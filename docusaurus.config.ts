@@ -60,7 +60,7 @@ const config: Config = {
   title: docusaurusData.title || "My Site",
   tagline: docusaurusData.tagline || "Tag Line",
   url: docusaurusData.url || "https://www.example.com/docstatic/",
-  baseUrl: "/docstatic/",
+  baseUrl: "",
   onBrokenLinks: "warn",
   onBrokenMarkdownLinks: "warn",
   favicon: "img/docstatic.png",

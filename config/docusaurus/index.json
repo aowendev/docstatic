@@ -6,7 +6,7 @@
   },
   "title": "docStatic",
   "tagline": "Composable Documentation Solution",
-  "url": "https://aowendev.github.io/",
+  "url": "https://docstatic.com/",
   "footer": {
     "style": "dark",
     "links": [
@@ -55,7 +55,7 @@
         "items": [
           {
             "label": "docStatic",
-            "href": "https://aowendev.github.io/docstatic/blog",
+            "href": "https://docstatic.com/blog",
             "_template": "external"
           },
           {
