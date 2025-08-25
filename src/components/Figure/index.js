@@ -1,14 +1,18 @@
 import React from "react";
 
 const Figure = ({ img, caption, size }) => {
-  const src = `..${img}`;
 
   return (
-    <div class="zoom">
+    <div style={{textAlign: 'center', margin: '2rem 0'}}>
       <figure>
-        <img src={src} alt={caption} width={size} />
+        <img 
+          src={img} 
+          alt={caption}
+          style={{cursor: 'pointer', maxWidth: size, height: 'auto'}}
+          onClick={() => window.open(img, '_blank')}
+        />
         <figcaption>{caption}</figcaption>
-      </figure>
+      </figure>    
     </div>
   );
 };
