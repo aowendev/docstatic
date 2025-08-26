@@ -11,13 +11,13 @@ export const slugify = (text) => {
 };
 
 export const docusaurusDate = (val) => {
-  let ye = new Intl.DateTimeFormat("en", {
+  const ye = new Intl.DateTimeFormat("en", {
     year: "numeric",
   }).format(val);
-  let mo = new Intl.DateTimeFormat("en", {
+  const mo = new Intl.DateTimeFormat("en", {
     month: "2-digit",
   }).format(val);
-  let da = new Intl.DateTimeFormat("en", {
+  const da = new Intl.DateTimeFormat("en", {
     day: "2-digit",
   }).format(val);
   return `${ye}-${mo}-${da}`;

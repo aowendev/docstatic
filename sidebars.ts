@@ -9,9 +9,9 @@ const getDocId = (doc) => {
 };
 
 const getItem = (item) => {
-  const type = item["_template"];
+  const type = item._template;
 
-  let itemProps = {
+  const itemProps = {
     type: type,
   };
 
@@ -89,12 +89,11 @@ const sidebars = {
       link: {
         type: "generated-index",
         title: "Petstore API",
-        slug: "/category/petstore-api"
+        slug: "/category/petstore-api",
       },
-      items: require("./docs/petstore/sidebar.js")
-    }
-  ]
-
+      items: require("./docs/petstore/sidebar.ts"),
+    },
+  ],
 };
 
 module.exports = sidebars;
