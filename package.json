@@ -6,6 +6,9 @@
     "docusaurus": "docusaurus",
     "dev": "tinacms dev -c \"docusaurus start\" ",
     "start": "docusaurus start",
+    "generate-files": "node scripts/generate-file-list.js",
+    "prebuild": "yarn generate-files",
+    "predev": "yarn generate-files",
     "build": "tinacms build && docusaurus build",
     "build-local": "tinacms build --local --skip-indexing --skip-cloud-checks && docusaurus build",
     "swizzle": "docusaurus swizzle",
@@ -35,11 +38,14 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "tinacms": "^2.7.8",
-    "title": "^4.0.1",
-    "typescript": "^5.9.2"
+    "title": "^4.0.1"
   },
   "browserslist": {
-    "production": [">0.5%", "not dead", "not op_mini all"],
+    "production": [
+      ">0.5%",
+      "not dead",
+      "not op_mini all"
+    ],
     "development": [
       "last 3 chrome version",
       "last 3 firefox version",

@@ -1,64 +1,42 @@
 {
   "taxonomy": [
     {
-      "tag": "blog",
-      "children": [
-        {
-          "tag": "docstatic"
-        },
-        {
-          "tag": "hello"
-        }
-      ]
-    },
-    {
       "tag": "docs",
       "children": [
         {
-          "tag": "quick-start"
+          "tag": "docs_quick-start"
         },
         {
-          "tag": "author",
-          "children": [
-            {
-              "tag": "create-a-document"
-            }
-          ]
+          "tag": "docs_author"
         },
         {
-          "tag": "diagram"
+          "tag": "docs_diagram"
         },
         {
-          "tag": "media"
+          "tag": "docs_media"
         },
         {
-          "tag": "open-api"
+          "tag": "docs_open-api"
         },
         {
-          "tag": "reuse"
+          "tag": "docs_reuse"
         },
         {
-          "tag": "search"
+          "tag": "docs_search"
         },
         {
-          "tag": "taxonomy"
+          "tag": "docs_taxonomy"
         },
         {
-          "tag": "translate"
+          "tag": "docs_translate"
         },
         {
-          "tag": "publish"
+          "tag": "docs_publish"
         },
         {
-          "tag": "version"
+          "tag": "docs_version"
         }
       ]
-    },
-    {
-      "tag": "testing"
-    },
-    {
-      "tag": "wiki"
     }
   ]
 }

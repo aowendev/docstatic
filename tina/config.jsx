@@ -8,6 +8,12 @@ import { YouTubeEmbedBlockTemplate } from "../src/components/YouTubeEmbed/templa
 import { MDXTemplates } from "../src/theme/template";
 import { docusaurusDate, titleFromSlug } from "../util";
 
+// tags UI component
+import TagsField from "../src/components/TagsField";
+
+// workflows component
+import StatusField from "../src/components/StatusField";
+
 // get doc tags from the taxonomy JSON file
 import data from "../reuse/taxonomy/index.json";
 
@@ -138,8 +144,11 @@ const PostCollection = {
       label: "Tags",
       name: "tags",
       type: "string",
-      options: allTags,
       list: true,
+      ui: {
+        component: TagsField,
+      },
+      options: allTags,
     },
   ],
 };
@@ -201,48 +210,29 @@ const DocsCollection = {
       label: "Description",
     },
     {
+      label: "Tags",
+      name: "tags",
+      type: "string",
+      list: true,
+      ui: {
+        component: TagsField,
+      },
+      options: allTags,
+    },
+    {
+      type: "string",
+      name: "status",
+      label: "Document Status",
+      ui: {
+        component: StatusField,
+      },
+    },
+    {
       type: "rich-text",
       name: "body",
       label: "Body",
       isBody: true,
       templates: [...MDXTemplates],
-    },
-    {
-      type: "boolean",
-      name: "draft",
-      label: "Draft",
-    },
-    {
-      type: "boolean",
-      name: "review",
-      label: "In Review",
-    },
-    {
-      type: "boolean",
-      name: "translate",
-      label: "In Translation",
-    },
-    {
-      type: "boolean",
-      name: "approved",
-      label: "Translation Approved",
-    },
-    {
-      type: "boolean",
-      name: "published",
-      label: "Published",
-    },
-    {
-      type: "boolean",
-      name: "unlisted",
-      label: "Unlisted",
-    },
-    {
-      label: "Tags",
-      name: "tags",
-      type: "string",
-      options: allTags,
-      list: true,
     },
   ],
 };
@@ -276,50 +266,29 @@ const TranslationCollection = {
       label: "Description",
     },
     {
+      label: "Tags",
+      name: "tags",
+      type: "string",
+      list: true,
+      ui: {
+        component: TagsField,
+      },
+      options: allTags,
+    },
+    {
+      type: "string",
+      name: "status",
+      label: "Document Status",
+      ui: {
+        component: StatusField,
+      },
+    },
+    {
       type: "rich-text",
       name: "body",
       label: "Body",
       isBody: true,
       templates: [...MDXTemplates],
-    },
-    {
-      type: "boolean",
-      name: "draft",
-      label: "Draft",
-      required: true,
-    },
-    {
-      type: "boolean",
-      name: "review",
-      label: "In Review",
-      required: true,
-    },
-    {
-      type: "boolean",
-      name: "translate",
-      label: "In Translation",
-    },
-    {
-      type: "boolean",
-      name: "approved",
-      label: "Translation Approved",
-    },
-    {
-      type: "boolean",
-      name: "published",
-      label: "Published",
-    },
-    {
-      type: "boolean",
-      name: "unlisted",
-      label: "Unlisted",
-    },
-    {
-      label: "Tags",
-      name: "tags",
-      type: "string",
-      options: allTags,
-      list: true,
     },
   ],
 };
@@ -984,7 +953,7 @@ const PagesCollection = {
 const VariableSetCollection = {
   label: "Variable Sets",
   name: "variableSets",
-  path: "static/reuse/variableSets",
+  path: "reuse/variableSets",
   format: "json",
   fields: [
     {
@@ -1170,7 +1139,10 @@ const GlossaryTermLanguageTemplate = {
   label: "Language",
   ui: {
     itemProps: (item) => ({
-      label: `${item.lang}: ${item.translations[0].term}`,
+      label:
+        item.translations && item.translations.length > 0
+          ? `${item.lang}: ${item.translations[0].term}`
+          : item.lang,
     }),
   },
   fields: [
@@ -1219,7 +1191,7 @@ const GlossaryTermTemplate = {
 const GlossaryTermCollection = {
   label: "Glossary Terms",
   name: "glossaryTerms",
-  path: "static/reuse/glossaryTerms",
+  path: "reuse/glossaryTerms",
   format: "json",
   fields: [
     {
@@ -1245,7 +1217,7 @@ export default defineConfig({
   build: {
     outputFolder: "admin",
     publicFolder: "static",
-    //    basePath: "docstatic", // if your Tina admin is not at the root of your site, set this to the path where it is hosted
+    //    basePath: "", // if your Tina admin is not at the root of your site, set this to the path where it is hosted
   },
   media: {
     tina: {

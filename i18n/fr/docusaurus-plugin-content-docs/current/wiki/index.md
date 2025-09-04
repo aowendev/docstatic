@@ -1,7 +1,5 @@
 ---
 title: Wiki
-tags:
-  - wiki
 ---
 # Wiki
 
