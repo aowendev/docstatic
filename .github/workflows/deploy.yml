@@ -11,28 +11,86 @@ on:
 jobs:
   build:
     name: Build Docusaurus
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest-4-cores
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+      
       - uses: actions/setup-node@v4
         with:
           node-version: 23
           cache: yarn
 
+      # Cache Yarn dependencies with fallback keys
+      - name: Cache Yarn dependencies
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cache/yarn
+            node_modules
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
+      # Cache Docusaurus build artifacts
+      - name: Cache Docusaurus build
+        uses: actions/cache@v4
+        with:
+          path: |
+            .docusaurus
+            build/.docusaurus
+          key: ${{ runner.os }}-docusaurus-${{ hashFiles('docs/**', 'blog/**', 'src/**', 'docusaurus.config.js', 'sidebars.ts') }}
+          restore-keys: |
+            ${{ runner.os }}-docusaurus-
+
+      # Cache TinaCMS artifacts
+      - name: Cache TinaCMS build
+        uses: actions/cache@v4
+        with:
+          path: |
+            .tina/__generated__
+            tina/__generated__
+          key: ${{ runner.os }}-tina-${{ hashFiles('tina/**', 'content/**', 'docs/**', 'blog/**') }}
+          restore-keys: |
+            ${{ runner.os }}-tina-
+
+      # Cache generated API docs to avoid regenerating if OpenAPI spec hasn't changed
+      - name: Cache API docs
+        uses: actions/cache@v4
+        with:
+          path: |
+            docs/petstore
+          key: ${{ runner.os }}-api-docs-${{ hashFiles('apis/**') }}
+          restore-keys: |
+            ${{ runner.os }}-api-docs-
+
       - name: Install dependencies
-        run: yarn install --frozen-lockfile
+        run: yarn install --frozen-lockfile --prefer-offline
+
+      # Only regenerate API docs if OpenAPI specs have changed
+      - name: Check if API docs need regeneration
+        id: api-docs-check
+        run: |
+          if [ -d "docs/petstore" ] && [ "$(find docs/petstore -name '*.api.mdx' | wc -l)" -gt 0 ]; then
+            echo "api-docs-exist=true" >> $GITHUB_OUTPUT
+          else
+            echo "api-docs-exist=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Clean and generate API docs
+        if: steps.api-docs-check.outputs.api-docs-exist == 'false'
+        run: |
+          yarn clean-api-docs all
+          yarn gen-api-docs all
+
       - name: Build website
         env:
           NEXT_PUBLIC_TINA_CLIENT_ID: ${{ secrets.TINA_PUBLIC_CLIENT_ID }}
           TINA_TOKEN: ${{ secrets.TINA_TOKEN }}
           TINA_SEARCH_TOKEN: ${{ secrets.TINA_SEARCH_TOKEN }}
           NODE_OPTIONS: "--max_old_space_size=4096"
-        run: |
-          yarn clean-api-docs all
-          yarn gen-api-docs all
-          yarn build
+        run: yarn build
 
       - name: Upload Build Artifact
         uses: actions/upload-pages-artifact@v3
@@ -53,7 +111,7 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
 
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest-4-cores
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
