@@ -14,11 +14,11 @@ The project was created by creating a new Docusaurus v3 site with Palo Alto Netw
 
 **Note**: Lunr search is available only in production.
 
-This demo includes the use of snippets (partials), code snippets and variables (on the [Test Page](test-page)). It includes an example  workflow for the *Docs* collection in Tina:
+This demo includes the use of snippets (partials), code snippets and variables (on the [Test Page](test-page)). It includes an example workflow for the *Docs* collection in Tina:
 
-`Draft` → `In Review` → `In Translation` → `Published`
+`Draft` → `In Review` → `In Translation` → `Translated` → `Published` ( → `Unlisted`)
 
-It enables you to set the `Unlisted` flag and a `Translation Approved` flag from Tina.
+Each state is a metadata Boolean, but the user interface in Tina treats them as a unified workflow.
 
 ## Local development
 
@@ -47,13 +47,13 @@ Visit the CMS at [http://localhost:3000/admin](http://localhost:3000/admin) to s
 ├── /i18n: translation
 ├── /reuse: reusable content
 │   ├── /code: code snippets
+│   ├── /glossaryTerms: translatable glossary terms
 │   ├── /snippets: text snippets
-│   └── /taxonomy: taxonomy tags
+│   ├── /taxonomy: taxonomy tags
+│   └── /variableSets: translatable variable sets
 └── /static: static content
-    ├─── /img: images
-    └─── /reuse: reusable content
-         ├── /glossaryTerms: translatable glossary terms
-         └── /variableSets: translatable variable sets
+    ├─── /admin: CMS
+    └─── /img: images
 ```
 
 ### Generating OpenAPI Docs
