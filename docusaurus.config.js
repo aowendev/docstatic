@@ -91,12 +91,15 @@ const config = {
         },
         blog: {
           showReadingTime: true,
-          // Remove this to remove the "edit this page" links.
-          editUrl: ({ permalink }) => {
-            return permalink.replace(
-              "/blog/",
-              "/admin#/collections/edit/post/"
-            );
+          // Edit URL configuration for blog posts
+          editUrl: ({ blogDirPath, blogPath, permalink, locale }) => {
+            // blogPath gives us something like "hybrid.mdx"
+            // Remove file extension to get the path that TinaCMS expects
+            const cleanPath = blogPath.replace(/\.(mdx?|md)$/, '');
+            
+            // For blog posts, TinaCMS expects just the filename (without extension)
+            // So "hybrid.mdx" becomes "hybrid"
+            return `/admin#/collections/edit/post/${cleanPath}`;
           },
           onInlineAuthors: "ignore",
           onUntruncatedBlogPosts: "ignore",
