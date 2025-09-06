@@ -135,3 +135,36 @@
   transform: translateY(-0.1rem) !important;
   vertical-align: baseline !important;
 }
+
+/* Fix for menu bar hiding content on anchor links */
+html {
+  scroll-padding-top: 80px;
+}
+
+/* Adjust scroll margin for headings and anchor targets */
+h1, h2, h3, h4, h5, h6,
+[id], 
+.anchor {
+  scroll-margin-top: 80px;
+}
+
+/* Additional targeting for specific content areas */
+.theme-doc-markdown h1,
+.theme-doc-markdown h2,
+.theme-doc-markdown h3,
+.theme-doc-markdown h4,
+.theme-doc-markdown h5,
+.theme-doc-markdown h6 {
+  scroll-margin-top: 80px;
+}
+
+/* Fix for context-sensitive help links and API documentation */
+.theme-api-method h1,
+.theme-api-method h2,
+.theme-api-method h3,
+.theme-api-method h4,
+.theme-api-method h5,
+.theme-api-method h6,
+.theme-api-method [id] {
+  scroll-margin-top: 80px;
+}
