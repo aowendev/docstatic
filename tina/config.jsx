@@ -134,13 +134,6 @@ const PostCollection = {
       },
     },
     {
-      type: "rich-text",
-      name: "body",
-      label: "Body",
-      isBody: true,
-      templates: [...MDXTemplates],
-    },
-    {
       label: "Tags",
       name: "tags",
       type: "string",
@@ -149,6 +142,13 @@ const PostCollection = {
         component: TagsField,
       },
       options: allTags,
+    },
+    {
+      type: "rich-text",
+      name: "body",
+      label: "Body",
+      isBody: true,
+      templates: [...MDXTemplates],
     },
   ],
 };

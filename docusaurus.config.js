@@ -91,6 +91,10 @@ const config = {
         },
         blog: {
           showReadingTime: true,
+          // Truncate blog previews after a certain number of characters
+          truncateMarker: /<!--\s*(truncate)\s*-->/,
+          // Alternative: set a global character limit for truncation
+          // truncateLength: 300,
           // Edit URL configuration for blog posts
           editUrl: ({ blogDirPath, blogPath, permalink, locale }) => {
             // blogPath gives us something like "hybrid.mdx"
