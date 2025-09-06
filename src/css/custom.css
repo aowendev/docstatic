@@ -168,3 +168,381 @@ h1, h2, h3, h4, h5, h6,
 .theme-api-method [id] {
   scroll-margin-top: 80px;
 }
+
+/* Fix search UI overlapping site title on mobile */
+@media (max-width: 768px) {
+  /* Adjust navbar layout on mobile */
+  .navbar {
+    flex-wrap: wrap;
+    padding: 0.5rem 1rem;
+  }
+  
+  /* Ensure logo/title has enough space */
+  .navbar__brand {
+    flex: 1;
+    min-width: 0;
+    margin-right: 0.5rem;
+  }
+  
+  /* Control search input width on mobile */
+  .navbar__search {
+    flex: none !important;
+    width: 40px !important;
+    min-width: 40px !important;
+    max-width: 40px !important;
+    margin-left: auto !important;
+  }
+  
+  /* Adjust search input styling */
+  .navbar__search-input {
+    width: 40px !important;
+    min-width: 40px !important;
+    max-width: 40px !important;
+    font-size: 14px !important;
+    padding: 0.5rem !important;
+    border-radius: 50% !important;
+  }
+  
+  /* Stack navigation items if needed */
+  .navbar__items {
+    flex-wrap: wrap;
+    gap: 0.25rem;
+  }
+  
+  /* Adjust toggle button positioning */
+  .navbar__toggle {
+    margin-left: 0.5rem;
+  }
+}
+
+/* Extra small mobile devices */
+@media (max-width: 480px) {
+  .navbar {
+    padding: 0.25rem 0.75rem;
+  }
+  
+  .navbar__brand {
+    font-size: 1rem;
+  }
+  
+  .navbar__search {
+    max-width: 120px;
+  }
+  
+  .navbar__search-input {
+    font-size: 13px;
+    padding: 0.2rem 0.4rem;
+  }
+}
+
+/* Fix "Loading..." text overlapping icons on mobile */
+@media (max-width: 768px) {
+  /* Docusaurus search loading states */
+  .DocSearch-LoadingIndicator,
+  .DocSearch-Button .DocSearch-Search-Icon + span,
+  .navbar__search-input:focus + .loading,
+  .search-suggestions .loading {
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.25rem !important;
+    font-size: 12px !important;
+  }
+  
+  /* Lunr search loading fixes */
+  .navbar__search .loading,
+  .navbar__search-input[placeholder*="Loading"] {
+    position: relative !important;
+    padding-left: 2rem !important;
+  }
+  
+  /* Loading icon positioning */
+  .navbar__search::before,
+  .navbar__search .loading-icon {
+    position: absolute !important;
+    left: 0.5rem !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    width: 16px !important;
+    height: 16px !important;
+    z-index: 1 !important;
+  }
+  
+  /* Search input text positioning when loading */
+  .navbar__search-input {
+    text-indent: 0.5rem !important;
+  }
+  
+  /* Alternative: hide loading text entirely on mobile */
+  .navbar__search-input[placeholder*="Loading..."] {
+    text-indent: 0 !important;
+    font-size: 0 !important;
+  }
+  
+  .navbar__search-input[placeholder*="Loading..."]::placeholder {
+    font-size: 12px !important;
+    text-indent: 1.5rem !important;
+  }
+}
+
+/* Very small mobile devices */
+@media (max-width: 480px) {
+  /* More aggressive fixes for very small screens */
+  .navbar__search-input[placeholder*="Loading"] {
+    font-size: 0 !important;
+  }
+  
+  .navbar__search-input[placeholder*="Loading"]::placeholder {
+    font-size: 10px !important;
+    content: "..." !important;
+  }
+  
+  /* Hide loading text completely if needed */
+  .DocSearch-LoadingIndicator span,
+  .navbar__search .loading-text {
+    display: none !important;
+  }
+  
+  /* Hide "Search +K" text on mobile */
+  .DocSearch-Button-Placeholder,
+  .DocSearch-Button-Key,
+  .DocSearch-Button .DocSearch-Search-Icon + span,
+  .navbar__search-input::placeholder {
+    display: none !important;
+  }
+  
+  /* Hide search placeholder text */
+  .navbar__search-input {
+    text-indent: 0 !important;
+  }
+  
+  .navbar__search-input::placeholder {
+    color: transparent !important;
+    font-size: 0 !important;
+  }
+}
+
+/* Hide "Search +K" text on all mobile devices */
+@media (max-width: 768px) {
+  /* DocSearch button text hiding */
+  .DocSearch-Button-Placeholder,
+  .DocSearch-Button-Key {
+    display: none !important;
+  }
+  
+  /* Keep only the search icon - force consistent sizing */
+  .DocSearch-Button {
+    width: 40px !important;
+    min-width: 40px !important;
+    max-width: 40px !important;
+    padding: 0.5rem !important;
+    margin: 0 !important;
+  }
+  
+  /* Force search container sizing */
+  .navbar__search {
+    flex: none !important;
+    width: 40px !important;
+    min-width: 40px !important;
+    max-width: 40px !important;
+    margin-left: auto !important;
+  }
+  
+  /* Hide search input placeholder on mobile */
+  .navbar__search-input {
+    width: 40px !important;
+    min-width: 40px !important;
+    max-width: 40px !important;
+    padding: 0.5rem !important;
+    border-radius: 50% !important;
+    text-indent: -9999px !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23999' viewBox='0 0 16 16'%3E%3Cpath d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z'/%3E%3C/svg%3E") !important;
+    background-repeat: no-repeat !important;
+    background-position: center !important;
+    background-size: 16px !important;
+  }
+  
+  .navbar__search-input::placeholder {
+    color: transparent !important;
+  }
+  
+  /* Lunr search input placeholder hiding */
+  .navbar__search-input[placeholder*="Search"] {
+    text-indent: -9999px !important;
+  }
+  
+  .navbar__search-input[placeholder*="Search"]:focus {
+    text-indent: 0 !important;
+    width: calc(100vw - 120px) !important;
+    max-width: calc(100vw - 120px) !important;
+    min-width: 200px !important;
+    border-radius: 0.375rem !important;
+    position: absolute !important;
+    right: 0 !important;
+    top: 0 !important;
+    z-index: 1000 !important;
+    padding-left: 2.5rem !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23999' viewBox='0 0 16 16'%3E%3Cpath d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z'/%3E%3C/svg%3E") !important;
+    background-repeat: no-repeat !important;
+    background-position: 0.75rem center !important;
+    background-size: 16px !important;
+  }
+  
+  /* Mobile search results container */
+  .DocSearch-Container {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    z-index: 9999 !important;
+    padding: 1rem !important;
+  }
+  
+  .DocSearch-Modal {
+    width: 100% !important;
+    max-width: calc(100vw - 2rem) !important;
+    max-height: calc(100vh - 2rem) !important;
+    margin: 0 !important;
+    border-radius: 0.5rem !important;
+  }
+  
+  /* Lunr search results positioning */
+  .navbar__search {
+    position: relative !important;
+  }
+  
+  .navbar__search .search-suggestions,
+  .navbar__search .search-results {
+    position: absolute !important;
+    top: 100% !important;
+    right: 0 !important;
+    left: auto !important;
+    width: calc(100vw - 2rem) !important;
+    max-width: 400px !important;
+    max-height: 60vh !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    -webkit-overflow-scrolling: touch !important;
+    z-index: 1000 !important;
+    background: var(--ifm-background-color) !important;
+    border: 1px solid var(--ifm-border-color) !important;
+    border-radius: 0.375rem !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+    margin-top: 0.25rem !important;
+    scrollbar-width: thin !important;
+  }
+  
+  /* Improve scrollbar visibility on mobile */
+  .navbar__search .search-suggestions::-webkit-scrollbar,
+  .navbar__search .search-results::-webkit-scrollbar {
+    width: 8px !important;
+  }
+  
+  .navbar__search .search-suggestions::-webkit-scrollbar-track,
+  .navbar__search .search-results::-webkit-scrollbar-track {
+    background: var(--ifm-color-emphasis-200) !important;
+    border-radius: 4px !important;
+  }
+  
+  .navbar__search .search-suggestions::-webkit-scrollbar-thumb,
+  .navbar__search .search-results::-webkit-scrollbar-thumb {
+    background: var(--ifm-color-emphasis-400) !important;
+    border-radius: 4px !important;
+  }
+  
+  /* DocSearch modal scrolling improvements */
+  .DocSearch-Modal {
+    width: 100% !important;
+    max-width: calc(100vw - 2rem) !important;
+    max-height: calc(100vh - 2rem) !important;
+    margin: 0 !important;
+    border-radius: 0.5rem !important;
+    overflow: hidden !important;
+  }
+  
+  .DocSearch-Dropdown {
+    max-height: calc(100vh - 200px) !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    scrollbar-width: thin !important;
+  }
+  
+  /* Lunr search specific scrolling fix */
+  .ds-dataset-1 {
+    max-height: 60vh !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    -webkit-overflow-scrolling: touch !important;
+    scrollbar-width: thin !important;
+  }
+  
+  .ds-dataset-1::-webkit-scrollbar {
+    width: 8px !important;
+  }
+  
+  .ds-dataset-1::-webkit-scrollbar-track {
+    background: var(--ifm-color-emphasis-200) !important;
+    border-radius: 4px !important;
+  }
+  
+  .ds-dataset-1::-webkit-scrollbar-thumb {
+    background: var(--ifm-color-emphasis-400) !important;
+    border-radius: 4px !important;
+  }
+}
+
+/* Very small mobile devices */
+@media (max-width: 480px) {
+  .loading,
+  .loading-text,
+  [class*="loading"] {
+    font-size: 11px !important;
+    gap: 0.25rem !important;
+  }
+  
+  .loading-spinner,
+  .spinner {
+    width: 14px !important;
+    height: 14px !important;
+  }
+  
+  /* Hide loading text on very small screens if needed */
+  .loading-text-responsive {
+    display: none !important;
+  }
+  
+  /* Small mobile search adjustments */
+  .navbar__search-input[placeholder*="Search"]:focus {
+    width: calc(100vw - 80px) !important;
+    max-width: calc(100vw - 80px) !important;
+    min-width: 160px !important;
+    padding-left: 2.5rem !important;
+  }
+  
+  .navbar__search .search-suggestions,
+  .navbar__search .search-results {
+    width: calc(100vw - 1rem) !important;
+    max-width: calc(100vw - 1rem) !important;
+    left: 0.5rem !important;
+    right: 0.5rem !important;
+    max-height: 50vh !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+  
+  .DocSearch-Modal {
+    width: calc(100vw - 1rem) !important;
+    max-width: calc(100vw - 1rem) !important;
+    margin: 0.5rem !important;
+  }
+  
+  .DocSearch-Dropdown {
+    max-height: calc(100vh - 150px) !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+  
+  /* Small mobile Lunr search scrolling */
+  .ds-dataset-1 {
+    max-height: 50vh !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+}
