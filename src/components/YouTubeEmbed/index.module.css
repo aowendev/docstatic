@@ -6,3 +6,38 @@
   flex-direction: column;
   margin: 2rem 0;
 }
+
+/* Responsive YouTube embed container */
+.video iframe {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  max-width: 853px;
+  max-height: 480px;
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 768px) {
+  .video {
+    margin: 1rem 0;
+  }
+  
+  .video iframe {
+    width: 100%;
+    height: calc(100vw * 9 / 16);
+    max-height: 60vh;
+  }
+}
+
+/* Small mobile devices */
+@media (max-width: 480px) {
+  .video {
+    margin: 0.5rem 0;
+  }
+  
+  .video iframe {
+    width: 100%;
+    height: calc(100vw * 9 / 16);
+    max-height: 50vh;
+  }
+}
