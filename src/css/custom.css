@@ -116,3 +116,22 @@
   border-color: rgb(191, 88, 29);
   color: white;
 }
+
+/* Lower baseline of openapi-schema__property element */
+.openapi-schema__property {
+  vertical-align: text-bottom !important;
+  position: relative !important;
+  top: -0.055em !important;
+}
+
+
+
+/* Broader targeting for all code elements in OpenAPI components */
+[class*="openapi"] code,
+[class*="schema"] code,
+.theme-api-method code {
+  position: relative !important;
+  top: -0.055rem !important;
+  transform: translateY(-0.1rem) !important;
+  vertical-align: baseline !important;
+}
