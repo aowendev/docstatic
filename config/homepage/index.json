@@ -1,37 +1,37 @@
 {
   "label": "Homepage",
   "title": "docStatic",
-  "description": "Composable Documentation Solution",
+  "description": "Modern Documentation Platform",
   "blocks": [
     {
       "title": "docStatic",
-      "subtitle": "Composable Documentation Solution",
+      "subtitle": "Modern Documentation Platform",
       "document": "docs/quick-start",
-      "documentLabel": "Quick Start",
+      "documentLabel": "Get Started",
       "_template": "hero"
     },
     {
       "items": [
         {
           "title": "For Writers",
-          "description": "CCMS features and a graphical editor.\n",
+          "description": "Intuitive CMS features with a visual editor that makes content creation effortless. Write in Markdown or use the rich-text editor.",
           "image": "./img/writers.jpg"
         },
         {
-          "title": "For Developers",
-          "description": "Git, Markdown, OpenAPI and React.\n",
+          "title": "For Developers", 
+          "description": "Git-based workflow with Markdown, React components, and OpenAPI integration. Build exactly what you need.",
           "image": "./img/developers.jpg"
         },
         {
           "title": "For Users",
-          "description": "Responsive documentation websites.\n",
+          "description": "Fast, responsive documentation websites with excellent search and navigation. Beautiful on any device.",
           "image": "./img/users.jpg"
         }
       ],
       "_template": "features"
     },
     {
-      "title": "Watch the demo",
+      "title": "Watch the Demo",
       "url": "https://www.youtube.com/watch?v=2bHBwM54UB8",
       "_template": "youTubeEmbed"
     }

@@ -18,8 +18,74 @@
   --ifm-color-primary-lightest: #0075e4;
   --ifm-code-font-size: 95%;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
-  --ifm-font-family-base: "Arial", sans-serif;
+  --ifm-font-family-base: "Inter", "Arial", sans-serif;
   --ifm-font-family-monospace: "IBM Plex Mono", "Courier New", monospace;
+  --ifm-global-radius: 8px;
+  --ifm-button-border-radius: 6px;
+  --ifm-card-border-radius: 12px;
+  --ifm-navbar-height: 4rem;
+}
+
+/* Global improvements */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-feature-settings: "kern" 1, "liga" 1;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Enhanced button styles */
+.button {
+  transition: all 0.2s ease;
+  font-weight: 600;
+  border-radius: var(--ifm-button-border-radius);
+}
+
+.button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.button--primary {
+  background: linear-gradient(135deg, var(--ifm-color-primary), var(--ifm-color-primary-dark));
+  border: none;
+}
+
+.button--primary:hover {
+  background: linear-gradient(135deg, var(--ifm-color-primary-dark), var(--ifm-color-primary-darker));
+}
+
+/* Enhanced card styles */
+.card {
+  border-radius: var(--ifm-card-border-radius);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+/* Improved navbar */
+.navbar {
+  backdrop-filter: blur(20px);
+  background: rgba(255, 255, 255, 0.9);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.navbar__brand {
+  font-weight: 700;
+}
+
+.navbar__item {
+  font-weight: 500;
 }
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
@@ -33,6 +99,103 @@
   --ifm-color-primary-lightest: #4db8ff;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
   --ifm-footer-background-color: #0d0d0d;
+}
+
+/* Dark mode navbar */
+[data-theme="dark"] .navbar {
+  background: rgba(0, 0, 0, 0.9);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Improved content sections */
+.container {
+  max-width: 1140px;
+}
+
+/* Smooth animations for elements */
+.margin-bottom--lg,
+.margin-top--lg,
+.padding-bottom--lg,
+.padding-top--lg {
+  transition: all 0.3s ease;
+}
+
+/* Enhanced code blocks */
+.prism-code {
+  border-radius: 8px;
+  font-size: 0.9rem;
+}
+
+/* Better table styles */
+.table-of-contents {
+  border-left: 3px solid var(--ifm-color-primary);
+  padding-left: 1rem;
+}
+
+/* Improved pagination */
+.pagination-nav {
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.pagination-nav__item {
+  transition: all 0.2s ease;
+}
+
+.pagination-nav__item:hover {
+  transform: translateX(4px);
+}
+
+.pagination-nav__item--next:hover {
+  transform: translateX(-4px);
+}
+
+/* Better admonitions */
+.alert {
+  border-radius: 8px;
+  border-left-width: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* Enhanced doc item */
+.theme-doc-markdown {
+  line-height: 1.7;
+}
+
+.theme-doc-markdown h1,
+.theme-doc-markdown h2,
+.theme-doc-markdown h3 {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+/* Improved sidebar */
+.theme-doc-sidebar-container {
+  border-right: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="dark"] .theme-doc-sidebar-container {
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Better menu items */
+.menu__link {
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.menu__link:hover {
+  background: rgba(var(--ifm-color-primary-rgb), 0.1);
+}
+
+/* Enhanced footer */
+.footer {
+  background: var(--ifm-footer-background-color);
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="dark"] .footer {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 /* Sidebar Method labels */

@@ -15,7 +15,7 @@
         "items": [
           {
             "label": "docStatic",
-            "to": "docs/quick-start/quick-start.mdx",
+            "to": "docs/quick-start",
             "_template": "internal"
           },
           {
@@ -55,8 +55,8 @@
         "items": [
           {
             "label": "docStatic",
-            "href": "https://docstatic.com/blog",
-            "_template": "external"
+            "to": "blog",
+            "_template": "internal"
           },
           {
             "label": "Docusarus",
