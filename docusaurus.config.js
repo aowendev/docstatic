@@ -52,6 +52,11 @@ const config = {
   onBrokenLinks: "warn",
   onBrokenMarkdownLinks: "warn",
   favicon: "img/docstatic.png",
+  // Client modules that run on every page
+  clientModules: [
+    require.resolve("./src/clientModules/editThisPageTarget.js"),
+  ],
+
   // Github pages deployment config.
   projectName: "aowendev.github.io",
   organizationName: "aowendev",
@@ -71,8 +76,16 @@ const config = {
         docs: {
           sidebarPath: require.resolve("./sidebars.ts"),
           // Remove this to remove the "edit this page" links.
-          editUrl: ({ permalink }) => {
-            return permalink.replace("/docs/", "/admin#/collections/edit/doc/");
+          editUrl: ({ versionDocsDirPath, docPath }) => {
+            // docPath gives us the file path relative to docs directory
+            // For example: "quick-start/quick-start.mdx", "wiki/index.md", "test-page.mdx"
+            
+            // Remove file extension to get the path that TinaCMS expects
+            const cleanPath = docPath.replace(/\.(mdx?|md)$/, '');
+            
+            // TinaCMS expects the full path including filename (without extension)
+            // So quick-start/quick-start.mdx becomes quick-start/quick-start
+            return `/admin#/collections/edit/doc/${cleanPath}`;
           },
           docItemComponent: "@theme/ApiItem", // Derived from docusaurus-theme-openapi
         },
