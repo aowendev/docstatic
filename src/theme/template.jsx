@@ -510,93 +510,28 @@ const FigureTemplate = {
   ],
 };
 
-const BrowserOnlyTemplate = {
-  name: "BrowserOnly",
-  fields: [
-    {
-      name: "children",
-      label: "BrowserOnly",
-      type: "rich-text",
-    },
-  ],
-};
-
 const FootnoteTemplate = {
   name: "Footnote",
-  label: "Footnote",
-  ui: {
-    itemProps: (item) => {
-      // Simple approach: convert to JSON and extract text patterns
-      let displayText = 'Empty';
-      
-      if (item?.children) {
-        try {
-          // Convert the entire children object to string and look for text patterns
-          const jsonStr = JSON.stringify(item.children);
-          
-          // Look for text content in various patterns
-          const textMatches = jsonStr.match(/"text":"([^"]+)"/g);
-          if (textMatches && textMatches.length > 0) {
-            // Extract all text values and join them
-            displayText = textMatches
-              .map(match => match.replace(/"text":"/, '').replace(/"$/, ''))
-              .join(' ')
-              .trim();
-          } else {
-            // Fallback: look for any quoted strings that might be content
-            const allQuotedStrings = jsonStr.match(/"([^"]{3,})"/g);
-            if (allQuotedStrings && allQuotedStrings.length > 0) {
-              // Filter out likely property names and keep content
-              const contentStrings = allQuotedStrings
-                .map(str => str.replace(/^"|"$/g, ''))
-                .filter(str => 
-                  !['type', 'children', 'text', 'bold', 'italic', 'code', 'link'].includes(str) &&
-                  str.length > 3 &&
-                  /[a-zA-Z]/.test(str) // Contains letters
-                )
-                .slice(0, 3); // Take first few that look like content
-              
-              if (contentStrings.length > 0) {
-                displayText = contentStrings.join(' ').trim();
-              }
-            }
-          }
-        } catch (e) {
-          displayText = 'Error parsing content';
-        }
-      }
-      
-      // Clean up the text and get preview
-      displayText = displayText.replace(/\\n/g, ' ').replace(/\s+/g, ' ').trim();
-      if (!displayText || displayText === '' || displayText === 'Empty') {
-        displayText = 'Empty footnote';
-      }
-      
-      // Get first sentence or first 50 characters
-      const firstSentence = displayText.split(/[.!?]/)[0];
-      const preview = firstSentence.length > 50 
-        ? firstSentence.substring(0, 50) + '...' 
-        : firstSentence;
-      
-      return { label: `Footnote: ${preview}` };
-    },
-  },
   fields: [
     {
-      name: "children",
-      label: "Footnote Content",
-      type: "rich-text",
+      name: "summary",
+      label: "Summary",
+      type: "string",
       isTitle: true,
       required: true,
+    },
+    {
+      name: "children",
+      label: "Footnote",
+      type: "rich-text",
     },
   ],
 };
 
 export const MDXTemplates = [
   AdmonitionTemplate,
-  BrowserOnlyTemplate,
-  CommentsTemplate,
   CodeBlockTemplate,
+  CommentsTemplate,
   ContextHelpTemplate,
   DetailsTemplate,
   DocCardListTemplate,
