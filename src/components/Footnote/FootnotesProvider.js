@@ -1,12 +1,12 @@
-import React, { createContext, useState, useCallback, useRef } from 'react';
-import { generateFootnoteKey } from './utils';
+import React, { createContext, useState, useCallback, useRef } from "react";
+import { generateFootnoteKey } from "./utils";
 
 // Create context with default values
 export const FootnotesContext = createContext({
   footnotes: [],
   addFootnote: () => 1,
   clearFootnotes: () => {},
-  getFootnoteNumber: () => 1
+  getFootnoteNumber: () => 1,
 });
 
 export const FootnotesProvider = ({ children }) => {
@@ -17,21 +17,21 @@ export const FootnotesProvider = ({ children }) => {
   const addFootnote = useCallback((content) => {
     // Safely convert content to string for comparison
     const contentKey = generateFootnoteKey(content);
-    
+
     // Check if this footnote already exists
     if (footnoteMapRef.current.has(contentKey)) {
       return footnoteMapRef.current.get(contentKey);
     }
-    
+
     // Add new footnote
     footnoteCountRef.current += 1;
     const newNumber = footnoteCountRef.current;
     footnoteMapRef.current.set(contentKey, newNumber);
-    
-    setFootnotes(prev => {
+
+    setFootnotes((prev) => {
       return [...prev, { number: newNumber, content, key: contentKey }];
     });
-    
+
     return newNumber;
   }, []);
 
@@ -48,7 +48,7 @@ export const FootnotesProvider = ({ children }) => {
     getFootnoteNumber: (content) => {
       const contentKey = generateFootnoteKey(content);
       return footnoteMapRef.current.get(contentKey);
-    }
+    },
   };
 
   return (

@@ -1,6 +1,6 @@
 import React from "react";
-import { slugify } from "../../util";
 import codeFiles from "../../reuse/code-files.json";
+import { slugify } from "../../util";
 
 const AdmonitionTemplate = {
   name: "Admonition",
@@ -299,21 +299,22 @@ const CodeBlockTemplate = {
         description: "Select the programming language for syntax highlighting",
       },
     },
-{
-  name: "filepath",
-  label: "File Path",
-  type: "string",
-  isTitle: true,
-  required: true,
-  options: codeFiles.map(file => ({
-    label: file,
-    value: file
-  })),
-  ui: {
-    component: "select",
-    description: "Select a file from /reuse/code/ (includes subdirectories)",
-  },
-},
+    {
+      name: "filepath",
+      label: "File Path",
+      type: "string",
+      isTitle: true,
+      required: true,
+      options: codeFiles.map((file) => ({
+        label: file,
+        value: file,
+      })),
+      ui: {
+        component: "select",
+        description:
+          "Select a file from /reuse/code/ (includes subdirectories)",
+      },
+    },
   ],
 };
 

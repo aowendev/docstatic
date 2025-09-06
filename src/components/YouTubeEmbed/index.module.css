@@ -21,7 +21,7 @@
   .video {
     margin: 1rem 0;
   }
-  
+
   .video iframe {
     width: 100%;
     height: calc(100vw * 9 / 16);
@@ -34,7 +34,7 @@
   .video {
     margin: 0.5rem 0;
   }
-  
+
   .video iframe {
     width: 100%;
     height: calc(100vw * 9 / 16);
