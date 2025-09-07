@@ -80,7 +80,11 @@
   right: -50px;
   width: 200px;
   height: 200px;
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.1) 0%,
+    transparent 70%
+  );
   border-radius: 50%;
   animation: float 6s ease-in-out infinite;
 }
@@ -91,13 +95,18 @@
   left: -50px;
   width: 150px;
   height: 150px;
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.08) 0%, transparent 70%);
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.08) 0%,
+    transparent 70%
+  );
   border-radius: 50%;
   animation: float 4s ease-in-out infinite reverse;
 }
 
 @keyframes float {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0px);
   }
   50% {
@@ -110,15 +119,15 @@
   .videoSection {
     padding: 3rem 0;
   }
-  
+
   .videoTitle {
     font-size: 2rem;
   }
-  
+
   .videoSubtitle {
     font-size: 1.1rem;
   }
-  
+
   .videoHeader {
     margin-bottom: 2rem;
   }
@@ -128,17 +137,17 @@
   .videoSection {
     padding: 2rem 0;
   }
-  
+
   .videoTitle {
     font-size: 1.8rem;
   }
-  
+
   .iframe {
     width: 100%;
     height: calc(100vw * 9 / 16);
     max-height: 60vh;
   }
-  
+
   .decoration1,
   .decoration2 {
     display: none;
@@ -150,7 +159,7 @@
   .videoFrame {
     padding: 4px;
   }
-  
+
   .iframe {
     width: 100%;
     height: calc(100vw * 9 / 16);

@@ -23,12 +23,18 @@ export const Hero = ({ data, index }) => {
               {data.subtitle ? data.subtitle : siteConfig.tagline}
             </p>
             <div className={styles.heroDescription}>
-              <p>Bridging the gap between writers and developers to create online documentation your users will love.</p>
+              <p>
+                Bridging the gap between writers and developers to create online
+                documentation your users will love.
+              </p>
             </div>
             {data.document && (
               <div className={styles.buttons}>
                 <Link
-                  className={clsx("button button--primary button--lg", styles.primaryButton)}
+                  className={clsx(
+                    "button button--primary button--lg",
+                    styles.primaryButton
+                  )}
                   to={getDocPath(data.document)}
                 >
                   {data.documentLabel
@@ -36,7 +42,10 @@ export const Hero = ({ data, index }) => {
                     : titleFromSlug(data.document)}
                 </Link>
                 <Link
-                  className={clsx("button button--outline button--lg", styles.secondaryButton)}
+                  className={clsx(
+                    "button button--outline button--lg",
+                    styles.secondaryButton
+                  )}
                   to="/blog"
                 >
                   View Blog
@@ -58,15 +67,30 @@ export const Hero = ({ data, index }) => {
                 <div className={styles.codeBlock}>
                   <span className={styles.codeKeyword}># Features</span>
                   <br />
-                  <span className={styles.codeProperty}>  - Content Reuse & Single Sourcing</span>
+                  <span className={styles.codeProperty}>
+                    {" "}
+                    - Content Reuse & Single Sourcing
+                  </span>
                   <br />
-                  <span className={styles.codeProperty}>  - Simple Structured Authoring & Semantic Models</span>
+                  <span className={styles.codeProperty}>
+                    {" "}
+                    - Simple Structured Authoring & Semantic Models
+                  </span>
                   <br />
-                  <span className={styles.codeProperty}>  - Content Lifecylce & Workflow Management</span>
+                  <span className={styles.codeProperty}>
+                    {" "}
+                    - Content Lifecylce & Workflow Management
+                  </span>
                   <br />
-                  <span className={styles.codeProperty}>  - Translation & Localization Support</span>
+                  <span className={styles.codeProperty}>
+                    {" "}
+                    - Translation & Localization Support
+                  </span>
                   <br />
-                  <span className={styles.codeProperty}>  - Versioning & Variant Management</span>
+                  <span className={styles.codeProperty}>
+                    {" "}
+                    - Versioning & Variant Management
+                  </span>
                 </div>
               </div>
             </div>

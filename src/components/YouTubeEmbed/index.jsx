@@ -12,7 +12,8 @@ export const YouTubeEmbed = ({ data, index }) => {
           <div className={styles.videoHeader}>
             <h2 className={styles.videoTitle}>{data.title}</h2>
             <p className={styles.videoSubtitle}>
-              See docStatic in action and learn how it can transform your documentation workflow.
+              See docStatic in action and learn how it can transform your
+              documentation workflow.
             </p>
           </div>
           <div className={styles.videoWrapper}>

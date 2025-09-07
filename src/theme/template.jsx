@@ -462,10 +462,11 @@ const TruncateTemplate = {
   fields: [
     {
       name: "deactivate",
-      label: "Do not modify this string or you will not be able to edit this topic in the rich text editor.",
+      label:
+        "Do not modify this string or you will not be able to edit this topic in the rich text editor.",
       type: "string",
       defaultValue: "",
-    }
+    },
   ],
 };
 

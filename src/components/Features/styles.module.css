@@ -72,9 +72,11 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(135deg, 
-    rgba(0, 94, 184, 0.1) 0%, 
-    rgba(0, 133, 222, 0.1) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(0, 94, 184, 0.1) 0%,
+    rgba(0, 133, 222, 0.1) 100%
+  );
   opacity: 0;
   transition: opacity 0.3s ease;
   border-radius: 16px;
@@ -130,19 +132,19 @@
   .features {
     padding: 3rem 0;
   }
-  
+
   .featuresHeader {
     margin-bottom: 3rem;
   }
-  
+
   .featuresTitle {
     font-size: 2rem;
   }
-  
+
   .featuresSubtitle {
     font-size: 1.1rem;
   }
-  
+
   .featureSvg {
     height: 150px;
     width: 150px;
@@ -153,11 +155,11 @@
   .featuresTitle {
     font-size: 1.8rem;
   }
-  
+
   .featureImageContainer {
     padding: 1.5rem;
   }
-  
+
   .featureSvg {
     height: 120px;
     width: 120px;

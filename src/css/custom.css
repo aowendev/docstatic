@@ -38,7 +38,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-  /* Enhanced button styles */
+/* Enhanced button styles */
 .button {
   transition: all 0.2s ease;
   font-weight: 600;
@@ -51,12 +51,20 @@ body {
 }
 
 .button--primary {
-  background: linear-gradient(135deg, var(--ifm-color-primary), var(--ifm-color-primary-dark));
+  background: linear-gradient(
+    135deg,
+    var(--ifm-color-primary),
+    var(--ifm-color-primary-dark)
+  );
   border: none;
 }
 
 .button--primary:hover {
-  background: linear-gradient(135deg, var(--ifm-color-primary-dark), var(--ifm-color-primary-darker));
+  background: linear-gradient(
+    135deg,
+    var(--ifm-color-primary-dark),
+    var(--ifm-color-primary-darker)
+  );
 }
 
 /* Enhanced card styles */
@@ -293,7 +301,7 @@ h3,
 h4,
 h5,
 h6,
-[id], 
+[id],
 .anchor {
   scroll-margin-top: 80px;
 }
@@ -326,14 +334,14 @@ h6,
     flex-wrap: wrap;
     padding: 0.5rem 1rem;
   }
-  
+
   /* Ensure logo/title has enough space */
   .navbar__brand {
     flex: 1;
     min-width: 0;
     margin-right: 0.5rem;
   }
-  
+
   /* Control search input width on mobile */
   .navbar__search {
     flex: none !important;
@@ -342,7 +350,7 @@ h6,
     max-width: 40px !important;
     margin-left: auto !important;
   }
-  
+
   /* Adjust search input styling */
   .navbar__search-input {
     width: 40px !important;
@@ -352,13 +360,13 @@ h6,
     padding: 0.5rem !important;
     border-radius: 50% !important;
   }
-  
+
   /* Stack navigation items if needed */
   .navbar__items {
     flex-wrap: wrap;
     gap: 0.25rem;
   }
-  
+
   /* Adjust toggle button positioning */
   .navbar__toggle {
     margin-left: 0.5rem;
@@ -370,15 +378,15 @@ h6,
   .navbar {
     padding: 0.25rem 0.75rem;
   }
-  
+
   .navbar__brand {
     font-size: 1rem;
   }
-  
+
   .navbar__search {
     max-width: 120px;
   }
-  
+
   .navbar__search-input {
     font-size: 13px;
     padding: 0.2rem 0.4rem;
@@ -397,14 +405,14 @@ h6,
     gap: 0.25rem !important;
     font-size: 12px !important;
   }
-  
+
   /* Lunr search loading fixes */
   .navbar__search .loading,
   .navbar__search-input[placeholder*="Loading"] {
     position: relative !important;
     padding-left: 2rem !important;
   }
-  
+
   /* Loading icon positioning */
   .navbar__search::before,
   .navbar__search .loading-icon {
@@ -416,18 +424,18 @@ h6,
     height: 16px !important;
     z-index: 1 !important;
   }
-  
+
   /* Search input text positioning when loading */
   .navbar__search-input {
     text-indent: 0.5rem !important;
   }
-  
+
   /* Alternative: hide loading text entirely on mobile */
   .navbar__search-input[placeholder*="Loading..."] {
     text-indent: 0 !important;
     font-size: 0 !important;
   }
-  
+
   .navbar__search-input[placeholder*="Loading..."]::placeholder {
     font-size: 12px !important;
     text-indent: 1.5rem !important;
@@ -440,18 +448,18 @@ h6,
   .navbar__search-input[placeholder*="Loading"] {
     font-size: 0 !important;
   }
-  
+
   .navbar__search-input[placeholder*="Loading"]::placeholder {
     font-size: 10px !important;
     content: "..." !important;
   }
-  
+
   /* Hide loading text completely if needed */
   .DocSearch-LoadingIndicator span,
   .navbar__search .loading-text {
     display: none !important;
   }
-  
+
   /* Hide "Search +K" text on mobile */
   .DocSearch-Button-Placeholder,
   .DocSearch-Button-Key,
@@ -459,12 +467,12 @@ h6,
   .navbar__search-input::placeholder {
     display: none !important;
   }
-  
+
   /* Hide search placeholder text */
   .navbar__search-input {
     text-indent: 0 !important;
   }
-  
+
   .navbar__search-input::placeholder {
     color: transparent !important;
     font-size: 0 !important;
@@ -478,7 +486,7 @@ h6,
   .DocSearch-Button-Key {
     display: none !important;
   }
-  
+
   /* Keep only the search icon - force consistent sizing */
   .DocSearch-Button {
     width: 40px !important;
@@ -487,7 +495,7 @@ h6,
     padding: 0.5rem !important;
     margin: 0 !important;
   }
-  
+
   /* Force search container sizing */
   .navbar__search {
     flex: none !important;
@@ -496,7 +504,7 @@ h6,
     max-width: 40px !important;
     margin-left: auto !important;
   }
-  
+
   /* Hide search input placeholder on mobile */
   .navbar__search-input {
     width: 40px !important;
@@ -510,16 +518,16 @@ h6,
     background-position: center !important;
     background-size: 16px !important;
   }
-  
+
   .navbar__search-input::placeholder {
     color: transparent !important;
   }
-  
+
   /* Lunr search input placeholder hiding */
   .navbar__search-input[placeholder*="Search"] {
     text-indent: -9999px !important;
   }
-  
+
   .navbar__search-input[placeholder*="Search"]:focus {
     text-indent: 0 !important;
     width: calc(100vw - 120px) !important;
@@ -536,7 +544,7 @@ h6,
     background-position: 0.75rem center !important;
     background-size: 16px !important;
   }
-  
+
   /* Mobile search results container */
   .DocSearch-Container {
     position: fixed !important;
@@ -547,7 +555,7 @@ h6,
     z-index: 9999 !important;
     padding: 1rem !important;
   }
-  
+
   .DocSearch-Modal {
     width: 100% !important;
     max-width: calc(100vw - 2rem) !important;
@@ -555,12 +563,12 @@ h6,
     margin: 0 !important;
     border-radius: 0.5rem !important;
   }
-  
+
   /* Lunr search results positioning */
   .navbar__search {
     position: relative !important;
   }
-  
+
   .navbar__search .search-suggestions,
   .navbar__search .search-results {
     position: absolute !important;
@@ -581,25 +589,25 @@ h6,
     margin-top: 0.25rem !important;
     scrollbar-width: thin !important;
   }
-  
+
   /* Improve scrollbar visibility on mobile */
   .navbar__search .search-suggestions::-webkit-scrollbar,
   .navbar__search .search-results::-webkit-scrollbar {
     width: 8px !important;
   }
-  
+
   .navbar__search .search-suggestions::-webkit-scrollbar-track,
   .navbar__search .search-results::-webkit-scrollbar-track {
     background: var(--ifm-color-emphasis-200) !important;
     border-radius: 4px !important;
   }
-  
+
   .navbar__search .search-suggestions::-webkit-scrollbar-thumb,
   .navbar__search .search-results::-webkit-scrollbar-thumb {
     background: var(--ifm-color-emphasis-400) !important;
     border-radius: 4px !important;
   }
-  
+
   /* DocSearch modal scrolling improvements */
   .DocSearch-Modal {
     width: 100% !important;
@@ -609,14 +617,14 @@ h6,
     border-radius: 0.5rem !important;
     overflow: hidden !important;
   }
-  
+
   .DocSearch-Dropdown {
     max-height: calc(100vh - 200px) !important;
     overflow-y: auto !important;
     -webkit-overflow-scrolling: touch !important;
     scrollbar-width: thin !important;
   }
-  
+
   /* Lunr search specific scrolling fix */
   .ds-dataset-1 {
     max-height: 60vh !important;
@@ -625,16 +633,16 @@ h6,
     -webkit-overflow-scrolling: touch !important;
     scrollbar-width: thin !important;
   }
-  
+
   .ds-dataset-1::-webkit-scrollbar {
     width: 8px !important;
   }
-  
+
   .ds-dataset-1::-webkit-scrollbar-track {
     background: var(--ifm-color-emphasis-200) !important;
     border-radius: 4px !important;
   }
-  
+
   .ds-dataset-1::-webkit-scrollbar-thumb {
     background: var(--ifm-color-emphasis-400) !important;
     border-radius: 4px !important;
@@ -649,18 +657,18 @@ h6,
     font-size: 11px !important;
     gap: 0.25rem !important;
   }
-  
+
   .loading-spinner,
   .spinner {
     width: 14px !important;
     height: 14px !important;
   }
-  
+
   /* Hide loading text on very small screens if needed */
   .loading-text-responsive {
     display: none !important;
   }
-  
+
   /* Small mobile search adjustments */
   .navbar__search-input[placeholder*="Search"]:focus {
     width: calc(100vw - 80px) !important;
@@ -668,7 +676,7 @@ h6,
     min-width: 160px !important;
     padding-left: 2.5rem !important;
   }
-  
+
   .navbar__search .search-suggestions,
   .navbar__search .search-results {
     width: calc(100vw - 1rem) !important;
@@ -678,18 +686,18 @@ h6,
     max-height: 50vh !important;
     -webkit-overflow-scrolling: touch !important;
   }
-  
+
   .DocSearch-Modal {
     width: calc(100vw - 1rem) !important;
     max-width: calc(100vw - 1rem) !important;
     margin: 0.5rem !important;
   }
-  
+
   .DocSearch-Dropdown {
     max-height: calc(100vh - 150px) !important;
     -webkit-overflow-scrolling: touch !important;
   }
-  
+
   /* Small mobile Lunr search scrolling */
   .ds-dataset-1 {
     max-height: 50vh !important;

@@ -13,10 +13,18 @@ const Feature = ({ image, title, description }) => {
       )}
       <div className={styles.featureContent}>
         {title && <h3 className={styles.featureTitle}>{title}</h3>}
-        {description && <p className={styles.featureDescription}>{description}</p>}
+        {description && (
+          <p className={styles.featureDescription}>{description}</p>
+        )}
         <div className={styles.featureArrow}>
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-            <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            <path
+              d="M7 17L17 7M17 7H7M17 7V17"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
           </svg>
         </div>
       </div>
@@ -31,7 +39,8 @@ export const Features = ({ data, index }) => {
         <div className={styles.featuresHeader}>
           <h2 className={styles.featuresTitle}>Built for Everyone</h2>
           <p className={styles.featuresSubtitle}>
-            Whether you're a writer, developer or end user, docStatic has something for you.
+            Whether you're a writer, developer or end user, docStatic has
+            something for you.
           </p>
         </div>
         <div className="row">

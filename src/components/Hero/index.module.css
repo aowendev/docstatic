@@ -8,10 +8,12 @@
   text-align: center;
   position: relative;
   overflow: hidden;
-  background: linear-gradient(135deg, 
-    var(--ifm-color-primary) 0%, 
-    var(--ifm-color-primary-dark) 50%, 
-    var(--ifm-color-primary-darker) 100%);
+  background: linear-gradient(
+    135deg,
+    var(--ifm-color-primary) 0%,
+    var(--ifm-color-primary-dark) 50%,
+    var(--ifm-color-primary-darker) 100%
+  );
   color: white;
   min-height: 70vh;
   display: flex;
@@ -195,9 +197,10 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-image: 
-    linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+  background-image: linear-gradient(
+      rgba(255, 255, 255, 0.1) 1px,
+      transparent 1px
+    ), linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
   background-size: 50px 50px;
   opacity: 0.3;
 }
@@ -207,25 +210,25 @@
     padding: 4rem 0 3rem 0;
     min-height: auto;
   }
-  
+
   .heroContent {
     grid-template-columns: 1fr;
     gap: 3rem;
     text-align: center;
   }
-  
+
   .heroTitle {
     font-size: 2.5rem;
   }
-  
+
   .heroSubtitle {
     font-size: 1.3rem;
   }
-  
+
   .buttons {
     justify-content: center;
   }
-  
+
   .heroCard {
     max-width: 300px;
   }
@@ -235,20 +238,20 @@
   .heroBanner {
     padding: 3rem 0 2rem 0;
   }
-  
+
   .heroTitle {
     font-size: 2rem;
   }
-  
+
   .heroSubtitle {
     font-size: 1.1rem;
   }
-  
+
   .buttons {
     flex-direction: column;
     align-items: center;
   }
-  
+
   .primaryButton,
   .secondaryButton {
     width: 100%;
