@@ -60,7 +60,7 @@ export const Hero = ({ data, index }) => {
                   <br />
                   <span className={styles.codeProperty}>  - Content Reuse & Single Sourcing</span>
                   <br />
-                  <span className={styles.codeProperty}>  - Simple Structured Authoring & Metadata</span>
+                  <span className={styles.codeProperty}>  - Simple Structured Authoring & Semantic Models</span>
                   <br />
                   <span className={styles.codeProperty}>  - Content Lifecylce & Workflow Management</span>
                   <br />

@@ -101,7 +101,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 575px;
+  width: 100%;
 }
 
 .heroCard {
@@ -109,7 +109,7 @@
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 12px;
   padding: 0;
-  max-width: 575px;
+  max-width: 518px;
   width: 100%;
   backdrop-filter: blur(20px);
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
