@@ -452,6 +452,23 @@ const CommentsTemplate = {
   ],
 };
 
+const TruncateTemplate = {
+  name: "truncate",
+  label: "Truncate",
+  match: {
+    start: "<!--",
+    end: "-->",
+  },
+  fields: [
+    {
+      name: "deactivate",
+      label: "Do not modify this string or you will not be able to edit this topic in the rich text editor.",
+      type: "string",
+      defaultValue: "",
+    }
+  ],
+};
+
 // Get the last segment of the path as the slug
 const usePageSlug = () => {
   if (typeof window === "undefined") return "";
@@ -541,5 +558,6 @@ export const MDXTemplates = [
   GlossaryTermTemplate,
   SnippetTemplate,
   TabsTemplate,
+  TruncateTemplate,
   VariableSetTemplate,
 ];
