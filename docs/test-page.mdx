@@ -10,19 +10,27 @@ tags:
 
 #### Admonitions
 
+Custom styling for notes, tips, cautions, warnings and information.
+
 <Admonition type="note" title="Note Title">
   This is one of the five types of admonition. The others are `Tip`, `Info`, `Caution` and `Warning`.
 </Admonition>
 
 #### Code snippets
 
+Include code snippets directly from files that you can unit test.
+
 <CodeSnippet title="This is a code snippet from a file:" language="xml" filepath="example.xml" />
 
 #### Comments
 
+Add comments to the source that will never appear in the published site, even in the raw HTML.
+
 <!-- hidden comment="This comment will not be visible, even by inspecting the output." -->
 
 #### Context help
+
+Create anchors for context-sensitive help.
 
 [URL](#csh)
 
@@ -30,13 +38,19 @@ tags:
 
 #### Details
 
+Expandable information blocsk.
+
 <Details summary="This is an expanding block.">
   Here are the details.
 </Details>
 
+#### Doc Card Lists
+
+<DocCardList title="Doc Card List" />
+
 #### Figures
 
-Include captions and open the full-size image in a new window.
+Include captions and open the full-size image in a lightbox.
 
 <Figure img="/img/docStaticDemo.jpg" caption="An image." size="100%" />
 
@@ -50,9 +64,13 @@ And here's a reference to the same footnote again<Footnote summary="1st footnote
 
 #### Glossary terms
 
+Translatable glossary terms.
+
 Hover over this glossary term: <GlossaryTerm termKey="single-sourcing" />
 
 #### Snippets
+
+Snippets from Markdown files.
 
 <Snippet filepath="example.mdx" />
 
@@ -72,6 +90,14 @@ Hover over this glossary term: <GlossaryTerm termKey="single-sourcing" />
   </TabItem>
 </Tabs>
 
+#### Truncate blog posts
+
+Embed a truncate tag directly from within the CMS.
+
+<!-- truncate -->
+
 #### Variable sets
+
+Translatable variable sets.
 
 This is a variable: <VariableSet setKey="writing-terms" variableKey="single-sourcing" />
