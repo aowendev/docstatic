@@ -101,6 +101,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 575px;
 }
 
 .heroCard {
@@ -108,7 +109,7 @@
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 12px;
   padding: 0;
-  max-width: 400px;
+  max-width: 575px;
   width: 100%;
   backdrop-filter: blur(20px);
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
@@ -155,13 +156,13 @@
 }
 
 .cardContent {
-  padding: 1.5rem;
+  padding: 2rem;
 }
 
 .codeBlock {
   font-family: var(--ifm-font-family-monospace);
-  font-size: 0.9rem;
-  line-height: 1.6;
+  font-size: 1rem;
+  line-height: 1.8;
   text-align: left;
 }
 

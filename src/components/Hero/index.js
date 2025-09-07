@@ -23,7 +23,7 @@ export const Hero = ({ data, index }) => {
               {data.subtitle ? data.subtitle : siteConfig.tagline}
             </p>
             <div className={styles.heroDescription}>
-              <p>Build beautiful, maintainable documentation with the power of React, Markdown and TinaCMS.</p>
+              <p>Bridging the gap between writers and developers to create online documentation your users will love.</p>
             </div>
             {data.document && (
               <div className={styles.buttons}>
@@ -56,17 +56,17 @@ export const Hero = ({ data, index }) => {
               </div>
               <div className={styles.cardContent}>
                 <div className={styles.codeBlock}>
-                  <span className={styles.codeComment}># Modern documentation platform</span>
+                  <span className={styles.codeKeyword}># Features</span>
                   <br />
-                  <span className={styles.codeKeyword}>features:</span>
+                  <span className={styles.codeProperty}>  - Content Reuse & Single Sourcing</span>
                   <br />
-                  <span className={styles.codeProperty}>  - TinaCMS</span>
+                  <span className={styles.codeProperty}>  - Lightweight Structured Authoring & Semantic Content</span>
                   <br />
-                  <span className={styles.codeProperty}>  - React Components</span>
+                  <span className={styles.codeProperty}>  - Content Lifecylce & Workflow Management</span>
                   <br />
-                  <span className={styles.codeProperty}>  - OpenAPI Support</span>
+                  <span className={styles.codeProperty}>  - Translation & Localization Support</span>
                   <br />
-                  <span className={styles.codeProperty}>  - Git-based</span>
+                  <span className={styles.codeProperty}>  - Versioning & Variant Management</span>
                 </div>
               </div>
             </div>
