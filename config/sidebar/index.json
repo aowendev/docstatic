@@ -24,6 +24,11 @@
       "_template": "category"
     },
     {
+      "document": "docs/blog/blog.mdx",
+      "label": "Blog",
+      "_template": "doc"
+    },
+    {
       "title": "Diagram",
       "link": "generated",
       "items": [
