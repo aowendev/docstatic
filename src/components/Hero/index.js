@@ -79,7 +79,7 @@ export const Hero = ({ data, index }) => {
                   <br />
                   <span className={styles.codeProperty}>
                     {" "}
-                    - Content Lifecylce & Workflow Management
+                    - Content Lifecycle & Workflow Management
                   </span>
                   <br />
                   <span className={styles.codeProperty}>
