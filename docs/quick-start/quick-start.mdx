@@ -8,17 +8,17 @@ tags:
 
 # docStatic
 
-A modern documentation solution based on [Docusaurus 3](https://docusaurus.io/) and [TinaCMS](https://tina.io/) (including tag management), [OpenAPI](https://swagger.io/specification/), [Mermaid](https://mermaid.js.org/) charts, [Lunr](https://lunrjs.com/) search integration and [Raw Loader](https://github.com/webpack-contrib/raw-loader) for code snippets.
+A modern documentation platform, docStatic bridges the gap between writers and developers to create online documentation your users will love. 
 
-The project was created by creating a new Docusaurus v3 site with Palo Alto Networks' [OpenAPI plugin](https://github.com/PaloAltoNetworks/docusaurus-openapi-docs) and merging [Tinasaurus](https://github.com/tinacms/tinasaurus) to create a working config.
+It features:
 
-**Note**: Lunr search is available only in production.
+* Content reuse and single sourcing.
+* Simple structured authoring and semantic models.
+* Content lifecycle and workflow management.
+* Translation and localization support.
+* Versioning and variant management.
 
-This demo includes the use of snippets (partials), code snippets and variables (on the [Test Page](test-page)). It includes an example workflow for the *Docs* collection in Tina:
-
-`Draft` → `In Review` → `In Translation` → `Translated` → `Published` ( → `Unlisted`)
-
-Each state is a metadata Boolean, but the user interface in Tina treats them as a unified workflow.
+Fully open-source, it combines a static site generator with a headless CMS and a publishing pipeline. Writers can work in a rich-text editor. Developers can work in Markdown directly in their favorite IDE. Users get a responsive documentation website with advanced features.
 
 ## Local development
 
@@ -60,7 +60,7 @@ Visit the CMS at [http://localhost:3000/admin](http://localhost:3000/admin) to s
 
 To generate all OpenAPI docs, run this command from the root folder of your project:
 
-```
+```shell
 yarn gen-api-docs all
 ```
 
@@ -68,13 +68,13 @@ yarn gen-api-docs all
 
 You can also generate OpenAPI docs for a single path or OAS by specifying the unique `id`:
 
-```
+```shell
 yarn gen-api-docs <id>
 ```
 
 Example:
 
-```bash
+```shell
 yarn gen-api-docs petstore
 ```
 
@@ -84,7 +84,7 @@ If you have multiple versions of the same API, `gen-api-docs` only generates the
 
 Example:
 
-```bash
+```shell
 yarn gen-api-docs all --all-versions
 ```
 
@@ -94,19 +94,19 @@ yarn gen-api-docs all --all-versions
 
 To clean/remove all API Docs, run this command from the root folder of your project:
 
-```bash
+```shell
 yarn clean-api-docs all
 ```
 
 You can also remove a particular set of API docs by specifying the unique `id` of your desired spec instance.
 
-```bash
+```shell
 yarn clean-api-docs <id>
 ```
 
 Example:
 
-```bash
+```shell
 yarn clean-api-docs petstore
 ```
 
@@ -116,7 +116,7 @@ If you have multiple versions of the same API, `clean-api-docs` only cleans the 
 
 Example:
 
-```bash
+```shell
 yarn clean-api-docs all --all-versions
 ```
 
@@ -126,13 +126,13 @@ yarn clean-api-docs all --all-versions
 
 To generate *all* versioned OpenAPI docs, run this command from the root folder of your project:
 
-```bash
+```shell
 yarn gen-api-docs:version <id>:all
 ```
 
 Example:
 
-```bash
+```shell
 yarn gen-api-docs:version petstore:all
 ```
 
@@ -142,16 +142,20 @@ yarn gen-api-docs:version petstore:all
 
 ### Build
 
-```
+```shell
 $ yarn build
 ```
 
 This command generates static content into the `build` folder and can be served using any static contents hosting service. For example:
 
-```
+```shell
 npm run serve
 ```
 
 ### Deployment
 
 To deploy to production and support editing on your live website (at `your-company.github.io/baseurl/admin`), follow the steps from TinaCMS to [deploy to GitHub pages](https://tina.io/docs/tina-cloud/deployment-options/github-pages).
+
+## Acknowledgments
+
+This software is possible because of the generosity of Meta, SSW, Palo Alto Networks and legions of open-source developers.
