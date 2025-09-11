@@ -2,7 +2,7 @@ import React, { useState, useMemo } from "react";
 import { wrapFieldsWithMeta } from "tinacms";
 
 const ConditionsTreeField = wrapFieldsWithMeta(({ input, field }) => {
-  const [expandedCategories, setExpandedCategories] = useState(new Set(['User Roles', 'Feature Flags', 'Environment']));
+  const [expandedCategories, setExpandedCategories] = useState(new Set()); // Start with all categories collapsed
   const selectedConditions = input.value || [];
 
   // Build tree structure from conditions data

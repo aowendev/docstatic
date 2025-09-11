@@ -222,6 +222,11 @@ const DocsCollection = {
   format: "mdx",
   ui: {
     defaultItem: {
+      metadata: {
+        description: "",
+        tags: [],
+        conditions: [],
+      },
       draft: true,
       review: false,
       translate: false,
@@ -239,29 +244,39 @@ const DocsCollection = {
       required: true,
     },
     {
-      type: "string",
-      name: "description",
-      label: "Description",
-    },
-    {
-      label: "Tags",
-      name: "tags",
-      type: "string",
-      list: true,
+      type: "object",
+      name: "metadata",
+      label: "Metadata",
       ui: {
-        component: TagsField,
+        component: "group",
       },
-      options: allTags,
-    },
-    {
-      label: "Conditions",
-      name: "conditions",
-      type: "string",
-      list: true,
-      ui: {
-        component: ConditionsTreeField,
-      },
-      options: allConditions,
+      fields: [
+        {
+          type: "string",
+          name: "description",
+          label: "Description",
+        },
+        {
+          label: "Tags",
+          name: "tags",
+          type: "string",
+          list: true,
+          ui: {
+            component: TagsField,
+          },
+          options: allTags,
+        },
+        {
+          label: "Conditions",
+          name: "conditions",
+          type: "string",
+          list: true,
+          ui: {
+            component: ConditionsTreeField,
+          },
+          options: allConditions,
+        },
+      ],
     },
     {
       type: "boolean",
