@@ -185,6 +185,9 @@ const DocsCollection = {
   name: "doc",
   label: "Topics",
   path: "docs",
+  match: {
+    exclude: 'api/**/**',
+  },
   format: "mdx",
   ui: {
     defaultItem: {
