@@ -7,6 +7,7 @@ import Details from "@theme/Details";
 import React from "react";
 
 import CodeSnippet from "@site/src/components/CodeSnippet";
+import ConditionalText from "@site/src/components/ConditionalText";
 import Figure from "@site/src/components/Figure";
 import Footnote from "@site/src/components/Footnote";
 import GlossaryTerm from "@site/src/components/GlossaryTerm";
@@ -23,6 +24,7 @@ export default {
   DocCardList: DocCardList,
 
   CodeSnippet: CodeSnippet,
+  ConditionalText: ConditionalText,
   Figure: Figure,
   Footnote: Footnote,
   GlossaryTerm: GlossaryTerm,

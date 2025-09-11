@@ -1,6 +1,7 @@
 import React from "react";
 import codeFiles from "../../reuse/code-files.json";
 import { slugify } from "../../util";
+import { ConditionalTextBlockTemplate } from "../components/ConditionalText/template";
 
 const AdmonitionTemplate = {
   name: "Admonition",
@@ -551,6 +552,7 @@ export const MDXTemplates = [
   AdmonitionTemplate,
   CodeBlockTemplate,
   CommentsTemplate,
+  ConditionalTextBlockTemplate,
   ContextHelpTemplate,
   DetailsTemplate,
   DocCardListTemplate,

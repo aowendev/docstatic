@@ -11,11 +11,22 @@ import { docusaurusDate, titleFromSlug } from "../util";
 // tags UI component
 import TagsField from "../src/components/TagsField";
 
+// conditions tree UI component
+import ConditionsTreeField from "../src/components/ConditionsField";
+
 // workflows component
 import StatusField from "../src/components/StatusField";
 
 // get doc tags from the taxonomy JSON file
 import data from "../reuse/taxonomy/index.json";
+
+// get conditions from the conditions JSON file
+import conditionsData from "../reuse/conditions/index.json";
+
+// Make conditions data available globally for tree component
+if (typeof window !== 'undefined') {
+  window.conditionsData = conditionsData;
+}
 
 const allTags = [];
 
@@ -27,7 +38,27 @@ function collectTags(nodes) {
   });
 }
 
+// get all conditions from hierarchical structure
+const allConditions = [];
+
+function collectConditions(categories) {
+  if (!Array.isArray(categories)) return;
+  categories.forEach((category) => {
+    if (category.conditions && Array.isArray(category.conditions)) {
+      category.conditions.forEach((condition) => {
+        if (condition.active !== false) { // include active conditions and those without active field
+          allConditions.push({
+            value: condition.condition,
+            label: `${condition.condition} (${category.name})`
+          });
+        }
+      });
+    }
+  });
+}
+
 collectTags(data.taxonomy);
+collectConditions(conditionsData.categories);
 
 // Your hosting provider likely exposes this as an environment variable
 const branch =
@@ -223,9 +254,19 @@ const DocsCollection = {
       options: allTags,
     },
     {
+      label: "Conditions",
+      name: "conditions",
+      type: "string",
+      list: true,
+      ui: {
+        component: ConditionsTreeField,
+      },
+      options: allConditions,
+    },
+    {
       type: "boolean",
       name: "draft",
-      label: "Draft",
+      label: "Workflow",
       ui: {
         component: StatusField,
       },
@@ -978,9 +1019,87 @@ const PagesCollection = {
       templates: [...MDXTemplates],
     },
   ],
+  ui: {
+    allowedActions: {
+      create: false,
+      delete: false,
+    },
+  },
 };
 
 // DocStatic Collections
+
+// conditions
+const ConditionsCollection = {
+  label: "Conditions",
+  name: "conditions",
+  path: "reuse/conditions",
+  format: "json",
+  fields: [
+    {
+      type: "object",
+      label: "Categories",
+      name: "categories",
+      list: true,
+      ui: {
+        itemProps: (item) => ({
+          label: item.name,
+        }),
+      },
+      fields: [
+        {
+          type: "string",
+          label: "Category Name",
+          name: "name",
+          isTitle: true,
+          required: true,
+        },
+        {
+          type: "string",
+          label: "Description",
+          name: "description",
+        },
+        {
+          type: "object",
+          label: "Conditions",
+          name: "conditions",
+          list: true,
+          ui: {
+            itemProps: (item) => ({
+              label: item.condition,
+            }),
+          },
+          fields: [
+            {
+              type: "string",
+              label: "Condition",
+              name: "condition",
+              isTitle: true,
+              required: true,
+            },
+            {
+              type: "string",
+              label: "Description",
+              name: "description",
+            },
+            {
+              type: "boolean",
+              label: "Active",
+              name: "active",
+              description: "Whether this condition is currently active/available",
+            },
+          ],
+        },
+      ],
+    },
+  ],
+  ui: {
+    allowedActions: {
+      create: false,
+      delete: false,
+    },
+  },
+};
 
 // variable sets
 const VariableSetCollection = {
@@ -1260,17 +1379,18 @@ export default defineConfig({
   },
   schema: {
     collections: [
-      HomepageCollection,
-      SidebarCollection,
-      DocsCollection,
-      SnippetsCollection,
-      TranslationCollection,
+      ConditionsCollection,
       PostCollection,
-      PagesCollection,
       GlossaryTermCollection,
-      VariableSetCollection,
-      TaxonomyCollection,
+      HomepageCollection,
+      PagesCollection,
       SettingsCollection,
+      SnippetsCollection,
+      SidebarCollection,
+      TaxonomyCollection,
+      DocsCollection,
+      TranslationCollection,
+      VariableSetCollection,
     ],
   },
   search: {

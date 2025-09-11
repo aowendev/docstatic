@@ -56,3 +56,43 @@ export const getPageRoute = (page) => {
 export const getPath = (page) => {
   return page.replace(/\.mdx?$/, "");
 };
+
+// Helper function to get all active conditions from hierarchical structure
+export const getAllConditions = (conditionsData) => {
+  const conditions = [];
+  
+  if (conditionsData && conditionsData.categories && Array.isArray(conditionsData.categories)) {
+    for (const category of conditionsData.categories) {
+      if (category.conditions && Array.isArray(category.conditions)) {
+        for (const condition of category.conditions) {
+          if (condition.active !== false) { // include active conditions and those without active field
+            conditions.push(condition.condition);
+          }
+        }
+      }
+    }
+  }
+  
+  return conditions;
+};
+
+// Helper function to get condition details by name
+export const getConditionDetails = (conditionsData, conditionName) => {
+  if (conditionsData && conditionsData.categories && Array.isArray(conditionsData.categories)) {
+    for (const category of conditionsData.categories) {
+      if (category.conditions && Array.isArray(category.conditions)) {
+        for (const condition of category.conditions) {
+          if (condition.condition === conditionName) {
+            return {
+              ...condition,
+              category: category.name,
+              categoryDescription: category.description
+            };
+          }
+        }
+      }
+    }
+  }
+  
+  return null;
+};

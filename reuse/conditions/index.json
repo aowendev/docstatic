@@ -1,0 +1,82 @@
+{
+  "categories": [
+    {
+      "name": "User Roles",
+      "description": "Access conditions based on user roles and permissions",
+      "conditions": [
+        {
+          "condition": "admin",
+          "description": "Administrator with full access to all features",
+          "active": true
+        },
+        {
+          "condition": "user",
+          "description": "Regular authenticated user with standard access",
+          "active": true
+        },
+        {
+          "condition": "moderator",
+          "description": "Content moderator with elevated permissions",
+          "active": true
+        },
+        {
+          "condition": "guest",
+          "description": "Anonymous visitor with limited access",
+          "active": true
+        },
+        {
+          "condition": "editor",
+          "description": "Content editor with publishing permissions",
+          "active": true
+        },
+        {
+          "condition": "author",
+          "description": "Content author with creation permissions",
+          "active": true
+        },
+        {
+          "condition": "subscriber",
+          "description": "Newsletter or content subscriber",
+          "active": true
+        }
+      ]
+    },
+    {
+      "name": "Feature Flags",
+      "description": "Feature-based access control conditions",
+      "conditions": [
+        {
+          "condition": "beta-features",
+          "description": "Access to beta and experimental features",
+          "active": false
+        },
+        {
+          "condition": "advanced-tools",
+          "description": "Access to advanced developer tools",
+          "active": true
+        }
+      ]
+    },
+    {
+      "name": "Environment",
+      "description": "Environment-specific access conditions",
+      "conditions": [
+        {
+          "condition": "development",
+          "description": "Development environment access",
+          "active": true
+        },
+        {
+          "condition": "staging",
+          "description": "Staging environment access",
+          "active": true
+        },
+        {
+          "condition": "production",
+          "description": "Production environment access",
+          "active": true
+        }
+      ]
+    }
+  ]
+}

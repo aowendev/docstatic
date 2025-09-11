@@ -4,6 +4,8 @@ description: Page for testing out new docStatic features.
 tags:
   - docs
   - docs_author
+conditions:
+  - admin
 ---
 
 # Embeddable components
@@ -27,6 +29,10 @@ Include code snippets directly from files that you can unit test.
 Add comments to the source that will never appear in the published site, even in the raw HTML.
 
 <!-- hidden comment="This comment will not be visible, even by inspecting the output." -->
+
+#### Conditional Text
+
+<ConditionalText text="This text will appear when conditions are met." conditions={["admin"]} logic="any" />
 
 #### Context help
 
