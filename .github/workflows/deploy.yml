@@ -60,7 +60,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: |
-            docs/petstore
+            docs/api/petstore
           key: ${{ runner.os }}-api-docs-${{ hashFiles('apis/**') }}
           restore-keys: |
             ${{ runner.os }}-api-docs-
@@ -72,7 +72,7 @@ jobs:
       - name: Check if API docs need regeneration
         id: api-docs-check
         run: |
-          if [ -d "docs/petstore" ] && [ "$(find docs/petstore -name '*.api.mdx' | wc -l)" -gt 0 ]; then
+          if [ -d "docs/api/petstore" ] && [ "$(find docs/api/petstore -name '*.api.mdx' | wc -l)" -gt 0 ]; then
             echo "api-docs-exist=true" >> $GITHUB_OUTPUT
           else
             echo "api-docs-exist=false" >> $GITHUB_OUTPUT

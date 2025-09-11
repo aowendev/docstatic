@@ -220,12 +220,42 @@ const DocsCollection = {
       options: allTags,
     },
     {
-      type: "string",
-      name: "status",
-      label: "Document Status",
+      type: "boolean",
+      name: "draft",
+      label: "Draft",
       ui: {
         component: StatusField,
       },
+    },
+    {
+      type: "boolean",
+      name: "review",
+      label: "In Review",
+      ui: { component: "hidden" },
+    },
+    {
+      type: "boolean",
+      name: "translate",
+      label: "In Translation",
+      ui: { component: "hidden" },
+    },
+    {
+      type: "boolean",
+      name: "approved",
+      label: "Translation Approved",
+      ui: { component: "hidden" },
+    },
+    {
+      type: "boolean",
+      name: "published",
+      label: "Published",
+      ui: { component: "hidden" },
+    },
+    {
+      type: "boolean",
+      name: "unlisted",
+      label: "Unlisted",
+      ui: { component: "hidden" },
     },
     {
       type: "rich-text",

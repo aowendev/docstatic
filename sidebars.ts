@@ -91,7 +91,7 @@ const sidebars = {
         title: "Petstore API",
         slug: "/category/petstore-api",
       },
-      items: require("./docs/petstore/sidebar.ts"),
+      items: require("./docs/api/petstore/sidebar.ts"),
     },
   ],
 };

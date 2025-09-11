@@ -295,7 +295,7 @@ const config = {
         config: {
           petstore: {
             specPath: "apis/petstore.yaml",
-            outputDir: "docs/petstore",
+            outputDir: "docs/api/petstore",
             downloadUrl:
               "https://raw.githubusercontent.com/PaloAltoNetworks/docusaurus-template-openapi-docs/main/examples/petstore.yaml",
             sidebarOptions: {
