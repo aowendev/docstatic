@@ -396,6 +396,40 @@ const VariableSetTemplate = {
   ],
 };
 
+const RelatedTopicsTemplate = {
+  name: "RelatedTopics",
+  label: "Related Topics",
+  ui: {
+    itemProps: (item) => {
+      const tagsList = Array.isArray(item?.tags) ? item.tags.join(", ") : "";
+      return { 
+        label: tagsList ? `Related Topics (${tagsList})` : "Related Topics" 
+      };
+    },
+  },
+  fields: [
+    {
+      name: "tags",
+      label: "Tags",
+      type: "string",
+      list: true,
+      description: "Tags to find related documents for (e.g., docs_reuse, docs_author)",
+    },
+    {
+      name: "maxItems",
+      label: "Maximum Items",
+      type: "number",
+      description: "Maximum number of related documents to show (default: 5)",
+    },
+    {
+      name: "excludeCurrentPage",
+      label: "Exclude Current Page",
+      type: "boolean",
+      description: "Exclude the current page from results",
+    },
+  ],
+};
+
 const CommentsTemplate = {
   name: "hidden",
   label: "Comment",
@@ -586,6 +620,7 @@ export const MDXTemplates = [
   FigureTemplate,
   FootnoteTemplate,
   GlossaryTermTemplate,
+  RelatedTopicsTemplate,
   SnippetTemplate,
   TabsTemplate,
   TruncateTemplate,

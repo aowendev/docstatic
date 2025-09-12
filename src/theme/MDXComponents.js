@@ -3,31 +3,40 @@ import DocCardList from "@theme-original/DocCardList";
 import MDXComponents from "@theme-original/MDXComponents";
 import TabItem from "@theme-original/TabItem";
 import Tabs from "@theme-original/Tabs";
+import Admonition from "@theme-original/Admonition";
 import Details from "@theme/Details";
 import React from "react";
 
-import CodeSnippet from "@site/src/components/CodeSnippet";
-import ConditionalText from "@site/src/components/ConditionalText";
-import Figure from "@site/src/components/Figure";
-import Footnote from "@site/src/components/Footnote";
-import GlossaryTerm from "@site/src/components/GlossaryTerm";
-import Snippet from "@site/src/components/Snippet";
-import VariableSet from "@site/src/components/VariableSet";
+import CodeSnippet from "../components/CodeSnippet";
+import ConditionalText from "../components/ConditionalText";
+import Figure from "../components/Figure";
+import Footnote from "../components/Footnote";
+import GlossaryTerm from "../components/GlossaryTerm";
+import RelatedTopics from "../components/RelatedTopics";
+import Snippet from "../components/Snippet";
+import StatusField from "../components/StatusField";
+import TagsField from "../components/TagsField";
+import VariableSet from "../components/VariableSet";
+import YouTubeEmbed from "../components/YouTubeEmbed";
 
 export default {
+  // Re-use the default mapping
   ...MDXComponents,
-  Details: Details,
+  Admonition: Admonition,
   CodeBlock: CodeBlock,
-  Tabs: Tabs,
-  TabItem: TabItem,
-  Admonition: MDXComponents.admonition,
-  DocCardList: DocCardList,
-
   CodeSnippet: CodeSnippet,
   ConditionalText: ConditionalText,
+  Details: Details,
+  DocCardList: DocCardList,
   Figure: Figure,
   Footnote: Footnote,
   GlossaryTerm: GlossaryTerm,
+  RelatedTopics: RelatedTopics,
   Snippet: Snippet,
+  StatusField: StatusField,
+  TabItem: TabItem,
+  Tabs: Tabs,
+  TagsField: TagsField,
   VariableSet: VariableSet,
+  YouTubeEmbed: YouTubeEmbed,
 };

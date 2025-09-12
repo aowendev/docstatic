@@ -41,12 +41,23 @@
     "title": "^4.0.1"
   },
   "browserslist": {
-    "production": [">0.5%", "not dead", "not op_mini all"],
+    "production": [
+      ">0.5%",
+      "not dead",
+      "not op_mini all"
+    ],
     "development": [
       "last 3 chrome version",
       "last 3 firefox version",
       "last 5 safari version"
     ]
+  },
+  "resolutions": {
+    "@floating-ui/dom": "1.6.10",
+    "@floating-ui/react": "0.26.24",
+    "@floating-ui/react-dom": "2.1.1",
+    "@floating-ui/core": "1.6.7",
+    "@floating-ui/utils": "0.2.7"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
