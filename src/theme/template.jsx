@@ -516,56 +516,58 @@ const FootnoteTemplate = {
 
 const TabsTemplate = {
   name: "Tabs",
+  label: "Tabs",
+  ui: {
+    itemProps: (item) => {
+      return { label: "Tabs" };
+    },
+  },
   fields: [
     {
       name: "children",
-      label: "Tabs",
+      label: "Tab Items",
       type: "rich-text",
       templates: [
         {
           name: "TabItem",
-          label: "Tab",
+          label: "Tab Item",
           ui: {
             defaultItem: {
-              label: "Tab",
-              value: "tab",
+              label: "New Tab",
+              value: "new-tab",
+            },
+            itemProps: (item) => {
+              return { label: item?.label || "New Tab" };
             },
           },
           fields: [
             {
-              name: "label",
-              label: "Label",
+              name: "value",
+              label: "Tab Value",
               type: "string",
-              isTitle: true,
               required: true,
+              description: "Unique identifier for this tab"
             },
             {
-              name: "value",
+              name: "label",
+              label: "Tab Label",
               type: "string",
-              ui: {
-                component: ({ input, tinaForm }) => {
-                  React.useEffect(() => {
-                    input.onChange(slugify(tinaForm.values.label));
-                  }, [JSON.stringify(tinaForm.values)]);
-
-                  return (
-                    <input
-                      type="text"
-                      id={input.name}
-                      className="hidden"
-                      {...input}
-                    />
-                  );
-                },
-              },
+              required: true,
+              isTitle: true,
+              description: "Display text for the tab button"
+            },
+            {
+              name: "default",
+              label: "Default Tab",
+              type: "boolean",
+              description: "Set this tab as the default selected tab"
             },
             {
               name: "children",
-              label: "Content",
-              type: "string",
-              ui: {
-                component: "textarea",
-              },
+              label: "Tab Content",
+              type: "rich-text",
+              templates: [
+              ],
             },
           ],
         },
