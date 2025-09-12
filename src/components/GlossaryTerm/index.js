@@ -17,8 +17,8 @@ const GlossaryTerm = ({ termKey, lang }) => {
 
   // Create and manage portal element
   useEffect(() => {
-    if (isTouchDevice && showDefinition && typeof document !== 'undefined') {
-      const portalDiv = document.createElement('div');
+    if (isTouchDevice && showDefinition && typeof document !== "undefined") {
+      const portalDiv = document.createElement("div");
       portalDiv.style.cssText = `
         position: fixed !important;
         top: 0px !important;
@@ -38,7 +38,7 @@ const GlossaryTerm = ({ termKey, lang }) => {
         }
       };
     }
-    
+
     return () => {
       setPortalElement(null);
     };
@@ -49,14 +49,14 @@ const GlossaryTerm = ({ termKey, lang }) => {
     const checkTouchDevice = () => {
       // Add debug mode - uncomment next line to force touch mode for testing
       // return true; // TEMPORARY: Force touch mode for testing
-      
+
       return (
-        'ontouchstart' in window ||
+        "ontouchstart" in window ||
         navigator.maxTouchPoints > 0 ||
         navigator.msMaxTouchPoints > 0
       );
     };
-    
+
     setIsTouchDevice(checkTouchDevice());
   }, []);
 
@@ -78,11 +78,11 @@ const GlossaryTerm = ({ termKey, lang }) => {
 
     if (isTouchDevice && showDefinition) {
       // Use both touchstart and click for better compatibility
-      document.addEventListener('touchstart', handleClickOutside);
-      document.addEventListener('click', handleClickOutside);
+      document.addEventListener("touchstart", handleClickOutside);
+      document.addEventListener("click", handleClickOutside);
       return () => {
-        document.removeEventListener('touchstart', handleClickOutside);
-        document.removeEventListener('click', handleClickOutside);
+        document.removeEventListener("touchstart", handleClickOutside);
+        document.removeEventListener("click", handleClickOutside);
       };
     }
   }, [showDefinition, isTouchDevice]);
@@ -94,31 +94,31 @@ const GlossaryTerm = ({ termKey, lang }) => {
     const termRect = termRef.current.getBoundingClientRect();
     const viewportWidth = window.innerWidth;
     const viewportHeight = window.innerHeight;
-    
+
     // Default positioning below the term
     let top = termRect.bottom + 8;
     let left = termRect.left;
-    
+
     // Estimated definition box width (will be adjusted by CSS max-width)
     const estimatedWidth = Math.min(300, viewportWidth - 20);
-    
+
     // Check if definition would overflow right edge
     if (left + estimatedWidth > viewportWidth - 10) {
       left = viewportWidth - estimatedWidth - 10;
     }
-    
+
     // Check if definition would overflow left edge
     if (left < 10) {
       left = 10;
     }
-    
+
     // Check if definition would overflow bottom edge
     // Estimate height as roughly 100px (will be adjusted by content)
     const estimatedHeight = 100;
     if (top + estimatedHeight > viewportHeight - 10) {
       // Position above the term instead
       top = termRect.top - estimatedHeight - 8;
-      
+
       // If still overflowing top, position at top of viewport
       if (top < 10) {
         top = 10;
@@ -126,7 +126,7 @@ const GlossaryTerm = ({ termKey, lang }) => {
     }
 
     return {
-      position: 'fixed',
+      position: "fixed",
       top: `${top}px`,
       left: `${left}px`,
       zIndex: 2147483647, // Maximum z-index value
@@ -209,34 +209,34 @@ const GlossaryTerm = ({ termKey, lang }) => {
   // Create the definition box component
   const DefinitionBox = () => {
     if (!termRef.current) return null;
-    
+
     const termRect = termRef.current.getBoundingClientRect();
     const viewportWidth = window.innerWidth;
     const viewportHeight = window.innerHeight;
-    
+
     // Estimated definition box dimensions
     const estimatedWidth = Math.min(300, viewportWidth - 20);
     const estimatedHeight = 120; // Rough estimate for height
-    
+
     // Default positioning below the term
     let top = termRect.bottom + 8;
     let left = termRect.left;
-    
+
     // Check if definition would overflow right edge
     if (left + estimatedWidth > viewportWidth - 10) {
       left = viewportWidth - estimatedWidth - 10;
     }
-    
+
     // Check if definition would overflow left edge
     if (left < 10) {
       left = 10;
     }
-    
+
     // Check if definition would overflow bottom edge
     if (top + estimatedHeight > viewportHeight - 10) {
       // Position above the term instead
       top = termRect.top - estimatedHeight - 8;
-      
+
       // If still overflowing top, position at top of viewport
       if (top < 10) {
         top = 10;
@@ -244,43 +244,44 @@ const GlossaryTerm = ({ termKey, lang }) => {
     }
 
     // Detect current theme to set appropriate colors
-    const isDarkMode = document.documentElement.getAttribute('data-theme') === 'dark';
-    const backgroundColor = isDarkMode ? '#1b1b1d' : 'white';
-    const textColor = isDarkMode ? '#e3e3e3' : 'black';
-    const secondaryTextColor = isDarkMode ? '#b3b3b3' : '#333';
-    const borderColor = isDarkMode ? '#444' : '#666';
+    const isDarkMode =
+      document.documentElement.getAttribute("data-theme") === "dark";
+    const backgroundColor = isDarkMode ? "#1b1b1d" : "white";
+    const textColor = isDarkMode ? "#e3e3e3" : "black";
+    const secondaryTextColor = isDarkMode ? "#b3b3b3" : "#333";
+    const borderColor = isDarkMode ? "#444" : "#666";
 
     return (
       <div
         ref={definitionRef}
         style={{
-          position: 'fixed',
+          position: "fixed",
           top: `${top}px`,
           left: `${left}px`,
-          zIndex: '999999999',
+          zIndex: "999999999",
           backgroundColor: backgroundColor,
           color: textColor,
           border: `1px solid ${borderColor}`,
-          borderRadius: '8px',
-          padding: '16px',
-          maxWidth: '300px',
-          minWidth: '200px',
-          boxShadow: '0 8px 32px rgba(0, 0, 0, 0.5)',
-          fontSize: '14px',
-          lineHeight: '1.4',
-          wordWrap: 'break-word',
-          pointerEvents: 'auto',
-          fontFamily: 'Arial, sans-serif',
+          borderRadius: "8px",
+          padding: "16px",
+          maxWidth: "300px",
+          minWidth: "200px",
+          boxShadow: "0 8px 32px rgba(0, 0, 0, 0.5)",
+          fontSize: "14px",
+          lineHeight: "1.4",
+          wordWrap: "break-word",
+          pointerEvents: "auto",
+          fontFamily: "Arial, sans-serif",
         }}
         onTouchStart={(e) => e.stopPropagation()}
         onClick={(e) => e.stopPropagation()}
       >
-        <div style={{ fontWeight: 'bold', marginBottom: '8px', color: textColor }}>
+        <div
+          style={{ fontWeight: "bold", marginBottom: "8px", color: textColor }}
+        >
           {term}
         </div>
-        <div style={{ color: secondaryTextColor }}>
-          {definition}
-        </div>
+        <div style={{ color: secondaryTextColor }}>{definition}</div>
       </div>
     );
   };
@@ -290,36 +291,38 @@ const GlossaryTerm = ({ termKey, lang }) => {
       <span
         ref={termRef}
         title={!isTouchDevice ? definition : undefined}
-        style={{ 
-          textDecoration: "underline", 
+        style={{
+          textDecoration: "underline",
           cursor: isTouchDevice ? "pointer" : "help",
-          position: 'relative'
+          position: "relative",
         }}
         onClick={handleTermClick}
         onTouchStart={isTouchDevice ? (e) => e.stopPropagation() : undefined}
       >
         {term}
       </span>
-      
-      {isTouchDevice && showDefinition && typeof document !== 'undefined' && portalElement && 
+
+      {isTouchDevice &&
+        showDefinition &&
+        typeof document !== "undefined" &&
+        portalElement &&
         createPortal(
-          <div 
+          <div
             style={{
-              position: 'fixed',
-              top: '0px',
-              left: '0px', 
-              width: '100vw',
-              height: '100vh',
-              backgroundColor: 'transparent',
-              pointerEvents: 'none',
-              zIndex: '999999999',
+              position: "fixed",
+              top: "0px",
+              left: "0px",
+              width: "100vw",
+              height: "100vh",
+              backgroundColor: "transparent",
+              pointerEvents: "none",
+              zIndex: "999999999",
             }}
           >
             <DefinitionBox />
-          </div>, 
+          </div>,
           portalElement
-        )
-      }
+        )}
     </>
   );
 };
