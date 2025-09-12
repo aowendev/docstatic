@@ -26,6 +26,46 @@
   --ifm-navbar-height: 4rem;
 }
 
+/* Force highest z-index for definition boxes - targeted approach */
+.glossary-definition-portal {
+  z-index: 2147483647 !important;
+  position: fixed !important;
+  pointer-events: none !important;
+}
+
+.glossary-definition-portal > div {
+  pointer-events: auto !important;
+  z-index: 2147483647 !important;
+  position: fixed !important;
+}
+
+/* Ensure definition boxes work in both light and dark modes */
+[data-theme="light"] .glossary-definition-portal,
+[data-theme="dark"] .glossary-definition-portal,
+html[data-theme="light"] .glossary-definition-portal,
+html[data-theme="dark"] .glossary-definition-portal {
+  z-index: 2147483647 !important;
+  position: fixed !important;
+  isolation: isolate !important;
+  transform: translateZ(0) !important;
+}
+
+[data-theme="light"] .glossary-definition-portal > div,
+[data-theme="dark"] .glossary-definition-portal > div,
+html[data-theme="light"] .glossary-definition-portal > div,
+html[data-theme="dark"] .glossary-definition-portal > div {
+  z-index: 2147483647 !important;
+  position: fixed !important;
+  isolation: isolate !important;
+  transform: translateZ(0) !important;
+}
+
+/* Specific fix for light mode stacking issues */
+[data-theme="light"] div[style*="z-index"],
+html[data-theme="light"] div[style*="z-index"] {
+  z-index: 2147483647 !important;
+}
+
 /* Global improvements */
 html {
   scroll-behavior: smooth;
