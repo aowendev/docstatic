@@ -333,40 +333,6 @@ const DocCardListTemplate = {
 
 // DocStatic components follow
 
-const TabsItemTemplate = {
-  name: "TabItem",
-  label: "Tab Item",
-  fields: [
-    {
-      name: "label",
-      label: "Label",
-      type: "string",
-    },
-    {
-      name: "value",
-      label: "Value",
-      type: "string",
-    },
-    {
-      name: "children",
-      label: "Content",
-      type: "rich-text",
-    },
-  ],
-};
-
-const TabsTemplate = {
-  name: "Tabs",
-  fields: [
-    {
-      name: "children",
-      label: "Tabs",
-      type: "rich-text",
-      templates: [TabsItemTemplate],
-    },
-  ],
-};
-
 const GlossaryTermTemplate = {
   name: "GlossaryTerm",
   label: "Glossary Term",
@@ -544,6 +510,66 @@ const FootnoteTemplate = {
       name: "children",
       label: "Footnote",
       type: "rich-text",
+    },
+  ],
+};
+
+const TabsTemplate = {
+  name: "Tabs",
+  fields: [
+    {
+      name: "children",
+      label: "Tabs",
+      type: "rich-text",
+      templates: [
+        {
+          name: "TabItem",
+          label: "Tab",
+          ui: {
+            defaultItem: {
+              label: "Tab",
+              value: "tab",
+            },
+          },
+          fields: [
+            {
+              name: "label",
+              label: "Label",
+              type: "string",
+              isTitle: true,
+              required: true,
+            },
+            {
+              name: "value",
+              type: "string",
+              ui: {
+                component: ({ input, tinaForm }) => {
+                  React.useEffect(() => {
+                    input.onChange(slugify(tinaForm.values.label));
+                  }, [JSON.stringify(tinaForm.values)]);
+
+                  return (
+                    <input
+                      type="text"
+                      id={input.name}
+                      className="hidden"
+                      {...input}
+                    />
+                  );
+                },
+              },
+            },
+            {
+              name: "children",
+              label: "Content",
+              type: "string",
+              ui: {
+                component: "textarea",
+              },
+            },
+          ],
+        },
+      ],
     },
   ],
 };
