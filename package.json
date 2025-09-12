@@ -21,8 +21,8 @@
     "clean-api-docs": "docusaurus clean-api-docs",
     "gen-api-docs:version": "docusaurus gen-api-docs:version",
     "clean-api-docs:version": "docusaurus clean-api-docs:version",
-    "lint": "biome check src/ tina/",
-    "lint:fix": "biome check src/ tina/ --fix"
+    "lint": "biome check apis/ config/ reuse/ scripts/ src/ static/ tina/",
+    "lint:fix": "biome check apis/ config/ reuse/ scripts/ src/ static/ tina/ --fix"
   },
   "dependencies": {
     "@docusaurus/core": "^3.8.1",
@@ -41,11 +41,7 @@
     "title": "^4.0.1"
   },
   "browserslist": {
-    "production": [
-      ">0.5%",
-      "not dead",
-      "not op_mini all"
-    ],
+    "production": [">0.5%", "not dead", "not op_mini all"],
     "development": [
       "last 3 chrome version",
       "last 3 firefox version",

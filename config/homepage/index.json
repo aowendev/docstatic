@@ -18,7 +18,7 @@
           "image": "./img/writers.jpg"
         },
         {
-          "title": "For Developers", 
+          "title": "For Developers",
           "description": "Git-based workflow with Markdown, React components, and OpenAPI integration. Build exactly what you need.",
           "image": "./img/developers.jpg"
         },

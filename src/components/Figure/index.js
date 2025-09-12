@@ -69,7 +69,11 @@ const Figure = ({ img, caption, size }) => {
             style={lightboxStyles.content}
             onClick={(e) => e.stopPropagation()}
           >
-            <button style={lightboxStyles.closeButton} onClick={closeLightbox}>
+            <button
+              type="button"
+              style={lightboxStyles.closeButton}
+              onClick={closeLightbox}
+            >
               ✕
             </button>
             <img src={img} alt={caption} style={lightboxStyles.image} />

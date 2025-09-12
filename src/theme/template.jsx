@@ -546,7 +546,7 @@ const TabsTemplate = {
               label: "Tab Value",
               type: "string",
               required: true,
-              description: "Unique identifier for this tab"
+              description: "Unique identifier for this tab",
             },
             {
               name: "label",
@@ -554,20 +554,19 @@ const TabsTemplate = {
               type: "string",
               required: true,
               isTitle: true,
-              description: "Display text for the tab button"
+              description: "Display text for the tab button",
             },
             {
               name: "default",
               label: "Default Tab",
               type: "boolean",
-              description: "Set this tab as the default selected tab"
+              description: "Set this tab as the default selected tab",
             },
             {
               name: "children",
               label: "Tab Content",
               type: "rich-text",
-              templates: [
-              ],
+              templates: [],
             },
           ],
         },

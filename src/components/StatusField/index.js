@@ -25,12 +25,12 @@ const StatusField = wrapFieldsWithMeta(({ input, field, tinaForm }) => {
 
   const handleStatusChange = (selectedStatus) => {
     // Update all status fields
-    statusFields.forEach((field) => {
+    for (const field of statusFields) {
       const fieldValue = field === selectedStatus;
 
       // Use the form's change method to update each field
       tinaForm.change(field, fieldValue);
-    });
+    }
   };
 
   const statusLabels = {

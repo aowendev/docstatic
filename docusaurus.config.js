@@ -1,5 +1,3 @@
-// @ts-check
-// Note: type annotations allow type checking and IDEs autocompletion
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = createConfig;
 const docusaurusData = require("./config/docusaurus/index.json");
@@ -53,9 +51,7 @@ const config = {
   onBrokenMarkdownLinks: "warn",
   favicon: "img/docstatic.png",
   // Client modules that run on every page
-  clientModules: [
-    require.resolve("./src/clientModules/editThisPageTarget.js"),
-  ],
+  clientModules: [require.resolve("./src/clientModules/editThisPageTarget.js")],
 
   // Github pages deployment config.
   projectName: "aowendev.github.io",
@@ -79,10 +75,10 @@ const config = {
           editUrl: ({ versionDocsDirPath, docPath }) => {
             // docPath gives us the file path relative to docs directory
             // For example: "quick-start/quick-start.mdx", "wiki/index.md", "test-page.mdx"
-            
+
             // Remove file extension to get the path that TinaCMS expects
-            const cleanPath = docPath.replace(/\.(mdx?|md)$/, '');
-            
+            const cleanPath = docPath.replace(/\.(mdx?|md)$/, "");
+
             // TinaCMS expects the full path including filename (without extension)
             // So quick-start/quick-start.mdx becomes quick-start/quick-start
             return `/admin#/collections/edit/doc/${cleanPath}`;
@@ -97,8 +93,8 @@ const config = {
           editUrl: ({ blogDirPath, blogPath, permalink, locale }) => {
             // blogPath gives us something like "hybrid.mdx"
             // Remove file extension to get the path that TinaCMS expects
-            const cleanPath = blogPath.replace(/\.(mdx?|md)$/, '');
-            
+            const cleanPath = blogPath.replace(/\.(mdx?|md)$/, "");
+
             // For blog posts, TinaCMS expects just the filename (without extension)
             // So "hybrid.mdx" becomes "hybrid"
             return `/admin#/collections/edit/post/${cleanPath}`;

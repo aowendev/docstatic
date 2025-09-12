@@ -14,12 +14,13 @@ const TagsField = wrapFieldsWithMeta(({ input, field, tinaForm }) => {
   const tagTree = useMemo(() => {
     const tree = {};
 
-    allTags.forEach((tag) => {
+    for (const tag of allTags) {
       const parts = tag.split("_");
       let currentLevel = tree;
       let path = "";
 
-      parts.forEach((part, index) => {
+      for (let index = 0; index < parts.length; index++) {
+        const part = parts[index];
         path = path ? `${path}_${part}` : part;
 
         if (!currentLevel[part]) {
@@ -33,8 +34,8 @@ const TagsField = wrapFieldsWithMeta(({ input, field, tinaForm }) => {
         }
 
         currentLevel = currentLevel[part].children;
-      });
-    });
+      }
+    }
 
     return tree;
   }, [allTags]);
@@ -51,13 +52,13 @@ const TagsField = wrapFieldsWithMeta(({ input, field, tinaForm }) => {
   // Group tags by category (for search mode)
   const groupedTags = useMemo(() => {
     const groups = {};
-    filteredTags.forEach((tag) => {
+    for (const tag of filteredTags) {
       const category = tag.split("_")[0] || "other";
       if (!groups[category]) {
         groups[category] = [];
       }
       groups[category].push(tag);
-    });
+    }
     return groups;
   }, [filteredTags]);
 

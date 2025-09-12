@@ -24,7 +24,7 @@ import data from "../reuse/taxonomy/index.json";
 import conditionsData from "../reuse/conditions/index.json";
 
 // Make conditions data available globally for tree component
-if (typeof window !== 'undefined') {
+if (typeof window !== "undefined") {
   window.conditionsData = conditionsData;
 }
 
@@ -32,10 +32,10 @@ const allTags = [];
 
 function collectTags(nodes) {
   if (!Array.isArray(nodes)) return;
-  nodes.forEach((node) => {
+  for (const node of nodes) {
     if (node.tag) allTags.push(node.tag);
     if (node.children) collectTags(node.children);
-  });
+  }
 }
 
 // get all conditions from hierarchical structure
@@ -43,18 +43,19 @@ const allConditions = [];
 
 function collectConditions(categories) {
   if (!Array.isArray(categories)) return;
-  categories.forEach((category) => {
+  for (const category of categories) {
     if (category.conditions && Array.isArray(category.conditions)) {
-      category.conditions.forEach((condition) => {
-        if (condition.active !== false) { // include active conditions and those without active field
+      for (const condition of category.conditions) {
+        if (condition.active !== false) {
+          // include active conditions and those without active field
           allConditions.push({
             value: condition.condition,
-            label: `${condition.condition} (${category.name})`
+            label: `${condition.condition} (${category.name})`,
           });
         }
-      });
+      }
     }
-  });
+  }
 }
 
 collectTags(data.taxonomy);
@@ -217,7 +218,7 @@ const DocsCollection = {
   label: "Topics",
   path: "docs",
   match: {
-    exclude: 'api/**/**',
+    exclude: "api/**/**",
   },
   format: "mdx",
   ui: {
@@ -483,7 +484,7 @@ const CategoryFields = [
           return fieldName
             .split(".")
             .reduce((o, i) => o[i], props.tinaForm.values).link;
-        }, [props.tinaForm.values]);
+        }, [props.tinaForm.values, props.field.name]);
 
         if (link !== "doc") {
           return null;
@@ -645,7 +646,7 @@ const NavbarItemFields = [
           return fieldName
             .split(".")
             .reduce((o, i) => o[i], props.tinaForm.values).link;
-        }, [props.tinaForm.values]);
+        }, [props.tinaForm.values, props.field.name]);
 
         if (link !== "doc") {
           return null;
@@ -670,7 +671,7 @@ const NavbarItemFields = [
           return fieldName
             .split(".")
             .reduce((o, i) => o[i], props.tinaForm.values).link;
-        }, [props.tinaForm.values]);
+        }, [props.tinaForm.values, props.field.name]);
 
         if (link !== "page") {
           return null;
@@ -694,7 +695,7 @@ const NavbarItemFields = [
           return fieldName
             .split(".")
             .reduce((o, i) => o[i], props.tinaForm.values).link;
-        }, [props.tinaForm.values]);
+        }, [props.tinaForm.values, props.field.name]);
 
         if (link !== "external") {
           return null;
@@ -1101,7 +1102,8 @@ const ConditionsCollection = {
               type: "boolean",
               label: "Active",
               name: "active",
-              description: "Whether this condition is currently active/available",
+              description:
+                "Whether this condition is currently active/available",
             },
           ],
         },
