@@ -1,0 +1,140 @@
+---
+title: MDX and React
+description: 'Using the power of React in DocStatic Markdown documents, thanks to MDX.'
+draft: false
+review: false
+translate: false
+approved: false
+published: true
+unlisted: false
+---
+
+# MDX and React
+
+DocStatic has built-in support for [MDX](https://mdxjs.com/), which enables you to write JSX within your Markdown files and render them as React components. However, if you add JSX directly in your topics, the CMS won't be able to display them in the rich text editor.
+
+## MDX component scope
+
+The preferred way to use components in MDX in DocStatic is by registering them in the global scope, which makes them automatically available in every MDX file, without any import statements. You also need to add a template definition to the component and import it so that the CMS knows about it. For examples of how this is done you can explore DocStatic's own components, such as `CodeSnippet`. It's important to ensure that global components are statically rendered, or they may add delays to page rendering.
+
+For example, here's the contents of `src/themes/MDXComponents.js`:
+
+```javascript
+import CodeBlock from "@theme-original/CodeBlock";
+import DocCardList from "@theme-original/DocCardList";
+import MDXComponents from "@theme-original/MDXComponents";
+import TabItem from "@theme-original/TabItem";
+import Tabs from "@theme-original/Tabs";
+import Details from "@theme/Details";
+import React from "react";
+
+import CodeSnippet from "@site/src/components/CodeSnippet";
+import ConditionalText from "@site/src/components/ConditionalText";
+import Figure from "@site/src/components/Figure";
+import Footnote from "@site/src/components/Footnote";
+import GlossaryTerm from "@site/src/components/GlossaryTerm";
+import Passthrough from "@site/src/components/Passthrough";
+import Snippet from "@site/src/components/Snippet";
+import VariableSet from "@site/src/components/VariableSet";
+
+export default {
+  ...MDXComponents,
+  Admonition: MDXComponents.admonition,
+  CodeBlock: CodeBlock,
+  CodeSnippet: CodeSnippet,
+  ConditionalText: ConditionalText,
+  Details: Details,
+  DocCardList: DocCardList,
+  Figure: Figure,
+  Footnote: Footnote,
+  GlossaryTerm: GlossaryTerm,
+  Passthrough: Passthrough,
+  Snippet: Snippet,
+  TabItem: TabItem,
+  Tabs: Tabs,
+  VariableSet: VariableSet,
+};
+```
+
+The imports that begin with `@site/src/components`/ are the custom components that can be rendered in topics. There are also custom components that are used by the CMS such as StatusField that do not need to be imported.
+
+The src/themes/tempate.jsx file begins:
+
+```javascript
+import React from "react";
+import codeFiles from "../../reuse/code-files.json";
+import { slugify } from "../../util";
+import { CodeSnippetBlockTemplate } from "../components/CodeSnippet/template";
+import { ConditionalTextBlockTemplate } from "../components/ConditionalText/template";
+import { FigureBlockTemplate } from "../components/Figure/template";
+import { FootnoteBlockTemplate } from "../components/Footnote/template";
+import { GlossaryTermBlockTemplate } from "../components/GlossaryTerm/template";
+import { PassthroughBlockTemplate } from "../components/Passthrough/template";
+import { SnippetBlockTemplate } from "../components/Snippet/template";
+import { VariableSetBlockTemplate } from "../components/VariableSet/template";
+```
+
+Templates for native components, such as `Details`, must be defined directly in the file. For example:
+
+```javascript
+const DetailsTemplate = {
+  name: "Details",
+  fields: [
+    {
+      name: "summary",
+      label: "Summary",
+      type: "string",
+      isTitle: true,
+      required: true,
+    },
+    {
+      name: "children",
+      label: "Details",
+      type: "rich-text",
+    },
+  ],
+};
+```
+
+The file ends by exporting all the templates:
+
+```javascript
+
+export const MDXTemplates = [
+  AdmonitionTemplate,
+  CodeSnippetBlockTemplate,
+  CommentsTemplate,
+  ConditionalTextBlockTemplate,
+  ContextHelpTemplate,
+  DetailsTemplate,
+  DocCardListTemplate,
+  FigureBlockTemplate,
+  FootnoteBlockTemplate,
+  GlossaryTermBlockTemplate,
+  SnippetBlockTemplate,
+  PassthroughBlockTemplate,
+  TabsTemplate,
+  TruncateTemplate,
+  VariableSetBlockTemplate,
+];
+```
+
+Now these components can be used in any MDX file.
+
+<Admonition type="caution" title="Caution">
+  Use upper-case tag names.
+
+  From MDX v3+ onward, lower-case tag names are always rendered as native HTML elements and will not use any component mapping you provide.
+</Admonition>
+
+For more information, refer to [MDX and React](https://docusaurus.io/docs/markdown-features/react) in the Docusaurus documentation.
+
+## Passthrough component
+
+Sometimes it will be necessary to include some HTML, JSX or Markdown in a topic that the CMS cannot display in the rich text editor. To ensure that the editor can still be used for other content, the Passthrough component is provided. This enables you to wrap content so that the rich text editor will effectively ignore it.
+
+1. Select **Passthrough** from the **Embed** list.
+2. Enter a **Summary**.
+3. Enter the **Content** as plain text.
+
+The content is added directly to the page when the site is built, without the wrapper.

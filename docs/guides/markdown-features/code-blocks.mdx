@@ -1,0 +1,39 @@
+---
+title: Code blocks and snippets
+description: Handling code blocks in DocStatic
+draft: false
+review: false
+translate: false
+approved: false
+published: true
+unlisted: false
+---
+
+# Code blocks and snippets
+
+DocStatic provides two ways to include code in your documentation. Both support syntax highlighting.
+
+## Code blocks
+
+1. Click the Code Block icon in the rich text editor.
+2. Click the language list and select or search for a language.
+3. Enter your code in the box.
+
+Example:
+
+```plaintext
+This is some plain text.
+```
+
+## Code snippets
+
+1. Select Code Snippet from the Embed list.
+2. Enter a Title.
+3. Select a Language.
+4. Choose a file from the list. The list is populated with all the files in the reuse/code/ folder every time you run the dev server or do a build.
+
+Example:
+
+<CodeSnippet title="Code snippet example" language="xml" filepath="example.xml" />
+
+The advantage of using code snippets is that there is a physical file that can be unit tested.
