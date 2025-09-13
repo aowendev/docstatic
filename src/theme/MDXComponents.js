@@ -12,6 +12,7 @@ import Figure from "@site/src/components/Figure";
 import Footnote from "@site/src/components/Footnote";
 import GlossaryTerm from "@site/src/components/GlossaryTerm";
 import Snippet from "@site/src/components/Snippet";
+import Passthrough from "@site/src/components/Passthrough";
 import VariableSet from "@site/src/components/VariableSet";
 
 export default {
@@ -25,8 +26,9 @@ export default {
   Figure: Figure,
   Footnote: Footnote,
   GlossaryTerm: GlossaryTerm,
+  Passthrough: Passthrough,
   Snippet: Snippet,
-  Tabs: Tabs,
   TabItem: TabItem,
+  Tabs: Tabs,
   VariableSet: VariableSet,
 };
