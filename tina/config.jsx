@@ -218,7 +218,7 @@ const DocsCollection = {
   label: "Topics",
   path: "docs",
   match: {
-    exclude: "api/**/**",
+    exclude: "{api/**/**,wiki/**/**}",
   },
   format: "mdx",
   ui: {
@@ -326,6 +326,30 @@ const DocsCollection = {
     },
   ],
 };
+
+const WikiCollection = {
+  name: "wiki",
+  label: "Wiki Pages",
+  path: "docs/wiki",
+  format: "mdx",
+  fields: [
+    {
+      type: "string",
+      name: "title",
+      label: "Title",
+      isTitle: true,
+      required: true,
+    },
+    {
+      type: "rich-text",
+      name: "body",
+      label: "Body",
+      isBody: true,
+      templates: [...MDXTemplates],
+    },
+  ],
+};
+
 
 const TranslationCollection = {
   name: "i18n",
@@ -1203,7 +1227,7 @@ const VariableSetCollection = {
 
 const TaxonomyCollection = {
   name: "taxonomy",
-  label: "Taxonomy",
+  label: "Taxonomies",
   path: "reuse/taxonomy",
   format: "json",
   fields: [
@@ -1281,7 +1305,7 @@ const TaxonomyCollection = {
 
 const GlossaryTermTranslationTemplate = {
   name: "translation",
-  label: "Translation",
+  label: "Translations",
   ui: {
     itemProps: (item) => ({
       label: `${item.term}: ${item.definition}`,
@@ -1408,6 +1432,7 @@ export default defineConfig({
       DocsCollection,
       TranslationCollection,
       VariableSetCollection,
+      WikiCollection,
     ],
   },
   search: {

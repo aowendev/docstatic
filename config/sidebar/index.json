@@ -2,135 +2,15 @@
   "label": "Docs Sidebar",
   "items": [
     {
-      "title": "Quick Start",
+      "title": "Getting Started",
       "link": "generated",
       "items": [
         {
-          "document": "docs/quick-start/quick-start.mdx",
+          "document": "docs/introduction.mdx",
           "_template": "doc"
         }
       ],
       "_template": "category"
-    },
-    {
-      "title": "Author",
-      "link": "generated",
-      "items": [
-        {
-          "document": "docs/author/author.mdx",
-          "_template": "doc"
-        }
-      ],
-      "_template": "category"
-    },
-    {
-      "document": "docs/blog/blog.mdx",
-      "label": "Blog",
-      "_template": "doc"
-    },
-    {
-      "title": "Diagram",
-      "link": "generated",
-      "items": [
-        {
-          "document": "docs/diagram/diagram.mdx",
-          "_template": "doc"
-        }
-      ],
-      "_template": "category"
-    },
-    {
-      "title": "Media",
-      "link": "generated",
-      "items": [
-        {
-          "document": "docs/media/media.mdx",
-          "_template": "doc"
-        }
-      ],
-      "_template": "category"
-    },
-    {
-      "title": "OpenAPI",
-      "link": "generated",
-      "items": [
-        {
-          "document": "docs/openapi/openapi.mdx",
-          "_template": "doc"
-        }
-      ],
-      "_template": "category"
-    },
-    {
-      "title": "Reuse",
-      "link": "generated",
-      "items": [
-        {
-          "document": "docs/reuse/reuse.mdx",
-          "_template": "doc"
-        }
-      ],
-      "_template": "category"
-    },
-    {
-      "title": "Search",
-      "link": "generated",
-      "items": [
-        {
-          "document": "docs/search/search.mdx",
-          "_template": "doc"
-        }
-      ],
-      "_template": "category"
-    },
-    {
-      "title": "Tag",
-      "link": "generated",
-      "items": [
-        {
-          "document": "docs/tag/tag.mdx",
-          "_template": "doc"
-        }
-      ],
-      "_template": "category"
-    },
-    {
-      "title": "Translate",
-      "link": "generated",
-      "items": [
-        {
-          "document": "docs/translate/translate.mdx",
-          "_template": "doc"
-        }
-      ],
-      "_template": "category"
-    },
-    {
-      "title": "Publish",
-      "link": "generated",
-      "items": [
-        {
-          "document": "docs/publish/publish.mdx",
-          "_template": "doc"
-        }
-      ],
-      "_template": "category"
-    },
-    {
-      "title": "Version",
-      "link": "generated",
-      "items": [
-        {
-          "document": "docs/version/version.mdx",
-          "_template": "doc"
-        }
-      ],
-      "_template": "category"
-    },
-    {
-      "document": "docs/test-page.mdx",
-      "label": "Testing",
-      "_template": "doc"
     }
   ]
 }

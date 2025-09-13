@@ -125,7 +125,7 @@ const config = {
       items: [
         {
           type: "doc",
-          docId: "quick-start/quick-start",
+          docId: "introduction",
           position: "left",
           label: "Docs",
         },
@@ -142,7 +142,7 @@ const config = {
         },
         {
           type: "doc",
-          docId: "wiki/index",
+          docId: "wiki/readme",
           position: "left",
           label: "Wiki",
         },
@@ -155,13 +155,8 @@ const config = {
           position: "right",
         },
         //          {
-        //            href: "https://docusaurus.io/docs",
-        //            label: "Docusaurus",
-        //            position: "right",
-        //          },
-        //          {
-        //            href: "https://tina.io/docs",
-        //            label: "TinaCMS",
+        //            href: "https://www.example.com",
+        //            label: "Example Link",
         //            position: "right",
         //          },
       ],
