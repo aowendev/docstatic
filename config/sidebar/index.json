@@ -2,15 +2,45 @@
   "label": "Docs Sidebar",
   "items": [
     {
+      "document": "docs/introduction.mdx",
+      "_template": "doc"
+    },
+    {
       "title": "Getting Started",
       "link": "generated",
       "items": [
         {
-          "document": "docs/introduction.mdx",
+          "document": "docs/installation.mdx",
+          "_template": "doc"
+        },
+        {
+          "document": "docs/configuration.mdx",
           "_template": "doc"
         }
       ],
       "_template": "category"
+    },
+    {
+      "title": "Guides",
+      "link": "generated",
+      "items": [
+        {
+          "title": "Markdown Features",
+          "link": "generated",
+          "items": [
+            {
+              "document": "docs/guides/markdown-features/markdown-features-math-equations.mdx",
+              "_template": "doc"
+            }
+          ],
+          "_template": "category"
+        }
+      ],
+      "_template": "category"
+    },
+    {
+      "document": "docs/migration/index.mdx",
+      "_template": "doc"
     }
   ]
 }

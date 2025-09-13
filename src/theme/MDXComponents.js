@@ -16,18 +16,17 @@ import VariableSet from "@site/src/components/VariableSet";
 
 export default {
   ...MDXComponents,
-  Details: Details,
-  CodeBlock: CodeBlock,
-  Tabs: Tabs,
-  TabItem: TabItem,
   Admonition: MDXComponents.admonition,
-  DocCardList: DocCardList,
-
+  CodeBlock: CodeBlock,
   CodeSnippet: CodeSnippet,
   ConditionalText: ConditionalText,
+  Details: Details,
+  DocCardList: DocCardList,
   Figure: Figure,
   Footnote: Footnote,
   GlossaryTerm: GlossaryTerm,
   Snippet: Snippet,
+  Tabs: Tabs,
+  TabItem: TabItem,
   VariableSet: VariableSet,
 };

@@ -24,8 +24,8 @@ export const Hero = ({ data, index }) => {
             </p>
             <div className={styles.heroDescription}>
               <p>
-                Bridging the gap between writers and developers to create online
-                documentation your users will love.
+                Bridging the gap between writers and developers to help
+                you create online documentation your users will love.
               </p>
             </div>
             {data.document && (

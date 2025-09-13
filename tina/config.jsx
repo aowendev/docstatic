@@ -223,11 +223,9 @@ const DocsCollection = {
   format: "mdx",
   ui: {
     defaultItem: {
-      metadata: {
-        description: "",
-        tags: [],
-        conditions: [],
-      },
+      description: "",
+    tags: [],
+    conditions: [],
       draft: true,
       review: false,
       translate: false,
@@ -245,39 +243,29 @@ const DocsCollection = {
       required: true,
     },
     {
-      type: "object",
-      name: "metadata",
-      label: "Metadata",
+      type: "string",
+      name: "description",
+      label: "Description",
+    },
+    {
+      label: "Tags",
+      name: "tags",
+      type: "string",
+      list: true,
       ui: {
-        component: "group",
+        component: TagsField,
       },
-      fields: [
-        {
-          type: "string",
-          name: "description",
-          label: "Description",
-        },
-        {
-          label: "Tags",
-          name: "tags",
-          type: "string",
-          list: true,
-          ui: {
-            component: TagsField,
-          },
-          options: allTags,
-        },
-        {
-          label: "Conditions",
-          name: "conditions",
-          type: "string",
-          list: true,
-          ui: {
-            component: ConditionsTreeField,
-          },
-          options: allConditions,
-        },
-      ],
+      options: allTags,
+    },
+    {
+      label: "Conditions",
+      name: "conditions",
+      type: "string",
+      list: true,
+      ui: {
+        component: ConditionsTreeField,
+      },
+      options: allConditions,
     },
     {
       type: "boolean",
@@ -353,7 +341,7 @@ const WikiCollection = {
 
 const TranslationCollection = {
   name: "i18n",
-  label: "Translation",
+  label: "Translations",
   path: "i18n",
   format: "mdx",
   ui: {
@@ -828,33 +816,33 @@ const SettingsCollection = {
       name: "url",
       required: true,
     },
-    {
-      type: "object",
-      label: "Navbar",
-      name: "navbar",
-      list: true,
-      ui: {
-        itemProps: (item) => ({
-          label: `${item.label} - ${title(item.position)}`,
-        }),
-        defaultItem: {
-          position: "left",
-        },
-      },
-      fields: [
-        ...NavbarItemFields,
-        {
-          ...NavbarSubitemProps,
-          fields: [
-            ...NavbarItemFields,
-            {
-              ...NavbarSubitemProps,
-              fields: NavbarItemFields,
-            },
-          ],
-        },
-      ],
-    },
+    // {
+    //   type: "object",
+    //   label: "Navbar",
+    //   name: "navbar",
+    //   list: true,
+    //   ui: {
+    //     itemProps: (item) => ({
+    //       label: `${item.label} - ${title(item.position)}`,
+    //     }),
+    //     defaultItem: {
+    //       position: "left",
+    //     },
+    //   },
+    //   fields: [
+    //     ...NavbarItemFields,
+    //     {
+    //       ...NavbarSubitemProps,
+    //       fields: [
+    //         ...NavbarItemFields,
+    //         {
+    //           ...NavbarSubitemProps,
+    //           fields: NavbarItemFields,
+    //         },
+    //       ],
+    //     },
+    //   ],
+    // },
     {
       type: "object",
       label: "Footer",

@@ -6,7 +6,7 @@
     {
       "title": "docStatic",
       "subtitle": "Modern Documentation Platform",
-      "document": "docs/quick-start",
+      "document": "docs/introduction",
       "documentLabel": "Get Started",
       "_template": "hero"
     },

@@ -15,7 +15,7 @@
         "items": [
           {
             "label": "docStatic",
-            "to": "docs/quick-start",
+            "to": "docs/introduction",
             "_template": "internal"
           },
           {

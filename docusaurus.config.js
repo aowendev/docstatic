@@ -1,3 +1,6 @@
+import remarkMath from 'remark-math';
+import rehypeKatex from 'rehype-katex';
+
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = createConfig;
 const docusaurusData = require("./config/docusaurus/index.json");
@@ -57,6 +60,17 @@ const config = {
   projectName: "aowendev.github.io",
   organizationName: "aowendev",
   trailingSlash: false,
+
+  stylesheets: [
+    {
+      href: 'https://cdn.jsdelivr.net/npm/katex@0.13.24/dist/katex.min.css',
+      type: 'text/css',
+      integrity:
+        'sha384-odtC+0UGzzFL/6PNoE8rX/SPcQDXBJ+uRepguP4QkPCm2LBxH3FA3y+fKSiJ+AmM',
+      crossorigin: 'anonymous',
+    },
+  ],
+  
   // Even if you don't use internalization, you can use this field to set useful
   // metadata like html lang. For example, if your site is Chinese, you may want
   // to replace "en" with "zh-Hans".
@@ -64,13 +78,15 @@ const config = {
     defaultLocale: "en",
     locales: ["en", "fr"],
   },
+
   presets: [
     [
-      "classic",
-      /** @type {import('@docusaurus/preset-classic').Options} */
+      "@docusaurus/preset-classic",
       {
         docs: {
           sidebarPath: require.resolve("./sidebars.ts"),
+          remarkPlugins: [remarkMath],
+          rehypePlugins: [rehypeKatex],
           // Remove this to remove the "edit this page" links.
           editUrl: ({ versionDocsDirPath, docPath }) => {
             // docPath gives us the file path relative to docs directory

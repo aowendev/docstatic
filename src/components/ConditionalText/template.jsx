@@ -5,7 +5,7 @@ export const ConditionalTextBlockTemplate = {
     previewSrc: "/blocks/ConditionalText.png",
     defaultItem: {
       text: "This text will appear when conditions are met.",
-      conditions: [],
+    conditions: [],
       languages: [],
       logic: "any",
       languageLogic: "any",

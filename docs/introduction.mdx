@@ -1,15 +1,46 @@
 ---
 title: Introduction
-metadata:
-  description: ''
-  tags: []
-  conditions: []
-draft: true
+description: >-
+  DocStatic was designed from the ground up to be easily installed and used to
+  get your website up and running quickly.
+tags: []
+conditions: []
+draft: false
 review: false
 translate: false
 approved: false
-published: false
+published: true
 unlisted: false
 ---
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+DocStatic is a modern documentation platform that bridges the gap between writers and developers to help you create online documentation your users will love.
+
+It simultaneously provides the best features of [component content management systems](https://en.wikipedia.org/wiki/Component_content_management_system) and [docs-as-code](https://www.writethedocs.org/guide/docs-as-code/) solutions for online documentation. It enables anyone on your team to create and edit your docs without sacrificing your developer workflow.
+
+DocStatic was created as a refinement of [Tinasaurus](https://tina.io/blog/tinasaurus-docusaurus-starter), an open-source [React](https://react.dev/)-based project that combines a [static site generator](https://en.wikipedia.org/wiki/Static_site_generator) ([Docusaurus](https://docusaurus.io/)) with a [headless content management system](https://en.wikipedia.org/wiki/Headless_content_management_system) ([TinaCMS](https://tina.io/)). It includes:
+
+* Editing interface for Markdown, MDX, JSON, and YAML content.
+* Integration with existing Git and CI/CD workflows.
+* Embedded MDX components.
+* Media manager with support for third-party media providers.
+* Editing in the cloud (no local setup required).
+
+## Git-backed
+
+Source control, automation and, optionally, publishing are managed through [GitHub](https://github.com/). The repository structure is very similar to the Docusaurus defaults, but with some changes required for integration with TinaCMS. When editing files with the rich-text editor, TinaCMS commits on save or saves directly to the file if working locally. Git remains the source of truth for the whole team.
+
+## React-based
+
+Content is stored in MDX format—an extension to Markdown that supports custom React components for features such as admonitions. These components available universally and do not need to be declared in individual files. When working locally, the dev server instantly recompiles pages when you save your changes.
+
+## Easy content management
+
+The CMS uses a [GraphQL](https://graphql.org/) schema to describe the shape of your content as a set of collections. DocStatic's default collections include conditional text, glossary terms, snippets, taxonomies and variable sets. The CMS defines components that can be embedded as templates, making them available in the rich text editor. DocStatic's default templates include code blocks, comments, collapsible details, figures, footnotes and tabs.
+
+## Preconfigured plugins
+
+DocStatic is preconfigured with plugins supporting features such as [KaTeX](https://katex.org/) equations, [Lunr](https://lunrjs.com/) search, [Mermaid](https://mermaid.js.org/) diagrams and [OpenAPI](https://www.openapis.org/) docs. There is built-in support for internationalization (i18n). Multilingual spelling, grammar and, optionally, style checking are provided by [LanguageTool](https://languagetool.org/) through browser and IDE plugins.
+
+## Fully documented
+
+Developers will find all the information they need to configure and start using DocStatic in the [Docusaurus](https://docusaurus.io/docs) and [TinaCMS](https://tina.io/docs) documentation. That information is not duplicated here, to avoid the possibility of it becoming out of date. Instead, the DocStatic documentation focuses on using the CMS.
