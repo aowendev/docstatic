@@ -1,8 +1,8 @@
-import React from 'react';
-import Markdown from 'react-markdown';
-import remarkMath from 'remark-math';
-import rehypeKatex from 'rehype-katex';
-import 'katex/dist/katex.min.css'; // Import KaTeX CSS
+import React from "react";
+import Markdown from "react-markdown";
+import rehypeKatex from "rehype-katex";
+import remarkMath from "remark-math";
+import "katex/dist/katex.min.css"; // Import KaTeX CSS
 
 /**
  * Passthrough component that renders a string as markdown with KaTeX math support
@@ -12,10 +12,7 @@ import 'katex/dist/katex.min.css'; // Import KaTeX CSS
 const Passthrough = ({ summary, string }) => {
   return (
     <span title={summary}>
-      <Markdown
-        remarkPlugins={[remarkMath]}
-        rehypePlugins={[rehypeKatex]}
-      >
+      <Markdown remarkPlugins={[remarkMath]} rehypePlugins={[rehypeKatex]}>
         {string}
       </Markdown>
     </span>

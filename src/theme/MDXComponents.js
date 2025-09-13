@@ -11,8 +11,8 @@ import ConditionalText from "@site/src/components/ConditionalText";
 import Figure from "@site/src/components/Figure";
 import Footnote from "@site/src/components/Footnote";
 import GlossaryTerm from "@site/src/components/GlossaryTerm";
-import Snippet from "@site/src/components/Snippet";
 import Passthrough from "@site/src/components/Passthrough";
+import Snippet from "@site/src/components/Snippet";
 import VariableSet from "@site/src/components/VariableSet";
 
 export default {

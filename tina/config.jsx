@@ -224,8 +224,8 @@ const DocsCollection = {
   ui: {
     defaultItem: {
       description: "",
-    tags: [],
-    conditions: [],
+      tags: [],
+      conditions: [],
       draft: true,
       review: false,
       translate: false,
@@ -337,7 +337,6 @@ const WikiCollection = {
     },
   ],
 };
-
 
 const TranslationCollection = {
   name: "i18n",

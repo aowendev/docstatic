@@ -17,7 +17,8 @@ export const PassthroughBlockTemplate = {
       type: "string",
       name: "string",
       label: "Markdown Content",
-      description: "Markdown content with LaTeX math support (use $...$ for inline math, $$...$$ for block math)",
+      description:
+        "Markdown content with LaTeX math support (use $...$ for inline math, $$...$$ for block math)",
       ui: {
         component: "textarea",
       },
