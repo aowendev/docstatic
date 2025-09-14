@@ -30,6 +30,7 @@
     "@docusaurus/theme-mermaid": "^3.8.1",
     "@mdx-js/react": "^3.0.0",
     "clsx": "^2.0.0",
+    "color": "^4.2.3",
     "docusaurus-lunr-search": "^3.6.0",
     "docusaurus-plugin-openapi-docs": "4.3.4",
     "docusaurus-theme-openapi-docs": "4.3.4",
@@ -51,16 +52,17 @@
       "not op_mini all"
     ],
     "development": [
-      "last 3 chrome version",
-      "last 3 firefox version",
-      "last 5 safari version"
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
     ]
   },
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
     "@docusaurus/module-type-aliases": "^3.8.1",
     "@docusaurus/types": "^3.8.1",
-    "@tinacms/cli": "^1.9.8"
+    "@tinacms/cli": "^1.9.8",
+    "@types/color": "^3.0.4"
   },
   "engines": {
     "node": ">=18.0"

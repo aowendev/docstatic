@@ -1,15 +1,12 @@
+/**
+ * Copyright (c) Source Solutions, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 import React from "react";
 
-/**
- * ConditionalText Component (Fully Static)
- *
- * Displays content conditionally based on:
- * 1. Document conditions (from frontmatter/props)
- * 2. Specified language requirements
- * 3. Custom tags with AND/OR logic
- *
- * Pass conditions explicitly through props for now.
- */
 const ConditionalText = ({
   tags = [],
   conditions = [], // Pass conditions explicitly as props

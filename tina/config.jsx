@@ -1048,8 +1048,8 @@ const PagesCollection = {
   ],
   ui: {
     allowedActions: {
-      create: false,
-      delete: false,
+      create: true,
+      delete: true,
     },
   },
 };

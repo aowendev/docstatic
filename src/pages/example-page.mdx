@@ -3,24 +3,12 @@ title: Example Page
 description: Example description
 ---
 
-This is an example page.
+# Example page
 
-<Admonition type="note" title="Note">
-  Use note admonitions for supplementary information.
-</Admonition>
+This example page imports the React component `ColorGenerator`.
 
-<Admonition type="tip" title="Tip">
-  Use tip admonitions to provide advice that it's safe to ignore.
-</Admonition>
+You can use it to create generate a color set for your site.
 
-<Admonition type="info" title="Info">
-  Use info admonitions for information that's sufficiently important that it needs to stand apart from the rest of the text.
-</Admonition>
+import ColorGenerator from '@site/src/components/ColorGenerator';
 
-<Admonition type="caution" title="Caution">
-  Use caution admonitions when something may prevent an intended action from being completed.
-</Admonition>
-
-<Admonition type="danger" title="Warning">
-  Use warning admonitions when there is a risk of injury, security breach or data loss.
-</Admonition>
+<ColorGenerator />

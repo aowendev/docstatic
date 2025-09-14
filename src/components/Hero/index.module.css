@@ -1,8 +1,14 @@
 /**
- * CSS files with the .module.css suffix will be treated as CSS modules
- * and scoped locally.
+ * Copyright (c) TinaCMS
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
  */
 
+/*
+  CSS files with the .module.css suffix will be treated as CSS modules
+ * and scoped locally.
+ */
 .heroBanner {
   padding: 6rem 0 4rem 0;
   text-align: center;
