@@ -7,33 +7,37 @@ import PrismDark from './src/utils/prismDark';
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = createConfig;
 const docusaurusData = require("./config/docusaurus/index.json");
-const getDocId = (doc) => {
+const getDocId = (doc: string) => {
   return doc
     .replace(/\.mdx?$/, "")
     .split("/")
     .slice(1)
     .join("/");
 };
-const getPageRoute = (page) => {
+const getPageRoute = (page: string) => {
   return page
     .replace(/\.mdx?$/, "")
     .split("/")
     .slice(2)
     .join("/");
 };
-const getPath = (page) => {
+const getPath = (page: string) => {
   return page.replace(/\.mdx?$/, "");
 };
-const formatFooterItem = (item) => {
+type FooterItem =
+  | { title: any; items: FooterItem[] }
+  | { label: any; to?: any; href?: any };
+
+const formatFooterItem = (item: { title: any; items: any[]; label: any; to: any; href: any; }): FooterItem => {
   if (item.title) {
     return {
       title: item.title,
-      items: item.items.map((subItem) => {
+      items: item.items.map((subItem: any) => {
         return formatFooterItem(subItem);
       }),
     };
   }
-  const linkObject = {
+  const linkObject: { label: any; to?: any; href?: any } = {
     label: item.label,
   };
   if (item.to) {
@@ -91,7 +95,7 @@ const config = {
           remarkPlugins: [remarkMath],
           rehypePlugins: [rehypeKatex],
           // Remove this to remove the "edit this page" links.
-          editUrl: ({ versionDocsDirPath, docPath }) => {
+          editUrl: ({ versionDocsDirPath, docPath }: { versionDocsDirPath: string; docPath: string }) => {
             // docPath gives us the file path relative to docs directory
             // For example: "quick-start/quick-start.mdx", "wiki/index.md", "test-page.mdx"
 
@@ -109,7 +113,17 @@ const config = {
           // Truncate blog previews with manual markers or excerpt
           truncateMarker: /<!--\s*(truncate)\s*-->/,
           // Edit URL configuration for blog posts
-          editUrl: ({ blogDirPath, blogPath, permalink, locale }) => {
+          editUrl: ({
+            blogDirPath,
+            blogPath,
+            permalink,
+            locale,
+          }: {
+            blogDirPath: string;
+            blogPath: string;
+            permalink: string;
+            locale: string;
+          }) => {
             // blogPath gives us something like "hybrid.mdx"
             // Remove file extension to get the path that TinaCMS expects
             const cleanPath = blogPath.replace(/\.(mdx?|md)$/, "");
@@ -182,7 +196,7 @@ const config = {
     },
     footer: {
       //        style: docusaurusData.footer?.style || "dark",
-      links: docusaurusData.footer?.links.map((item) => {
+      links: docusaurusData.footer?.links.map((item: any) => {
         return formatFooterItem(item);
       }),
       copyright: `Copyright © ${new Date().getFullYear()} ${docusaurusData.footer?.copyright || docusaurusData.title}`,
