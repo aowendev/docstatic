@@ -98,6 +98,11 @@ export const Hero = ({ data, index }) => {
                     {" "}
                     - Versioning & Variant Management
                   </span>
+                  <br />
+                  <span className={styles.codeProperty}>
+                    {" "}
+                    - Integrated GraphQL & OpenAPI Documentation
+                  </span>
                 </div>
               </div>
             </div>
