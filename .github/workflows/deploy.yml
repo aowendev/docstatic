@@ -40,7 +40,7 @@ jobs:
           path: |
             .docusaurus
             build/.docusaurus
-          key: ${{ runner.os }}-docusaurus-${{ hashFiles('docs/**', 'blog/**', 'src/**', 'docusaurus.config.js', 'sidebars.ts') }}
+          key: ${{ runner.os }}-docusaurus-${{ hashFiles('docs/**', 'blog/**', 'src/**', 'docusaurus.config.ts', 'sidebars.ts') }}
           restore-keys: |
             ${{ runner.os }}-docusaurus-
 
