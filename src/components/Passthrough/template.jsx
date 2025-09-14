@@ -18,14 +18,13 @@ export const PassthroughBlockTemplate = {
       type: "string",
       name: "summary",
       label: "Summary",
-      description: "A brief description of the passthrough content",
+      isTitle: true,
+      required: true,
     },
     {
       type: "string",
       name: "string",
-      label: "Markdown Content",
-      description:
-        "Markdown content with LaTeX math support (use $...$ for inline math, $$...$$ for block math)",
+      label: "Content",
       ui: {
         component: "textarea",
       },
