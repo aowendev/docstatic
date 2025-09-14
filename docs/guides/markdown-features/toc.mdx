@@ -1,4 +1,33 @@
 ---
-title: toc
-description: Customizing headings and table-of-contents in Markdown
+title: Headings and table of contents
+description: Using headings and table-of-contents in DocStatic.
+draft: false
+review: false
+translate: false
+approved: false
+published: true
+unlisted: false
 ---
+
+# Headings and table of contents
+
+In the CMS you can select **Paragraph** or **Heading** level (from 1 to 6).
+
+<a id="anchor-example" />
+
+## Heading IDs
+
+Heading IDs are generated automatically. For example, `heading-ids`. You can use these to link directly to topic headings. However, if you change the title of the heading, the link will break. For this reason, DocStatic provides the **Context Help** component. This embeds an anchor tag anywhere on a page, not just at a heading.
+
+1. Select **Context Help** from the **Embed** list.
+2. Edit the component and give it a **Context Help ID**.
+
+To link to the anchor, use the path: `<URL>/docs/<slug>#<ID>.`
+
+For example: [https://docstatic.com/docs/guides/markdown-features/toc#anchor-example](https://docstatic.com/docs/guides/markdown-features/toc#anchor-example)
+
+## Table of contents heading level
+
+Each Markdown document displays a table of contents in the top-right corner. By default, this table only shows `h2` and `h3` headings, which should be sufficient for an overview of the page structure. In case you need to change the range of headings displayed, you can customize the minimum and maximum heading level, either per page or globally.
+
+For more information, refer to [Headings and Table of contents](https://docusaurus.io/docs/markdown-features/toc) in the Docusaurus documentation.

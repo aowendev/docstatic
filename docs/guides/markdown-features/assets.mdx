@@ -1,4 +1,53 @@
 ---
-title: assets
-description: Handling assets in Docusaurus Markdown
+title: Assets
+description: Handling assets in DocStatic.
+draft: false
+review: false
+translate: false
+approved: false
+published: true
+unlisted: false
 ---
+
+# Assets
+
+Sometimes you want to link to assets (for example, docx files, images and so on) directly from topics. DocStatic manages this through the static/ folder.
+
+Any content placed in the folder will be available from the root of the published site. For example:
+
+```
+# Your doc
+/website/docs/myFeature.mdx
+
+# Some assets you want to use
+/website/assets/docstatic-asset-example.docx
+/website/img/docstastic-asset-example-banner.png
+```
+
+## Images
+
+DocStatic provides two ways to add images to topics. For inline images you can click the Image icon to place an image in a topic. This works best for icons and small images. For larger images, it's better to use the Figure component.
+
+1. Select **Figure** from the **Embed** list.
+2. Edit the component.
+3. Click the **Image** area to open the **Media Manager**.
+4. Upload or select an image.
+5. Give it a **Caption**.
+
+#### Example:
+
+<Figure img="/img/docStaticDemo.jpg" caption="Example Figure" size="" />
+
+The figure resizes based on the view window. Clicking it will open it at maximum size in a light box.
+
+For more information about the Media Manager, refer to [Media Overview](https://tina.io/docs/reference/media/overview) in the TinaCMS documentation.
+
+## Files
+
+In the same way you can link to existing assets by using the path from the static/ folder in the URL. For example:
+
+```
+./assets/docstatic-asset-example.docx
+```
+
+For more information, refer to [Static assets](https://docusaurus.io/docs/markdown-features/assets) in the Docusaurus documentation.

@@ -5,88 +5,67 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, {type ReactNode, useEffect, useState} from 'react';
-import clsx from 'clsx';
-import Color from 'color';
-import Link from '@docusaurus/Link';
-import Translate from '@docusaurus/Translate';
-import {useColorMode} from '@docusaurus/theme-common';
-import CodeBlock from '@theme/CodeBlock';
-import Admonition from '@theme/Admonition';
+import Link from "@docusaurus/Link";
+import Translate from "@docusaurus/Translate";
+import { useColorMode } from "@docusaurus/theme-common";
+import Admonition from "@theme/Admonition";
+import CodeBlock from "@theme/CodeBlock";
+import clsx from "clsx";
+import Color from "color";
+import React, { useEffect, useState } from "react";
 import {
-  type ColorState,
   COLOR_SHADES,
-  LIGHT_PRIMARY_COLOR,
+  DARK_BACKGROUND_COLOR,
   DARK_PRIMARY_COLOR,
   LIGHT_BACKGROUND_COLOR,
-  DARK_BACKGROUND_COLOR,
+  LIGHT_PRIMARY_COLOR,
+  darkStorage,
   getAdjustedColors,
   lightStorage,
-  darkStorage,
   updateDOMColors,
-} from '@site/src/utils/colorUtils';
-import styles from './styles.module.css';
-
-function wcagContrast(foreground: string, background: string) {
+} from "../../utils/colorUtils";
+import styles from "./styles.module.css";
+function wcagContrast(foreground, background) {
   const contrast = Color(foreground).contrast(Color(background));
-  // eslint-disable-next-line no-nested-ternary
-  return contrast > 7 ? 'AAA 🏅' : contrast > 4.5 ? 'AA 👍' : 'Fail 🔴';
+  return contrast > 7 ? "AAA 3c5" : contrast > 4.5 ? "AA 44d" : "Fail 534";
 }
-
-export default function ColorGenerator(): ReactNode {
-  const {colorMode, setColorMode} = useColorMode();
-
-  const isDarkTheme = colorMode === 'dark';
-
+export default function ColorGenerator() {
+  const { colorMode, setColorMode } = useColorMode();
+  const isDarkTheme = colorMode === "dark";
   const DEFAULT_PRIMARY_COLOR = isDarkTheme
     ? DARK_PRIMARY_COLOR
     : LIGHT_PRIMARY_COLOR;
   const DEFAULT_BACKGROUND_COLOR = isDarkTheme
     ? DARK_BACKGROUND_COLOR
     : LIGHT_BACKGROUND_COLOR;
-
   const [inputColor, setInputColor] = useState(DEFAULT_PRIMARY_COLOR);
   const [baseColor, setBaseColor] = useState(DEFAULT_PRIMARY_COLOR);
   const [background, setBackground] = useState(DEFAULT_BACKGROUND_COLOR);
   const [shades, setShades] = useState(COLOR_SHADES);
   const [storage, setStorage] = useState(
-    isDarkTheme ? darkStorage : lightStorage,
+    isDarkTheme ? darkStorage : lightStorage
   );
-
   useEffect(() => {
     setStorage(isDarkTheme ? darkStorage : lightStorage);
   }, [isDarkTheme]);
-
-  // Switch modes -> update state by stored values
   useEffect(() => {
-    const storedValues = JSON.parse(
-      storage.get() ?? '{}',
-    ) as Partial<ColorState>;
+    const storedValues = JSON.parse(storage.get() ?? "{}") || {};
     setInputColor(storedValues.baseColor ?? DEFAULT_PRIMARY_COLOR);
     setBaseColor(storedValues.baseColor ?? DEFAULT_PRIMARY_COLOR);
     setBackground(storedValues.background ?? DEFAULT_BACKGROUND_COLOR);
     setShades(storedValues.shades ?? COLOR_SHADES);
   }, [storage, DEFAULT_BACKGROUND_COLOR, DEFAULT_PRIMARY_COLOR]);
-
-  // State changes -> update DOM styles
   useEffect(() => {
-    updateDOMColors({baseColor, background, shades}, isDarkTheme);
-    storage.set(JSON.stringify({baseColor, background, shades}));
+    updateDOMColors({ baseColor, background, shades }, isDarkTheme);
+    storage.set(JSON.stringify({ baseColor, background, shades }));
   }, [baseColor, background, shades, storage, isDarkTheme]);
-
-  function updateColor(event: React.ChangeEvent<HTMLInputElement>) {
-    // Only prepend # when there isn't one.
-    // e.g. ccc -> #ccc, #ccc -> #ccc, ##ccc -> ##ccc,
-    const colorValue = event.target.value.replace(/^(?=[^#])/, '#');
+  function updateColor(event) {
+    const colorValue = event.target.value.replace(/^(?=[^#])/, "#");
     setInputColor(colorValue);
-
     try {
       setBaseColor(Color(colorValue).hex());
-    } catch {
-      // Don't update for invalid colors.
-    }
+    } catch {}
   }
-
   return (
     <div>
       <Admonition type="tip">
@@ -101,7 +80,8 @@ export default function ColorGenerator(): ReactNode {
                   </Translate>
                 </Link>
               ),
-            }}>
+            }}
+          >
             {
               "To ensure readability, aim for at least {wcagLink} for the primary color. Use the DocStatic website itself to preview how your color palette will appear. You can use alternative palettes in dark mode because one color doesn't usually work in both light and dark mode."
             }
@@ -109,33 +89,31 @@ export default function ColorGenerator(): ReactNode {
         </p>
       </Admonition>
       <p>
-        {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
         <label htmlFor="primary_color">
           <strong className="margin-right--sm">
             <Translate id="colorGenerator.inputs.primary.label">
               Primary Color:
             </Translate>
           </strong>
-        </label>{' '}
+        </label>{" "}
         <input
           id="primary_color"
           type="text"
-          className={clsx(styles.input, 'margin-right--sm')}
+          className={clsx(styles.input, "margin-right--sm")}
           value={inputColor}
           onChange={updateColor}
         />
         <input
           type="color"
           className={styles.colorInput}
-          // value has to always be a valid color, so baseColor instead of
-          // inputColor
           value={baseColor}
           onChange={updateColor}
         />
         <button
           type="button"
           className="clean-btn button button--primary margin-left--md"
-          onClick={() => setColorMode(isDarkTheme ? 'light' : 'dark')}>
+          onClick={() => setColorMode(isDarkTheme ? "light" : "dark")}
+        >
           <Translate
             id="colorGenerator.inputs.modeToggle.label"
             values={{
@@ -148,8 +126,9 @@ export default function ColorGenerator(): ReactNode {
                   dark
                 </Translate>
               ),
-            }}>
-            {'Edit {colorMode} mode'}
+            }}
+          >
+            {"Edit {colorMode} mode"}
           </Translate>
         </button>
         <button
@@ -160,14 +139,14 @@ export default function ColorGenerator(): ReactNode {
             setBaseColor(DEFAULT_PRIMARY_COLOR);
             setBackground(DEFAULT_BACKGROUND_COLOR);
             setShades(COLOR_SHADES);
-          }}>
+          }}
+        >
           <Translate id="colorGenerator.inputs.resetButton.label">
             Reset
           </Translate>
         </button>
       </p>
       <p>
-        {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
         <label htmlFor="background_color">
           <strong className="margin-right--sm">
             <Translate id="colorGenerator.inputs.background.label">
@@ -178,7 +157,7 @@ export default function ColorGenerator(): ReactNode {
         <input
           id="background_color"
           type="color"
-          className={clsx(styles.colorInput, 'margin-right--sm')}
+          className={clsx(styles.colorInput, "margin-right--sm")}
           value={background}
           onChange={(e) => {
             setBackground(e.target.value);
@@ -197,21 +176,24 @@ export default function ColorGenerator(): ReactNode {
               <th>
                 <Translate
                   id="colorGenerator.table.heading2"
-                  description="This column is the color's representation in hex">
+                  description="This column is the color's representation in hex"
+                >
                   Hex
                 </Translate>
               </th>
               <th>
                 <Translate
                   id="colorGenerator.table.heading3"
-                  description="This column is the adjusted shades' adjustment values relative to the primary color">
+                  description="This column is the adjusted shades' adjustment values relative to the primary color"
+                >
                   Adjustment
                 </Translate>
               </th>
               <th>
                 <Translate
                   id="colorGenerator.table.heading4"
-                  description="This column is WCAG contrast rating: AAA, AA, Fail">
+                  description="This column is WCAG contrast rating: AAA, AA, Fail"
+                >
                   Contrast Rating
                 </Translate>
               </th>
@@ -221,7 +203,8 @@ export default function ColorGenerator(): ReactNode {
             {getAdjustedColors(shades, baseColor)
               .sort((a, b) => a.displayOrder - b.displayOrder)
               .map((value) => {
-                const {variableName, adjustment, adjustmentInput, hex} = value;
+                const { variableName, adjustment, adjustmentInput, hex } =
+                  value;
                 return (
                   <tr key={variableName}>
                     <td>
@@ -230,16 +213,14 @@ export default function ColorGenerator(): ReactNode {
                     <td>
                       <span
                         className={styles.color}
-                        style={{
-                          backgroundColor: hex,
-                        }}
+                        style={{ backgroundColor: hex }}
                       />
                       <code className="margin-left--sm">
                         {hex.toLowerCase()}
                       </code>
                     </td>
                     <td>
-                      {variableName === '--ifm-color-primary' ? (
+                      {variableName === "--ifm-color-primary" ? (
                         0
                       ) : (
                         <input
@@ -248,11 +229,13 @@ export default function ColorGenerator(): ReactNode {
                           type="number"
                           value={adjustmentInput}
                           onChange={(event) => {
-                            const newValue = parseFloat(event.target.value);
+                            const newValue = Number.parseFloat(
+                              event.target.value
+                            );
                             setShades({
                               ...shades,
                               [variableName]: {
-                                ...shades[variableName]!,
+                                ...(shades[variableName] ?? {}),
                                 adjustmentInput: event.target.value,
                                 adjustment: Number.isNaN(newValue)
                                   ? adjustment
@@ -265,10 +248,11 @@ export default function ColorGenerator(): ReactNode {
                     </td>
                     <td
                       style={{
-                        fontSize: 'medium',
+                        fontSize: "medium",
                         backgroundColor: background,
                         color: hex,
-                      }}>
+                      }}
+                    >
                       <b>{wcagContrast(hex, background)}</b>
                     </td>
                   </tr>
@@ -280,23 +264,22 @@ export default function ColorGenerator(): ReactNode {
       <p>
         <Translate
           id="colorGenerator.text"
-          // eslint-disable-next-line @docusaurus/no-untranslated-text
-          values={{cssPath: <code>src/css/custom.css</code>}}>
-          {'Replace the variables in {cssPath} with these new variables.'}
+          values={{ cssPath: <code>src/css/custom.css</code> }}
+        >
+          {"Replace the variables in {cssPath} with these new variables."}
         </Translate>
       </p>
-      <CodeBlock className="language-css" title="/src/css/custom.css">
-        {`${isDarkTheme ? "[data-theme='dark']" : ':root'} {
+      <CodeBlock
+        className="language-css"
+        title="/src/css/custom.css"
+      >{`${isDarkTheme ? "[data-theme='dark']" : ":root"} {
 ${getAdjustedColors(shades, baseColor)
   .sort((a, b) => a.codeOrder - b.codeOrder)
   .map((value) => `  ${value.variableName}: ${value.hex.toLowerCase()};`)
-  .join('\n')}${
-          background !== DEFAULT_BACKGROUND_COLOR
-            ? `\n  --ifm-background-color: ${background};`
-            : ''
-        }
-}`}
-      </CodeBlock>
+  .join(
+    "\n"
+  )}${background !== DEFAULT_BACKGROUND_COLOR ? `\n  --ifm-background-color: ${background};` : ""}
+}`}</CodeBlock>
     </div>
   );
 }

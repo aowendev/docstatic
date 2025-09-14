@@ -1,4 +1,44 @@
 ---
-title: tabs
-description: Using tabs inside Docusaurus Markdown
+title: Tabs
+description: Using tabs in DocStatic.
+draft: false
+review: false
+translate: false
+approved: false
+published: true
+unlisted: false
 ---
+
+The **Tabs** component enables you to add tabbed content to your topic.
+
+1. Select **Tabs** from the **Embed** list.
+2. Edit the component.
+3. For each tab:
+   1. Select **Tab Item** from the **Embed** list.
+   2. Give it a **Value**.
+   3. Give it a **Title**.
+   4. Enter the **Content**.
+   5. (Optional) Make it the **Default** tab.
+4. **Save** your changes.
+
+<Admonition type="danger" title="Warning">
+  The CMS can lose context when editing tabs. You should save often. The CMS can get into a position where it cannot find the context of the tab. In this case click the **Raw Markdown** icon and make changes directly in the Markdown. Save and then return to the rich text editor.
+</Admonition>
+
+#### Example:
+
+<Tabs>
+  <TabItem label="Apple" value="apple">
+    This is an apple 🍎
+  </TabItem>
+
+  <TabItem label="Orange" value="orange">
+    This is an orange 🍊
+  </TabItem>
+
+  <TabItem label="Banana" value="banana">
+    This is a banana 🍌
+  </TabItem>
+</Tabs>
+
+For more information, refer to [Tabs](https://docusaurus.io/docs/markdown-features/tabs) in the Docusaurus documentation.

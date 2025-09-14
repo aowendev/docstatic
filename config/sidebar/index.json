@@ -33,11 +33,43 @@
               "_template": "doc"
             },
             {
+              "document": "docs/guides/markdown-features/tabs.mdx",
+              "_template": "doc"
+            },
+            {
               "document": "docs/guides/markdown-features/code-blocks.mdx",
               "_template": "doc"
             },
             {
+              "document": "docs/guides/markdown-features/admonitions.mdx",
+              "_template": "doc"
+            },
+            {
+              "document": "docs/guides/markdown-features/toc.mdx",
+              "_template": "doc"
+            },
+            {
+              "document": "docs/guides/markdown-features/assets.mdx",
+              "_template": "doc"
+            },
+            {
+              "document": "docs/guides/markdown-features/links.mdx",
+              "_template": "doc"
+            },
+            {
+              "document": "docs/guides/markdown-features/plugins.mdx",
+              "_template": "doc"
+            },
+            {
               "document": "docs/guides/markdown-features/math-equations.mdx",
+              "_template": "doc"
+            },
+            {
+              "document": "docs/guides/markdown-features/diagrams.mdx",
+              "_template": "doc"
+            },
+            {
+              "document": "docs/guides/markdown-features/metadata.mdx",
               "_template": "doc"
             }
           ],

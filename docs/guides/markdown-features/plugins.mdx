@@ -1,4 +1,24 @@
 ---
-title: plugins
-description: Using MDX plugins to expand Docusaurus Markdown functionalities
+title: MDX plugins
+description: Using MDX plugins to expand Markdown functionality.
+draft: false
+review: false
+translate: false
+approved: false
+published: true
+unlisted: false
 ---
+
+# MDX plugins
+
+MDX has a built-in [plugin system](https://mdxjs.com/advanced/plugins/) that can be used to customize how Markdown files are parsed and transformed to JSX. However, if you change the way Markdown behaves, you must also reflect these changes in the CMS.
+
+<Admonition type="danger" title="Warning">
+  MDX plugins that change the behavior of standard Markdown components may break compatibility with the CMS. Proceed at your own risk.
+</Admonition>
+
+For more information, refer to [MDX Plugins](https://docusaurus.io/docs/markdown-features/plugins) in the Docusaurus documentation.
+
+<Admonition type="note" title="Note">
+  DocStatic preinstalls and configures the [math plugins](math-equations) for you.
+</Admonition>
