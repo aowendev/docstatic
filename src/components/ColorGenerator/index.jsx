@@ -27,7 +27,7 @@ import {
 import styles from "./styles.module.css";
 function wcagContrast(foreground, background) {
   const contrast = Color(foreground).contrast(Color(background));
-  return contrast > 7 ? "AAA 3c5" : contrast > 4.5 ? "AA 44d" : "Fail 534";
+  return contrast > 7 ? "AAA 🏅" : contrast > 4.5 ? "AA 👍" : "Fail 🔴";
 }
 export default function ColorGenerator() {
   const { colorMode, setColorMode } = useColorMode();
