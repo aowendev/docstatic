@@ -1,7 +1,21 @@
 {
   "name": "docstatic",
   "version": "0.3.8",
-  "private": true,
+  "description": "A Docusaurus + TinaCMS documentation/static site generator with OpenAPI and GraphQL support.",
+  "author": "aowendev <aowen@ieee.org>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aowendev/docstatic.git"
+  },
+  "keywords": [
+    "docusaurus",
+    "tinacms",
+    "documentation",
+    "static site",
+    "openapi",
+    "graphql"
+  ],
   "scripts": {
     "docusaurus": "docusaurus",
     "dev": "tinacms dev -c \"docusaurus start\" ",
