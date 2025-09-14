@@ -8,6 +8,7 @@
 import React from "react";
 import Markdown from "react-markdown";
 import rehypeKatex from "rehype-katex";
+import rehypeRaw from "rehype-raw";
 import remarkMath from "remark-math";
 import remarkBreaks from "remark-breaks";
 import "katex/dist/katex.min.css"; // Import KaTeX CSS
@@ -16,9 +17,9 @@ import "katex/dist/katex.min.css"; // Import KaTeX CSS
 import ColorGenerator from "@site/src/components/ColorGenerator";
 
 /**
- * Passthrough component that renders content as JSX, markdown, or plain text
+ * Passthrough component that renders content as JSX, HTML, markdown, or plain text
  * @param {string} summary - A summary description (for documentation purposes)
- * @param {string} string - The content to render (supports JSX, markdown, or plain text)
+ * @param {string} string - The content to render (supports JSX, HTML, markdown, or plain text)
  */
 const Passthrough = ({ summary, string }) => {
   // Ensure string is valid
@@ -31,6 +32,10 @@ const Passthrough = ({ summary, string }) => {
 
   // Check if the content is a React component reference (like "<ColorGenerator />")
   const isReactComponent = /^[\s]*<[A-Z][a-zA-Z0-9]*[^>]*\/?>[\s]*$/.test(processedString.trim());
+  
+  // Check if it's an HTML element (like "<h2>Hello</h2>" or "<div>content</div>")
+  const isHTML = /^[\s]*<[a-z][a-zA-Z0-9]*[^>]*>.*<\/[a-z][a-zA-Z0-9]*>[\s]*$/.test(processedString.trim()) ||
+                 /^[\s]*<[a-z][a-zA-Z0-9]*[^>]*\/>[\s]*$/.test(processedString.trim());
   
   // Check if it's an import statement
   const isImportStatement = processedString.includes('import ') && processedString.includes('from ');
@@ -53,6 +58,24 @@ const Passthrough = ({ summary, string }) => {
         </div>
       );
     }
+  }
+
+  // Handle HTML content - render using react-markdown with HTML support
+  if (isHTML) {
+    return (
+      <div title={summary} className="passthrough-content passthrough-html">
+        <Markdown 
+          remarkPlugins={[remarkMath, remarkBreaks]} 
+          rehypePlugins={[rehypeKatex, rehypeRaw]}
+          components={{
+            // Allow HTML elements to pass through
+            p: ({ children, ...props }) => <span {...props}>{children}</span>,
+          }}
+        >
+          {processedString}
+        </Markdown>
+      </div>
+    );
   }
 
   // Handle import statements - don't render them visually, just return null

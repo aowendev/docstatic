@@ -1,16 +1,14 @@
 ---
 title: Example Page
-description: Example description
+description: A React page that can be edited in the CMS with JSX, HTML and MDX content. 
 ---
 
-# Example page
+<Passthrough string="<h1>Example page</h1>" summary="HTML" />
 
 This example page imports the React component `ColorGenerator`.
 
 You can use it to create generate a color set for your site.
 
-<Passthrough string="import ColorGenerator from '@site/src/components/ColorGenerator';" summary="import ColorGenerator " />
+<Passthrough string="import ColorGenerator from '@site/src/components/ColorGenerator';" summary="JSX" />
 
-<Passthrough string="<ColorGenerator />" summary="ColorGenerator component" />
-
-<Passthrough string="<h2>Hello</h2>" summary="heading" />
+<Passthrough string="<ColorGenerator />" summary="MDX" />

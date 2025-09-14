@@ -41,6 +41,7 @@
     "react-dom": "^19.0.0",
     "react-markdown": "^10.1.0",
     "rehype-katex": "7",
+    "rehype-raw": "^7.0.0",
     "remark-breaks": "^4.0.0",
     "remark-math": "6",
     "tinacms": "^2.7.8",
