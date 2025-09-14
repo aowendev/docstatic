@@ -29,5 +29,18 @@ export const PassthroughBlockTemplate = {
         component: "textarea",
       },
     },
+    {
+      type: "string",
+      name: "type",
+      label: "Content Type",
+      options: [
+        { value: "markdown", label: "Markdown" },
+        { value: "html", label: "HTML" },
+        { value: "jsx", label: "JSX Component" },
+      ],
+      ui: {
+        component: "select",
+      },
+    },
   ],
 };
