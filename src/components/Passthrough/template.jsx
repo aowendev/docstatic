@@ -36,7 +36,7 @@ export const PassthroughBlockTemplate = {
       options: [
         { value: "markdown", label: "Markdown" },
         { value: "html", label: "HTML" },
-        { value: "jsx", label: "JSX Component" },
+        { value: "jsx", label: "JSX" },
       ],
       ui: {
         component: "select",

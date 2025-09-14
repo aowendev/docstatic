@@ -1,6 +1,6 @@
 ---
 title: MDX and React
-description: 'Using the power of React in DocStatic Markdown documents, thanks to MDX.'
+description: Using React in DocStatic Markdown documents with MDX.
 draft: false
 review: false
 translate: false
@@ -131,10 +131,13 @@ For more information, refer to [MDX and React](https://docusaurus.io/docs/markdo
 
 ## Passthrough component
 
-Sometimes it will be necessary to include some HTML, JSX or Markdown in a topic that the CMS cannot display in the rich text editor. To ensure that the editor can still be used for other content, the Passthrough component is provided. This enables you to wrap content so that the rich text editor will effectively ignore it.
+Sometimes it will be necessary to include some HTML, JSX or Markdown in a topic that the CMS cannot display in the rich text editor. To ensure that the editor can still be used for other content, the `Passthrough` component is provided. This enables you to wrap content so that the rich text editor will effectively ignore it.
 
 1. Select **Passthrough** from the **Embed** list.
-2. Enter a **Summary**.
+2. Give it a **Summary**.
 3. Enter the **Content** as plain text.
+4. Select the **Content Type** (**Markdown**, **HTML** or **JSX**).
 
 The content is added directly to the page when the site is built, without the wrapper.
+
+For examples, see the [example page](/example-page) and [math equations](/docs/guides/markdown-features/math-equations).

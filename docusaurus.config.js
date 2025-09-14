@@ -1,6 +1,9 @@
 import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
 
+import PrismLight from './src/utils/prismLight';
+import PrismDark from './src/utils/prismDark';
+
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = createConfig;
 const docusaurusData = require("./config/docusaurus/index.json");
@@ -184,20 +187,33 @@ const config = {
       }),
       copyright: `Copyright © ${new Date().getFullYear()} ${docusaurusData.footer?.copyright || docusaurusData.title}`,
     },
-    prism: {
-      additionalLanguages: [
-        "ruby",
-        "csharp",
-        "php",
-        "java",
-        "powershell",
-        "json",
-        "bash",
-        "dart",
-        "objectivec",
-        "r",
-      ],
-    },
+      prism: {
+        additionalLanguages: [
+          'java',
+          'latex',
+          'haskell',
+          'matlab',
+          'PHp',
+          'powershell',
+          'bash',
+          'diff',
+          'json',
+          'scss',
+        ],
+        magicComments: [
+          {
+            className: 'theme-code-block-highlighted-line',
+            line: 'highlight-next-line',
+            block: {start: 'highlight-start', end: 'highlight-end'},
+          },
+          {
+            className: 'code-block-error-line',
+            line: 'This will error',
+          },
+        ],
+        theme: PrismLight,
+        darkTheme: PrismDark,
+      },
     languageTabs: [
       {
         highlight: "python",
