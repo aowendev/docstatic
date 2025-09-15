@@ -7,33 +7,37 @@ import PrismDark from './src/utils/prismDark';
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = createConfig;
 const docusaurusData = require("./config/docusaurus/index.json");
-const getDocId = (doc) => {
+const getDocId = (doc: string) => {
   return doc
     .replace(/\.mdx?$/, "")
     .split("/")
     .slice(1)
     .join("/");
 };
-const getPageRoute = (page) => {
+const getPageRoute = (page: string) => {
   return page
     .replace(/\.mdx?$/, "")
     .split("/")
     .slice(2)
     .join("/");
 };
-const getPath = (page) => {
+const getPath = (page: string) => {
   return page.replace(/\.mdx?$/, "");
 };
-const formatFooterItem = (item) => {
+type FooterItem =
+  | { title: any; items: FooterItem[] }
+  | { label: any; to?: any; href?: any };
+
+const formatFooterItem = (item: { title: any; items: any[]; label: any; to: any; href: any; }): FooterItem => {
   if (item.title) {
     return {
       title: item.title,
-      items: item.items.map((subItem) => {
+      items: item.items.map((subItem: any) => {
         return formatFooterItem(subItem);
       }),
     };
   }
-  const linkObject = {
+  const linkObject: { label: any; to?: any; href?: any } = {
     label: item.label,
   };
   if (item.to) {
