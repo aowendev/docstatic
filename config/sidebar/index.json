@@ -79,15 +79,6 @@
             {
               "document": "docs/guides/markdown-features/conditional-text.mdx",
               "_template": "doc"
-            },
-            {
-              "_template": "doc"
-            },
-            {
-              "_template": "doc"
-            },
-            {
-              "_template": "doc"
             }
           ],
           "_template": "category"
