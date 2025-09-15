@@ -71,6 +71,22 @@
             {
               "document": "docs/guides/markdown-features/metadata.mdx",
               "_template": "doc"
+            },
+            {
+              "document": "docs/guides/markdown-features/Comments.mdx",
+              "_template": "doc"
+            },
+            {
+              "_template": "doc"
+            },
+            {
+              "_template": "doc"
+            },
+            {
+              "_template": "doc"
+            },
+            {
+              "_template": "doc"
             }
           ],
           "_template": "category"
