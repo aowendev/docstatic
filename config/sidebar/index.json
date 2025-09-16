@@ -26,7 +26,8 @@
       "items": [
         {
           "title": "Markdown features",
-          "link": "generated",
+          "link": "doc",
+          "docLink": "docs/guides/markdown-features/intro.mdx",
           "items": [
             {
               "document": "docs/guides/markdown-features/react.mdx",
@@ -78,6 +79,30 @@
             },
             {
               "document": "docs/guides/markdown-features/conditional-text.mdx",
+              "_template": "doc"
+            },
+            {
+              "document": "docs/guides/markdown-features/context-help.mdx",
+              "_template": "doc"
+            },
+            {
+              "document": "docs/guides/markdown-features/figures.mdx",
+              "_template": "doc"
+            },
+            {
+              "document": "docs/guides/markdown-features/footnotes.mdx",
+              "_template": "doc"
+            },
+            {
+              "document": "docs/guides/markdown-features/glossary.mdx",
+              "_template": "doc"
+            },
+            {
+              "document": "docs/guides/markdown-features/snippets.mdx",
+              "_template": "doc"
+            },
+            {
+              "document": "docs/guides/markdown-features/variables.mdx",
               "_template": "doc"
             }
           ],

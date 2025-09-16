@@ -1,8 +1,6 @@
 ---
-title: conditional text
+title: Conditional text
 description: Filtering content with conditional text settings.
-tags: []
-conditions: []
 draft: false
 review: false
 translate: false
@@ -11,4 +9,38 @@ published: true
 unlisted: false
 ---
 
-# Conditional Text
+# Conditional text
+
+The **Conditions** component enables you to wrap text in a set of conditions that determine when it should be displayed.
+Conditions can be any combination of languages or user-defined conditions.
+The text can be displayed if one or more conditions are met (OR) or only if all conditions are met (AND).
+You can also specify fallback text to display if no conditions are met.
+
+## Create categories and conditions
+
+1. In the CMS, click  the **Conditions** collection.
+2. Click the **Add** icon to add a new **Category**
+3. Give it a **Name** and **Description**.
+4. For each **Condition** you want to add:
+   1. Click the **Add** icon.
+   2. Name the **Condition** and give it a **Description**.
+   3. Toggle the **Active** status of the condition as required.
+
+## Add conditions to a topic
+
+Conditions are set at the topic level. The language is determined by the page language. Other conditions are defined as an array in the metadata at the start of the topic.
+
+1. Create or edit a topic.
+2. In the **Conditions** area, expand the **Categories** and select the box of any **Conditions** you want to apply to the topic.
+
+## Add conditional text
+
+1. Select **Conditional Text** from the **Embed** list.
+2. Edit the component.
+3. Enter the **Text Content**.
+4. Add any **Required Conditions**.
+5. Add any **Required Languages**.
+6. Set the **Condition Logic**.
+7. Set the **Language Logic**.
+8. Select if both conditions and languages are required.
+9. (Optional) Enter the **Fallback Text**.

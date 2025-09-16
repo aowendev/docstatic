@@ -1,4 +1,90 @@
 ---
-title: introduction
-description: Docusaurus uses MDX. Find out more about Docusaurus-specific features when writing Markdown.
+title: Markdown features
+description: >-
+  DocStatic uses MDX. Find out more about DocStatic-specific features when
+  writing Markdown.
+draft: false
+review: false
+translate: false
+approved: false
+published: true
+unlisted: false
 ---
+
+# Markdown features
+
+DocStatic uses [Markdown](https://commonmark.org/) as its main content authoring format. You can [learn it in ten minutes](https://commonmark.org/help/). But you don't have to because the CMS provides a full rich text editing environment for metadata, Markdown and React components.
+
+## Simple Structured Authoring
+
+Topics in DocStatic consist of metadata in [YAML](https://yaml.org/spec/1.2.2/) format, Markdown and a predefined set of React components. It is not necessary to include any JSX declarations in the topics because the components are available globally. The CMS ensures consistent use of Metadata and uniform Markdown while React components ensure consistency and provide support for content reuse.
+
+## Standard features
+
+Markdown features include:
+
+* Bold, code, italic and strikethrough character styles.
+* Bulleted and numbered lists.
+* Code blocks.
+* Heading levels (1 to 6).
+* Horizontal rules.
+* Images.
+* Links.
+* Quotes.
+* Simple tables.
+
+These can all be selected directly from the rich text toolbar in the CMS.
+
+To these, Docusaurus adds:
+
+* Admonitions
+* Details (expanding content)
+* Doc card lists
+* Tabs
+
+DocStatic further extends this with:
+
+* Code snippets (from files)
+* Comments
+* Conditional text
+* Context help links
+* Diagrams
+* Figures
+* Footnotes
+* Glossary terms
+* Math equations
+* Snippets
+* Variables
+
+## Front matter
+
+Front matter is used to add metadata to your Markdown file. It's provided at the very top of the file, enclosed by three dashes ---. Content plugins may have their own front matter schema. DocStatic uses the front matter for:
+
+* Titles
+* Descriptions
+* Workflow status
+* Conditions (for conditional text)
+
+## Details
+
+1. Select **Details** from the **Embed** list.
+2. Edit the component.
+3. Give it a **Summary**.
+4. Enter the **Details**.
+
+#### Example:
+
+<Details summary="Toggle me.">
+  This is the detailed content.
+
+  You can use Markdown here including **bold** and *italic* text, and inline [links](https://docusaurus.io/).
+</Details>
+
+## Doc card lists
+
+Doc card lists are automatically generated for categories in the table of contents. However, you can also manually add them to a topic.
+
+1. Select **Doc Card List** from the **Embed** list.
+2. Give it a **Title**.
+
+For more information, refer to [Markdown Features](https://docusaurus.io/docs/markdown-features) in the Docusarus documentation.
