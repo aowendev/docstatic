@@ -40,7 +40,7 @@
     "lint:fix": "biome check apis/ config/ reuse/ scripts/ src/ static/ tina/ --fix"
   },
   "dependencies": {
-    "@algolia/client-search": "^4.19.1",
+    "@algolia/client-search": "^5.37.0",
     "@codemirror/language": "6.0.0",
     "@docusaurus/core": "^3.8.1",
     "@docusaurus/plugin-content-docs": "^3.8.1",
@@ -52,13 +52,13 @@
     "@mdx-js/react": "^3.0.0",
     "@types/react": "^18.2.37",
     "clsx": "^2.0.0",
-    "color": "^4.2.3",
+    "color": "^5.0.2",
     "docusaurus-graphql-plugin": "0.7.0",
     "docusaurus-lunr-search": "^3.6.0",
-    "docusaurus-plugin-openapi-docs": "4.3.4",
+    "docusaurus-plugin-openapi-docs": "4.5.1",
     "docusaurus-plugin-sass": "^0.2.3",
-    "docusaurus-theme-openapi-docs": "4.3.4",
-    "fs-extra": "^9.0.1",
+    "docusaurus-theme-openapi-docs": "4.5.1",
+    "fs-extra": "9.0.1",
     "graphql": "15.8.0",
     "katex": "^0.16.22",
     "prism-react-renderer": "^2.3.0",
@@ -77,14 +77,14 @@
     "slate": ">=0.65.3",
     "slate-dom": ">=0.110.2",
     "sucrase": "^3.35.0",
-    "tinacms": "^2.7.8",
+    "tinacms": "^2.8.3",
     "title": "^4.0.1",
-    "typescript": "^5.6.0",
+    "typescript": "5.6.3",
     "webpack": "^5.91.0",
-    "yup": "^0.32.0"
-    },
-    "resolutions": {
-      "graphql": "15.8.0"
+    "yup": "0.32.11"
+  },
+  "resolutions": {
+    "graphql": "15.8.0"
   },
   "browserslist": {
     "production": [
@@ -99,8 +99,8 @@
     ]
   },
   "devDependencies": {
-    "@biomejs/biome": "^1.9.4",
-    "@tinacms/cli": "^1.9.8"
+    "@biomejs/biome": "^2.2.4",
+    "@tinacms/cli": "^1.10.3"
   },
   "engines": {
     "node": ">=18.0"
