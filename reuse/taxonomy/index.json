@@ -1,40 +1,10 @@
 {
   "taxonomy": [
     {
-      "tag": "docs",
+      "tag": "reuse",
       "children": [
         {
-          "tag": "docs_quick-start"
-        },
-        {
-          "tag": "docs_author"
-        },
-        {
-          "tag": "docs_diagram"
-        },
-        {
-          "tag": "docs_media"
-        },
-        {
-          "tag": "docs_open-api"
-        },
-        {
-          "tag": "docs_reuse"
-        },
-        {
-          "tag": "docs_search"
-        },
-        {
-          "tag": "docs_taxonomy"
-        },
-        {
-          "tag": "docs_translate"
-        },
-        {
-          "tag": "docs_publish"
-        },
-        {
-          "tag": "docs_version"
+          "tag": "conditional-text"
         }
       ]
     }
