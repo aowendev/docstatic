@@ -171,6 +171,9 @@
           "tag": "descriptions"
         },
         {
+          "tag": "slugs"
+        },
+        {
           "tag": "titles"
         },
         {

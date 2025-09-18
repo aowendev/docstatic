@@ -244,6 +244,11 @@ const DocsCollection = {
     },
     {
       type: "string",
+      name: "slug",
+      label: "Slug",
+    },
+    {
+      type: "string",
       name: "description",
       label: "Description",
     },
