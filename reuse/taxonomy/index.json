@@ -1,10 +1,76 @@
 {
   "taxonomy": [
     {
+      "tag": "apis",
+      "children": [
+        {
+          "tag": "graphql"
+        },
+        {
+          "tag": "openapi"
+        }
+      ]
+    },
+    {
+      "tag": "computer-languages",
+      "children": [
+        {
+          "tag": "html"
+        },
+        {
+          "tag": "javascript",
+          "children": [
+            {
+              "tag": "jsx"
+            },
+            {
+              "tag": "react"
+            }
+          ]
+        },
+        {
+          "tag": "latex",
+          "children": [
+            {
+              "tag": "katex"
+            }
+          ]
+        },
+        {
+          "tag": "markdown",
+          "children": [
+            {
+              "tag": "mdx"
+            }
+          ]
+        },
+        {
+          "tag": "xml"
+        },
+        {
+          "tag": "yaml"
+        }
+      ]
+    },
+    {
+      "tag": "configuration",
+      "children": [
+        {
+          "tag": "docusaurus"
+        },
+        {
+          "tag": "homepage"
+        },
+        {
+          "tag": "sidebar"
+        }
+      ]
+    },
+    {
       "tag": "reuse",
       "children": [
         {
-          "tag": "code"
+          "tag": "code-files"
         },
         {
           "tag": "conditional-text"
@@ -20,6 +86,84 @@
         },
         {
           "tag": "variable-sets"
+        }
+      ]
+    },
+    {
+      "tag": "software",
+      "children": [
+        {
+          "tag": "automation",
+          "children": [
+            {
+              "tag": "github-actions"
+            }
+          ]
+        },
+        {
+          "tag": "content-management-systems",
+          "children": [
+            {
+              "tag": "tinacms"
+            }
+          ]
+        },
+        {
+          "tag": "grammar-spelling-style",
+          "children": [
+            {
+              "tag": "languagetool"
+            }
+          ]
+        },
+        {
+          "tag": "integrated-development-environments",
+          "children": [
+            {
+              "tag": "eclipse"
+            },
+            {
+              "tag": "vscodium"
+            }
+          ]
+        },
+        {
+          "tag": "package-managers",
+          "children": [
+            {
+              "tag": "yarn"
+            }
+          ]
+        },
+        {
+          "tag": "search",
+          "children": [
+            {
+              "tag": "algolia"
+            },
+            {
+              "tag": "lunr"
+            }
+          ]
+        },
+        {
+          "tag": "static-site-generators",
+          "children": [
+            {
+              "tag": "docusaurus"
+            }
+          ]
+        },
+        {
+          "tag": "source-control",
+          "children": [
+            {
+              "tag": "git"
+            },
+            {
+              "tag": "github"
+            }
+          ]
         }
       ]
     }
