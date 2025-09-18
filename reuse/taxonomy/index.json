@@ -4,7 +4,22 @@
       "tag": "reuse",
       "children": [
         {
+          "tag": "code"
+        },
+        {
           "tag": "conditional-text"
+        },
+        {
+          "tag": "glossary-terms"
+        },
+        {
+          "tag": "images"
+        },
+        {
+          "tag": "snippets"
+        },
+        {
+          "tag": "variable-sets"
         }
       ]
     }
