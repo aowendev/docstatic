@@ -15,6 +15,9 @@
       "tag": "computer-languages",
       "children": [
         {
+          "tag": "css"
+        },
+        {
           "tag": "html"
         },
         {
@@ -56,13 +59,119 @@
       "tag": "configuration",
       "children": [
         {
-          "tag": "docusaurus"
+          "tag": "docusaurus",
+          "children": [
+            {
+              "tag": "homepage"
+            },
+            {
+              "tag": "sidebar"
+            }
+          ]
         },
         {
-          "tag": "homepage"
+          "tag": "github-pages"
         },
         {
-          "tag": "sidebar"
+          "tag": "tinacms"
+        }
+      ]
+    },
+    {
+      "tag": "content",
+      "children": [
+        {
+          "tag": "blog-articles"
+        },
+        {
+          "tag": "diagrams"
+        },
+        {
+          "tag": "equations"
+        },
+        {
+          "tag": "images"
+        },
+        {
+          "tag": "topics"
+        }
+      ]
+    },
+    {
+      "tag": "elements",
+      "children": [
+        {
+          "tag": "admonitions"
+        },
+        {
+          "tag": "code-blocks"
+        },
+        {
+          "tag": "comments"
+        },
+        {
+          "tag": "doc-card-lists"
+        },
+        {
+          "tag": "figures"
+        },
+        {
+          "tag": "footnotes"
+        },
+        {
+          "tag": "horizontal-rules"
+        },
+        {
+          "tag": "links"
+        },
+        {
+          "tag": "passthroughs"
+        },
+        {
+          "tag": "quotes"
+        },
+        {
+          "tag": "tables"
+        },
+        {
+          "tag": "tabs"
+        }
+      ]
+    },
+    {
+      "tag": "formatting",
+      "children": [
+        {
+          "tag": "bold"
+        },
+        {
+          "tag": "code-font"
+        },
+        {
+          "tag": "headings"
+        },
+        {
+          "tag": "italic"
+        },
+        {
+          "tag": "strikethrough"
+        }
+      ]
+    },
+    {
+      "tag": "metadata",
+      "children": [
+        {
+          "tag": "conditions"
+        },
+        {
+          "tag": "descriptions"
+        },
+        {
+          "tag": "titles"
+        },
+        {
+          "tag": "workflows"
         }
       ]
     },
@@ -105,6 +214,9 @@
           "children": [
             {
               "tag": "tinacms"
+            },
+            {
+              "tag": "media-management"
             }
           ]
         },
@@ -164,6 +276,9 @@
               "tag": "github"
             }
           ]
+        },
+        {
+          "tag": "upgrading"
         }
       ]
     }
