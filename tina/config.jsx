@@ -11,6 +11,9 @@ import { docusaurusDate, titleFromSlug } from "../util";
 // tags UI component
 import TagsField from "../src/components/TagsField";
 
+// Context Help
+import HelpButton from "../src/components/HelpButton";
+
 // conditions tree UI component
 import ConditionsTreeField from "../src/components/ConditionsField";
 
@@ -111,6 +114,15 @@ const PostCollection = {
   },
   fields: [
     {
+      type: "boolean",
+      name: "help",
+      label: "Help",
+      required: false,
+      ui: {
+        component: (props) => <HelpButton url="https://docstatic.com/docs/blog" {...props} />,
+      },
+    },
+    {
       type: "string",
       name: "title",
       label: "Title",
@@ -192,6 +204,15 @@ const SnippetsCollection = {
   format: "mdx",
   fields: [
     {
+      type: "boolean",
+      name: "help",
+      label: "Help",
+      required: false,
+      ui: {
+        component: (props) => <HelpButton url="https://docstatic.com/docs/guides/markdown-features/snippets" {...props} />,
+      },
+    },
+    {
       type: "string",
       name: "title",
       label: "Title",
@@ -235,6 +256,15 @@ const DocsCollection = {
     },
   },
   fields: [
+    {
+      type: "boolean",
+      name: "help",
+      label: "Help",
+      required: false,
+      ui: {
+        component: (props) => <HelpButton url="https://docstatic.com/docs/introduction" {...props} />,
+      },
+    },
     {
       type: "string",
       name: "title",
@@ -327,6 +357,15 @@ const WikiCollection = {
   format: "mdx",
   fields: [
     {
+      type: "boolean",
+      name: "help",
+      label: "Help",
+      required: false,
+      ui: {
+        component: (props) => <HelpButton url="https://docstatic.com/docs/guides/markdown-features/variables" {...props} />,
+      },
+    },
+    {
       type: "string",
       name: "title",
       label: "Title",
@@ -359,6 +398,15 @@ const TranslationCollection = {
     },
   },
   fields: [
+    {
+      type: "boolean",
+      name: "help",
+      label: "Help",
+      required: false,
+      ui: {
+        component: (props) => <HelpButton url="https://docstatic.com/docs/introduction" {...props} />,
+      },
+    },
     {
       type: "string",
       name: "title",
@@ -590,6 +638,15 @@ const SidebarCollection = {
   },
   fields: [
     {
+      type: "boolean",
+      name: "help",
+      label: "Help",
+      required: false,
+      ui: {
+        component: (props) => <HelpButton url="https://docstatic.com/docs/introduction" {...props} />,
+      },
+    },
+    {
       type: "string",
       name: "_warning",
       ui: {
@@ -767,6 +824,15 @@ const SettingsCollection = {
     },
   },
   fields: [
+    {
+      type: "boolean",
+      name: "help",
+      label: "Help",
+      required: false,
+      ui: {
+        component: (props) => <HelpButton url="https://docstatic.com/docs/configuration" {...props} />,
+      },
+    },
     {
       type: "string",
       name: "_warning",
@@ -983,6 +1049,15 @@ const HomepageCollection = {
   },
   fields: [
     {
+      type: "boolean",
+      name: "help",
+      label: "Help",
+      required: false,
+      ui: {
+        component: (props) => <HelpButton url="https://docstatic.com/docs/introduction" {...props} />,
+      },
+    },
+    {
       type: "string",
       name: "_warning",
       ui: {
@@ -1032,6 +1107,15 @@ const PagesCollection = {
   format: "mdx",
   fields: [
     {
+      type: "boolean",
+      name: "help",
+      label: "Help",
+      required: false,
+      ui: {
+        component: (props) => <HelpButton url="https://docstatic.com/docs/introduction" {...props} />,
+      },
+    },
+    {
       type: "string",
       name: "title",
       label: "Title",
@@ -1068,6 +1152,15 @@ const ConditionsCollection = {
   path: "reuse/conditions",
   format: "json",
   fields: [
+    {
+      type: "boolean",
+      name: "help",
+      label: "Help",
+      required: false,
+      ui: {
+        component: (props) => <HelpButton url="https://docstatic.com/docs/guides/markdown-features/conditional-text" {...props} />,
+      },
+    },
     {
       type: "object",
       label: "Categories",
@@ -1141,6 +1234,15 @@ const VariableSetCollection = {
   path: "reuse/variableSets",
   format: "json",
   fields: [
+    {
+      type: "boolean",
+      name: "help",
+      label: "Help",
+      required: false,
+      ui: {
+        component: (props) => <HelpButton url="https://docstatic.com/docs/guides/markdown-features/variables" {...props} />,
+      },
+    },
     {
       type: "object",
       label: "Variable Sets",
@@ -1223,6 +1325,15 @@ const TaxonomyCollection = {
   path: "reuse/taxonomy",
   format: "json",
   fields: [
+    {
+      type: "boolean",
+      name: "help",
+      label: "Help",
+      required: false,
+      ui: {
+        component: (props) => <HelpButton url="https://docstatic.com/docs/introduction" {...props} />,
+      },
+    },
     {
       type: "object",
       list: true,
@@ -1379,6 +1490,15 @@ const GlossaryTermCollection = {
   path: "reuse/glossaryTerms",
   format: "json",
   fields: [
+    {
+      type: "boolean",
+      name: "help",
+      label: "Help",
+      required: false,
+      ui: {
+        component: (props) => <HelpButton url="https://docstatic.com/docs/guides/markdown-features/glossary" {...props} />,
+      },
+    },
     {
       type: "object",
       name: "glossaryTerms",
