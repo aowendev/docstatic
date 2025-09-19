@@ -1,5 +1,41 @@
 ---
 title: Footnotes
 description: Automatically numbered and back-linked footnotes.
-draft: true
+draft: false
+review: false
+translate: false
+approved: false
+published: true
+unlisted: false
 ---
+
+# Footnotes
+
+There is an extension to Markdown that provides footnotes, but its implementation is not consistent and it separates the content from the number. For example:
+
+```markdown
+Markdown is a lightweight markup language[^1] created by John Gruber[^2], now widely used in writing[^3].
+
+[^1]: Markdown uses simple syntax to achieve text formatting.
+[^2]: John Gruber created Markdown in 2004.
+[^3]: Many platforms such as GitHub, Stack Overflow, and blog platforms support Markdown.
+```
+
+In DocStatic this would be represented as:
+
+```markdown
+Markdown is a lightweight markup language<Footnote summary="1"> Markdown uses simple syntax to achieve text formatting.</Footnote>
+created by John Gruber<Footnote summary="2">John Gruber created Markdown in 2004.</Footnote>,
+now widely used in writing<Footnote summary="3">Many platforms such as GitHub, Stack Overflow, and blog platforms support Markdown.</Footnote>.
+```
+
+The **Footnotes** component enables you add inline footnotes to your text.
+
+1. Select **Footnotes** from the **Embed** list.
+2. Edit the component.
+3. Give it a **Summary**.
+4. Enter the **Footnote**.
+
+#### Example
+
+Markdown is a lightweight markup language<Footnote summary="1"> Markdown uses simple syntax to achieve text formatting.</Footnote> created by John Gruber<Footnote summary="2">John Gruber created Markdown in 2004.</Footnote>, now widely used in writing<Footnote summary="3">Many platforms such as GitHub, Stack Overflow, and blog platforms support Markdown.</Footnote>.
