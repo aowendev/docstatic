@@ -16,7 +16,7 @@ unlisted: false
 
 Typically, context-sensitive help is implemented by having a help icon that users can click that will take them to the appropriate part of the documentation for the part of the software they are using. This involves creating a map of context URLs.
 
-DocStatic automatically generates links to headings. However, if you change the heading, the link will change. For this reason, DocStatic provides the Context Help element. It enables you to add an anchor tag anywhere within a topic. Providing that a slug is defined for the topic in the metadata, the link will not break.
+The static site generator automatically generates links to headings. However, if you change the heading, the link will change. For this reason, DocStatic provides the Context Help element. It enables you to add an anchor tag anywhere within a topic. Providing that a slug is defined for the topic in the metadata, the link will not break.
 
 1. Select **Context Help** from the Embed list.
 2. Enter a unique ID.
@@ -28,3 +28,25 @@ The link will be in the form: `<URL>/docs/<slug>#<id>`.
 [https://docstatic.com/docs/context-help#help-example](/docs/context-help#help-example)
 
 <a id="help-example" />
+
+## Developers
+
+For an example of how to include context help links in your code, examine the HelpButton React component in the source code for this site. Because DocStatic doesn't have direct access to the CMS code, it implements the button by applying it as a UI element on an unused field in a CMS collection. The HelpButton component attaches the button to the nav element on the page and links it to the URL passed in the template:
+
+```javascript
+const ExampleCollection = {
+  name: "example",
+  label: "Example",
+  path: "docs/example",
+  format: "mdx",
+  fields: [
+    {
+      type: "boolean",
+      name: "help",
+      label: "Help",
+      required: false,
+      ui: {
+        component: (props) => <HelpButton url="https://example.com/" {...props} />,
+      },
+    },
+```
