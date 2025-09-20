@@ -22,7 +22,8 @@
     },
     {
       "title": "Guides",
-      "link": "generated",
+      "link": "doc",
+      "docLink": "docs/guides/index.mdx",
       "items": [
         {
           "title": "Markdown features",
@@ -107,6 +108,26 @@
             }
           ],
           "_template": "category"
+        }
+      ],
+      "_template": "category"
+    },
+    {
+      "title": "Advanced guides",
+      "link": "doc",
+      "docLink": "docs/advanced/index.mdx",
+      "items": [
+        {
+          "document": "docs/advanced/hosted-cms.mdx",
+          "_template": "doc"
+        },
+        {
+          "document": "docs/advanced/notifications.mdx",
+          "_template": "doc"
+        },
+        {
+          "document": "docs/advanced/style.mdx",
+          "_template": "doc"
         }
       ],
       "_template": "category"

@@ -1,0 +1,37 @@
+---
+title: Notifications
+description: 'Sending workflow notifications to email, Slack or Teams.'
+draft: false
+review: false
+translate: false
+approved: false
+published: true
+unlisted: false
+---
+
+# Notifications
+
+DocStatic uses [GitHub Actions](https://docs.github.com/en/actions) to send workflow notifications. Example review and translate notifications are included in the `.github/workflows/` folder. Some configuration in GitHub is required to enable them. You can also use them as the starting point to develop your own custom notifications.
+
+## Email
+
+The `email-review.yml `and `email-translate.yml` actions are triggered when either the review or translate tags are set on a markdown file in the main branch. To use them, add these [secrets](https://docs.github.com/en/actions/how-tos/write-workflows/choose-what-workflows-do/use-secrets) to your repository:
+
+* `SMTP_SERVER`
+* `SMTP_PORT`
+* `SMTP_USERNAME`
+* `SMTP_PASSWORD`
+* `NOTIFY_EMAIL_TO`
+* `NOTIFY_EMAIL_FROM`
+
+## Slack
+
+The `slack-review.yml `and `slack-translate.yml` actions use the same triggers as the email versions. To use them, add your Slack webhook URL as a secret named `SLACK_WEBHOOK_URL`.
+
+## Teams
+
+The `teams-review.yml `and `teams-translate.yml` actions work like the Slack versions, but use the `jdcargile/ms-teams-notification` action.
+
+To use them, add your MS Teams webhook URL as a secret named `MS_TEAMS_WEBHOOK_URL`.
+
+If the action cannot be resolved, you may need to use a different maintained MS Teams notification action or send a POST request to the webhook using a script step.

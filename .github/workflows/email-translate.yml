@@ -1,0 +1,45 @@
+name: Notify by email on Translate tag
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  notify-email:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Find changed markdown files
+        id: changed_files
+        run: |
+          git fetch origin main
+          git diff --name-only ${{ github.sha }}^ ${{ github.sha }} | grep '\.mdx\?$' > changed_files.txt || true
+
+      - name: Check for translate tag
+        id: translate_check
+        run: |
+          found=false
+          while read file; do
+            if grep -q 'translate: true' "$file"; then
+              found=true
+              echo "File $file has translate: true"
+            fi
+          done < changed_files.txt
+          echo "found=$found" >> $GITHUB_OUTPUT
+
+      - name: Send Email notification
+        if: steps.translate_check.outputs.found == 'true'
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: ${{ secrets.SMTP_SERVER }}
+          server_port: ${{ secrets.SMTP_PORT }}
+          username: ${{ secrets.SMTP_USERNAME }}
+          password: ${{ secrets.SMTP_PASSWORD }}
+          subject: "Translate Tag Set to True"
+          to: ${{ secrets.NOTIFY_EMAIL_TO }}
+          from: ${{ secrets.NOTIFY_EMAIL_FROM }}
+          body: |
+            A markdown file with `translate: true` was committed to main. Please translate!
