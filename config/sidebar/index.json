@@ -146,6 +146,10 @@
           "_template": "doc"
         },
         {
+          "document": "docs/search.mdx",
+          "_template": "doc"
+        },
+        {
           "document": "docs/i18n/introduction.mdx",
           "_template": "doc"
         }
