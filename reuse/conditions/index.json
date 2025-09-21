@@ -77,6 +77,16 @@
           "active": true
         }
       ]
+    },
+    {
+      "name": "Operating system",
+      "description": "Conditional content based on operating system",
+      "conditions": [
+        {
+          "condition": "macOS",
+          "description": "Apple's OS designed exclusively for Mac computers."
+        }
+      ]
     }
   ]
 }
