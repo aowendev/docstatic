@@ -1,0 +1,41 @@
+name: Test notifications
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test-notifications:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send Slack test notification
+        uses: slackapi/slack-github-action@v1.25.0
+        with:
+          payload: |
+            {
+              "text": "Test notification from GitHub Actions (Slack)"
+            }
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
+      - name: Send Email test notification
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: ${{ secrets.SMTP_SERVER }}
+          server_port: ${{ secrets.SMTP_PORT }}
+          username: ${{ secrets.SMTP_USERNAME }}
+          password: ${{ secrets.SMTP_PASSWORD }}
+          subject: "Test notification from GitHub Actions (Email)"
+          to: ${{ secrets.NOTIFY_EMAIL_TO }}
+          from: ${{ secrets.NOTIFY_EMAIL_FROM }}
+          body: |
+            This is a test notification from GitHub Actions (Email).
+
+      - name: Send Teams test notification
+        uses: jdcargile/ms-teams-notification@v1.4
+        with:
+          github-token: ${{ github.token }}
+          ms-teams-webhook-uri: ${{ secrets.MS_TEAMS_WEBHOOK_URI }}
+          notification-summary: "Test notification from GitHub Actions (Teams)"
+          notification-color: 17a2b8
+          timezone: Europe/Paris
+          verbose-logging: true
