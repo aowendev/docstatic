@@ -26,13 +26,16 @@ jobs:
         id: review_check
         run: |
           found=false
+          files_with_review=""
           while read file; do
             if grep -q 'review: true' "$file"; then
               found=true
+              files_with_review="$files_with_review $file"
               echo "File $file has review: true"
             fi
           done < changed_files.txt
           echo "found=$found" >> $GITHUB_OUTPUT
+          echo "files=$files_with_review" >> $GITHUB_OUTPUT
 
       - name: Send Email notification
         if: steps.review_check.outputs.found == 'true'

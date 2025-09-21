@@ -26,13 +26,16 @@ jobs:
         id: translate_check
         run: |
           found=false
+          files_with_translate=""
           while read file; do
             if grep -q 'translate: true' "$file"; then
               found=true
+              files_with_translate="$files_with_translate $file"
               echo "File $file has translate: true"
             fi
           done < changed_files.txt
           echo "found=$found" >> $GITHUB_OUTPUT
+          echo "files=$files_with_translate" >> $GITHUB_OUTPUT
 
       - name: Send Slack notification
         if: steps.translate_check.outputs.found == 'true'
