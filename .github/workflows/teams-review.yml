@@ -32,8 +32,11 @@ jobs:
 
       - name: Send MS Teams notification
         if: steps.review_check.outputs.found == 'true'
-        uses: jdcargile/ms-teams-notification@v1.2.0
+        uses: jdcargile/ms-teams-notification@v1.4
         with:
-          webhook_url: ${{ secrets.MS_TEAMS_WEBHOOK_URL }}
-          message: |
-            A markdown file with `review: true` was committed to main. Please review!
+          github-token: ${{ github.token }} # this will use the runner's token.
+          ms-teams-webhook-uri: ${{ secrets.MS_TEAMS_WEBHOOK_URI }}
+          notification-summary: A markdown file with `review: true` was committed to main. Please review!
+          notification-color: 17a2b8
+          timezone: Europe/Paris
+          verbose-logging: true
