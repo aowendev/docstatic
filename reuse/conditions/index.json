@@ -85,6 +85,10 @@
         {
           "condition": "macOS",
           "description": "Apple's OS designed exclusively for Mac computers."
+        },
+        {
+          "condition": "Windows",
+          "description": "Microsoft’s widely used OS."
         }
       ]
     }
