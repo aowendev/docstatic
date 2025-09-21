@@ -166,10 +166,11 @@
           "_template": "doc"
         },
         {
-          "document": "docs/i18n/introduction.mdx",
+          "document": "docs/deployment.mdx",
           "_template": "doc"
         },
         {
+          "document": "docs/i18n/introduction.mdx",
           "_template": "doc"
         }
       ],
