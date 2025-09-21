@@ -1,0 +1,41 @@
+---
+title: Creating pages
+description: Creating pages in the CMS.
+tags:
+  - computer-languages
+  - computer-languages_javascript
+  - computer-languages_javascript_react
+draft: false
+review: false
+translate: false
+approved: false
+published: true
+unlisted: false
+---
+
+# Creating pages
+
+Pages are distinct from other types of content in that they are intended as one-off, standalone content, such as a showcase, playground or support page. They can contain React components and Markdown. Note that pages don't have sidebars.
+
+<Admonition type="info" title="Info">
+  Refer to the [Pages Plugin API Reference](http://localhost:3000/docs/api/plugins/plugin-content-pages.mdx) in the Docusaurus documentation for an exhaustive list of options.
+</Admonition>
+
+## Add a page
+
+1. From the **Pages** collection in the CMS, click **Add File**.
+2. Give it a **Title** and a **Description**.
+3. Add your content in the rich text editor.
+4. Click **Save**.
+
+## Add React components to a page
+
+DocStatic's React components are available globally. But if you're only using a component on one page it doesn't make sense to do this. Instead, you can import the component directly into the page. However, to ensure you can edit the page in the CMS, you need to wrap the import directive in a [Passthrough](/docs/guides/markdown-features/react#passthrough-component) component. The example page on the DocStatic site imports the ColorGenerator component like this:
+
+```markdown
+<Passthrough type="jsx" string="import ColorGenerator from '@site/src/components/ColorGenerator';" summary="Import Statement" />
+
+<Passthrough type="jsx" string="<ColorGenerator />" summary="JSX Component" />
+```
+
+For more information, refer to [Creating Pages](http://localhost:3000/docs/guides/creating-pages) in the Docusaurus documentation.

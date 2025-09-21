@@ -4,10 +4,10 @@
       "tag": "apis",
       "children": [
         {
-          "tag": "graphql"
+          "tag": "apis_graphql"
         },
         {
-          "tag": "openapi"
+          "tag": "apis_openapi"
         }
       ]
     },
@@ -15,46 +15,46 @@
       "tag": "computer-languages",
       "children": [
         {
-          "tag": "css"
+          "tag": "computer-languages_css"
         },
         {
-          "tag": "html"
+          "tag": "computer-languages_html"
         },
         {
-          "tag": "javascript",
+          "tag": "computer-languages_javascript",
           "children": [
             {
-              "tag": "jsx"
+              "tag": "computer-languages_javascript_jsx"
             },
             {
-              "tag": "mermaid"
+              "tag": "computer-languages_javascript_mermaid"
             },
             {
-              "tag": "react"
+              "tag": "computer-languages_javascript_react"
             }
           ]
         },
         {
-          "tag": "latex",
+          "tag": "computer-languages_latex",
           "children": [
             {
-              "tag": "katex"
+              "tag": "computer-languages_latex_katex"
             }
           ]
         },
         {
-          "tag": "markdown",
+          "tag": "computer-languages_markdown",
           "children": [
             {
-              "tag": "mdx"
+              "tag": "computer-languages_markdown_mdx"
             }
           ]
         },
         {
-          "tag": "xml"
+          "tag": "computer-languages_xml"
         },
         {
-          "tag": "yaml"
+          "tag": "computer-languages_yaml"
         }
       ]
     },
@@ -62,21 +62,21 @@
       "tag": "configuration",
       "children": [
         {
-          "tag": "docusaurus",
+          "tag": "configuration_docusaurus",
           "children": [
             {
-              "tag": "homepage"
+              "tag": "configuration_docusaurus_homepage"
             },
             {
-              "tag": "sidebar"
+              "tag": "configuration_docusaurus_sidebar"
             }
           ]
         },
         {
-          "tag": "github-pages"
+          "tag": "configuration_github-pages"
         },
         {
-          "tag": "tinacms"
+          "tag": "configuration_tinacms"
         }
       ]
     },
@@ -84,19 +84,22 @@
       "tag": "content",
       "children": [
         {
-          "tag": "blog-articles"
+          "tag": "content_blog-articles"
         },
         {
-          "tag": "diagrams"
+          "tag": "content_diagrams"
         },
         {
-          "tag": "equations"
+          "tag": "content_equations"
         },
         {
-          "tag": "images"
+          "tag": "content_images"
         },
         {
-          "tag": "topics"
+          "tag": "content_topics"
+        },
+        {
+          "tag": "content_wikis"
         }
       ]
     },
@@ -104,40 +107,43 @@
       "tag": "elements",
       "children": [
         {
-          "tag": "admonitions"
+          "tag": "elements_admonitions"
         },
         {
-          "tag": "code-blocks"
+          "tag": "elements_code-blocks"
         },
         {
-          "tag": "comments"
+          "tag": "elements_comments"
         },
         {
-          "tag": "doc-card-lists"
+          "tag": "elements_context-sensitive-help"
         },
         {
-          "tag": "figures"
+          "tag": "elements_doc-card-lists"
         },
         {
-          "tag": "footnotes"
+          "tag": "elements_figures"
         },
         {
-          "tag": "horizontal-rules"
+          "tag": "elements_footnotes"
         },
         {
-          "tag": "links"
+          "tag": "elements_horizontal-rules"
         },
         {
-          "tag": "passthroughs"
+          "tag": "elements_links"
         },
         {
-          "tag": "quotes"
+          "tag": "elements_passthroughs"
         },
         {
-          "tag": "tables"
+          "tag": "elements_quotes"
         },
         {
-          "tag": "tabs"
+          "tag": "elements_tables"
+        },
+        {
+          "tag": "elements_tabs"
         }
       ]
     },
@@ -145,39 +151,54 @@
       "tag": "formatting",
       "children": [
         {
-          "tag": "bold"
+          "tag": "formatting_bold"
         },
         {
-          "tag": "code-font"
+          "tag": "formatting_code-font"
         },
         {
-          "tag": "headings"
+          "tag": "formatting_headings"
         },
         {
-          "tag": "italic"
+          "tag": "formatting_italic"
         },
         {
-          "tag": "strikethrough"
+          "tag": "formatting_strikethrough"
         }
+      ]
+    },
+    {
+      "tag": "internationalization",
+      "children": [
+        {
+          "tag": "internationalization_localization"
+        },
+        {
+          "tag": "internationalization_translation"
+        },
+        {}
       ]
     },
     {
       "tag": "metadata",
       "children": [
         {
-          "tag": "conditions"
+          "tag": "metadata_conditions"
         },
         {
-          "tag": "descriptions"
+          "tag": "metadata_descriptions"
         },
         {
-          "tag": "slugs"
+          "tag": "metadata_slugs"
         },
         {
-          "tag": "titles"
+          "tag": "metadata_taxonomies"
         },
         {
-          "tag": "workflows"
+          "tag": "metadata_titles"
+        },
+        {
+          "tag": "metadata_workflows"
         }
       ]
     },
@@ -185,22 +206,22 @@
       "tag": "reuse",
       "children": [
         {
-          "tag": "code-files"
+          "tag": "reuse_code-files"
         },
         {
-          "tag": "conditional-text"
+          "tag": "reuse_conditional-text"
         },
         {
-          "tag": "glossary-terms"
+          "tag": "reuse_glossary-terms"
         },
         {
-          "tag": "images"
+          "tag": "reuse_images"
         },
         {
-          "tag": "snippets"
+          "tag": "reuse_snippets"
         },
         {
-          "tag": "variable-sets"
+          "tag": "reuse_variable-sets"
         }
       ]
     },
@@ -208,83 +229,97 @@
       "tag": "software",
       "children": [
         {
-          "tag": "automation",
+          "tag": "software_automation",
           "children": [
             {
-              "tag": "github-actions"
+              "tag": "software_automation_github-actions"
             }
           ]
         },
         {
-          "tag": "content-management-systems",
+          "tag": "software_content-management-systems",
           "children": [
             {
-              "tag": "tinacms"
+              "tag": "content-management-systems_tinacms"
             },
             {
-              "tag": "media-management"
+              "tag": "content-management-systems_media-management"
             }
           ]
         },
         {
-          "tag": "grammar-spelling-style",
+          "tag": "software_grammar-spelling-style",
           "children": [
             {
-              "tag": "languagetool"
+              "tag": "software_grammar-spelling-style_languagetool"
             }
           ]
         },
         {
-          "tag": "integrated-development-environments",
+          "tag": "software_integrated-development-environments",
           "children": [
             {
-              "tag": "eclipse"
+              "tag": "software_integrated-development-environments_eclipse"
             },
             {
-              "tag": "vscodium"
+              "tag": "software_integrated-development-environments_vscodium"
             }
           ]
         },
         {
-          "tag": "package-managers",
+          "tag": "software_notifications",
           "children": [
             {
-              "tag": "yarn"
-            }
-          ]
-        },
-        {
-          "tag": "search",
-          "children": [
-            {
-              "tag": "algolia"
+              "tag": "software_notifications_email"
             },
             {
-              "tag": "lunr"
-            }
-          ]
-        },
-        {
-          "tag": "static-site-generators",
-          "children": [
-            {
-              "tag": "docusaurus"
-            }
-          ]
-        },
-        {
-          "tag": "source-control",
-          "children": [
-            {
-              "tag": "git"
+              "tag": "software_notifications_slack"
             },
             {
-              "tag": "github"
+              "tag": "software_notifications_teams"
             }
           ]
         },
         {
-          "tag": "upgrading"
+          "tag": "software_package-managers",
+          "children": [
+            {
+              "tag": "software_package-managers_yarn"
+            }
+          ]
+        },
+        {
+          "tag": "software_search",
+          "children": [
+            {
+              "tag": "software_search_algolia"
+            },
+            {
+              "tag": "software_search_lunr"
+            }
+          ]
+        },
+        {
+          "tag": "software_static-site-generators",
+          "children": [
+            {
+              "tag": "software_static-site-generators_docusaurus"
+            }
+          ]
+        },
+        {
+          "tag": "software_source-control",
+          "children": [
+            {
+              "tag": "software_source-control_git"
+            },
+            {
+              "tag": "software_source-control_github"
+            }
+          ]
+        },
+        {
+          "tag": "software_upgrading"
         }
       ]
     }

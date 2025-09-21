@@ -26,6 +26,34 @@
       "docLink": "docs/guides/index.mdx",
       "items": [
         {
+          "document": "docs/guides/creating-pages.mdx",
+          "_template": "doc"
+        },
+        {
+          "title": "Docs",
+          "link": "doc",
+          "docLink": "docs/guides/docs/introduction.mdx",
+          "items": [
+            {
+              "document": "docs/guides/docs/create-doc.mdx",
+              "_template": "doc"
+            },
+            {
+              "document": "docs/guides/docs/taxonomies.mdx",
+              "_template": "doc"
+            }
+          ],
+          "_template": "category"
+        },
+        {
+          "document": "docs/blog.mdx",
+          "_template": "doc"
+        },
+        {
+          "document": "docs/guides/wikis.mdx",
+          "_template": "doc"
+        },
+        {
           "title": "Markdown features",
           "link": "doc",
           "docLink": "docs/guides/markdown-features/intro.mdx",
@@ -108,6 +136,10 @@
             }
           ],
           "_template": "category"
+        },
+        {
+          "document": "docs/i18n/introduction.mdx",
+          "_template": "doc"
         }
       ],
       "_template": "category"

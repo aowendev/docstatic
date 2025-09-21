@@ -1,0 +1,32 @@
+---
+title: Taxonomy tags
+description: Using taxonomy tags in DocStartic
+tags:
+  - metadata
+  - metadata_taxonomies
+draft: false
+review: false
+translate: false
+approved: false
+published: true
+unlisted: false
+---
+
+# Taxonomy tags
+
+Taxonomy tags enable you to apply an [information architecture ](https://en.wikipedia.org/wiki/Information_architecture)to your site content. It should be applied to any documentation platforms you use, such as bug-tracking systems and wikis. The most restrictive tag requirements that you're likely to encounter are flat (non-hierarchical) systems that support only lower-case letters and underscores (`_`) without spaces.
+
+DocStatic applies a three-tier hierarchy to taxonomy tags. To prevent the tags becoming unreasonably long, nesting is limited to a maximum depth of three. In some cases, this requires flattening the structure (for example, while `regions_europe_uk_scotland` is logical, it has four levels and so must be structured as `regions_uk_scotland`).
+
+When designing a three-tier information architecture, it's recommended that you aim to have around ten top-level categories, seven mid-level categories and as many leaf-level categories as you need. You should spell out acronyms and abbreviations, and aim to avoid redundancy.
+
+## Editing taxonomy tags
+
+1. From the **Taxonomies** collection, **Add** a taxonomy.
+2. Give it a **Tag** using only lower-case letters.
+3. Add any **Children**, and give them a tag, starting with the parent tag followed by an underscore.
+4. For each child, add any Children.
+
+<Admonition type="note" title="Note">
+  You can enter tags without the preceding tag name and an underscore, but if you do when adding them to a topic, they will be presented as a flat list.
+</Admonition>
