@@ -138,6 +138,10 @@
           "_template": "category"
         },
         {
+          "document": "docs/styling-layout.mdx",
+          "_template": "doc"
+        },
+        {
           "document": "docs/i18n/introduction.mdx",
           "_template": "doc"
         }
