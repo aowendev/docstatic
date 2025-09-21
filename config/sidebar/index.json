@@ -142,6 +142,10 @@
           "_template": "doc"
         },
         {
+          "document": "docs/static-assets.mdx",
+          "_template": "doc"
+        },
+        {
           "document": "docs/i18n/introduction.mdx",
           "_template": "doc"
         }
