@@ -382,6 +382,30 @@ const WikiCollection = {
   ],
 };
 
+const APIsCollection = {
+  name: "generated",
+  label: "API (generated)",
+  path: "docs/api",
+  format: "mdx",
+  ui: {
+    global: false,
+    allowedActions: {
+      create: false,
+      delete: false,
+    },
+  },
+  fields: [
+    {
+      type: "boolean",
+      name: "help",
+      label: "Help",
+      ui: { component: "hidden" },
+      required: false,
+    },
+  ],
+};
+
+
 const TranslationCollection = {
   name: "i18n",
   label: "Translations",
@@ -1545,6 +1569,7 @@ export default defineConfig({
       TranslationCollection,
       VariableSetCollection,
       WikiCollection,
+      APIsCollection,
     ],
   },
   search: {

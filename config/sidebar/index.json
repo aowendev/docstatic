@@ -142,10 +142,6 @@
           "_template": "doc"
         },
         {
-          "document": "docs/swizzling.mdx",
-          "_template": "doc"
-        },
-        {
           "document": "docs/static-assets.mdx",
           "_template": "doc"
         },
