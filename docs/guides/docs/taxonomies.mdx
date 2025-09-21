@@ -8,25 +8,35 @@ draft: false
 review: false
 translate: false
 approved: false
-published: false
-unlisted: true
+published: true
+unlisted: false
 ---
 
 # Taxonomies
 
-The more information you have, the harder it is to find things. Markdown enables you to tag content, but without any checking for consistency. DocStatic enables you to apply an [information architecture ](https://en.wikipedia.org/wiki/Information_architecture)to your content with a tag hierarchy organized by taxonomies.
+The more information you have, the harder it is to find things. Markdown enables you to tag content, but without any checking for consistency. DocStatic enables you to apply an [information architecture ](https://en.wikipedia.org/wiki/Information_architecture)to your content with taxonomies.
 
 ## Designing an information architecture
 
-Three tiers. Ten top leves. Seven mid levels. As many third (leaf) levels as required.
+It's beyond the scope of this document to cover information architecture in great depth, but here are some suggestions:
 
-Lower case and underscores only.
+* Limit your hierarchy to three levels. This maps well to traditional [indexing](/docs/tags).
+* Normalize your terms. Prefer plurals over singulars or verbs. Prefer single words over phrases.
+* Spell out acronyms and abbreviations.
+* Try to limit the top-level to ten categories.
+* Try to limit the mid-level to seven categories.
+* Use as many leaf-level categories as required.
 
-Flat tag systems like wikis and bug-tracking systems.
+## Applying a hierarchy to flat tag systems
+
+Ideally, you should apply the information architecture to all your information platforms (bug-tracking systems, wikis and so on). This means that tags have to meet the most restrictive criteria:
+
+* Tags must contain their own parent categories, separated by an underscore ( \_ ).
+* Lowercase letters only. No numerals, spaces (use a hyphen instead) or special characters.
+
+To prevent the tags becoming unreasonably long, nesting is limited to a maximum depth of three levels. In some cases, this requires flattening the structure. For example, while regions\_europe\_uk\_scotland is logical, it has four levels and so must be structured as regions\_uk\_scotland.
 
 ## Managing taxonomy tags
-
-Using tags in this way effectively creates an [index](/docs/tags).
 
 <Admonition type="note" title="Note">
   You don't have to include the parent and an underscore in a child tag, but if you leave them out then you'll be presented with a flat list of tags when you add a tag to a topic.
