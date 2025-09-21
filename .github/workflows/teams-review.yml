@@ -15,8 +15,12 @@ jobs:
       - name: Find changed markdown files
         id: changed_files
         run: |
-          git fetch origin main
-          git diff --name-only ${{ github.sha }}^ ${{ github.sha }} | grep '\.mdx\?$' > changed_files.txt || true
+          if [ "${{ github.event.before }}" = "0000000000000000000000000000000000000000" ]; then
+            # First commit, diff against empty tree
+            git diff --name-only ${{ github.sha }} | grep '\.mdx\?$' > changed_files.txt || true
+          else
+            git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep '\.mdx\?$' > changed_files.txt || true
+          fi
 
       - name: Check for review tag
         id: review_check
@@ -36,7 +40,7 @@ jobs:
         with:
           github-token: ${{ github.token }} # this will use the runner's token.
           ms-teams-webhook-uri: ${{ secrets.MS_TEAMS_WEBHOOK_URI }}
-          notification-summary: "A markdown file with `review: true` was committed to main. Please review!"
+          notification-summary: "The following markdown files with `review: true` were committed to main: ${{ steps.review_check.outputs.files }}. Please review!"            
           notification-color: 17a2b8
           timezone: Europe/Paris
           verbose-logging: true

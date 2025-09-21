@@ -42,7 +42,7 @@ jobs:
         with:
           payload: |
             {
-              "text": "A markdown file with `review: true` was committed to main. Please review!"
+              "text": "The following markdown files with `review: true` were committed to main: ${{ steps.review_check.outputs.files }}. Please review!"
             }
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
