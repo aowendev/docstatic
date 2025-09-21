@@ -97,6 +97,10 @@
         {
           "condition": "Android",
           "description": "Google’s open-source mobile OS used by most smartphone manufacturers worldwide"
+        },
+        {
+          "condition": "iOS",
+          "description": "Apple’s mobile OS for iPhones and iPads, known for its smooth ecosystem and security."
         }
       ]
     }
