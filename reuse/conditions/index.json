@@ -93,6 +93,10 @@
         {
           "condition": "Linux",
           "description": "Open-source OS family popular with developers and servers for its flexibility and security"
+        },
+        {
+          "condition": "Android",
+          "description": "Google’s open-source mobile OS used by most smartphone manufacturers worldwide"
         }
       ]
     }
