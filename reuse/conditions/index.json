@@ -89,6 +89,10 @@
         {
           "condition": "Windows",
           "description": "Microsoft’s widely used OS."
+        },
+        {
+          "condition": "Linux",
+          "description": "Open-source OS family popular with developers and servers for its flexibility and security"
         }
       ]
     }
