@@ -31,11 +31,19 @@ jobs:
             This is a test notification from GitHub Actions (Email).
 
       - name: Send Teams test notification
-        uses: jdcargile/ms-teams-notification@v1.4
-        with:
-          github-token: ${{ github.token }}
-          ms-teams-webhook-uri: ${{ secrets.MS_TEAMS_WEBHOOK_URI }}
-          notification-summary: "Test notification from GitHub Actions (Teams)"
-          notification-color: 17a2b8
-          timezone: Europe/Paris
-          verbose-logging: true
+        run: | 
+          curl --ssl-no-revoke -X POST \
+          --location ${{ secrets.MS_TEAMS_HTTP_POST_URL }} \
+          --header 'Content-Type: application/json' \
+          --data '{ \
+            "type": "message", \
+            "attachments": [{ \
+              "contentType": "application/vnd.microsoft.card.adaptive", \
+              "content": { \
+                "$schema": "http://adaptivecards.io/schemas/adaptive-card.json", \
+                "type": "AdaptiveCard", \
+                "version": "1.3", \
+                "body": [ { \
+                  "type": "TextBlock", \
+                  "text": "This is a test notification from GitHub Actions (Teams).", \
+                  "wrap": true }]}}]}'
