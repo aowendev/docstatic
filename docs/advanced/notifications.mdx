@@ -41,8 +41,37 @@ The `slack-review.yml `and `slack-translate.yml` actions use the same triggers a
 
 ## Teams
 
-The `teams-review.yml `and `teams-translate.yml` actions work like the Slack versions, but use the `jdcargile/ms-teams-notification` action.
+The `teams-review.yml `and `teams-translate.yml` actions work like the Slack versions. Microsoft is deprecating the **Incoming Webhooks** app for Teams from December 2025, but currently there isn't a publicly available GitHub method for sending Adaptive Cards to workflows. The workaround is to use curl:
 
-To use them, add your MS Teams webhook URL as a secret named `MS_TEAMS_WEBHOOK_URL`.
+```yaml
+- name: Send Teams test notification
+  run: | 
+    curl --ssl-no-revoke -X POST \
+    --location ${{ secrets.MS_TEAMS_HTTP_POST_URL }} \
+    --header 'Content-Type: application/json' \
+    --data '{ \
+      "type": "message", \
+      "attachments": [{ \
+        "contentType": "application/vnd.microsoft.card.adaptive", \
+        "content": { \
+          "$schema": "http://adaptivecards.io/schemas/adaptive-card.json", \
+          "type": "AdaptiveCard", \
+          "version": "1.3", \
+          "body": [ { \
+            "type": "TextBlock", \
+            "text": "This is a test notification from GitHub Actions (Teams).", \
+            "wrap": true }]}}]}'
+```
 
-If the action cannot be resolved, you may need to use a different maintained MS Teams notification action or send a POST request to the webhook using a script step.
+1. In Teams, go to the channel you want to send messages, click the elipsis (**…**) and select **Workflows**.
+2. Click **Manage**.
+3. Click **New Flow**.
+4. Search templates for webhooks and click **Send webhook alerts to a channel**.
+5. (Optional) Edit the **Flow name**.
+6. Sign in and click **Next**.
+7. Select a **Team** and **Channel** from the lists and click **Create Flow**.
+8. Copy the `MS_TEAMS_HTTP_POST_URL` and store it as a secret in GitHub and click **Done**.
+
+<Admonition type="tip" title="Tip">
+  You can use the Test notifications GitHub action to test your connections.
+</Admonition>
