@@ -119,7 +119,7 @@ const PostCollection = {
       label: "Help",
       required: false,
       ui: {
-        component: (props) => <HelpButton url="/docs/blog" {...props} />,
+        component: (props) => <HelpButton url="https://docstatic.com/docs/blog" {...props} />,
       },
     },
     {
@@ -209,7 +209,7 @@ const SnippetsCollection = {
       label: "Help",
       required: false,
       ui: {
-        component: (props) => <HelpButton url="/docs/guides/markdown-features/snippets" {...props} />,
+        component: (props) => <HelpButton url="https://docstatic.com/docs/guides/markdown-features/snippets" {...props} />,
       },
     },
     {
@@ -262,7 +262,7 @@ const DocsCollection = {
       label: "Help",
       required: false,
       ui: {
-        component: (props) => <HelpButton url="/docs/guides/docs/create-doc" {...props} />,
+        component: (props) => <HelpButton url="https://docstatic.com/docs/guides/docs/create-doc" {...props} />,
       },
     },
     {
@@ -362,7 +362,7 @@ const WikiCollection = {
       label: "Help",
       required: false,
       ui: {
-        component: (props) => <HelpButton url="/docs/guides/wikis" {...props} />,
+        component: (props) => <HelpButton url="https://docstatic.com/docs/guides/wikis" {...props} />,
       },
     },
     {
@@ -428,7 +428,7 @@ const TranslationCollection = {
       label: "Help",
       required: false,
       ui: {
-        component: (props) => <HelpButton url="/docs/i18n/introduction" {...props} />,
+        component: (props) => <HelpButton url="https://docstatic.com/docs/i18n/introduction" {...props} />,
       },
     },
     {
@@ -667,7 +667,7 @@ const SidebarCollection = {
       label: "Help",
       required: false,
       ui: {
-        component: (props) => <HelpButton url="/docs/guides/markdown-features/toc" {...props} />,
+        component: (props) => <HelpButton url="https://docstatic.com/docs/guides/markdown-features/toc" {...props} />,
       },
     },
     {
@@ -854,7 +854,7 @@ const SettingsCollection = {
       label: "Help",
       required: false,
       ui: {
-        component: (props) => <HelpButton url="/docs/configuration" {...props} />,
+        component: (props) => <HelpButton url="https://docstatic.com/docs/configuration" {...props} />,
       },
     },
     {
@@ -1078,7 +1078,7 @@ const HomepageCollection = {
       label: "Help",
       required: false,
       ui: {
-        component: (props) => <HelpButton url="/docs/introduction" {...props} />,
+        component: (props) => <HelpButton url="https://docstatic.com/docs/introduction" {...props} />,
       },
     },
     {
@@ -1136,7 +1136,7 @@ const PagesCollection = {
       label: "Help",
       required: false,
       ui: {
-        component: (props) => <HelpButton url="/docs/guides/creating-pages" {...props} />,
+        component: (props) => <HelpButton url="https://docstatic.com/docs/guides/creating-pages" {...props} />,
       },
     },
     {
@@ -1182,7 +1182,7 @@ const ConditionsCollection = {
       label: "Help",
       required: false,
       ui: {
-        component: (props) => <HelpButton url="/docs/guides/markdown-features/conditional-text" {...props} />,
+        component: (props) => <HelpButton url="https://docstatic.com/docs/guides/markdown-features/conditional-text" {...props} />,
       },
     },
     {
@@ -1264,7 +1264,7 @@ const VariableSetCollection = {
       label: "Help",
       required: false,
       ui: {
-        component: (props) => <HelpButton url="/docs/guides/markdown-features/variables" {...props} />,
+        component: (props) => <HelpButton url="https://docstatic.com/docs/guides/markdown-features/variables" {...props} />,
       },
     },
     {
@@ -1355,7 +1355,7 @@ const TaxonomyCollection = {
       label: "Help",
       required: false,
       ui: {
-        component: (props) => <HelpButton url="/docs/guides/docs/taxonomy" {...props} />,
+        component: (props) => <HelpButton url="https://docstatic.com/docs/guides/docs/taxonomies" {...props} />,
       },
     },
     {
@@ -1520,7 +1520,7 @@ const GlossaryTermCollection = {
       label: "Help",
       required: false,
       ui: {
-        component: (props) => <HelpButton url="/docs/guides/markdown-features/glossary" {...props} />,
+        component: (props) => <HelpButton url="https://docstatic.com/docs/guides/markdown-features/glossary" {...props} />,
       },
     },
     {
