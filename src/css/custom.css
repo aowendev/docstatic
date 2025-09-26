@@ -33,6 +33,11 @@
   --ifm-navbar-height: 4rem;
 }
 
+a[id^="footnote-ref-"] {
+  color: var(--ifm-link-color) !important;
+  text-decoration: underline;
+}
+
 /* Force highest z-index for definition boxes - targeted approach */
 .glossary-definition-portal {
   z-index: 2147483647 !important;
