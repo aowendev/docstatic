@@ -45,7 +45,7 @@ const Footnote = ({ children }) => {
         setFootnoteNumber(1);
       }
     }
-  }, [children, context]);
+  }, [children, context?.addFootnote]);
 
   const handleClick = (e) => {
     e.preventDefault();

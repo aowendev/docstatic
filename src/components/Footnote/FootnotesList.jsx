@@ -22,7 +22,7 @@ const FootnotesList = () => {
     } else {
       setFootnotes([]);
     }
-  }, [context, context?.footnotes]);
+  }, [context?.footnotes]);
 
   // Clear footnotes when component unmounts (page navigation)
   useEffect(() => {
@@ -38,7 +38,7 @@ const FootnotesList = () => {
         window.globalFootnoteMap = new Map();
       }
     };
-  }, [context]);
+  }, [context?.clearFootnotes]);
 
   if (!footnotes || footnotes.length === 0) {
     return null;
@@ -52,39 +52,6 @@ const FootnotesList = () => {
     if (refElement) {
       refElement.scrollIntoView({ behavior: "smooth" });
     }
-  };
-
-  const listStyles = {
-    borderTop: "2px solid #e0e0e0",
-    marginTop: "4rem",
-    paddingTop: "2rem",
-    fontSize: "0.9em",
-    lineHeight: "1.6",
-  };
-
-  const titleStyles = {
-    fontSize: "1.25em",
-    fontWeight: "bold",
-    marginBottom: "1.5rem",
-    color: "#333",
-    fontFamily: "inherit",
-  };
-
-  const itemStyles = {
-    marginBottom: "0.8rem",
-    display: "flex",
-    alignItems: "flex-start",
-  };
-
-  const numberStyles = {
-    fontWeight: "bold",
-    marginRight: "0.5rem",
-    minWidth: "1.5em",
-    color: "#1976d2",
-  };
-
-  const contentStyles = {
-    flex: 1,
   };
 
   // Function to safely render footnote content
@@ -117,33 +84,25 @@ const FootnotesList = () => {
     return <span>{String(content)}</span>;
   };
 
-  const backLinkStyles = {
-    marginLeft: "0.5rem",
-    color: "#1976d2",
-    textDecoration: "none",
-    fontSize: "0.8em",
-  };
-
   return (
-    <div style={listStyles}>
-      <h3 style={titleStyles}>Footnotes</h3>
-      <ol style={{ listStyle: "none", padding: 0, margin: 0 }}>
+    <div className="footnotes-list">
+      <hr />
+      <h3 className="footnotes-title">Footnotes</h3>
+      <ol className="footnotes-ol">
         {footnotes.map((footnote) => (
-          <li key={footnote.number} style={itemStyles}>
-            <span id={`footnote-${footnote.number}`} style={numberStyles}>
-              {footnote.number}.
-            </span>
-            <div style={contentStyles}>
+          <li key={footnote.number} className="footnotes-item">
+            <span id={`footnote-${footnote.number}`} />
+            <span className="footnotes-content">
               {renderFootnoteContent(footnote.content)}
               <a
                 href={`#footnote-ref-${footnote.number}`}
                 onClick={handleBackClick(footnote.number)}
-                style={backLinkStyles}
+                className="footnotes-backlink"
                 title="Back to reference"
               >
                 ↩
               </a>
-            </div>
+            </span>
           </li>
         ))}
       </ol>
