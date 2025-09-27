@@ -1,13 +1,27 @@
 ---
-title: search
-description: ''
-tags: []
-conditions: []
-draft: true
+title: Search
+description: Search providers.
+tags:
+  - software
+  - software_search
+  - software_search_lunr
+  - software_search_algolia
+draft: false
 review: false
 translate: false
 approved: false
-published: false
+published: true
 unlisted: false
 ---
 
+By default, DocStatic is configured to use [Lunr](https://lunrjs.com/) search. Its main advantage is that it's a zero cost solution. Its main disadvantage is that the entire search index is downloaded to the user's browser; the larger your site gets, the slower it gets.
+
+A variety of alternatives are available as Docusaurus plugins, including:
+
+* Algolia (pre-installed)
+* [Markprompt](https://github.com/typesense/docusaurus-theme-search-typesense)
+* [Meilisearch](https://github.com/tauri-apps/meilisearch-docsearch)
+* [Orama](https://github.com/askorama/orama/tree/main/packages/plugin-docusaurus-v3)
+* [Typesense DocSearch](https://github.com/typesense/docusaurus-theme-search-typesense)
+
+For more information, refer to [Search](https://docusaurus.io/docs/search#using-algolia-docsearch) in the Docusaurus documentation.

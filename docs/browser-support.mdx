@@ -1,13 +1,35 @@
 ---
-title: browser-support
-description: ''
-tags: []
-conditions: []
-draft: true
+title: Browser support
+description: >-
+  How to keep a reasonable bundle size while ensuring sufficient browser
+  support.
+tags:
+  - software
+  - software_browsers
+  - software_browsers_safari
+  - software_browsers_firefox
+  - software_browsers_edge
+  - software_browsers_chrome
+draft: false
 review: false
 translate: false
 approved: false
-published: false
+published: true
 unlisted: false
 ---
 
+DocStatic enables you to define the list of supported browsers through a [browserslist configuration](https://github.com/browserslist/browserslist). Typically, websites should run well on any modern browser.
+
+For more information, refer to [Browser support ](https://docusaurus.io/docs/browser-support)in the Docusaurus documentation.
+
+## Editing in the CMS
+
+TinaCMS is fully supported with:
+
+* Chrome
+* Edge
+* Safari
+
+<Admonition type="danger" title="Warning">
+  TinaCMS has known issues with Firefox that can range from character styles being ignored to work not being saved. You should use a different browser.
+</Admonition>

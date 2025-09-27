@@ -1,13 +1,43 @@
 ---
-title: static-assets
-description: ''
-tags: []
-conditions: []
-draft: true
+title: Static assets
+description: >-
+  Static assets are the non-code files that are directly copied to the build
+  output. Learn about how they are handled and the best practices for using
+  static assets.
+tags:
+  - software
+  - software_static-site-generators
+draft: false
 review: false
 translate: false
 approved: false
-published: false
+published: true
 unlisted: false
 ---
 
+Static assets are the non-code files that are directly copied to the build output. They include images, stylesheets, favicons, fonts, and so on
+
+You should put these assets in the `static` folder. Every file you put into that folder is copied into the root of the generated build folder with the folder hierarchy preserved. For example, if you add a file named `sun.jpg` to the static folder, it will be copied to `build/sun.jpg`.
+
+This means that:
+
+* For site b`aseUrl: '/'`, the image `/static/img/sun.jpg` will be served at `/img/sun.jpg`.
+* For site `baseUrl: '/subpath/'`, the image `/static/img/sun.jpg` will be served at `/subpath/img/sun.jpg`.
+
+## Referencing your static asset
+
+### In the CMS
+
+1. Insert a Link.
+2. Enter the absolute path, for example /files/note.docx.
+3. Enter the text to display.
+
+### In Markdown
+
+```markdown
+You write a link like this: [Download this document](/files/note.docx)
+
+Docusaurus changes that to: <a href={require('static/files/note.docx')}>Download this document</a>
+```
+
+For more information, refer to [Static Assets](https://docusaurus.io/docs/static-assets) in the Docusaurus documentation.

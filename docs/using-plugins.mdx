@@ -1,13 +1,25 @@
 ---
-title: using-plugins
-description: ''
-tags: []
-conditions: []
-draft: true
+title: Using plugins
+description: Extending the functionality of the static site generator with plugins.
+tags:
+  - software
+  - software_plugins
+draft: false
 review: false
 translate: false
 approved: false
-published: false
+published: true
 unlisted: false
 ---
 
+The static site generator core doesn't provide any feature of its own. All features are delegated to individual plugins: the docs feature provided by the [docs plugin](https://docusaurus.io/docs/api/plugins/@docusaurus/plugin-content-docs); the blog feature provided by the [blog plugin](https://docusaurus.io/docs/api/plugins/@docusaurus/plugin-content-docs); or individual pages provided by the [pages plugin](https://docusaurus.io/docs/api/plugins/@docusaurus/plugin-content-docs).
+
+DocStatic is preconfigured to use the plugins required to support:
+
+* KaTeX math equations
+* Lunr search
+* Mermaid diagrams
+* OpenAPI docs
+* GraphQL docs
+
+For more information, refer to [Using Plugins](https://docusaurus.io/docs/using-plugins) in the Docusaurus documentation.

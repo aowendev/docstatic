@@ -237,6 +237,26 @@
           ]
         },
         {
+          "tag": "software_browsers",
+          "children": [
+            {
+              "tag": "software_browsers_chrome"
+            },
+            {
+              "tag": "software_browsers_edge"
+            },
+            {
+              "tag": "software_browsers_firefox"
+            },
+            {
+              "tag": "software_browsers_safari"
+            }
+          ]
+        },
+        {
+          "tag": "software_command-line-interface"
+        },
+        {
           "tag": "software_content-management-systems",
           "children": [
             {
@@ -289,6 +309,9 @@
           ]
         },
         {
+          "tag": "software_plugins"
+        },
+        {
           "tag": "software_search",
           "children": [
             {
@@ -296,6 +319,9 @@
             },
             {
               "tag": "software_search_lunr"
+            },
+            {
+              "tag": "software_search_search-engine-optimization"
             }
           ]
         },
