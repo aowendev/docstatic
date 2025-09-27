@@ -17,14 +17,15 @@ import {
   COLOR_SHADES,
   DARK_BACKGROUND_COLOR,
   DARK_PRIMARY_COLOR,
-  LIGHT_BACKGROUND_COLOR,
-  LIGHT_PRIMARY_COLOR,
   darkStorage,
   getAdjustedColors,
+  LIGHT_BACKGROUND_COLOR,
+  LIGHT_PRIMARY_COLOR,
   lightStorage,
   updateDOMColors,
 } from "../../utils/colorUtils";
 import styles from "./styles.module.css";
+
 function wcagContrast(foreground, background) {
   const contrast = Color(foreground).contrast(Color(background));
   return contrast > 7 ? "AAA 🏅" : contrast > 4.5 ? "AA 👍" : "Fail 🔴";

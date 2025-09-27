@@ -58,7 +58,6 @@ const config = {
   url: docusaurusData.url || "https://www.example.com/docstatic/",
   baseUrl: "",
   onBrokenLinks: "warn",
-  onBrokenMarkdownLinks: "warn",
   favicon: "img/docstatic.png",
   // Client modules that run on every page
   clientModules: [require.resolve("./src/clientModules/editThisPageTarget.js")],

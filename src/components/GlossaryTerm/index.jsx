@@ -7,7 +7,7 @@
 
 import { useLocation } from "@docusaurus/router";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
-import React, { useState, useRef, useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 // Import the JSON data directly at build time
 import glossaryData from "/reuse/glossaryTerms/index.json";

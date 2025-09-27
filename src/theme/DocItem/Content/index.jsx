@@ -5,10 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
-import DocItemContent from '@theme-original/DocItem/Content';
-import FootnotesList from '@site/src/components/Footnote/FootnotesList';
-import { FootnotesProvider } from '@site/src/components/Footnote/FootnotesProvider';
+import FootnotesList from "@site/src/components/Footnote/FootnotesList";
+import { FootnotesProvider } from "@site/src/components/Footnote/FootnotesProvider";
+import DocItemContent from "@theme-original/DocItem/Content";
+import React from "react";
 
 export default function DocItemContentWrapper(props) {
   return (

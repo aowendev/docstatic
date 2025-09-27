@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { createContext, useState, useCallback, useRef } from "react";
+import React, { createContext, useCallback, useRef, useState } from "react";
 import { generateFootnoteKey } from "./utils";
 
 // Create context with default values
