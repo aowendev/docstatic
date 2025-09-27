@@ -42,10 +42,11 @@ const FloatingChatBot = () => {
   };
   const helpOptions = ["Introduction", "Features"];
 
+  const computed = getComputedStyle(document.documentElement);
   const settings = {
     general: {
-      primaryColor: "#005eb8",
-      secondaryColor: "#0099ff",
+      primaryColor: computed.getPropertyValue("--ifm-color-primary-lightest"),
+      secondaryColor: computed.getPropertyValue("--ifm-color-primary-darkest"),
       showFooter: false,
     },
     tooltip: {
@@ -59,6 +60,80 @@ const FloatingChatBot = () => {
       disabled: true,
     },
   };
+
+  // Dynamically inherit styles from Docusaurus ifm CSS variables
+  const [styles, setStyles] = React.useState({});
+
+  React.useEffect(() => {
+    function updateStyles() {
+      const computed = getComputedStyle(document.documentElement);
+      setStyles({
+        bodyStyle: {
+          backgroundColor: computed.getPropertyValue("--ifm-background-color"),
+        },
+        chatHistoryButtonStyle: {
+          backgroundColor: computed.getPropertyValue("--ifm-background-color"),
+          color: computed.getPropertyValue("--ifm-font-color-base"),
+        },
+        chatHistoryButtonHoveredStyle: {
+          backgroundColor: computed.getPropertyValue(
+            "--ifm-color-primary-lightest"
+          ),
+          color: "white",
+        },
+        chatInputContainerStyle: {
+          backgroundColor: computed.getPropertyValue("--ifm-background-color"),
+        },
+        chatInputAreaStyle: {
+          backgroundColor: computed.getPropertyValue("--ifm-background-color"),
+          color: computed.getPropertyValue("--ifm-font-color-base"),
+        },
+        botBubbleStyle: {
+          backgroundColor: computed.getPropertyValue(
+            "--ifm-color-secondary-lightest"
+          ),
+          color: "black",
+        },
+        userBubbleStyle: {
+          backgroundColor: computed.getPropertyValue(
+            "--ifm-color-primary-lightest"
+          ),
+          color: "white",
+        },
+        botOptionStyle: {
+          backgroundColor: computed.getPropertyValue("--ifm-background-color"),
+          color: computed.getPropertyValue("--ifm-font-color-base"),
+        },
+        botOptionHoveredStyle: {
+          backgroundColor: computed.getPropertyValue(
+            "--ifm-color-primary-lightest"
+          ),
+          color: "white",
+        },
+        sendButtonStyle: {
+          backgroundColor: computed.getPropertyValue("--ifm-color-primary"),
+        },
+        sendButtonHoveredStyle: {
+          backgroundColor: computed.getPropertyValue(
+            "--ifm-color-primary-darkest"
+          ),
+        },
+      });
+    }
+    updateStyles();
+    const observer = new MutationObserver(updateStyles);
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["data-theme"],
+    });
+    window.addEventListener("storage", updateStyles);
+    window.addEventListener("docusaurus.themeChanged", updateStyles);
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("storage", updateStyles);
+      window.removeEventListener("docusaurus.themeChanged", updateStyles);
+    };
+  }, []);
 
   // example flow for testing
   const flow = {
@@ -82,7 +157,7 @@ const FloatingChatBot = () => {
         // https://github.com/React-ChatBotify-Plugins/llm-connector/blob/main/docs/providers/Gemini.md
         provider: new GeminiProvider({
           mode: "direct",
-          model: "gemini-1.5-flash",
+          model: "gemini-2.0-flash",
           responseFormat: "stream",
           apiKey: apiKey,
         }),
@@ -90,7 +165,18 @@ const FloatingChatBot = () => {
       },
     },
   };
-  return <ChatBot id={uniqueId} flow={flow} settings={settings} />;
+
+  // Use a key based on a hash of the styles object to force re-mount on theme change
+  const stylesKey = JSON.stringify(styles);
+  return (
+    <ChatBot
+      key={stylesKey}
+      id={uniqueId}
+      flow={flow}
+      styles={styles}
+      settings={settings}
+    />
+  );
 };
 
 export default FloatingChatBot;
