@@ -5,6 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+// for settings, see: https://react-chatbotify.com/docs/v2/introduction/quickstart
+
 import LlmConnector, { GeminiProvider } from "@rcb-plugins/llm-connector";
 import React, { useId } from "react";
 import ChatBot from "react-chatbotify";
