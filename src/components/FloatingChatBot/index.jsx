@@ -22,7 +22,12 @@ const FloatingChatBot = () => {
   const uniqueId = useId();
 
   // gemini api key, required since we're using 'direct' mode for testing
-  const apiKey = "";
+fetch('https://snazzy-crepe-91991c.netlify.app/.netlify/functions/gemini')
+  .then(res => res.json())
+  .then(data => {
+    const apiKey = data.apiKey;
+    // Use the apiKey as needed
+  });
 
   // initialize the plugin
   const plugins = [LlmConnector()];
