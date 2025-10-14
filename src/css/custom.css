@@ -756,3 +756,6 @@ h6,
     -webkit-overflow-scrolling: touch !important;
   }
 }
+
+/* Mermaid Zoom Functionality */
+@import '../theme/Mermaid/mermaid-zoom.css';
