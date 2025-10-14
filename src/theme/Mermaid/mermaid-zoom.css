@@ -1,0 +1,153 @@
+/**
+ * Copyright (c) Source Solutions, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+/* Mermaid Zoom Styles */
+.mermaid-zoom-wrapper {
+  position: relative;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: var(--ifm-global-radius);
+  overflow: hidden;
+  background: var(--ifm-background-color);
+  margin: 1rem 0;
+}
+
+.mermaid-zoom-controls {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 10;
+  display: flex;
+  gap: 4px;
+  background: var(--ifm-background-surface-color);
+  border-radius: 6px;
+  padding: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--ifm-color-emphasis-200);
+}
+
+.mermaid-zoom-toggle,
+.mermaid-zoom-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 4px;
+  background: var(--ifm-color-emphasis-100);
+  color: var(--ifm-color-content-secondary);
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+.mermaid-zoom-toggle:hover,
+.mermaid-zoom-btn:hover {
+  background: var(--ifm-color-primary-light);
+  color: white;
+  transform: scale(1.05);
+}
+
+.mermaid-zoom-toggle.active {
+  background: var(--ifm-color-primary);
+  color: white;
+}
+
+.mermaid-container {
+  position: relative;
+  overflow: hidden;
+  min-height: 200px;
+  transition: transform 0.1s ease-out;
+  transform-origin: 0 0;
+}
+
+.mermaid-container.zoom-enabled {
+  cursor: grab;
+  overflow: visible;
+}
+
+.mermaid-container.zoom-enabled.dragging {
+  cursor: grabbing;
+}
+
+/* Ensure Mermaid diagrams don't overflow */
+.mermaid-container svg {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Dark mode adjustments */
+[data-theme='dark'] .mermaid-zoom-controls {
+  background: var(--ifm-background-surface-color);
+  border-color: var(--ifm-color-emphasis-300);
+}
+
+[data-theme='dark'] .mermaid-zoom-toggle,
+[data-theme='dark'] .mermaid-zoom-btn {
+  background: var(--ifm-color-emphasis-200);
+  color: var(--ifm-color-content);
+  border-color: var(--ifm-color-emphasis-400);
+}
+
+[data-theme='dark'] .mermaid-zoom-toggle:hover,
+[data-theme='dark'] .mermaid-zoom-btn:hover {
+  background: var(--ifm-color-primary);
+  color: white;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .mermaid-zoom-controls {
+    top: 4px;
+    right: 4px;
+    padding: 2px;
+  }
+  
+  .mermaid-zoom-toggle,
+  .mermaid-zoom-btn {
+    width: 24px;
+    height: 24px;
+    font-size: 12px;
+  }
+}
+
+/* Smooth transitions for better UX */
+.mermaid-container * {
+  pointer-events: auto;
+}
+
+.mermaid-container.zoom-enabled * {
+  pointer-events: none;
+}
+
+.mermaid-container.zoom-enabled svg {
+  pointer-events: auto;
+}
+
+/* Ensure good contrast for zoom indicators */
+.mermaid-zoom-wrapper::before {
+  content: '';
+  position: absolute;
+  bottom: 8px;
+  left: 8px;
+  padding: 2px 6px;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  font-size: 11px;
+  border-radius: 3px;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.mermaid-container.zoom-enabled + .mermaid-zoom-wrapper::before {
+  content: 'Scroll to zoom, drag to pan';
+  opacity: 1;
+}
