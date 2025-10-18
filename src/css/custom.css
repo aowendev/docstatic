@@ -84,7 +84,9 @@ html {
 }
 
 body {
-  font-feature-settings: "kern" 1, "liga" 1;
+  font-feature-settings:
+    "kern" 1,
+    "liga" 1;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -758,4 +760,4 @@ h6,
 }
 
 /* Mermaid Zoom Functionality */
-@import '../theme/Mermaid/mermaid-zoom.css';
+@import "../theme/Mermaid/mermaid-zoom.css";

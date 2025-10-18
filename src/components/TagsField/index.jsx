@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useState, useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import { wrapFieldsWithMeta } from "tinacms";
 
 const TagsField = wrapFieldsWithMeta(({ input, field, tinaForm }) => {

@@ -6,6 +6,7 @@
  */
 
 import { themes } from "prism-react-renderer";
+
 const baseTheme = themes.vsDark;
 export default {
   plain: { color: "#D4D4D4", backgroundColor: "#212121" },

@@ -1,33 +1,25 @@
 import React from "react";
-import { TextField, defineConfig } from "tinacms";
-import { ReferenceField } from "tinacms";
+import { defineConfig, ReferenceField, TextField } from "tinacms";
 import title from "title";
+// get conditions from the conditions JSON file
+import conditionsData from "../reuse/conditions/index.json";
+// get doc tags from the taxonomy JSON file
+import data from "../reuse/taxonomy/index.json";
+// collapsible field component
+import CollapsibleField from "../src/components/CollapsibleField";
+// conditions tree UI component
+import ConditionsTreeField from "../src/components/ConditionsField";
 import { FeaturesBlockTemplate } from "../src/components/Features/template";
+// Context Help
+import HelpButton from "../src/components/HelpButton";
 import { HeroBlockTemplate } from "../src/components/Hero/template";
+// workflows component
+import StatusField from "../src/components/StatusField";
+// tags UI component
+import TagsField from "../src/components/TagsField";
 import { YouTubeEmbedBlockTemplate } from "../src/components/YouTubeEmbed/template";
 import { MDXTemplates } from "../src/theme/template";
 import { docusaurusDate, titleFromSlug } from "../util";
-
-// tags UI component
-import TagsField from "../src/components/TagsField";
-
-// Context Help
-import HelpButton from "../src/components/HelpButton";
-
-// conditions tree UI component
-import ConditionsTreeField from "../src/components/ConditionsField";
-
-// workflows component
-import StatusField from "../src/components/StatusField";
-
-// collapsible field component
-import CollapsibleField from "../src/components/CollapsibleField";
-
-// get doc tags from the taxonomy JSON file
-import data from "../reuse/taxonomy/index.json";
-
-// get conditions from the conditions JSON file
-import conditionsData from "../reuse/conditions/index.json";
 
 // Make conditions data available globally for tree component
 if (typeof window !== "undefined") {
@@ -122,7 +114,9 @@ const PostCollection = {
       label: "Help",
       required: false,
       ui: {
-        component: (props) => <HelpButton url="https://docstatic.com/docs/blog" {...props} />,
+        component: (props) => (
+          <HelpButton url="https://docstatic.com/docs/blog" {...props} />
+        ),
       },
     },
     {
@@ -212,7 +206,12 @@ const SnippetsCollection = {
       label: "Help",
       required: false,
       ui: {
-        component: (props) => <HelpButton url="https://docstatic.com/docs/guides/markdown-features/snippets" {...props} />,
+        component: (props) => (
+          <HelpButton
+            url="https://docstatic.com/docs/guides/markdown-features/snippets"
+            {...props}
+          />
+        ),
       },
     },
     {
@@ -265,7 +264,12 @@ const DocsCollection = {
       label: "Help",
       required: false,
       ui: {
-        component: (props) => <HelpButton url="https://docstatic.com/docs/guides/docs/create-doc" {...props} />,
+        component: (props) => (
+          <HelpButton
+            url="https://docstatic.com/docs/guides/docs/create-doc"
+            {...props}
+          />
+        ),
       },
     },
     {
@@ -281,7 +285,7 @@ const DocsCollection = {
       label: "Slug",
       ui: {
         component: (props) => (
-          <CollapsibleField 
+          <CollapsibleField
             {...props}
             FieldComponent={TextField}
             defaultCollapsed={true}
@@ -295,7 +299,7 @@ const DocsCollection = {
       label: "Description",
       ui: {
         component: (props) => (
-          <CollapsibleField 
+          <CollapsibleField
             {...props}
             FieldComponent={TextField}
             defaultCollapsed={true}
@@ -310,7 +314,7 @@ const DocsCollection = {
       list: true,
       ui: {
         component: (props) => (
-          <CollapsibleField 
+          <CollapsibleField
             {...props}
             FieldComponent={TagsField}
             defaultCollapsed={true}
@@ -326,7 +330,7 @@ const DocsCollection = {
       list: true,
       ui: {
         component: (props) => (
-          <CollapsibleField 
+          <CollapsibleField
             {...props}
             FieldComponent={ConditionsTreeField}
             defaultCollapsed={true}
@@ -341,7 +345,7 @@ const DocsCollection = {
       label: "Workflow",
       ui: {
         component: (props) => (
-          <CollapsibleField 
+          <CollapsibleField
             {...props}
             FieldComponent={StatusField}
             defaultCollapsed={true}
@@ -401,7 +405,12 @@ const WikiCollection = {
       label: "Help",
       required: false,
       ui: {
-        component: (props) => <HelpButton url="https://docstatic.com/docs/guides/wikis" {...props} />,
+        component: (props) => (
+          <HelpButton
+            url="https://docstatic.com/docs/guides/wikis"
+            {...props}
+          />
+        ),
       },
     },
     {
@@ -444,7 +453,6 @@ const APIsCollection = {
   ],
 };
 
-
 const TranslationCollection = {
   name: "i18n",
   label: "Translations",
@@ -467,7 +475,12 @@ const TranslationCollection = {
       label: "Help",
       required: false,
       ui: {
-        component: (props) => <HelpButton url="https://docstatic.com/docs/i18n/introduction" {...props} />,
+        component: (props) => (
+          <HelpButton
+            url="https://docstatic.com/docs/i18n/introduction"
+            {...props}
+          />
+        ),
       },
     },
     {
@@ -706,7 +719,12 @@ const SidebarCollection = {
       label: "Help",
       required: false,
       ui: {
-        component: (props) => <HelpButton url="https://docstatic.com/docs/guides/markdown-features/toc" {...props} />,
+        component: (props) => (
+          <HelpButton
+            url="https://docstatic.com/docs/guides/markdown-features/toc"
+            {...props}
+          />
+        ),
       },
     },
     {
@@ -893,7 +911,12 @@ const SettingsCollection = {
       label: "Help",
       required: false,
       ui: {
-        component: (props) => <HelpButton url="https://docstatic.com/docs/configuration" {...props} />,
+        component: (props) => (
+          <HelpButton
+            url="https://docstatic.com/docs/configuration"
+            {...props}
+          />
+        ),
       },
     },
     {
@@ -1117,7 +1140,12 @@ const HomepageCollection = {
       label: "Help",
       required: false,
       ui: {
-        component: (props) => <HelpButton url="https://docstatic.com/docs/introduction" {...props} />,
+        component: (props) => (
+          <HelpButton
+            url="https://docstatic.com/docs/introduction"
+            {...props}
+          />
+        ),
       },
     },
     {
@@ -1175,7 +1203,12 @@ const PagesCollection = {
       label: "Help",
       required: false,
       ui: {
-        component: (props) => <HelpButton url="https://docstatic.com/docs/guides/creating-pages" {...props} />,
+        component: (props) => (
+          <HelpButton
+            url="https://docstatic.com/docs/guides/creating-pages"
+            {...props}
+          />
+        ),
       },
     },
     {
@@ -1221,7 +1254,12 @@ const ConditionsCollection = {
       label: "Help",
       required: false,
       ui: {
-        component: (props) => <HelpButton url="https://docstatic.com/docs/guides/markdown-features/conditional-text" {...props} />,
+        component: (props) => (
+          <HelpButton
+            url="https://docstatic.com/docs/guides/markdown-features/conditional-text"
+            {...props}
+          />
+        ),
       },
     },
     {
@@ -1303,7 +1341,12 @@ const VariableSetCollection = {
       label: "Help",
       required: false,
       ui: {
-        component: (props) => <HelpButton url="https://docstatic.com/docs/guides/markdown-features/variables" {...props} />,
+        component: (props) => (
+          <HelpButton
+            url="https://docstatic.com/docs/guides/markdown-features/variables"
+            {...props}
+          />
+        ),
       },
     },
     {
@@ -1394,7 +1437,12 @@ const TaxonomyCollection = {
       label: "Help",
       required: false,
       ui: {
-        component: (props) => <HelpButton url="https://docstatic.com/docs/guides/docs/taxonomies" {...props} />,
+        component: (props) => (
+          <HelpButton
+            url="https://docstatic.com/docs/guides/docs/taxonomies"
+            {...props}
+          />
+        ),
       },
     },
     {
@@ -1559,7 +1607,12 @@ const GlossaryTermCollection = {
       label: "Help",
       required: false,
       ui: {
-        component: (props) => <HelpButton url="https://docstatic.com/docs/guides/markdown-features/glossary" {...props} />,
+        component: (props) => (
+          <HelpButton
+            url="https://docstatic.com/docs/guides/markdown-features/glossary"
+            {...props}
+          />
+        ),
       },
     },
     {

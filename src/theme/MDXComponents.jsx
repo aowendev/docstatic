@@ -5,14 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import CodeBlock from "@theme-original/CodeBlock";
-import DocCardList from "@theme-original/DocCardList";
-import MDXComponents from "@theme-original/MDXComponents";
-import TabItem from "@theme-original/TabItem";
-import Tabs from "@theme-original/Tabs";
-import Details from "@theme/Details";
-import React from "react";
-
 import CodeSnippet from "@site/src/components/CodeSnippet";
 import ConditionalText from "@site/src/components/ConditionalText";
 import Figure from "@site/src/components/Figure";
@@ -21,6 +13,13 @@ import GlossaryTerm from "@site/src/components/GlossaryTerm";
 import Passthrough from "@site/src/components/Passthrough";
 import Snippet from "@site/src/components/Snippet";
 import VariableSet from "@site/src/components/VariableSet";
+import Details from "@theme/Details";
+import CodeBlock from "@theme-original/CodeBlock";
+import DocCardList from "@theme-original/DocCardList";
+import MDXComponents from "@theme-original/MDXComponents";
+import TabItem from "@theme-original/TabItem";
+import Tabs from "@theme-original/Tabs";
+import React from "react";
 
 export default {
   ...MDXComponents,

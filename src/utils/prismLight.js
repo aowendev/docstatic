@@ -6,6 +6,7 @@
  */
 
 import { themes } from "prism-react-renderer";
+
 const baseTheme = themes.github;
 export default {
   ...baseTheme,

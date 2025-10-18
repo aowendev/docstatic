@@ -83,20 +83,20 @@
 }
 
 /* Dark mode adjustments */
-[data-theme='dark'] .mermaid-zoom-controls {
+[data-theme="dark"] .mermaid-zoom-controls {
   background: var(--ifm-background-surface-color);
   border-color: var(--ifm-color-emphasis-300);
 }
 
-[data-theme='dark'] .mermaid-zoom-toggle,
-[data-theme='dark'] .mermaid-zoom-btn {
+[data-theme="dark"] .mermaid-zoom-toggle,
+[data-theme="dark"] .mermaid-zoom-btn {
   background: var(--ifm-color-emphasis-200);
   color: var(--ifm-color-content);
   border-color: var(--ifm-color-emphasis-400);
 }
 
-[data-theme='dark'] .mermaid-zoom-toggle:hover,
-[data-theme='dark'] .mermaid-zoom-btn:hover {
+[data-theme="dark"] .mermaid-zoom-toggle:hover,
+[data-theme="dark"] .mermaid-zoom-btn:hover {
   background: var(--ifm-color-primary);
   color: white;
 }
@@ -108,7 +108,7 @@
     right: 4px;
     padding: 2px;
   }
-  
+
   .mermaid-zoom-toggle,
   .mermaid-zoom-btn {
     width: 24px;
@@ -132,7 +132,7 @@
 
 /* Ensure good contrast for zoom indicators */
 .mermaid-zoom-wrapper::before {
-  content: '';
+  content: "";
   position: absolute;
   bottom: 8px;
   left: 8px;
@@ -148,6 +148,6 @@
 }
 
 .mermaid-container.zoom-enabled + .mermaid-zoom-wrapper::before {
-  content: 'Scroll to zoom, drag to pan';
+  content: "Scroll to zoom, drag to pan";
   opacity: 1;
 }
