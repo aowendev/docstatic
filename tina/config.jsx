@@ -293,6 +293,15 @@ const DocsCollection = {
       type: "string",
       name: "description",
       label: "Description",
+      ui: {
+        component: (props) => (
+          <CollapsibleField 
+            {...props}
+            FieldComponent={TextField}
+            defaultCollapsed={true}
+          />
+        ),
+      },
     },
     {
       label: "Tags",

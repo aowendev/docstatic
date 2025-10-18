@@ -63,48 +63,32 @@ const CollapsibleField = wrapFieldsWithMeta(({
         </svg>
       </button>
       
-      <div className="relative" style={{ minHeight: isCollapsed && !hasValue ? '0' : '2rem' }}>
+      <div className={`relative ${isCollapsed ? 'h-0 overflow-hidden' : ''}`} style={{ 
+        minHeight: isCollapsed ? '0' : '2rem',
+        margin: isCollapsed ? '0' : undefined,
+        padding: isCollapsed ? '0' : undefined
+      }}>
 
-      {/* Description if provided */}
-      {field.description && !isCollapsed && (
-        <p className="text-sm text-gray-500 mb-2">{field.description}</p>
-      )}
-
-      {/* Value preview when collapsed */}
-      {isCollapsed && hasValue && (
-        <div className="mb-2 p-2 bg-gray-50 rounded text-sm text-gray-600 border-l-3 border-blue-400">
-          <div className="font-medium text-xs uppercase tracking-wide text-gray-400 mb-1">
-            Current Value:
+        {/* Collapsible content */}
+        {!isCollapsed && (
+          <div className="transition-all duration-300 ease-in-out" style={{ marginTop: '-1.56rem' }}>
+            <FieldComponent
+              input={input}
+              field={{
+                ...field,
+                name: field.name
+              }}
+              tinaForm={tinaForm}
+              meta={meta}
+              {...props}
+            />
           </div>
-          <div className="truncate">
-            {Array.isArray(input.value) 
-              ? `${input.value.length} item${input.value.length === 1 ? '' : 's'} selected`
-              : String(input.value || 'Not set').substring(0, 100)
-            }
-          </div>
-        </div>
-      )}
+        )}
 
-      {/* Collapsible content */}
-      {!isCollapsed && (
-        <div className="transition-all duration-300 ease-in-out" style={{ marginTop: '-1.56rem', backgroundColor: 'rgba(255, 255, 0, 0.3)'}}>
-          <FieldComponent
-            input={input}
-            field={{
-              ...field,
-              name: field.name
-            }}
-            tinaForm={tinaForm}
-            meta={meta}
-            {...props}
-          />
-        </div>
-      )}
-
-      {/* Error display */}
-      {meta?.touched && meta?.error && (
-        <div className="mt-1 text-sm text-red-600">{meta.error}</div>
-      )}
+        {/* Error display */}
+        {meta?.touched && meta?.error && (
+          <div className="mt-1 text-sm text-red-600">{meta.error}</div>
+        )}
       </div>
     </>
   );
