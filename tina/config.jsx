@@ -20,6 +20,9 @@ import ConditionsTreeField from "../src/components/ConditionsField";
 // workflows component
 import StatusField from "../src/components/StatusField";
 
+// collapsible field component
+import CollapsibleField from "../src/components/CollapsibleField";
+
 // get doc tags from the taxonomy JSON file
 import data from "../reuse/taxonomy/index.json";
 
@@ -276,6 +279,15 @@ const DocsCollection = {
       type: "string",
       name: "slug",
       label: "Slug",
+      ui: {
+        component: (props) => (
+          <CollapsibleField 
+            {...props}
+            FieldComponent={TextField}
+            defaultCollapsed={true}
+          />
+        ),
+      },
     },
     {
       type: "string",
