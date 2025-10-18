@@ -19,8 +19,11 @@ const StatusField = wrapFieldsWithMeta(({ input, field, tinaForm }) => {
   ];
 
   // Get current status values from the form
+  // Priority order: published > unlisted > approved > translate > review > draft
   const getCurrentStatus = () => {
-    for (const statusField of statusFields) {
+    const priorityOrder = ["published", "unlisted", "approved", "translate", "review", "draft"];
+    
+    for (const statusField of priorityOrder) {
       if (tinaForm.values[statusField] === true) {
         return statusField;
       }
@@ -37,6 +40,12 @@ const StatusField = wrapFieldsWithMeta(({ input, field, tinaForm }) => {
 
       // Use the form's change method to update each field
       tinaForm.change(field, fieldValue);
+    }
+
+    // Special behavior: draft should always be true unless published or unlisted is true
+    // This is invisible to the user but ensures proper workflow state
+    if (selectedStatus !== "published" && selectedStatus !== "unlisted") {
+      tinaForm.change("draft", true);
     }
   };
 
