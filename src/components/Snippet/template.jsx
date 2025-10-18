@@ -8,6 +8,7 @@
 export const SnippetBlockTemplate = {
   name: "Snippet",
   label: "Snippet",
+  inline: true,
   ui: {
     itemProps: (item) => {
       return { label: item?.title };

@@ -7,6 +7,7 @@
 
 export const FootnoteBlockTemplate = {
   name: "Footnote",
+  inline: true,
   fields: [
     {
       name: "summary",

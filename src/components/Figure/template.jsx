@@ -8,6 +8,7 @@
 export const FigureBlockTemplate = {
   name: "Figure",
   label: "Figure",
+  inline: true,
   ui: {
     itemProps: (item) => {
       return { label: item?.title };

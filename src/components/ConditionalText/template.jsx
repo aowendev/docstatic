@@ -8,6 +8,7 @@
 export const ConditionalTextBlockTemplate = {
   name: "ConditionalText",
   label: "Conditional Text",
+  inline: true,
   ui: {
     previewSrc: "/blocks/ConditionalText.png",
     defaultItem: {

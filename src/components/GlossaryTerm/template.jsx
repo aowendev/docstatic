@@ -8,6 +8,7 @@
 export const GlossaryTermBlockTemplate = {
   name: "GlossaryTerm",
   label: "Glossary Term",
+  inline: true,
   ui: {
     itemProps: (item) => {
       return { label: item?.title };

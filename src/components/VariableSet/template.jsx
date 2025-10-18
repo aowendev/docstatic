@@ -8,6 +8,7 @@
 export const VariableSetBlockTemplate = {
   name: "VariableSet",
   label: "Variable",
+  inline: true,
   ui: {
     itemProps: (item) => {
       return { label: item?.title };
