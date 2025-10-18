@@ -309,7 +309,13 @@ const DocsCollection = {
       type: "string",
       list: true,
       ui: {
-        component: TagsField,
+        component: (props) => (
+          <CollapsibleField 
+            {...props}
+            FieldComponent={TagsField}
+            defaultCollapsed={true}
+          />
+        ),
       },
       options: allTags,
     },
@@ -319,7 +325,13 @@ const DocsCollection = {
       type: "string",
       list: true,
       ui: {
-        component: ConditionsTreeField,
+        component: (props) => (
+          <CollapsibleField 
+            {...props}
+            FieldComponent={ConditionsTreeField}
+            defaultCollapsed={true}
+          />
+        ),
       },
       options: allConditions,
     },
@@ -328,7 +340,13 @@ const DocsCollection = {
       name: "draft",
       label: "Workflow",
       ui: {
-        component: StatusField,
+        component: (props) => (
+          <CollapsibleField 
+            {...props}
+            FieldComponent={StatusField}
+            defaultCollapsed={true}
+          />
+        ),
       },
     },
     {
