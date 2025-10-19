@@ -59,6 +59,270 @@ function collectConditions(categories) {
 collectTags(data.taxonomy);
 collectConditions(conditionsData.categories);
 
+// Common field definitions to reduce redundancy
+const commonFields = {
+  // Last Modified field - used in multiple collections
+  lastmod: {
+    type: "string",
+    name: "lastmod",
+    label: "Last Modified",
+    ui: {
+      component: "text",
+      disabled: true,
+      format: (val) => {
+        if (!val) return '';
+        try {
+          return new Date(val).toLocaleString('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+            timeZoneName: 'short'
+          });
+        } catch {
+          return val;
+        }
+      },
+    },
+  },
+
+  // Title field - used in most collections
+  title: {
+    type: "string",
+    name: "title",
+    label: "Title",
+    isTitle: true,
+    required: true,
+  },
+
+  // Rich text body field - used in content collections
+  body: {
+    type: "rich-text",
+    name: "body",
+    label: "Body",
+    isBody: true,
+    templates: [...MDXTemplates],
+  },
+
+  // Description field - used in multiple collections
+  description: {
+    type: "string",
+    name: "description",
+    label: "Description",
+  },
+
+  // Collapsible description field - used in docs collections
+  collapsibleDescription: {
+    type: "string",
+    name: "description",
+    label: "Description",
+    ui: {
+      component: (props) => (
+        <CollapsibleField
+          {...props}
+          FieldComponent={TextField}
+          defaultCollapsed={true}
+        />
+      ),
+    },
+  },
+
+  // Slug field - used in docs collections
+  slug: {
+    type: "string",
+    name: "slug",
+    label: "Slug",
+    ui: {
+      component: (props) => (
+        <CollapsibleField
+          {...props}
+          FieldComponent={TextField}
+          defaultCollapsed={true}
+        />
+      ),
+    },
+  },
+
+  // Tags field - used in multiple collections
+  tags: {
+    label: "Tags",
+    name: "tags",
+    type: "string",
+    list: true,
+    ui: {
+      component: TagsField,
+    },
+    options: allTags,
+  },
+
+  // Collapsible tags field - used in docs collections
+  collapsibleTags: {
+    label: "Tags",
+    name: "tags",
+    type: "string",
+    list: true,
+    ui: {
+      component: (props) => (
+        <CollapsibleField
+          {...props}
+          FieldComponent={TagsField}
+          defaultCollapsed={true}
+        />
+      ),
+    },
+    options: allTags,
+  },
+
+  // Conditions field - used in docs collections
+  conditions: {
+    label: "Conditions",
+    name: "conditions",
+    type: "string",
+    list: true,
+    ui: {
+      component: (props) => (
+        <CollapsibleField
+          {...props}
+          FieldComponent={ConditionsTreeField}
+          defaultCollapsed={true}
+        />
+      ),
+    },
+    options: allConditions,
+  },
+
+  // Tag field for taxonomy - used in taxonomy collections
+  taxonomyTag: {
+    type: "string",
+    name: "tag",
+    label: "Tag",
+    isTitle: true,
+    required: true,
+  },
+
+  // Key field for glossary - used in glossary collections  
+  glossaryKey: {
+    type: "string",
+    name: "key",
+    label: "Key",
+    isTitle: true,
+    required: true,
+  },
+
+  // Category name field - used in conditions collections
+  categoryName: {
+    type: "string",
+    label: "Category Name",
+    name: "name",
+    isTitle: true,
+    required: true,
+  },
+
+  // Variable set name field - used in variable sets collections
+  variableSetName: {
+    type: "string",
+    label: "Variable Set Name",
+    name: "name",
+    isTitle: true,
+    required: true,
+  },
+
+  // Workflow fields - used in docs and translation collections
+  workflow: {
+    draft: {
+      type: "boolean",
+      name: "draft",
+      label: "Workflow",
+      ui: {
+        component: (props) => (
+          <CollapsibleField
+            {...props}
+            FieldComponent={StatusField}
+            defaultCollapsed={true}
+          />
+        ),
+      },
+    },
+    review: {
+      type: "boolean",
+      name: "review",
+      label: "In Review",
+      ui: { component: "hidden" },
+    },
+    translate: {
+      type: "boolean",
+      name: "translate",
+      label: "In Translation",
+      ui: { component: "hidden" },
+    },
+    approved: {
+      type: "boolean",
+      name: "approved",
+      label: "Translation Approved",
+      ui: { component: "hidden" },
+    },
+    published: {
+      type: "boolean",
+      name: "published",
+      label: "Published",
+      ui: { component: "hidden" },
+    },
+    unlisted: {
+      type: "boolean",
+      name: "unlisted",
+      label: "Unlisted",
+      ui: { component: "hidden" },
+    },
+  }
+};
+
+// Common help button generator
+const createHelpField = (url) => ({
+  type: "boolean",
+  name: "help",
+  label: "Help",
+  required: false,
+  ui: {
+    component: (props) => (
+      <HelpButton url={url} {...props} />
+    ),
+  },
+});
+
+// Common UI configurations for collections with lastmod
+const lastmodUIConfig = {
+  defaultItem: {
+    lastmod: new Date().toISOString(),
+  },
+  beforeSubmit: async ({ values }) => {
+    return {
+      ...values,
+      lastmod: new Date().toISOString(),
+    };
+  },
+};
+
+// Workflow default items and UI config
+const workflowUIConfig = {
+  defaultItem: {
+    description: "",
+    draft: true,
+    review: false,
+    translate: false,
+    approved: false,
+    published: false,
+    unlisted: false,
+    lastmod: new Date().toISOString(),
+  },
+  beforeSubmit: async ({ values }) => {
+    return {
+      ...values,
+      lastmod: new Date().toISOString(),
+    };
+  },
+};
+
 // Your hosting provider likely exposes this as an environment variable
 const branch =
   //  process.env.VERCEL_GIT_COMMIT_REF ||
@@ -105,69 +369,15 @@ const PostCollection = {
   ui: {
     defaultItem: {
       date: docusaurusDate(new Date()),
-      lastmod: new Date().toISOString(),
+      ...lastmodUIConfig.defaultItem,
     },
-    beforeSubmit: async ({
-      form,
-      cms,
-      values,
-    }) => {
-      return {
-        ...values,
-        lastmod: new Date().toISOString(),
-      };
-    },
+    beforeSubmit: lastmodUIConfig.beforeSubmit,
   },
   fields: [
-    {
-      type: "boolean",
-      name: "help",
-      label: "Help",
-      required: false,
-      ui: {
-        component: (props) => (
-          <HelpButton url="https://docstatic.com/docs/blog" {...props} />
-        ),
-      },
-    },
-    {
-      type: "string",
-      name: "title",
-      label: "Title",
-      isTitle: true,
-      required: true,
-    },
-    {
-      type: "string",
-      name: "lastmod",
-      label: "Last Modified",
-      ui: {
-        component: "text",
-        disabled: true,
-        format: (val) => {
-          if (!val) return '';
-          try {
-            return new Date(val).toLocaleString('en-US', {
-              year: 'numeric',
-              month: 'long',
-              day: 'numeric',
-              hour: '2-digit',
-              minute: '2-digit',
-              timeZoneName: 'short'
-            });
-          } catch {
-            return val;
-          }
-        },
-      },
-    },
-    {
-      type: "rich-text",
-      name: "body",
-      label: "Body",
-      isBody: true,
-      templates: [...MDXTemplates],
-    },
+    createHelpField("https://docstatic.com/docs/blog"),
+    commonFields.title,
+    commonFields.lastmod,
+    commonFields.body,
     {
       name: "authors",
       label: "Authors",
@@ -216,16 +426,7 @@ const PostCollection = {
         },
       },
     },
-    {
-      label: "Tags",
-      name: "tags",
-      type: "string",
-      list: true,
-      ui: {
-        component: TagsField,
-      },
-      options: allTags,
-    },
+    commonFields.tags,
   ],
 };
 
@@ -234,79 +435,13 @@ const SnippetsCollection = {
   label: "Snippets",
   path: "reuse/snippets",
   format: "mdx",
-  ui: {
-    defaultItem: {
-      lastmod: new Date().toISOString(),
-    },
-    beforeSubmit: async ({
-      form,
-      cms,
-      values,
-    }) => {
-      return {
-        ...values,
-        lastmod: new Date().toISOString(),
-      };
-    },
-  },
+  ui: lastmodUIConfig,
   fields: [
-    {
-      type: "boolean",
-      name: "help",
-      label: "Help",
-      required: false,
-      ui: {
-        component: (props) => (
-          <HelpButton
-            url="https://docstatic.com/docs/guides/markdown-features/snippets"
-            {...props}
-          />
-        ),
-      },
-    },
-    {
-      type: "string",
-      name: "title",
-      label: "Title",
-      isTitle: true,
-      required: true,
-    },
-    {
-      type: "string",
-      name: "lastmod",
-      label: "Last Modified",
-      ui: {
-        component: "text",
-        disabled: true,
-        format: (val) => {
-          if (!val) return '';
-          try {
-            return new Date(val).toLocaleString('en-US', {
-              year: 'numeric',
-              month: 'long',
-              day: 'numeric',
-              hour: '2-digit',
-              minute: '2-digit',
-              timeZoneName: 'short'
-            });
-          } catch {
-            return val;
-          }
-        },
-      },
-    },
-    {
-      type: "string",
-      name: "description",
-      label: "Description",
-    },
-    {
-      type: "rich-text",
-      name: "body",
-      label: "Body",
-      isBody: true,
-      templates: [...MDXTemplates],
-    },
+    createHelpField("https://docstatic.com/docs/guides/markdown-features/snippets"),
+    commonFields.title,
+    commonFields.lastmod,
+    commonFields.description,
+    commonFields.body,
   ],
 };
 
@@ -318,185 +453,22 @@ const DocsCollection = {
     exclude: "{api/**/**,wiki/**/**}",
   },
   format: "mdx",
-  ui: {
-    defaultItem: {
-      description: "",
-      draft: true,
-      review: false,
-      translate: false,
-      approved: false,
-      published: false,
-      unlisted: false,
-      lastmod: new Date().toISOString(),
-    },
-    beforeSubmit: async ({
-      form,
-      cms,
-      values,
-    }) => {
-      return {
-        ...values,
-        lastmod: new Date().toISOString(),
-      };
-    },
-  },
+  ui: workflowUIConfig,
   fields: [
-    {
-      type: "boolean",
-      name: "help",
-      label: "Help",
-      required: false,
-      ui: {
-        component: (props) => (
-          <HelpButton
-            url="https://docstatic.com/docs/guides/docs/create-doc"
-            {...props}
-          />
-        ),
-      },
-    },
-    {
-      type: "string",
-      name: "title",
-      label: "Title",
-      isTitle: true,
-      required: true,
-    },
-    {
-      type: "string",
-      name: "lastmod",
-      label: "Last Modified",
-      ui: {
-        component: "text",
-        disabled: true,
-        format: (val) => {
-          if (!val) return '';
-          try {
-            return new Date(val).toLocaleString('en-US', {
-              year: 'numeric',
-              month: 'long',
-              day: 'numeric',
-              hour: '2-digit',
-              minute: '2-digit',
-              timeZoneName: 'short'
-            });
-          } catch {
-            return val;
-          }
-        },
-      },
-    },
-    {
-      type: "rich-text",
-      name: "body",
-      label: "Body",
-      isBody: true,
-      templates: [...MDXTemplates],
-    },
-    {
-      label: "Conditions",
-      name: "conditions",
-      type: "string",
-      list: true,
-      ui: {
-        component: (props) => (
-          <CollapsibleField
-            {...props}
-            FieldComponent={ConditionsTreeField}
-            defaultCollapsed={true}
-          />
-        ),
-      },
-      options: allConditions,
-    },
-    {
-      type: "string",
-      name: "description",
-      label: "Description",
-      ui: {
-        component: (props) => (
-          <CollapsibleField
-            {...props}
-            FieldComponent={TextField}
-            defaultCollapsed={true}
-          />
-        ),
-      },
-    },
-    {
-      type: "string",
-      name: "slug",
-      label: "Slug",
-      ui: {
-        component: (props) => (
-          <CollapsibleField
-            {...props}
-            FieldComponent={TextField}
-            defaultCollapsed={true}
-          />
-        ),
-      },
-    },
-    {
-      label: "Tags",
-      name: "tags",
-      type: "string",
-      list: true,
-      ui: {
-        component: (props) => (
-          <CollapsibleField
-            {...props}
-            FieldComponent={TagsField}
-            defaultCollapsed={true}
-          />
-        ),
-      },
-      options: allTags,
-    },
-    {
-      type: "boolean",
-      name: "draft",
-      label: "Workflow",
-      ui: {
-        component: (props) => (
-          <CollapsibleField
-            {...props}
-            FieldComponent={StatusField}
-            defaultCollapsed={true}
-          />
-        ),
-      },
-    },
-    {
-      type: "boolean",
-      name: "review",
-      label: "In Review",
-      ui: { component: "hidden" },
-    },
-    {
-      type: "boolean",
-      name: "translate",
-      label: "In Translation",
-      ui: { component: "hidden" },
-    },
-    {
-      type: "boolean",
-      name: "approved",
-      label: "Translation Approved",
-      ui: { component: "hidden" },
-    },
-    {
-      type: "boolean",
-      name: "published",
-      label: "Published",
-      ui: { component: "hidden" },
-    },
-    {
-      type: "boolean",
-      name: "unlisted",
-      label: "Unlisted",
-      ui: { component: "hidden" },
-    },
+    createHelpField("https://docstatic.com/docs/guides/docs/create-doc"),
+    commonFields.title,
+    commonFields.lastmod,
+    commonFields.body,
+    commonFields.conditions,
+    commonFields.collapsibleDescription,
+    commonFields.slug,
+    commonFields.collapsibleTags,
+    commonFields.workflow.draft,
+    commonFields.workflow.review,
+    commonFields.workflow.translate,
+    commonFields.workflow.approved,
+    commonFields.workflow.published,
+    commonFields.workflow.unlisted,
   ],
 };
 
@@ -508,72 +480,15 @@ const WikiCollection = {
   ui: {
     defaultItem: {
       date: docusaurusDate(new Date()),
-      lastmod: new Date().toISOString(),
+      ...lastmodUIConfig.defaultItem,
     },
-    beforeSubmit: async ({
-      form,
-      cms,
-      values,
-    }) => {
-      return {
-        ...values,
-        lastmod: new Date().toISOString(),
-      };
-    },
+    beforeSubmit: lastmodUIConfig.beforeSubmit,
   },
   fields: [
-    {
-      type: "boolean",
-      name: "help",
-      label: "Help",
-      required: false,
-      ui: {
-        component: (props) => (
-          <HelpButton
-            url="https://docstatic.com/docs/guides/wikis"
-            {...props}
-          />
-        ),
-      },
-    },
-    {
-      type: "string",
-      name: "title",
-      label: "Title",
-      isTitle: true,
-      required: true,
-    },
-      {
-      type: "string",
-      name: "lastmod",
-      label: "Last Modified",
-      ui: {
-        component: "text",
-        disabled: true,
-        format: (val) => {
-          if (!val) return '';
-          try {
-            return new Date(val).toLocaleString('en-US', {
-              year: 'numeric',
-              month: 'long',
-              day: 'numeric',
-              hour: '2-digit',
-              minute: '2-digit',
-              timeZoneName: 'short'
-            });
-          } catch {
-            return val;
-          }
-        },
-      },
-    },
-    {
-      type: "rich-text",
-      name: "body",
-      label: "Body",
-      isBody: true,
-      templates: [...MDXTemplates],
-    },
+    createHelpField("https://docstatic.com/docs/guides/wikis"),
+    commonFields.title,
+    commonFields.lastmod,
+    commonFields.body,
   ],
 };
 
@@ -591,11 +506,8 @@ const APIsCollection = {
   },
   fields: [
     {
-      type: "boolean",
-      name: "help",
-      label: "Help",
+      ...createHelpField(""),
       ui: { component: "hidden" },
-      required: false,
     },
   ],
 };
@@ -605,185 +517,22 @@ const TranslationCollection = {
   label: "Translations",
   path: "i18n",
   format: "mdx",
-  ui: {
-    defaultItem: {
-      description: "",
-      draft: true,
-      review: false,
-      translate: false,
-      approved: false,
-      published: false,
-      unlisted: false,
-      lastmod: new Date().toISOString(),
-    },
-    beforeSubmit: async ({
-      form,
-      cms,
-      values,
-    }) => {
-      return {
-        ...values,
-        lastmod: new Date().toISOString(),
-      };
-    },
-  },
+  ui: workflowUIConfig,
   fields: [
-    {
-      type: "boolean",
-      name: "help",
-      label: "Help",
-      required: false,
-      ui: {
-        component: (props) => (
-          <HelpButton
-            url="https://docstatic.com/docs/guides/docs/create-doc"
-            {...props}
-          />
-        ),
-      },
-    },
-    {
-      type: "string",
-      name: "title",
-      label: "Title",
-      isTitle: true,
-      required: true,
-    },
-    {
-      type: "string",
-      name: "lastmod",
-      label: "Last Modified",
-      ui: {
-        component: "text",
-        disabled: true,
-        format: (val) => {
-          if (!val) return '';
-          try {
-            return new Date(val).toLocaleString('en-US', {
-              year: 'numeric',
-              month: 'long',
-              day: 'numeric',
-              hour: '2-digit',
-              minute: '2-digit',
-              timeZoneName: 'short'
-            });
-          } catch {
-            return val;
-          }
-        },
-      },
-    },
-    {
-      type: "rich-text",
-      name: "body",
-      label: "Body",
-      isBody: true,
-      templates: [...MDXTemplates],
-    },
-    {
-      label: "Conditions",
-      name: "conditions",
-      type: "string",
-      list: true,
-      ui: {
-        component: (props) => (
-          <CollapsibleField
-            {...props}
-            FieldComponent={ConditionsTreeField}
-            defaultCollapsed={true}
-          />
-        ),
-      },
-      options: allConditions,
-    },
-    {
-      type: "string",
-      name: "description",
-      label: "Description",
-      ui: {
-        component: (props) => (
-          <CollapsibleField
-            {...props}
-            FieldComponent={TextField}
-            defaultCollapsed={true}
-          />
-        ),
-      },
-    },
-    {
-      type: "string",
-      name: "slug",
-      label: "Slug",
-      ui: {
-        component: (props) => (
-          <CollapsibleField
-            {...props}
-            FieldComponent={TextField}
-            defaultCollapsed={true}
-          />
-        ),
-      },
-    },
-    {
-      label: "Tags",
-      name: "tags",
-      type: "string",
-      list: true,
-      ui: {
-        component: (props) => (
-          <CollapsibleField
-            {...props}
-            FieldComponent={TagsField}
-            defaultCollapsed={true}
-          />
-        ),
-      },
-      options: allTags,
-    },
-    {
-      type: "boolean",
-      name: "draft",
-      label: "Workflow",
-      ui: {
-        component: (props) => (
-          <CollapsibleField
-            {...props}
-            FieldComponent={StatusField}
-            defaultCollapsed={true}
-          />
-        ),
-      },
-    },
-    {
-      type: "boolean",
-      name: "review",
-      label: "In Review",
-      ui: { component: "hidden" },
-    },
-    {
-      type: "boolean",
-      name: "translate",
-      label: "In Translation",
-      ui: { component: "hidden" },
-    },
-    {
-      type: "boolean",
-      name: "approved",
-      label: "Translation Approved",
-      ui: { component: "hidden" },
-    },
-    {
-      type: "boolean",
-      name: "published",
-      label: "Published",
-      ui: { component: "hidden" },
-    },
-    {
-      type: "boolean",
-      name: "unlisted",
-      label: "Unlisted",
-      ui: { component: "hidden" },
-    },
+    createHelpField("https://docstatic.com/docs/guides/docs/create-doc"),
+    commonFields.title,
+    commonFields.lastmod,
+    commonFields.body,
+    commonFields.conditions,
+    commonFields.collapsibleDescription,
+    commonFields.slug,
+    commonFields.collapsibleTags,
+    commonFields.workflow.draft,
+    commonFields.workflow.review,
+    commonFields.workflow.translate,
+    commonFields.workflow.approved,
+    commonFields.workflow.published,
+    commonFields.workflow.unlisted,
   ],
 };
 
@@ -847,13 +596,7 @@ const ExternalLinkTemplate = {
 };
 
 const CategoryFields = [
-  {
-    name: "title",
-    label: "Title",
-    type: "string",
-    isTitle: true,
-    required: true,
-  },
+  commonFields.title,
   {
     name: "link",
     label: "Link",
@@ -977,20 +720,7 @@ const SidebarCollection = {
     },
   },
   fields: [
-    {
-      type: "boolean",
-      name: "help",
-      label: "Help",
-      required: false,
-      ui: {
-        component: (props) => (
-          <HelpButton
-            url="https://docstatic.com/docs/guides/markdown-features/toc"
-            {...props}
-          />
-        ),
-      },
-    },
+    createHelpField("https://docstatic.com/docs/guides/markdown-features/toc"),
     {
       type: "string",
       name: "_warning",
@@ -1169,20 +899,7 @@ const SettingsCollection = {
     },
   },
   fields: [
-    {
-      type: "boolean",
-      name: "help",
-      label: "Help",
-      required: false,
-      ui: {
-        component: (props) => (
-          <HelpButton
-            url="https://docstatic.com/docs/configuration"
-            {...props}
-          />
-        ),
-      },
-    },
+    createHelpField("https://docstatic.com/docs/configuration"),
     {
       type: "string",
       name: "_warning",
@@ -1398,20 +1115,7 @@ const HomepageCollection = {
     },
   },
   fields: [
-    {
-      type: "boolean",
-      name: "help",
-      label: "Help",
-      required: false,
-      ui: {
-        component: (props) => (
-          <HelpButton
-            url="https://docstatic.com/docs/introduction"
-            {...props}
-          />
-        ),
-      },
-    },
+    createHelpField("https://docstatic.com/docs/introduction"),
     {
       type: "string",
       name: "_warning",
@@ -1436,11 +1140,7 @@ const HomepageCollection = {
       name: "title",
       label: "Title",
     },
-    {
-      type: "string",
-      name: "description",
-      label: "Description",
-    },
+    commonFields.description,
     {
       type: "object",
       list: true,
@@ -1461,27 +1161,8 @@ const PagesCollection = {
   path: "src/pages",
   format: "mdx",
   fields: [
-    {
-      type: "boolean",
-      name: "help",
-      label: "Help",
-      required: false,
-      ui: {
-        component: (props) => (
-          <HelpButton
-            url="https://docstatic.com/docs/guides/creating-pages"
-            {...props}
-          />
-        ),
-      },
-    },
-    {
-      type: "string",
-      name: "title",
-      label: "Title",
-      isTitle: true,
-      required: true,
-    },
+    createHelpField("https://docstatic.com/docs/guides/creating-pages"),
+    commonFields.title,
     {
       type: "datetime",
       name: "lastModified",
@@ -1491,18 +1172,8 @@ const PagesCollection = {
         timeFormat: "hh:mm A",
       },
     },
-    {
-      type: "string",
-      name: "description",
-      label: "Description",
-    },
-    {
-      type: "rich-text",
-      name: "body",
-      label: "Body",
-      isBody: true,
-      templates: [...MDXTemplates],
-    },
+    commonFields.description,
+    commonFields.body,
   ],
   ui: {
     allowedActions: {
@@ -1521,20 +1192,7 @@ const ConditionsCollection = {
   path: "reuse/conditions",
   format: "json",
   fields: [
-    {
-      type: "boolean",
-      name: "help",
-      label: "Help",
-      required: false,
-      ui: {
-        component: (props) => (
-          <HelpButton
-            url="https://docstatic.com/docs/guides/markdown-features/conditional-text"
-            {...props}
-          />
-        ),
-      },
-    },
+    createHelpField("https://docstatic.com/docs/guides/markdown-features/conditional-text"),
     {
       type: "object",
       label: "Categories",
@@ -1546,18 +1204,8 @@ const ConditionsCollection = {
         }),
       },
       fields: [
-        {
-          type: "string",
-          label: "Category Name",
-          name: "name",
-          isTitle: true,
-          required: true,
-        },
-        {
-          type: "string",
-          label: "Description",
-          name: "description",
-        },
+        commonFields.categoryName,
+        commonFields.description,
         {
           type: "object",
           label: "Conditions",
@@ -1608,20 +1256,7 @@ const VariableSetCollection = {
   path: "reuse/variableSets",
   format: "json",
   fields: [
-    {
-      type: "boolean",
-      name: "help",
-      label: "Help",
-      required: false,
-      ui: {
-        component: (props) => (
-          <HelpButton
-            url="https://docstatic.com/docs/guides/markdown-features/variables"
-            {...props}
-          />
-        ),
-      },
-    },
+    createHelpField("https://docstatic.com/docs/guides/markdown-features/variables"),
     {
       type: "object",
       label: "Variable Sets",
@@ -1633,13 +1268,7 @@ const VariableSetCollection = {
         }),
       },
       fields: [
-        {
-          type: "string",
-          label: "Variable Set Name",
-          name: "name",
-          isTitle: true,
-          required: true,
-        },
+        commonFields.variableSetName,
         {
           type: "object",
           label: "Variables",
@@ -1704,20 +1333,7 @@ const TaxonomyCollection = {
   path: "reuse/taxonomy",
   format: "json",
   fields: [
-    {
-      type: "boolean",
-      name: "help",
-      label: "Help",
-      required: false,
-      ui: {
-        component: (props) => (
-          <HelpButton
-            url="https://docstatic.com/docs/guides/docs/taxonomies"
-            {...props}
-          />
-        ),
-      },
-    },
+    createHelpField("https://docstatic.com/docs/guides/docs/taxonomies"),
     {
       type: "object",
       list: true,
@@ -1729,13 +1345,7 @@ const TaxonomyCollection = {
         }),
       },
       fields: [
-        {
-          type: "string",
-          name: "tag",
-          label: "Tag",
-          isTitle: true,
-          required: true,
-        },
+        commonFields.taxonomyTag,
         {
           type: "object",
           list: true,
@@ -1747,13 +1357,7 @@ const TaxonomyCollection = {
             }),
           },
           fields: [
-            {
-              type: "string",
-              name: "tag",
-              label: "Tag",
-              isTitle: true,
-              required: true,
-            },
+            commonFields.taxonomyTag,
             {
               type: "object",
               list: true,
@@ -1765,13 +1369,7 @@ const TaxonomyCollection = {
                 }),
               },
               fields: [
-                {
-                  type: "string",
-                  name: "tag",
-                  label: "Tag",
-                  isTitle: true,
-                  required: true,
-                },
+                commonFields.taxonomyTag,
               ],
             },
           ],
@@ -1851,13 +1449,7 @@ const GlossaryTermTemplate = {
     }),
   },
   fields: [
-    {
-      type: "string",
-      name: "key",
-      label: "Key",
-      isTitle: true,
-      required: true,
-    },
+    commonFields.glossaryKey,
     {
       type: "object",
       name: "languages",
@@ -1874,20 +1466,7 @@ const GlossaryTermCollection = {
   path: "reuse/glossaryTerms",
   format: "json",
   fields: [
-    {
-      type: "boolean",
-      name: "help",
-      label: "Help",
-      required: false,
-      ui: {
-        component: (props) => (
-          <HelpButton
-            url="https://docstatic.com/docs/guides/markdown-features/glossary"
-            {...props}
-          />
-        ),
-      },
-    },
+    createHelpField("https://docstatic.com/docs/guides/markdown-features/glossary"),
     {
       type: "object",
       name: "glossaryTerms",
