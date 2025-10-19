@@ -1,0 +1,14 @@
+{
+  "title": {
+    "message": "Blog",
+    "description": "Le titre du blog utilisé pour le référencement"
+  },
+  "description": {
+    "message": "Blog",
+    "description": "La description du blog utilisée pour le référencement"
+  },
+  "sidebar.title": {
+    "message": "Recent posts",
+    "description": "L'étiquette pour la barre latérale gauche"
+  }
+}

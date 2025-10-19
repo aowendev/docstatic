@@ -1,0 +1,38 @@
+---
+title: Métadonnées d'entête
+lastmod: '2025-10-19T13:45:20.622Z'
+description: Déclarer des métadonnées d'en-tête spécifiques à une page à l'aide de MDX.
+tags:
+  - metadata
+  - elements
+  - elements_passthroughs
+draft: false
+review: false
+translate: false
+approved: false
+published: true
+unlisted: false
+---
+
+<head>
+  <html className="some-extra-html-class" />
+
+  <body className="other-extra-body-class" />
+
+  <title>Head Metadata customized title!</title>
+
+  <meta charSet="utf-8" />
+
+  <meta name="twitter:card" content="summary" />
+
+  <link rel="canonical" href="https://docstatic.com/docs/markdown-features/metadata" />
+</head>
+
+# Métadonnées d'entête
+
+DocStatic définit automatiquement pour vous des métadonnées utiles dans `<html>`, `<head>` et `<body>`.
+Il est possible d'ajouter des métadonnées supplémentaires (ou de remplacer les métadonnées existantes) avec la balise `<head>` dans les fichiers Markdown.
+
+Dans le CMS, ces métadonnées doivent être ajoutées dans l'éditeur Markdown. Elle ne sera pas reconnue si vous l'intégrez dans le composant **Passthrough**.
+
+Pour plus d'informations, voir [Métadonnées d'entête](https://docusaurus.io/fr/docs/markdown-features/head-metadata) dans la documentation de Docusaurus.

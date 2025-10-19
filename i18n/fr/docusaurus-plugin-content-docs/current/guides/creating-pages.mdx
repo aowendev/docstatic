@@ -1,0 +1,42 @@
+---
+title: Création de pages
+description: Création de pages dans le CMS.
+tags:
+  - "computer-languages"
+  - "computer-languages_javascript"
+  - "computer-languages_javascript_react"
+draft: false
+review: false
+translate: false
+approved: false
+published: true
+unlisted: false
+lastmod: "2025-10-19T11:44:28.636Z"
+---
+
+# Création de pages
+
+Les pages se distinguent des autres types de contenu dans la mesure où elles sont destinées à un contenu unique et autonome, tel qu'une page de présentation, un terrain de jeu ou une page d'assistance. Elles peuvent contenir des composants React et du Markdown. Notez que les pages n'ont pas de barres latérales.
+
+<Admonition type="info" title="Info">
+  Reportez-vous à la [Référence API du plugin Pages](http://localhost:3000/docs/api/plugins/plugin-content-pages.mdx) dans la documentation de Docusaurus pour une liste exhaustive d'options.
+</Admonition>
+
+## Ajouter une page
+
+1. Dans la collection **Pages** du CMS, cliquez sur **Ajouter un fichier**.
+2. Donnez-lui un **Titre** et une **Description**.
+3. Ajoutez votre contenu dans l'éditeur de texte riche.
+4. Cliquez sur **Enregistrer**.
+
+## Ajouter des composants React à une page
+
+Les composants React de DocStatic sont disponibles globalement. Mais si vous n'utilisez un composant que sur une seule page, cela n'a pas de sens. Au lieu de cela, vous pouvez importer le composant directement dans la page. Toutefois, pour pouvoir modifier la page dans le CMS, vous devez intégrer la directive d'importation dans un composant [Passthrough](/docs/guides/markdown-features/react#passthrough-component). La page d'exemple sur le site DocStatic importe le composant ColorGenerator de la manière suivante :
+
+``markdown
+<Passthrough type="jsx" string="import ColorGenerator from '@site/src/components/ColorGenerator' ;" summary="Import Statement" />
+
+<Passthrough type="jsx" string="<ColorGenerator />" summary="JSX Component" />
+```
+
+Pour plus d'informations, voir [Creating Pages](http://localhost:3000/docs/guides/creating-pages) dans la documentation de Docusaurus.

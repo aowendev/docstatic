@@ -1,0 +1,44 @@
+---
+title: Créer un document
+lastmod: '2025-10-19T12:54:39.453Z'
+description: Créer un document Markdown.
+tags:
+  - content
+  - content_topics
+draft: false
+review: false
+translate: false
+approved: false
+published: true
+unlisted: false
+---
+
+# Créer un document
+
+Dans DocStatic, vous écrivez votre contenu en Markdown dans des fichiers appelés "Topics". En règle générale, vous créez vous-même chaque sujet, bien que certains types de documents puissent avoir des sujets autogénérés.
+
+<Admonition type="note" title="Note">
+  Les documents GraphQL et OpenAPI sont autogénérés à partir d'un serveur ou d'un schéma.
+</Admonition>
+
+Pour créer un sujet :
+
+1. Dans la collection **Topics**, cliquez sur **Add File**.
+2. Donnez un **Title** à la rubrique.
+3. (Facultatif) Si vous souhaitez utiliser la rubrique dans [l'aide contextuelle](https://docstatic.com/docs/context-help), offrez-lui un **Slug**. Il s'agit d'un chemin fixe à partir de `/docs/`.
+4. Offrez à la rubrique une **Description**. Celle-ci est affichée dans la liste des cartes de documents.
+5. (Facultatif) Ajoutez les **Tags** de la [taxonomie](taxonomies).
+6. (Facultatif) Définir les **Conditions**.
+7. Assurez-vous que le statut du flux de travail est défini sur **Draft**.
+8. Saisissez votre contenu.
+9. Cliquez sur **Save**.
+
+## Document recto
+
+Au début de chaque sujet se trouve une section de YAML contenue entre deux séries de trois traits d'union (---). DocStatic l'utilise pour des choses telles que :
+
+* Texte conditionnel
+* Taxonomies (étiquettes de documents)
+* les flux de travail
+
+Pour plus d'informations, voir [Créer un doc](https://docusaurus.io/fr/docs/create-doc) dans la documentation de Docusaurus.

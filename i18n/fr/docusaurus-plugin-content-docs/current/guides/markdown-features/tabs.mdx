@@ -1,0 +1,48 @@
+---
+title: Onglets
+lastmod: '2025-10-19T13:49:37.706Z'
+description: Utilisation des onglets dans DocStatic.
+tags:
+  - elements
+  - elements_tabs
+draft: false
+review: false
+translate: false
+approved: false
+published: true
+unlisted: false
+---
+
+Le composant **Tabs** vous permet d'ajouter des onglets à votre sujet.
+
+1. Sélectionnez **Tabs** dans la liste **Embed**.
+2. Modifiez le composant.
+3. Pour chaque onglet :
+   1. Sélectionnez **Tab Item** dans la liste **Embed**.
+   2. Donnez-lui une **Value**.
+   3. Donnez-lui un **Title**.
+   4. Saisissez le **Content**.
+   5. (Facultatif) Faites-en l'onglet **Default**.
+4. **Save** vos modifications.
+
+<Admonition type="danger" title="Warning">
+  Le CMS peut perdre le contexte lors de la modification des onglets. Vous devez sauvegarder souvent. Le CMS peut se retrouver dans une position où il ne peut pas trouver le contexte de l'onglet. Dans ce cas, cliquez sur l'icône **Markdown brut** et apportez des modifications directement dans le Markdown. Sauvegardez et revenez ensuite à l'éditeur de texte riche.
+</Admonition>
+
+#### Exemple :
+
+<Tabs>
+  <TabItem label="Pomme" value="apple">
+    Ceci est une pomme 🍎
+  </TabItem>
+
+  <TabItem label="Orange" value="orange">
+    Ceci est une orange 🍊
+  </TabItem>
+
+  <TabItem label="Banane" value="banane">
+    Ceci est une banane 🍌
+  </TabItem>
+</Tabs>
+
+Pour plus d'informations, voir [Onglets](https://docusaurus.io/fr/docs/markdown-features/tabs) dans la documentation de Docusaurus.

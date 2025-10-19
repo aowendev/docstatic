@@ -1,0 +1,21 @@
+---
+title: Exemple de page
+description: Une page React qui peut être éditée dans le CMS avec du contenu JSX, HTML et MDX.
+lastmod: "2025-10-19T11:52:51.928Z"
+---
+
+<Passthrough type="html" string="
+  <div class='theme-doc-markdown markdown'>
+    <header>
+      <h1>Example page</h1>
+    </header>
+  </div>
+" summary="HTML Content" />
+
+Cette page d'exemple importe le composant React `ColorGenerator`.
+
+Vous pouvez l'utiliser pour générer un jeu de couleurs pour votre site.
+
+<Passthrough type="jsx" string="import ColorGenerator from '@site/src/components/ColorGenerator' ;" summary="Import Statement" />
+
+<Passthrough type="jsx" string="<ColorGenerator />" summary="JSX Component" />

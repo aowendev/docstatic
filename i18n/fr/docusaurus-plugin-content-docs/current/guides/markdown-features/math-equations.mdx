@@ -1,0 +1,60 @@
+---
+title: Équations mathématiques
+lastmod: '2025-10-19T13:16:36.801Z'
+description: Écrire des équations mathématiques en LaTeX.
+tags:
+  - content
+  - content_equations
+  - computer-languages
+  - computer-languages_
+  - computer-languages_latex
+  - computer-languages_latex_katex
+draft: false
+review: false
+translate: false
+approved: false
+published: true
+unlisted: false
+---
+
+# Équations mathématiques
+
+Les équations mathématiques peuvent être rendues avec [KaTeX](https://katex.org).
+
+## Utiliser
+
+Pour utiliser KaTeX à partir du CMS, intégrez la chaîne dans un composant **Passthrough**. Vous pouvez inclure un **Summary** qui apparaîtra en ligne lors de l'édition du sujet.
+
+### Incliné
+
+Écrire des équations mathématiques en ligne en enveloppant les équations LaTeX entre `$` :
+
+```latex
+Let $f\colon[a,b]\to\R$ be Riemann integrable. Let $F\colon[a,b]\to\R$ be
+$F(x)=\int_{a}^{x} f(t)\,dt$. Then $F$ is continuous, and at all $x$ such that
+$f$ is continuous at $x$, $F$ is differentiable at $x$ with $F'(x)=f(x)$.
+```
+
+<Passthrough type="markdown" string="Let $f\colon[a,b] \to \R$ be Riemann integrable. Soit $F\colon[a,b]\to\R$ $F(x)=\int_{a}^{x} f(t)\N,dt$. Alors $F$ est continue, et pour tout $x$ tel que $f$ est continue en $x$, $F$ est différentiable en $x$ avec $F'(x)=f(x)$." summary="inline equation" />
+
+### Blocs
+
+Pour le bloc d'équation ou le mode d'affichage, utilisez les sauts de ligne et `$$` :
+
+```latex
+$$
+I = \int_0^{2\pi} \sin(x)\,dx
+$$
+```
+
+<Passthrough
+  type="markdown"
+  string="
+  $$
+  I = \int_0^{2\pi} \sin(x)\,dx
+  $$
+  "
+  summary="block equation"
+/>
+
+Pour plus d'informations, consultez la documentation [KaTeX](https://katex.org).

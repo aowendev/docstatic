@@ -1,0 +1,37 @@
+---
+title: Rubriques et table des matières
+lastmod: '2025-10-19T13:55:29.671Z'
+description: Utilisation des titres et de la table des matières dans DocStatic.
+tags:
+  - formatting
+  - formatting_headings
+draft: false
+review: false
+translate: false
+approved: false
+published: true
+unlisted: false
+---
+
+# Titres et table des matières
+
+Dans le CMS, vous pouvez sélectionner le niveau **Paragraphe** ou **Titre** (de 1 à 6).
+
+<a id="anchor-example" />
+
+## ID des rubriques
+
+Les identifiants des titres sont générés automatiquement. Par exemple, `heading-ids`. Vous pouvez les utiliser pour établir un lien direct avec les titres des rubriques. Cependant, si vous changez le titre de la rubrique, le lien sera rompu. C'est pourquoi DocStatic fournit le composant **Aide contextuelle**. Ce composant permet d'insérer une balise d'ancrage n'importe où sur une page, et simultanément dans un titre.
+
+1. Sélectionnez **Context Help** dans la liste **Embed**.
+2. Modifiez le composant et donnez-lui un **Context Help ID**.
+
+Pour créer un lien vers l'ancre, utilisez le chemin d'accès : `<URL>/docs/<slug>#<ID>.`
+
+Par exemple : [https://docstatic.com/docs/fr/guides/markdown-features/toc#anchor-example](https://docstatic.com/docs/fr/guides/markdown-features/toc#anchor-example)
+
+## Niveau de l'en-tête de la table des matières
+
+Chaque document Markdown affiche une table des matières dans le coin supérieur droit. Par défaut, cette table n'affiche que les titres `h2` et `h3`, ce qui devrait être suffisant pour avoir une vue d'ensemble de la structure de la page. Si vous souhaitez modifier l'étendue des titres affichés, vous pouvez personnaliser le niveau minimum et maximum des titres, soit par page, soit globalement.
+
+Pour plus d'informations, reportez-vous à [Entêtes et table des matières](https://docusaurus.io/fr/docs/markdown-features/toc) dans la documentation de Docusaurus.

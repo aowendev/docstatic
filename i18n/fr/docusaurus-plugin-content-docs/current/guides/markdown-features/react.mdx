@@ -1,0 +1,150 @@
+---
+title: MDX et React
+lastmod: '2025-10-19T13:43:23.624Z'
+description: Utiliser React dans DocStatic Documents Markdown avec MDX.
+tags:
+  - computer-languages
+  - computer-languages_markdown
+  - computer-languages_markdown_mdx
+  - computer-languages_javascript
+  - computer-languages_javascript_react
+draft: false
+review: false
+translate: false
+approved: false
+published: true
+unlisted: false
+---
+
+# MDX et React
+
+DocStatic a un support intégré pour [MDX](https://mdxjs.com/), qui vous permet d'écrire JSX dans vos fichiers Markdown et de les rendre comme des composants React. Cependant, si vous ajoutez des JSX directement dans vos sujets, le CMS ne sera pas en mesure de les afficher dans l'éditeur de texte enrichi.
+
+## Portée du composant MDX
+
+La meilleure façon d'utiliser les composants MDX dans DocStatic est de les enregistrer dans la portée globale, ce qui les rend automatiquement disponibles dans chaque fichier MDX, sans aucune instruction d'importation. Vous devez également ajouter une définition de modèle au composant et l'importer pour que le CMS en ait connaissance. Pour des exemples de la manière dont cela est fait, vous pouvez explorer les propres composants de DocStatic, tels que `CodeSnippet`. Il est important de s'assurer que les composants généraux sont rendus de manière statique, sinon ils peuvent retarder le rendu de la page.
+
+Par exemple, voici le contenu de `src/themes/MDXComponents.jsx` :
+
+```javascript
+import CodeBlock from "@theme-original/CodeBlock";
+import DocCardList from "@theme-original/DocCardList";
+import MDXComponents from "@theme-original/MDXComponents";
+import TabItem from "@theme-original/TabItem";
+import Tabs from "@theme-original/Tabs";
+import Details from "@theme/Details";
+import React from "react";
+
+import CodeSnippet from "@site/src/components/CodeSnippet";
+import ConditionalText from "@site/src/components/ConditionalText";
+import Figure from "@site/src/components/Figure";
+import Footnote from "@site/src/components/Footnote";
+import GlossaryTerm from "@site/src/components/GlossaryTerm";
+import Passthrough from "@site/src/components/Passthrough";
+import Snippet from "@site/src/components/Snippet";
+import VariableSet from "@site/src/components/VariableSet";
+
+export default {
+  ...MDXComponents,
+  Admonition: MDXComponents.admonition,
+  CodeBlock: CodeBlock,
+  CodeSnippet: CodeSnippet,
+  ConditionalText: ConditionalText,
+  Details: Details,
+  DocCardList: DocCardList,
+  Figure: Figure,
+  Footnote: Footnote,
+  GlossaryTerm: GlossaryTerm,
+  Passthrough: Passthrough,
+  Snippet: Snippet,
+  TabItem: TabItem,
+  Tabs: Tabs,
+  VariableSet: VariableSet,
+};
+```
+
+Les importations qui commencent par `@site/src/components`/ sont les composants personnalisés qui peuvent être rendus dans les rubriques. Il existe également des composants personnalisés utilisés par le CMS, tels que StatusField, qui n'ont pas besoin d'être importés.
+
+Le fichier  `src/themes/tempate.jsx` file commence ainsi :
+
+```javascript
+import React from "react";
+import codeFiles from "../../reuse/code-files.json";
+import { slugify } from "../../util";
+import { CodeSnippetBlockTemplate } from "../components/CodeSnippet/template";
+import { ConditionalTextBlockTemplate } from "../components/ConditionalText/template";
+import { FigureBlockTemplate } from "../components/Figure/template";
+import { FootnoteBlockTemplate } from "../components/Footnote/template";
+import { GlossaryTermBlockTemplate } from "../components/GlossaryTerm/template";
+import { PassthroughBlockTemplate } from "../components/Passthrough/template";
+import { SnippetBlockTemplate } from "../components/Snippet/template";
+import { VariableSetBlockTemplate } from "../components/VariableSet/template";
+```
+
+Les modèles pour les composants natifs, tels que `Details`, doivent être définis directement dans le fichier. Par exemple, le modèle `Details` doit être défini directement dans le fichier :
+
+```javascript
+const DetailsTemplate = {
+  name: "Details",
+  fields: [
+    {
+      name: "summary",
+      label: "Summary",
+      type: "string",
+      isTitle: true,
+      required: true,
+    },
+    {
+      name: "children",
+      label: "Details",
+      type: "rich-text",
+    },
+  ],
+};
+```
+
+Le fichier se termine par l'exportation de tous les modèles :
+
+```javascript
+
+export const MDXTemplates = [
+  AdmonitionTemplate,
+  CodeSnippetBlockTemplate,
+  CommentsTemplate,
+  ConditionalTextBlockTemplate,
+  ContextHelpTemplate,
+  DetailsTemplate,
+  DocCardListTemplate,
+  FigureBlockTemplate,
+  FootnoteBlockTemplate,
+  GlossaryTermBlockTemplate,
+  SnippetBlockTemplate,
+  PassthroughBlockTemplate,
+  TabsTemplate,
+  TruncateTemplate,
+  VariableSetBlockTemplate,
+];
+```
+
+Ces composants peuvent désormais être utilisés dans n'importe quel fichier MDX.
+
+<Admonition type="caution" title="Attention">
+  Utilisez des noms de balises en majuscules.
+
+  A partir de MDX v3+, les noms de balises en minuscules sont toujours rendus comme des éléments HTML natifs et n'utiliseront pas les mappages de composants que vous fournissez.
+</Admonition>
+
+Pour plus d'informations, voir [MDX et React](https://docusaurus.io/fr/docs/markdown-features/react) dans la documentation de Docusaurus.
+
+## Composant passthrough
+
+Il est parfois nécessaire d'inclure du HTML, du JSX ou du Markdown dans un sujet que le CMS ne peut pas afficher dans l'éditeur de texte riche. Pour s'assurer que l'éditeur peut toujours être utilisé pour d'autres contenus, le composant `Passthrough` est fourni. Il vous permet d'envelopper le contenu pour ce que l'éditeur de texte enrichi l'ignore.
+
+1. Sélectionnez **Passthrough** dans la liste **Embed**.
+2. Donnez-lui un **Summary**.
+3. Saisissez le **Contenu** en texte brut.
+4. Sélectionnez le **Content Type** (**Markdown**, **HTML** ou **JSX**).
+
+Le contenu est ajouté directement à la page lorsque le site est construit, sans l'enveloppe.
+
+Pour des exemples, voir [page d'exemple](/fr/example-page) et [équations mathématiques](/docs/fr/guides/markdown-features/math-equations).

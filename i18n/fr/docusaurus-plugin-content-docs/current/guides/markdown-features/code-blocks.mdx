@@ -1,0 +1,45 @@
+---
+title: Blocs de code et extraits
+lastmod: '2025-10-19T13:10:09.774Z'
+description: Gestion des blocs de code dans DocStatic.
+tags:
+  - elements
+  - elements_code-blocks
+  - reuse
+  - reuse_snippets
+draft: false
+review: false
+translate: false
+approved: false
+published: true
+unlisted: false
+---
+
+# Blocs de code et extraits
+
+DocStatic propose deux façons d'inclure du code dans votre documentation. Toutes deux prennent en charge la mise en évidence de la syntaxe.
+
+## Blocs de code
+
+1. Cliquez sur l'icône **Code Block** dans l'éditeur de texte riche.
+2. Cliquez sur la liste des langues et sélectionnez ou recherchez une langue.
+3. Saisissez votre code dans la boîte.
+
+#### Exemple :
+
+```plaintext
+Voici du texte en clair.
+```
+
+## Extraits de code
+
+1. Sélectionnez **Code Snippet** dans la liste **Embed**.
+2. Donnez-lui un **Title**.
+3. Sélectionnez une **Language**.
+4. Choisissez un fichier dans la liste. La liste est remplie avec tous les fichiers du dossier `reuse/code/` chaque fois que vous lancez le serveur de développement ou que vous faites une compilation.
+
+#### Exemple :
+
+<CodeSnippet title="Titre de l'exemple" language="xml" filepath="example.xml" />
+
+L'avantage d'utiliser des extraits de code est qu'il existe un fichier physique qui peut être testé de manière unitaire.

@@ -1,0 +1,156 @@
+---
+title: Installation
+lastmod: '2025-10-19T12:24:11.460Z'
+description: >-
+  Comment installer DocStatic localement et démarrer un site DocStatic en un
+  rien de temps.
+tags:
+  - software
+  - software_integrated-development-environments
+  - software_integrated-development-environments_eclipse
+  - software_integrated-development-environments_vscodium
+  - software_package-managers
+  - software_package-managers_yarn
+  - software_source-control
+  - software_source-control_github
+  - software_content-management-systems
+  - software_content-management-systems_tinacms
+  - software_grammar-spelling-style
+  - software_grammar-spelling-style_languagetool
+draft: false
+review: false
+translate: false
+approved: false
+published: true
+unlisted: false
+---
+
+# Installation
+
+Pour commencer, créez et clonez le [Dépôt DocStatic](https://github.com/aowendev/docstatic).
+
+```Shell
+git clone https://github.com/aowendev/docstatic.git
+```
+
+## Prérequis
+
+Il est possible d'utiliser DocStatic localement ou de configurer votre propre déploiement hébergé. Cependant, pour un déploiement dans le nuage le plus facile possible, vous pouvez vous inscrire à des comptes avec :
+
+* [GitHub](https://github.com/signup)
+* [TinaCMS](https://app.tina.io/register)
+* [LanguageTool](https://languagetool.org/register)
+
+## Exigences
+
+Pour le développement local, vous devez installer un IDE. Deux options libres et gratuites sont disponibles :
+
+* [Eclipse](https://eclipseide.org)
+* [VSCodium](https://vscodium.com/)
+
+DocStatic consiste en un ensemble de paquets [Node.js](https://nodejs.org/en/download/). Vous aurez besoin de la version 18.0 ou supérieure (qui peut être vérifiée en lançant `node -v`). Vous pouvez utiliser [nvm](https://github.com/nvm-sh/nvm) pour gérer plusieurs versions de Node.js sur une seule machine. Lors de l'installation de Node.js, vous devez cocher toutes les cases relatives aux dépendances.
+
+Yarn est utilisé pour la gestion des paquets. Les responsables de Yarn recommandent d'installer Yarn globalement en utilisant le gestionnaire de paquets NPM, qui est inclus par défaut dans toutes les installations de Node.js. Utilisez le drapeau `-g` avec `npm install` pour le faire :
+
+```shell
+sudo npm install -g yarn
+```
+
+Ensuite, allez à la racine du dossier docstatic/ et installez les dépendances :
+
+```shell
+yarn install
+```
+
+## Structure du projet
+
+Après avoir cloné le dépôt, vous verrez ces fichiers dans le dossier `docstatic/` :
+
+```
+docstatic
+├── apis
+│   └── petstore.yaml
+├── blog
+│   └── hybrid.mdx
+├── config
+│   ├── docusaurus
+│   │   └── index.json
+│   ├── homepage
+│   │   └── index.json
+│   ├── sidebar
+│   │   └── index.json
+│   └── code-files.json
+├── docs
+│   └── introduction.mdx
+├── i18n
+│   └── fr
+├── reuse
+│   ├── code
+│   │   └── example.xml
+│   ├── conditions
+│   │   └── index.js
+│   ├── glossaryTerms
+│   │   └── index.js
+│   ├── snippets
+│   │   └── example.mdx
+│   ├── taxonomy
+│   │   └── index.json
+│   ├── variableSets
+│   │   └── index.json
+│   └── code-files.json
+├── src
+│   ├── css
+│   │   └── custom.css
+│   └── pages
+│       ├── example-page.mdx
+│       ├── index.js
+│       └── index.module.css
+├── static
+│   └── img
+├── docusaurus.config.ts
+├── package.json
+├── README.md
+├── sidebars.ts
+└── yarn.lock
+```
+
+Cette liste n'est pas exhaustive, mais il s'agit des principaux éléments à prendre en compte.
+
+### Aperçu de la structure du projet
+
+* `/apis/` - Fichiers OpenAPI YAML.
+* `/blog/` - Fichiers MDX pour les blogs.
+* `/config/` - Fichiers JSON utilisés par TinaCMS pour configurer DocStatic.
+* `/docs/` - Fichiers MDX Docs.
+* `/i18n/` - Fichiers de traduction.
+* `/reuse/` - Contenu réutilisable.
+* `/src/` - Fichiers non-documentaires comme les pages ou les composants React personnalisés.
+  * `/src/pages` - Tout fichier JSX/TSX/MDX dans ce répertoire est converti en page web.
+* `/static/` - Dossier statique. Tout le contenu qu'il contient est copié à la racine du dossier de construction final.
+* `/docusaurus.config.ts` - Un fichier de configuration contenant la configuration du site.
+* `/package.json` - Un site web DocStatic est une application React. Vous pouvez installer et utiliser tous les paquets npm que vous souhaitez.
+* `/sidebars.ts` - Spécifie l'ordre des documents dans la barre latérale.
+
+### Monorepos
+
+Si vous utilisez DocStatic pour la documentation d'un projet existant, une monorepo peut être la solution pour vous. Pour plus d'informations, voir [Monorepos](https://docusaurus.io/fr/docs/installation#monorepos) dans la documentation de Docusaurus.
+
+### Exécution du serveur de développement
+
+Pour prévisualiser vos modifications au fur et à mesure que vous éditez les fichiers, vous pouvez lancer un serveur de développement local qui servira votre site web et reflétera les dernières modifications.
+
+```shell
+yarn dev
+```
+
+Par défaut, une fenêtre de navigateur s'ouvrira à l'adresse [http://localhost:3000](http://localhost:3000).
+
+### Build
+
+DocStatic utilise un générateur de site statique pour construire le site web dans un dossier de contenu statique et le placer sur un serveur web où il peut être visualisé. Pour créer le site web :
+
+```shell
+yarn build-local
+```
+
+et le contenu sont générés dans le dossier `/build`, qui peut être copié sur n'importe quel service d'hébergement de fichiers statiques comme les pages GitHub, Netlify ou Vercel. Pour plus d'informations, voir [Déploiement](https://docusaurus.io/fr/docs/deployment) dans la documentation de Docusaurus.

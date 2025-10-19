@@ -1,0 +1,58 @@
+---
+title: Taxonomies
+lastmod: '2025-10-19T12:58:33.186Z'
+description: Création et application d'une architecture de l'information dans DocStatic.
+tags:
+  - metadata
+  - metadata_taxonomies
+draft: false
+review: false
+translate: false
+approved: false
+published: true
+unlisted: false
+---
+
+# Taxonomies
+
+Plus il y a d'informations, plus il est difficile de les retrouver. Markdown vous permet d'étiqueter le contenu, mais sans aucun contrôle de cohérence. DocStatic vous permet d'appliquer une [architecture de l'information](https://fr.wikipedia.org/wiki/Architecture_de_l%27information) à votre contenu à l'aide de taxonomies.
+
+## Concevoir une architecture de l'information
+
+L'architecture de l'information n'entre pas dans le cadre de ce document, mais voici quelques suggestions :
+
+* Limitez votre hiérarchie à trois niveaux. Cela correspond bien à l'indexation traditionnelle (/docs/tags).
+* Normalisez vos termes. Préférez les pluriels aux singuliers ou aux verbes. Préférez les mots simples aux phrases.
+* Écrivez en toutes lettres les acronymes et les abréviations.
+* Essayez de limiter le niveau supérieur à dix catégories.
+* Essayez de limiter le niveau intermédiaire à sept catégories.
+* Utiliser autant de catégories que nécessaire au niveau des feuilles.
+
+## Application d'une hiérarchie à des systèmes d'étiquetage plats
+
+Idéalement, vous devriez appliquer l'architecture de l'information à toutes vos plateformes d'information (systèmes de suivi des bogues, wikis, etc.). Cela signifie que les balises doivent répondre aux critères les plus restrictifs :
+
+* Les balises doivent contenir leurs propres catégories parentes, séparées par un trait de soulignement ( \_ ).
+* Lettres minuscules uniquement. Pas de chiffres, d'espaces (utilisez plutôt un trait d'union) ou de caractères spéciaux.
+
+Pour éviter que les balises ne deviennent trop longues, l'imbrication est limitée à une profondeur maximale de trois niveaux. Dans certains cas, vous devez aplatir la structure. Par exemple, bien que `regions_europe_uk_scotland` soit logique, il a quatre niveaux et doit donc être structuré comme `regions_uk_scotland`.
+
+## Gestion des balises de taxonomie
+
+Lorsque vous étiquetez du contenu dans le CMS, vous êtes restreint à l'ensemble des étiquettes que vous définissez.
+
+1. Sélectionnez Taxonomies dans les collections et Ajouter une taxonomie.
+2. Ajoutez toutes les balises enfant de niveau intermédiaire. Celles-ci doivent inclure la balise parente (`parent_child`).
+3. Ajoutez toutes les balises enfant de niveau feuille. Elles doivent inclure la balise parente (`top_mid_leaf`).
+
+<Admonition type="note" title="Note">
+  Il n'est pas nécessaire d'inclure le parent et un trait de soulignement dans une balise enfant, mais si vous ne le faites pas, vous obtiendrez une liste plate de balises lorsque vous ajouterez une balise à un thème.
+</Admonition>
+
+## Baliser le contenu
+
+Dans le CMS, lorsque vous modifiez une rubrique, vous pouvez soit utiliser le mode recherche pour rechercher un terme, soit le sélectionner dans l'arborescence. Lorsque vous ajoutez une balise, toutes les balises parentes sont automatiquement ajoutées. Cependant, une seule instance de chaque balise est ajoutée.
+
+<Admonition type="tip" title="Conseil">
+  Évitez de baliser le contenu en dehors du CMS. Ainsi, vos balises resteront cohérentes et la recherche de contenu sera plus facile.
+</Admonition>

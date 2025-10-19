@@ -1,0 +1,33 @@
+---
+title: Balises taxonomiques
+lastmod: '2025-10-19T14:02:00.743Z'
+description: Utilisation des étiquettes de taxonomie dans DocStatic
+tags:
+  - metadata
+  - metadata_taxonomies
+draft: false
+review: false
+translate: false
+approved: false
+published: true
+unlisted: false
+---
+
+# Balises de taxonomie
+
+Les balises de taxonomie vous permettent d'appliquer une [architecture de l'information](https://fr.wikipedia.org/wiki/Information_architecture) au contenu de votre site. Elles doivent être appliquées à toutes les plateformes de documentation que vous utilisez, telles que les systèmes de suivi des bogues et les wikis. Les exigences les plus restrictives en matière de balises que vous êtes susceptible de rencontrer sont les systèmes plats (non hiérarchiques) qui ne prennent en charge que les lettres minuscules et les traits de soulignement (`_`) sans espaces.
+
+DocStatic applique une hiérarchie à trois niveaux aux balises de taxonomie. Pour éviter que les balises ne deviennent trop longues, l'imbrication est limitée à une profondeur maximale de trois. Dans certains cas, vous devez aplatir la structure (par exemple, si `regions_europe_uk_scotland` est logique, il a quatre niveaux et doit alors être structuré comme `regions_uk_scotland`).
+
+Lors de la conception d'une architecture d'information à trois niveaux, il est recommandé d'avoir environ dix catégories de premier niveau, sept catégories de niveau intermédiaire et autant de catégories de niveau secondaire que nécessaire. Les acronymes et les abréviations doivent être explicités et la redondance doit être évitée.
+
+## Modifier les balises de la taxonomie
+
+1. Dans la collection **Taxonomies**, **Add** une taxonomie.
+2. Donnez-lui un **Tag** avec uniquement des lettres minuscules.
+3. Ajoutez des **Children** et attribuez-leur une étiquette, en commençant par l'étiquette du parent suivie d'un trait de soulignement.
+4. Pour chaque enfant, ajoutez des **Children**.
+
+<Admonition type="note" title="Note">
+  Vous pouvez saisir des balises sans le nom de la balise qui précède et sans trait de soulignement, mais si vous le faites lorsque vous les ajoutez à un thème, elles seront présentées sous la forme d'une liste plate.
+</Admonition>

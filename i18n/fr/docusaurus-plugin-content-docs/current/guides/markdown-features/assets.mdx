@@ -1,0 +1,57 @@
+---
+title: Ressources
+lastmod: '2025-10-19T13:04:06.226Z'
+description: Gestion des actifs dans DocStatic.
+tags:
+  - content
+  - content_images
+draft: false
+review: false
+translate: false
+approved: false
+published: true
+unlisted: false
+---
+
+# Ressources
+
+Parfois, vous souhaitiez créer des liens vers des ressources (par exemple, des fichiers docx, des images, etc.) directement à partir des rubriques. DocStatic dirige cela à travers le dossier static/.
+
+Tout contenu placé dans ce dossier sera disponible à la racine du site publié. Par exemple, dans le cas de DocStatic, il s'agit d'un dossier statique :
+
+```
+# Votre document
+/website/docs/myFeature.mdx
+
+# Quelques actifs que vous voulez utiliser
+/website/assets/docstatic-asset-example.docx
+/website/img/docstastic-asset-example-banner.png
+```
+
+## Images
+
+DocStatic propose deux façons d'ajouter des images aux rubriques. Pour les images en ligne, vous pouvez cliquer sur l'icône Image pour placer une image dans une rubrique. Cette méthode fonctionne mieux pour les icônes et les petites images. Pour les images plus grandes, il est préférable d'utiliser le composant Figure.
+
+1. Sélectionnez **Figure** dans la liste **Embed**.
+2. Modifiez le composant.
+3. Cliquez sur la zone **Image** pour ouvrir le **Media Manager**.
+4. Téléchargez ou sélectionnez une image.
+5. Donnez-lui une **Caption**.
+
+#### Exemple :
+
+<Figure img="/img/docStaticDemo.jpg" caption="Exemple de figure" size="" />
+
+La figure est redimensionnée en fonction de la fenêtre d'affichage. En cliquant dessus, vous l'ouvrirez à sa taille maximale dans une boîte lumineuse.
+
+Pour plus d'informations sur le gestionnaire de médias, reportez-vous à [Media Overview](https://tina.io/docs/reference/media/overview) dans la documentation de TinaCMS.
+
+## Fichiers
+
+De la même manière, vous pouvez créer un lien vers des ressources existantes avec le chemin du dossier static/ dans l'URL. Par exemple, vous pouvez créer un lien vers un fichier existant avec le chemin du dossier `static/` dans l'URL :
+
+```
+./assets/docstatic-asset-example.docx
+```
+
+Pour plus d'informations, voir [Ressources](https://docusaurus.io/fr/docs/markdown-features/assets) dans la documentation de Docusaurus.

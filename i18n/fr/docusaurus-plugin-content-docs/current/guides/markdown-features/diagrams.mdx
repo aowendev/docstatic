@@ -1,0 +1,45 @@
+---
+title: Diagrammes
+lastmod: '2025-10-19T13:13:36.135Z'
+description: Diagrammes d'écriture avec Mermaid.
+tags:
+  - content
+  - content_diagrams
+draft: false
+review: false
+translate: false
+approved: false
+published: true
+unlisted: false
+---
+
+# Diagrammes
+
+Les diagrammes peuvent être rendus avec [Mermaid](https://mermaid.js.org/) dans un bloc de code.
+
+## Utiliser
+
+Le CMS prend directement en charge l'édition des diagrammes Mermaid.
+
+1. Cliquez sur l'icône **Mermaid**.
+2. Entrez le Markdown dans la boîte.
+
+Cliquez sur **Examen** pour visualiser votre diagramme.
+
+#### Exemple :
+
+```mermaid
+graph TD;
+    A-->B;
+    A-->C;
+    B-->D;
+    C-->D;
+```
+
+<Admonition type="note" title="Note">
+  Actuellement, les diagrammes zenUML ne sont pas pris en charge et les diagrammes de cartes heuristiques peuvent produire un comportement inhabituel. Tous les types de diagrammes ne peuvent pas être prévisualisés dans le CMS.
+</Admonition>
+
+Pour plus d'informations, reportez-vous à [Mermaid](https://tina.io/docs/reference/rich-text-usage/mermaid) dans la documentation de TinaCMS.
+
+Pour plus d'informations sur la thématisation de Mermaid, voir [Diagrammes](https://docusaurus.io/fr/docs/markdown-features/diagrams) dans la documentation de Docusaurus.

@@ -1,0 +1,118 @@
+---
+title: Fonctionnalités de Markdown
+lastmod: '2025-10-19T13:35:13.680Z'
+description: >-
+  DocStatic utilise MDX. En savoir plus sur les fonctionnalités spécifiques à
+  DocStatic lors de l'écriture de Markdown.
+tags:
+  - computer-languages
+  - computer-languages_markdown
+  - elements
+  - elements_tabs
+  - elements_footnotes
+  - elements_figures
+  - elements_doc-card-lists
+  - elements_admonitions
+  - elements_comments
+  - elements_code-blocks
+  - elements_horizontal-rules
+  - elements_links
+  - elements_tables
+  - elements_quotes
+draft: false
+review: false
+translate: false
+approved: false
+published: true
+unlisted: false
+---
+
+# Fonctionnalités de Markdown
+
+DocStatic utilise [Markdown](https://commonmark.org/) comme principal format de création de contenu. Vous pouvez [l'apprendre en dix minutes](https://commonmark.org/help/). Mais vous n'avez pas à le faire car le CMS fournit un environnement d'édition de texte riche complet pour les métadonnées, Markdown et les composants React.
+
+## Rédaction structurée simple
+
+Les sujets dans DocStatic ont trois parties :
+
+* Métadonnées (au format [YAML](https://yaml.org/spec/1.2.2/))
+* Contenu (en Markdown)
+* Composants React prédéfinis.
+
+Le CMS s'assure que les métadonnées et le format Markdown sont utilisés de manière cohérente, tandis que les composants React fournissent un style uniforme et prennent en charge les fonctions de réutilisation du contenu. Vous n'avez pas besoin d'ajouter du code JSX vous-même car les composants sont déjà disponibles globalement.
+
+## Fonctionnalités standard
+
+Les fonctionnalités Markdown incluent :
+
+* Styles de caractères gras, code, italique et barré.
+* Listes numérotées et à puces.
+* Blocs de code.
+* Niveaux de titres (1 à 6).
+* Règles horizontales.
+* Images.
+* Liens.
+* Citations.
+* Tableaux simples.
+
+Tous ces éléments peuvent être sélectionnés directement à partir de la barre d'outils "texte riche" du CMS.
+
+A cela, Docusaurus ajoute :
+
+* Admonitions
+* Détails (expansion du contenu)
+* Listes de fiches doc
+* Onglets
+
+DocStatic étend encore ce système avec :
+
+* Extraits de code (depuis fichiers)
+* Commentaires
+* Texte conditionnel
+* Liens d'aide contextuelle
+* Diagrammes
+* Figures
+* Notes de bas de page
+* Glossaire
+* Équations mathématiques
+* Bribes d'information
+* Variables
+
+## Première page
+
+La page de garde est utilisée pour ajouter des métadonnées à votre fichier Markdown. Il est fourni tout en haut du fichier, entouré de trois tirets ---. Les plugins de contenu peuvent avoir leur propre schéma de contenu. DocStatic utilise la matière première pour :
+
+* Les conditions (pour le texte conditionnel)
+* Les descriptions
+* Slugs (chemins d'accès fixes)
+* Balises de taxonomie
+* Titres
+* Statut du flux de travail
+
+## Détails
+
+1. Sélectionnez **Details** dans la liste **Embed**.
+2. Modifiez le composant.
+3. Donnez-lui un **Summary**.
+4. Saisissez les **Details**.
+
+#### Exemple :
+
+<Details summary="Toggle me.">
+  Il s'agit du contenu détaillé.
+
+  Vous pouvez utiliser Markdown ici, y compris le texte en **gras** et *italique*, et les \[liens] en ligne ([https://docusaurus.io/](https://docusaurus.io/)).
+</Details>
+
+## Listes de cartes document
+
+Les listes de fiches sont générées automatiquement pour les catégories de la table des matières. Toutefois, vous pouvez également les ajouter manuellement à une rubrique.
+
+1. Sélectionnez **Doc Card List** dans la liste **Embed**.
+2. Offrez-lui un **Title**.
+
+Pour plus d'informations, voir [Fonctionnalités Markdown](https://docusaurus.io/fr/docs/markdown-features) dans la documentation de Docusarus.
+
+#### Exemple :
+
+<DocCardList title="Fonctionnalités Markdown" />
