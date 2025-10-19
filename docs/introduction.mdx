@@ -13,11 +13,11 @@ tags:
   - software_static-site-generators_docusaurus
   - software_content-management-systems
   - software_content-management-systems_tinacms
-draft: false
-review: false
+draft: true
+review: true
 translate: false
 approved: false
-published: true
+published: false
 unlisted: false
 ---
 
@@ -25,7 +25,7 @@ DocStatic is a modern documentation platform that bridges the gap between writer
 
 It simultaneously provides the best features of [component content management systems](https://en.wikipedia.org/wiki/Component_content_management_system) and [docs-as-code](https://www.writethedocs.org/guide/docs-as-code/) solutions for online documentation. It enables anyone on your team to create and edit your documents without sacrificing your developer workflow.
 
-DocStatic was created as a refinement of [Tinasaurus](https://tina.io/blog/tinasaurus-docusaurus-starter), an open-source [React](https://react.dev/)-based project that combines a [static site generator](https://en.wikipedia.org/wiki/Static_site_generator) ([Docusaurus](https://docusaurus.io/)) with a [headless content management system](https://en.wikipedia.org/wiki/Headless_content_management_system) ([TinaCMS](https://tina.io/). It includes:
+DocStatic was created as a refinement of [Tinasaurus](https://tina.io/blog/tinasaurus-docusaurus-starter), an open-source [React](https://react.dev/)-based project that combines a [static site generator](https://en.wikipedia.org/wiki/Static_site_generator) ([Docusaurus](https://docusaurus.io/)) with a [headless content management system](https://en.wikipedia.org/wiki/Headless_content_management_system) ([TinaCMS](https://tina.io/)). It includes:
 
 * Editing interface for Markdown, MDX, JSON, and YAML content.
 * Integration with existing Git and CI/CD workflows.
@@ -35,7 +35,7 @@ DocStatic was created as a refinement of [Tinasaurus](https://tina.io/blog/tinas
 
 ## Git-backed
 
-Source control, automation and, optionally, publishing are managed through [GitHub](https://github.com/). The repository structure is very similar to the Docusaurus defaults, but with some changes required for integration with TinaCMS. When editing files with the rich-text editor, TinaCMS commits on save or saves directly to the file if working locally. Git remains the source of truth for the whole team.
+Source control, automation and, optionally, publishing are managed through [GitHub](https://github.com/). The repository structure is very similar to the Docusaurus defaults, but with some changes required for integration with TinaCMS. When editing files with the rich-text editor, TinaCMS either commits on save or saves directly to the file if working locally. Git remains the source of truth for the whole team.
 
 ## React-based
 
@@ -43,7 +43,11 @@ Content is stored in MDX format—an extension to Markdown that supports custom 
 
 ## Easy content management
 
-The CMS uses a [GraphQL](https://graphql.org/) schema to describe the shape of your content as a set of collections. DocStatic's default collections include conditional text, glossary terms, snippets, taxonomies and variable sets. The CMS defines components that can be embedded as templates, making them available in the rich text editor. DocStatic's default templates include code blocks, comments, collapsible details, figures, footnotes and tabs.
+DocStatic's default collections include some of the more advanced authoring features you'd expect to find in a CCMS. These include conditional text, snippets, and variable sets for content reuse. You can also create taxonomies and glossary terms.
+
+The CMS uses a [GraphQL](https://graphql.org/) schema to describe the shape of your content as a set of collections. 
+
+The CMS defines components that can be embedded as templates, making them available in the rich text editor. DocStatic's default templates include code blocks, comments, collapsible details, figures, footnotes and tabs.
 
 ## Preconfigured plugins
 
