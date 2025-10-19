@@ -1,6 +1,5 @@
 import React from "react";
 import { defineConfig, ReferenceField, TextField } from "tinacms";
-import title from "title";
 // get conditions from the conditions JSON file
 import conditionsData from "../reuse/conditions/index.json";
 // get doc tags from the taxonomy JSON file

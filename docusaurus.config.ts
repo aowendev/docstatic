@@ -52,13 +52,15 @@ const formatFooterItem = (item: { title: any; items: any[]; label: any; to: any;
 const config = {
   markdown: {
     mermaid: true,
+    hooks: {
+      onBrokenMarkdownLinks: "warn",
+    }
   },
   title: docusaurusData.title || "My Site",
   tagline: docusaurusData.tagline || "Tag Line",
   url: docusaurusData.url || "https://www.example.com/docstatic/",
   baseUrl: "",
   onBrokenLinks: "warn",
-  onBrokenMarkdownLinks: "warn",
   favicon: "img/docstatic.png",
   // Client modules that run on every page
   clientModules: [require.resolve("./src/clientModules/editThisPageTarget.js")],
