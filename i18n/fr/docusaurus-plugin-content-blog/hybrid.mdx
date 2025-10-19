@@ -1,15 +1,15 @@
 ---
 authors:
-  - name: Andrew Owen
-    title: docStatic maintainer
-    url: 'https://github.com/aowendev'
-    image_url: 'https://avatars.githubusercontent.com/u/84041006'
-date: '2025-02-27'
+  - name: "Andrew Owen"
+    title: "docStatic maintainer"
+    url: "https://github.com/aowendev"
+    image_url: "https://avatars.githubusercontent.com/u/84041006"
+date: "2025-02-27"
 title: Les systèmes hybrides de gestion des documents revisités
-lastmod: '2025-10-19T11:59:14.005Z'
+lastmod: "2025-10-19T16:37:54.096Z"
 tags:
-  - content
-  - content_blog-articles
+  - "content"
+  - "content_blog-articles"
 ---
 
 En janvier de l'année dernière, j'étais candidat à un poste de responsable de la documentation et je devais trouver une solution pour répondre aux besoins des rédacteurs et des développeurs contributeurs.
@@ -40,4 +40,4 @@ Ce qui me ramène à Markdown. Existait-il un SSG dont l'objectif principal éta
 
 Je n'ai pas réussi à trouver un moyen d'activer les widgets de version et de localisation dans la barre de navigation avec la solution Tina, j'ai donc décidé d'utiliser une définition fixe pour ces widgets. Pour la plupart des autres paramètres, Tina utilise des fichiers JSON qui sont référencés par la configuration. L'ajout du support de la recherche [Mermaid](https://mermaid.js.org/) et [Lunr](https://lunrjs.com/) était trivial, bien que la recherche ne fonctionne qu'en production. Plutôt que d'essayer de vous expliquer tout ce que j'ai dû faire pour que cela fonctionne, j'ai pensé cette fois-ci partager simplement le [repo](https://github.com/aowendev/docstatic). Le composant de Palo Alto Networks est disponible sous la licence MIT, j'ai donc utilisé la même licence. La seule configuration que vous aurez à faire est d'ajouter vos identifiants Tina pour permettre l'édition web en ligne.
 
-Pour en revenir aux exigences, nous avons un repo GitHub avec Actions. Docusaurus remplace Hugo en tant que SSG. Nous utilisons Markdown Extended (MDX) à la place d'AsciiDoc. Nous pouvons toujours utiliser \[LanguageTool] ([https://languagetool.org/](https://languagetool.org/)) avec TinaCMS et VScode. Nous utilisons Tina à la place de l'éditeur XML Mind. Nous avons des diagrammes Mermaid, avec prévisualisation dans Tina. Nous utilisons Lunr pour la recherche, mais si cela ne suffit pas, il y a un support intégré [Algolia](https://www.docusaurus.io/docs/search). Il existe un plug-in pour [Matomo analytics](https://github.com/karser/docusaurus-plugin-matomo)). Il existe un plug-in pour [GraphQL docs](https://github.com/Zhouzi/docusaurus-graphql-plugin)). Docusaurus inclut le support des versions et de la localisation. Nous pouvons toujours utiliser [DeepL](https://www.deepl.com/) pour la traduction automatique. Nous pouvons toujours utiliser [Pandoc](https://pandoc.org/) pour l'impression au format PDF ou Word pour l'exportation vers [Affinity Publisher](https://affinity.serif.com/en-us/publisher/).
+Pour en revenir aux exigences, nous avons un repo GitHub avec Actions. Docusaurus remplace Hugo en tant que SSG. Nous utilisons Markdown Extended (MDX) à la place d'AsciiDoc. Nous pouvons toujours utiliser [LanguageTool](https://languagetool.org/fr/) avec TinaCMS et VScode. Nous utilisons Tina à la place de l'éditeur XML Mind. Nous avons des diagrammes Mermaid, avec prévisualisation dans Tina. Nous utilisons Lunr pour la recherche, mais si cela ne suffit pas, il y a un support intégré [Algolia](https://www.docusaurus.io/docs/search). Il existe un plug-in pour [Matomo analytics](https://github.com/karser/docusaurus-plugin-matomo)). Il existe un plug-in pour [GraphQL docs](https://github.com/Zhouzi/docusaurus-graphql-plugin)). Docusaurus inclut le support des versions et de la localisation. Nous pouvons toujours utiliser [DeepL](https://www.deepl.com/) pour la traduction automatique. Nous pouvons toujours utiliser [Pandoc](https://pandoc.org/) pour l'impression au format PDF ou Word pour l'exportation vers [Affinity Publisher](https://affinity.serif.com/en-us/publisher/).
