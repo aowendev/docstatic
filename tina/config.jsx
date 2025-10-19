@@ -105,6 +105,17 @@ const PostCollection = {
   ui: {
     defaultItem: {
       date: docusaurusDate(new Date()),
+      lastmod: new Date().toISOString(),
+    },
+    beforeSubmit: async ({
+      form,
+      cms,
+      values,
+    }) => {
+      return {
+        ...values,
+        lastmod: new Date().toISOString(),
+      };
     },
   },
   fields: [
@@ -125,6 +136,37 @@ const PostCollection = {
       label: "Title",
       isTitle: true,
       required: true,
+    },
+    {
+      type: "string",
+      name: "lastmod",
+      label: "Last Modified",
+      ui: {
+        component: "text",
+        disabled: true,
+        format: (val) => {
+          if (!val) return '';
+          try {
+            return new Date(val).toLocaleString('en-US', {
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric',
+              hour: '2-digit',
+              minute: '2-digit',
+              timeZoneName: 'short'
+            });
+          } catch {
+            return val;
+          }
+        },
+      },
+    },
+    {
+      type: "rich-text",
+      name: "body",
+      label: "Body",
+      isBody: true,
+      templates: [...MDXTemplates],
     },
     {
       name: "authors",
@@ -184,13 +226,6 @@ const PostCollection = {
       },
       options: allTags,
     },
-    {
-      type: "rich-text",
-      name: "body",
-      label: "Body",
-      isBody: true,
-      templates: [...MDXTemplates],
-    },
   ],
 };
 
@@ -199,6 +234,21 @@ const SnippetsCollection = {
   label: "Snippets",
   path: "reuse/snippets",
   format: "mdx",
+  ui: {
+    defaultItem: {
+      lastmod: new Date().toISOString(),
+    },
+    beforeSubmit: async ({
+      form,
+      cms,
+      values,
+    }) => {
+      return {
+        ...values,
+        lastmod: new Date().toISOString(),
+      };
+    },
+  },
   fields: [
     {
       type: "boolean",
@@ -220,6 +270,30 @@ const SnippetsCollection = {
       label: "Title",
       isTitle: true,
       required: true,
+    },
+    {
+      type: "string",
+      name: "lastmod",
+      label: "Last Modified",
+      ui: {
+        component: "text",
+        disabled: true,
+        format: (val) => {
+          if (!val) return '';
+          try {
+            return new Date(val).toLocaleString('en-US', {
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric',
+              hour: '2-digit',
+              minute: '2-digit',
+              timeZoneName: 'short'
+            });
+          } catch {
+            return val;
+          }
+        },
+      },
     },
     {
       type: "string",
@@ -247,14 +321,23 @@ const DocsCollection = {
   ui: {
     defaultItem: {
       description: "",
-      tags: [],
-      conditions: [],
       draft: true,
       review: false,
       translate: false,
       approved: false,
       published: false,
       unlisted: false,
+      lastmod: new Date().toISOString(),
+    },
+    beforeSubmit: async ({
+      form,
+      cms,
+      values,
+    }) => {
+      return {
+        ...values,
+        lastmod: new Date().toISOString(),
+      };
     },
   },
   fields: [
@@ -281,8 +364,55 @@ const DocsCollection = {
     },
     {
       type: "string",
-      name: "slug",
-      label: "Slug",
+      name: "lastmod",
+      label: "Last Modified",
+      ui: {
+        component: "text",
+        disabled: true,
+        format: (val) => {
+          if (!val) return '';
+          try {
+            return new Date(val).toLocaleString('en-US', {
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric',
+              hour: '2-digit',
+              minute: '2-digit',
+              timeZoneName: 'short'
+            });
+          } catch {
+            return val;
+          }
+        },
+      },
+    },
+    {
+      type: "rich-text",
+      name: "body",
+      label: "Body",
+      isBody: true,
+      templates: [...MDXTemplates],
+    },
+    {
+      label: "Conditions",
+      name: "conditions",
+      type: "string",
+      list: true,
+      ui: {
+        component: (props) => (
+          <CollapsibleField
+            {...props}
+            FieldComponent={ConditionsTreeField}
+            defaultCollapsed={true}
+          />
+        ),
+      },
+      options: allConditions,
+    },
+    {
+      type: "string",
+      name: "description",
+      label: "Description",
       ui: {
         component: (props) => (
           <CollapsibleField
@@ -295,8 +425,8 @@ const DocsCollection = {
     },
     {
       type: "string",
-      name: "description",
-      label: "Description",
+      name: "slug",
+      label: "Slug",
       ui: {
         component: (props) => (
           <CollapsibleField
@@ -322,22 +452,6 @@ const DocsCollection = {
         ),
       },
       options: allTags,
-    },
-    {
-      label: "Conditions",
-      name: "conditions",
-      type: "string",
-      list: true,
-      ui: {
-        component: (props) => (
-          <CollapsibleField
-            {...props}
-            FieldComponent={ConditionsTreeField}
-            defaultCollapsed={true}
-          />
-        ),
-      },
-      options: allConditions,
     },
     {
       type: "boolean",
@@ -383,13 +497,6 @@ const DocsCollection = {
       label: "Unlisted",
       ui: { component: "hidden" },
     },
-    {
-      type: "rich-text",
-      name: "body",
-      label: "Body",
-      isBody: true,
-      templates: [...MDXTemplates],
-    },
   ],
 };
 
@@ -398,6 +505,22 @@ const WikiCollection = {
   label: "Wiki Pages",
   path: "docs/wiki",
   format: "mdx",
+  ui: {
+    defaultItem: {
+      date: docusaurusDate(new Date()),
+      lastmod: new Date().toISOString(),
+    },
+    beforeSubmit: async ({
+      form,
+      cms,
+      values,
+    }) => {
+      return {
+        ...values,
+        lastmod: new Date().toISOString(),
+      };
+    },
+  },
   fields: [
     {
       type: "boolean",
@@ -419,6 +542,30 @@ const WikiCollection = {
       label: "Title",
       isTitle: true,
       required: true,
+    },
+      {
+      type: "string",
+      name: "lastmod",
+      label: "Last Modified",
+      ui: {
+        component: "text",
+        disabled: true,
+        format: (val) => {
+          if (!val) return '';
+          try {
+            return new Date(val).toLocaleString('en-US', {
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric',
+              hour: '2-digit',
+              minute: '2-digit',
+              timeZoneName: 'short'
+            });
+          } catch {
+            return val;
+          }
+        },
+      },
     },
     {
       type: "rich-text",
@@ -460,12 +607,24 @@ const TranslationCollection = {
   format: "mdx",
   ui: {
     defaultItem: {
+      description: "",
       draft: true,
       review: false,
       translate: false,
       approved: false,
       published: false,
       unlisted: false,
+      lastmod: new Date().toISOString(),
+    },
+    beforeSubmit: async ({
+      form,
+      cms,
+      values,
+    }) => {
+      return {
+        ...values,
+        lastmod: new Date().toISOString(),
+      };
     },
   },
   fields: [
@@ -477,7 +636,7 @@ const TranslationCollection = {
       ui: {
         component: (props) => (
           <HelpButton
-            url="https://docstatic.com/docs/i18n/introduction"
+            url="https://docstatic.com/docs/guides/docs/create-doc"
             {...props}
           />
         ),
@@ -492,25 +651,26 @@ const TranslationCollection = {
     },
     {
       type: "string",
-      name: "description",
-      label: "Description",
-    },
-    {
-      label: "Tags",
-      name: "tags",
-      type: "string",
-      list: true,
+      name: "lastmod",
+      label: "Last Modified",
       ui: {
-        component: TagsField,
-      },
-      options: allTags,
-    },
-    {
-      type: "string",
-      name: "status",
-      label: "Document Status",
-      ui: {
-        component: StatusField,
+        component: "text",
+        disabled: true,
+        format: (val) => {
+          if (!val) return '';
+          try {
+            return new Date(val).toLocaleString('en-US', {
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric',
+              hour: '2-digit',
+              minute: '2-digit',
+              timeZoneName: 'short'
+            });
+          } catch {
+            return val;
+          }
+        },
       },
     },
     {
@@ -519,6 +679,110 @@ const TranslationCollection = {
       label: "Body",
       isBody: true,
       templates: [...MDXTemplates],
+    },
+    {
+      label: "Conditions",
+      name: "conditions",
+      type: "string",
+      list: true,
+      ui: {
+        component: (props) => (
+          <CollapsibleField
+            {...props}
+            FieldComponent={ConditionsTreeField}
+            defaultCollapsed={true}
+          />
+        ),
+      },
+      options: allConditions,
+    },
+    {
+      type: "string",
+      name: "description",
+      label: "Description",
+      ui: {
+        component: (props) => (
+          <CollapsibleField
+            {...props}
+            FieldComponent={TextField}
+            defaultCollapsed={true}
+          />
+        ),
+      },
+    },
+    {
+      type: "string",
+      name: "slug",
+      label: "Slug",
+      ui: {
+        component: (props) => (
+          <CollapsibleField
+            {...props}
+            FieldComponent={TextField}
+            defaultCollapsed={true}
+          />
+        ),
+      },
+    },
+    {
+      label: "Tags",
+      name: "tags",
+      type: "string",
+      list: true,
+      ui: {
+        component: (props) => (
+          <CollapsibleField
+            {...props}
+            FieldComponent={TagsField}
+            defaultCollapsed={true}
+          />
+        ),
+      },
+      options: allTags,
+    },
+    {
+      type: "boolean",
+      name: "draft",
+      label: "Workflow",
+      ui: {
+        component: (props) => (
+          <CollapsibleField
+            {...props}
+            FieldComponent={StatusField}
+            defaultCollapsed={true}
+          />
+        ),
+      },
+    },
+    {
+      type: "boolean",
+      name: "review",
+      label: "In Review",
+      ui: { component: "hidden" },
+    },
+    {
+      type: "boolean",
+      name: "translate",
+      label: "In Translation",
+      ui: { component: "hidden" },
+    },
+    {
+      type: "boolean",
+      name: "approved",
+      label: "Translation Approved",
+      ui: { component: "hidden" },
+    },
+    {
+      type: "boolean",
+      name: "published",
+      label: "Published",
+      ui: { component: "hidden" },
+    },
+    {
+      type: "boolean",
+      name: "unlisted",
+      label: "Unlisted",
+      ui: { component: "hidden" },
     },
   ],
 };
@@ -1217,6 +1481,15 @@ const PagesCollection = {
       label: "Title",
       isTitle: true,
       required: true,
+    },
+    {
+      type: "datetime",
+      name: "lastModified",
+      label: "Last Modified",
+      ui: {
+        dateFormat: "MMMM DD YYYY",
+        timeFormat: "hh:mm A",
+      },
     },
     {
       type: "string",

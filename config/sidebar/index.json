@@ -182,6 +182,10 @@
       "docLink": "docs/advanced/index.mdx",
       "items": [
         {
+          "document": "docs/advanced/front-matter-cms.mdx",
+          "_template": "doc"
+        },
+        {
           "document": "docs/advanced/hosted-cms.mdx",
           "_template": "doc"
         },
