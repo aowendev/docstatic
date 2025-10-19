@@ -1,17 +1,17 @@
 ---
 title: Création de pages
+lastmod: '2025-10-19T16:28:38.025Z'
 description: Création de pages dans le CMS.
 tags:
-  - "computer-languages"
-  - "computer-languages_javascript"
-  - "computer-languages_javascript_react"
+  - computer-languages
+  - computer-languages_javascript
+  - computer-languages_javascript_react
 draft: false
 review: false
 translate: false
 approved: false
 published: true
 unlisted: false
-lastmod: "2025-10-19T11:44:28.636Z"
 ---
 
 # Création de pages
@@ -33,10 +33,9 @@ Les pages se distinguent des autres types de contenu dans la mesure où elles so
 
 Les composants React de DocStatic sont disponibles globalement. Mais si vous n'utilisez un composant que sur une seule page, cela n'a pas de sens. Au lieu de cela, vous pouvez importer le composant directement dans la page. Toutefois, pour pouvoir modifier la page dans le CMS, vous devez intégrer la directive d'importation dans un composant [Passthrough](/docs/guides/markdown-features/react#passthrough-component). La page d'exemple sur le site DocStatic importe le composant ColorGenerator de la manière suivante :
 
-``markdown
+```markdown
 <Passthrough type="jsx" string="import ColorGenerator from '@site/src/components/ColorGenerator' ;" summary="Import Statement" />
-
 <Passthrough type="jsx" string="<ColorGenerator />" summary="JSX Component" />
 ```
 
-Pour plus d'informations, voir [Creating Pages](http://localhost:3000/docs/guides/creating-pages) dans la documentation de Docusaurus.
+Pour plus d'informations, voir [Création des pages](https://docusaurus.io/fr/docs/creating-pages) dans la documentation de Docusaurus.
