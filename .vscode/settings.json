@@ -3,5 +3,12 @@
 	"frontMatter.dashboard.openOnStart": true,
 	"frontMatter.content.autoUpdateDate": true,
 	"frontMatter.taxonomy.quoteStringValues": true,
-    "frontMatter.taxonomy.noPropertyValueQuotes": ["title", "description", "tags", "authors"]
+	"frontMatter.taxonomy.noPropertyValueQuotes": [
+		"title",
+		"description",
+		"tags",
+		"authors"
+	],
+	"[markdown]": {
+	}
 }
