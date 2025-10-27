@@ -186,8 +186,16 @@
           "_template": "doc"
         },
         {
-          "document": "docs/advanced/hosted-cms.mdx",
-          "_template": "doc"
+          "title": "Hosted CMS",
+          "link": "doc",
+          "docLink": "docs/advanced/hosted-cms.mdx",
+          "items": [
+            {
+              "document": "docs/advanced/adding-the-cms-to-an-ipad-home-screen.mdx",
+              "_template": "doc"
+            }
+          ],
+          "_template": "category"
         },
         {
           "document": "docs/advanced/notifications.mdx",
