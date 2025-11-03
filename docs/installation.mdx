@@ -24,6 +24,93 @@ unlisted: false
 
 # Installation
 
+Welcome! This guide walks you through setting up DocStatic for the first time.
+
+If you’ve never worked with GitHub or docs-as-code before, don’t worry — we’ll explain what’s needed, why, and where to find more detail.
+
+## Prerequisites
+
+You can run DocStatic locally (on your computer) or host it in the cloud.
+
+For the easiest cloud setup, create free accounts with these services:
+
+* [GitHub ](https://github.com/)— stores your content and tracks changes
+* [TinaCMS](https://tina.io/) — enables browser-based editing
+* [LanguageTool](https://languagetool.org/) — provides optional grammar and style checking
+
+If you plan to run DocStatic locally (on your computer) instead, see the Requirements for local development.
+
+***
+
+## Requirements for local development
+
+This section only applies if you plan to work locally. 
+
+You'll need an Integrated Development Environment (IDE) or a text editor. Two open-source options are:
+
+* [Eclipse](https://eclipseide.org)
+* [VSCodium](https://vscodium.com/)
+
+You will also need to install Node.js for its build tools and Yarn for package management.
+
+### Install Node.js
+
+You need to install [Node.js](https://nodejs.org/) version 18.0 or above.
+
+Check if Node.js is already installed. Open a terminal (Command Prompt or Terminal app) and run:
+
+```
+node -v
+```
+
+If you see a version number starting with v18 or higher, you're good to go.
+
+If Node.js is not installed or you have an older version:
+
+1. Go to the [official Node.js downloads](https://nodejs.org/en/download/prebuilt-installer) page.
+2. Choose the LTS (Long-Term Support) version for your operating system. 
+
+   The installer includes npm, the Node Package Manager, which you'll need in later steps.
+
+   During installation:
+
+   \* Keep the default options selected (these include required dependencies)
+   \* When the installer finishes, close and reopen your terminal.
+3. (Optional) if you work on different projects that need different Node versions, install nvm ([Node Version Manager](https://github.com/nvm-sh/nvm)). With nvm, you can switch between versions of Node without breaking your setup.
+
+
+### Install Yarn
+
+DocStatic uses Yarn for package management.
+
+Check if Yarn is already installed. Open your terminal or command prompt and type:
+
+```
+yarn -v
+```
+
+If you see a version number, Yarn is already installed.
+
+If you get a “command not found” message or similar error, follow the steps below:
+
+1. Open a terminal (Command Prompt or Terminal app) and run:
+
+```
+npm install -g yarn
+```
+
+<Admonition type="note" title="Note">
+  On macOS or Linux, you might need to prefix the command with sudo to grant permission:
+
+  ```
+  sudo npm install -g yarn
+  ```
+</Admonition>
+
+## Get the DocStatic repository
+
+DocStatic’s source code lives on GitHub. To start, you’ll make your own copy (known as forking), then download it to your computer (cloning).
+
 To get started, fork and clone the [DocStatic repository](https://github.com/aowendev/docstatic).
 
 ```shell
