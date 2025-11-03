@@ -44,7 +44,7 @@ If you plan to run DocStatic locally (on your computer) instead, see the Require
 
 ## Requirements for local development
 
-This section only applies if you plan to work locally. 
+This section only applies if you plan to work locally.
 
 You'll need an Integrated Development Environment (IDE) or a text editor. Two open-source options are:
 
@@ -68,7 +68,7 @@ If you see a version number starting with v18 or higher, you're good to go.
 If Node.js is not installed or you have an older version:
 
 1. Go to the [official Node.js downloads](https://nodejs.org/en/download/prebuilt-installer) page.
-2. Choose the LTS (Long-Term Support) version for your operating system. 
+2. Choose the LTS (Long-Term Support) version for your operating system.
 
    The installer includes npm, the Node Package Manager, which you'll need in later steps.
 
@@ -77,7 +77,6 @@ If Node.js is not installed or you have an older version:
    \* Keep the default options selected (these include required dependencies)
    \* When the installer finishes, close and reopen your terminal.
 3. (Optional) if you work on different projects that need different Node versions, install nvm ([Node Version Manager](https://github.com/nvm-sh/nvm)). With nvm, you can switch between versions of Node without breaking your setup.
-
 
 ### Install Yarn
 
@@ -91,9 +90,7 @@ yarn -v
 
 If you see a version number, Yarn is already installed.
 
-If you get a “command not found” message or similar error, follow the steps below:
-
-1. Open a terminal (Command Prompt or Terminal app) and run:
+If you get a “command not found” message or similar error, open a terminal (Command Prompt or Terminal app) and run:
 
 ```
 npm install -g yarn
@@ -111,6 +108,8 @@ npm install -g yarn
   On Windows, you don’t use sudo. Just open your terminal as Administrator and run the command.
 </Admonition>
 
+***
+
 ## Get the DocStatic repository
 
 DocStatic’s source code lives on GitHub. To start, you’ll make your own copy (known as forking), then download it to your computer (cloning).
@@ -121,34 +120,16 @@ To get started, fork and clone the [DocStatic repository](https://github.com/aow
 git clone https://github.com/aowendev/docstatic.git
 ```
 
-## Prerequisites
+If you are going to work locally, you also need to install the project dependencies. Navigate to the root folder of your cloned DocStatic repository and install the packages:
 
-It is possible to use DocStatic locally or configure your own hosted deployment. However, for the easiest cloud deployment, you may want to sign up for accounts with:
-
-* [GitHub](https://github.com/signup)
-* [TinaCMS](https://app.tina.io/register)
-* [LanguageTool](https://languagetool.org/register)
-
-## Requirements
-
-For local development, you should install an IDE. Two free open-source options are:
-
-* [Eclipse](https://eclipseide.org)
-* [VSCodium](https://vscodium.com/)
-
-DocStatic consists of a set of [Node.js](https://nodejs.org/en/download/) packages. You will need version 18.0 or above (which can be checked by running `node -v`). You can use [nvm](https://github.com/nvm-sh/nvm) to manage multiple Node.js versions on a single machine. When installing Node.js, you should select all checkboxes related to dependencies.
-
-Yarn is used for package management. The Yarn maintainers recommend installing Yarn globally by using the NPM package manager, which is included by default with all Node.js installations. Use the `-g` flag with `npm install` to do this:
-
-```shell
-sudo npm install -g yarn
 ```
-
-Then go to the root of the docstatic/ folder and install the dependencies:
-
-```shell
+cd docstatic
 yarn install
 ```
+
+Yarn will download everything listed in package.json. This may take a few minutes.
+
+***
 
 ## Project structure
 
