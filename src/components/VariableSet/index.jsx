@@ -12,20 +12,12 @@ import React from "react";
 // Import the JSON data directly at build time
 import variableSetsData from "/reuse/variableSets/index.json";
 
-const VariableSet = ({ variableSelection, setKey, variableKey, lang }) => {
+const VariableSet = ({ variableSelection, lang }) => {
   const location = useLocation();
   const { i18n } = useDocusaurusContext();
 
-  // Parse composite value or use legacy separate props
-  let finalSetKey, finalVariableKey;
-  
-  if (variableSelection) {
-    [finalSetKey, finalVariableKey] = variableSelection.split('|');
-  } else {
-    // Fallback for legacy usage
-    finalSetKey = setKey;
-    finalVariableKey = variableKey;
-  }
+  // Parse composite value
+  const [finalSetKey, finalVariableKey] = variableSelection?.split('|') || [];
 
   // Determine the current language
   const getCurrentLanguage = () => {
