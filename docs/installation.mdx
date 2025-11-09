@@ -112,15 +112,12 @@ npm install -g yarn
 
 ## Get the DocStatic repository
 
-DocStatic’s source code lives on GitHub. To start, you’ll need to make your own copy by either:
+DocStatic’s source code lives on GitHub. To start, you’ll need to make your own copy by:
 
-* **Creating a fork** of the DocStatic repository
-  Forking creates a copy that you can use to work independently on your own project.
-
-* **Creating a clone** of the DocStatic repository.
-  Cloning makes a copy that is still associated with the original repository. 
-
-Unless your IT department specifically ask you to clone the repository, we recommend that you create a fork.
+1. **Create a fork** of the DocStatic repository
+   Forking creates a copy that you can use to work independently on your own project.
+2. **Create a clone** of your fork.
+   Cloning makes a copy that is associated with the original fork that you made. This can be useful for fixing schema issues, should they occur later. 
 
 ### Fork the DocStatic repository
 
@@ -134,16 +131,19 @@ Unless your IT department specifically ask you to clone the repository, we recom
 
 GitHub makes a new branch of the repository in your GitHub account.
 
-### Clone the DocStatic repository
+### Clone your fork of the DocStatic repository
 
-If your IT department require you to clone the DocStatic repository instead of creating a fork.
+To create a clone:
 
-To create a clone, open your terminal or command prompt and use `cd` to navigate to the location where you want to store the clone. For example, `cd Documents/Projects/GitHub`.
-
-Next, enter:
+1. Log in to your GitHub account.
+2. Navigate to the repository for the fork.
+3. Click on the repository to open it.
+4. Click on **\<> Code** and then copy the url.
+5. Open your terminal or command prompt and use `cd` to navigate to the location where you want to store the clone. For example, `cd Documents/Projects/`.
+6. Enter `git clone` followed by the url of your clone.
 
 ```shell
-git clone https://github.com/aowendev/docstatic.git
+git clone https://github.com/acme-projects/docstatic.git
 ```
 
 ***
