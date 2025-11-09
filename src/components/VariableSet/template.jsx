@@ -5,6 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import variableSets from "../../../reuse/variableSets/index.json";
+
 export const VariableSetBlockTemplate = {
   name: "VariableSet",
   label: "Variable",
@@ -20,6 +22,10 @@ export const VariableSetBlockTemplate = {
       label: "Variable Set",
       type: "string",
       required: true,
+      options: variableSets.variableSets.map(set => ({
+        value: set.name,
+        label: set.name
+      })),
     },
     {
       name: "variableKey",
@@ -27,6 +33,15 @@ export const VariableSetBlockTemplate = {
       type: "string",
       isTitle: true,
       required: true,
+      options: variableSets.variableSets.flatMap(set => 
+        set.variables.map(variable => ({
+          value: variable.key,
+          label: `${variable.key} (${set.name})`
+        }))
+      ),
+      ui: {
+        component: "select",
+      },
     },
   ],
 };
