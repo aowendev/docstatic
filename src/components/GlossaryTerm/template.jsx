@@ -5,6 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import glossaryTerms from "../../../reuse/glossaryTerms/index.json";
+
 export const GlossaryTermBlockTemplate = {
   name: "GlossaryTerm",
   label: "Glossary Term",
@@ -21,6 +23,16 @@ export const GlossaryTermBlockTemplate = {
       type: "string",
       isTitle: true,
       required: true,
+      options: glossaryTerms.glossaryTerms.map((item) => ({
+        label: item.key,
+        value: item.key,
+      })),
+      ui: {
+        component: "select",
+        description:
+          "Select a file from /reuse/snippets/ (includes subdirectories)",
+      },
     },
   ],
 };
+
