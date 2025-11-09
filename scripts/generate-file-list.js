@@ -8,8 +8,8 @@
 const fs = require("node:fs");
 const path = require("node:path");
 
-function generateFileList() {
-  const codeDir = path.join(__dirname, "../reuse/code");
+function generateFileList(type = "code") {
+  const baseDir = path.join(__dirname, `../reuse/${type}`);
   const files = [];
 
   function walkDir(dir, relativePath = "") {
@@ -31,13 +31,19 @@ function generateFileList() {
           files.push(relativeFilePath);
         }
       }
-    } catch (error) {}
+    } catch {
+      // Silently handle directory read errors
+    }
   }
 
-  if (!fs.existsSync(codeDir)) {
-    files.push("example.a", "example.b"); // fallback files
+  if (!fs.existsSync(baseDir)) {
+    if (type === "code") {
+      files.push("example.a", "example.b"); // fallback files
+    } else if (type === "snippets") {
+      files.push("example.mdx"); // fallback file for snippets
+    }
   } else {
-    walkDir(codeDir);
+    walkDir(baseDir);
   }
 
   // Sort files alphabetically
@@ -50,9 +56,10 @@ function generateFileList() {
   }
 
   // Write to public directory
-  const outputPath = path.join(publicDir, "code-files.json");
+  const outputPath = path.join(publicDir, `${type}-files.json`);
   fs.writeFileSync(outputPath, JSON.stringify(files, null, 2));
 }
 
-// Run the function
-generateFileList();
+// Run the function for both code and snippets
+generateFileList("code");
+generateFileList("snippets");

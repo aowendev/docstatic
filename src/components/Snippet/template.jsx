@@ -5,6 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import snippetFiles from "../../../reuse/snippets-files.json";
+
 export const SnippetBlockTemplate = {
   name: "Snippet",
   label: "Snippet",
@@ -21,6 +23,15 @@ export const SnippetBlockTemplate = {
       type: "string",
       isTitle: true,
       required: true,
+      options: snippetFiles.map((file) => ({
+        label: file,
+        value: file,
+      })),
+      ui: {
+        component: "select",
+        description:
+          "Select a file from /reuse/snippets/ (includes subdirectories)",
+      },
     },
   ],
 };
