@@ -12,9 +12,20 @@ import React from "react";
 // Import the JSON data directly at build time
 import variableSetsData from "/reuse/variableSets/index.json";
 
-const VariableSet = ({ setKey, variableKey, lang }) => {
+const VariableSet = ({ variableSelection, setKey, variableKey, lang }) => {
   const location = useLocation();
   const { i18n } = useDocusaurusContext();
+
+  // Parse composite value or use legacy separate props
+  let finalSetKey, finalVariableKey;
+  
+  if (variableSelection) {
+    [finalSetKey, finalVariableKey] = variableSelection.split('|');
+  } else {
+    // Fallback for legacy usage
+    finalSetKey = setKey;
+    finalVariableKey = variableKey;
+  }
 
   // Determine the current language
   const getCurrentLanguage = () => {
@@ -51,15 +62,15 @@ const VariableSet = ({ setKey, variableKey, lang }) => {
   // All logic now runs at build time
   const getTranslation = () => {
     try {
-      // Find the set by setKey
+      // Find the set by finalSetKey
       const set = Array.isArray(variableSetsData.variableSets)
-        ? variableSetsData.variableSets.find((s) => s.name === setKey)
+        ? variableSetsData.variableSets.find((s) => s.name === finalSetKey)
         : null;
 
-      // Find the variable by variableKey
+      // Find the variable by finalVariableKey
       const variable =
         set && Array.isArray(set.variables)
-          ? set.variables.find((v) => v.key === variableKey)
+          ? set.variables.find((v) => v.key === finalVariableKey)
           : null;
 
       // Find the translation by current language, fallback to 'en'
@@ -71,7 +82,7 @@ const VariableSet = ({ setKey, variableKey, lang }) => {
       }
 
       return "NOT FOUND";
-    } catch (error) {
+    } catch {
       return "NOT FOUND";
     }
   };

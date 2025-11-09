@@ -13,29 +13,21 @@ export const VariableSetBlockTemplate = {
   inline: true,
   ui: {
     itemProps: (item) => {
-      return { label: item?.title };
+      // Extract variable key from composite value for display
+      const variableKey = item?.variableSelection?.split('|')[1] || item?.title;
+      return { label: variableKey };
     },
   },
   fields: [
     {
-      name: "setKey",
-      label: "Variable Set",
-      type: "string",
-      required: true,
-      options: variableSets.variableSets.map(set => ({
-        value: set.name,
-        label: set.name
-      })),
-    },
-    {
-      name: "variableKey",
+      name: "variableSelection",
       label: "Variable",
       type: "string",
       isTitle: true,
       required: true,
       options: variableSets.variableSets.flatMap(set => 
         set.variables.map(variable => ({
-          value: variable.key,
+          value: `${set.name}|${variable.key}`, // Composite value: setKey|variableKey
           label: `${variable.key} (${set.name})`
         }))
       ),
