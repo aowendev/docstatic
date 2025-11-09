@@ -179,7 +179,13 @@ const PostCollection = {
       type: "string",
       list: true,
       ui: {
-        component: TagsField,
+        component: (props) => (
+          <CollapsibleField
+            {...props}
+            FieldComponent={TagsField}
+            defaultCollapsed={true}
+          />
+        ),
       },
       options: allTags,
     },
@@ -245,9 +251,6 @@ const DocsCollection = {
   format: "mdx",
   ui: {
     defaultItem: {
-      description: "",
-      tags: [],
-      conditions: [],
       draft: true,
       review: false,
       translate: false,
@@ -279,9 +282,32 @@ const DocsCollection = {
       required: true,
     },
     {
+      type: "rich-text",
+      name: "body",
+      label: "Body",
+      isBody: true,
+      templates: [...MDXTemplates],
+    },
+    {
+      label: "Conditions",
+      name: "conditions",
       type: "string",
-      name: "slug",
-      label: "Slug",
+      list: true,
+      ui: {
+        component: (props) => (
+          <CollapsibleField
+            {...props}
+            FieldComponent={ConditionsTreeField}
+            defaultCollapsed={true}
+          />
+        ),
+      },
+      options: allConditions,
+    },
+    {
+      type: "string",
+      name: "description",
+      label: "Description",
       ui: {
         component: (props) => (
           <CollapsibleField
@@ -294,8 +320,8 @@ const DocsCollection = {
     },
     {
       type: "string",
-      name: "description",
-      label: "Description",
+      name: "slug",
+      label: "Slug",
       ui: {
         component: (props) => (
           <CollapsibleField
@@ -322,22 +348,7 @@ const DocsCollection = {
       },
       options: allTags,
     },
-    {
-      label: "Conditions",
-      name: "conditions",
-      type: "string",
-      list: true,
-      ui: {
-        component: (props) => (
-          <CollapsibleField
-            {...props}
-            FieldComponent={ConditionsTreeField}
-            defaultCollapsed={true}
-          />
-        ),
-      },
-      options: allConditions,
-    },
+
     {
       type: "boolean",
       name: "draft",
@@ -381,14 +392,7 @@ const DocsCollection = {
       name: "unlisted",
       label: "Unlisted",
       ui: { component: "hidden" },
-    },
-    {
-      type: "rich-text",
-      name: "body",
-      label: "Body",
-      isBody: true,
-      templates: [...MDXTemplates],
-    },
+    }
   ],
 };
 
@@ -490,9 +494,55 @@ const TranslationCollection = {
       required: true,
     },
     {
+      type: "rich-text",
+      name: "body",
+      label: "Body",
+      isBody: true,
+      templates: [...MDXTemplates],
+    },
+    {
+      label: "Conditions",
+      name: "conditions",
+      type: "string",
+      list: true,
+      ui: {
+        component: (props) => (
+          <CollapsibleField
+            {...props}
+            FieldComponent={ConditionsTreeField}
+            defaultCollapsed={true}
+          />
+        ),
+      },
+      options: allConditions,
+    },
+    {
       type: "string",
       name: "description",
       label: "Description",
+      ui: {
+        component: (props) => (
+          <CollapsibleField
+            {...props}
+            FieldComponent={TextField}
+            defaultCollapsed={true}
+          />
+        ),
+      },
+    },
+    {
+      type: "string",
+      name: "slug",
+      label: "Slug",
+      ui: {
+        component: (props) => (
+          <CollapsibleField
+            {...props}
+            FieldComponent={TextField}
+            defaultCollapsed={true}
+          />
+        ),
+      },
     },
     {
       label: "Tags",
@@ -500,25 +550,61 @@ const TranslationCollection = {
       type: "string",
       list: true,
       ui: {
-        component: TagsField,
+        component: (props) => (
+          <CollapsibleField
+            {...props}
+            FieldComponent={TagsField}
+            defaultCollapsed={true}
+          />
+        ),
       },
       options: allTags,
     },
+
     {
-      type: "string",
-      name: "status",
-      label: "Document Status",
+      type: "boolean",
+      name: "draft",
+      label: "Workflow",
       ui: {
-        component: StatusField,
+        component: (props) => (
+          <CollapsibleField
+            {...props}
+            FieldComponent={StatusField}
+            defaultCollapsed={true}
+          />
+        ),
       },
     },
     {
-      type: "rich-text",
-      name: "body",
-      label: "Body",
-      isBody: true,
-      templates: [...MDXTemplates],
+      type: "boolean",
+      name: "review",
+      label: "In Review",
+      ui: { component: "hidden" },
     },
+    {
+      type: "boolean",
+      name: "translate",
+      label: "In Translation",
+      ui: { component: "hidden" },
+    },
+    {
+      type: "boolean",
+      name: "approved",
+      label: "Translation Approved",
+      ui: { component: "hidden" },
+    },
+    {
+      type: "boolean",
+      name: "published",
+      label: "Published",
+      ui: { component: "hidden" },
+    },
+    {
+      type: "boolean",
+      name: "unlisted",
+      label: "Unlisted",
+      ui: { component: "hidden" },
+    }
   ],
 };
 
