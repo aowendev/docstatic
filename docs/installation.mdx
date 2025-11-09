@@ -112,15 +112,45 @@ npm install -g yarn
 
 ## Get the DocStatic repository
 
-DocStatic’s source code lives on GitHub. To start, you’ll make your own copy (known as forking), then download it to your computer (cloning).
+DocStatic’s source code lives on GitHub. To start, you’ll need to make your own copy by either:
 
-To get started, fork and clone the [DocStatic repository](https://github.com/aowendev/docstatic).
+* **Creating a fork** of the DocStatic repository
+  Forking creates a copy that you can use to work independently on your own project.
+
+* **Creating a clone** of the DocStatic repository.
+  Cloning makes a copy that is still associated with the original repository. 
+
+Unless your IT department specifically ask you to clone the repository, we recommend that you create a fork.
+
+### Fork the DocStatic repository
+
+1. Log in to your account in GitHub.
+2. Visit [https://github.com/aowendev/docstatic](https://github.com/aowendev/docstatic).
+3. Click Fork (it is usually to the top-right).
+4. Leave the default Repository name in place.
+5. Enter a description of your project.
+6. Make sure Copy the main branch only is checked.
+7. Click Create fork.
+
+GitHub makes a new branch of the repository in your GitHub account.
+
+### Clone the DocStatic repository
+
+If your IT department require you to clone the DocStatic repository instead of creating a fork.
+
+To create a clone, open your terminal or command prompt and use `cd` to navigate to the location where you want to store the clone. For example, `cd Documents/Projects/GitHub`.
+
+Next, enter:
 
 ```shell
 git clone https://github.com/aowendev/docstatic.git
 ```
 
-If you are going to work locally, you also need to install the project dependencies. Navigate to the root folder of your cloned DocStatic repository and install the packages:
+***
+
+## Install the project dependencies
+
+If you're going to work locally, you also need to install the project dependencies. Use `cd` to navigate to the root folder of your cloned or forked DocStatic repository and install the packages:
 
 ```
 cd docstatic
@@ -133,7 +163,7 @@ Yarn will download everything listed in package.json. This may take a few minute
 
 ## Project structure
 
-After cloning the repository, you will see these files in the `docstatic/` folder:
+After forking or cloning the repository, you will see these files in your `docstatic/` folder:
 
 ```
 docstatic
