@@ -147,6 +147,11 @@ body {
   --ifm-footer-background-color: #0d0d0d;
 }
 
+/* Base64-encoded SVGs (data URIs) */
+html[data-theme='dark'] img[src^='data:image/svg+xml'] {
+  filter: invert(1) hue-rotate(180deg);
+}
+
 /* Dark mode navbar */
 [data-theme="dark"] .navbar {
   background: rgba(0, 0, 0, 0.9);
