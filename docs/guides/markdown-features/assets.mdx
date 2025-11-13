@@ -29,7 +29,13 @@ Any content placed in the folder will be available from the root of the publishe
 
 ## Images
 
-DocStatic provides two ways to add images to topics. For inline images you can click the Image icon to place an image in a topic. This works best for icons and small images. For larger images, it's better to use the Figure component.
+DocStatic provides two ways to add images to topics. For inline images you can click the **Image** icon to place an image in a topic. This works best for icons (![](/img/docs/example.svg)) and small images. Icons should be stored as pre-scaled SVG files. These will be inverted and have their color space rotated by 180° in dark mode.
+
+<Admonition type="tip" title="Tip">
+  You can use [Librsvg](https://wiki.gnome.org/Projects/LibRsvg) to scale SVGs. For example, `rsvg-convert example.svg -h 12 -f svg -o example.svg` sets a height of 12 points.
+</Admonition>
+
+For larger images, it's better to use the Figure component.
 
 1. Select **Figure** from the **Embed** list.
 2. Edit the component.
@@ -37,7 +43,7 @@ DocStatic provides two ways to add images to topics. For inline images you can c
 4. Upload or select an image.
 5. Give it a **Caption**.
 
-#### Example:
+#### Example
 
 <Figure img="/img/docStaticDemo.jpg" caption="Example Figure" size="" />
 
