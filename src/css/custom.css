@@ -766,3 +766,20 @@ h6,
 
 /* Mermaid Zoom Functionality */
 @import "../theme/Mermaid/mermaid-zoom.css";
+
+/* Ordered list styling */
+ol {
+  list-style-type: decimal; /* First level: 1, 2, 3, ... */
+}
+
+ol ol {
+  list-style-type: lower-alpha; /* Second level: a, b, c, ... */
+}
+
+ol ol ol {
+  list-style-type: lower-roman; /* Third level: i, ii, iii, ... */
+}
+
+ol ol ol ol {
+  list-style-type: decimal; /* Fourth level: 1, 2, 3, ... (cycle back) */
+}
