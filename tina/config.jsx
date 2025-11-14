@@ -102,6 +102,12 @@ const PostCollection = {
   path: "blog",
   format: "mdx",
   ui: {
+    beforeSubmit: async ({ values }) => {
+      return {
+      ...values,
+       lastmod: new Date().toISOString(),
+      };
+    },
     defaultItem: {
       date: docusaurusDate(new Date()),
     },
@@ -116,6 +122,14 @@ const PostCollection = {
         component: (props) => (
           <HelpButton url="https://docstatic.com/docs/blog" {...props} />
         ),
+      },
+    },
+    {
+      label: "Last Modified",
+      type: "string",
+      name: "lastmod",
+      ui: {
+        component: "hidden",
       },
     },
     {
@@ -250,6 +264,12 @@ const DocsCollection = {
   },
   format: "mdx",
   ui: {
+    beforeSubmit: async ({ values }) => {
+      return {
+      ...values,
+       lastmod: new Date().toISOString(),
+      };
+    },
     defaultItem: {
       draft: true,
       review: false,
@@ -272,6 +292,14 @@ const DocsCollection = {
             {...props}
           />
         ),
+      },
+    },
+    {
+      label: "Last Modified",
+      type: "string",
+      name: "lastmod",
+      ui: {
+        component: "hidden",
       },
     },
     {
@@ -401,6 +429,14 @@ const WikiCollection = {
   label: "Wiki Pages",
   path: "docs/wiki",
   format: "mdx",
+  ui: {
+    beforeSubmit: async ({ values }) => {
+      return {
+      ...values,
+       lastmod: new Date().toISOString(),
+      };
+    },
+  },
   fields: [
     {
       type: "boolean",
@@ -414,6 +450,14 @@ const WikiCollection = {
             {...props}
           />
         ),
+      },
+    },
+    {
+      label: "Last Modified",
+      type: "string",
+      name: "lastmod",
+      ui: {
+        component: "hidden",
       },
     },
     {
@@ -462,6 +506,12 @@ const TranslationCollection = {
   path: "i18n",
   format: "mdx",
   ui: {
+    beforeSubmit: async ({ values }) => {
+      return {
+      ...values,
+       lastmod: new Date().toISOString(),
+      };
+    },
     defaultItem: {
       draft: true,
       review: false,
@@ -484,6 +534,14 @@ const TranslationCollection = {
             {...props}
           />
         ),
+      },
+    },
+    {
+      label: "Last Modified",
+      type: "string",
+      name: "lastmod",
+      ui: {
+        component: "hidden",
       },
     },
     {
