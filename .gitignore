@@ -8,7 +8,7 @@ node_modules
 /build
 
 # LocalStorage file for builds
-localstorage.json
+localstorage.json*
 
 # Logs
 logs

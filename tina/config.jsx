@@ -20,6 +20,59 @@ import { YouTubeEmbedBlockTemplate } from "../src/components/YouTubeEmbed/templa
 import { MDXTemplates } from "../src/theme/template";
 import { docusaurusDate, titleFromSlug } from "../util";
 
+// Function to extract available locales from Docusaurus config
+function getDocusaurusLocales() {
+  try {
+    // Read Docusaurus config file and extract locales
+    const fs = require('fs');
+    const path = require('path');
+    const configPath = path.resolve(__dirname, '..', 'docusaurus.config.ts');
+    const configContent = fs.readFileSync(configPath, 'utf8');
+    
+    // Extract locales array using regex
+    const localesMatch = configContent.match(/locales:\s*\[([^\]]+)\]/);
+    if (localesMatch) {
+      // Parse the locales array from the string match
+      const localesString = localesMatch[1];
+      // Extract quoted strings
+      const locales = localesString.match(/"([^"]+)"/g);
+      if (locales) {
+        return locales.map(locale => locale.replace(/"/g, ''));
+      }
+    }
+    
+    // Fallback to default if parsing fails
+    return ['en', 'fr'];
+  } catch {
+    // Fallback to default if parsing fails
+    return ['en', 'fr'];
+  }
+}
+
+// Get available locales from Docusaurus config
+const availableLocales = getDocusaurusLocales();
+
+// Create language options with descriptive labels
+const languageOptions = availableLocales.map(locale => {
+  const labels = {
+    'en': 'English (en)',
+    'fr': 'Français (fr)',
+    'es': 'Español (es)',
+    'de': 'Deutsch (de)',
+    'it': 'Italiano (it)',
+    'pt': 'Português (pt)',
+    'ja': '日本語 (ja)',
+    'ko': '한국어 (ko)',
+    'zh': '中文 (zh)',
+    'ru': 'Русский (ru)'
+  };
+  
+  return {
+    value: locale,
+    label: labels[locale] || `${locale.toUpperCase()} (${locale})`
+  };
+});
+
 // Make conditions data available globally for tree component
 if (typeof window !== "undefined") {
   window.conditionsData = conditionsData;
@@ -1544,6 +1597,7 @@ const VariableSetCollection = {
                   label: "Language",
                   name: "lang",
                   required: true,
+                  options: languageOptions,
                 },
                 {
                   type: "string",
@@ -1701,6 +1755,7 @@ const GlossaryTermLanguageTemplate = {
       name: "lang",
       label: "Language Code",
       required: true,
+      options: languageOptions,
     },
     {
       type: "object",
