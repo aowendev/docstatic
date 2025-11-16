@@ -30,7 +30,7 @@ export const GlossaryTermBlockTemplate = {
       ui: {
         component: "select",
         description:
-          "Select a file from /reuse/snippets/ (includes subdirectories)",
+          "Select a glossary term key from the Glossary Terms collection",
       },
     },
   ],

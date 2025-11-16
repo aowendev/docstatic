@@ -186,24 +186,24 @@ const GlossaryTerm = ({ termKey, lang }) => {
         ? glossaryData.glossaryTerms.find((t) => t.key === termKey)
         : null;
 
-      // Find the language object by current language, fallback to 'en'
-      const langObj =
-        entry && Array.isArray(entry.languages)
-          ? entry.languages.find((l) => l.lang === currentLang) ||
-            entry.languages.find((l) => l.lang === "en")
-          : null;
+      if (!entry || !Array.isArray(entry.translations)) {
+        return {
+          term: "TERM NOT FOUND",
+          definition: "NOT FOUND",
+        };
+      }
 
-      // Find the first translation (if any)
+      // Find the translation by current language, fallback to 'en'
       const translation =
-        langObj && Array.isArray(langObj.translations)
-          ? langObj.translations[0]
-          : null;
+        entry.translations.find((t) => t.lang === currentLang) ||
+        entry.translations.find((t) => t.lang === "en") ||
+        entry.translations[0]; // Fallback to first available translation
 
       return {
         term: translation?.term || "TERM NOT FOUND",
         definition: translation?.definition || "NOT FOUND",
       };
-    } catch (error) {
+    } catch {
       return {
         term: "TERM NOT FOUND",
         definition: "NOT FOUND",

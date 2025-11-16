@@ -1716,37 +1716,10 @@ const TaxonomyCollection = {
 
 const GlossaryTermTranslationTemplate = {
   name: "translation",
-  label: "Translations",
+  label: "Translation",
   ui: {
     itemProps: (item) => ({
-      label: `${item.term}: ${item.definition}`,
-    }),
-  },
-  fields: [
-    {
-      type: "string",
-      name: "term",
-      label: "Term",
-      required: true,
-    },
-    {
-      type: "string",
-      name: "definition",
-      label: "Definition",
-      required: true,
-    },
-  ],
-};
-
-const GlossaryTermLanguageTemplate = {
-  name: "language",
-  label: "Language",
-  ui: {
-    itemProps: (item) => ({
-      label:
-        item.translations && item.translations.length > 0
-          ? `${item.lang}: ${item.translations[0].term}`
-          : item.lang,
+      label: `${item.lang}: ${item.term}`,
     }),
   },
   fields: [
@@ -1758,11 +1731,16 @@ const GlossaryTermLanguageTemplate = {
       options: languageOptions,
     },
     {
-      type: "object",
-      name: "translations",
-      label: "Definitions",
-      list: true,
-      templates: [GlossaryTermTranslationTemplate],
+      type: "string",
+      name: "term",
+      label: "Term",
+      required: true,
+    },
+    {
+      type: "string",
+      name: "definition",
+      label: "Definition",
+      required: true,
     },
   ],
 };
@@ -1785,10 +1763,10 @@ const GlossaryTermTemplate = {
     },
     {
       type: "object",
-      name: "languages",
+      name: "translations",
       label: "Translations",
       list: true,
-      templates: [GlossaryTermLanguageTemplate],
+      templates: [GlossaryTermTranslationTemplate],
     },
   ],
 };
