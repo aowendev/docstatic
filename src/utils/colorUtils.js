@@ -55,12 +55,40 @@ export const LIGHT_PRIMARY_COLOR = "#005eb8";
 export const DARK_PRIMARY_COLOR = "#0055a6";
 export const LIGHT_BACKGROUND_COLOR = "#ffffff";
 export const DARK_BACKGROUND_COLOR = "#181920";
-export const lightStorage = createStorageSlot("ifm-theme-colors-light", {
-  persistence: "sessionStorage",
-});
-export const darkStorage = createStorageSlot("ifm-theme-colors-dark", {
-  persistence: "sessionStorage",
-});
+
+// Create storage slots only on client side to prevent SSR SecurityErrors
+// During SSR (Server-Side Rendering), localStorage is not available and causes:
+// "SecurityError: Cannot initialize local storage without a `--localstorage-file` path"
+const createStorage = () => {
+  if (typeof window === 'undefined') {
+    // Server-side fallback with dummy storage
+    return {
+      get: () => null,
+      set: () => {},
+      del: () => {}
+    };
+  }
+  return createStorageSlot("ifm-theme-colors-light", {
+    persistence: "sessionStorage",
+  });
+};
+
+const createDarkStorage = () => {
+  if (typeof window === 'undefined') {
+    // Server-side fallback with dummy storage
+    return {
+      get: () => null,
+      set: () => {},
+      del: () => {}
+    };
+  }
+  return createStorageSlot("ifm-theme-colors-dark", {
+    persistence: "sessionStorage",
+  });
+};
+
+export const lightStorage = createStorage();
+export const darkStorage = createDarkStorage();
 export function getAdjustedColors(shades, baseColor) {
   return Object.keys(shades).map((shade) => {
     const shadeValue = shades[shade];
