@@ -84,8 +84,8 @@ const config = {
   // metadata like html lang. For example, if your site is Chinese, you may want
   // to replace "en" with "zh-Hans".
   i18n: {
-    defaultLocale: "en",
-    locales: ["en", "fr"],
+    defaultLocale: docusaurusData.languages.default,
+    locales: docusaurusData.languages.supported.map((lang: any) => lang.code),
   },
 
   presets: [
