@@ -7,9 +7,6 @@ node_modules
 # Production
 /build
 
-# LocalStorage file for builds
-localstorage.json*
-
 # Logs
 logs
 *.log

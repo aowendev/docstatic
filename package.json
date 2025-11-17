@@ -17,14 +17,14 @@
     "graphql"
   ],
   "scripts": {
-    "docusaurus": "node --localstorage-file=./localstorage.json ./node_modules/.bin/docusaurus",
-    "dev": "tinacms dev -c \"node --localstorage-file=./localstorage.json ./node_modules/.bin/docusaurus start\" ",
-    "start": "node --localstorage-file=./localstorage.json ./node_modules/.bin/docusaurus start",
+    "docusaurus": "docusaurus",
+    "dev": "tinacms dev -c \"docusaurus start\"",
+    "start": "docusaurus start",
     "generate-files": "node scripts/generate-file-list.js",
     "prebuild": "yarn generate-files",
     "predev": "yarn generate-files",
-    "build": "tinacms build && node --localstorage-file=./localstorage.json ./node_modules/.bin/docusaurus build",
-    "build-local": "tinacms build --local --skip-indexing --skip-cloud-checks && node --localstorage-file=./localstorage.json ./node_modules/.bin/docusaurus build",
+    "build": "tinacms build && docusaurus build",
+    "build-local": "tinacms build --local --skip-indexing --skip-cloud-checks && docusaurus build",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
     "clear": "docusaurus clear",
@@ -98,6 +98,6 @@
     "@tinacms/cli": "^1.12.3"
   },
   "engines": {
-    "node": ">=20.0"
+    "node": "24.11.1"
   }
 }
