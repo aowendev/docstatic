@@ -7,6 +7,19 @@
   "title": "docStatic",
   "tagline": "Modern Documentation Solution",
   "url": "https://docstatic.com/",
+  "languages": {
+    "supported": [
+      {
+        "code": "en",
+        "label": "English"
+      },
+      {
+        "code": "fr",
+        "label": "Français"
+      }
+    ],
+    "default": "en"
+  },  
   "footer": {
     "style": "dark",
     "links": [
