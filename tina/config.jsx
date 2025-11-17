@@ -4,6 +4,8 @@ import { defineConfig, ReferenceField, TextField } from "tinacms";
 import conditionsData from "../reuse/conditions/index.json";
 // get doc tags from the taxonomy JSON file
 import data from "../reuse/taxonomy/index.json";
+// get docusaurus configfor language settings
+import docusaurusData from "../config/docusaurus/index.json";
 // collapsible field component
 import CollapsibleField from "../src/components/CollapsibleField";
 // conditions tree UI component
