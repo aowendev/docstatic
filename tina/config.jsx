@@ -22,56 +22,26 @@ import { docusaurusDate, titleFromSlug } from "../util";
 
 // Function to extract available locales from Docusaurus config
 function getDocusaurusLocales() {
-  try {
-    // Read Docusaurus config file and extract locales
-    const fs = require('fs');
-    const path = require('path');
-    const configPath = path.resolve(__dirname, '..', 'docusaurus.config.ts');
-    const configContent = fs.readFileSync(configPath, 'utf8');
-    
-    // Extract locales array using regex
-    const localesMatch = configContent.match(/locales:\s*\[([^\]]+)\]/);
-    if (localesMatch) {
-      // Parse the locales array from the string match
-      const localesString = localesMatch[1];
-      // Extract quoted strings
-      const locales = localesString.match(/"([^"]+)"/g);
-      if (locales) {
-        return locales.map(locale => locale.replace(/"/g, ''));
-      }
-    }
-    
-    // Fallback to default if parsing fails
-    return ['en', 'fr'];
-  } catch {
-    // Fallback to default if parsing fails
-    return ['en', 'fr'];
-  }
+  return docusaurusData.languages.supported.map(lang => lang.code);
+}
+
+// Function to create language options from config data
+function createLanguageOptions(configData = docusaurusData) {
+  const supportedLanguages = configData.languages?.supported || [{code: "en", label: "English"}];
+  
+  return supportedLanguages.map((langObj) => {
+    return {
+      value: langObj.code,
+      label: `${langObj.label} (${langObj.code})`,
+    };
+  });
 }
 
 // Get available locales from Docusaurus config
 const availableLocales = getDocusaurusLocales();
 
 // Create language options with descriptive labels
-const languageOptions = availableLocales.map(locale => {
-  const labels = {
-    'en': 'English (en)',
-    'fr': 'Français (fr)',
-    'es': 'Español (es)',
-    'de': 'Deutsch (de)',
-    'it': 'Italiano (it)',
-    'pt': 'Português (pt)',
-    'ja': '日本語 (ja)',
-    'ko': '한국어 (ko)',
-    'zh': '中文 (zh)',
-    'ru': 'Русский (ru)'
-  };
-  
-  return {
-    value: locale,
-    label: labels[locale] || `${locale.toUpperCase()} (${locale})`
-  };
-});
+const languageOptions = createLanguageOptions();
 
 // Make conditions data available globally for tree component
 if (typeof window !== "undefined") {
@@ -1167,6 +1137,92 @@ const SettingsCollection = {
       label: "URL",
       name: "url",
       required: true,
+    },
+    {
+      type: "object",
+      label: "Languages",
+      name: "languages",
+      fields: [
+        {
+          type: "object",
+          label: "Supported Languages",
+          name: "supported",
+          list: true,
+          ui: {
+            itemProps: (item) => ({
+              label: `${item.code}: ${item.label}`,
+            }),
+            defaultItem: () => ({
+              code: "en",
+              label: "English"
+            }),
+          },
+          fields: [
+            {
+              type: "string",
+              label: "Language Code",
+              name: "code",
+              required: true,
+            },
+            {
+              type: "string",
+              label: "Display Label",
+              name: "label",
+              required: true,
+            },
+          ],
+        },
+        {
+          type: "string",
+          label: "Default Language",
+          name: "default",
+          required: true,
+          ui: {
+            component: (props) => {
+              // Get the supported languages from the form values
+              const supportedLanguages = React.useMemo(() => {
+                const formValues = props.tinaForm.values;
+                const supported = formValues?.languages?.supported || [];
+                return supported.map(lang => lang.code).filter(Boolean);
+              }, [props.tinaForm.values]);
+
+              // Auto-set to first supported language if current default is not supported
+              React.useEffect(() => {
+                const currentDefault = props.input.value;
+                if (currentDefault && !supportedLanguages.includes(currentDefault)) {
+                  if (supportedLanguages.length > 0) {
+                    props.input.onChange(supportedLanguages[0]);
+                  }
+                }
+              }, [supportedLanguages, props.input]);
+
+              return (
+                <div className="relative">
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    {props.field.label}
+                  </label>
+                  <select
+                    value={props.input.value || (supportedLanguages[0] || "en")}
+                    onChange={(e) => props.input.onChange(e.target.value)}
+                    className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                  >
+                    {supportedLanguages.map(code => (
+                      <option key={code} value={code}>
+                        {code}
+                      </option>
+                    ))}
+                  </select>
+                  {props.field.description && (
+                    <p className="mt-1 text-sm text-gray-500">
+                      {props.field.description}
+                    </p>
+                  )}
+                </div>
+              );
+            },
+          },
+        },
+      ],
     },
     // {
     //   type: "object",
