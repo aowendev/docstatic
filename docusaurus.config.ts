@@ -49,6 +49,65 @@ const formatFooterItem = (item: { title: any; items: any[]; label: any; to: any;
   }
   return linkObject;
 };
+
+const formatNavbarItem = (item: any) => {
+  const baseItem: any = {
+    label: item.label,
+    position: item.position,
+  };
+
+  switch (item.link) {
+    case "doc":
+      return {
+        ...baseItem,
+        type: "doc",
+        docId: item.docId,
+      };
+    case "blog":
+      return {
+        ...baseItem,
+        to: "/blog",
+      };
+    case "page":
+      return {
+        ...baseItem,
+        to: item.pageLink ? getPageRoute(item.pageLink) : "example-page",
+      };
+    case "external":
+      return {
+        ...baseItem,
+        href: item.externalLink,
+      };
+    case "manualPath":
+      return {
+        ...baseItem,
+        to: item.manualPath,
+      };
+    case "localeDropdown":
+      return {
+        type: "localeDropdown",
+        position: item.position,
+      };
+    case "docsVersionDropdown":
+      return {
+        type: "docsVersionDropdown",
+        position: item.position,
+      };
+    case "search":
+      return {
+        type: "search",
+        position: item.position,
+      };
+    case "dropdown":
+      return {
+        ...baseItem,
+        type: "dropdown",
+        items: item.items ? item.items.map(formatNavbarItem) : [],
+      };
+    default:
+      return baseItem;
+  }
+};
 const config = {
   markdown: {
     mermaid: true,
@@ -157,7 +216,7 @@ const config = {
           ? docusaurusData?.logo?.src
           : "img/logo.svg",
       },
-      items: [
+      items: docusaurusData.navbar ? docusaurusData.navbar.map(formatNavbarItem) : [
         {
           type: "doc",
           docId: "introduction",
@@ -186,19 +245,10 @@ const config = {
           position: "left",
           label: "Wiki",
         },
-        //          {
-        //            type: "docsVersionDropdown",
-        //            position: "right",
-        //          },
         {
           type: "localeDropdown",
           position: "right",
         },
-        //          {
-        //            href: "https://www.example.com",
-        //            label: "Example Link",
-        //            position: "right",
-        //          },
       ],
     },
     footer: {

@@ -4164,10 +4164,10 @@
   resolved "https://registry.yarnpkg.com/@tanstack/virtual-core/-/virtual-core-3.13.12.tgz#1dff176df9cc8f93c78c5e46bcea11079b397578"
   integrity sha512-1YBOJfRHV4sXUmWsFSf5rQor4Ss82G8dQWLRbnk3GA4jeP8hQt1hxXh0tmflpC0dz3VgEv/1+qwPyLeWkQuPFA==
 
-"@tinacms/app@2.3.8":
-  version "2.3.8"
-  resolved "https://registry.yarnpkg.com/@tinacms/app/-/app-2.3.8.tgz#7f066f700e247c3e12f0a6d494c6ad6c851b6458"
-  integrity sha512-QHTOo7GaRNiWpnpJmve3tMUrcLHmBamNR6hm1G7cij046NFR+lewav20S56an+7xgureQYrondc9/SHay05exw==
+"@tinacms/app@2.3.9":
+  version "2.3.9"
+  resolved "https://registry.yarnpkg.com/@tinacms/app/-/app-2.3.9.tgz#2285f70f1af07f57e97a5f1672052254742df769"
+  integrity sha512-n46a7V8sxU5F4PayBPmiEoj9wBcpbZUkKExnI6BDYcRSetbgBqnK6EW0lX4K1LmQUJag+Q7cgHxcUgSgWSFFEQ==
   dependencies:
     "@graphiql/toolkit" "0.8.4"
     "@headlessui/react" "2.1.8"
@@ -4181,14 +4181,14 @@
     react "^18.3.1"
     react-dom "^18.3.1"
     react-router-dom "6.3.0"
-    tinacms "2.9.4"
+    tinacms "2.9.5"
     typescript "^5.7.3"
     zod "^3.24.2"
 
-"@tinacms/cli@^1.12.3":
-  version "1.12.3"
-  resolved "https://registry.yarnpkg.com/@tinacms/cli/-/cli-1.12.3.tgz#712bfea2b1522970ad8728b357699807d00c1ec0"
-  integrity sha512-z/1qWOZDQ5bJIWo2vmUhnX6HOW+56J5VzOLE/SgXxmOkAowo4klT248FU1i6XsEE4LNZLiwRTGmMSP8XDtdvEA==
+"@tinacms/cli@^1.12.4":
+  version "1.12.4"
+  resolved "https://registry.yarnpkg.com/@tinacms/cli/-/cli-1.12.4.tgz#3e5b7a5604cef0d96836a8ce8c683034a476d007"
+  integrity sha512-2iIVZMMK9MyviXOU1XzwwU2CAbXQzEclnSuTgNd3ukjmnb520DyrkTcjXuiujZPrU4aiwwTSshPFb6O443sYuA==
   dependencies:
     "@graphql-codegen/core" "^2.6.8"
     "@graphql-codegen/plugin-helpers" latest
@@ -4203,7 +4203,7 @@
     "@tailwindcss/aspect-ratio" "^0.4.2"
     "@tailwindcss/container-queries" "^0.1.1"
     "@tailwindcss/typography" "^0.5.16"
-    "@tinacms/app" "2.3.8"
+    "@tinacms/app" "2.3.9"
     "@tinacms/graphql" "1.6.1"
     "@tinacms/metrics" "1.1.0"
     "@tinacms/schema-tools" "1.9.1"
@@ -4235,7 +4235,7 @@
     prompts "^2.4.2"
     readable-stream "^4.7.0"
     tailwindcss "^3.4.17"
-    tinacms "2.9.4"
+    tinacms "2.9.5"
     typanion "3.13.0"
     typescript "^5.7.3"
     vite "^4.5.9"
@@ -7756,7 +7756,7 @@ dompurify@2.4.1:
   resolved "https://registry.yarnpkg.com/dompurify/-/dompurify-2.4.1.tgz#f9cb1a275fde9af6f2d0a2644ef648dd6847b631"
   integrity sha512-ewwFzHzrrneRjxzmK6oVz/rZn9VWspGFRDb4/rRtIsM1n36t9AKma/ye8syCpcw+XJ25kOK/hOG7t1j2I2yBqA==
 
-dompurify@^3.2.5, dompurify@^3.3.0:
+dompurify@^3.2.5:
   version "3.3.0"
   resolved "https://registry.yarnpkg.com/dompurify/-/dompurify-3.3.0.tgz#aaaadbb83d87e1c2fbb066452416359e5b62ec97"
   integrity sha512-r+f6MYR1gGN1eJv0TVQbhA7if/U7P87cdPl3HN5rikqaBSBxLiCb/b9O+2eG0cxz0ghyU+mU1QkbsOwERMYlWQ==
@@ -15531,11 +15531,6 @@ sockjs@^0.3.24:
     uuid "^8.3.2"
     websocket-driver "^0.7.4"
 
-sonner@^2.0.7:
-  version "2.0.7"
-  resolved "https://registry.yarnpkg.com/sonner/-/sonner-2.0.7.tgz#810c1487a67ec3370126e0f400dfb9edddc3e4f6"
-  integrity sha512-W6ZN4p58k8aDKA4XPcx2hpIQXBRAgyiWVkYhT7CvK6D3iAu7xjvVyhQHg2/iaKJZ1XVJ4r7XuwGL+WGEK37i9w==
-
 sort-css-media-queries@2.2.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/sort-css-media-queries/-/sort-css-media-queries-2.2.0.tgz#aa33cf4a08e0225059448b6c40eddbf9f1c8334c"
@@ -16073,10 +16068,10 @@ thunky@^1.0.2:
   resolved "https://registry.yarnpkg.com/thunky/-/thunky-1.1.0.tgz#5abaf714a9405db0504732bbccd2cedd9ef9537d"
   integrity sha512-eHY7nBftgThBqOyHGVN+l8gF0BucP09fMo0oO/Lb0w1OF80dJv+lDVpXG60WMQvkcxAkNybKsrEIE3ZtKGmPrA==
 
-tinacms@2.9.4, tinacms@^2.9.4:
-  version "2.9.4"
-  resolved "https://registry.yarnpkg.com/tinacms/-/tinacms-2.9.4.tgz#5f1546d3daba88cd97b29d7bab9bf94c55283aa0"
-  integrity sha512-uUROw6XxFt8axo2qh6+ERQCGePx0EKlt3NOyDPhUUENxjJCTfbr288qulx/u6IVSNUBJVuzncHAWuX1WC311Wg==
+tinacms@2.9.5, tinacms@^2.9.5:
+  version "2.9.5"
+  resolved "https://registry.yarnpkg.com/tinacms/-/tinacms-2.9.5.tgz#20e986c840ea8741abf2b86ec760502299e6c710"
+  integrity sha512-6Crfvnh37X0Eb1kAsDsRjF/TVZdqCn/UO2Hw+YfzhP6Ce7u7uulghXK0AzBIKfiutB+IB/KMuTkBOnplyanMxQ==
   dependencies:
     "@ariakit/react" "^0.4.15"
     "@floating-ui/dom" "^1.6.13"
@@ -16128,7 +16123,6 @@ tinacms@2.9.4, tinacms@^2.9.4:
     color-string "^1.9.1"
     crypto-js "^4.2.0"
     date-fns "2.30.0"
-    dompurify "^3.3.0"
     final-form "4.20.10"
     final-form-arrays "^3.1.0"
     final-form-set-field-data "^1.0.2"
@@ -16153,7 +16147,6 @@ tinacms@2.9.4, tinacms@^2.9.4:
     react-icons "^5.4.0"
     react-router-dom "6.3.0"
     react-use "^17.6.0"
-    sonner "^2.0.7"
     tailwind-merge "^2.6.0"
     webfontloader "1.6.28"
     yup "^1.6.1"

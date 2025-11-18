@@ -19,7 +19,49 @@
       }
     ],
     "default": "en"
-  },  
+  },
+  "navbar": [
+    {
+      "label": "Docs",
+      "link": "doc",
+      "docId": "introduction",
+      "position": "left"
+    },
+    {
+      "label": "Blog",
+      "link": "blog",
+      "position": "left"
+    },
+    {
+      "label": "Page",
+      "link": "page",
+      "pageLink": "src/pages/example-page.mdx",
+      "position": "left"
+    },
+    {
+      "label": "GraphQL",
+      "link": "manualPath",
+      "manualPath": "/docs/api/queries",
+      "position": "left"
+    },
+    {
+      "label": "OpenAPI",
+      "link": "manualPath",
+      "manualPath": "/docs/category/petstore-api",
+      "position": "left"
+    },
+    {
+      "label": "Wiki",
+      "link": "doc",
+      "docId": "wiki/readme",
+      "position": "left"
+    },
+    {
+      "label": "Language",
+      "link": "localeDropdown",
+      "position": "right"
+    }
+  ],
   "footer": {
     "style": "dark",
     "links": [

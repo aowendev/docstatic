@@ -951,6 +951,26 @@ const NavbarItemFields = [
         label: "External",
         value: "external",
       },
+      {
+        label: "Manual Path",
+        value: "manualPath",
+      },
+      {
+        label: "Locale Dropdown",
+        value: "localeDropdown",
+      },
+      {
+        label: "Docs Version Dropdown",
+        value: "docsVersionDropdown",
+      },
+      {
+        label: "Dropdown",
+        value: "dropdown",
+      },
+      {
+        label: "Search",
+        value: "search",
+      },
     ],
   },
   {
@@ -1020,6 +1040,54 @@ const NavbarItemFields = [
         }, [props.tinaForm.values, props.field.name]);
 
         if (link !== "external") {
+          return null;
+        }
+
+        return TextField(props);
+      },
+    },
+  },
+  {
+    name: "manualPath",
+    label: "Manual Path",
+    type: "string",
+    ui: {
+      component: (props) => {
+        const link = React.useMemo(() => {
+          let fieldName = props.field.name;
+          fieldName =
+            fieldName.substring(0, fieldName.lastIndexOf(".")) || fieldName;
+
+          return fieldName
+            .split(".")
+            .reduce((o, i) => o[i], props.tinaForm.values).link;
+        }, [props.tinaForm.values, props.field.name]);
+
+        if (link !== "manualPath") {
+          return null;
+        }
+
+        return TextField(props);
+      },
+    },
+  },
+  {
+    name: "docId",
+    label: "Document ID",
+    type: "string",
+    ui: {
+      component: (props) => {
+        const link = React.useMemo(() => {
+          let fieldName = props.field.name;
+          fieldName =
+            fieldName.substring(0, fieldName.lastIndexOf(".")) || fieldName;
+
+          return fieldName
+            .split(".")
+            .reduce((o, i) => o[i], props.tinaForm.values).link;
+        }, [props.tinaForm.values, props.field.name]);
+
+        if (link !== "doc") {
           return null;
         }
 
@@ -1142,117 +1210,31 @@ const SettingsCollection = {
     },
     {
       type: "object",
-      label: "Languages",
-      name: "languages",
+      label: "Navbar",
+      name: "navbar",
+      list: true,
+      ui: {
+        itemProps: (item) => ({
+          label: `${item.label} - ${item.position ? item.position.charAt(0).toUpperCase() + item.position.slice(1) : 'Left'}`,
+        }),
+        defaultItem: {
+          position: "left",
+        },
+      },
       fields: [
+        ...NavbarItemFields,
         {
-          type: "object",
-          label: "Supported Languages",
-          name: "supported",
-          list: true,
-          ui: {
-            itemProps: (item) => ({
-              label: `${item.code}: ${item.label}`,
-            }),
-            defaultItem: () => ({
-              code: "en",
-              label: "English"
-            }),
-          },
+          ...NavbarSubitemProps,
           fields: [
+            ...NavbarItemFields,
             {
-              type: "string",
-              label: "Language Code",
-              name: "code",
-              required: true,
-            },
-            {
-              type: "string",
-              label: "Display Label",
-              name: "label",
-              required: true,
+              ...NavbarSubitemProps,
+              fields: NavbarItemFields,
             },
           ],
         },
-        {
-          type: "string",
-          label: "Default Language",
-          name: "default",
-          required: true,
-          ui: {
-            component: (props) => {
-              // Get the supported languages from the form values
-              const supportedLanguages = React.useMemo(() => {
-                const formValues = props.tinaForm.values;
-                const supported = formValues?.languages?.supported || [];
-                return supported.map(lang => lang.code).filter(Boolean);
-              }, [props.tinaForm.values]);
-
-              // Auto-set to first supported language if current default is not supported
-              React.useEffect(() => {
-                const currentDefault = props.input.value;
-                if (currentDefault && !supportedLanguages.includes(currentDefault)) {
-                  if (supportedLanguages.length > 0) {
-                    props.input.onChange(supportedLanguages[0]);
-                  }
-                }
-              }, [supportedLanguages, props.input]);
-
-              return (
-                <div className="relative">
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    {props.field.label}
-                  </label>
-                  <select
-                    value={props.input.value || (supportedLanguages[0] || "en")}
-                    onChange={(e) => props.input.onChange(e.target.value)}
-                    className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-                  >
-                    {supportedLanguages.map(code => (
-                      <option key={code} value={code}>
-                        {code}
-                      </option>
-                    ))}
-                  </select>
-                  {props.field.description && (
-                    <p className="mt-1 text-sm text-gray-500">
-                      {props.field.description}
-                    </p>
-                  )}
-                </div>
-              );
-            },
-          },
-        },
       ],
     },
-    // {
-    //   type: "object",
-    //   label: "Navbar",
-    //   name: "navbar",
-    //   list: true,
-    //   ui: {
-    //     itemProps: (item) => ({
-    //       label: `${item.label} - ${title(item.position)}`,
-    //     }),
-    //     defaultItem: {
-    //       position: "left",
-    //     },
-    //   },
-    //   fields: [
-    //     ...NavbarItemFields,
-    //     {
-    //       ...NavbarSubitemProps,
-    //       fields: [
-    //         ...NavbarItemFields,
-    //         {
-    //           ...NavbarSubitemProps,
-    //           fields: NavbarItemFields,
-    //         },
-    //       ],
-    //     },
-    //   ],
-    // },
     {
       type: "object",
       label: "Footer",
@@ -1368,6 +1350,92 @@ const SettingsCollection = {
           type: "string",
           label: "Copyright",
           name: "copyright",
+        },
+      ],
+    },
+    {
+      type: "object",
+      label: "Languages",
+      name: "languages",
+      fields: [
+        {
+          type: "object",
+          label: "Supported Languages",
+          name: "supported",
+          list: true,
+          ui: {
+            itemProps: (item) => ({
+              label: `${item.code}: ${item.label}`,
+            }),
+            defaultItem: () => ({
+              code: "en",
+              label: "English"
+            }),
+          },
+          fields: [
+            {
+              type: "string",
+              label: "Language Code",
+              name: "code",
+              required: true,
+            },
+            {
+              type: "string",
+              label: "Display Label",
+              name: "label",
+              required: true,
+            },
+          ],
+        },
+        {
+          type: "string",
+          label: "Default Language",
+          name: "default",
+          required: true,
+          ui: {
+            component: (props) => {
+              // Get the supported languages from the form values
+              const supportedLanguages = React.useMemo(() => {
+                const formValues = props.tinaForm.values;
+                const supported = formValues?.languages?.supported || [];
+                return supported.map(lang => lang.code).filter(Boolean);
+              }, [props.tinaForm.values]);
+
+              // Auto-set to first supported language if current default is not supported
+              React.useEffect(() => {
+                const currentDefault = props.input.value;
+                if (currentDefault && !supportedLanguages.includes(currentDefault)) {
+                  if (supportedLanguages.length > 0) {
+                    props.input.onChange(supportedLanguages[0]);
+                  }
+                }
+              }, [supportedLanguages, props.input]);
+
+              return (
+                <div className="relative">
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    {props.field.label}
+                  </label>
+                  <select
+                    value={props.input.value || (supportedLanguages[0] || "en")}
+                    onChange={(e) => props.input.onChange(e.target.value)}
+                    className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                  >
+                    {supportedLanguages.map(code => (
+                      <option key={code} value={code}>
+                        {code}
+                      </option>
+                    ))}
+                  </select>
+                  {props.field.description && (
+                    <p className="mt-1 text-sm text-gray-500">
+                      {props.field.description}
+                    </p>
+                  )}
+                </div>
+              );
+            },
+          },
         },
       ],
     },
