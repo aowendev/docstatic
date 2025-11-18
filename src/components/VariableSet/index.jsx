@@ -12,7 +12,7 @@ import React from "react";
 // Import the JSON data directly at build time
 import variableSetsData from "/reuse/variableSets/index.json";
 
-const VariableSet = ({ variableSelection, lang }) => {
+const VariableSet = ({ variableSelection, lang, initcap }) => {
   const location = useLocation();
   const { i18n } = useDocusaurusContext();
 
@@ -81,7 +81,12 @@ const VariableSet = ({ variableSelection, lang }) => {
 
   const translation = getTranslation();
 
-  return <span>{translation}</span>;
+  // Apply initcap transformation if requested
+  const displayValue = initcap && translation !== "NOT FOUND" 
+    ? translation.charAt(0).toUpperCase() + translation.slice(1)
+    : translation;
+
+  return <span>{displayValue}</span>;
 };
 
 export default VariableSet;

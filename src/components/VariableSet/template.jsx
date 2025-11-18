@@ -35,5 +35,10 @@ export const VariableSetBlockTemplate = {
         component: "select",
       },
     },
+    {
+      name: "initcap",
+      label: "Capitalize first letter",
+      type: "boolean",
+    },
   ],
 };
