@@ -33,6 +33,11 @@ export const GlossaryTermBlockTemplate = {
           "Select a glossary term key from the Glossary Terms collection",
       },
     },
+    {
+      name: "initcap",
+      label: "Capitalize first letter",
+      type: "boolean",
+    },
   ],
 };
 
