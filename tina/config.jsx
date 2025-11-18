@@ -1175,38 +1175,48 @@ const SettingsCollection = {
       },
     },
     {
-      type: "object",
-      label: "Logo",
-      name: "logo",
-      fields: [
-        {
-          type: "string",
-          label: "Alt Text",
-          name: "alt",
-        },
-        {
-          type: "image",
-          label: "Source",
-          name: "src",
-        },
-      ],
-    },
-    {
       type: "string",
       label: "Title",
       name: "title",
       required: true,
+      ui: {
+        component: (props) => (
+          <CollapsibleField
+            {...props}
+            FieldComponent={TextField}
+            defaultCollapsed={true}
+          />
+        ),
+      },
     },
     {
       type: "string",
       label: "Tagline",
       name: "tagline",
+      ui: {
+        component: (props) => (
+          <CollapsibleField
+            {...props}
+            FieldComponent={TextField}
+            defaultCollapsed={true}
+          />
+        ),
+      },
     },
     {
       type: "string",
       label: "URL",
       name: "url",
       required: true,
+      ui: {
+        component: (props) => (
+          <CollapsibleField
+            {...props}
+            FieldComponent={TextField}
+            defaultCollapsed={true}
+          />
+        ),
+      },
     },
     {
       type: "object",
@@ -1436,6 +1446,23 @@ const SettingsCollection = {
               );
             },
           },
+        },
+      ],
+    },
+    {
+      type: "object",
+      label: "Logo",
+      name: "logo",
+      fields: [
+        {
+          type: "string",
+          label: "Alt Text",
+          name: "alt",
+        },
+        {
+          type: "image",
+          label: "Source",
+          name: "src",
         },
       ],
     },
