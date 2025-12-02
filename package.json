@@ -60,6 +60,8 @@
     "fs-extra": "9.0.1",
     "raw-loader": "^4.0.2",
     "react": "^18.3.1",
+    "react-dnd": "^16.0.1",
+    "react-dnd-html5-backend": "^16.0.1",
     "react-dom": "^18.3.1",
     "react-loadable": "^5.5.0",
     "react-markdown": "^10.1.0",
@@ -72,7 +74,7 @@
     "slate": "^0.118.1",
     "slate-dom": "^0.118.1",
     "sucrase": "^3.35.0",
-    "tinacms": "^2.9.5",
+    "tinacms": "^3.0.0",
     "title": "^4.0.1",
     "typescript": "5.6.3",
     "webpack": "^5.102.1",
@@ -95,7 +97,7 @@
   },
   "devDependencies": {
     "@biomejs/biome": "^2.3.4",
-    "@tinacms/cli": "^1.12.4"
+    "@tinacms/cli": "^2.0.0"
   },
   "engines": {
     "node": "24.11.1"
