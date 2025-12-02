@@ -40,5 +40,10 @@ export const VariableSetBlockTemplate = {
       label: "Capitalize first letter",
       type: "boolean",
     },
+    {
+      name: "bold",
+      label: "Bold text",
+      type: "boolean",
+    },
   ],
 };
