@@ -9,6 +9,33 @@ import React, { useEffect } from "react";
 
 export default function HelpButton({ url }) {
   useEffect(() => {
+    // Inject custom TinaCMS styles for strikethrough highlighting
+    const injectTinaStyles = () => {
+      // Check if styles are already injected
+      if (document.querySelector('#tina-custom-styles')) {
+        return;
+      }
+
+      const style = document.createElement('style');
+      style.id = 'tina-custom-styles';
+      style.textContent = `
+        /* Custom strikethrough styling for TinaCMS rich text editor */
+        .slate-strikethrough,
+        s.slate-strikethrough,
+        del.slate-strikethrough,
+        .slate-editor s,
+        .slate-editor del {
+          text-decoration: none !important;
+          background-color: #ffff99 !important;
+          color: #000 !important;
+          padding: 1px 3px !important;
+          border-radius: 3px !important;
+          box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1) !important;
+        }
+      `;
+      document.head.appendChild(style);
+    };
+
     const injectIcon = () => {
       // Find all <nav> elements
       const elements = Array.from(document.querySelectorAll("nav"));
@@ -41,6 +68,11 @@ export default function HelpButton({ url }) {
         target.appendChild(button);
       }
     };
+    
+    // Inject custom TinaCMS styles
+    injectTinaStyles();
+    
+    // Inject help button icon
     injectIcon();
     const timeout = setTimeout(injectIcon, 500);
     return () => clearTimeout(timeout);
