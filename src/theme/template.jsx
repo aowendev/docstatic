@@ -108,6 +108,7 @@ const DocCardListTemplate = {
 const CommentsTemplate = {
   name: "hidden",
   label: "Comment",
+  inline: true,
   match: {
     start: "<!--",
     end: "-->",
