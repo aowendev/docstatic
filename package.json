@@ -19,8 +19,10 @@
   "scripts": {
     "docusaurus": "docusaurus",
     "dev": "tinacms dev -c \"docusaurus start\"",
+    "dev-with-styles": "./scripts/dev-with-styles.sh",
     "start": "docusaurus start",
     "generate-files": "node scripts/generate-file-list.js",
+    "inject-tina-styles": "node scripts/inject-tina-styles.js",
     "prebuild": "yarn generate-files",
     "predev": "yarn generate-files",
     "build": "tinacms build && docusaurus build",

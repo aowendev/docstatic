@@ -12,7 +12,7 @@ import { createPortal } from "react-dom";
 // Import the JSON data directly at build time
 import glossaryData from "/reuse/glossaryTerms/index.json";
 
-const GlossaryTerm = ({ termKey, lang, initcap }) => {
+const GlossaryTerm = ({ termKey, lang, initcap, bold }) => {
   const location = useLocation();
   const { i18n } = useDocusaurusContext();
   const [showDefinition, setShowDefinition] = useState(false);
@@ -284,7 +284,11 @@ const GlossaryTerm = ({ termKey, lang, initcap }) => {
         onClick={(e) => e.stopPropagation()}
       >
         <div
-          style={{ fontWeight: "bold", marginBottom: "8px", color: textColor }}
+          style={{ 
+            fontWeight: bold ? "bold" : "600", 
+            marginBottom: "8px", 
+            color: textColor 
+          }}
         >
           {initcap && term !== "TERM NOT FOUND" 
             ? term.charAt(0).toUpperCase() + term.slice(1)
@@ -304,6 +308,7 @@ const GlossaryTerm = ({ termKey, lang, initcap }) => {
           textDecoration: "underline",
           cursor: isTouchDevice ? "pointer" : "help",
           position: "relative",
+          fontWeight: bold ? "bold" : "normal",
         }}
         onClick={handleTermClick}
         onTouchStart={isTouchDevice ? (e) => e.stopPropagation() : undefined}

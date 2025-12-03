@@ -783,3 +783,18 @@ ol ol ol {
 ol ol ol ol {
   list-style-type: decimal; /* Fourth level: 1, 2, 3, ... (cycle back) */
 }
+
+/* Strikethrough styling customization */
+/* Default behavior: Remove strikethrough effect on rendered pages */
+article del, 
+article s,
+.markdown del,
+.markdown s,
+main del,
+main s,
+.theme-doc-markdown del,
+.theme-doc-markdown s {
+  text-decoration: none;
+  background: transparent;
+  color: inherit;
+}
