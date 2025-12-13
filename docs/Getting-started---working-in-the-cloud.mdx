@@ -1,0 +1,152 @@
+---
+lastmod: '2025-12-13T10:23:32.218Z'
+title: Getting started - working in the cloud
+draft: true
+review: false
+translate: false
+approved: false
+published: false
+unlisted: false
+---
+
+# Getting started: Working with DocStatic in the Cloud
+
+Welcome! This guide walks you through setting up DocStatic for the first time.
+
+If you’ve never worked with GitHub or docs-as-code before, don’t worry — we’ll explain what’s needed, why, and where to find more detail.
+
+## Prerequisites
+
+You can run DocStatic locally (on your computer) or host it in the cloud. In this article, we explain how to host it in the cloud.
+
+For the easiest cloud setup, create free accounts with these services:
+
+* [GitHub](https://github.com/) — stores your content and tracks changes
+* [TinaCMS](https://tina.io/) — enables browser-based editing
+* [LanguageTool](https://languagetool.org/) — provides optional grammar and style checking
+
+***
+
+## Fork the DocStatic repository
+
+DocStatic’s source code lives on GitHub. To start, you’ll need to fork it. This gives you a personal copy that you can use in your own repository, without affecting the original version.
+
+1. Log in to your account in GitHub.
+2. Visit [https://github.com/aowendev/docstatic](https://github.com/aowendev/docstatic).
+3. Click **Fork** (it is usually to the top-right).
+4. Leave the default **Repository name** in place.
+5. Enter a description of your project.
+6. Make sure **Copy the main branch only** is checked.
+7. Click **Create fork**.
+
+***
+
+## Project structure
+
+After forking and cloning the repository, you will see various files in your in your `docstatic/` folder. Below, we've included **some** of the project structure files and folders that you need to be aware of. **It is not a complete list of everything in the project**.
+
+```
+docstatic
+├── apis
+│   └── petstore.yaml
+├── blog
+│   └── hybrid.mdx
+├── config
+│   ├── docusaurus
+│   │   └── index.json
+│   ├── homepage
+│   │   └── index.json
+│   └── sidebar
+│       └── index.json
+│   
+├── docs
+│   └── introduction.mdx
+├── i18n
+│   └── fr
+├── reuse
+│   ├── code
+│   │   └── example.xml
+│   ├── conditions
+│   │   └── index.json
+│   ├── glossaryTerms
+│   │   └── index.json
+│   ├── snippets
+│   │   └── example.mdx
+│   ├── taxonomy
+│   │   └── index.json
+│   ├── variableSets
+│   │   └── index.json
+│   ├── code-files.json
+│   └── snippets-files.json
+├── src
+│   ├── css
+│   │   └── custom.css
+│   └── pages
+│       ├── example-page.mdx
+│       ├── index.js
+│       └── index.module.css
+├── static
+│   └── img
+├── docusaurus.config.ts
+├── package.json
+├── README.md
+├── sidebars.ts
+└── yarn.lock
+```
+
+### Project structure rundown
+
+* `/apis/` - OpenAPI YAML files.
+* `/blog/` - Blog MDX files.
+* `/config/` - JSON files used by TinaCMS to configure DocStatic.
+* `/docs/` - Docs MDX files.
+* `/i18n/` - Translation files.
+* `/reuse/` - Reusable content.
+* `/src/` - Non-documentation files like pages or custom React components.
+  * `/src/pages` - Any JSX/TSX/MDX file within this directory are converted into a website page.
+* `/static/` - Static folder. Any content inside here is copied into the root of the final build folder.
+* `/docusaurus.config.ts` - A config file containing the site configuration.
+* `/package.json` - A DocStatic website is a React app. You can install and use any npm packages you want.
+* `/sidebars.ts` - Specifies the order of documents in the sidebar. Use this for your “table of contents” structure.
+
+Next, let's look at where you'll need to create and store your documentation files.
+
+***
+
+## Clear the Docs folder
+
+The Docs folder contains a copy of the DocStatic documentation. The idea is that you clear out the DocStatic documentation. When you create your own documentation, you should save it to the Docs folder.
+
+***
+
+## Monorepos
+
+DocStatic allows the use of a single repo that contains both the project code and the project documentation. In Docusaurus terminology, this concept is called a “monorepo”.
+
+For more information, see [Monorepos](https://docusaurus.io/docs/installation#monorepos) in the Docusaurus documentation.
+
+***
+
+## Preview changes
+
+To preview your changes as you edit the files, you can run a **local development server** that will serve your website and reflect the latest changes.
+
+Open a terminal or command prompt and enter:
+
+```shell
+yarn dev
+```
+
+By default, a browser window will open at [http://localhost:3000](http://localhost:3000).
+
+***
+
+## Build
+
+DocStatic uses a static site generator to build the website into a folder of static contents and put it on a web server where it can be viewed. To build the website, use:
+
+```shell
+yarn build-local
+```
+
+The contents are generated in the `/build` folder, which you can copy to any static file hosting service such as GitHub pages, Netlify or Vercel. For more information, refer to [Deployment](https://docusaurus.io/docs/deployment) in the Docusaurus documentation.
