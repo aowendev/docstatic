@@ -1,0 +1,270 @@
+---
+title: 'Getting Started - Local '
+description: >-
+  Learn how to set up DocStatic for working locally on your computer instead of
+  in the cloud.
+---
+
+# Getting started for working with DocStatic locally
+
+Welcome! This guide walks you through setting up DocStatic for the first time.
+
+If you’ve never worked with GitHub or docs-as-code before, don’t worry — we’ll explain what’s needed, why, and where to find more detail.
+
+## Prerequisites
+
+You can run DocStatic locally (on your computer) or host it in the cloud. Here, we explain how to set it up to work locally.
+
+Before you begin, you'll need:
+
+* [GitHub ](https://github.com/)— create a free account. GitHub will store your content and track changes.
+* An Integrated Development Environment (IDE) or a text editor. Two open-source options are:
+  * [Eclipse](https://eclipseide.org)
+  * [VSCodium](https://vscodium.com/)
+
+
+When you have those in place, you can begin the installation (as described in this article).
+
+***
+
+## Install Node.js
+
+You need to install [Node.js](https://nodejs.org/) version 18.0 or above as DocStatic uses its build tools.
+
+First, check if you have Node.js installed already:
+
+1. Open a terminal (Command Prompt or Terminal app).
+2. Run:
+
+```
+node -v
+```
+
+If you see a version number starting with **v18 or higher**, you already have a suitable version of Node.js installed.
+
+If Node.js is **not installed** or you have an **older version**:
+
+1. Go to the [official Node.js downloads](https://nodejs.org/en/download/prebuilt-installer) page.
+2. Choose the LTS (Long-Term Support) version for your operating system.
+   The installer includes npm, the Node Package Manager, which you'll need in later steps.
+3. During installation:
+   * Keep the default options selected (these include required dependencies)
+   * When the installer finishes, close and reopen your terminal.
+4. (Optional) if you work on different projects that need different Node versions, install nvm ([Node Version Manager](https://github.com/nvm-sh/nvm)). With nvm, you can switch between versions of Node without breaking your setup.
+
+Next: Install Yarn.
+
+***
+
+## Install Yarn
+
+DocStatic uses Yarn for package management.
+
+Check if Yarn is already installed. 
+
+1. Open your terminal or command prompt.
+2. Type:
+
+```
+yarn -v
+```
+
+If you see a version number, Yarn is already installed. 
+
+If you get a “command not found” message or similar error:
+
+1. Open a terminal (Command Prompt or Terminal app)
+2. Run:
+
+```
+npm install -g yarn
+```
+
+<Admonition type="note" title="Note">
+  On macOS or Linux, you might need to prefix the command with sudo to grant permission:
+
+  ```
+  sudo npm install -g yarn
+  ```
+</Admonition>
+
+<Admonition type="note" title="Note">
+  On Windows, you don’t use sudo. Just open your terminal as Administrator and run the command.
+</Admonition>
+
+Next: Fork the DocStatic repository
+
+***
+
+## Fork the DocStatic repository
+
+DocStatic’s source code lives on GitHub. To start, you’ll need to fork the repository. 
+
+When you fork a repository, you create your own personal copy of it in GitHub. As it is your own copy, you have management rights for it and can to push content into it. This is how you work on a repository without affecting the original DocStatic repository.
+
+1. Log in to your account in GitHub.
+2. Visit [https://github.com/aowendev/docstatic](https://github.com/aowendev/docstatic).
+3. Click **Fork** (it is usually to the top-right).
+4. Leave the default **Repository name** in place.
+5. Enter a description of your project.
+6. Make sure **Copy the main branch only** is checked.
+7. Click **Create fork**.
+
+GitHub makes a new branch of the repository in your GitHub account.
+
+Next: Clone your fork.
+
+***
+
+## Clone your fork of the DocStatic repository
+
+Cloning allows you to work locally on content that you will push to your fork on GitHub. 
+
+* Fork = ownership on GitHub
+* Clone = ability to work locally
+
+To create a clone:
+
+1. Log in to your GitHub account.
+2. Navigate to the repository for the fork.
+3. Click on the repository to open it.
+4. Click on **\<> Code** and then copy the url.
+5. Open your terminal or command prompt.
+6. Use `cd` to navigate to the location where you want to store the clone. For example, `cd Documents/Projects/`.
+7. Enter `git clone` followed by the url of your clone.
+
+```shell
+git clone https://github.com/acme-projects/docstatic.git
+```
+
+Next: Install the project dependencies.
+
+***
+
+## Install the project dependencies
+
+To work locally, you also need to install the project dependencies. 
+
+1. Open your terminal or command prompt.
+2. Use `cd` to navigate to the root folder of your cloned or forked DocStatic repository and install the packages:
+
+```
+cd docstatic
+yarn install
+```
+
+Yarn will download everything listed in package.json. This may take a few minutes.
+
+You've now set everything up. Next, let's look at the project structure.
+
+***
+
+## Project structure
+
+After forking and cloning the repository, you will see various files in your in your `docstatic/` folder. Below, we've included **some** of the project structure files and folders that you need to be aware of. **It is not a complete list of everything in the project**.
+
+```
+docstatic
+├── apis
+│   └── petstore.yaml
+├── blog
+│   └── hybrid.mdx
+├── config
+│   ├── docusaurus
+│   │   └── index.json
+│   ├── homepage
+│   │   └── index.json
+│   └── sidebar
+│       └── index.json
+│   
+├── docs
+│   └── introduction.mdx
+├── i18n
+│   └── fr
+├── reuse
+│   ├── code
+│   │   └── example.xml
+│   ├── conditions
+│   │   └── index.json
+│   ├── glossaryTerms
+│   │   └── index.json
+│   ├── snippets
+│   │   └── example.mdx
+│   ├── taxonomy
+│   │   └── index.json
+│   ├── variableSets
+│   │   └── index.json
+│   ├── code-files.json
+│   └── snippets-files.json
+├── src
+│   ├── css
+│   │   └── custom.css
+│   └── pages
+│       ├── example-page.mdx
+│       ├── index.js
+│       └── index.module.css
+├── static
+│   └── img
+├── docusaurus.config.ts
+├── package.json
+├── README.md
+├── sidebars.ts
+└── yarn.lock
+```
+
+### Project structure rundown
+
+* `/apis/` - OpenAPI YAML files.
+* `/blog/` - Blog MDX files.
+* `/config/` - JSON files used by TinaCMS to configure DocStatic.
+* `/docs/` - Docs MDX files.
+* `/i18n/` - Translation files.
+* `/reuse/` - Reusable content.
+* `/src/` - Non-documentation files like pages or custom React components.
+  * `/src/pages` - Any JSX/TSX/MDX file within this directory are converted into a website page.
+* `/static/` - Static folder. Any content inside here is copied into the root of the final build folder.
+* `/docusaurus.config.ts` - A config file containing the site configuration.
+* `/package.json` - A DocStatic website is a React app. You can install and use any npm packages you want.
+* `/sidebars.ts` - Specifies the order of documents in the sidebar. Use this for your “table of contents” structure.
+
+Next, let's look at where you'll need to create and store your documentation files.
+
+***
+
+## Clear the Docs folder
+
+The Docs folder contains a copy of the DocStatic documentation. The idea is that you clear out the DocStatic documentation. When you create your own documentation, you should save it to the Docs folder.
+
+***
+
+## Monorepos
+
+DocStatic allows the use of a single repo that contains both the project code and the project documentation. In Docusaurus terminology, this concept is called a “monorepo”.
+
+For more information, see [Monorepos](https://docusaurus.io/docs/installation#monorepos) in the Docusaurus documentation.
+
+***
+
+## Preview changes
+
+To preview your changes as you edit the files, you can run a **local development server** that will serve your website and reflect the latest changes.
+
+Open a terminal or command prompt and enter:
+
+```shell
+yarn dev
+```
+
+By default, a browser window will open at [http://localhost:3000](http://localhost:3000).
+
+***
+
+## Build
+
+DocStatic uses a static site generator to build the website into a folder of static contents and put it on a web server where it can be viewed. To build the website, use:
+
+```shell
+yarn build-local
+```
+
+The contents are generated in the `/build` folder, which you can copy to any static file hosting service such as GitHub pages, Netlify or Vercel. For more information, refer to [Deployment](https://docusaurus.io/docs/deployment) in the Docusaurus documentation.
