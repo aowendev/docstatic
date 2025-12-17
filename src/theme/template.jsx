@@ -9,6 +9,7 @@ import React from "react";
 import codeFiles from "../../reuse/code-files.json";
 import { slugify } from "../../util";
 import { CodeSnippetBlockTemplate } from "../components/CodeSnippet/template";
+import { CommentBlockTemplate } from "../components/Comment/template";
 import { ConditionalTextBlockTemplate } from "../components/ConditionalText/template";
 import { FigureBlockTemplate } from "../components/Figure/template";
 import { FootnoteBlockTemplate } from "../components/Footnote/template";
@@ -105,29 +106,29 @@ const DocCardListTemplate = {
 
 // Custom DocStatic components
 
-const CommentsTemplate = {
-  name: "hidden",
-  label: "Comment",
-  inline: true,
-  match: {
-    start: "<!--",
-    end: "-->",
-  },
-  ui: {
-    itemProps: (item) => {
-      return { label: item?.title };
-    },
-  },
-  fields: [
-    {
-      name: "comment",
-      label: "Comment",
-      type: "string",
-      isTitle: true,
-      required: true,
-    },
-  ],
-};
+// const CommentsTemplate = {
+//  name: "hidden",
+//  label: "Comment",
+//  inline: true,
+//  match: {
+//    start: "<!--",
+//    end: "-->",
+//  },
+//  ui: {
+//    itemProps: (item) => {
+//      return { label: item?.title };
+//    },
+//  },
+//  fields: [
+//    {
+//      name: "comment",
+//      label: "Comment",
+//      type: "string",
+//      isTitle: true,
+//      required: true,
+//    },
+//  ],
+//};
 
 const TruncateTemplate = {
   name: "truncate",
@@ -240,7 +241,7 @@ const TabsTemplate = {
 export const MDXTemplates = [
   AdmonitionTemplate,
   CodeSnippetBlockTemplate,
-  CommentsTemplate,
+  CommentBlockTemplate,
   ConditionalTextBlockTemplate,
   ContextHelpTemplate,
   DetailsTemplate,

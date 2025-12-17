@@ -6,6 +6,7 @@
  */
 
 import CodeSnippet from "@site/src/components/CodeSnippet";
+import Comment from "@site/src/components/Comment";
 import ConditionalText from "@site/src/components/ConditionalText";
 import Figure from "@site/src/components/Figure";
 import Footnote from "@site/src/components/Footnote";
@@ -26,6 +27,7 @@ export default {
   Admonition: MDXComponents.admonition,
   CodeBlock: CodeBlock,
   CodeSnippet: CodeSnippet,
+  Comment: Comment,
   ConditionalText: ConditionalText,
   Details: Details,
   DocCardList: DocCardList,
