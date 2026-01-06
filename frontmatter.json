@@ -57,5 +57,15 @@
       "title": "i18n",
       "path": "[[workspace]]/i18n"
     }
+  ],
+  "frontMatter.content.autoUpdateDate": true,
+  "frontMatter.content.defaultFileType": "mdx",
+  "frontMatter.dashboard.openOnStart": true,
+  "frontMatter.taxonomy.quoteStringValues": true,
+  "frontMatter.taxonomy.noPropertyValueQuotes": [
+    "title",
+    "description",
+    "tags",
+    "authors"
   ]
 }
