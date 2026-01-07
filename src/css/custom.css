@@ -784,6 +784,17 @@ ol ol ol ol {
   list-style-type: decimal; /* Fourth level: 1, 2, 3, ... (cycle back) */
 }
 
+/* maintain list spacing when using reusable elements */
+ol li > p,
+ul li > p,
+ol li div p,
+ul li div p {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
 /* Strikethrough styling customization */
 /* Default behavior: Remove strikethrough effect on rendered pages */
 article del, 
