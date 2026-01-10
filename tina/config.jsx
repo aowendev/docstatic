@@ -1471,7 +1471,7 @@ const SettingsCollection = {
 
 const HomepageCollection = {
   name: "homepage",
-  label: "Landing Page",
+  label: "Home Page",
   description:
     "To see settings changes reflected on your site, you must restart the Tina CLI after saving changes (local development only).",
   path: "config/homepage",

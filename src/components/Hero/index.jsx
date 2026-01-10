@@ -1,5 +1,5 @@
 /**
- * Copyright (c) TinaCMS
+ * Copyright (c) Source Solutions, Inc.
  *
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
@@ -31,8 +31,8 @@ export const Hero = ({ data, index }) => {
             </p>
             <div className={styles.heroDescription}>
               <p>
-                Bridging the gap between writers and developers to help you
-                create online documentation your users will love.
+                {data.description ||
+                  "Bridging the gap between writers and developers to help you create online documentation your users will love."}
               </p>
             </div>
             {data.document && (
@@ -48,65 +48,85 @@ export const Hero = ({ data, index }) => {
                     ? data.documentLabel
                     : titleFromSlug(data.document)}
                 </Link>
-                <Link
-                  className={clsx(
-                    "button button--outline button--lg",
-                    styles.secondaryButton
-                  )}
-                  to="/blog"
-                >
-                  View Blog
-                </Link>
+                {(data.secondaryButtonText && data.secondaryButtonLink) && (
+                  <Link
+                    className={clsx(
+                      "button button--outline button--lg",
+                      styles.secondaryButton
+                    )}
+                    to={data.secondaryButtonLink}
+                  >
+                    {data.secondaryButtonText}
+                  </Link>
+                )}
               </div>
             )}
           </div>
-          <div className={styles.heroVisual}>
-            <div className={styles.heroCard}>
-              <div className={styles.cardHeader}>
-                <div className={styles.cardDots}>
-                  <span />
-                  <span />
-                  <span />
+          {data.showHeroCard !== false && (
+            <div className={styles.heroVisual}>
+              <div className={styles.heroCard}>
+                <div className={styles.cardHeader}>
+                  <div className={styles.cardDots}>
+                    <span />
+                    <span />
+                    <span />
+                  </div>
+                  <span className={styles.cardTitle}>
+                    {data.heroCardTitle || "docStatic"}
+                  </span>
                 </div>
-                <span className={styles.cardTitle}>docStatic</span>
-              </div>
-              <div className={styles.cardContent}>
-                <div className={styles.codeBlock}>
-                  <span className={styles.codeKeyword}># Features</span>
-                  <br />
-                  <span className={styles.codeProperty}>
-                    {" "}
-                    - Content Reuse & Single Sourcing
-                  </span>
-                  <br />
-                  <span className={styles.codeProperty}>
-                    {" "}
-                    - Simple Structured Authoring & Semantic Models
-                  </span>
-                  <br />
-                  <span className={styles.codeProperty}>
-                    {" "}
-                    - Content Lifecycle & Workflow Management
-                  </span>
-                  <br />
-                  <span className={styles.codeProperty}>
-                    {" "}
-                    - Translation & Localization Support
-                  </span>
-                  <br />
-                  <span className={styles.codeProperty}>
-                    {" "}
-                    - Versioning & Variant Management
-                  </span>
-                  <br />
-                  <span className={styles.codeProperty}>
-                    {" "}
-                    - Integrated GraphQL & OpenAPI Documentation
-                  </span>
+                <div className={styles.cardContent}>
+                  <div className={styles.codeBlock}>
+                    <span className={styles.codeKeyword}># Features</span>
+                    <br />
+                    {data.heroCardFeatures && data.heroCardFeatures.length > 0 ? (
+                      data.heroCardFeatures.map((item, index) => (
+                        <React.Fragment key={index}>
+                          <span className={styles.codeProperty}>
+                            {" "}
+                            - {item.feature}
+                          </span>
+                          <br />
+                        </React.Fragment>
+                      ))
+                    ) : (
+                      <>
+                        <span className={styles.codeProperty}>
+                          {" "}
+                          - Content Reuse & Single Sourcing
+                        </span>
+                        <br />
+                        <span className={styles.codeProperty}>
+                          {" "}
+                          - Simple Structured Authoring & Semantic Models
+                        </span>
+                        <br />
+                        <span className={styles.codeProperty}>
+                          {" "}
+                          - Content Lifecycle & Workflow Management
+                        </span>
+                        <br />
+                        <span className={styles.codeProperty}>
+                          {" "}
+                          - Translation & Localization Support
+                        </span>
+                        <br />
+                        <span className={styles.codeProperty}>
+                          {" "}
+                          - Versioning & Variant Management
+                        </span>
+                        <br />
+                        <span className={styles.codeProperty}>
+                          {" "}
+                          - Integrated GraphQL & OpenAPI Documentation
+                        </span>
+                      </>
+                    )}
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
+          )}
         </div>
       </div>
       <div className={styles.heroBackground}>

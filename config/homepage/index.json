@@ -6,25 +6,50 @@
     {
       "title": "docStatic",
       "subtitle": "Modern Documentation Platform",
+      "description": "Bridging the gap between writers and developers to help you create online documentation your users will love.",
       "document": "docs/introduction",
       "documentLabel": "Get Started",
+      "secondaryButtonText": "View Blog",
+      "secondaryButtonLink": "/blog",
+      "showHeroCard": true,
+      "heroCardTitle": "docStatic",
+      "heroCardFeatures": [
+        {
+          "feature": "Content Reuse & Single Sourcing"
+        },
+        {
+          "feature": "Simple Structured Authoring & Semantic Models"
+        },
+        {
+          "feature": "Content Lifecycle & Workflow Management"
+        },
+        {
+          "feature": "Translation & Localization Support"
+        },
+        {
+          "feature": "Versioning & Variant Management"
+        },
+        {
+          "feature": "Integrated GraphQL & OpenAPI Documentation"
+        }
+      ],
       "_template": "hero"
     },
     {
       "items": [
         {
           "title": "For Writers",
-          "description": "Intuitive CMS features with a visual editor that makes content creation effortless. Write in Markdown or use the rich-text editor.",
+          "description": "Intuitive CMS features with a visual editor that makes content creation effortless. Write in Markdown or use the rich-text editor.\n",
           "image": "./img/writers.jpg"
         },
         {
           "title": "For Developers",
-          "description": "Git-based workflow with Markdown, React components, and OpenAPI integration. Build exactly what you need.",
+          "description": "Git-based workflow with Markdown, React components, and OpenAPI integration. Build exactly what you need.\n",
           "image": "./img/developers.jpg"
         },
         {
           "title": "For Users",
-          "description": "Fast, responsive documentation websites with excellent search and navigation. Beautiful on any device.",
+          "description": "Fast, responsive documentation websites with excellent search and navigation. Beautiful on any device.\n",
           "image": "./img/users.jpg"
         }
       ],
@@ -33,6 +58,7 @@
     {
       "title": "Watch the Demo",
       "url": "https://www.youtube.com/watch?v=2bHBwM54UB8",
+      "caption": "See how Docusaurs and TinaCMS work together.",
       "_template": "youTubeEmbed"
     }
   ]
