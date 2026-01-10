@@ -1,83 +1,13 @@
 {
   "label": "Settings",
-  "logo": {
-    "alt": "docStatic",
-    "src": "/img/docstatic.png"
-  },
   "title": "docStatic",
   "tagline": "Modern Documentation Solution",
-  "url": {
-    "siteUrl": "https://docstatic.com/",
-    "baseUrl": "",
-    "trailingSlash": false
-  },
   "favicon": "img/docstatic.png",
-  "github": {
-    "projectName": "aowendev.github.io",
-    "organizationName": "aowendev"
-  },
-  "sidebarHideable": true,
-  "showReadingTime": true,
   "colorMode": {
     "defaultMode": "light",
     "disableSwitch": false,
     "respectPrefersColorScheme": false
   },
-  "languages": {
-    "supported": [
-      {
-        "code": "en",
-        "label": "English"
-      },
-      {
-        "code": "fr",
-        "label": "Français"
-      }
-    ],
-    "default": "en"
-  },
-  "navbar": [
-    {
-      "label": "Docs",
-      "link": "doc",
-      "docId": "introduction",
-      "position": "left"
-    },
-    {
-      "label": "Blog",
-      "link": "blog",
-      "position": "left"
-    },
-    {
-      "label": "Page",
-      "link": "page",
-      "pageLink": "src/pages/example-page.mdx",
-      "position": "left"
-    },
-    {
-      "label": "GraphQL",
-      "link": "manualPath",
-      "manualPath": "/docs/api/queries",
-      "position": "left"
-    },
-    {
-      "label": "OpenAPI",
-      "link": "manualPath",
-      "manualPath": "/docs/category/petstore-api",
-      "position": "left"
-    },
-    {
-      "label": "Wiki",
-      "link": "doc",
-      "docId": "wiki/readme",
-      "position": "left"
-    },
-    {
-      "label": "Language",
-      "link": "localeDropdown",
-      "position": "right"
-    }
-  ],
   "footer": {
     "style": "dark",
     "links": [
@@ -163,5 +93,105 @@
       }
     ],
     "copyright": "Source Solutions, Inc. Built with docStatic."
-  }
+  },
+  "github": {
+    "projectName": "aowendev.github.io",
+    "organizationName": "aowendev"
+  },
+  "languages": {
+    "supported": [
+      {
+        "code": "en",
+        "label": "English"
+      },
+      {
+        "code": "fr",
+        "label": "Français"
+      }
+    ],
+    "default": "en"
+  },
+  "logo": {
+    "alt": "docStatic",
+    "src": "/img/docstatic.png"
+  },
+  "prism": {
+    "additionalLanguages": [
+      "java",
+      "latex",
+      "haskell",
+      "matlab",
+      "php",
+      "powershell",
+      "bash",
+      "diff",
+      "json",
+      "scss"
+    ],
+    "magicComments": [
+      {
+        "className": "theme-code-block-highlighted-line",
+        "line": "highlight-next-line",
+        "block": {
+          "start": "highlight-start",
+          "end": "highlight-end"
+        }
+      },
+      {
+        "className": "code-block-error-line",
+        "line": "This will error"
+      }
+    ],
+    "theme": "prismLight",
+    "darkTheme": "prismDark"
+  },
+  "url": {
+    "siteUrl": "https://docstatic.com/",
+    "baseUrl": "",
+    "trailingSlash": false
+  },
+  "navbar": [
+    {
+      "label": "Docs",
+      "link": "doc",
+      "docId": "introduction",
+      "position": "left"
+    },
+    {
+      "label": "Blog",
+      "link": "blog",
+      "position": "left"
+    },
+    {
+      "label": "Page",
+      "link": "page",
+      "pageLink": "src/pages/example-page.mdx",
+      "position": "left"
+    },
+    {
+      "label": "GraphQL",
+      "link": "manualPath",
+      "manualPath": "/docs/api/queries",
+      "position": "left"
+    },
+    {
+      "label": "OpenAPI",
+      "link": "manualPath",
+      "manualPath": "/docs/category/petstore-api",
+      "position": "left"
+    },
+    {
+      "label": "Wiki",
+      "link": "doc",
+      "docId": "wiki/readme",
+      "position": "left"
+    },
+    {
+      "label": "Language",
+      "link": "localeDropdown",
+      "position": "right"
+    }
+  ],
+  "sidebarHideable": true,
+  "showReadingTime": true
 }

@@ -638,6 +638,99 @@ export const SettingsCollection = {
         },
       ],
     },
+    {
+      type: "object",
+      label: "Syntax Highlighting",
+      name: "prism",
+      fields: [
+        {
+          type: "string",
+          label: "Additional Languages",
+          name: "additionalLanguages",
+          list: true,
+          description: "Programming languages supported for syntax highlighting",
+        },
+        {
+          type: "object",
+          label: "Magic Comments",
+          name: "magicComments",
+          list: true,
+          description: "Comments that trigger special highlighting behaviors",
+          ui: {
+            itemProps: (item) => ({
+              label: item.line || item.className || "Magic Comment",
+            }),
+          },
+          fields: [
+            {
+              type: "string",
+              label: "CSS Class Name",
+              name: "className",
+              required: true,
+            },
+            {
+              type: "string",
+              label: "Line Comment",
+              name: "line",
+              description: "Comment text that triggers highlighting on the next line",
+            },
+            {
+              type: "object",
+              label: "Block Comment",
+              name: "block",
+              description: "Comments that define a block of highlighted lines",
+              fields: [
+                {
+                  type: "string",
+                  label: "Start Comment",
+                  name: "start",
+                },
+                {
+                  type: "string",
+                  label: "End Comment",
+                  name: "end",
+                },
+              ],
+            },
+          ],
+        },
+        {
+          type: "string",
+          label: "Light Theme",
+          name: "theme",
+          description: "Syntax highlighting theme for light mode",
+          options: [
+            { label: "docStatic Light", value: "prismLight" },
+            { label: "GitHub", value: "github" },
+            { label: "GitHub Light", value: "githubLight" },
+            { label: "One Light", value: "oneLight" },
+            { label: "Prism", value: "prism" },
+            { label: "VS Code Light", value: "vsLight" },
+          ],
+          ui: {
+            component: "select",
+          },
+        },
+        {
+          type: "string",
+          label: "Dark Theme",
+          name: "darkTheme",
+          description: "Syntax highlighting theme for dark mode",
+          options: [
+            { label: "docStatic Dark", value: "prismDark" },
+            { label: "Dark Plus", value: "darkPlus" },
+            { label: "Dracula", value: "dracula" },
+            { label: "GitHub Dark", value: "githubDark" },
+            { label: "Night Owl", value: "nightOwl" },
+            { label: "Oceanic Next", value: "oceanicNext" },
+            { label: "VS Dark", value: "vsDark" },
+          ],
+          ui: {
+            component: "select",
+          },
+        },
+      ],
+    },
 	{
       type: "object",
       label: "URL",

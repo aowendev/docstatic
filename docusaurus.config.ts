@@ -1,5 +1,6 @@
 import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
+import { themes } from 'prism-react-renderer';
 
 import PrismLight from './src/utils/prismLight';
 import PrismDark from './src/utils/prismDark';
@@ -7,6 +8,26 @@ import PrismDark from './src/utils/prismDark';
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = createConfig;
 const docusaurusData = require("./config/docusaurus/index.json");
+
+// Function to map theme names to actual theme objects
+const getTheme = (themeName: string) => {
+  switch (themeName) {
+    case 'github': return themes.github;
+    case 'githubLight': return themes.githubLight;
+    case 'githubDark': return themes.githubDark;
+    case 'vsLight': return themes.vsLight;
+    case 'vsDark': return themes.vsDark;
+    case 'darkPlus': return themes.darkPlus;
+    case 'dracula': return themes.dracula;
+    case 'nightOwl': return themes.nightOwl;
+    case 'oceanicNext': return themes.oceanicNext;
+    case 'oneLight': return themes.oneLight;
+    case 'prism': return themes.prism;
+    case 'prismLight': return PrismLight;
+    case 'prismDark': return PrismDark;
+    default: return themes.github;
+  }
+};
 const getDocId = (doc: string) => {
   return doc
     .replace(/\.mdx?$/, "")
@@ -268,7 +289,7 @@ const config = {
       copyright: `Copyright © ${new Date().getFullYear()} ${docusaurusData.footer?.copyright || docusaurusData.title}`,
     },
       prism: {
-        additionalLanguages: [
+        additionalLanguages: docusaurusData.prism?.additionalLanguages || [
           'java',
           'latex',
           'haskell',
@@ -280,7 +301,7 @@ const config = {
           'json',
           'scss',
         ],
-        magicComments: [
+        magicComments: docusaurusData.prism?.magicComments || [
           {
             className: 'theme-code-block-highlighted-line',
             line: 'highlight-next-line',
@@ -291,8 +312,8 @@ const config = {
             line: 'This will error',
           },
         ],
-        theme: PrismLight,
-        darkTheme: PrismDark,
+        theme: docusaurusData.prism?.theme ? getTheme(docusaurusData.prism.theme) : PrismLight,
+        darkTheme: docusaurusData.prism?.darkTheme ? getTheme(docusaurusData.prism.darkTheme) : PrismDark,
       },
     languageTabs: [
       {
