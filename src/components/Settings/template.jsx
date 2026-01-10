@@ -356,20 +356,6 @@ export const SettingsCollection = {
         ),
       },
     },
-
-    {
-      type: "boolean",
-      label: "Hideable Sidebar",
-      name: "sidebarHideable",
-      description: "Allow users to hide/show the documentation sidebar",
-    },
-    {
-      type: "boolean",
-      label: "Show Reading Time",
-      name: "showReadingTime",
-      description: "Display estimated reading time for blog posts",
-    },
-
     {
       type: "object",
       label: "Footer",
@@ -662,6 +648,16 @@ export const SettingsCollection = {
           ],
         },
       ],
-    }
-],
+    },
+    {
+      type: "boolean",
+      label: "Sidebar can be hidden",
+      name: "sidebarHideable",
+    },
+    {
+      type: "boolean",
+      label: "Show blog reading time",
+      name: "showReadingTime",
+    },
+  ],
 };
