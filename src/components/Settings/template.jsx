@@ -6,7 +6,7 @@
  */
 
 import React from "react";
-import { ReferenceField, TextField } from "tinacms";
+import { ReferenceField, TextField, ImageField } from "tinacms";
 import docusaurusData from "../../../config/docusaurus/index.json";
 import CollapsibleField from "../CollapsibleField";
 import HelpButton from "../HelpButton";
@@ -343,14 +343,14 @@ export const SettingsCollection = {
       },
     },
     {
-      type: "string",
+      type: "image",
       label: "Favicon",
       name: "favicon",
       ui: {
         component: (props) => (
           <CollapsibleField
             {...props}
-            FieldComponent={TextField}
+            FieldComponent={ImageField}
             defaultCollapsed={true}
           />
         ),
