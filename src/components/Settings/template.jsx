@@ -343,31 +343,93 @@ export const SettingsCollection = {
       },
     },
     {
+      type: "string",
+      label: "Favicon",
+      name: "favicon",
+      ui: {
+        component: (props) => (
+          <CollapsibleField
+            {...props}
+            FieldComponent={TextField}
+            defaultCollapsed={true}
+          />
+        ),
+      },
+    },
+
+    {
       type: "object",
-      label: "URL",
-      name: "url",
+      label: "GitHub Deployment",
+      name: "github",
+      ui: {
+        component: (props) => (
+          <CollapsibleField
+            {...props}
+            FieldComponent={({ children }) => <div>{children}</div>}
+            defaultCollapsed={true}
+          />
+        ),
+      },
       fields: [
         {
           type: "string",
-          label: "Site URL",
-          name: "siteUrl",
-          required: true,
-          description: "The URL where your site will be hosted",
+          label: "Project Name",
+          name: "projectName",
+          description: "GitHub repository name for GitHub Pages deployment",
         },
         {
           type: "string",
-          label: "Base URL",
-          name: "baseUrl",
-          description: "Base URL for your site (e.g., /my-project/). Leave empty for root domain.",
-        },
-        {
-          type: "boolean",
-          label: "Trailing Slash",
-          name: "trailingSlash",
-          description: "Whether to add trailing slashes to URLs",
+          label: "Organization Name", 
+          name: "organizationName",
+          description: "GitHub username or organization name",
         },
       ],
     },
+    {
+      type: "object",
+      label: "Documentation Settings",
+      name: "docs",
+      ui: {
+        component: (props) => (
+          <CollapsibleField
+            {...props}
+            FieldComponent={({ children }) => <div>{children}</div>}
+            defaultCollapsed={true}
+          />
+        ),
+      },
+      fields: [
+        {
+          type: "boolean",
+          label: "Hideable Sidebar",
+          name: "sidebarHideable",
+          description: "Allow users to hide/show the documentation sidebar",
+        },
+      ],
+    },
+    {
+      type: "object",
+      label: "Blog Settings",
+      name: "blog",
+      ui: {
+        component: (props) => (
+          <CollapsibleField
+            {...props}
+            FieldComponent={({ children }) => <div>{children}</div>}
+            defaultCollapsed={true}
+          />
+        ),
+      },
+      fields: [
+        {
+          type: "boolean",
+          label: "Show Reading Time",
+          name: "showReadingTime",
+          description: "Display estimated reading time for blog posts",
+        },
+      ],
+    },
+
     {
       type: "object",
       label: "Footer",
@@ -589,96 +651,33 @@ export const SettingsCollection = {
         },
       ],
     },
-
-    {
-      type: "string",
-      label: "Favicon",
-      name: "favicon",
-      description: "Path to your site's favicon (e.g., img/favicon.ico)",
-      ui: {
-        component: (props) => (
-          <CollapsibleField
-            {...props}
-            FieldComponent={TextField}
-            defaultCollapsed={true}
-          />
-        ),
-      },
-    },
-
-    {
+	{
       type: "object",
-      label: "GitHub Deployment",
-      name: "github",
-      ui: {
-        component: (props) => (
-          <CollapsibleField
-            {...props}
-            FieldComponent={({ children }) => <div>{children}</div>}
-            defaultCollapsed={true}
-          />
-        ),
-      },
+      label: "URL",
+      name: "url",
       fields: [
         {
           type: "string",
-          label: "Project Name",
-          name: "projectName",
-          description: "GitHub repository name for GitHub Pages deployment",
+          label: "Site URL",
+          name: "siteUrl",
+          required: true,
+          description: "The URL where your site will be hosted",
         },
         {
           type: "string",
-          label: "Organization Name", 
-          name: "organizationName",
-          description: "GitHub username or organization name",
+          label: "Base URL",
+          name: "baseUrl",
+          description: "Base URL for your site (e.g., /my-project/). Leave empty for root domain.",
         },
-      ],
-    },
-    {
-      type: "object",
-      label: "Documentation Settings",
-      name: "docs",
-      ui: {
-        component: (props) => (
-          <CollapsibleField
-            {...props}
-            FieldComponent={({ children }) => <div>{children}</div>}
-            defaultCollapsed={true}
-          />
-        ),
-      },
-      fields: [
         {
           type: "boolean",
-          label: "Hideable Sidebar",
-          name: "sidebarHideable",
-          description: "Allow users to hide/show the documentation sidebar",
+          label: "Trailing Slash",
+          name: "trailingSlash",
+          description: "Whether to add trailing slashes to URLs",
         },
       ],
     },
-    {
-      type: "object",
-      label: "Blog Settings",
-      name: "blog",
-      ui: {
-        component: (props) => (
-          <CollapsibleField
-            {...props}
-            FieldComponent={({ children }) => <div>{children}</div>}
-            defaultCollapsed={true}
-          />
-        ),
-      },
-      fields: [
-        {
-          type: "boolean",
-          label: "Show Reading Time",
-          name: "showReadingTime",
-          description: "Display estimated reading time for blog posts",
-        },
-      ],
-    },
-    {
+	{
       type: "object",
       label: "Navbar",
       name: "navbar",
