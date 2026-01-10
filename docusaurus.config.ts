@@ -360,18 +360,24 @@ const config = {
       {
         id: "openapi",
         docsPluginId: "classic",
-        config: {
-          petstore: {
-            specPath: "apis/petstore.yaml",
-            outputDir: "docs/api/petstore",
-            downloadUrl:
-              "https://raw.githubusercontent.com/PaloAltoNetworks/docusaurus-template-openapi-docs/main/examples/petstore.yaml",
-            sidebarOptions: {
-              groupPathsBy: "tag",
-              categoryLinkSource: "tag",
-            },
-          },
-        },
+        config: (() => {
+          const config = {};
+          const apis = docusaurusData.openapi;
+          
+          apis.forEach((api) => {
+            config[api.name] = {
+              specPath: api.specPath,
+              outputDir: api.outputDir,
+              downloadUrl: api.downloadUrl,
+              sidebarOptions: {
+                groupPathsBy: api.groupPathsBy || "tag",
+                categoryLinkSource: api.categoryLinkSource || "tag",
+              },
+            };
+          });
+          
+          return config;
+        })(),
       },
     ],
     [

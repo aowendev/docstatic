@@ -654,6 +654,76 @@ export const SettingsCollection = {
     },
     {
       type: "object",
+      label: "OpenAPI",
+      name: "openapi",
+      list: true,
+      ui: {
+        itemProps: (item) => ({
+          label: item.name || "API Configuration",
+        }),
+        defaultItem: {
+          groupPathsBy: "tag",
+          categoryLinkSource: "tag",
+        },
+      },
+      fields: [
+        {
+          type: "string",
+          label: "API Name",
+          name: "name",
+          required: true,
+          description: "Unique name for this API (e.g., petstore, userapi, etc.)",
+        },
+        {
+          type: "string",
+          label: "Spec Path",
+          name: "specPath",
+          required: true,
+          description: "Path to the OpenAPI specification file (e.g., apis/petstore.yaml)",
+        },
+        {
+          type: "string",
+          label: "Output Directory",
+          name: "outputDir",
+          required: true,
+          description: "Directory where generated API docs will be placed (e.g., docs/api/petstore)",
+        },
+        {
+          type: "string",
+          label: "Download URL",
+          name: "downloadUrl",
+          description: "Optional URL to download the OpenAPI spec file",
+        },
+        {
+          type: "string",
+          label: "Group Paths By",
+          name: "groupPathsBy",
+          description: "How to group API endpoints in sidebar",
+          options: [
+            { label: "Tag", value: "tag" },
+            { label: "Operation", value: "operation" },
+          ],
+          ui: {
+            component: "select",
+          },
+        },
+        {
+          type: "string",
+          label: "Category Link Source",
+          name: "categoryLinkSource",
+          description: "Source for category links",
+          options: [
+            { label: "Tag", value: "tag" },
+            { label: "Info", value: "info" },
+          ],
+          ui: {
+            component: "select",
+          },
+        },
+      ],
+    },
+    {
+      type: "object",
       label: "Syntax Highlighting",
       name: "prism",
       fields: [
