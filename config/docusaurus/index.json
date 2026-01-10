@@ -1,14 +1,4 @@
 {
-  "openapi": [
-    {
-      "name": "petstore",
-      "specPath": "apis/petstore.yaml",
-      "outputDir": "docs/api/petstore",
-      "downloadUrl": "https://raw.githubusercontent.com/PaloAltoNetworks/docusaurus-template-openapi-docs/main/examples/petstore.yaml",
-      "groupPathsBy": "tag",
-      "categoryLinkSource": "tag"
-    }
-  ],
   "openApiSidebar": [
     {
       "type": "category",
@@ -19,33 +9,6 @@
         "slug": "/category/petstore-api"
       },
       "items": "./docs/api/petstore/sidebar.ts"
-    }
-  ],
-  "languageTabs": [
-    {
-      "highlight": "typescript",
-      "language": "typescript",
-      "logoClass": "typescript"
-    },
-    {
-      "highlight": "python",
-      "language": "python",
-      "logoClass": "python"
-    },
-    {
-      "highlight": "bash",
-      "language": "curl",
-      "logoClass": "curl"
-    },
-    {
-      "highlight": "csharp",
-      "language": "csharp",
-      "logoClass": "csharp"
-    },
-    {
-      "highlight": "javascript",
-      "language": "nodejs",
-      "logoClass": "nodejs"
     }
   ],
   "label": "Settings",
@@ -165,6 +128,23 @@
     "alt": "docStatic",
     "src": "/img/docstatic.png"
   },
+  "openapi": [
+    {
+      "name": "petstore",
+      "specPath": "apis/petstore.yaml",
+      "outputDir": "docs/api/petstore",
+      "downloadUrl": "https://raw.githubusercontent.com/PaloAltoNetworks/docusaurus-template-openapi-docs/main/examples/petstore.yaml",
+      "groupPathsBy": "tag",
+      "categoryLinkSource": "tag"
+    }
+  ],
+  "languageTabs": [
+    "csharp",
+    "python",
+    "curl",
+    "nodejs",
+    "javascript"
+  ],
   "prism": {
     "additionalLanguages": [
       "java",

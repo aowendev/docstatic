@@ -268,99 +268,115 @@ const config = {
         theme: getTheme(docusaurusData.prism.theme),
         darkTheme: getTheme(docusaurusData.prism.darkTheme),
       },
-    languageTabs: [
-      {
-        highlight: "python",
-        language: "python",
-        logoClass: "python",
-      },
-      {
-        highlight: "bash",
-        language: "curl",
-        logoClass: "curl",
-      },
-      {
-        highlight: "csharp",
-        language: "csharp",
-        logoClass: "csharp",
-      },
-      {
-        highlight: "go",
-        language: "go",
-        logoClass: "go",
-      },
-      {
-        highlight: "javascript",
-        language: "nodejs",
-        logoClass: "nodejs",
-      },
-      {
-        highlight: "ruby",
-        language: "ruby",
-        logoClass: "ruby",
-      },
-      {
-        highlight: "php",
-        language: "php",
-        logoClass: "php",
-      },
-      {
-        highlight: "java",
-        language: "java",
-        logoClass: "java",
-        variant: "unirest",
-      },
-      {
-        highlight: "powershell",
-        language: "powershell",
-        logoClass: "powershell",
-      },
-      {
-        highlight: "dart",
-        language: "dart",
-        logoClass: "dart",
-      },
-      {
-        highlight: "javascript",
-        language: "javascript",
-        logoClass: "javascript",
-      },
-      {
-        highlight: "c",
-        language: "c",
-        logoClass: "c",
-      },
-      {
-        highlight: "objective-c",
-        language: "objective-c",
-        logoClass: "objective-c",
-      },
-      {
-        highlight: "ocaml",
-        language: "ocaml",
-        logoClass: "ocaml",
-      },
-      {
-        highlight: "r",
-        language: "r",
-        logoClass: "r",
-      },
-      {
-        highlight: "swift",
-        language: "swift",
-        logoClass: "swift",
-      },
-      {
-        highlight: "kotlin",
-        language: "kotlin",
-        logoClass: "kotlin",
-      },
-      {
-        highlight: "rust",
-        language: "rust",
-        logoClass: "rust",
-      },
-    ],
+    languageTabs: (() => {
+      // Define all available language configurations
+      const availableLanguages = {
+        python: {
+          highlight: "python",
+          language: "python",
+          logoClass: "python",
+        },
+        typescript: {
+          highlight: "typescript",
+          language: "typescript",
+          logoClass: "typescript",
+        },
+        javascript: {
+          highlight: "javascript",
+          language: "javascript",
+          logoClass: "javascript",
+        },
+        nodejs: {
+          highlight: "javascript",
+          language: "nodejs",
+          logoClass: "nodejs",
+        },
+        curl: {
+          highlight: "bash",
+          language: "curl",
+          logoClass: "curl",
+        },
+        csharp: {
+          highlight: "csharp",
+          language: "csharp",
+          logoClass: "csharp",
+        },
+        go: {
+          highlight: "go",
+          language: "go",
+          logoClass: "go",
+        },
+        ruby: {
+          highlight: "ruby",
+          language: "ruby",
+          logoClass: "ruby",
+        },
+        php: {
+          highlight: "php",
+          language: "php",
+          logoClass: "php",
+        },
+        java: {
+          highlight: "java",
+          language: "java",
+          logoClass: "java",
+          variant: "unirest",
+        },
+        powershell: {
+          highlight: "powershell",
+          language: "powershell",
+          logoClass: "powershell",
+        },
+        dart: {
+          highlight: "dart",
+          language: "dart",
+          logoClass: "dart",
+        },
+        c: {
+          highlight: "c",
+          language: "c",
+          logoClass: "c",
+        },
+        "objective-c": {
+          highlight: "objective-c",
+          language: "objective-c",
+          logoClass: "objective-c",
+        },
+        ocaml: {
+          highlight: "ocaml",
+          language: "ocaml",
+          logoClass: "ocaml",
+        },
+        r: {
+          highlight: "r",
+          language: "r",
+          logoClass: "r",
+        },
+        swift: {
+          highlight: "swift",
+          language: "swift",
+          logoClass: "swift",
+        },
+        kotlin: {
+          highlight: "kotlin",
+          language: "kotlin",
+          logoClass: "kotlin",
+        },
+        rust: {
+          highlight: "rust",
+          language: "rust",
+          logoClass: "rust",
+        },
+      };
+
+      // Get selected languages from global languageTabs setting
+      const selectedLanguages = docusaurusData.languageTabs || ["python", "curl", "csharp", "go", "nodejs"];
+      
+      // Map selected languages to their full configurations
+      return selectedLanguages
+        .map(lang => availableLanguages[lang])
+        .filter(Boolean); // Remove any undefined entries
+    })(),
   },
   plugins: [
     require.resolve("docusaurus-lunr-search"),
