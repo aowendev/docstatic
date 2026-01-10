@@ -118,16 +118,16 @@ const config = {
   title: docusaurusData.title || "My Site",
   tagline: docusaurusData.tagline || "Tag Line",
   url: docusaurusData.url || "https://www.example.com/docstatic/",
-  baseUrl: "",
+  baseUrl: docusaurusData.baseUrl || "",
   onBrokenLinks: "warn",
-  favicon: "img/docstatic.png",
+  favicon: docusaurusData.favicon || "img/docstatic.png",
   // Client modules that run on every page
   clientModules: [require.resolve("./src/clientModules/editThisPageTarget.js")],
 
   // Github pages deployment config.
-  projectName: "aowendev.github.io",
-  organizationName: "aowendev",
-  trailingSlash: false,
+  projectName: docusaurusData.github?.projectName || "aowendev.github.io",
+  organizationName: docusaurusData.github?.organizationName || "aowendev",
+  trailingSlash: docusaurusData.trailingSlash ?? false,
 
   stylesheets: [
     {
@@ -157,6 +157,8 @@ const config = {
           rehypePlugins: [rehypeKatex],
           // Remove this to remove the "edit this page" links.
           editUrl: ({ versionDocsDirPath, docPath }: { versionDocsDirPath: string; docPath: string }) => {
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
+            const _unused = versionDocsDirPath;
             // docPath gives us the file path relative to docs directory
             // For example: "quick-start/quick-start.mdx", "wiki/index.md", "test-page.mdx"
 
@@ -170,7 +172,7 @@ const config = {
           docItemComponent: "@theme/ApiItem", // Derived from docusaurus-theme-openapi
         },
         blog: {
-          showReadingTime: true,
+          showReadingTime: docusaurusData.blog?.showReadingTime ?? true,
           // Truncate blog previews with manual markers or excerpt
           truncateMarker: /<!--\s*(truncate)\s*-->/,
           // Edit URL configuration for blog posts
@@ -185,6 +187,8 @@ const config = {
             permalink: string;
             locale: string;
           }) => {
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
+            const _unused = { blogDirPath, permalink, locale };
             // blogPath gives us something like "hybrid.mdx"
             // Remove file extension to get the path that TinaCMS expects
             const cleanPath = blogPath.replace(/\.(mdx?|md)$/, "");
@@ -205,7 +209,7 @@ const config = {
   themeConfig: {
     docs: {
       sidebar: {
-        hideable: true,
+        hideable: docusaurusData.docs?.sidebarHideable ?? true,
       },
     },
     navbar: {

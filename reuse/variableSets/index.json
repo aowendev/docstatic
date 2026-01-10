@@ -22,6 +22,15 @@
       "name": "languages",
       "variables": [
         {
+          "key": "English",
+          "translations": [
+            {
+              "lang": "en",
+              "value": "Englsih"
+            }
+          ]
+        },
+        {
           "key": "French",
           "translations": [
             {
