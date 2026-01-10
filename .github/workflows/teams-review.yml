@@ -1,9 +1,11 @@
 name: Notify by Teams on Review tag
 
 on:
-  push:
-    branches:
-      - main
+#  push:
+#    branches:
+#      - main
+  workflow_dispatch:
+
 
 jobs:
   notify-teams:
