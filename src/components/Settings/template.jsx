@@ -343,44 +343,28 @@ export const SettingsCollection = {
       },
     },
     {
-      type: "string",
+      type: "object",
       label: "URL",
       name: "url",
-      required: true,
-      ui: {
-        component: (props) => (
-          <CollapsibleField
-            {...props}
-            FieldComponent={TextField}
-            defaultCollapsed={true}
-          />
-        ),
-      },
-    },
-    {
-      type: "object",
-      label: "Navbar",
-      name: "navbar",
-      list: true,
-      ui: {
-        itemProps: (item) => ({
-          label: `${item.label} - ${item.position ? item.position.charAt(0).toUpperCase() + item.position.slice(1) : 'Left'}`,
-        }),
-        defaultItem: {
-          position: "left",
-        },
-      },
       fields: [
-        ...NavbarItemFields,
         {
-          ...NavbarSubitemProps,
-          fields: [
-            ...NavbarItemFields,
-            {
-              ...NavbarSubitemProps,
-              fields: NavbarItemFields,
-            },
-          ],
+          type: "string",
+          label: "Site URL",
+          name: "siteUrl",
+          required: true,
+          description: "The URL where your site will be hosted",
+        },
+        {
+          type: "string",
+          label: "Base URL",
+          name: "baseUrl",
+          description: "Base URL for your site (e.g., /my-project/). Leave empty for root domain.",
+        },
+        {
+          type: "boolean",
+          label: "Trailing Slash",
+          name: "trailingSlash",
+          description: "Whether to add trailing slashes to URLs",
         },
       ],
     },
@@ -605,21 +589,7 @@ export const SettingsCollection = {
         },
       ],
     },
-    {
-      type: "string",
-      label: "Base URL",
-      name: "baseUrl",
-      description: "Base URL for your site (e.g., /my-project/). Leave empty for root domain.",
-      ui: {
-        component: (props) => (
-          <CollapsibleField
-            {...props}
-            FieldComponent={TextField}
-            defaultCollapsed={true}
-          />
-        ),
-      },
-    },
+
     {
       type: "string",
       label: "Favicon",
@@ -635,40 +605,7 @@ export const SettingsCollection = {
         ),
       },
     },
-    {
-      type: "boolean",
-      label: "Trailing Slash",
-      name: "trailingSlash",
-      description: "Whether to add trailing slashes to URLs",
-      ui: {
-        component: (props) => (
-          <CollapsibleField
-            {...props}
-            FieldComponent={({ input, field }) => (
-              <div className="relative">
-                <label className="flex items-center">
-                  <input
-                    type="checkbox"
-                    checked={input.value || false}
-                    onChange={(e) => input.onChange(e.target.checked)}
-                    className="mr-2"
-                  />
-                  <span className="text-sm font-medium text-gray-700">
-                    {field.label}
-                  </span>
-                </label>
-                {field.description && (
-                  <p className="mt-1 text-sm text-gray-500">
-                    {field.description}
-                  </p>
-                )}
-              </div>
-            )}
-            defaultCollapsed={true}
-          />
-        ),
-      },
-    },
+
     {
       type: "object",
       label: "GitHub Deployment",
@@ -741,5 +678,32 @@ export const SettingsCollection = {
         },
       ],
     },
-  ],
+    {
+      type: "object",
+      label: "Navbar",
+      name: "navbar",
+      list: true,
+      ui: {
+        itemProps: (item) => ({
+          label: `${item.label} - ${item.position ? item.position.charAt(0).toUpperCase() + item.position.slice(1) : 'Left'}`,
+        }),
+        defaultItem: {
+          position: "left",
+        },
+      },
+      fields: [
+        ...NavbarItemFields,
+        {
+          ...NavbarSubitemProps,
+          fields: [
+            ...NavbarItemFields,
+            {
+              ...NavbarSubitemProps,
+              fields: NavbarItemFields,
+            },
+          ],
+        },
+      ],
+    }
+],
 };

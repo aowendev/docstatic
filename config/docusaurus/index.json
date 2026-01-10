@@ -6,10 +6,12 @@
   },
   "title": "docStatic",
   "tagline": "Modern Documentation Solution",
-  "url": "https://docstatic.com/",
-  "baseUrl": "",
+  "url": {
+    "siteUrl": "https://docstatic.com/",
+    "baseUrl": "",
+    "trailingSlash": false
+  },
   "favicon": "img/docstatic.png",
-  "trailingSlash": false,
   "github": {
     "projectName": "aowendev.github.io",
     "organizationName": "aowendev"

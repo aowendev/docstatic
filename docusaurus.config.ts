@@ -117,8 +117,8 @@ const config = {
   },
   title: docusaurusData.title || "My Site",
   tagline: docusaurusData.tagline || "Tag Line",
-  url: docusaurusData.url || "https://www.example.com/docstatic/",
-  baseUrl: docusaurusData.baseUrl || "",
+  url: docusaurusData.url?.siteUrl || "https://www.example.com/docstatic/",
+  baseUrl: docusaurusData.url?.baseUrl || "",
   onBrokenLinks: "warn",
   favicon: docusaurusData.favicon || "img/docstatic.png",
   // Client modules that run on every page
@@ -127,7 +127,7 @@ const config = {
   // Github pages deployment config.
   projectName: docusaurusData.github?.projectName || "aowendev.github.io",
   organizationName: docusaurusData.github?.organizationName || "aowendev",
-  trailingSlash: docusaurusData.trailingSlash ?? false,
+  trailingSlash: docusaurusData.url?.trailingSlash ?? false,
 
   stylesheets: [
     {
