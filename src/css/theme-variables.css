@@ -20,7 +20,7 @@
   --ifm-navbar-height: 4rem;
 }
 
-[data-theme='dark'] {
+[data-theme="dark"] {
   --ifm-color-primary: #0099ff;
   --ifm-color-primary-dark: #008ae6;
   --ifm-color-primary-darker: #0088e3;

@@ -222,13 +222,15 @@ export const ThemeCollection = {
           type: "string",
           name: "baseFontFamily",
           label: "Base Font Family",
-          description: "CSS font-family value (e.g., '\"Inter\", \"Arial\", sans-serif')",
+          description:
+            'CSS font-family value (example: \'"Inter", "Arial", sans-serif\')',
         },
         {
           type: "string",
           name: "monospaceFontFamily",
           label: "Monospace Font Family",
-          description: "CSS font-family value for code blocks (e.g., '\"Fira Code\", monospace')",
+          description:
+            "CSS font-family value for code blocks (example: '\"Fira Code\", monospace')",
         },
         {
           type: "string",

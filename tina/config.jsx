@@ -20,11 +20,11 @@ import {
 import HelpButton from "../src/components/HelpButton";
 import { HeroBlockTemplate } from "../src/components/Hero/template";
 import { SettingsCollection } from "../src/components/Settings/template";
-import { ThemeCollection } from "../src/components/Theme/template";
 // workflows component
 import StatusField from "../src/components/StatusField";
 // tags UI component
 import TagsField from "../src/components/TagsField";
+import { ThemeCollection } from "../src/components/Theme/template";
 import { YouTubeEmbedBlockTemplate } from "../src/components/YouTubeEmbed/template";
 import { MDXTemplates } from "../src/theme/template";
 import { docusaurusDate, titleFromSlug } from "../util";
