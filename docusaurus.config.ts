@@ -13,16 +13,25 @@ const docusaurusData = require("./config/docusaurus/index.json");
 const getTheme = (themeName: string) => {
   switch (themeName) {
     case 'github': return themes.github;
-    case 'githubLight': return themes.githubLight;
-    case 'githubDark': return themes.githubDark;
     case 'vsLight': return themes.vsLight;
     case 'vsDark': return themes.vsDark;
-    case 'darkPlus': return themes.darkPlus;
     case 'dracula': return themes.dracula;
     case 'nightOwl': return themes.nightOwl;
+    case 'nightOwlLight': return themes.nightOwlLight;
     case 'oceanicNext': return themes.oceanicNext;
     case 'oneLight': return themes.oneLight;
-    case 'prism': return themes.prism;
+    case 'oneDark': return themes.oneDark;
+    case 'duotoneLight': return themes.duotoneLight;
+    case 'duotoneDark': return themes.duotoneDark;
+    case 'gruvboxMaterialLight': return themes.gruvboxMaterialLight;
+    case 'gruvboxMaterialDark': return themes.gruvboxMaterialDark;
+    case 'jettwaveLight': return themes.jettwaveLight;
+    case 'jettwaveDark': return themes.jettwaveDark;
+    case 'okaidia': return themes.okaidia;
+    case 'palenight': return themes.palenight;
+    case 'shadesOfPurple': return themes.shadesOfPurple;
+    case 'synthwave84': return themes.synthwave84;
+    case 'ultramin': return themes.ultramin;
     case 'prismLight': return PrismLight;
     case 'prismDark': return PrismDark;
     default: return themes.github;
@@ -361,10 +370,10 @@ const config = {
         id: "openapi",
         docsPluginId: "classic",
         config: (() => {
-          const config = {};
-          const apis = docusaurusData.openapi;
+          const config: { [key: string]: { specPath: string; outputDir: string; downloadUrl?: string; sidebarOptions: { groupPathsBy: string; categoryLinkSource: string } } } = {};
+          const apis: Array<{ name: string; specPath: string; outputDir: string; downloadUrl?: string; groupPathsBy?: string; categoryLinkSource?: string }> = docusaurusData.openapi;
           
-          apis.forEach((api) => {
+          for (const api of apis) {
             config[api.name] = {
               specPath: api.specPath,
               outputDir: api.outputDir,
@@ -374,7 +383,7 @@ const config = {
                 categoryLinkSource: api.categoryLinkSource || "tag",
               },
             };
-          });
+          }
           
           return config;
         })(),
