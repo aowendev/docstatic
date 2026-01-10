@@ -125,53 +125,56 @@ const ConditionsTreeField = wrapFieldsWithMeta(({ input, field }) => {
   return (
     <div
       style={{
-        border: "1px solid #e1e5e9",
-        borderRadius: "6px",
-        backgroundColor: "#ffffff",
+        backgroundColor: "#f8f9fa",
         fontFamily:
           '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
       }}
     >
-      {/* Header */}
-      <div
-        style={{
-          padding: "12px 16px",
-          borderBottom: "1px solid #e1e5e9",
-          backgroundColor: "#f8f9fa",
-          borderRadius: "6px 6px 0 0",
-        }}
-      >
-        <div
-          style={{
-            fontSize: "14px",
-            fontWeight: "600",
-            color: "#1a1a1a",
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-          }}
-        >
-          <span>Conditions</span>
-          <span
-            style={{
-              fontSize: "12px",
-              fontWeight: "500",
-              backgroundColor:
-                selectedConditions.length > 0 ? "#0ea5e9" : "#94a3b8",
-              color: "white",
-              padding: "2px 8px",
-              borderRadius: "12px",
-              minWidth: "24px",
-              textAlign: "center",
-            }}
-          >
-            {selectedConditions.length}
-          </span>
+      {/* Selected Conditions Display */}
+      {selectedConditions.length > 0 && (
+        <div className="mb-3">
+          <div className="flex items-center justify-between mb-2">
+            <span className="text-sm text-gray-600">
+              Selected ({selectedConditions.length})
+            </span>
+            <button
+              type="button"
+              onClick={() => input.onChange([])}
+              className="text-xs text-red-600 hover:text-red-800"
+            >
+              Clear All
+            </button>
+          </div>
+          <div className="flex flex-wrap gap-1">
+            {selectedConditions.map((condition) => {
+              return (
+                <span
+                  key={condition}
+                  className="inline-flex items-center px-2 py-1 rounded-md text-xs font-medium bg-blue-100 text-blue-800"
+                >
+                  {condition}
+                  <button
+                    type="button"
+                    onClick={() => {
+                      const newConditions = selectedConditions.filter(
+                        (c) => c !== condition
+                      );
+                      input.onChange(newConditions);
+                    }}
+                    className="ml-1 text-blue-600 hover:text-blue-800"
+                  >
+                    ×
+                  </button>
+                </span>
+              );
+            })}
+          </div>
         </div>
-      </div>
+      )}
 
       {/* Tree Content */}
-      <div style={{ maxHeight: "400px", overflowY: "auto", padding: "8px" }}>
+      <div className="border border-gray-300 rounded-md max-h-80 overflow-y-auto bg-white">
+        <div className="p-2">
         {Object.entries(conditionsTree).map(([category, conditions]) => {
           const isExpanded = expandedCategories.has(category);
           const categoryStatus = getCategoryStatus(conditions);
@@ -183,18 +186,7 @@ const ConditionsTreeField = wrapFieldsWithMeta(({ input, field }) => {
             <div key={category} style={{ marginBottom: "4px" }}>
               {/* Category Header */}
               <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  padding: "8px 12px",
-                  backgroundColor: "#f1f5f9",
-                  borderRadius: "4px",
-                  cursor: "pointer",
-                  fontWeight: "500",
-                  fontSize: "13px",
-                  border: "1px solid #e2e8f0",
-                  transition: "all 0.15s ease",
-                }}
+                className="flex items-center py-1 px-2 hover:bg-gray-50 rounded cursor-pointer"
               >
                 <button
                   type="button"
@@ -214,116 +206,55 @@ const ConditionsTreeField = wrapFieldsWithMeta(({ input, field }) => {
                   ▶
                 </button>
 
-                <input
-                  type="checkbox"
-                  checked={categoryStatus === "all"}
-                  ref={(input) => {
-                    if (input) input.indeterminate = categoryStatus === "some";
-                  }}
-                  onChange={() => handleCategoryToggle(category, conditions)}
-                  style={{
-                    marginRight: "8px",
-                    cursor: "pointer",
-                  }}
-                />
-
                 <span
                   onClick={() => toggleCategory(category)}
-                  style={{
-                    flex: 1,
-                    cursor: "pointer",
-                    userSelect: "none",
-                  }}
+                  className="flex-1 text-left text-sm cursor-pointer select-none"
                 >
-                  📁 {category}
+                  {category}
                 </span>
 
-                <span
-                  style={{
-                    fontSize: "11px",
-                    fontWeight: "500",
-                    color: selectedInCategory > 0 ? "#0ea5e9" : "#94a3b8",
-                    backgroundColor:
-                      selectedInCategory > 0 ? "#e0f2fe" : "#f1f5f9",
-                    padding: "2px 6px",
-                    borderRadius: "10px",
-                    minWidth: "28px",
-                    textAlign: "center",
-                    border: `1px solid ${selectedInCategory > 0 ? "#0ea5e9" : "#cbd5e1"}`,
-                  }}
-                >
-                  {selectedInCategory}/{conditions.length}
-                </span>
               </div>
 
               {/* Category Conditions */}
               {isExpanded && (
-                <div
-                  style={{
-                    marginLeft: "20px",
-                    marginTop: "4px",
-                    borderLeft: "2px solid #e2e8f0",
-                    paddingLeft: "12px",
-                  }}
-                >
-                  {conditions.map((condition) => (
-                    <label
-                      key={condition.value}
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        gap: "8px",
-                        cursor: "pointer",
-                        padding: "6px 8px",
-                        margin: "2px 0",
-                        fontSize: "13px",
-                        borderRadius: "3px",
-                        backgroundColor: selectedConditions.includes(
-                          condition.value
-                        )
-                          ? "#eff6ff"
-                          : "transparent",
-                        border: selectedConditions.includes(condition.value)
-                          ? "1px solid #dbeafe"
-                          : "1px solid transparent",
-                        transition: "all 0.1s ease",
-                      }}
-                    >
-                      <input
-                        type="checkbox"
-                        checked={selectedConditions.includes(condition.value)}
-                        onChange={() => handleConditionToggle(condition.value)}
-                        style={{ margin: 0, cursor: "pointer" }}
-                      />
-                      <div style={{ flex: 1 }}>
-                        <div
-                          style={{
-                            color: selectedConditions.includes(condition.value)
-                              ? "#1e40af"
-                              : "#374151",
-                            fontWeight: selectedConditions.includes(
-                              condition.value
-                            )
-                              ? "500"
-                              : "400",
-                          }}
+                <div className="tree-children">
+                  {conditions.map((condition) => {
+                    const isSelected = selectedConditions.includes(condition.value);
+                    return (
+                      <div
+                        key={condition.value}
+                        className={`flex items-center py-1 px-2 hover:bg-gray-50 rounded cursor-pointer ${
+                          isSelected ? "bg-blue-50 text-blue-700" : ""
+                        }`}
+                        style={{ paddingLeft: "40px" }}
+                      >
+                        <button
+                          type="button"
+                          onClick={() => handleConditionToggle(condition.value)}
+                          className="flex-1 text-left text-sm"
                         >
-                          {condition.label}
-                        </div>
-                        {condition.description && (
-                          <div
-                            style={{
-                              fontSize: "11px",
-                              color: "#6b7280",
-                              marginTop: "1px",
-                            }}
+                          <span className={`${isSelected ? "font-medium" : ""}`}>
+                            {condition.label}
+                          </span>
+                          {condition.description && (
+                            <div className="text-xs text-gray-500 mt-1">
+                              {condition.description}
+                            </div>
+                          )}
+                        </button>
+
+                        {isSelected && (
+                          <button
+                            type="button"
+                            onClick={() => handleConditionToggle(condition.value)}
+                            className="ml-2 text-blue-600 hover:text-blue-800 text-xs"
                           >
-                            {condition.description}
-                          </div>
+                            ×
+                          </button>
                         )}
                       </div>
-                    </label>
-                  ))}
+                    );
+                  })}
                 </div>
               )}
             </div>
@@ -343,29 +274,8 @@ const ConditionsTreeField = wrapFieldsWithMeta(({ input, field }) => {
             No conditions available
           </div>
         )}
-      </div>
-
-      {/* Selected Summary */}
-      {selectedConditions.length > 0 && (
-        <div
-          style={{
-            padding: "12px 16px",
-            borderTop: "1px solid #e1e5e9",
-            backgroundColor: "#f0f9ff",
-            borderRadius: "0 0 6px 6px",
-          }}
-        >
-          <div
-            style={{
-              fontSize: "12px",
-              color: "#0369a1",
-              fontWeight: "500",
-            }}
-          >
-            Selected: {selectedConditions.join(", ")}
-          </div>
         </div>
-      )}
+      </div>
     </div>
   );
 });

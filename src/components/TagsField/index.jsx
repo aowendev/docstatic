@@ -128,9 +128,19 @@ const TagsField = wrapFieldsWithMeta(({ input, field, tinaForm }) => {
             <button
               type="button"
               onClick={() => toggleExpanded(node.fullPath)}
-              className="mr-1 w-4 h-4 flex items-center justify-center text-gray-400 hover:text-gray-600"
+              style={{
+                background: "none",
+                border: "none",
+                cursor: "pointer",
+                marginRight: "8px",
+                fontSize: "12px",
+                color: "#64748b",
+                transform: isExpanded ? "rotate(90deg)" : "rotate(0deg)",
+                transition: "transform 0.15s ease",
+                padding: "2px",
+              }}
             >
-              {isExpanded ? "▼" : "▶"}
+              ▶
             </button>
           ) : (
             <div className="w-5" />
@@ -260,27 +270,6 @@ const TagsField = wrapFieldsWithMeta(({ input, field, tinaForm }) => {
         // Tree View
         <div className="border border-gray-300 rounded-md max-h-80 overflow-y-auto bg-white">
           <div className="p-2">
-            <div className="mb-2 flex items-center justify-between">
-              <span className="text-xs font-semibold text-gray-700">
-                Tag Hierarchy
-              </span>
-              <button
-                type="button"
-                onClick={() => {
-                  const allPaths = allTags
-                    .map((tag) => {
-                      const parts = tag.split("_");
-                      return parts.slice(0, -1).join("_");
-                    })
-                    .filter(Boolean);
-                  setExpandedNodes(new Set(allPaths));
-                }}
-                className="text-xs text-blue-600 hover:text-blue-800"
-              >
-                Expand All
-              </button>
-            </div>
-
             <div className="tree-container">
               {Object.values(tagTree).map((node) => renderTreeNode(node))}
             </div>
