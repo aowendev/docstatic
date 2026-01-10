@@ -357,6 +357,20 @@ export const SettingsCollection = {
       },
     },
     {
+      type: "string",
+      label: "GraphQL Schema URL",
+      name: "graphql",
+      ui: {
+        component: (props) => (
+          <CollapsibleField
+            {...props}
+            FieldComponent={TextField}
+            defaultCollapsed={true}
+          />
+        ),
+      },
+    },
+    {
       type: "object",
       label: "Color Mode",
       name: "colorMode",

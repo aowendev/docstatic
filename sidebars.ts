@@ -1,4 +1,5 @@
 const sidebarData = require("./config/sidebar/index.json");
+const docusaurusData = require("./config/docusaurus/index.json");
 
 const getDocId = (doc) => {
   return doc

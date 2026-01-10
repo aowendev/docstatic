@@ -1,8 +1,50 @@
 {
+  "openapi": {
+    "openApiSidebar": [
+      {
+        "type": "category",
+        "label": "Petstore",
+        "link": {
+          "type": "generated-index",
+          "title": "Petstore API",
+          "slug": "/category/petstore-api"
+        },
+        "items": "./docs/api/petstore/sidebar.ts"
+      }
+    ],
+    "languageTabs": [
+      {
+        "highlight": "typescript",
+        "language": "typescript",
+        "logoClass": "typescript"
+      },
+      {
+        "highlight": "python",
+        "language": "python",
+        "logoClass": "python"
+      },
+      {
+        "highlight": "bash",
+        "language": "curl",
+        "logoClass": "curl"
+      },
+      {
+        "highlight": "csharp",
+        "language": "csharp",
+        "logoClass": "csharp"
+      },
+      {
+        "highlight": "javascript",
+        "language": "nodejs",
+        "logoClass": "nodejs"
+      }
+    ]
+  },
   "label": "Settings",
   "title": "docStatic",
   "tagline": "Modern Documentation Solution",
   "favicon": "img/docstatic.png",
+  "graphql": "http://localhost:4001/graphql",
   "colorMode": {
     "defaultMode": "light",
     "disableSwitch": false,
