@@ -271,50 +271,30 @@ const config = {
     languageTabs: (() => {
       // Define all available language configurations
       const availableLanguages = {
-        python: {
-          highlight: "python",
-          language: "python",
-          logoClass: "python",
-        },
-        typescript: {
-          highlight: "typescript",
-          language: "typescript",
-          logoClass: "typescript",
-        },
-        javascript: {
-          highlight: "javascript",
-          language: "javascript",
-          logoClass: "javascript",
-        },
-        nodejs: {
-          highlight: "javascript",
-          language: "nodejs",
-          logoClass: "nodejs",
-        },
-        curl: {
-          highlight: "bash",
-          language: "curl",
-          logoClass: "curl",
+        c: {
+          highlight: "c",
+          language: "c",
+          logoClass: "c",
         },
         csharp: {
           highlight: "csharp",
           language: "csharp",
           logoClass: "csharp",
         },
+        curl: {
+          highlight: "bash",
+          language: "curl",
+          logoClass: "curl",
+        },
+        dart: {
+          highlight: "dart",
+          language: "dart",
+          logoClass: "dart",
+        },
         go: {
           highlight: "go",
           language: "go",
           logoClass: "go",
-        },
-        ruby: {
-          highlight: "ruby",
-          language: "ruby",
-          logoClass: "ruby",
-        },
-        php: {
-          highlight: "php",
-          language: "php",
-          logoClass: "php",
         },
         java: {
           highlight: "java",
@@ -322,20 +302,20 @@ const config = {
           logoClass: "java",
           variant: "unirest",
         },
-        powershell: {
-          highlight: "powershell",
-          language: "powershell",
-          logoClass: "powershell",
+        javascript: {
+          highlight: "javascript",
+          language: "javascript",
+          logoClass: "javascript",
         },
-        dart: {
-          highlight: "dart",
-          language: "dart",
-          logoClass: "dart",
+        kotlin: {
+          highlight: "kotlin",
+          language: "kotlin",
+          logoClass: "kotlin",
         },
-        c: {
-          highlight: "c",
-          language: "c",
-          logoClass: "c",
+        nodejs: {
+          highlight: "javascript",
+          language: "nodejs",
+          logoClass: "nodejs",
         },
         "objective-c": {
           highlight: "objective-c",
@@ -347,25 +327,45 @@ const config = {
           language: "ocaml",
           logoClass: "ocaml",
         },
+        php: {
+          highlight: "php",
+          language: "php",
+          logoClass: "php",
+        },
+        powershell: {
+          highlight: "powershell",
+          language: "powershell",
+          logoClass: "powershell",
+        },
+        python: {
+          highlight: "python",
+          language: "python",
+          logoClass: "python",
+        },
         r: {
           highlight: "r",
           language: "r",
           logoClass: "r",
+        },
+        ruby: {
+          highlight: "ruby",
+          language: "ruby",
+          logoClass: "ruby",
+        },
+        rust: {
+          highlight: "rust",
+          language: "rust",
+          logoClass: "rust",
         },
         swift: {
           highlight: "swift",
           language: "swift",
           logoClass: "swift",
         },
-        kotlin: {
-          highlight: "kotlin",
-          language: "kotlin",
-          logoClass: "kotlin",
-        },
-        rust: {
-          highlight: "rust",
-          language: "rust",
-          logoClass: "rust",
+        typescript: {
+          highlight: "typescript",
+          language: "typescript",
+          logoClass: "typescript",
         },
       };
 

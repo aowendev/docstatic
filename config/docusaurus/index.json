@@ -141,10 +141,10 @@
     ],
     "languageTabs": [
       "csharp",
-      "python",
       "curl",
       "nodejs",
-      "javascript"
+      "javascript",
+      "python"
     ]
   },
   "prism": {
