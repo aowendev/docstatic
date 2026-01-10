@@ -16,12 +16,8 @@
     "projectName": "aowendev.github.io",
     "organizationName": "aowendev"
   },
-  "docs": {
-    "sidebarHideable": true
-  },
-  "blog": {
-    "showReadingTime": true
-  },
+  "sidebarHideable": true,
+  "showReadingTime": true,
   "languages": {
     "supported": [
       {

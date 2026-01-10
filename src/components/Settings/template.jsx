@@ -358,48 +358,16 @@ export const SettingsCollection = {
     },
 
     {
-      type: "object",
-      label: "Documentation Settings",
-      name: "docs",
-      ui: {
-        component: (props) => (
-          <CollapsibleField
-            {...props}
-            FieldComponent={({ children }) => <div>{children}</div>}
-            defaultCollapsed={true}
-          />
-        ),
-      },
-      fields: [
-        {
-          type: "boolean",
-          label: "Hideable Sidebar",
-          name: "sidebarHideable",
-          description: "Allow users to hide/show the documentation sidebar",
-        },
-      ],
+      type: "boolean",
+      label: "Hideable Sidebar",
+      name: "sidebarHideable",
+      description: "Allow users to hide/show the documentation sidebar",
     },
     {
-      type: "object",
-      label: "Blog Settings",
-      name: "blog",
-      ui: {
-        component: (props) => (
-          <CollapsibleField
-            {...props}
-            FieldComponent={({ children }) => <div>{children}</div>}
-            defaultCollapsed={true}
-          />
-        ),
-      },
-      fields: [
-        {
-          type: "boolean",
-          label: "Show Reading Time",
-          name: "showReadingTime",
-          description: "Display estimated reading time for blog posts",
-        },
-      ],
+      type: "boolean",
+      label: "Show Reading Time",
+      name: "showReadingTime",
+      description: "Display estimated reading time for blog posts",
     },
 
     {

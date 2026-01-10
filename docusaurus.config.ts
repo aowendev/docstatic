@@ -172,7 +172,7 @@ const config = {
           docItemComponent: "@theme/ApiItem", // Derived from docusaurus-theme-openapi
         },
         blog: {
-          showReadingTime: docusaurusData.blog?.showReadingTime ?? true,
+          showReadingTime: docusaurusData.showReadingTime ?? true,
           // Truncate blog previews with manual markers or excerpt
           truncateMarker: /<!--\s*(truncate)\s*-->/,
           // Edit URL configuration for blog posts
@@ -209,7 +209,7 @@ const config = {
   themeConfig: {
     docs: {
       sidebar: {
-        hideable: docusaurusData.docs?.sidebarHideable ?? true,
+        hideable: docusaurusData.sidebarHideable ?? true,
       },
     },
     navbar: {
