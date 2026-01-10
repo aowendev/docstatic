@@ -359,34 +359,6 @@ export const SettingsCollection = {
 
     {
       type: "object",
-      label: "GitHub Deployment",
-      name: "github",
-      ui: {
-        component: (props) => (
-          <CollapsibleField
-            {...props}
-            FieldComponent={({ children }) => <div>{children}</div>}
-            defaultCollapsed={true}
-          />
-        ),
-      },
-      fields: [
-        {
-          type: "string",
-          label: "Project Name",
-          name: "projectName",
-          description: "GitHub repository name for GitHub Pages deployment",
-        },
-        {
-          type: "string",
-          label: "Organization Name", 
-          name: "organizationName",
-          description: "GitHub username or organization name",
-        },
-      ],
-    },
-    {
-      type: "object",
       label: "Documentation Settings",
       name: "docs",
       ui: {
@@ -549,6 +521,25 @@ export const SettingsCollection = {
       ],
     },
     {
+      type: "object",
+      label: "GitHub Deployment",
+      name: "github",
+      fields: [
+        {
+          type: "string",
+          label: "Project Name",
+          name: "projectName",
+          description: "GitHub repository name for GitHub Pages deployment",
+        },
+        {
+          type: "string",
+          label: "Organization Name", 
+          name: "organizationName",
+          description: "GitHub username or organization name",
+        },
+      ],
+    },
+	{
       type: "object",
       label: "Languages",
       name: "languages",
