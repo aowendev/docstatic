@@ -136,19 +136,19 @@ const config = {
       onBrokenMarkdownLinks: "warn",
     }
   },
-  title: docusaurusData.title || "My Site",
-  tagline: docusaurusData.tagline || "Tag Line",
-  url: docusaurusData.url?.siteUrl || "https://www.example.com/docstatic/",
-  baseUrl: docusaurusData.url?.baseUrl || "",
+  title: docusaurusData.title,
+  tagline: docusaurusData.tagline,
+  url: docusaurusData.url?.siteUrl,
+  baseUrl: docusaurusData.url?.baseUrl,
   onBrokenLinks: "warn",
-  favicon: docusaurusData.favicon || "img/docstatic.png",
+  favicon: docusaurusData.favicon,
   // Client modules that run on every page
   clientModules: [require.resolve("./src/clientModules/editThisPageTarget.js")],
 
   // Github pages deployment config.
-  projectName: docusaurusData.github?.projectName || "aowendev.github.io",
-  organizationName: docusaurusData.github?.organizationName || "aowendev",
-  trailingSlash: docusaurusData.url?.trailingSlash ?? false,
+  projectName: docusaurusData.github?.projectName,
+  organizationName: docusaurusData.github?.organizationName,
+  trailingSlash: docusaurusData.url?.trailingSlash,
 
   stylesheets: [
     {
@@ -193,7 +193,7 @@ const config = {
           docItemComponent: "@theme/ApiItem", // Derived from docusaurus-theme-openapi
         },
         blog: {
-          showReadingTime: docusaurusData.showReadingTime ?? true,
+          showReadingTime: docusaurusData.showReadingTime,
           // Truncate blog previews with manual markers or excerpt
           truncateMarker: /<!--\s*(truncate)\s*-->/,
           // Edit URL configuration for blog posts
@@ -229,91 +229,35 @@ const config = {
   ],
   themeConfig: {
     colorMode: {
-      defaultMode: docusaurusData.colorMode?.defaultMode || "light",
-      disableSwitch: docusaurusData.colorMode?.disableSwitch ?? false,
-      respectPrefersColorScheme: docusaurusData.colorMode?.respectPrefersColorScheme ?? false,
+      defaultMode: docusaurusData.colorMode?.defaultMode,
+      disableSwitch: docusaurusData.colorMode?.disableSwitch,
+      respectPrefersColorScheme: docusaurusData.colorMode?.respectPrefersColorScheme,
     },
     docs: {
       sidebar: {
-        hideable: docusaurusData.sidebarHideable ?? true,
+        hideable: docusaurusData.sidebarHideable,
       },
     },
     navbar: {
-      title: docusaurusData.title || "My Site",
+      title: docusaurusData.title,
       logo: {
-        alt: docusaurusData?.logo?.alt ? docusaurusData?.logo?.alt : "My Logo",
-        src: docusaurusData?.logo?.src
-          ? docusaurusData?.logo?.src
-          : "img/logo.svg",
+        alt: docusaurusData?.logo?.alt,
+        src: docusaurusData?.logo?.src,
       },
-      items: docusaurusData.navbar ? docusaurusData.navbar.map(formatNavbarItem) : [
-        {
-          type: "doc",
-          docId: "introduction",
-          position: "left",
-          label: "Docs",
-        },
-        { to: "/blog", label: "Blog", position: "left" },
-        {
-          label: "Page",
-          position: "left",
-          to: "example-page",
-        },
-        {
-          label: "GraphQL",
-          position: "left",
-          to: "/docs/api/queries",
-        },
-        {
-          label: "OpenAPI",
-          position: "left",
-          to: "/docs/category/petstore-api",
-        },
-        {
-          type: "doc",
-          docId: "wiki/readme",
-          position: "left",
-          label: "Wiki",
-        },
-        {
-          type: "localeDropdown",
-          position: "right",
-        },
-      ],
+      items: docusaurusData.navbar.map(formatNavbarItem),
     },
     footer: {
       //        style: docusaurusData.footer?.style || "dark",
       links: docusaurusData.footer?.links.map((item: any) => {
         return formatFooterItem(item);
       }),
-      copyright: `Copyright © ${new Date().getFullYear()} ${docusaurusData.footer?.copyright || docusaurusData.title}`,
+      copyright: `Copyright © ${new Date().getFullYear()} ${docusaurusData.footer?.copyright}`,
     },
       prism: {
-        additionalLanguages: docusaurusData.prism?.additionalLanguages || [
-          'java',
-          'latex',
-          'haskell',
-          'matlab',
-          'PHp',
-          'powershell',
-          'bash',
-          'diff',
-          'json',
-          'scss',
-        ],
-        magicComments: docusaurusData.prism?.magicComments || [
-          {
-            className: 'theme-code-block-highlighted-line',
-            line: 'highlight-next-line',
-            block: {start: 'highlight-start', end: 'highlight-end'},
-          },
-          {
-            className: 'code-block-error-line',
-            line: 'This will error',
-          },
-        ],
-        theme: docusaurusData.prism?.theme ? getTheme(docusaurusData.prism.theme) : PrismLight,
-        darkTheme: docusaurusData.prism?.darkTheme ? getTheme(docusaurusData.prism.darkTheme) : PrismDark,
+        additionalLanguages: docusaurusData.prism?.additionalLanguages,
+        magicComments: docusaurusData.prism?.magicComments,
+        theme: getTheme(docusaurusData.prism.theme),
+        darkTheme: getTheme(docusaurusData.prism.darkTheme),
       },
     languageTabs: [
       {
