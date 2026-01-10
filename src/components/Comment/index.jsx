@@ -11,7 +11,7 @@ import React from "react";
  * Comment component for Tina CMS
  * This component renders nothing and is only visible in the source code.
  * Used for adding reviewer comments that don't appear in the final output.
- * 
+ *
  * @param {Object} props - The component props
  * @param {string} props.Reviewer - The name of the reviewer
  * @param {string} props.Comment - The comment text

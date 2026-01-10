@@ -11,9 +11,16 @@
  * work well for content-centric websites.
  */
 
-@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap");
+/*
+ * TODO: remove - now handled by Theme collection
+ * @import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap");
+ * /
 
-/* You can override the default Infima variables here. */
+/* Import theme variables generated from TinaCMS */
+@import "./theme-variables.css";
+
+/* 
+ * TODO: remove - now handled by Theme collection
 :root {
   --ifm-footer-background-color: #f2f2f2;
   --ifm-color-primary: #005eb8;
@@ -32,6 +39,7 @@
   --ifm-card-border-radius: 12px;
   --ifm-navbar-height: 4rem;
 }
+*/
 
 a[id^="footnote-ref-"] {
   color: var(--ifm-link-color) !important;
@@ -148,7 +156,7 @@ body {
 }
 
 /* Base64-encoded SVGs (data URIs) */
-html[data-theme='dark'] img[src^='data:image/svg+xml'] {
+html[data-theme="dark"] img[src^="data:image/svg+xml"] {
   filter: invert(1) hue-rotate(180deg);
 }
 
@@ -797,7 +805,7 @@ ul li div p {
 
 /* Strikethrough styling customization */
 /* Default behavior: Remove strikethrough effect on rendered pages */
-article del, 
+article del,
 article s,
 .markdown del,
 .markdown s,

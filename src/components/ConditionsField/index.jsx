@@ -175,105 +175,110 @@ const ConditionsTreeField = wrapFieldsWithMeta(({ input, field }) => {
       {/* Tree Content */}
       <div className="border border-gray-300 rounded-md max-h-80 overflow-y-auto bg-white">
         <div className="p-2">
-        {Object.entries(conditionsTree).map(([category, conditions]) => {
-          const isExpanded = expandedCategories.has(category);
-          const categoryStatus = getCategoryStatus(conditions);
-          const selectedInCategory = conditions.filter((c) =>
-            selectedConditions.includes(c.value)
-          ).length;
+          {Object.entries(conditionsTree).map(([category, conditions]) => {
+            const isExpanded = expandedCategories.has(category);
+            const categoryStatus = getCategoryStatus(conditions);
+            const selectedInCategory = conditions.filter((c) =>
+              selectedConditions.includes(c.value)
+            ).length;
 
-          return (
-            <div key={category} style={{ marginBottom: "4px" }}>
-              {/* Category Header */}
-              <div
-                className="flex items-center py-1 px-2 hover:bg-gray-50 rounded cursor-pointer"
-              >
-                <button
-                  type="button"
-                  onClick={() => toggleCategory(category)}
-                  style={{
-                    background: "none",
-                    border: "none",
-                    cursor: "pointer",
-                    marginRight: "8px",
-                    fontSize: "12px",
-                    color: "#64748b",
-                    transform: isExpanded ? "rotate(90deg)" : "rotate(0deg)",
-                    transition: "transform 0.15s ease",
-                    padding: "2px",
-                  }}
-                >
-                  ▶
-                </button>
+            return (
+              <div key={category} style={{ marginBottom: "4px" }}>
+                {/* Category Header */}
+                <div className="flex items-center py-1 px-2 hover:bg-gray-50 rounded cursor-pointer">
+                  <button
+                    type="button"
+                    onClick={() => toggleCategory(category)}
+                    style={{
+                      background: "none",
+                      border: "none",
+                      cursor: "pointer",
+                      marginRight: "8px",
+                      fontSize: "12px",
+                      color: "#64748b",
+                      transform: isExpanded ? "rotate(90deg)" : "rotate(0deg)",
+                      transition: "transform 0.15s ease",
+                      padding: "2px",
+                    }}
+                  >
+                    ▶
+                  </button>
 
-                <span
-                  onClick={() => toggleCategory(category)}
-                  className="flex-1 text-left text-sm cursor-pointer select-none"
-                >
-                  {category}
-                </span>
+                  <span
+                    onClick={() => toggleCategory(category)}
+                    className="flex-1 text-left text-sm cursor-pointer select-none"
+                  >
+                    {category}
+                  </span>
+                </div>
 
-              </div>
-
-              {/* Category Conditions */}
-              {isExpanded && (
-                <div className="tree-children">
-                  {conditions.map((condition) => {
-                    const isSelected = selectedConditions.includes(condition.value);
-                    return (
-                      <div
-                        key={condition.value}
-                        className={`flex items-center py-1 px-2 hover:bg-gray-50 rounded cursor-pointer ${
-                          isSelected ? "bg-blue-50 text-blue-700" : ""
-                        }`}
-                        style={{ paddingLeft: "40px" }}
-                      >
-                        <button
-                          type="button"
-                          onClick={() => handleConditionToggle(condition.value)}
-                          className="flex-1 text-left text-sm"
+                {/* Category Conditions */}
+                {isExpanded && (
+                  <div className="tree-children">
+                    {conditions.map((condition) => {
+                      const isSelected = selectedConditions.includes(
+                        condition.value
+                      );
+                      return (
+                        <div
+                          key={condition.value}
+                          className={`flex items-center py-1 px-2 hover:bg-gray-50 rounded cursor-pointer ${
+                            isSelected ? "bg-blue-50 text-blue-700" : ""
+                          }`}
+                          style={{ paddingLeft: "40px" }}
                         >
-                          <span className={`${isSelected ? "font-medium" : ""}`}>
-                            {condition.label}
-                          </span>
-                          {condition.description && (
-                            <div className="text-xs text-gray-500 mt-1">
-                              {condition.description}
-                            </div>
-                          )}
-                        </button>
-
-                        {isSelected && (
                           <button
                             type="button"
-                            onClick={() => handleConditionToggle(condition.value)}
-                            className="ml-2 text-blue-600 hover:text-blue-800 text-xs"
+                            onClick={() =>
+                              handleConditionToggle(condition.value)
+                            }
+                            className="flex-1 text-left text-sm"
                           >
-                            ×
+                            <span
+                              className={`${isSelected ? "font-medium" : ""}`}
+                            >
+                              {condition.label}
+                            </span>
+                            {condition.description && (
+                              <div className="text-xs text-gray-500 mt-1">
+                                {condition.description}
+                              </div>
+                            )}
                           </button>
-                        )}
-                      </div>
-                    );
-                  })}
-                </div>
-              )}
-            </div>
-          );
-        })}
 
-        {Object.keys(conditionsTree).length === 0 && (
-          <div
-            style={{
-              padding: "20px",
-              textAlign: "center",
-              color: "#6b7280",
-              fontStyle: "italic",
-              fontSize: "13px",
-            }}
-          >
-            No conditions available
-          </div>
-        )}
+                          {isSelected && (
+                            <button
+                              type="button"
+                              onClick={() =>
+                                handleConditionToggle(condition.value)
+                              }
+                              className="ml-2 text-blue-600 hover:text-blue-800 text-xs"
+                            >
+                              ×
+                            </button>
+                          )}
+                        </div>
+                      );
+                    })}
+                  </div>
+                )}
+              </div>
+            );
+          })}
+
+          {Object.keys(conditionsTree).length === 0 && (
+            <div
+              style={{
+                padding: "20px",
+                textAlign: "center",
+                color: "#6b7280",
+                fontStyle: "italic",
+                fontSize: "13px",
+              }}
+            >
+              No conditions available
+            </div>
+          )}
         </div>
       </div>
     </div>

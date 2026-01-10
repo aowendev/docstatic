@@ -6,15 +6,17 @@
  */
 
 import React from "react";
-import { ReferenceField, TextField, ImageField } from "tinacms";
+import { ImageField, ReferenceField, TextField } from "tinacms";
 import docusaurusData from "../../../config/docusaurus/index.json";
 import CollapsibleField from "../CollapsibleField";
 import HelpButton from "../HelpButton";
 
 // Function to create language options from config data
 function createLanguageOptions(configData = docusaurusData) {
-  const supportedLanguages = configData.languages?.supported || [{code: "en", label: "English"}];
-  
+  const supportedLanguages = configData.languages?.supported || [
+    { code: "en", label: "English" },
+  ];
+
   return supportedLanguages.map((langObj) => {
     return {
       value: langObj.code,
@@ -386,7 +388,7 @@ export const SettingsCollection = {
               value: "light",
             },
             {
-              label: "Dark", 
+              label: "Dark",
               value: "dark",
             },
             {
@@ -543,13 +545,13 @@ export const SettingsCollection = {
         },
         {
           type: "string",
-          label: "Organization Name", 
+          label: "Organization Name",
           name: "organizationName",
           description: "GitHub username or organization name",
         },
       ],
     },
-	{
+    {
       type: "object",
       label: "Languages",
       name: "languages",
@@ -565,7 +567,7 @@ export const SettingsCollection = {
             }),
             defaultItem: () => ({
               code: "en",
-              label: "English"
+              label: "English",
             }),
           },
           fields: [
@@ -594,13 +596,16 @@ export const SettingsCollection = {
               const supportedLanguages = React.useMemo(() => {
                 const formValues = props.tinaForm.values;
                 const supported = formValues?.languages?.supported || [];
-                return supported.map(lang => lang.code).filter(Boolean);
+                return supported.map((lang) => lang.code).filter(Boolean);
               }, [props.tinaForm.values]);
 
               // Auto-set to first supported language if current default is not supported
               React.useEffect(() => {
                 const currentDefault = props.input.value;
-                if (currentDefault && !supportedLanguages.includes(currentDefault)) {
+                if (
+                  currentDefault &&
+                  !supportedLanguages.includes(currentDefault)
+                ) {
                   if (supportedLanguages.length > 0) {
                     props.input.onChange(supportedLanguages[0]);
                   }
@@ -613,11 +618,11 @@ export const SettingsCollection = {
                     {props.field.label}
                   </label>
                   <select
-                    value={props.input.value || (supportedLanguages[0] || "en")}
+                    value={props.input.value || supportedLanguages[0] || "en"}
                     onChange={(e) => props.input.onChange(e.target.value)}
                     className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                   >
-                    {supportedLanguages.map(code => (
+                    {supportedLanguages.map((code) => (
                       <option key={code} value={code}>
                         {code}
                       </option>
@@ -677,21 +682,24 @@ export const SettingsCollection = {
               label: "API Name",
               name: "name",
               required: true,
-              description: "Unique name for this API (e.g., petstore, userapi, etc.)",
+              description:
+                "Unique name for this API (e.g., petstore, userapi, etc.)",
             },
             {
               type: "string",
               label: "Spec Path",
               name: "specPath",
               required: true,
-              description: "Path to the OpenAPI specification file (e.g., apis/petstore.yaml)",
+              description:
+                "Path to the OpenAPI specification file (e.g., apis/petstore.yaml)",
             },
             {
               type: "string",
               label: "Output Directory",
               name: "outputDir",
               required: true,
-              description: "Directory where generated API docs will be placed (e.g., docs/api/petstore)",
+              description:
+                "Directory where generated API docs will be placed (e.g., docs/api/petstore)",
             },
             {
               type: "string",
@@ -732,7 +740,8 @@ export const SettingsCollection = {
           label: "Language Tabs",
           name: "languageTabs",
           list: true,
-          description: "Select which programming languages to show as tabs in OpenAPI code examples across all APIs",
+          description:
+            "Select which programming languages to show as tabs in OpenAPI code examples across all APIs",
           options: [
             { label: "C", value: "c" },
             { label: "C#", value: "csharp" },
@@ -767,7 +776,8 @@ export const SettingsCollection = {
           label: "Additional Languages",
           name: "additionalLanguages",
           list: true,
-          description: "Programming languages supported for syntax highlighting",
+          description:
+            "Programming languages supported for syntax highlighting",
         },
         {
           type: "object",
@@ -791,7 +801,8 @@ export const SettingsCollection = {
               type: "string",
               label: "Line Comment",
               name: "line",
-              description: "Comment text that triggers highlighting on the next line",
+              description:
+                "Comment text that triggers highlighting on the next line",
             },
             {
               type: "object",
@@ -859,7 +870,7 @@ export const SettingsCollection = {
         },
       ],
     },
-	{
+    {
       type: "object",
       label: "URL",
       name: "url",
@@ -875,7 +886,8 @@ export const SettingsCollection = {
           type: "string",
           label: "Base URL",
           name: "baseUrl",
-          description: "Base URL for your site (e.g., /my-project/). Leave empty for root domain.",
+          description:
+            "Base URL for your site (e.g., /my-project/). Leave empty for root domain.",
         },
         {
           type: "boolean",
@@ -885,14 +897,14 @@ export const SettingsCollection = {
         },
       ],
     },
-	{
+    {
       type: "object",
       label: "Navbar",
       name: "navbar",
       list: true,
       ui: {
         itemProps: (item) => ({
-          label: `${item.label} - ${item.position ? item.position.charAt(0).toUpperCase() + item.position.slice(1) : 'Left'}`,
+          label: `${item.label} - ${item.position ? item.position.charAt(0).toUpperCase() + item.position.slice(1) : "Left"}`,
         }),
         defaultItem: {
           position: "left",

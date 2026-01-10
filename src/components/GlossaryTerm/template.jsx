@@ -6,14 +6,16 @@
  */
 
 import React from "react";
-import glossaryTerms from "../../../reuse/glossaryTerms/index.json";
 import docusaurusData from "../../../config/docusaurus/index.json";
+import glossaryTerms from "../../../reuse/glossaryTerms/index.json";
 import HelpButton from "../HelpButton";
 
 // Function to create language options from config data
 function createLanguageOptions(configData = docusaurusData) {
-  const supportedLanguages = configData.languages?.supported || [{code: "en", label: "English"}];
-  
+  const supportedLanguages = configData.languages?.supported || [
+    { code: "en", label: "English" },
+  ];
+
   return supportedLanguages.map((langObj) => {
     return {
       value: langObj.code,
@@ -155,4 +157,3 @@ export const GlossaryTermBlockTemplate = {
     },
   ],
 };
-

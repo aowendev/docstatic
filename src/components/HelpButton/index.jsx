@@ -12,12 +12,12 @@ export default function HelpButton({ url }) {
     // Inject custom TinaCMS styles for strikethrough highlighting
     const injectTinaStyles = () => {
       // Check if styles are already injected
-      if (document.querySelector('#tina-custom-styles')) {
+      if (document.querySelector("#tina-custom-styles")) {
         return;
       }
 
-      const style = document.createElement('style');
-      style.id = 'tina-custom-styles';
+      const style = document.createElement("style");
+      style.id = "tina-custom-styles";
       style.textContent = `
         /* Custom strikethrough styling for TinaCMS rich text editor */
         .slate-strikethrough,
@@ -39,23 +39,25 @@ export default function HelpButton({ url }) {
     // Modify TinaCMS rich text editor strikethrough button to show "Highlight"
     const modifyStrikeThroughButton = () => {
       // Look for the specific strikethrough SVG element
-      const strikeThroughSvgs = document.querySelectorAll('svg.lucide-strikethrough');
-      
+      const strikeThroughSvgs = document.querySelectorAll(
+        "svg.lucide-strikethrough"
+      );
+
       for (const svg of strikeThroughSvgs) {
-        const button = svg.closest('button');
+        const button = svg.closest("button");
         if (!button || button.dataset.highlightModified) continue; // Already modified
-        
+
         // Replace the SVG with the Lucide highlighter icon
         svg.outerHTML = `
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-highlighter-icon lucide-highlighter"><path d="m9 11-6 6v3h9l3-3"/><path d="m22 12-4.6 4.6a2 2 0 0 1-2.8 0l-5.2-5.2a2 2 0 0 1 0-2.8L14 4"/></svg>
         `;
-        
+
         // Update button title/tooltip
-        button.title = 'highlight text';
-        button.setAttribute('aria-label', 'highlight text');
-        
-        button.dataset.highlightModified = 'true';
-      }      
+        button.title = "highlight text";
+        button.setAttribute("aria-label", "highlight text");
+
+        button.dataset.highlightModified = "true";
+      }
     };
 
     const injectIcon = () => {
@@ -90,23 +92,23 @@ export default function HelpButton({ url }) {
         target.appendChild(button);
       }
     };
-    
+
     // Inject custom TinaCMS styles
     injectTinaStyles();
-    
+
     // Modify strikethrough button to show "Highlight"
     modifyStrikeThroughButton();
-    
+
     // Inject help button icon
     injectIcon();
     const timeout = setTimeout(() => {
       injectIcon();
       modifyStrikeThroughButton(); // Try again after delay in case UI loads late
     }, 500);
-    
+
     // Also try again after a longer delay for slower loading
     const longerTimeout = setTimeout(modifyStrikeThroughButton, 2000);
-    
+
     return () => {
       clearTimeout(timeout);
       clearTimeout(longerTimeout);

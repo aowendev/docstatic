@@ -21,8 +21,15 @@ const StatusField = wrapFieldsWithMeta(({ input, field, tinaForm }) => {
   // Get current status values from the form
   // Priority order: published > unlisted > approved > translate > review > draft
   const getCurrentStatus = () => {
-    const priorityOrder = ["published", "unlisted", "approved", "translate", "review", "draft"];
-    
+    const priorityOrder = [
+      "published",
+      "unlisted",
+      "approved",
+      "translate",
+      "review",
+      "draft",
+    ];
+
     for (const statusField of priorityOrder) {
       if (tinaForm.values[statusField] === true) {
         return statusField;

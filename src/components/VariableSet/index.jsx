@@ -17,7 +17,7 @@ const VariableSet = ({ variableSelection, lang, initcap, bold }) => {
   const { i18n } = useDocusaurusContext();
 
   // Parse composite value
-  const [finalSetKey, finalVariableKey] = variableSelection?.split('|') || [];
+  const [finalSetKey, finalVariableKey] = variableSelection?.split("|") || [];
 
   // Determine the current language
   const getCurrentLanguage = () => {
@@ -82,11 +82,16 @@ const VariableSet = ({ variableSelection, lang, initcap, bold }) => {
   const translation = getTranslation();
 
   // Apply initcap transformation if requested
-  const displayValue = initcap && translation !== "NOT FOUND" 
-    ? translation.charAt(0).toUpperCase() + translation.slice(1)
-    : translation;
+  const displayValue =
+    initcap && translation !== "NOT FOUND"
+      ? translation.charAt(0).toUpperCase() + translation.slice(1)
+      : translation;
 
-  return <span style={bold ? { fontWeight: 'bold' } : undefined}>{displayValue}</span>;
+  return (
+    <span style={bold ? { fontWeight: "bold" } : undefined}>
+      {displayValue}
+    </span>
+  );
 };
 
 export default VariableSet;

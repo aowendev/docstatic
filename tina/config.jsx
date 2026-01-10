@@ -1,21 +1,26 @@
 import React from "react";
 import { defineConfig, ReferenceField, TextField } from "tinacms";
+// docusaurus config for language settings
+import docusaurusData from "../config/docusaurus/index.json";
 // conditions from the conditions JSON file
 import conditionsData from "../reuse/conditions/index.json";
 // doc tags from the taxonomy JSON file
 import data from "../reuse/taxonomy/index.json";
-// docusaurus config for language settings
-import docusaurusData from "../config/docusaurus/index.json";
 // collapsible field component
 import CollapsibleField from "../src/components/CollapsibleField";
 // conditions tree UI component
 import ConditionsTreeField from "../src/components/ConditionsField";
 import { FeaturesBlockTemplate } from "../src/components/Features/template";
-import { GlossaryTermTemplate, GlossaryTermTranslationTemplate, GlossaryTermCollection } from "../src/components/GlossaryTerm/template";
+import {
+  GlossaryTermCollection,
+  GlossaryTermTemplate,
+  GlossaryTermTranslationTemplate,
+} from "../src/components/GlossaryTerm/template";
 // context help
 import HelpButton from "../src/components/HelpButton";
 import { HeroBlockTemplate } from "../src/components/Hero/template";
 import { SettingsCollection } from "../src/components/Settings/template";
+import { ThemeCollection } from "../src/components/Theme/template";
 // workflows component
 import StatusField from "../src/components/StatusField";
 // tags UI component
@@ -26,13 +31,15 @@ import { docusaurusDate, titleFromSlug } from "../util";
 
 // Function to extract available locales from Docusaurus config
 function getDocusaurusLocales() {
-  return docusaurusData.languages.supported.map(lang => lang.code);
+  return docusaurusData.languages.supported.map((lang) => lang.code);
 }
 
 // Function to create language options from config data
 function createLanguageOptions(configData = docusaurusData) {
-  const supportedLanguages = configData.languages?.supported || [{code: "en", label: "English"}];
-  
+  const supportedLanguages = configData.languages?.supported || [
+    { code: "en", label: "English" },
+  ];
+
   return supportedLanguages.map((langObj) => {
     return {
       value: langObj.code,
@@ -131,8 +138,8 @@ const PostCollection = {
   ui: {
     beforeSubmit: async ({ values }) => {
       return {
-      ...values,
-       lastmod: new Date().toISOString(),
+        ...values,
+        lastmod: new Date().toISOString(),
       };
     },
     defaultItem: {
@@ -293,8 +300,8 @@ const DocsCollection = {
   ui: {
     beforeSubmit: async ({ values }) => {
       return {
-      ...values,
-       lastmod: new Date().toISOString(),
+        ...values,
+        lastmod: new Date().toISOString(),
       };
     },
     defaultItem: {
@@ -447,7 +454,7 @@ const DocsCollection = {
       name: "unlisted",
       label: "Unlisted",
       ui: { component: "hidden" },
-    }
+    },
   ],
 };
 
@@ -459,8 +466,8 @@ const WikiCollection = {
   ui: {
     beforeSubmit: async ({ values }) => {
       return {
-      ...values,
-       lastmod: new Date().toISOString(),
+        ...values,
+        lastmod: new Date().toISOString(),
       };
     },
   },
@@ -535,8 +542,8 @@ const TranslationCollection = {
   ui: {
     beforeSubmit: async ({ values }) => {
       return {
-      ...values,
-       lastmod: new Date().toISOString(),
+        ...values,
+        lastmod: new Date().toISOString(),
       };
     },
     defaultItem: {
@@ -689,7 +696,7 @@ const TranslationCollection = {
       name: "unlisted",
       label: "Unlisted",
       ui: { component: "hidden" },
-    }
+    },
   ],
 };
 
@@ -1335,8 +1342,8 @@ export default defineConfig({
   },
   schema: {
     collections: [
-      ConditionsCollection,
       PostCollection,
+      ConditionsCollection,
       GlossaryTermCollection,
       HomepageCollection,
       PagesCollection,
@@ -1344,6 +1351,7 @@ export default defineConfig({
       SnippetsCollection,
       SidebarCollection,
       TaxonomyCollection,
+      ThemeCollection,
       DocsCollection,
       TranslationCollection,
       VariableSetCollection,

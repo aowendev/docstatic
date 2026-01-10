@@ -284,13 +284,13 @@ const GlossaryTerm = ({ termKey, lang, initcap, bold }) => {
         onClick={(e) => e.stopPropagation()}
       >
         <div
-          style={{ 
-            fontWeight: bold ? "bold" : "600", 
-            marginBottom: "8px", 
-            color: textColor 
+          style={{
+            fontWeight: bold ? "bold" : "600",
+            marginBottom: "8px",
+            color: textColor,
           }}
         >
-          {initcap && term !== "TERM NOT FOUND" 
+          {initcap && term !== "TERM NOT FOUND"
             ? term.charAt(0).toUpperCase() + term.slice(1)
             : term}
         </div>
@@ -313,7 +313,7 @@ const GlossaryTerm = ({ termKey, lang, initcap, bold }) => {
         onClick={handleTermClick}
         onTouchStart={isTouchDevice ? (e) => e.stopPropagation() : undefined}
       >
-        {initcap && term !== "TERM NOT FOUND" 
+        {initcap && term !== "TERM NOT FOUND"
           ? term.charAt(0).toUpperCase() + term.slice(1)
           : term}
       </span>

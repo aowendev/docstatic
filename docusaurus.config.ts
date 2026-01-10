@@ -370,7 +370,7 @@ const config = {
       };
 
       // Get selected languages from global languageTabs setting
-      const selectedLanguages = docusaurusData.openapi?.languageTabs;
+      const selectedLanguages = docusaurusData.openapi?.languageTabs as Array<keyof typeof availableLanguages>;
       
       // Map selected languages to their full configurations
       return selectedLanguages

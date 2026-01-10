@@ -60,12 +60,12 @@ export const DARK_BACKGROUND_COLOR = "#181920";
 // During SSR (Server-Side Rendering), localStorage is not available and causes:
 // "SecurityError: Cannot initialize local storage without a `--localstorage-file` path"
 const createStorage = () => {
-  if (typeof window === 'undefined') {
+  if (typeof window === "undefined") {
     // Server-side fallback with dummy storage
     return {
       get: () => null,
       set: () => {},
-      del: () => {}
+      del: () => {},
     };
   }
   return createStorageSlot("ifm-theme-colors-light", {
@@ -74,12 +74,12 @@ const createStorage = () => {
 };
 
 const createDarkStorage = () => {
-  if (typeof window === 'undefined') {
+  if (typeof window === "undefined") {
     // Server-side fallback with dummy storage
     return {
       get: () => null,
       set: () => {},
-      del: () => {}
+      del: () => {},
     };
   }
   return createStorageSlot("ifm-theme-colors-dark", {

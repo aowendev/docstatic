@@ -27,6 +27,6 @@ export const CommentBlockTemplate = {
       type: "string",
       isTitle: true,
       required: true,
-    }
+    },
   ],
 };

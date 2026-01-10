@@ -48,7 +48,7 @@ export const Hero = ({ data, index }) => {
                     ? data.documentLabel
                     : titleFromSlug(data.document)}
                 </Link>
-                {(data.secondaryButtonText && data.secondaryButtonLink) && (
+                {data.secondaryButtonText && data.secondaryButtonLink && (
                   <Link
                     className={clsx(
                       "button button--outline button--lg",
@@ -79,7 +79,8 @@ export const Hero = ({ data, index }) => {
                   <div className={styles.codeBlock}>
                     <span className={styles.codeKeyword}># Features</span>
                     <br />
-                    {data.heroCardFeatures && data.heroCardFeatures.length > 0 ? (
+                    {data.heroCardFeatures &&
+                    data.heroCardFeatures.length > 0 ? (
                       data.heroCardFeatures.map((item, index) => (
                         <React.Fragment key={index}>
                           <span className={styles.codeProperty}>

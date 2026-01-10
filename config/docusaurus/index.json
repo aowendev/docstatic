@@ -139,13 +139,7 @@
         "categoryLinkSource": "tag"
       }
     ],
-    "languageTabs": [
-      "csharp",
-      "curl",
-      "nodejs",
-      "javascript",
-      "python"
-    ]
+    "languageTabs": ["csharp", "curl", "nodejs", "javascript", "python"]
   },
   "prism": {
     "additionalLanguages": [
