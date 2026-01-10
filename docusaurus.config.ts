@@ -378,7 +378,7 @@ const config = {
       "docusaurus-graphql-plugin",
       {
         // can be a path, a glob or an URL
-        schema: docusaurusData.graphql?.schemaUrl,
+        schema: docusaurusData.graphql,
       },
     ],
   ],
