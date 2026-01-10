@@ -370,7 +370,7 @@ const config = {
       };
 
       // Get selected languages from global languageTabs setting
-      const selectedLanguages = docusaurusData.languageTabs || ["python", "curl", "csharp", "go", "nodejs"];
+      const selectedLanguages = docusaurusData.openapi?.languageTabs;
       
       // Map selected languages to their full configurations
       return selectedLanguages
@@ -387,7 +387,7 @@ const config = {
         docsPluginId: "classic",
         config: (() => {
           const config: { [key: string]: { specPath: string; outputDir: string; downloadUrl?: string; sidebarOptions: { groupPathsBy: string; categoryLinkSource: string } } } = {};
-          const apis: Array<{ name: string; specPath: string; outputDir: string; downloadUrl?: string; groupPathsBy?: string; categoryLinkSource?: string }> = docusaurusData.openapi;
+          const apis: Array<{ name: string; specPath: string; outputDir: string; downloadUrl?: string; groupPathsBy?: string; categoryLinkSource?: string }> = docusaurusData.openapi?.apis || [];
           
           for (const api of apis) {
             config[api.name] = {

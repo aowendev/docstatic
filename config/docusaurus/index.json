@@ -128,23 +128,25 @@
     "alt": "docStatic",
     "src": "/img/docstatic.png"
   },
-  "openapi": [
-    {
-      "name": "petstore",
-      "specPath": "apis/petstore.yaml",
-      "outputDir": "docs/api/petstore",
-      "downloadUrl": "https://raw.githubusercontent.com/PaloAltoNetworks/docusaurus-template-openapi-docs/main/examples/petstore.yaml",
-      "groupPathsBy": "tag",
-      "categoryLinkSource": "tag"
-    }
-  ],
-  "languageTabs": [
-    "csharp",
-    "python",
-    "curl",
-    "nodejs",
-    "javascript"
-  ],
+  "openapi": {
+    "apis": [
+      {
+        "name": "petstore",
+        "specPath": "apis/petstore.yaml",
+        "outputDir": "docs/api/petstore",
+        "downloadUrl": "https://raw.githubusercontent.com/PaloAltoNetworks/docusaurus-template-openapi-docs/main/examples/petstore.yaml",
+        "groupPathsBy": "tag",
+        "categoryLinkSource": "tag"
+      }
+    ],
+    "languageTabs": [
+      "csharp",
+      "python",
+      "curl",
+      "nodejs",
+      "javascript"
+    ]
+  },
   "prism": {
     "additionalLanguages": [
       "java",
