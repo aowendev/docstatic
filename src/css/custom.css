@@ -11,35 +11,8 @@
  * work well for content-centric websites.
  */
 
-/*
- * TODO: remove - now handled by Theme collection
- * @import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap");
- * /
-
 /* Import theme variables generated from TinaCMS */
 @import "./theme-variables.css";
-
-/* 
- * TODO: remove - now handled by Theme collection
-:root {
-  --ifm-footer-background-color: #f2f2f2;
-  --ifm-color-primary: #005eb8;
-  --ifm-color-primary-dark: #0055a6;
-  --ifm-color-primary-darker: #00509c;
-  --ifm-color-primary-darkest: #004281;
-  --ifm-color-primary-light: #0067ca;
-  --ifm-color-primary-lighter: #006cd4;
-  --ifm-color-primary-lightest: #0075e4;
-  --ifm-code-font-size: 95%;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
-  --ifm-font-family-base: "Inter", "Arial", sans-serif;
-  --ifm-font-family-monospace: "IBM Plex Mono", "Courier New", monospace;
-  --ifm-global-radius: 8px;
-  --ifm-button-border-radius: 6px;
-  --ifm-card-border-radius: 12px;
-  --ifm-navbar-height: 4rem;
-}
-*/
 
 a[id^="footnote-ref-"] {
   color: var(--ifm-link-color) !important;
@@ -140,19 +113,6 @@ body {
 .card:hover {
   transform: translateY(-2px);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
-}
-
-/* For readability concerns, you should choose a lighter palette in dark mode. */
-[data-theme="dark"] {
-  --ifm-color-primary: #0099ff;
-  --ifm-color-primary-dark: #008ae6;
-  --ifm-color-primary-darker: #0088e3;
-  --ifm-color-primary-darkest: #0085de;
-  --ifm-color-primary-light: #1aa3ff;
-  --ifm-color-primary-lighter: #26a8ff;
-  --ifm-color-primary-lightest: #4db8ff;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
-  --ifm-footer-background-color: #0d0d0d;
 }
 
 /* Base64-encoded SVGs (data URIs) */

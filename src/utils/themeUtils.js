@@ -25,8 +25,13 @@ function generateThemeCSS(themeConfig) {
     const { colors } = themeConfig;
     if (colors.primary) css += `  --ifm-color-primary: ${colors.primary};\n`;
     if (colors.primaryDark) css += `  --ifm-color-primary-dark: ${colors.primaryDark};\n`;
+    if (colors.primaryDarker) css += `  --ifm-color-primary-darker: ${colors.primaryDarker};\n`;
+    if (colors.primaryDarkest) css += `  --ifm-color-primary-darkest: ${colors.primaryDarkest};\n`;
     if (colors.primaryLight) css += `  --ifm-color-primary-light: ${colors.primaryLight};\n`;
+    if (colors.primaryLighter) css += `  --ifm-color-primary-lighter: ${colors.primaryLighter};\n`;
+    if (colors.primaryLightest) css += `  --ifm-color-primary-lightest: ${colors.primaryLightest};\n`;
     if (colors.footerBackground) css += `  --ifm-footer-background-color: ${colors.footerBackground};\n`;
+    if (colors.highlightedCodeLineBackground) css += `  --docusaurus-highlighted-code-line-bg: ${colors.highlightedCodeLineBackground};\n`;
   }
   
   // Typography
@@ -47,6 +52,22 @@ function generateThemeCSS(themeConfig) {
   }
   
   css += '}\n';
+  
+  // Dark mode colors
+  if (themeConfig.darkColors) {
+    css += '\n[data-theme=\'dark\'] {\n';
+    const { darkColors } = themeConfig;
+    if (darkColors.primary) css += `  --ifm-color-primary: ${darkColors.primary};\n`;
+    if (darkColors.primaryDark) css += `  --ifm-color-primary-dark: ${darkColors.primaryDark};\n`;
+    if (darkColors.primaryDarker) css += `  --ifm-color-primary-darker: ${darkColors.primaryDarker};\n`;
+    if (darkColors.primaryDarkest) css += `  --ifm-color-primary-darkest: ${darkColors.primaryDarkest};\n`;
+    if (darkColors.primaryLight) css += `  --ifm-color-primary-light: ${darkColors.primaryLight};\n`;
+    if (darkColors.primaryLighter) css += `  --ifm-color-primary-lighter: ${darkColors.primaryLighter};\n`;
+    if (darkColors.primaryLightest) css += `  --ifm-color-primary-lightest: ${darkColors.primaryLightest};\n`;
+    if (darkColors.footerBackground) css += `  --ifm-footer-background-color: ${darkColors.footerBackground};\n`;
+    if (darkColors.highlightedCodeLineBackground) css += `  --docusaurus-highlighted-code-line-bg: ${darkColors.highlightedCodeLineBackground};\n`;
+    css += '}\n';
+  }
   
   return css;
 }

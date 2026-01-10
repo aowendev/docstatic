@@ -10,6 +10,17 @@
     "footerBackground": "#f2f2f2",
     "highlightedCodeLineBackground": "rgba(0, 0, 0, 0.1)"
   },
+  "darkColors": {
+    "primary": "#0099ff",
+    "primaryDark": "#008ae6",
+    "primaryDarker": "#0088e3",
+    "primaryDarkest": "#0085de",
+    "primaryLight": "#1aa3ff",
+    "primaryLighter": "#26a8ff",
+    "primaryLightest": "#4db8ff",
+    "footerBackground": "#0d0d0d",
+    "highlightedCodeLineBackground": "rgba(0, 0, 0, 0.3)"
+  },
   "typography": {
     "baseFontFamily": "\"Inter\", \"Arial\", sans-serif",
     "monospaceFontFamily": "\"IBM Plex Mono\", \"Courier New\", monospace",

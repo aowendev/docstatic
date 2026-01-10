@@ -135,6 +135,86 @@ export const ThemeCollection = {
     },
     {
       type: "object",
+      name: "darkColors",
+      label: "Dark Mode",
+      fields: [
+        {
+          type: "string",
+          name: "primary",
+          label: "Primary",
+          ui: {
+            component: "color",
+          },
+        },
+        {
+          type: "string",
+          name: "primaryDark",
+          label: "Primary Dark",
+          ui: {
+            component: "color",
+          },
+        },
+        {
+          type: "string",
+          name: "primaryDarker",
+          label: "Primary Darker",
+          ui: {
+            component: "color",
+          },
+        },
+        {
+          type: "string",
+          name: "primaryDarkest",
+          label: "Primary Darkest",
+          ui: {
+            component: "color",
+          },
+        },
+        {
+          type: "string",
+          name: "primaryLight",
+          label: "Primary Light",
+          ui: {
+            component: "color",
+          },
+        },
+        {
+          type: "string",
+          name: "primaryLighter",
+          label: "Primary Lighter",
+          ui: {
+            component: "color",
+          },
+        },
+        {
+          type: "string",
+          name: "primaryLightest",
+          label: "Primary Lightest",
+          ui: {
+            component: "color",
+          },
+        },
+        {
+          type: "string",
+          name: "footerBackground",
+          label: "Footer Background",
+          ui: {
+            component: "color",
+          },
+        },
+        {
+          type: "string",
+          name: "highlightedCodeLineBackground",
+          label: "Highlighted Code Line Background",
+          description: "Background color for highlighted lines in code blocks",
+          ui: {
+            component: "color",
+          },
+        },
+      ],
+    },
+    {
+      type: "object",
       name: "typography",
       label: "Typography",
       fields: [
