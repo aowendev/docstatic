@@ -358,6 +358,48 @@ export const SettingsCollection = {
     },
     {
       type: "object",
+      label: "Color Mode",
+      name: "colorMode",
+      fields: [
+        {
+          type: "string",
+          label: "Default Mode",
+          name: "defaultMode",
+          description: "The color mode that is applied by default",
+          options: [
+            {
+              label: "Light",
+              value: "light",
+            },
+            {
+              label: "Dark", 
+              value: "dark",
+            },
+            {
+              label: "System",
+              value: "system",
+            },
+          ],
+          ui: {
+            component: "button-toggle",
+          },
+        },
+        {
+          type: "boolean",
+          label: "Hide Switch",
+          name: "disableSwitch",
+          description: "Hide the switch in the navbar",
+        },
+        {
+          type: "boolean",
+          label: "Respect Prefers Color Scheme",
+          name: "respectPrefersColorScheme",
+          description: "Use prefers-color-scheme CSS media feature",
+        },
+      ],
+    },
+    {
+      type: "object",
       label: "Footer",
       name: "footer",
       fields: [

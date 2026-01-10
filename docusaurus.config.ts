@@ -207,6 +207,11 @@ const config = {
     ],
   ],
   themeConfig: {
+    colorMode: {
+      defaultMode: docusaurusData.colorMode?.defaultMode || "light",
+      disableSwitch: docusaurusData.colorMode?.disableSwitch ?? false,
+      respectPrefersColorScheme: docusaurusData.colorMode?.respectPrefersColorScheme ?? false,
+    },
     docs: {
       sidebar: {
         hideable: docusaurusData.sidebarHideable ?? true,

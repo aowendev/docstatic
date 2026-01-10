@@ -18,6 +18,11 @@
   },
   "sidebarHideable": true,
   "showReadingTime": true,
+  "colorMode": {
+    "defaultMode": "light",
+    "disableSwitch": false,
+    "respectPrefersColorScheme": false
+  },
   "languages": {
     "supported": [
       {
