@@ -1,0 +1,15 @@
+{
+  "label": "Homepage",
+  "title": "My Site",
+  "description": "A documentation site",
+  "blocks": [
+    {
+      "title": "Welcome",
+      "subtitle": "My Documentation Site",
+      "description": "This is a starter site built with docStatic.",
+      "document": "docs/introduction",
+      "documentLabel": "Get Started",
+      "_template": "hero"
+    }
+  ]
+}

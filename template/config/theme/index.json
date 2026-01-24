@@ -1,0 +1,36 @@
+{
+  "colors": {
+    "primary": "#2e8555",
+    "primaryDark": "#29784c",
+    "primaryDarker": "#277148",
+    "primaryDarkest": "#205d3b",
+    "primaryLight": "#33925d",
+    "primaryLighter": "#359962",
+    "primaryLightest": "#3cad6e",
+    "footerBackground": "#fbfbfc",
+    "highlightedCodeLineBackground": "rgba(0, 0, 0, 0.1)"
+  },
+  "darkColors": {
+    "primary": "#25c2a0",
+    "primaryDark": "#21af90",
+    "primaryDarker": "#1fa588",
+    "primaryDarkest": "#1a8870",
+    "primaryLight": "#29d5b0",
+    "primaryLighter": "#32d8b4",
+    "primaryLightest": "#4fddbf",
+    "footerBackground": "#0d0d0d",
+    "highlightedCodeLineBackground": "rgba(0, 0, 0, 0.3)"
+  },
+  "typography": {
+    "baseFontFamily": "\"Inter\", system-ui, -apple-system, sans-serif",
+    "monospaceFontFamily": "\"Fira Code\", \"Monaco\", \"Consolas\", monospace",
+    "codeFontSize": "90%"
+  },
+  "layout": {
+    "globalRadius": 8,
+    "buttonRadius": 6,
+    "cardRadius": 12,
+    "navbarHeight": "4rem"
+  },
+  "customCSS": ""
+}

@@ -1,0 +1,20 @@
+{
+  "categories": [
+    {
+      "name": "User Roles",
+      "description": "Access conditions based on user roles",
+      "conditions": [
+        {
+          "condition": "admin",
+          "description": "Administrator access",
+          "active": true
+        },
+        {
+          "condition": "user",
+          "description": "Regular user access",
+          "active": true
+        }
+      ]
+    }
+  ]
+}

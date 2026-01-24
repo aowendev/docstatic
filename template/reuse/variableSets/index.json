@@ -1,0 +1,18 @@
+{
+  "variableSets": [
+    {
+      "name": "example-set",
+      "variables": [
+        {
+          "key": "example-var",
+          "translations": [
+            {
+              "lang": "en",
+              "value": "Example Value"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

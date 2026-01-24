@@ -1,0 +1,16 @@
+{
+  "glossaryTerms": [
+    {
+      "key": "example-term",
+      "translations": [
+        {
+          "lang": "en",
+          "term": "Example Term",
+          "definition": "This is an example glossary term.",
+          "_template": "translation"
+        }
+      ],
+      "_template": "glossaryTerm"
+    }
+  ]
+}

@@ -1,0 +1,96 @@
+{
+  "label": "Settings",
+  "title": "My Site",
+  "tagline": "A documentation site built with docStatic",
+  "favicon": "img/favicon.ico",
+  "graphql": "tina/__generated__/schema.gql",
+  "colorMode": {
+    "defaultMode": "light",
+    "disableSwitch": false,
+    "respectPrefersColorScheme": false
+  },
+  "footer": {
+    "style": "dark",
+    "links": [
+      {
+        "title": "Docs",
+        "items": [
+          {
+            "label": "Introduction",
+            "to": "docs/introduction",
+            "_template": "internal"
+          }
+        ]
+      },
+      {
+        "title": "Community",
+        "items": [
+          {
+            "label": "GitHub",
+            "href": "https://github.com",
+            "_template": "external"
+          }
+        ]
+      }
+    ],
+    "copyright": "Built with docStatic."
+  },
+  "github": {
+    "projectName": "",
+    "organizationName": ""
+  },
+  "languages": {
+    "supported": [
+      {
+        "code": "en",
+        "label": "English"
+      }
+    ],
+    "default": "en"
+  },
+  "logo": {
+    "alt": "My Site",
+    "src": "/img/logo.svg"
+  },
+  "openapi": {
+    "apis": [],
+    "languageTabs": [
+      "curl",
+      "javascript",
+      "python"
+    ]
+  },
+  "prism": {
+    "additionalLanguages": [
+      "bash",
+      "json"
+    ],
+    "magicComments": [
+      {
+        "className": "theme-code-block-highlighted-line",
+        "line": "highlight-next-line",
+        "block": {
+          "start": "highlight-start",
+          "end": "highlight-end"
+        }
+      }
+    ],
+    "theme": "github",
+    "darkTheme": "vsDark"
+  },
+  "url": {
+    "siteUrl": "https://my-site.com/",
+    "baseUrl": "/",
+    "trailingSlash": false
+  },
+  "navbar": [
+    {
+      "label": "Docs",
+      "link": "doc",
+      "docId": "introduction",
+      "position": "left"
+    }
+  ],
+  "sidebarHideable": true,
+  "showReadingTime": true
+}

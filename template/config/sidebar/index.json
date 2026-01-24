@@ -1,0 +1,9 @@
+{
+  "label": "Docs Sidebar",
+  "items": [
+    {
+      "document": "docs/introduction.mdx",
+      "_template": "doc"
+    }
+  ]
+}

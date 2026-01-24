@@ -1,0 +1,12 @@
+{
+  "taxonomy": [
+    {
+      "tag": "example",
+      "children": [
+        {
+          "tag": "example_sub"
+        }
+      ]
+    }
+  ]
+}

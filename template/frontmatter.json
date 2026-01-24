@@ -1,0 +1,67 @@
+{
+  "$schema": "https://frontmatter.codes/frontmatter.schema.json",
+  "frontMatter.taxonomy.contentTypes": [
+    {
+      "name": "default",
+      "pageBundle": false,
+      "previewPath": null,
+      "fields": [
+        {
+          "title": "Title",
+          "name": "title",
+          "type": "string"
+        },
+        {
+          "title": "Description",
+          "name": "description",
+          "type": "string"
+        },
+        {
+          "title": "Publishing date",
+          "name": "date",
+          "type": "datetime",
+          "default": "{{now}}",
+          "isPublishDate": true
+        },
+        {
+          "title": "Content preview",
+          "name": "preview",
+          "type": "image"
+        },
+        {
+          "title": "Is in draft",
+          "name": "draft",
+          "type": "draft"
+        },
+        {
+          "title": "Tags",
+          "name": "tags",
+          "type": "tags"
+        }
+      ]
+    }
+  ],
+  "frontMatter.framework.id": "docusaurus",
+  "frontMatter.content.publicFolder": "static",
+  "frontMatter.preview.host": "http://localhost:3000",
+  "frontMatter.content.pageFolders": [
+    {
+      "title": "docs",
+      "path": "[[workspace]]/docs"
+    },
+    {
+      "title": "blog",
+      "path": "[[workspace]]/blog"
+    }
+  ],
+  "frontMatter.content.autoUpdateDate": true,
+  "frontMatter.content.defaultFileType": "mdx",
+  "frontMatter.dashboard.openOnStart": true,
+  "frontMatter.taxonomy.quoteStringValues": true,
+  "frontMatter.taxonomy.noPropertyValueQuotes": [
+    "title",
+    "description",
+    "tags",
+    "authors"
+  ]
+}

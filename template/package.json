@@ -1,30 +1,14 @@
 {
-  "name": "docstatic",
-  "version": "0.3.92",
-  "description": "A Docusaurus + TinaCMS documentation/static site generator with OpenAPI and GraphQL support.",
-  "author": "aowendev <aowen@ieee.org>",
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/aowendev/docstatic.git"
-  },
-  "keywords": [
-    "docusaurus",
-    "tinacms",
-    "documentation",
-    "static site",
-    "openapi",
-    "graphql"
-  ],
-  "bin": {
-    "docstatic": "./bin/docstatic.js"
-  },
+  "name": "my-site",
+  "version": "0.1.0",
+  "description": "A Docusaurus + TinaCMS documentation site created with docstatic.",
+  "private": true,
   "scripts": {
     "docusaurus": "docusaurus",
     "dev": "tinacms dev -c \"docusaurus start\"",
     "start": "docusaurus start",
-    "generate-files": "node scripts/generate-file-list.cjs",
-    "update-theme-css": "node scripts/update-theme-css.cjs",
+    "generate-files": "node scripts/generate-file-list.js",
+    "update-theme-css": "node scripts/update-theme-css.js",
     "prebuild": "yarn generate-files && yarn update-theme-css",
     "predev": "yarn generate-files && yarn update-theme-css",
     "build": "tinacms build && docusaurus build",

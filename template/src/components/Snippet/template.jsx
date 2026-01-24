@@ -1,0 +1,37 @@
+/**
+ * Copyright (c) Source Solutions, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+import snippetFiles from "../../../reuse/snippets-files.json";
+
+export const SnippetBlockTemplate = {
+  name: "Snippet",
+  label: "Snippet",
+  inline: true,
+  ui: {
+    itemProps: (item) => {
+      return { label: item?.title };
+    },
+  },
+  fields: [
+    {
+      name: "filepath",
+      label: "File Path",
+      type: "string",
+      isTitle: true,
+      required: true,
+      options: snippetFiles.map((file) => ({
+        label: file,
+        value: file,
+      })),
+      ui: {
+        component: "select",
+        description:
+          "Select a file from /reuse/snippets/ (includes subdirectories)",
+      },
+    },
+  ],
+};
