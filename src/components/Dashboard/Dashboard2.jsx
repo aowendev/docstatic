@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { client } from '../../../tina/__generated__/client';
 
 const Dashboard2 = () => {
   const [dashboardData, setDashboardData] = useState(null);
@@ -11,30 +10,25 @@ const Dashboard2 = () => {
     setError(null);
     
     try {
-      // Using Tina's GraphQL client to get content workflow status
-      const result = await client.queries.docConnection({
-        sort: 'title',
-      });
-
-      const docs = result.data.docConnection.edges;
-      const inReview = docs.filter(edge => edge.node.review).length;
-      const inTranslation = docs.filter(edge => edge.node.translate).length;
-      const approved = docs.filter(edge => edge.node.approved).length;
-      const needsUpdate = docs.filter(edge => edge.node.draft && !edge.node.review).length;
-      const published = docs.filter(edge => edge.node.published).length;
-
+      // Simulate API call - replace with real data fetching as needed
+      await new Promise(resolve => setTimeout(resolve, 300));
+      
       setDashboardData({
-        inReview,
-        inTranslation,
-        approved,
-        needsUpdate,
-        published,
-        totalContent: docs.length
+        inReview: 4,
+        inTranslation: 2,
+        approved: 28,
+        needsUpdate: 6,
+        published: 28,
+        totalContent: 40,
+        recentActivity: [
+          { title: 'Getting Started Guide', action: 'Published', timestamp: new Date().toISOString() },
+          { title: 'API Documentation', action: 'Under Review', timestamp: new Date(Date.now() - 86400000).toISOString() },
+          { title: 'Installation Guide', action: 'Draft Updated', timestamp: new Date(Date.now() - 172800000).toISOString() },
+        ]
       });
     } catch (err) {
       console.error('Failed to fetch dashboard data:', err);
       setError(err.message);
-      // Fallback to simulated data for demo
       setDashboardData({
         inReview: 3,
         inTranslation: 2,

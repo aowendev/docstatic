@@ -1,0 +1,6 @@
+{
+  "name": "Performance Analytics Dashboard",
+  "description": "Monitor website traffic, user engagement, and content performance metrics",
+  "enabled": true,
+  "dashboard4": true
+}
