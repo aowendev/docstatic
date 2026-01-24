@@ -1,9 +1,6 @@
 import React from 'react';
 import DashboardField from './index';
-import Dashboard1 from './Dashboard1';
-import Dashboard2 from './Dashboard2';
 import Dashboard3 from './Dashboard3';
-import Dashboard4 from './Dashboard4';
 import HelpButton from '../HelpButton';
 
 export const DashboardsCollection = {
@@ -26,34 +23,12 @@ export const DashboardsCollection = {
 	  ui: {
 		component: (props) => (
 		  <HelpButton
-			url="https://docstatic.com/docs/guides/markdown-features/conditional-text"
+			url="https://docstatic.com/docs/guides/dashboards"
 			{...props}
 		  />
 		),
 	  },
 	},
-//	{
-//	  type: "boolean",
-//	  name: "dashboard1",
-//	  label: "Dashboard 1",
-//	  required: false,
-//	  ui: {
-//		component: (props) => (
-//		  <Dashboard1/>
-//		),
-//	  },
-//	},
-//	{
-//	  type: "boolean",
-//	  name: "dashboard2",
-//	  label: "Dashboard 2",
-//	  required: false,
-//	  ui: {
-//		component: (props) => (
-//		  <Dashboard2/>
-//		),
-//	  },
-//	},
 	{
 	  type: "boolean",
 	  name: "dashboard3",
@@ -65,18 +40,7 @@ export const DashboardsCollection = {
 		),
 	  },
 	},
-	{
-	  type: "boolean",
-	  name: "dashboard4",
-	  label: "Performance Analytics",
-	  required: false,
-	  ui: {
-		component: (props) => (
-		  <Dashboard4/>
-		),
-	  },
-	},
   ],
 };
 
-export { Dashboard1, Dashboard2, Dashboard3, Dashboard4, DashboardField };
+export { Dashboard3, DashboardField };
