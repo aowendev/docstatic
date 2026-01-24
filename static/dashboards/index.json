@@ -1,4 +1,5 @@
 {
+  "statusBar": true,
   "dashboard1": true,
   "dashboard2": false,
   "dashboard3": true

@@ -293,4 +293,4 @@ const Dashboard3 = () => {
   );
 };
 
-export default Dashboard3;
+export default GraphQLtest;

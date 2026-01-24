@@ -1,6 +1,6 @@
 import React from 'react';
 import Dashboard1 from './Dashboard1';
-import Dashboard3 from './Dashboard3';
+import StatusBar from './StatusBar';
 import HelpButton from '../HelpButton';
 
 export const DashboardsCollection = {
@@ -15,6 +15,26 @@ export const DashboardsCollection = {
     },
   },
   fields: [
+	{
+	  type: "boolean",
+	  name: "statusBar",
+	  label: "",
+	  required: false,
+	  ui: {
+		component: (props) => (
+		  <div style={{ 
+			position: 'relative',
+			width: '100%',
+			marginLeft: '-20px',
+			marginRight: '-20px',
+			marginBottom: '20px',
+			zIndex: 1000
+		  }}>
+			<StatusBar/>
+		  </div>
+		),
+	  },
+	},
 	{
 	  type: "boolean",
 	  name: "help",
@@ -40,18 +60,7 @@ export const DashboardsCollection = {
 		),
 	  },
 	},
-	{
-	  type: "boolean",
-	  name: "dashboard3",
-	  label: "GraphQL Test",
-	  required: false,
-	  ui: {
-		component: (props) => (
-		  <Dashboard3/>
-		),
-	  },
-	},
   ],
 };
 
-export { Dashboard1, Dashboard3 };
+export { Dashboard1, StatusBar };
