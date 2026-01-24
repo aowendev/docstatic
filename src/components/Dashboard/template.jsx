@@ -1,6 +1,7 @@
 import React from 'react';
 import Dashboard1 from './Dashboard1';
 import MediaDashboard from './MediaDashboard';
+import TranslationDashboard from './TranslationDashboard';
 import StatusBar from './StatusBar';
 import HelpButton from '../HelpButton';
 
@@ -63,6 +64,17 @@ export const DashboardsCollection = {
 	},
 	{
 	  type: "boolean",
+	  name: "translationDashboard",
+	  label: "Translation Status",
+	  required: false,
+	  ui: {
+		component: (props) => (
+		  <TranslationDashboard/>
+		),
+	  },
+	},
+	{
+	  type: "boolean",
 	  name: "mediaDashboard",
 	  label: "Media Library",
 	  required: false,
@@ -75,4 +87,4 @@ export const DashboardsCollection = {
   ],
 };
 
-export { Dashboard1, MediaDashboard, StatusBar };
+export { Dashboard1, MediaDashboard, TranslationDashboard, StatusBar };
