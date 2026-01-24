@@ -1,3 +1,5 @@
+// add this dashboard to template.jsx if you have GraphQL connection issues
+
 import React, { useState, useEffect } from 'react';
 import docusaurusSettings from '../../../config/docusaurus/index.json';
 

@@ -1,5 +1,6 @@
 import React from 'react';
 import Dashboard1 from './Dashboard1';
+import MediaDashboard from './MediaDashboard';
 import StatusBar from './StatusBar';
 import HelpButton from '../HelpButton';
 
@@ -60,7 +61,18 @@ export const DashboardsCollection = {
 		),
 	  },
 	},
+	{
+	  type: "boolean",
+	  name: "mediaDashboard",
+	  label: "Media Library",
+	  required: false,
+	  ui: {
+		component: (props) => (
+		  <MediaDashboard/>
+		),
+	  },
+	},
   ],
 };
 
-export { Dashboard1, StatusBar };
+export { Dashboard1, MediaDashboard, StatusBar };
