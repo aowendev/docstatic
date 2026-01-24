@@ -1,6 +1,0 @@
-{
-  "name": "GraphQL Connection Test Dashboard",
-  "description": "Test GraphQL connectivity and debug connection issues",
-  "enabled": true,
-  "dashboard3": true
-}
