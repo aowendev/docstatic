@@ -26,6 +26,7 @@ import StatusField from "../src/components/StatusField";
 import TagsField from "../src/components/TagsField";
 import { ThemeCollection } from "../src/components/Theme/template";
 import { YouTubeEmbedBlockTemplate } from "../src/components/YouTubeEmbed/template";
+import { DashboardsCollection } from "../src/components/Dashboard/template";
 import { MDXTemplates } from "../src/theme/template";
 import { docusaurusDate, titleFromSlug } from "../util";
 
@@ -1344,6 +1345,7 @@ export default defineConfig({
     collections: [
       PostCollection,
       ConditionsCollection,
+      DashboardsCollection,
       GlossaryTermCollection,
       HomepageCollection,
       PagesCollection,
