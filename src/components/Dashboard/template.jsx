@@ -1,5 +1,5 @@
 import React from 'react';
-import DashboardField from './index';
+import Dashboard1 from './Dashboard1';
 import Dashboard3 from './Dashboard3';
 import HelpButton from '../HelpButton';
 
@@ -31,6 +31,17 @@ export const DashboardsCollection = {
 	},
 	{
 	  type: "boolean",
+	  name: "dashboard1",
+	  label: "Content Overview",
+	  required: false,
+	  ui: {
+		component: (props) => (
+		  <Dashboard1/>
+		),
+	  },
+	},
+	{
+	  type: "boolean",
 	  name: "dashboard3",
 	  label: "GraphQL Test",
 	  required: false,
@@ -43,4 +54,4 @@ export const DashboardsCollection = {
   ],
 };
 
-export { Dashboard3, DashboardField };
+export { Dashboard1, Dashboard3 };
