@@ -44,6 +44,16 @@ const MediaDashboard = () => {
   const [imageUsages, setImageUsages] = useState({});
   const [expandedFile, setExpandedFile] = useState(null);
 
+  const [lightboxImage, setLightboxImage] = useState(null);
+
+  const openLightbox = (file) => {
+    setLightboxImage(file);
+  };
+
+  const closeLightbox = () => {
+    setLightboxImage(null);
+  };
+
   const extractTextFromAST = (node) => {
     if (!node) return '';
     
@@ -517,31 +527,26 @@ const MediaDashboard = () => {
                     flexShrink: 0
                   }}>
                     {file.type === 'image' ? (
-                      <a 
-                        href={file.url} 
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                        style={{ cursor: 'pointer' }}
-                      >
-                        <img 
-                          src={file.url} 
-                          alt={file.name}
-                          style={{
-                            width: '60px',
-                            height: '60px',
-                            objectFit: 'cover',
-                            borderRadius: '6px',
-                            border: '1px solid #dee2e6',
-                            transition: 'opacity 0.2s'
-                          }}
-                          onError={(e) => {
-                            e.target.style.display = 'none';
-                            e.target.parentNode.nextSibling.style.display = 'flex';
-                          }}
-                          onMouseOver={(e) => e.target.style.opacity = '0.8'}
-                          onMouseOut={(e) => e.target.style.opacity = '1'}
-                        />
-                      </a>
+                      <img 
+                        src={file.url} 
+                        alt={file.name}
+                        style={{
+                          width: '60px',
+                          height: '60px',
+                          objectFit: 'cover',
+                          borderRadius: '6px',
+                          border: '1px solid #dee2e6',
+                          cursor: 'pointer',
+                          transition: 'opacity 0.2s'
+                        }}
+                        onClick={() => openLightbox(file)}
+                        onError={(e) => {
+                          e.target.style.display = 'none';
+                          e.target.nextSibling.style.display = 'flex';
+                        }}
+                        onMouseOver={(e) => e.target.style.opacity = '0.8'}
+                        onMouseOut={(e) => e.target.style.opacity = '1'}
+                      />
                     ) : null}
                     <div style={{
                       width: '60px',
@@ -549,7 +554,7 @@ const MediaDashboard = () => {
                       backgroundColor: '#e9ecef',
                       borderRadius: '6px',
                       border: '1px solid #dee2e6',
-                      display: 'none',
+                      display: file.type === 'image' ? 'none' : 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
                       color: '#6c757d',
@@ -712,6 +717,69 @@ const MediaDashboard = () => {
           )}
         </div>
       </div>
+
+      {/* Lightbox */}
+      {lightboxImage && (
+        <div 
+          style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            backgroundColor: 'rgba(0, 0, 0, 0.8)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            zIndex: 9999,
+            cursor: 'pointer'
+          }}
+          onClick={closeLightbox}
+        >
+          <div
+            style={{
+              maxWidth: '90vw',
+              maxHeight: '90vh',
+              position: 'relative'
+            }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              onClick={closeLightbox}
+              style={{
+                position: 'absolute',
+                top: '-40px',
+                right: '0',
+                color: 'white',
+                fontSize: '24px',
+                cursor: 'pointer',
+                background: 'none',
+                border: 'none',
+                padding: '8px'
+              }}
+            >
+              ✕
+            </button>
+            <img 
+              src={lightboxImage.url} 
+              alt={lightboxImage.name}
+              style={{
+                maxWidth: '100%',
+                maxHeight: '100%',
+                objectFit: 'contain'
+              }}
+            />
+            <div style={{
+              color: 'white',
+              textAlign: 'center',
+              marginTop: '10px',
+              fontSize: '14px'
+            }}>
+              {lightboxImage.name} • {lightboxImage.dimensions} • {lightboxImage.size}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
