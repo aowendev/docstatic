@@ -1,0 +1,115 @@
+---
+lastmod: '2026-01-24T18:50:54.405Z'
+title: A technical evaluation of where docStatic is today
+authors:
+  - name: Andrew Owen
+    title: docStatic maintainer
+    url: 'https://github.com/aowendev'
+    image_url: 'https://avatars.githubusercontent.com/u/84041006'
+date: '2026-01-24T00:00:00.000Z'
+tags:
+  - content
+  - content_blog-articles
+---
+
+DocStatic is my second attempt at creating a docs solution that serves the needs of writers and developer-contributors. You can read about my first attempt in my previous blog. That was a loose collection of components, whereas docStatic is much more tightly integrated, although architecturally, it's not a standalone product in the traditional sense. Instead, it's a curated, opinionated integration of Docusaurus (static site generator) and TinaCMS (headless Git-backed CMS).
+
+<!-- truncate -->
+
+## Core capabilities
+
+* MDX (Markdown + React) as the primary content format.
+* Editing with:
+  * Local text editors (docs-as-code) with instant rebuilds using the dev server.
+  * TinaCMS browser-based rich text editor for non-technical users.
+* CCMS-style features (snippets, conditional text, variable sets, taxonomies, glossary terms).
+
+### Development workflow
+
+* Git remains the single source of truth.
+* TinaCMS commits directly to Git (or writes files locally).
+* Fully compaible with CI/CD pipelines.
+* Repository structure closely follows Docusaurus defaults, minimizing surprises.
+
+### Preconfigured integrations
+
+* OpenAPI documentation generation.
+* Mermaid diagrams.
+* KaTeX math rendering.
+* Lunr-based search.
+* Internationalization (i18n).
+
+LanguageTool integration is supported for spelling and grammar checking but depends on browser/IDE plugins.
+
+## Limitations
+
+Currently, adopting docStatic implicitly means:
+
+* Owning and extending the platform.
+* Accepting limited vendor-style support.
+
+DocStatic is not a good fit for teams who need to produce documentation in print of PDF format. It is not a drop-in replacement for commercial CCMS tools. But, for a large section of the market, it is already functionally equivalent.
+
+## Architecture
+
+### Workflow
+
+DocStatic provides a composable workflow. States are implemented as MDX front matter metadata. The state is read by TinaCMS and rendered through a custom editorial status UI. State transitions are content-native and versioned. This pattern is used by several commercial CCMS vendors. However, enforcement is procedural, not systemic.
+
+### Reusable content
+
+Reusable content is stored in a defined location, managed as independent content and referenced into documents. Snippets are content objects. This closely resembles DITA conrefs.
+
+### Translation and localization
+
+* Locale-specific metadata tracks translation state.
+* GitHub Actions:
+  * Detect state changes.
+  * Trigger Slack or Teams notifications.
+* Local previews per locale.
+* Translation state is deterministic and can be inspected and automated.
+
+Commercial CCMS offerings include embedded vendor support. DocStatic's approach is translation-ops-as-code. This can be a benefit when implementing automated machine translation, but is less turnkey for non-technical localization teams.
+
+## How docStatic compares to CCMS tools
+
+DocStatic supports:
+
+* Structured content.
+* Reusable content objects.
+* Workflow states.
+* Multi-language support.
+* Dashboards (beta).
+
+DocStatic lacks:
+
+* Centralized policy enforcement. Workflow rules live in metadata, Tina UI logic and the CI/CD pipeline.
+* Role-based access control. Although this is possible with a paid TinaCloud subscription.
+* Migration tooling.
+
+The core difference between docStatic and CCMS tools is composable, inspectable systems against embedded, opaque systems.
+
+DocStatic:
+
+* Prefers explicit metadata.
+* Leveraging existing infrastructure (Git, CI, Slack and so on).
+* Trades turnkey UX for architectural clarity.
+
+CCMS tools:
+
+* Centralize everything.
+* Hide state in the database.
+* Optimize for non-technical administrators.
+
+## Who is docStatic best for?
+
+DocStatic can be seen as an engineer-first CCMS. It delivers authoring, reuse, workflows and in-context review—including non-developer feedback directly inside TinaCMS using highlight and comments—while preserving a transparent Git-native source of truth. If you value open tooling, repo-owned workflows and developer-grade extensibility but don't want to sacrifice non-developer review, docStatic could be for you.
+
+## Roadmap
+
+DocStatic narrowly focuses on delivering the best possible online docs experience for readers. Print and PDF are not on the roadmap, and it's unlikely that they ever will be. But there are two areas where using CCMS tools for online docs still has the edge on docStatic:
+
+* Ease of deployment.
+* Dashboards.
+
+Dashboards are already in beta. For deployment, the intention is to make it possible to create a default repository using npm.

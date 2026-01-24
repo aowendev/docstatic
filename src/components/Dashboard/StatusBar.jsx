@@ -162,24 +162,6 @@ const StatusBar = () => {
           {status.settings.message}
         </span>
       </div>
-
-      {/* Refresh Button */}
-      <button
-        onClick={checkStatus}
-         style={{ 
-            padding: '5px 10px',
-            backgroundColor: '#2563eb',
-            color: 'white',
-            border: 'none',
-            borderRadius: '4px',
-            cursor: 'pointer',
-            fontSize: '12px'
-          }}
-        onMouseOver={(e) => e.target.style.backgroundColor = '#1d4ed8'}
-        onMouseOut={(e) => e.target.style.backgroundColor = '#2563eb'}
-      >
-        Refresh
-      </button>
     </div>
   );
 };

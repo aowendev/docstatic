@@ -215,10 +215,20 @@ const PostCollection = {
       type: "string",
       required: true,
       ui: {
-        dateFormat: "MMM D, yyyy",
         component: "date",
+        dateFormat: "YYYY-MM-DD",
         parse: (val) => {
-          return docusaurusDate(val);
+          if (!val) return docusaurusDate(new Date());
+          // Always return the simple YYYY-MM-DD format
+          return docusaurusDate(new Date(val));
+        },
+        format: (val) => {
+          if (!val) return new Date();
+          // If we already have a YYYY-MM-DD string, create a Date object for the picker
+          if (typeof val === 'string' && val.match(/^\d{4}-\d{2}-\d{2}$/)) {
+            return new Date(val + 'T12:00:00.000Z'); // Use noon to avoid timezone issues
+          }
+          return new Date(val);
         },
       },
     },
