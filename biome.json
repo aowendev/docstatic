@@ -2,7 +2,7 @@
   "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
   "files": {
     "maxSize": 10485760,
-    "experimentalScannerIgnores": [
+    "ignore": [
       ".next/**",
       "node_modules/**",
       "dist/**",

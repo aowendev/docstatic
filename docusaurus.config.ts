@@ -37,13 +37,6 @@ const getTheme = (themeName: string) => {
     default: return themes.github;
   }
 };
-const getDocId = (doc: string) => {
-  return doc
-    .replace(/\.mdx?$/, "")
-    .split("/")
-    .slice(1)
-    .join("/");
-};
 const getPageRoute = (page: string) => {
   return page
     .replace(/\.mdx?$/, "")
