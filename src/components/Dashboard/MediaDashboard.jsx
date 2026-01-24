@@ -93,152 +93,6 @@ const MediaDashboard = () => {
     return text;
   };
 
-  const testImageUsageQuery = async () => {
-    try {
-      const { client } = await import('../../../tina/__generated__/client');
-      
-      console.log('=== Testing GraphQL Query for docStaticDemo.jpg ===');
-      
-      // Fetch all documents
-      const docsResult = await client.queries.docConnection({
-        sort: 'title'
-      });
-      
-      const docs = docsResult.data.docConnection.edges || [];
-      console.log(`Found ${docs.length} total documents`);
-      
-      // Test specific documents that we know contain the image
-      const testFiles = ['guides/markdown-features/figures.mdx', 'guides/markdown-features/assets.mdx'];
-      
-      for (const testFile of testFiles) {
-        try {
-          // Try to get individual document
-          const docResult = await client.queries.doc({
-            relativePath: testFile
-          });
-          
-          const doc = docResult.data.doc;
-          console.log(`\n--- Testing ${testFile} ---`);
-          console.log('Available fields:', Object.keys(doc));
-          
-          // Check different content fields
-          const contentFields = ['body', 'content', '_body', 'rawBody'];
-          contentFields.forEach(field => {
-            if (doc[field]) {
-              const fieldValue = doc[field];
-              const fieldType = typeof fieldValue;
-              console.log(`${field} type:`, fieldType);
-              
-              if (fieldType === 'string') {
-                console.log(`${field} length:`, fieldValue.length);
-                
-                // Check if it contains our target image
-                if (fieldValue.includes('docStaticDemo.jpg')) {
-                  console.log(`✓ Found docStaticDemo.jpg in ${field}!`);
-                  console.log('Context:', fieldValue.substring(
-                    Math.max(0, fieldValue.indexOf('docStaticDemo.jpg') - 50),
-                    fieldValue.indexOf('docStaticDemo.jpg') + 100
-                  ));
-                } else {
-                  console.log(`✗ docStaticDemo.jpg not found in ${field}`);
-                }
-              } else if (fieldType === 'object') {
-                console.log(`${field} is an object with keys:`, Object.keys(fieldValue));
-                
-                // Extract text content from AST
-                const extractedText = extractTextFromAST(fieldValue);
-                console.log(`${field} extracted text length:`, extractedText.length);
-                console.log(`${field} extracted text sample:`, extractedText.substring(0, 300));
-                
-                // Check if it contains our target image
-                if (extractedText.includes('docStaticDemo.jpg')) {
-                  console.log(`✓ Found docStaticDemo.jpg in ${field} AST!`);
-                  const index = extractedText.indexOf('docStaticDemo.jpg');
-                  console.log('Context:', extractedText.substring(
-                    Math.max(0, index - 50),
-                    index + 100
-                  ));
-                } else {
-                  console.log(`✗ docStaticDemo.jpg not found in ${field} AST`);
-                }
-              } else {
-                console.log(`${field} value:`, fieldValue);
-              }
-            }
-          });
-          
-          // Test our patterns
-          const targetImage = 'docStaticDemo.jpg';
-          let content = '';
-          
-          // Try to get content as string from various sources
-          const contentSources = [doc.body, doc.content, doc._body, doc.rawBody];
-          for (const source of contentSources) {
-            if (typeof source === 'string' && source.length > 0) {
-              content = source;
-              break;
-            } else if (typeof source === 'object' && source !== null) {
-              content = extractTextFromAST(source);
-              break;
-            }
-          }
-          
-          console.log(`Using content source with length: ${content.length}`);
-          
-          const testPatterns = [
-            { name: 'Figure component', pattern: new RegExp(`<Figure[^>]+img=['""]/img/${targetImage.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}['"][^>]*>`, 'gi') },
-            { name: 'Standard markdown', pattern: new RegExp(`!\\[[^\\]]*\\]\\([^)]*${targetImage.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\)`, 'gi') },
-            { name: 'IMG attribute', pattern: new RegExp(`img=['""][^'"]*${targetImage.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}[^'"]*['"]`, 'gi') },
-            { name: 'Any reference', pattern: new RegExp(targetImage.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi') }
-          ];
-          
-          testPatterns.forEach(({ name, pattern }) => {
-            const matches = content.match(pattern);
-            if (matches) {
-              console.log(`✓ Pattern "${name}" matched:`, matches);
-            } else {
-              console.log(`✗ Pattern "${name}" no match`);
-            }
-          });
-          
-        } catch (err) {
-          console.error(`Error fetching ${testFile}:`, err);
-        }
-      }
-      
-      // Also test the connection query to see what fields are available
-      console.log('\n--- Connection Query Sample ---');
-      if (docs.length > 0) {
-        const sampleDoc = docs.find(edge => edge.node._sys.relativePath.includes('figures.mdx'));
-        if (sampleDoc) {
-          console.log('Sample doc fields:', Object.keys(sampleDoc.node));
-          console.log('Sample doc relativePath:', sampleDoc.node._sys.relativePath);
-          
-          const contentFields = ['body', 'content', '_body'];
-          contentFields.forEach(field => {
-            if (sampleDoc.node[field]) {
-              const fieldValue = sampleDoc.node[field];
-              const fieldType = typeof fieldValue;
-              console.log(`Sample ${field} type:`, fieldType);
-              
-              if (fieldType === 'string') {
-                console.log(`Sample ${field} (first 200 chars):`, fieldValue.substring(0, 200));
-              } else if (fieldType === 'object') {
-                console.log(`Sample ${field} object keys:`, Object.keys(fieldValue));
-                console.log(`Sample ${field} object:`, fieldValue);
-              } else {
-                console.log(`Sample ${field} value:`, fieldValue);
-              }
-            }
-          });
-        }
-      }
-      
-    } catch (err) {
-      console.error('Test GraphQL Query Error:', err);
-    }
-  };
-
   const scanDocumentsForImageUsage = async (mediaFiles) => {
     try {
       const { client } = await import('../../../tina/__generated__/client');
@@ -298,11 +152,15 @@ const MediaDashboard = () => {
             // Figure component: <Figure img="path">
             new RegExp(`<Figure[^>]+img=['""]${imagePath.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}['"][^>]*>`, 'gi'),
             // Figure component with filename only: <Figure img="/img/name">
-            new RegExp(`<Figure[^>]+img=['""]/img/${imageName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}['"][^>]*>`, 'gi'),
+            new RegExp(`<Figure[^>]+img=['""]/img/[^'"]*${imageName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}['"][^>]*>`, 'gi'),
+            // Figure component with subfolder path: <Figure img="/img/docs/name">
+            new RegExp(`<Figure[^>]+img=['""]${imagePath.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}['"][^>]*>`, 'gi'),
             // Any img attribute with filename
             new RegExp(`img=['""][^'"]*${imageName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}[^'"]*['"]`, 'gi'),
             // Static path references: /static/img/name
             new RegExp(`/static${imagePath.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}`, 'gi'),
+            // Subfolder references in markdown: ![alt](subfolder/name)
+            new RegExp(`!\\[[^\\]]*\\]\\([^)]*${imagePath.replace(/^\/img\//, '').replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\)`, 'gi'),
             // Simple filename match (most permissive)
             new RegExp(imageName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi'),
           ];
@@ -415,6 +273,26 @@ const MediaDashboard = () => {
           lastModified: '2024-01-17T11:20:00Z',
           dimensions: '800x600',
           url: '/img/writers.jpg'
+        },
+        {
+          name: 'example.svg',
+          path: '/img/docs/example.svg',
+          type: 'image',
+          extension: '.svg',
+          size: '12 KB',
+          lastModified: '2024-01-16T13:45:00Z',
+          dimensions: 'vector',
+          url: '/img/docs/example.svg'
+        },
+        {
+          name: 'wiki-pages-add-wiki.png',
+          path: '/img/docs/wiki-pages-add-wiki.png',
+          type: 'image',
+          extension: '.png',
+          size: '45 KB',
+          lastModified: '2024-01-14T08:30:00Z',
+          dimensions: '800x400',
+          url: '/img/docs/wiki-pages-add-wiki.png'
         }
       ];
 
@@ -578,7 +456,7 @@ const MediaDashboard = () => {
           </div>
 
           {/* Filter Controls */}
-          <div style={{ display: 'flex', gap: '10px', alignItems: 'center', marginBottom: '15px' }}>
+          <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
             <span style={{ fontSize: '14px', color: '#666', marginRight: '10px' }}>Filter:</span>
             {['all', 'images', 'recent', 'used', 'unused'].map((filter) => (
               <button
@@ -598,28 +476,6 @@ const MediaDashboard = () => {
                 {filter === 'recent' ? 'Recent (7 days)' : filter}
               </button>
             ))}
-          </div>
-
-          {/* Test Controls */}
-          <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
-            <button
-              onClick={testImageUsageQuery}
-              style={{
-                padding: '8px 16px',
-                backgroundColor: '#dc3545',
-                color: '#ffffff',
-                border: 'none',
-                borderRadius: '6px',
-                fontSize: '12px',
-                cursor: 'pointer',
-                fontWeight: '500'
-              }}
-            >
-              Test GraphQL Query (Check Console)
-            </button>
-            <span style={{ fontSize: '12px', color: '#666', fontStyle: 'italic' }}>
-              Click to test image detection in browser console
-            </span>
           </div>
         </div>
 
@@ -661,21 +517,31 @@ const MediaDashboard = () => {
                     flexShrink: 0
                   }}>
                     {file.type === 'image' ? (
-                      <img 
-                        src={file.url} 
-                        alt={file.name}
-                        style={{
-                          width: '60px',
-                          height: '60px',
-                          objectFit: 'cover',
-                          borderRadius: '6px',
-                          border: '1px solid #dee2e6'
-                        }}
-                        onError={(e) => {
-                          e.target.style.display = 'none';
-                          e.target.nextSibling.style.display = 'flex';
-                        }}
-                      />
+                      <a 
+                        href={file.url} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        style={{ cursor: 'pointer' }}
+                      >
+                        <img 
+                          src={file.url} 
+                          alt={file.name}
+                          style={{
+                            width: '60px',
+                            height: '60px',
+                            objectFit: 'cover',
+                            borderRadius: '6px',
+                            border: '1px solid #dee2e6',
+                            transition: 'opacity 0.2s'
+                          }}
+                          onError={(e) => {
+                            e.target.style.display = 'none';
+                            e.target.parentNode.nextSibling.style.display = 'flex';
+                          }}
+                          onMouseOver={(e) => e.target.style.opacity = '0.8'}
+                          onMouseOut={(e) => e.target.style.opacity = '1'}
+                        />
+                      </a>
                     ) : null}
                     <div style={{
                       width: '60px',
@@ -729,27 +595,11 @@ const MediaDashboard = () => {
                     gap: '8px',
                     flexShrink: 0
                   }}>
-                    <a
-                      href={file.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      style={{
-                        padding: '6px 12px',
-                        backgroundColor: '#007bff',
-                        color: '#ffffff',
-                        textDecoration: 'none',
-                        borderRadius: '4px',
-                        fontSize: '12px',
-                        transition: 'background-color 0.2s'
-                      }}
-                    >
-                      View
-                    </a>
                     <button
                       onClick={() => setExpandedFile(expandedFile === file.path ? null : file.path)}
                       style={{
                         padding: '6px 12px',
-                        backgroundColor: '#28a745',
+                        backgroundColor: (imageUsages[file.path] || []).length > 0 ? '#28a745' : '#dc3545',
                         color: '#ffffff',
                         border: 'none',
                         borderRadius: '4px',
@@ -837,16 +687,16 @@ const MediaDashboard = () => {
                                 rel="noopener noreferrer"
                                 style={{
                                   padding: '4px 8px',
-                                  backgroundColor: '#ffc107',
-                                  color: '#212529',
-                                  textDecoration: 'none',
-                                  borderRadius: '4px',
-                                  fontSize: '11px',
-                                  fontWeight: '500',
-                                  transition: 'background-color 0.2s'
-                                }}
-                                onMouseOver={(e) => e.target.style.backgroundColor = '#e0a800'}
-                                onMouseOut={(e) => e.target.style.backgroundColor = '#ffc107'}
+                                backgroundColor: '#007bff',
+                                color: '#ffffff',
+                                textDecoration: 'none',
+                                borderRadius: '4px',
+                                fontSize: '11px',
+                                fontWeight: '500',
+                                transition: 'background-color 0.2s'
+                              }}
+                              onMouseOver={(e) => e.target.style.backgroundColor = '#0056b3'}
+                              onMouseOut={(e) => e.target.style.backgroundColor = '#007bff'}
                               >
                                 Edit
                               </a>
