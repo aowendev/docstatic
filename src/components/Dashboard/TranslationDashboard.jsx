@@ -4,7 +4,7 @@ const TranslationDashboard = () => {
   const [translationData, setTranslationData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [selectedLanguage, setSelectedLanguage] = useState('all');
+  const [selectedLanguage, setSelectedLanguage] = useState('fr');
 
   const scanTranslations = async () => {
     setLoading(true);
@@ -20,6 +20,9 @@ const TranslationDashboard = () => {
       });
 
       const docs = docsResult.data.docConnection.edges || [];
+      
+      // Use all docs like Dashboard1 does - no filtering
+      const filteredDocs = docs;
       
       // Available languages (this could be made dynamic)
       const availableLanguages = ['fr'];
@@ -38,21 +41,12 @@ const TranslationDashboard = () => {
       }
 
       // Process each source document
-      for (const docEdge of docs) {
+      for (const docEdge of filteredDocs) {
         const doc = docEdge.node;
-        
-        // Skip if no lastmod in source (not trackable)
-        if (!doc.lastmod) {
-          continue;
-        }
 
         for (const lang of availableLanguages) {
           try {
-            // For demonstration, we'll create sample data
-            // In reality, you would need to query the translated collections
-            // or check the i18n folder structure
-            
-            const sourceDate = new Date(doc.lastmod);
+            const sourceDate = doc.lastmod ? new Date(doc.lastmod) : null;
             const fileName = doc._sys.relativePath || doc._sys.filename;
             const title = doc.title || fileName;
             
@@ -63,33 +57,69 @@ const TranslationDashboard = () => {
               // Missing translation
               results[lang].missing.push({
                 file: fileName,
-                sourceLastMod: doc.lastmod,
+                sourceLastMod: doc.lastmod || 'No date',
                 title: title
               });
             } else {
               // Simulate translation date (you would get this from actual translation data)
-              const daysOffset = Math.floor(Math.random() * 60) - 30; // Random offset from source date
-              const translationDate = new Date(sourceDate);
-              translationDate.setDate(translationDate.getDate() + daysOffset);
+              const hasTranslationDate = Math.random() > 0.4; // 60% chance translation has date
+              const translationDate = hasTranslationDate ? (
+                sourceDate ? 
+                  new Date(sourceDate.getTime() + (Math.floor(Math.random() * 60) - 30) * 24 * 60 * 60 * 1000) :
+                  new Date(Date.now() - Math.floor(Math.random() * 30) * 24 * 60 * 60 * 1000)
+              ) : null;
               
-              if (translationDate < sourceDate) {
-                // Translation is outdated
-                const daysBehind = Math.ceil((sourceDate - translationDate) / (1000 * 60 * 60 * 24));
+              // Comparison logic:
+              // - If both have no dates: up to date
+              // - If source has date but translation doesn't: outdated
+              // - If translation has date but source doesn't: up to date
+              // - If both have dates: compare them
+              
+              if (!sourceDate && !translationDate) {
+                // Both have no dates - consider up to date
+                results[lang].upToDate.push({
+                  file: fileName,
+                  sourceLastMod: 'No date',
+                  translationLastMod: 'No date',
+                  title: title
+                });
+              } else if (sourceDate && !translationDate) {
+                // Source has date but translation doesn't - outdated
                 results[lang].outdated.push({
                   file: fileName,
                   sourceLastMod: doc.lastmod,
-                  translationLastMod: translationDate.toISOString(),
-                  title: title,
-                  daysBehind: daysBehind
+                  translationLastMod: 'No date',
+                  title: title
                 });
-              } else {
-                // Translation is up to date
+              } else if (!sourceDate && translationDate) {
+                // Translation has date but source doesn't - up to date
                 results[lang].upToDate.push({
                   file: fileName,
-                  sourceLastMod: doc.lastmod,
+                  sourceLastMod: 'No date',
                   translationLastMod: translationDate.toISOString(),
                   title: title
                 });
+              } else {
+                // Both have dates - compare them
+                if (sourceDate > translationDate) {
+                  // Translation is outdated
+                  const daysBehind = Math.ceil((sourceDate - translationDate) / (1000 * 60 * 60 * 24));
+                  results[lang].outdated.push({
+                    file: fileName,
+                    sourceLastMod: doc.lastmod,
+                    translationLastMod: translationDate.toISOString(),
+                    title: title,
+                    daysBehind: daysBehind
+                  });
+                } else {
+                  // Translation is up to date
+                  results[lang].upToDate.push({
+                    file: fileName,
+                    sourceLastMod: doc.lastmod,
+                    translationLastMod: translationDate.toISOString(),
+                    title: title
+                  });
+                }
               }
             }
             
@@ -236,7 +266,7 @@ const TranslationDashboard = () => {
         paddingBottom: '10px'
       }}>
         <h2 style={{ margin: '0', color: '#2c3e50', fontSize: '24px' }}>
-          🌍 Translation Dashboard
+          🌍 Translations
         </h2>
         <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
           <select
@@ -249,7 +279,6 @@ const TranslationDashboard = () => {
               fontSize: '14px'
             }}
           >
-            <option value="all">All Languages</option>
             {languages.map(lang => (
               <option key={lang} value={lang}>{lang.toUpperCase()}</option>
             ))}
@@ -257,16 +286,17 @@ const TranslationDashboard = () => {
           <button
             onClick={scanTranslations}
             style={{
-              padding: '8px 16px',
-              backgroundColor: '#3498db',
+              padding: '5px 10px',
+              backgroundColor: '#2563eb',
               color: 'white',
               border: 'none',
               borderRadius: '4px',
-              fontSize: '14px',
-              cursor: 'pointer'
+              cursor: 'pointer',
+              fontSize: '12px'
             }}
+            disabled={loading}
           >
-            🔄 Refresh
+            {loading ? 'Refreshing...' : 'Refresh'}
           </button>
         </div>
       </div>
@@ -278,12 +308,12 @@ const TranslationDashboard = () => {
         gap: '15px',
         marginBottom: '30px'
       }}>
-        {(selectedLanguage === 'all' ? languages : [selectedLanguage]).map(lang => {
-          const counts = totalCounts[lang];
+        {(() => {
+          const counts = totalCounts[selectedLanguage];
           if (!counts) return null;
 
           return (
-            <div key={lang} style={{
+            <div style={{
               padding: '15px',
               backgroundColor: 'white',
               border: '1px solid #e9ecef',
@@ -297,7 +327,7 @@ const TranslationDashboard = () => {
                 textTransform: 'uppercase',
                 letterSpacing: '1px'
               }}>
-                {lang}
+                {selectedLanguage}
               </h3>
               <div style={{ fontSize: '14px', lineHeight: '1.5' }}>
                 <div style={{ color: getStatusColor('upToDate') }}>
@@ -315,26 +345,16 @@ const TranslationDashboard = () => {
               </div>
             </div>
           );
-        })}
+        })()}
       </div>
 
       {/* Detailed View */}
-      {(selectedLanguage === 'all' ? languages : [selectedLanguage]).map(lang => {
-        const data = translationData[lang];
+      {(() => {
+        const data = translationData[selectedLanguage];
         if (!data) return null;
 
         return (
-          <div key={lang} style={{ marginBottom: '30px' }}>
-            {selectedLanguage === 'all' && (
-              <h3 style={{
-                color: '#2c3e50',
-                borderBottom: '2px solid #3498db',
-                paddingBottom: '5px',
-                marginBottom: '20px'
-              }}>
-                {lang.toUpperCase()} Details
-              </h3>
-            )}
+          <div style={{ marginBottom: '30px' }}>
 
             {/* Missing Files */}
             {data.missing.length > 0 && (
@@ -475,7 +495,7 @@ const TranslationDashboard = () => {
             )}
           </div>
         );
-      })}
+      })()}
     </div>
   );
 };
