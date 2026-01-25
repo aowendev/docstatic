@@ -80,23 +80,21 @@ const BrokenLinksDashboard = () => {
       if (!url.startsWith('http://') && !url.startsWith('https://')) {
         // Check if it's a relative link to another doc
         if (url.endsWith('.mdx') || url.endsWith('.md')) {
-          // For now, assume internal doc links are valid
-          // In a production environment, you'd check against the actual file structure
           return { ...link, status: 'valid', reason: 'Internal doc link (assumed valid)' };
         }
         return { ...link, status: 'valid', reason: 'Internal link (assumed valid)' };
       }
       
-      // Validate external links with timeout
+      // Validate external links with timeout - use original no-cors approach first
       const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 8000); // 8 second timeout
+      const timeoutId = setTimeout(() => controller.abort(), 8000);
       
       try {
-        // Use a more robust validation approach
+        // Primary approach: Use no-cors mode (original working method)
         const response = await fetch(url, {
           method: 'HEAD',
           signal: controller.signal,
-          mode: 'no-cors', // Handle CORS issues
+          mode: 'no-cors',
           headers: {
             'User-Agent': 'Mozilla/5.0 (compatible; docStatic Link Checker/1.0)'
           }
@@ -104,8 +102,7 @@ const BrokenLinksDashboard = () => {
         
         clearTimeout(timeoutId);
         
-        // With no-cors mode, we can't read the response status
-        // So we assume if no error was thrown, the link is reachable
+        // With no-cors mode, if no error is thrown, assume link is reachable
         return { ...link, status: 'valid', reason: 'Link is reachable' };
         
       } catch (fetchError) {
@@ -115,7 +112,28 @@ const BrokenLinksDashboard = () => {
           return { ...link, status: 'broken', reason: 'Timeout (>8s)' };
         }
         
-        // Try to determine the type of error
+        // Fallback: Check if this might be a CORS/CORP issue for known problematic domains
+        const urlObj = new URL(url);
+        const knownCorsDomains = [
+          'docs.github.com',
+          'support.microsoft.com',
+          'docs.microsoft.com',
+          'developer.mozilla.org'
+        ];
+        
+        const isKnownCorsDomain = knownCorsDomains.some(domain => 
+          urlObj.hostname === domain || urlObj.hostname.endsWith('.' + domain)
+        );
+        
+        if (isKnownCorsDomain) {
+          return { 
+            ...link, 
+            status: 'warning', 
+            reason: 'CORS/CORP policy prevents validation - manual check required' 
+          };
+        }
+        
+        // For other errors, use original logic
         if (fetchError.message.includes('network') || fetchError.message.includes('fetch')) {
           return { ...link, status: 'broken', reason: 'Network error or unreachable' };
         }
