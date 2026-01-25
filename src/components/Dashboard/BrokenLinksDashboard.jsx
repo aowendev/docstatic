@@ -150,7 +150,7 @@ const BrokenLinksDashboard = () => {
   const openInCMS = (filePath) => {
     // Extract relative path from full path
     const relativePath = filePath.replace(/^\/docs\//, '').replace(/\.mdx?$/i, '');
-    const cmsUrl = `/admin/index.html#/collections/doc/~/${encodeURIComponent(relativePath)}`;
+    const cmsUrl = `/admin/index.html#/collections/edit/doc/${encodeURIComponent(relativePath)}`;
     window.open(cmsUrl, '_blank');
   };
 
