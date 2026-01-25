@@ -22,7 +22,10 @@ const TranslationDashboard = () => {
       const docs = docsResult.data.docConnection.edges || [];
       
       // Use all docs like Dashboard1 does - no filtering
+      // Note: i18n/ is a source folder (internationalization docs), not translations
       const filteredDocs = docs;
+      
+      console.log(`Processing ${filteredDocs.length} source documents`);
       
       // Available languages (this could be made dynamic)
       const availableLanguages = ['fr'];
@@ -50,77 +53,188 @@ const TranslationDashboard = () => {
             const fileName = doc._sys.relativePath || doc._sys.filename;
             const title = doc.title || fileName;
             
-            // Simulate translation status (you would replace this with actual translation data)
-            const translationExists = Math.random() > 0.3; // 70% chance translation exists
-            
-            if (!translationExists) {
-              // Missing translation
-              results[lang].missing.push({
-                file: fileName,
-                sourceLastMod: doc.lastmod || 'No date',
-                title: title
-              });
-            } else {
-              // Simulate translation date (you would get this from actual translation data)
-              const hasTranslationDate = Math.random() > 0.4; // 60% chance translation has date
-              const translationDate = hasTranslationDate ? (
-                sourceDate ? 
-                  new Date(sourceDate.getTime() + (Math.floor(Math.random() * 60) - 30) * 24 * 60 * 60 * 1000) :
-                  new Date(Date.now() - Math.floor(Math.random() * 30) * 24 * 60 * 60 * 1000)
-              ) : null;
+// Query the i18n collection directly since i18n is a separate GraphQL node
+              try {
+                let translationDoc = null;
+                
+                // Try to query i18n collection directly
+                try {
+                  const i18nQuery = await client.queries.i18nConnection({
+                    sort: 'title'
+                  });
+                  
+                  const i18nDocs = i18nQuery.data?.i18nConnection?.edges || [];
+                  console.log(`\n=== I18N COLLECTION (${i18nDocs.length} total) ===`);
+                  
+                  if (i18nDocs.length > 0) {
+                    // Show first few i18n documents to understand structure
+                    i18nDocs.slice(0, 5).forEach((edge, index) => {
+                      const doc = edge.node;
+                      console.log(`  ${index + 1}. Path: ${doc._sys?.relativePath || doc._sys?.filename || 'NO_PATH'}`);
+                      console.log(`      Title: ${doc.title || 'NO_TITLE'}`);
+                      console.log(`      Properties: ${Object.keys(doc).join(', ')}`);
+                    });
+                  }
+                  
+                  // Clean up the fileName for matching
+                  const cleanFileName = fileName.replace(/^docs\//, '');
+                  const baseFileName = cleanFileName.replace('.mdx', '').replace('.md', '');
+                  
+                  console.log(`Looking for translation of: ${fileName}`);
+                  console.log(`Clean filename: ${cleanFileName}`);
+                  console.log(`Base filename: ${baseFileName}`);
+                  
+                  // Look for matching translation in i18n collection
+                  const potentialTranslations = i18nDocs.filter(edge => {
+                    const doc = edge.node;
+                    const docPath = doc._sys?.relativePath || doc._sys?.filename || '';
+                    
+                    // Try different matching patterns for i18n collection
+                    const isMatch = (
+                      // Direct filename match
+                      docPath === cleanFileName ||
+                      docPath.endsWith(cleanFileName) ||
+                      docPath.endsWith(`/${cleanFileName}`) ||
+                      
+                      // Language-specific paths
+                      docPath === `${lang}/${cleanFileName}` ||
+                      docPath === `${lang}/docusaurus-plugin-content-docs/current/${cleanFileName}` ||
+                      docPath.endsWith(`/${lang}/${cleanFileName}`) ||
+                      
+                      // Base filename matching
+                      docPath.includes(baseFileName) ||
+                      
+                      // Title matching (if available)
+                      (doc.title && title && doc.title === title)
+                    );
+                    
+                    return isMatch;
+                  });
+                  
+                  if (potentialTranslations.length > 0) {
+                    translationDoc = potentialTranslations[0].node;
+                    console.log(`Found translation match: ${translationDoc._sys?.relativePath}`);
+                  } else {
+                    console.log(`No translation found in i18n collection for ${fileName}`);
+                    
+                    // Show what's actually available for debugging
+                    if (i18nDocs.length > 0) {
+                      const availablePaths = i18nDocs.map(edge => 
+                        edge.node._sys?.relativePath || edge.node._sys?.filename || 'NO_PATH'
+                      );
+                      console.log(`Available i18n paths:`, availablePaths.slice(0, 10));
+                    }
+                  }
+                  
+                } catch (e) {
+                  console.log(`Error querying i18n collection:`, e.message);
+                  
+                  // Fallback: try querying all docs if i18n collection doesn't exist
+                  console.log('Falling back to doc collection...');
+                  
+                  const allDocsQuery = await client.queries.docConnection({
+                    sort: 'title'
+                  });
+                  
+                  const allDocs = allDocsQuery.data?.docConnection?.edges || [];
+                  const cleanFileName = fileName.replace(/^docs\//, '');
+                  
+                  // Filter for i18n documents
+                  const i18nDocs = allDocs.filter(edge => {
+                    const path = edge.node._sys?.relativePath || '';
+                    return path.includes('i18n') || path.includes(`/${lang}/`);
+                  });
+                  
+                  console.log(`Found ${i18nDocs.length} i18n documents in doc collection`);
+                  
+                  const potentialTranslations = i18nDocs.filter(edge => {
+                    const docPath = edge.node._sys?.relativePath || '';
+                    return docPath.endsWith(cleanFileName) || docPath.includes(cleanFileName);
+                  });
+                  
+                  if (potentialTranslations.length > 0) {
+                    translationDoc = potentialTranslations[0].node;
+                    console.log(`Found fallback translation: ${translationDoc._sys?.relativePath}`);
+                  }
+              }
               
-              // Comparison logic:
-              // - If both have no dates: up to date
-              // - If source has date but translation doesn't: outdated
-              // - If translation has date but source doesn't: up to date
-              // - If both have dates: compare them
-              
-              if (!sourceDate && !translationDate) {
-                // Both have no dates - consider up to date
-                results[lang].upToDate.push({
+              if (!translationDoc) {
+                // No translation found in TinaCMS
+                results[lang].missing.push({
                   file: fileName,
-                  sourceLastMod: 'No date',
-                  translationLastMod: 'No date',
-                  title: title
-                });
-              } else if (sourceDate && !translationDate) {
-                // Source has date but translation doesn't - outdated
-                results[lang].outdated.push({
-                  file: fileName,
-                  sourceLastMod: doc.lastmod,
-                  translationLastMod: 'No date',
-                  title: title
-                });
-              } else if (!sourceDate && translationDate) {
-                // Translation has date but source doesn't - up to date
-                results[lang].upToDate.push({
-                  file: fileName,
-                  sourceLastMod: 'No date',
-                  translationLastMod: translationDate.toISOString(),
+                  sourceLastMod: doc.lastmod || 'No date',
                   title: title
                 });
               } else {
-                // Both have dates - compare them
-                if (sourceDate > translationDate) {
-                  // Translation is outdated
-                  const daysBehind = Math.ceil((sourceDate - translationDate) / (1000 * 60 * 60 * 24));
+                // Translation found - let's debug what we actually got
+                console.log(`\n=== TRANSLATION FOUND for ${fileName} ===`);
+                console.log(`Translation path: ${translationDoc._sys?.relativePath}`);
+                console.log(`Translation lastmod: ${translationDoc.lastmod}`);
+                console.log(`Source lastmod: ${doc.lastmod}`);
+                console.log(`Translation doc keys:`, Object.keys(translationDoc));
+                console.log(`Translation _sys keys:`, translationDoc._sys ? Object.keys(translationDoc._sys) : 'NO _sys');
+                
+                // Translation found, compare dates
+                const translationDate = translationDoc.lastmod ? new Date(translationDoc.lastmod) : null;
+                const translationDateString = translationDoc.lastmod || 'No date';
+                
+                console.log(`Parsed translation date:`, translationDate);
+                console.log(`Source date:`, sourceDate);
+                console.log(`=== END TRANSLATION DEBUG ===\n`);
+                
+                if (!sourceDate && !translationDate) {
+                  // Both have no dates - consider up to date
+                  results[lang].upToDate.push({
+                    file: fileName,
+                    sourceLastMod: 'No date',
+                    translationLastMod: 'No date',
+                    title: title
+                  });
+                } else if (sourceDate && !translationDate) {
+                  // Source has date but translation doesn't - outdated
                   results[lang].outdated.push({
                     file: fileName,
                     sourceLastMod: doc.lastmod,
-                    translationLastMod: translationDate.toISOString(),
-                    title: title,
-                    daysBehind: daysBehind
-                  });
-                } else {
-                  // Translation is up to date
-                  results[lang].upToDate.push({
-                    file: fileName,
-                    sourceLastMod: doc.lastmod,
-                    translationLastMod: translationDate.toISOString(),
+                    translationLastMod: 'No date',
                     title: title
                   });
+                } else if (!sourceDate && translationDate) {
+                  // Translation has date but source doesn't - up to date
+                  results[lang].upToDate.push({
+                    file: fileName,
+                    sourceLastMod: 'No date',
+                    translationLastMod: translationDateString,
+                    title: title
+                  });
+                } else {
+                  // Both have dates - compare them
+                  if (sourceDate > translationDate) {
+                    // Translation is outdated
+                    const daysBehind = Math.ceil((sourceDate - translationDate) / (1000 * 60 * 60 * 24));
+                    results[lang].outdated.push({
+                      file: fileName,
+                      sourceLastMod: doc.lastmod,
+                      translationLastMod: translationDateString,
+                      title: title,
+                      daysBehind: daysBehind
+                    });
+                  } else {
+                    // Translation is up to date
+                    results[lang].upToDate.push({
+                      file: fileName,
+                      sourceLastMod: doc.lastmod,
+                      translationLastMod: translationDateString,
+                      title: title
+                    });
+                  }
                 }
               }
+            } catch (queryError) {
+              console.error(`Error querying translations for ${fileName}:`, queryError);
+              results[lang].errors.push({
+                file: fileName,
+                error: `GraphQL query failed: ${queryError.message}`
+              });
             }
             
             results[lang].total++;
