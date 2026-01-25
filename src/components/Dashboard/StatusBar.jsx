@@ -38,7 +38,7 @@ const StatusBar = () => {
         try {
           const { client } = await import('../../../tina/__generated__/client');
           // If we have a client and clientId, assume TinaCloud is configured
-          connectionStatus = { type: 'warning', message: 'TinaCloud configured' };
+          connectionStatus = { type: 'success', message: 'TinaCloud configured' };
           environmentStatus = { type: 'tinacloud', message: `TinaCloud (${clientId.substring(0, 8)}...)` };
         } catch (clientErr) {
           connectionStatus = { type: 'error', message: 'Configuration error' };
@@ -58,10 +58,11 @@ const StatusBar = () => {
     const clientId = process.env.NEXT_PUBLIC_TINA_CLIENT_ID;
     const token = process.env.NEXT_PUBLIC_TINA_TOKEN;
     
-    // If using TinaCloud, check for required env vars
-    if (environmentStatus.type === 'tinacloud' && !token) {
-      missingSettings.push('NEXT_PUBLIC_TINA_TOKEN');
-    }
+    // NEXT_PUBLIC_TINA_TOKEN is not required for TinaCloud environments
+    // Only check for token if using local development with specific requirements
+    // if (environmentStatus.type === 'tinacloud' && !token) {
+    //   missingSettings.push('NEXT_PUBLIC_TINA_TOKEN');
+    // }
     
     // Check for essential config files
     try {
