@@ -1,5 +1,6 @@
 import React from "react";
 import { defineConfig, ReferenceField, TextField } from "tinacms";
+import { getEditorIdentity } from "../src/utils/editorIdentity";
 // docusaurus config for language settings
 import docusaurusData from "../config/docusaurus/index.json";
 // conditions from the conditions JSON file
@@ -310,9 +311,11 @@ const DocsCollection = {
   format: "mdx",
   ui: {
     beforeSubmit: async ({ values }) => {
+      const modifiedBy = await getEditorIdentity();
       return {
         ...values,
         lastmod: new Date().toISOString(),
+        modifiedBy,
       };
     },
     defaultItem: {
@@ -343,6 +346,14 @@ const DocsCollection = {
       label: "Last Modified",
       type: "string",
       name: "lastmod",
+      ui: {
+        component: "hidden",
+      },
+    },
+    {
+      label: "Modified By",
+      type: "string",
+      name: "modifiedBy",
       ui: {
         component: "hidden",
       },
@@ -552,9 +563,11 @@ const TranslationCollection = {
   format: "mdx",
   ui: {
     beforeSubmit: async ({ values }) => {
+      const modifiedBy = await getEditorIdentity();
       return {
         ...values,
         lastmod: new Date().toISOString(),
+        modifiedBy,
       };
     },
     defaultItem: {
@@ -585,6 +598,14 @@ const TranslationCollection = {
       label: "Last Modified",
       type: "string",
       name: "lastmod",
+      ui: {
+        component: "hidden",
+      },
+    },
+    {
+      label: "Modified By",
+      type: "string",
+      name: "modifiedBy",
       ui: {
         component: "hidden",
       },
