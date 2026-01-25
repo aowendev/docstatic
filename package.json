@@ -32,6 +32,7 @@
     "build-local": "tinacms build --local --skip-indexing --skip-cloud-checks && docusaurus build",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
+    "setup-git-hooks": "git config core.hooksPath .githooks && chmod +x .githooks/pre-commit",
     "clear": "docusaurus clear",
     "serve": "docusaurus serve",
     "write-translations": "docusaurus write-translations",

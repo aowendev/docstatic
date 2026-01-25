@@ -24,6 +24,11 @@
           "isPublishDate": true
         },
         {
+          "title": "Modified By",
+          "name": "modifiedBy",
+          "type": "string"
+        },
+        {
           "title": "Content preview",
           "name": "preview",
           "type": "image"
@@ -67,5 +72,16 @@
     "description",
     "tags",
     "authors"
+  ],
+  "frontMatter.custom.scripts": [
+    {
+      "title": "Set modifiedBy from Git",
+      "description": "Updates the front matter modifiedBy field for the current file using your local Git user.",
+      "command": "node",
+      "arguments": [
+        "scripts/set-modified-by.js",
+        "${file}"
+      ]
+    }
   ]
 }

@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+set -euo pipefail
+echo "[pre-commit] hook running" 1>&2
+
+# Stamp modifiedBy and lastmod on staged Markdown/MDX files
+raw=$(git diff --cached --name-only --diff-filter=AM || true)
+echo "[pre-commit] staged files: $(printf '%s' "$raw" | tr '\n' ' ')" 1>&2
+files=$(printf '%s' "$raw" | grep -E '\.(md|mdx)$' || true)
+echo "[pre-commit] filtered files: $(printf '%s' "$files" | tr '\n' ' ')" 1>&2
+
+if [ -z "$files" ]; then
+  exit 0
+fi
+
+root_dir=$(git rev-parse --show-toplevel)
+node_bin="node"
+
+for f in $files; do
+  echo "[pre-commit] processing $f" 1>&2
+  "$node_bin" "$root_dir/scripts/set-modified-by.js" "$root_dir/$f" 1>/dev/null || true
+  git add "$f"
+done
+
+exit 0
