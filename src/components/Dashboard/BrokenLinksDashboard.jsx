@@ -363,16 +363,16 @@ const BrokenLinksDashboard = () => {
         <button 
           onClick={scanDocsForLinks}
           style={{
-            padding: '6px 12px',
-            backgroundColor: '#f6f8fa',
-            color: '#24292e',
-            border: '1px solid #d0d7de',
-            borderRadius: '6px',
+            padding: '5px 10px',
+            backgroundColor: '#2563eb',
+            color: 'white',
+            border: 'none',
+            borderRadius: '4px',
             cursor: 'pointer',
             fontSize: '12px'
           }}
         >
-          ↻ Refresh
+          {loading ? 'Refreshing...' : 'Refresh'}
         </button>
       </div>
 
