@@ -2,6 +2,7 @@ import React from 'react';
 import Dashboard1 from './Dashboard1';
 import MediaDashboard from './MediaDashboard';
 import TranslationDashboard from './TranslationDashboard';
+import BrokenLinksDashboard from './BrokenLinksDashboard';
 import StatusBar from './StatusBar';
 import HelpButton from '../HelpButton';
 
@@ -84,7 +85,18 @@ export const DashboardsCollection = {
 		),
 	  },
 	},
+	{
+	  type: "boolean",
+	  name: "brokenLinksDashboard",
+	  label: "Broken Links",
+	  required: false,
+	  ui: {
+		component: (props) => (
+		  <BrokenLinksDashboard/>
+		),
+	  },
+	},
   ],
 };
 
-export { Dashboard1, MediaDashboard, TranslationDashboard, StatusBar };
+export { Dashboard1, MediaDashboard, TranslationDashboard, BrokenLinksDashboard, StatusBar };

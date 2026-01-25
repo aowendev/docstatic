@@ -3,5 +3,6 @@
   "dashboard1": true,
   "contentReuse": false,
   "dashboard2": false,
-  "dashboard3": true
+  "dashboard3": true,
+  "brokenLinksDashboard": true
 }
