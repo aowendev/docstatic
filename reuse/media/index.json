@@ -4,12 +4,14 @@
       "filename": "developers.jpg",
       "path": "developers.jpg",
       "size": 171743,
+      "dimensions": "427x427",
       "lastModified": "2025-09-21T14:43:22.000Z"
     },
     {
       "filename": "docStaticDemo.jpg",
       "path": "docStaticDemo.jpg",
       "size": 251209,
+      "dimensions": "1870x1115",
       "lastModified": "2025-09-21T14:43:22.000Z"
     },
     {
@@ -22,24 +24,28 @@
       "filename": "wiki-pages-add-wiki.png",
       "path": "docs/wiki-pages-add-wiki.png",
       "size": 151934,
+      "dimensions": "962x639",
       "lastModified": "2025-10-04T16:08:18.000Z"
     },
     {
       "filename": "docstatic.png",
       "path": "docstatic.png",
       "size": 7751,
+      "dimensions": "1024x1024",
       "lastModified": "2025-09-21T14:43:22.000Z"
     },
     {
       "filename": "users.jpg",
       "path": "users.jpg",
       "size": 158193,
+      "dimensions": "427x427",
       "lastModified": "2025-09-21T14:43:22.000Z"
     },
     {
       "filename": "writers.jpg",
       "path": "writers.jpg",
       "size": 154757,
+      "dimensions": "427x427",
       "lastModified": "2025-09-21T14:43:22.000Z"
     }
   ]

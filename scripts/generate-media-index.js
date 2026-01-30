@@ -2,7 +2,7 @@
 
 const fs = require('fs');
 const path = require('path');
-const imageSize = require('image-size');
+const { imageSize } = require('image-size');
 
 const IMG_DIR = path.join(__dirname, '../static/img');
 const OUTPUT_FILE = path.join(__dirname, '../reuse/media/index.json');
@@ -21,12 +21,17 @@ function getMediaFiles(dir, baseDir = IMG_DIR) {
       // Only get dimensions for raster images
       if (/(jpg|jpeg|png|gif|webp)$/i.test(ext)) {
         try {
-          const size = imageSize(filePath);
+          const buffer = fs.readFileSync(filePath);
+          const size = imageSize(buffer);
+          console.log(`image-size for ${filePath}:`, size);
           if (size.width && size.height) {
             dimensions = `${size.width}x${size.height}`;
+          } else {
+            console.warn(`No dimensions found for ${filePath}`);
           }
         } catch (e) {
-          // ignore errors for unreadable/corrupt images
+          console.error(`Error reading dimensions for ${filePath}:`, e.message || e);
+          // Skip dimensions for this file, continue processing others
         }
       }
       // Get last modified date (ISO string)
