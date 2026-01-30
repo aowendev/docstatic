@@ -1355,7 +1355,32 @@ const TaxonomyCollection = {
   },
 };
 
-// glossary terms collection - imported from template
+const MediaCollection = {
+  name: "media",
+  label: "Media (generated)",
+  path: "reuse/media",
+  format: "json",
+  ui: {
+    allowedActions: {
+      create: false,
+      delete: false,
+    },
+  },
+  fields: [
+    {
+      type: "object",
+      name: "media",
+      label: "Media",
+      list: true,
+      fields: [
+        { type: "string", name: "filename", label: "Filename", required: true },
+        { type: "string", name: "path", label: "Path", required: true },
+        { type: "number", name: "size", label: "Size (bytes)", required: true },
+      ],
+    },
+  ],
+};
+
 
 export default defineConfig({
   branch,
@@ -1390,6 +1415,7 @@ export default defineConfig({
       VariableSetCollection,
       WikiCollection,
       APIsCollection,
+      MediaCollection,
     ],
   },
   search: {

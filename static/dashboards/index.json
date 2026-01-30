@@ -1,8 +1,8 @@
 {
-  "statusBar": true,
-  "dashboard1": true,
+  "statusBar": false,
+  "dashboard1": false,
   "contentReuse": false,
   "dashboard2": false,
-  "dashboard3": true,
-  "brokenLinksDashboard": true
+  "dashboard3": false,
+  "brokenLinksDashboard": false
 }

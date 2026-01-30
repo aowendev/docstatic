@@ -1,40 +1,5 @@
 import React, { useState, useEffect } from 'react';
 
-/**
- * Media Dashboard Component
- * 
- * This component provides a dashboard interface for managing and viewing media files.
- * Currently uses static file discovery as a fallback, but is designed to integrate
- * with GraphQL when media queries become available.
- * 
- * Future GraphQL Integration:
- * When TinaCMS or custom media endpoints are available, this component can be extended
- * to use GraphQL queries like:
- * 
- * const mediaQuery = gql`
- *   query MediaConnection($first: Float, $after: String) {
- *     mediaConnection(first: $first, after: $after) {
- *       edges {
- *         node {
- *           id
- *           filename
- *           url
- *           src
- *           alt
- *           type
- *           size
- *           lastModified
- *         }
- *       }
- *       pageInfo {
- *         hasNextPage
- *         endCursor
- *       }
- *     }
- *   }
- * `;
- */
-
 const MediaDashboard = () => {
   const [mediaData, setMediaData] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -43,8 +8,22 @@ const MediaDashboard = () => {
   const [filterType, setFilterType] = useState('all');
   const [imageUsages, setImageUsages] = useState({});
   const [expandedFile, setExpandedFile] = useState(null);
-
   const [lightboxImage, setLightboxImage] = useState(null);
+
+  // Helper: get extension from filename
+  const getExtension = (filename) => {
+    const match = filename.match(/\.([^.]+)$/);
+    return match ? match[1].toLowerCase() : '';
+  };
+
+  // Helper: guess type from extension
+  const getType = (filename) => {
+    const ext = getExtension(filename);
+    if (["jpg", "jpeg", "png", "gif", "webp", "svg", "bmp", "tiff", "ico", "avif"].includes(ext)) return "image";
+    if (["mp4", "webm", "mov", "avi", "mkv"].includes(ext)) return "video";
+    if (["mp3", "wav", "ogg", "flac"].includes(ext)) return "audio";
+    return "file";
+  };
 
   const openLightbox = (file) => {
     setLightboxImage(file);
@@ -210,126 +189,41 @@ const MediaDashboard = () => {
   const fetchMediaFiles = async () => {
     setLoading(true);
     setError(null);
-    
     try {
-      // Try to fetch media files using GraphQL first
-      let mediaFiles = [];
-      
-      try {
-        const { client } = await import('../../../tina/__generated__/client');
-        
-        // Since TinaCMS doesn't expose media files through GraphQL by default,
-        // we'll need to use a custom approach or implement a server-side endpoint
-        // For now, we'll use a hybrid approach: check for static files and simulate data
-        
-        // TODO: Implement server-side media endpoint or custom GraphQL resolver
-        // const mediaResult = await client.queries.mediaConnection();
-        // mediaFiles = mediaResult.data.mediaConnection.edges;
-        
-      } catch (graphqlError) {
-        console.log('GraphQL media query not available, using fallback approach');
-      }
-      
-      // Fallback: Use static file discovery
-      // In a production environment, you would implement a server-side endpoint
-      // to scan the static/img directory and return file metadata
-      const staticMediaFiles = [
-        {
-          name: 'developers.jpg',
-          path: '/img/developers.jpg',
-          type: 'image',
-          extension: '.jpg',
-          size: '142 KB',
-          lastModified: '2024-01-20T10:30:00Z',
-          dimensions: '800x600',
-          url: '/img/developers.jpg'
-        },
-        {
-          name: 'docStaticDemo.jpg',
-          path: '/img/docStaticDemo.jpg',
-          type: 'image',
-          extension: '.jpg',
-          size: '95 KB',
-          lastModified: '2024-01-18T14:22:00Z',
-          dimensions: '1200x675',
-          url: '/img/docStaticDemo.jpg'
-        },
-        {
-          name: 'docstatic.png',
-          path: '/img/docstatic.png',
-          type: 'image',
-          extension: '.png',
-          size: '8 KB',
-          lastModified: '2024-01-15T09:15:00Z',
-          dimensions: '200x200',
-          url: '/img/docstatic.png'
-        },
-        {
-          name: 'users.jpg',
-          path: '/img/users.jpg',
-          type: 'image',
-          extension: '.jpg',
-          size: '128 KB',
-          lastModified: '2024-01-19T16:45:00Z',
-          dimensions: '800x533',
-          url: '/img/users.jpg'
-        },
-        {
-          name: 'writers.jpg',
-          path: '/img/writers.jpg',
-          type: 'image',
-          extension: '.jpg',
-          size: '156 KB',
-          lastModified: '2024-01-17T11:20:00Z',
-          dimensions: '800x600',
-          url: '/img/writers.jpg'
-        },
-        {
-          name: 'example.svg',
-          path: '/img/docs/example.svg',
-          type: 'image',
-          extension: '.svg',
-          size: '12 KB',
-          lastModified: '2024-01-16T13:45:00Z',
-          dimensions: 'vector',
-          url: '/img/docs/example.svg'
-        },
-        {
-          name: 'wiki-pages-add-wiki.png',
-          path: '/img/docs/wiki-pages-add-wiki.png',
-          type: 'image',
-          extension: '.png',
-          size: '45 KB',
-          lastModified: '2024-01-14T08:30:00Z',
-          dimensions: '800x400',
-          url: '/img/docs/wiki-pages-add-wiki.png'
-        }
-      ];
-
-      // Use GraphQL data if available, otherwise use static discovery
-      const finalMediaFiles = mediaFiles.length > 0 ? mediaFiles : staticMediaFiles;
-      setMediaFiles(finalMediaFiles);
-      
+      const { client } = await import('../../../tina/__generated__/client');
+      // Query Tina's MediaCollection (reuse/media/index.json)
+      const mediaResult = await client.queries.media({ relativePath: "index.json" });
+      const mediaList = (mediaResult?.data?.media?.media) || [];
+      // Add type, extension, url, and name fields for UI compatibility
+      const files = mediaList.map((file) => {
+        const ext = getExtension(file.filename);
+        const type = getType(file.filename);
+        // Use file.path for correct subfolder support
+        const url = `/img/${file.path}`;
+        return {
+          ...file,
+          name: file.filename,
+          extension: ext,
+          type,
+          url,
+          lastModified: file.lastModified || '',
+          dimensions: file.dimensions || '',
+        };
+      });
+      setMediaFiles(files);
       const mediaStats = {
-        total: finalMediaFiles.length,
-        images: finalMediaFiles.filter(f => f.type === 'image').length,
-        totalSize: finalMediaFiles.reduce((acc, file) => {
-          const sizeInKB = parseFloat(file.size.replace(' KB', ''));
-          return acc + sizeInKB;
-        }, 0)
+        total: files.length,
+        images: files.filter(f => f.type === 'image').length,
+        totalSize: files.reduce((acc, file) => acc + (typeof file.size === 'number' ? file.size / 1024 : 0), 0),
       };
-
       setMediaData({
-        files: finalMediaFiles,
+        files,
         stats: mediaStats
       });
-
-      // Scan documents for image usage
-      await scanDocumentsForImageUsage(finalMediaFiles);
-
+      await scanDocumentsForImageUsage(files);
     } catch (err) {
       console.error('Error fetching media files:', err);
-      setError('Failed to load media files. Please try again.');
+      setError('Failed to load media files from Tina MediaCollection.');
     } finally {
       setLoading(false);
     }
@@ -359,12 +253,16 @@ const MediaDashboard = () => {
     });
   };
 
-  const formatFileSize = (sizeStr) => {
-    const sizeNum = parseFloat(sizeStr.replace(' KB', ''));
-    if (sizeNum >= 1024) {
-      return `${(sizeNum / 1024).toFixed(1)} MB`;
+  const formatFileSize = (size) => {
+    // size is in bytes (number)
+    if (typeof size !== 'number') return size;
+    if (size >= 1024 * 1024) {
+      return `${(size / (1024 * 1024)).toFixed(1)} MB`;
     }
-    return sizeStr;
+    if (size >= 1024) {
+      return `${(size / 1024).toFixed(1)} KB`;
+    }
+    return `${size} B`;
   };
 
   const formatDate = (dateStr) => {
@@ -529,7 +427,7 @@ const MediaDashboard = () => {
                     {file.type === 'image' ? (
                       <img 
                         src={file.url} 
-                        alt={file.name}
+                        alt={file.filename}
                         style={{
                           width: '60px',
                           height: '60px',
@@ -561,7 +459,7 @@ const MediaDashboard = () => {
                       fontSize: '12px',
                       textAlign: 'center'
                     }}>
-                      {file.extension.toUpperCase()}
+                      {file.extension ? file.extension.toUpperCase() : ''}
                     </div>
                   </div>
 
@@ -573,7 +471,7 @@ const MediaDashboard = () => {
                       color: '#2c3e50',
                       marginBottom: '4px'
                     }}>
-                      {file.name}
+                      {file.filename}
                     </div>
                     <div style={{ 
                       fontSize: '13px', 
@@ -590,7 +488,7 @@ const MediaDashboard = () => {
                     }}>
                       <span>{formatFileSize(file.size)}</span>
                       {file.dimensions && <span>{file.dimensions}</span>}
-                      <span>Modified: {formatDate(file.lastModified)}</span>
+                      {file.lastModified && <span>Modified: {formatDate(file.lastModified)}</span>}
                     </div>
                   </div>
 
@@ -762,7 +660,7 @@ const MediaDashboard = () => {
             </button>
             <img 
               src={lightboxImage.url} 
-              alt={lightboxImage.name}
+              alt={lightboxImage.filename}
               style={{
                 maxWidth: '100%',
                 maxHeight: '100%',
@@ -775,7 +673,7 @@ const MediaDashboard = () => {
               marginTop: '10px',
               fontSize: '14px'
             }}>
-              {lightboxImage.name} • {lightboxImage.dimensions} • {lightboxImage.size}
+              {lightboxImage.filename} {lightboxImage.dimensions ? `• ${lightboxImage.dimensions}` : ''} • {formatFileSize(lightboxImage.size)}
             </div>
           </div>
         </div>

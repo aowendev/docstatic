@@ -1,0 +1,39 @@
+{
+  "media": [
+    {
+      "filename": "developers.jpg",
+      "path": "developers.jpg",
+      "size": 171743
+    },
+    {
+      "filename": "docStaticDemo.jpg",
+      "path": "docStaticDemo.jpg",
+      "size": 251209
+    },
+    {
+      "filename": "example.svg",
+      "path": "docs/example.svg",
+      "size": 666
+    },
+    {
+      "filename": "wiki-pages-add-wiki.png",
+      "path": "docs/wiki-pages-add-wiki.png",
+      "size": 151934
+    },
+    {
+      "filename": "docstatic.png",
+      "path": "docstatic.png",
+      "size": 7751
+    },
+    {
+      "filename": "users.jpg",
+      "path": "users.jpg",
+      "size": 158193
+    },
+    {
+      "filename": "writers.jpg",
+      "path": "writers.jpg",
+      "size": 154757
+    }
+  ]
+}
