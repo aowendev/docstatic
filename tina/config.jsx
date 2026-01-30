@@ -1376,6 +1376,8 @@ const MediaCollection = {
         { type: "string", name: "filename", label: "Filename", required: true },
         { type: "string", name: "path", label: "Path", required: true },
         { type: "number", name: "size", label: "Size (bytes)", required: true },
+        { type: "string", name: "dimensions", label: "Dimensions (WxH)", required: false },
+        { type: "string", name: "lastModified", label: "Last Modified", required: false },
       ],
     },
   ],

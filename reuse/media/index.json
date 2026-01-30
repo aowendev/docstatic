@@ -3,37 +3,44 @@
     {
       "filename": "developers.jpg",
       "path": "developers.jpg",
-      "size": 171743
+      "size": 171743,
+      "lastModified": "2025-09-21T14:43:22.000Z"
     },
     {
       "filename": "docStaticDemo.jpg",
       "path": "docStaticDemo.jpg",
-      "size": 251209
+      "size": 251209,
+      "lastModified": "2025-09-21T14:43:22.000Z"
     },
     {
       "filename": "example.svg",
       "path": "docs/example.svg",
-      "size": 666
+      "size": 666,
+      "lastModified": "2025-11-13T08:35:59.000Z"
     },
     {
       "filename": "wiki-pages-add-wiki.png",
       "path": "docs/wiki-pages-add-wiki.png",
-      "size": 151934
+      "size": 151934,
+      "lastModified": "2025-10-04T16:08:18.000Z"
     },
     {
       "filename": "docstatic.png",
       "path": "docstatic.png",
-      "size": 7751
+      "size": 7751,
+      "lastModified": "2025-09-21T14:43:22.000Z"
     },
     {
       "filename": "users.jpg",
       "path": "users.jpg",
-      "size": 158193
+      "size": 158193,
+      "lastModified": "2025-09-21T14:43:22.000Z"
     },
     {
       "filename": "writers.jpg",
       "path": "writers.jpg",
-      "size": 154757
+      "size": 154757,
+      "lastModified": "2025-09-21T14:43:22.000Z"
     }
   ]
 }

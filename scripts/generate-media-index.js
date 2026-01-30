@@ -2,6 +2,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const imageSize = require('image-size');
 
 const IMG_DIR = path.join(__dirname, '../static/img');
 const OUTPUT_FILE = path.join(__dirname, '../reuse/media/index.json');
@@ -15,10 +16,27 @@ function getMediaFiles(dir, baseDir = IMG_DIR) {
     if (stat && stat.isDirectory()) {
       results = results.concat(getMediaFiles(filePath, baseDir));
     } else if (/\.(jpg|jpeg|png|gif|svg|webp)$/i.test(file)) {
+      const ext = path.extname(file).toLowerCase();
+      let dimensions = undefined;
+      // Only get dimensions for raster images
+      if (/(jpg|jpeg|png|gif|webp)$/i.test(ext)) {
+        try {
+          const size = imageSize(filePath);
+          if (size.width && size.height) {
+            dimensions = `${size.width}x${size.height}`;
+          }
+        } catch (e) {
+          // ignore errors for unreadable/corrupt images
+        }
+      }
+      // Get last modified date (ISO string)
+      const lastModified = stat.mtime.toISOString();
       results.push({
         filename: file,
         path: path.relative(baseDir, filePath).replace(/\\/g, '/'),
-        size: stat.size
+        size: stat.size,
+        ...(dimensions ? { dimensions } : {}),
+        lastModified
       });
     }
   });
