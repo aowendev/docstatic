@@ -102,16 +102,6 @@ const Dashboard1 = () => {
     } catch (err) {
       console.error('Failed to fetch content overview:', err);
       setError(err.message);
-      
-      // Fallback to simulated data for demo
-      setContentData({
-        docs: { total: 28, draft: 8, review: 4, translate: 2, approved: 3, published: 10, unlisted: 1 },
-        recentActivity: [
-          { title: 'Getting Started Guide', type: 'Documentation', status: 'Published', lastModified: new Date().toISOString(), path: 'getting-started.mdx' },
-          { title: 'Installation Guide', type: 'Documentation', status: 'Draft', lastModified: new Date(Date.now() - 86400000).toISOString(), path: 'installation.mdx' }
-        ],
-        totalProgress: 36
-      });
     } finally {
       setLoading(false);
     }
