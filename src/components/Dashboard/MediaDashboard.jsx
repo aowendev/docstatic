@@ -487,7 +487,11 @@ const MediaDashboard = () => {
                       color: '#868e96'
                     }}>
                       <span>{formatFileSize(file.size)}</span>
-                      {file.dimensions && <span>{file.dimensions}</span>}
+                      {file.extension === 'svg' ? (
+                        <span>vector</span>
+                      ) : (
+                        file.dimensions && <span>{file.dimensions}</span>
+                      )}
                       {file.lastModified && <span>Modified: {formatDate(file.lastModified)}</span>}
                     </div>
                   </div>
