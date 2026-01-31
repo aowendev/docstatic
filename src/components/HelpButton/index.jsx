@@ -93,6 +93,35 @@ export default function HelpButton({ url }) {
       }
     };
 
+
+    // Hide unwanted Tina menu items
+    const hideUnwantedMenuItems = () => {
+      // Hide by href
+      const unwantedLinks = document.querySelectorAll('a[href="#/collections/generated/~"], a[href="#/collections/media/~"]');
+      unwantedLinks.forEach(link => {
+        const li = link.closest('li');
+        if (li) {
+          li.remove();
+        } else {
+          link.remove();
+        }
+      });
+      // Hide by label text (if needed)
+      document.querySelectorAll('nav a').forEach(link => {
+        if (
+          link.textContent.includes("API (generated)") ||
+          link.textContent.includes("Media (generated)")
+        ) {
+          const li = link.closest('li');
+          if (li) {
+            li.remove();
+          } else {
+            link.remove();
+          }
+        }
+      });
+    };
+
     // Inject custom TinaCMS styles
     injectTinaStyles();
 
@@ -101,13 +130,21 @@ export default function HelpButton({ url }) {
 
     // Inject help button icon
     injectIcon();
+
+    // Hide unwanted menu items
+    hideUnwantedMenuItems();
+
     const timeout = setTimeout(() => {
       injectIcon();
       modifyStrikeThroughButton(); // Try again after delay in case UI loads late
+      hideUnwantedMenuItems();     // Try again after delay
     }, 500);
 
     // Also try again after a longer delay for slower loading
-    const longerTimeout = setTimeout(modifyStrikeThroughButton, 2000);
+    const longerTimeout = setTimeout(() => {
+      modifyStrikeThroughButton();
+      hideUnwantedMenuItems();
+    }, 2000);
 
     return () => {
       clearTimeout(timeout);
