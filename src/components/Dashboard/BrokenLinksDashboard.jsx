@@ -276,32 +276,37 @@ const BrokenLinksDashboard = () => {
 
   if (loading) {
     return (
-      <div style={{ padding: '20px', textAlign: 'center' }}>
-        <div style={{ 
-          fontSize: '16px', 
-          color: '#666',
-          marginBottom: '10px'
-        }}>
-          Scanning docs for links and validating...
-        </div>
-        <div style={{
-          width: '100%',
-          height: '4px',
-          backgroundColor: '#e0e0e0',
-          borderRadius: '2px',
-          overflow: 'hidden'
-        }}>
+      <div style={{
+        padding: '20px',
+        border: '1px solid #ddd',
+        borderRadius: '8px',
+        backgroundColor: '#f9f9f9',
+        margin: '20px 0',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        minHeight: '120px'
+      }}>
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
           <div style={{
-            width: '100%',
-            height: '100%',
-            backgroundColor: '#0066cc',
-            animation: 'loading 2s infinite'
-          }}></div>
+            width: '36px',
+            height: '36px',
+            border: '4px solid #e0e0e0',
+            borderTop: '4px solid #2563eb',
+            borderRadius: '50%',
+            animation: 'spin 1s linear infinite',
+            marginBottom: '12px'
+          }} />
+          <div style={{ fontWeight: 500, color: '#2563eb', fontSize: '16px', marginBottom: '2px' }}>
+            Scanning docs for links and validating...
+          </div>
+          <div style={{ fontSize: '13px', color: '#666' }}>This may take a moment</div>
         </div>
-        <style jsx>{`
-          @keyframes loading {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(100%); }
+        <style>{`
+          @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
           }
         `}</style>
       </div>

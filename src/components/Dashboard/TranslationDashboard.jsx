@@ -243,12 +243,34 @@ const TranslationDashboard = () => {
         border: '1px solid #ddd',
         borderRadius: '8px',
         backgroundColor: '#f9f9f9',
-        margin: '20px 0'
+        margin: '20px 0',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        minHeight: '120px'
       }}>
-        <div style={{ textAlign: 'center', color: '#666' }}>
-          <div style={{ marginBottom: '10px' }}>🔄 Scanning translations...</div>
-          <div style={{ fontSize: '14px' }}>This may take a moment</div>
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+          <div style={{
+            width: '36px',
+            height: '36px',
+            border: '4px solid #e0e0e0',
+            borderTop: '4px solid #2563eb',
+            borderRadius: '50%',
+            animation: 'spin 1s linear infinite',
+            marginBottom: '12px'
+          }} />
+          <div style={{ fontWeight: 500, color: '#2563eb', fontSize: '16px', marginBottom: '2px' }}>
+            Scanning translations...
+          </div>
+          <div style={{ fontSize: '13px', color: '#666' }}>This may take a moment</div>
         </div>
+        <style>{`
+          @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+          }
+        `}</style>
       </div>
     );
   }

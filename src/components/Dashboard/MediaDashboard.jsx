@@ -263,9 +263,32 @@ const MediaDashboard = () => {
           backgroundColor: '#f8f9fa',
           borderRadius: '12px 12px 0 0'
         }}>
-          <h3 class="font-sans text-2xl text-tina-orange">
-            🏞️ Media Reuse
-          </h3>
+          <div style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            marginBottom: '10px'
+          }}>
+            <h3 class="font-sans text-2xl text-tina-orange" style={{ margin: 0 }}>
+              🏞️ Media Reuse
+            </h3>
+            <button
+              onClick={fetchMediaFiles}
+              style={{
+                padding: '5px 10px',
+                backgroundColor: '#2563eb',
+                color: 'white',
+                border: 'none',
+                borderRadius: '4px',
+                cursor: 'pointer',
+                fontSize: '12px',
+                marginLeft: '10px'
+              }}
+              disabled={loading}
+            >
+              {loading ? 'Refreshing...' : 'Refresh'}
+            </button>
+          </div>
           <hr style={{ border: 'none', borderTop: '1px solid #e1e4e8', margin: '10px 0 20px 0' }} />
           {/* Stats */}
           <div style={{ 
