@@ -82,106 +82,30 @@ const MediaDashboard = () => {
     return text;
   };
 
-  // Helper to dynamically import Tina client with fallback
-  const getTinaClient = async () => {
-    const { createClient } = await import('tinacms/dist/client');
-    const { queries } = await import('../../../tina/__generated__/types');
-    let url = '';
-    let token = '';
-    if (typeof window !== 'undefined' && (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')) {
-      url = 'http://localhost:4001/graphql';
-      token = '';
-    } else {
-      url = process.env.NEXT_PUBLIC_TINA_API_URL || 'https://content.tinajs.io/content/<your-client-id>/github/main/graphql';
-      token = process.env.TINA_TOKEN || '';
-    }
-    return createClient({ url, token, queries });
-  };
-
   const scanDocumentsForImageUsage = async (mediaFiles) => {
     try {
-      const client = await getTinaClient();
+      const { client } = await import('../../../tina/__generated__/client');
       // Fetch all documents to scan for image usage using connection query
-      // The connection query provides the AST body structure we need
-      const docsResult = await client.queries.docConnection({
-        sort: 'title'
-      });
-      
+      const docsResult = await client.queries.docConnection({ sort: 'title' });
       const docs = docsResult.data.docConnection.edges || [];
       const usages = {};
-      
-      // Initialize usage tracking for each media file
-      mediaFiles.forEach(file => {
-        usages[file.path] = [];
-      });
-      
-      // Scan each document for image references using the connection query data
-      // (which already includes the body AST that we need)
+      mediaFiles.forEach(file => { usages[file.path] = []; });
       docs.forEach(edge => {
         const node = edge.node;
         const title = node.title || node._sys.filename;
         const relativePath = node._sys.relativePath;
-        
-        // Extract content from AST body (which we know works from the test)
         let content = '';
         if (node.body && typeof node.body === 'object') {
           content = extractTextFromAST(node.body);
         } else if (typeof node.body === 'string') {
           content = node.body;
         }
-        
-        // Debug: Log for specific files we know should work
         if (content && (relativePath.includes('figures.mdx') || relativePath.includes('assets.mdx'))) {
           console.log(`Main scan - ${relativePath}, content length: ${content.length}`);
-          console.log('Content sample:', content.substring(0, 200));
         }
-        
-        // Look for various image reference patterns
         mediaFiles.forEach(file => {
-          const imagePath = file.path;
-          const imageName = file.name;
-          
-          // Check for different image reference patterns
-          const patterns = [
-            // Standard markdown: ![alt](path)
-            new RegExp(`!\\[[^\\]]*\\]\\(${imagePath.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\)`, 'gi'),
-            // Standard markdown: ![alt](/static/img/name)
-            new RegExp(`!\\[[^\\]]*\\]\\(/static${imagePath.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\)`, 'gi'),
-            // Standard markdown with just filename: ![alt](name)
-            new RegExp(`!\\[[^\\]]*\\]\\([^)]*${imageName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\)`, 'gi'),
-            // HTML img tag: <img src="path">
-            new RegExp(`<img[^>]+src=['""][^'"]*${imageName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}[^'"]*['"][^>]*>`, 'gi'),
-            // HTML img tag src attribute: src="path"
-            new RegExp(`src=['""]${imagePath.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}['"]`, 'gi'),
-            // Figure component: <Figure img="path">
-            new RegExp(`<Figure[^>]+img=['""]${imagePath.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}['"][^>]*>`, 'gi'),
-            // Figure component with filename only: <Figure img="/img/name">
-            new RegExp(`<Figure[^>]+img=['""]/img/[^'"]*${imageName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}['"][^>]*>`, 'gi'),
-            // Figure component with subfolder path: <Figure img="/img/docs/name">
-            new RegExp(`<Figure[^>]+img=['""]${imagePath.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}['"][^>]*>`, 'gi'),
-            // Any img attribute with filename
-            new RegExp(`img=['""][^'"]*${imageName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}[^'"]*['"]`, 'gi'),
-            // Static path references: /static/img/name
-            new RegExp(`/static${imagePath.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}`, 'gi'),
-            // Subfolder references in markdown: ![alt](subfolder/name)
-            new RegExp(`!\\[[^\\]]*\\]\\([^)]*${imagePath.replace(/^\/img\//, '').replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\)`, 'gi'),
-            // Simple filename match (most permissive)
-            new RegExp(imageName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi'),
-          ];
-          
-          let found = false;
-          patterns.forEach((pattern, patternIndex) => {
-            if (pattern.test(content)) {
-              found = true;
-              // Debug: Log successful matches for our test image
-              if (imageName === 'docStaticDemo.jpg') {
-                console.log(`Main scan - Found ${imageName} in ${relativePath} using pattern ${patternIndex}`);
-              }
-            }
-          });
-          
-          if (found) {
-            usages[imagePath].push({
+          if (content.includes(file.filename) || content.includes(file.path)) {
+            usages[file.path].push({
               title,
               relativePath,
               filename: node._sys.filename,
@@ -191,8 +115,6 @@ const MediaDashboard = () => {
           }
         });
       });
-      
-      console.log('Final usage results:', usages);
       setImageUsages(usages);
       return usages;
     } catch (err) {
@@ -205,7 +127,7 @@ const MediaDashboard = () => {
     setLoading(true);
     setError(null);
     try {
-      const client = await getTinaClient();
+      const { client } = await import('../../../tina/__generated__/client');
       // Query Tina's MediaCollection (reuse/media/index.json)
       const mediaResult = await client.queries.media({ relativePath: "index.json" });
       const mediaList = (mediaResult?.data?.media?.media) || [];
