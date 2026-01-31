@@ -195,9 +195,7 @@ const TranslationDashboard = () => {
     }
   };
 
-  useEffect(() => {
-    scanTranslations();
-  }, []);
+
 
   const formatDate = (dateString) => {
     try {
@@ -235,6 +233,54 @@ const TranslationDashboard = () => {
       return acc;
     }, {});
   };
+
+
+  // Always show the heading and button row, but if not loaded, only show the Load button (no dashboard content)
+  if (!translationData && !loading && !error) {
+    return (
+      <div style={{
+        padding: '20px',
+        border: '1px solid #ddd',
+        borderRadius: '8px',
+        backgroundColor: '#fafafa',
+        marginTop: 0,
+        marginBottom: '32px',
+        marginLeft: '16px',
+        marginRight: '16px',
+        boxSizing: 'border-box'
+      }}>
+        <div style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'flex-start',
+          marginBottom: '20px',
+          borderBottom: '2px solid #e9ecef',
+          paddingBottom: '10px',
+          gap: '16px' // Restore original gap between title and button
+        }}>
+          <h3 className="font-sans text-2xl text-tina-orange" style={{ margin: 0 }}>
+            🌍 Translations
+          </h3>
+          <button
+            onClick={scanTranslations}
+            style={{
+              padding: '5px 10px',
+              backgroundColor: '#2563eb',
+              color: 'white',
+              border: 'none',
+              borderRadius: '4px',
+              cursor: 'pointer',
+              fontSize: '12px',
+              marginLeft: '8px' // Extra gap for safety
+            }}
+            disabled={loading}
+          >
+            {loading ? 'Loading...' : 'Load'}
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   if (loading) {
     return (
@@ -329,15 +375,20 @@ const TranslationDashboard = () => {
       border: '1px solid #ddd',
       borderRadius: '8px',
       backgroundColor: '#fafafa',
-      margin: '20px 0'
+      marginTop: 0,
+      marginBottom: '32px',
+      marginLeft: '16px',
+      marginRight: '16px',
+      boxSizing: 'border-box'
     }}>
       <div style={{
         display: 'flex',
         justifyContent: 'space-between',
-        alignItems: 'center',
+        alignItems: 'flex-start',
         marginBottom: '20px',
         borderBottom: '2px solid #e9ecef',
-        paddingBottom: '10px'
+        paddingBottom: '10px',
+        gap: '16px' // Add gap between title and button
       }}>
         <h3 class="font-sans text-2xl text-tina-orange">
           🌍 Translations

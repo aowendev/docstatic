@@ -166,9 +166,7 @@ const MediaDashboard = () => {
     }
   };
 
-  useEffect(() => {
-    fetchMediaFiles();
-  }, []);
+
 
   const getFilteredFiles = () => {
     if (filterType === 'all') return mediaFiles;
@@ -210,17 +208,88 @@ const MediaDashboard = () => {
     });
   };
 
+  // Always show the heading and button row, but if not loaded, only show the Load button (no dashboard content)
+  if (!mediaData && !loading && !error) {
+    return (
+      <div style={{
+        padding: '20px',
+        border: '1px solid #ddd',
+        borderRadius: '8px',
+        backgroundColor: '#fafafa',
+        marginTop: 0,
+        marginBottom: '32px',
+        marginLeft: '16px',
+        marginRight: '16px',
+        boxSizing: 'border-box'
+      }}>
+        <div style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'flex-start',
+          marginBottom: '20px',
+          borderBottom: '2px solid #e9ecef',
+          paddingBottom: '10px',
+          gap: '16px' // Restore original gap between title and button
+        }}>
+          <h3 className="font-sans text-2xl text-tina-orange" style={{ margin: 0 }}>
+            🏞️ Media Reuse
+          </h3>
+          <button
+            onClick={fetchMediaFiles}
+            style={{
+              padding: '5px 10px',
+              backgroundColor: '#2563eb',
+              color: 'white',
+              border: 'none',
+              borderRadius: '4px',
+              cursor: 'pointer',
+              fontSize: '12px',
+              marginLeft: '8px' // Extra gap for safety
+            }}
+            disabled={loading}
+          >
+            {loading ? 'Loading...' : 'Load'}
+          </button>
+        </div>
+      </div>
+    );
+  }
+
   if (loading) {
     return (
-      <div style={{ padding: '20px', textAlign: 'center' }}>
-        <div style={{ 
-          border: '2px solid #f0f0f0', 
-          borderRadius: '8px', 
-          padding: '40px',
-          color: '#666'
-        }}>
-          Loading media files...
+      <div style={{
+        padding: '20px',
+        border: '1px solid #ddd',
+        borderRadius: '8px',
+        backgroundColor: '#f9f9f9',
+        margin: '20px 0',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        minHeight: '120px'
+      }}>
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+          <div style={{
+            width: '36px',
+            height: '36px',
+            border: '4px solid #e0e0e0',
+            borderTop: '4px solid #2563eb',
+            borderRadius: '50%',
+            animation: 'spin 1s linear infinite',
+            marginBottom: '12px'
+          }} />
+          <div style={{ fontWeight: 500, color: '#2563eb', fontSize: '16px', marginBottom: '2px' }}>
+            Loading media files...
+          </div>
+          <div style={{ fontSize: '13px', color: '#666' }}>This may take a moment</div>
         </div>
+        <style>{`
+          @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+          }
+        `}</style>
       </div>
     );
   }

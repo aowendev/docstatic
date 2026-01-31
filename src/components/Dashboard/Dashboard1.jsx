@@ -248,7 +248,11 @@ const Dashboard1 = () => {
       border: '1px solid #ddd',
       borderRadius: '8px',
       backgroundColor: '#fafafa',
-      margin: '20px 0'
+      marginTop: 0,
+      marginBottom: '32px',
+      marginLeft: '16px',
+      marginRight: '16px',
+      boxSizing: 'border-box'
     }}>
       <div style={{ 
         display: 'flex', 
