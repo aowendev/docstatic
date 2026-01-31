@@ -82,10 +82,25 @@ const MediaDashboard = () => {
     return text;
   };
 
+  // Helper to dynamically import Tina client with fallback
+  const getTinaClient = async () => {
+    const { createClient } = await import('tinacms/dist/client');
+    const { queries } = await import('../../../tina/__generated__/types');
+    let url = '';
+    let token = '';
+    if (typeof window !== 'undefined' && (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')) {
+      url = 'http://localhost:4001/graphql';
+      token = '';
+    } else {
+      url = process.env.NEXT_PUBLIC_TINA_API_URL || 'https://content.tinajs.io/content/<your-client-id>/github/main/graphql';
+      token = process.env.TINA_TOKEN || '';
+    }
+    return createClient({ url, token, queries });
+  };
+
   const scanDocumentsForImageUsage = async (mediaFiles) => {
     try {
-      const { client } = await import('../../../tina/__generated__/client');
-      
+      const client = await getTinaClient();
       // Fetch all documents to scan for image usage using connection query
       // The connection query provides the AST body structure we need
       const docsResult = await client.queries.docConnection({
@@ -190,7 +205,7 @@ const MediaDashboard = () => {
     setLoading(true);
     setError(null);
     try {
-      const { client } = await import('../../../tina/__generated__/client');
+      const client = await getTinaClient();
       // Query Tina's MediaCollection (reuse/media/index.json)
       const mediaResult = await client.queries.media({ relativePath: "index.json" });
       const mediaList = (mediaResult?.data?.media?.media) || [];
