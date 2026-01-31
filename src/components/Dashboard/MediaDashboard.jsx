@@ -262,7 +262,6 @@ const MediaDashboard = () => {
         border: '1px solid #ddd',
         borderRadius: '8px',
         backgroundColor: '#f9f9f9',
-        margin: '20px 0',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
@@ -323,7 +322,7 @@ const MediaDashboard = () => {
       border: '1px solid #ddd',
       borderRadius: '8px',
       backgroundColor: '#fafafa',
-      margin: '20px 0'
+
       }}>
         {/* Header */}
         <div style={{ 

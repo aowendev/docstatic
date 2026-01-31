@@ -326,7 +326,6 @@ const BrokenLinksDashboard = () => {
         border: '1px solid #ddd',
         borderRadius: '8px',
         backgroundColor: '#f9f9f9',
-        margin: '20px 0',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',

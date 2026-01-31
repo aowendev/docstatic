@@ -289,7 +289,6 @@ const TranslationDashboard = () => {
         border: '1px solid #ddd',
         borderRadius: '8px',
         backgroundColor: '#f9f9f9',
-        margin: '20px 0',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
@@ -328,7 +327,6 @@ const TranslationDashboard = () => {
         border: '1px solid #ff4757',
         borderRadius: '8px',
         backgroundColor: '#ffe0e0',
-        margin: '20px 0',
         color: '#d63031'
       }}>
         <strong>Error:</strong> {error}
