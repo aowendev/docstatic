@@ -266,7 +266,7 @@ const MediaDashboard = () => {
           <h3 class="font-sans text-2xl text-tina-orange">
             🏞️ Media Reuse
           </h3>
-          
+          <hr style={{ border: 'none', borderTop: '1px solid #e1e4e8', margin: '10px 0 20px 0' }} />
           {/* Stats */}
           <div style={{ 
             display: 'flex', 
