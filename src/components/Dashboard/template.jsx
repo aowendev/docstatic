@@ -3,6 +3,7 @@ import Dashboard1 from './Dashboard1';
 import MediaDashboard from './MediaDashboard';
 import TranslationDashboard from './TranslationDashboard';
 import BrokenLinksDashboard from './BrokenLinksDashboard';
+// import ContentReuseDashboard from './ContentReuseDashboard';
 import StatusBar from './StatusBar';
 import HelpButton from '../HelpButton';
 
@@ -17,7 +18,7 @@ export const DashboardsCollection = {
       delete: false,
     },
   },
-  fields: [
+	fields: [
 	{
 	  type: "boolean",
 	  name: "statusBar",
@@ -63,6 +64,17 @@ export const DashboardsCollection = {
 		),
 	  },
 	},
+//		{
+//		  type: "boolean",
+//		  name: "contentReuseDashboard",
+//		  label: "Content Reuse Overview",
+//		  required: false,
+//		  ui: {
+//			component: (props) => (
+//			  <ContentReuseDashboard />
+//			),
+//		  },
+//		},
 	{
 	  type: "boolean",
 	  name: "mediaDashboard",
