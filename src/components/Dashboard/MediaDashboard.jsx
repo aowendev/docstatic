@@ -312,12 +312,12 @@ const MediaDashboard = () => {
   const filteredFiles = getFilteredFiles();
 
   return (
-    <div style={{ padding: '20px' }}>
+    <div style={{ paddingLeft: '20px', paddingRight: '20px' }}>
       <div style={{ 
-        border: '2px solid #e0e0e0', 
-        borderRadius: '12px', 
-        backgroundColor: '#ffffff',
-        boxShadow: '0 2px 8px rgba(0,0,0,0.1)'
+      border: '1px solid #ddd',
+      borderRadius: '8px',
+      backgroundColor: '#fafafa',
+      margin: '20px 0'
       }}>
         {/* Header */}
         <div style={{ 
@@ -326,14 +326,9 @@ const MediaDashboard = () => {
           backgroundColor: '#f8f9fa',
           borderRadius: '12px 12px 0 0'
         }}>
-          <h2 style={{ 
-            margin: '0 0 15px 0', 
-            color: '#2c3e50',
-            fontSize: '24px',
-            fontWeight: '600'
-          }}>
-            Media Library
-          </h2>
+          <h3 class="font-sans text-2xl text-tina-orange">
+            🏞️ Media Reuse
+          </h3>
           
           {/* Stats */}
           <div style={{ 

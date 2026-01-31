@@ -65,23 +65,23 @@ export const DashboardsCollection = {
 	},
 	{
 	  type: "boolean",
-	  name: "translationDashboard",
-	  label: "Translation Status",
-	  required: false,
-	  ui: {
-		component: (props) => (
-		  <TranslationDashboard/>
-		),
-	  },
-	},
-	{
-	  type: "boolean",
 	  name: "mediaDashboard",
 	  label: "Media Library",
 	  required: false,
 	  ui: {
 		component: (props) => (
 		  <MediaDashboard/>
+		),
+	  },
+	},
+	{
+	  type: "boolean",
+	  name: "translationDashboard",
+	  label: "Translation Status",
+	  required: false,
+	  ui: {
+		component: (props) => (
+		  <TranslationDashboard/>
 		),
 	  },
 	},

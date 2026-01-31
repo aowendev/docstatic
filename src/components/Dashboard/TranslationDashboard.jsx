@@ -317,9 +317,9 @@ const TranslationDashboard = () => {
         borderBottom: '2px solid #e9ecef',
         paddingBottom: '10px'
       }}>
-        <h2 style={{ margin: '0', color: '#2c3e50', fontSize: '24px' }}>
+        <h3 class="font-sans text-2xl text-tina-orange">
           🌍 Translations
-        </h2>
+        </h3>
         <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
           <select
             value={selectedLanguage}

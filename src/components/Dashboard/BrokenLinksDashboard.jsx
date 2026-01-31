@@ -345,21 +345,24 @@ const BrokenLinksDashboard = () => {
   const problemLinks = [...(brokenLinks || []), ...(warningLinks || [])];
 
   return (
-    <div style={{ padding: '20px', fontFamily: 'Inter, system-ui, sans-serif' }}>
-      <div style={{ 
-        display: 'flex', 
-        justifyContent: 'space-between', 
+    <div style={{
+      padding: '20px',
+      border: '1px solid #ddd',
+      borderRadius: '8px',
+      backgroundColor: '#fafafa',
+      margin: '20px 0'
+    }}>
+      <div style={{
+        display: 'flex',
+        justifyContent: 'space-between',
         alignItems: 'center',
-        marginBottom: '20px'
+        marginBottom: '20px',
+        borderBottom: '2px solid #e9ecef',
+        paddingBottom: '10px'
       }}>
-        <h2 style={{ 
-          margin: 0, 
-          fontSize: '20px', 
-          fontWeight: '600',
-          color: '#24292e'
-        }}>
-          🔗 Broken Links Dashboard
-        </h2>
+        <h3 class="font-sans text-2xl text-tina-orange">
+          🔗 Broken Links
+        </h3>
         <button 
           onClick={scanDocsForLinks}
           style={{

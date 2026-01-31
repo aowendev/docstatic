@@ -243,7 +243,13 @@ const Dashboard1 = () => {
   );
 
   return (
-    <div style={{ padding: '20px', fontFamily: 'system-ui, sans-serif' }}>
+    <div style={{
+      padding: '20px',
+      border: '1px solid #ddd',
+      borderRadius: '8px',
+      backgroundColor: '#fafafa',
+      margin: '20px 0'
+    }}>
       <div style={{ 
         display: 'flex', 
         justifyContent: 'space-between', 
@@ -252,9 +258,9 @@ const Dashboard1 = () => {
         paddingBottom: '12px',
         borderBottom: '1px solid #e1e4e8'
       }}>
-        <h2 style={{ margin: 0, fontSize: '20px', color: '#24292e' }}>
+        <h3 class="font-sans text-2xl text-tina-orange">
           📊 Content Overview
-        </h2>
+        </h3>
         <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
           <div style={{ fontSize: '14px', color: '#586069' }}>
             Overall Progress: <strong>{contentData.totalProgress}%</strong>
