@@ -106,20 +106,6 @@ export default function HelpButton({ url }) {
           link.remove();
         }
       });
-      // Hide by label text (if needed)
-      document.querySelectorAll('nav a').forEach(link => {
-        if (
-          link.textContent.includes("API (generated)") ||
-          link.textContent.includes("Media (generated)")
-        ) {
-          const li = link.closest('li');
-          if (li) {
-            li.remove();
-          } else {
-            link.remove();
-          }
-        }
-      });
     };
 
     // Inject custom TinaCMS styles
