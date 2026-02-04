@@ -119,52 +119,57 @@ const StatusBar = () => {
     }
   };
 
-  return (
-    <div style={{
-      display: 'flex',
-      alignItems: 'center',
-      gap: '1rem',
-      padding: '0.5rem 1rem',
-      backgroundColor: '#f8fafc',
-      borderBottom: '1px solid #e2e8f0',
-      fontFamily: 'system-ui, -apple-system, sans-serif',
-      fontSize: '0.875rem',
-      marginBottom: '1rem'
-    }}>
-      {/* Connection Status */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-        <span style={{ color: getStatusColor(status.connection.type) }}>
-          {getStatusIcon(status.connection.type)}
-        </span>
-        <span style={{ fontWeight: '500' }}>GraphQL:</span>
-        <span style={{ color: getStatusColor(status.connection.type) }}>
-          {status.connection.message}
-        </span>
-      </div>
+  // Inject status into existing element if it exists
+  useEffect(() => {
+    const targetElement = document.querySelector('.relative.flex-none.w-full.h-16.px-6.bg-white.border-t.border-gray-100.flex.items-center.justify-end');
+    if (targetElement) {
+      const statusContainer = targetElement.querySelector('.status-bar-injected');
+      if (!statusContainer) {
+        const statusDiv = document.createElement('div');
+        statusDiv.className = 'status-bar-injected flex items-center gap-4 mr-auto';
+        statusDiv.style.fontSize = '0.75rem';
+        statusDiv.innerHTML = `
+          <div style="display: flex; align-items: center; gap: 0.5rem;">
+            <span style="color: ${getStatusColor(status.connection.type)}">${getStatusIcon(status.connection.type)}</span>
+            <span style="font-weight: 500; color: #374151">GraphQL:</span>
+            <span style="color: ${getStatusColor(status.connection.type)}">${status.connection.message}</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 0.5rem;">
+            <span style="color: ${getStatusColor(status.environment.type)}">${getStatusIcon(status.environment.type)}</span>
+            <span style="font-weight: 500; color: #374151">Environment:</span>
+            <span style="color: ${getStatusColor(status.environment.type)}">${status.environment.message}</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 0.5rem;">
+            <span style="color: ${getStatusColor(status.settings.type)}">${getStatusIcon(status.settings.type)}</span>
+            <span style="font-weight: 500; color: #374151">Settings:</span>
+            <span style="color: ${getStatusColor(status.settings.type)}">${status.settings.message}</span>
+          </div>
+        `;
+        targetElement.insertBefore(statusDiv, targetElement.firstChild);
+      } else {
+        // Update existing status
+        statusContainer.innerHTML = `
+          <div style="display: flex; align-items: center; gap: 0.5rem;">
+            <span style="color: ${getStatusColor(status.connection.type)}">${getStatusIcon(status.connection.type)}</span>
+            <span style="font-weight: 500; color: #374151">GraphQL:</span>
+            <span style="color: ${getStatusColor(status.connection.type)}">${status.connection.message}</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 0.5rem;">
+            <span style="color: ${getStatusColor(status.environment.type)}">${getStatusIcon(status.environment.type)}</span>
+            <span style="font-weight: 500; color: #374151">Environment:</span>
+            <span style="color: ${getStatusColor(status.environment.type)}">${status.environment.message}</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 0.5rem;">
+            <span style="color: ${getStatusColor(status.settings.type)}">${getStatusIcon(status.settings.type)}</span>
+            <span style="font-weight: 500; color: #374151">Settings:</span>
+            <span style="color: ${getStatusColor(status.settings.type)}">${status.settings.message}</span>
+          </div>
+        `;
+      }
+    }
+  }, [status]);
 
-      {/* Environment Status */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-        <span style={{ color: getStatusColor(status.environment.type) }}>
-          {getStatusIcon(status.environment.type)}
-        </span>
-        <span style={{ fontWeight: '500' }}>Environment:</span>
-        <span style={{ color: getStatusColor(status.environment.type) }}>
-          {status.environment.message}
-        </span>
-      </div>
-
-      {/* Settings Status */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-        <span style={{ color: getStatusColor(status.settings.type) }}>
-          {getStatusIcon(status.settings.type)}
-        </span>
-        <span style={{ fontWeight: '500' }}>Settings:</span>
-        <span style={{ color: getStatusColor(status.settings.type) }}>
-          {status.settings.message}
-        </span>
-      </div>
-    </div>
-  );
+  return null; // Only inject into existing element, don't render standalone
 };
 
 export default StatusBar;
