@@ -166,8 +166,16 @@ const MediaDashboard = () => {
       });
       const docs = docsResult.data.docConnection.edges || [];
       
+      console.log('MediaDashboard - Documents loaded for scanning:', docs.length);
+      
       const usages = {};
       mediaFiles.forEach(file => { usages[file.path] = []; });
+      
+      // Find example.svg in media files for debugging
+      const exampleSvgFile = mediaFiles.find(f => f.filename === 'example.svg');
+      if (exampleSvgFile) {
+        console.log('MediaDashboard - Scanning for example.svg with path:', exampleSvgFile.path);
+      }
       
       docs.forEach(edge => {
         const node = edge.node;
@@ -236,22 +244,26 @@ const MediaDashboard = () => {
             matchedPattern = exactPattern;
           }
           
-          // Secondary search: handle potential path variations and URL encoding
+          // Secondary search: handle potential path variations but be more precise
           if (!isUsed) {
             const filename = file.filename;
+            const pathParts = file.path.split('/');
+            const filenameOnly = pathParts[pathParts.length - 1];
+            
             const pathVariations = [
-              `/img/${file.path}`,
-              `/img/${filename}`,
-              file.path,
-              encodeURIComponent(file.path),
-              filename,
-              encodeURIComponent(filename),
-              // Handle case where path might not include directory
-              file.path.includes('/') ? file.path.split('/').pop() : file.path
+              `/img/${file.path}`, // Full path with /img/
+              `/img/${filename}`,  // Full filename with /img/
+              `/img/${filenameOnly}`, // Just filename portion with /img/
+              // Only add encoded versions if they're likely to be used
+              encodeURIComponent(`/img/${file.path}`),
+              encodeURIComponent(`/img/${filename}`)
             ];
             
+            // More precise matching - ensure we're not matching partial filenames
             for (const variation of pathVariations) {
-              if (content.includes(variation)) {
+              // Use word boundary or context-aware matching to avoid false positives
+              const regex = new RegExp(`[("']${variation.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}[)"']|${variation.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}(?=\\s|$|[)}>])`);
+              if (regex.test(content) || content.includes(variation)) {
                 isUsed = true;
                 matchedPattern = variation;
                 break;
@@ -259,19 +271,33 @@ const MediaDashboard = () => {
             }
           }
           
-          // Special debug logging for example.svg
-          if (file.filename === 'example.svg') {
-            console.log(`Debug example.svg search:`, {
+          // Special debug logging for example.svg and any file that contains "example"
+          if (file.filename === 'example.svg' || file.filename.includes('example') || file.path.includes('example')) {
+            const filename = file.filename;
+            const pathParts = file.path.split('/');
+            const filenameOnly = pathParts[pathParts.length - 1];
+            
+            console.log(`Debug ${file.filename} search:`, {
               filename: file.filename,
               filePath: file.path,
+              pathParts: pathParts,
+              filenameOnly: filenameOnly,
               searchPattern: exactPattern,
               isUsed,
               matchedPattern,
               contentLength: content.length,
               contentContainsExact: content.includes(exactPattern),
+              contentContainsFilename: content.includes(filename),
+              contentContainsFilenameOnly: content.includes(filenameOnly),
               contentSample: content.substring(0, 500),
-              relativePathContext: relativePath
+              relativePathContext: relativePath,
+              documentTitle: node.title
             });
+          }
+          
+          // Additional logging for any usage found
+          if (isUsed) {
+            console.log(`MediaDashboard - Found usage of ${file.filename} in ${relativePath} with pattern: ${matchedPattern}`);
           }
           
           if (isUsed) {
@@ -315,6 +341,18 @@ const MediaDashboard = () => {
       // Query Tina's MediaCollection (reuse/media/index.json)
       const mediaResult = await client.queries.media({ relativePath: "index.json" });
       const mediaList = (mediaResult?.data?.media?.media) || [];
+      
+      console.log('MediaDashboard - Media files loaded:', mediaList.length);
+      console.log('MediaDashboard - Sample media files:', mediaList.slice(0, 5).map(f => ({ filename: f.filename, path: f.path })));
+      
+      // Look specifically for example.svg
+      const exampleSvg = mediaList.find(f => f.filename === 'example.svg');
+      if (exampleSvg) {
+        console.log('MediaDashboard - Found example.svg:', exampleSvg);
+      } else {
+        console.log('MediaDashboard - example.svg not found in media list');
+        console.log('MediaDashboard - All SVG files:', mediaList.filter(f => f.filename.endsWith('.svg')));
+      }
       
       // Add type, extension, url, and name fields for UI compatibility
       const files = mediaList.map((file) => {
