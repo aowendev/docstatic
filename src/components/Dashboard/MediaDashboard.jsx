@@ -45,24 +45,55 @@ const MediaDashboard = () => {
     if (typeof node === 'object') {
       // Handle different node types
       if (node.type === 'text' && node.value) {
-        text += node.value;
+        text += node.value + ' ';
+      }
+      
+      // Handle raw string content
+      if (typeof node.value === 'string') {
+        text += node.value + ' ';
+      }
+      
+      // Handle markdown images like ![alt](/img/path.svg)
+      if (node.type === 'image' && node.url) {
+        text += node.url + ' ';
+      }
+      
+      // Handle MDX elements with src/href attributes
+      if (node.type === 'element' || node.type === 'mdxJsxFlowElement' || node.type === 'mdxJsxTextElement') {
+        // Extract attributes that might contain image paths
+        if (node.attributes && Array.isArray(node.attributes)) {
+          node.attributes.forEach(attr => {
+            if (attr.value && typeof attr.value === 'string') {
+              text += attr.value + ' ';
+            }
+            if (attr.value && attr.value.value) {
+              text += attr.value.value + ' ';
+            }
+          });
+        }
       }
       
       // Handle nodes with props (like Figure components)
       if (node.props) {
-        // Extract props as text for searching
-        text += JSON.stringify(node.props);
+        text += JSON.stringify(node.props) + ' ';
       }
       
       // Handle JSX elements
       if (node.type === 'element' && node.props) {
-        text += JSON.stringify(node.props);
+        text += JSON.stringify(node.props) + ' ';
       }
       
       // Handle MDX JSX elements
       if (node.name === 'Figure' && node.props) {
-        text += JSON.stringify(node.props);
+        text += JSON.stringify(node.props) + ' ';
       }
+      
+      // Extract any other string properties that might contain image paths
+      Object.keys(node).forEach(key => {
+        if (typeof node[key] === 'string' && node[key].includes('/img/')) {
+          text += node[key] + ' ';
+        }
+      });
       
       // Recursively process children
       if (node.children && Array.isArray(node.children)) {
@@ -86,9 +117,12 @@ const MediaDashboard = () => {
     try {
       const { client } = await import('../../../tina/__generated__/client');
       // Fetch all documents to scan for image usage using connection query
-      const docsResult = await client.queries.docConnection({ sort: 'title' });
+      const docsResult = await client.queries.docConnection({
+        sort: 'title',
+        first: 500  // Request more documents
+      });
       const docs = docsResult.data.docConnection.edges || [];
-      const usages = {};
+            const usages = {};
       mediaFiles.forEach(file => { usages[file.path] = []; });
       docs.forEach(edge => {
         const node = edge.node;
@@ -100,21 +134,40 @@ const MediaDashboard = () => {
         } else if (typeof node.body === 'string') {
           content = node.body;
         }
+        
+        // Fallback: try to get raw content if AST extraction seems incomplete
+        if (content.length < 100 && node.body) {
+          // Try to extract from raw body structure
+          const fallbackContent = JSON.stringify(node.body);
+          if (fallbackContent.length > content.length) {
+            content = fallbackContent;
+          }
+        }
+
         if (content && (relativePath.includes('figures.mdx') || relativePath.includes('assets.mdx'))) {
           console.log(`Main scan - ${relativePath}, content length: ${content.length}`);
         }
+
         mediaFiles.forEach(file => {
-          if (content.includes(file.filename) || content.includes(file.path)) {
+          // Simplified search pattern - only check for /img/ paths
+          const searchPattern = `/img/${file.path}`;
+          const isUsed = content.includes(searchPattern);
+          
+          if (isUsed) {
+            // Generate correct edit URL format: /admin/index.html#/collections/edit/doc/{path-without-extension}
+            const pathWithoutExtension = relativePath.replace(/\.mdx?$/, '');
+            const editUrl = `/admin#/collections/edit/doc/${pathWithoutExtension}`;
+            
             usages[file.path].push({
               title,
               relativePath,
               filename: node._sys.filename,
               lastModified: node.lastmod || node._sys?.lastModified,
-              editUrl: `/admin#/edit/${relativePath}`
+              editUrl
             });
           }
         });
-      });
+      });      
       setImageUsages(usages);
       return usages;
     } catch (err) {

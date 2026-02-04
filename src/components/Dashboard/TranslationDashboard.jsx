@@ -16,7 +16,8 @@ const TranslationDashboard = () => {
       
       // Get all docs from main collection
       const docsResult = await client.queries.docConnection({
-        sort: 'title'
+        sort: 'title',
+        first: 500  // Request more documents
       });
 
       const docs = docsResult.data.docConnection.edges || [];
@@ -60,6 +61,7 @@ const TranslationDashboard = () => {
           outdated: [],
           missing: [],
           upToDate: [],
+          orphaned: [],
           errors: [],
           total: 0
         };
@@ -107,7 +109,10 @@ const TranslationDashboard = () => {
               }
             } catch (e) {
               // Fallback: try querying all docs if i18n collection doesn't exist
-              const allDocsQuery = await client.queries.docConnection({ sort: 'title' });
+              const allDocsQuery = await client.queries.docConnection({ 
+                sort: 'title',
+                first: 500  // Request more documents
+              });
               const allDocs = allDocsQuery.data?.docConnection?.edges || [];
               const cleanFileName = fileName.replace(/^docs\//, '');
               // Filter for i18n documents in the correct language
@@ -186,6 +191,66 @@ const TranslationDashboard = () => {
         }
       }
 
+      // Process orphaned files (files in i18n that don't have corresponding source files)
+      for (const lang of availableLanguages) {
+        try {
+          const i18nQuery = await client.queries.i18nConnection({ sort: 'title' });
+          const i18nDocs = i18nQuery.data?.i18nConnection?.edges || [];
+          
+          // Get all i18n files for this language
+          const langFiles = i18nDocs.filter(edge => {
+            const docPath = edge.node._sys?.relativePath || edge.node._sys?.filename || '';
+            // Only consider docs with docusaurus-plugin-content-docs in the path after the lang prefix
+            if (!docPath.startsWith(`${lang}/`)) return false;
+            const afterLang = docPath.substring(lang.length + 1); // skip lang + '/'
+            return afterLang.startsWith('docusaurus-plugin-content-docs/');
+          });
+          
+          // Check each i18n file to see if it has a corresponding source file
+          for (const i18nEdge of langFiles) {
+            const i18nDoc = i18nEdge.node;
+            const i18nPath = i18nDoc._sys?.relativePath || i18nDoc._sys?.filename || '';
+            const i18nTitle = i18nDoc.title || i18nPath;
+            
+            // Extract the file path after the language prefix
+            const afterLang = i18nPath.substring(lang.length + 1); // skip lang + '/'
+            const cleanPath = afterLang.replace(/^docusaurus-plugin-content-docs\/current\//, '');
+            
+            // Check if there's a corresponding source file
+            let hasSourceFile = false;
+            for (const docEdge of filteredDocs) {
+              const sourceDoc = docEdge.node;
+              const sourcePath = sourceDoc._sys?.relativePath || sourceDoc._sys?.filename || '';
+              const cleanSourcePath = sourcePath.replace(/^docs\//, '');
+              const baseSourcePath = cleanSourcePath.replace(/\.(mdx|md)$/, '');
+              
+              if (
+                cleanPath === cleanSourcePath ||
+                cleanPath === baseSourcePath ||
+                cleanPath.endsWith(`/${cleanSourcePath}`) ||
+                cleanPath.endsWith(`/${baseSourcePath}`) ||
+                afterLang === cleanSourcePath ||
+                afterLang === baseSourcePath ||
+                (sourceDoc.title && i18nTitle && sourceDoc.title === i18nTitle)
+              ) {
+                hasSourceFile = true;
+                break;
+              }
+            }
+            
+            if (!hasSourceFile) {
+              results[lang].orphaned.push({
+                file: i18nPath,
+                translationLastMod: i18nDoc.lastmod || 'No date',
+                title: i18nTitle
+              });
+            }
+          }
+        } catch (error) {
+          console.warn(`Error detecting orphaned files for language ${lang}:`, error.message);
+        }
+      }
+
       setTranslationData(results);
     } catch (error) {
       console.error('Error scanning translations:', error);
@@ -214,6 +279,7 @@ const TranslationDashboard = () => {
       case 'outdated': return '#ff4757';
       case 'missing': return '#ff6b6b';
       case 'upToDate': return '#2ed573';
+      case 'orphaned': return '#9c88ff';
       default: return '#747d8c';
     }
   };
@@ -228,6 +294,7 @@ const TranslationDashboard = () => {
         missing: data.missing.length,
         outdated: data.outdated.length,
         upToDate: data.upToDate.length,
+        orphaned: data.orphaned.length,
         errors: data.errors.length
       };
       return acc;
@@ -462,6 +529,9 @@ const TranslationDashboard = () => {
                 <div style={{ color: getStatusColor('missing') }}>
                   ❌ Missing: <strong>{counts.missing}</strong>
                 </div>
+                <div style={{ color: getStatusColor('orphaned') }}>
+                  🔗 Orphan topics: <strong>{counts.orphaned}</strong>
+                </div>
                 <div style={{ marginTop: '8px', paddingTop: '8px', borderTop: '1px solid #eee' }}>
                   📊 Total: <strong>{counts.total}</strong> files
                 </div>
@@ -585,6 +655,44 @@ const TranslationDashboard = () => {
                       </div>
                       <div style={{ fontSize: '12px', color: '#666' }}>
                         {formatDate(item.translationLastMod)}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Orphaned Files */}
+            {data.orphaned.length > 0 && (
+              <div style={{ marginBottom: '25px' }}>
+                <h4 style={{ color: '#9c88ff', marginBottom: '10px' }}>
+                  🔗 Orphan Topics ({data.orphaned.length})
+                </h4>
+                <div style={{
+                  backgroundColor: '#f4f2ff',
+                  border: '1px solid #d4c5ff',
+                  borderRadius: '4px',
+                  padding: '15px'
+                }}>
+                  {data.orphaned.map((item, index) => (
+                    <div key={index} style={{
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      alignItems: 'center',
+                      padding: '8px 0',
+                      borderBottom: index < data.orphaned.length - 1 ? '1px solid #d4c5ff' : 'none'
+                    }}>
+                      <div>
+                        <strong>{item.title}</strong>
+                        <div style={{ fontSize: '12px', color: '#666' }}>
+                          {item.file}
+                        </div>
+                        <div style={{ fontSize: '11px', color: '#8b7dd6' }}>
+                          Translation exists but no source file found
+                        </div>
+                      </div>
+                      <div style={{ fontSize: '12px', color: '#666' }}>
+                        Translation: {formatDate(item.translationLastMod)}
                       </div>
                     </div>
                   ))}

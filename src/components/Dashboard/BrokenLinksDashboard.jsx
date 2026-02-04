@@ -165,7 +165,8 @@ const BrokenLinksDashboard = () => {
       
       // Fetch all docs from the main collection
       const docsResult = await client.queries.docConnection({
-        sort: 'title'
+        sort: 'title',
+        first: 500  // Request more documents
       });
       
       const docs = docsResult.data.docConnection.edges || [];

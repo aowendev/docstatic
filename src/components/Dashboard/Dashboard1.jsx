@@ -16,10 +16,11 @@ const Dashboard1 = () => {
     
     try {
       const { client } = await import('../../../tina/__generated__/client');
-      
+     
       // Fetch all docs from main collection
       const docsResult = await client.queries.docConnection({
-        sort: 'title'
+        sort: 'title',
+        first: 500  // Request more documents
       });
       
       const docs = docsResult.data.docConnection.edges || [];
@@ -62,11 +63,15 @@ const Dashboard1 = () => {
       const recentActivity = docs
         .filter(edge => {
           const node = edge.node;
-          if (!node.lastmod) return false; // Only include documents with a lastmod field
+          const relativePath = node._sys.relativePath;
           
+          // Skip documents without lastmod field
+          if (!node.lastmod) return false;
+          
+          // Apply time filter if specified
           if (timeCutoff) {
             const docDate = new Date(node.lastmod);
-            return docDate >= timeCutoff;
+            if (docDate < timeCutoff) return false;
           }
           
           return true;
@@ -291,7 +296,7 @@ const Dashboard1 = () => {
       <div style={{ marginBottom: '24px' }}>
         <h3 style={{ margin: '0 0 12px 0', fontSize: '16px', color: '#24292e' }}>
           📝 Documentation ({contentData.docs.total} topics)
-        </h3>
+        </h3>       
         <div style={{ 
           display: 'grid', 
           gridTemplateColumns: 'repeat(auto-fit, minmax(120px, 1fr))', 
