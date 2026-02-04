@@ -62,7 +62,7 @@ const MediaDashboard = () => {
       // Handle MDX JSX elements
       if (node.name === 'Figure' && node.props) {
         text += JSON.stringify(node.props);
-      }
+        }
       
       // Recursively process children
       if (node.children && Array.isArray(node.children)) {
@@ -86,7 +86,10 @@ const MediaDashboard = () => {
     try {
       const { client } = await import('../../../tina/__generated__/client');
       // Fetch all documents to scan for image usage using connection query
-      const docsResult = await client.queries.docConnection({ sort: 'title' });
+      const docsResult = await client.queries.docConnection({
+        sort: 'title',
+        first: 500  // Request more documents
+      });
       const docs = docsResult.data.docConnection.edges || [];
       const usages = {};
       mediaFiles.forEach(file => { usages[file.path] = []; });
@@ -110,12 +113,12 @@ const MediaDashboard = () => {
               relativePath,
               filename: node._sys.filename,
               lastModified: node.lastmod || node._sys?.lastModified,
-              editUrl: `/admin#/edit/${relativePath}`
+              editUrl: `/admin/#/collections/edit/doc/${relativePath.replace(/\.[^/.]+$/, '')}`
             });
           }
         });
       });
-      setImageUsages(usages);
+            setImageUsages(usages);
       return usages;
     } catch (err) {
       console.error('Error scanning documents for image usage:', err);
