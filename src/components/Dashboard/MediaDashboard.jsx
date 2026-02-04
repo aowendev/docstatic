@@ -1,5 +1,15 @@
 import React, { useState, useEffect } from 'react';
 
+/**
+ * MediaDashboard component for analyzing image usage across documents
+ * Handles both local development (TinaCMS GraphQL server) and cloud environments (TinaCloud)
+ * 
+ * Key improvements for cloud compatibility:
+ * - Robust AST content extraction that handles different content structures
+ * - Multiple fallback strategies for content parsing
+ * - Enhanced pattern matching for image references
+ * - Environment detection and debugging
+ */
 const MediaDashboard = () => {
   const [mediaData, setMediaData] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -38,18 +48,26 @@ const MediaDashboard = () => {
     
     let text = '';
     
+    // Handle simple string nodes
     if (typeof node === 'string') {
       return node;
     }
     
+    // Handle array of nodes
+    if (Array.isArray(node)) {
+      for (const item of node) {
+        text += extractTextFromAST(item);
+      }
+      return text;
+    }
+    
     if (typeof node === 'object') {
-      // Handle different node types
-      if (node.type === 'text' && node.value) {
-        text += node.value + ' ';
+      // Extract text content from various node formats
+      if (node.text && typeof node.text === 'string') {
+        text += node.text + ' ';
       }
       
-      // Handle raw string content
-      if (typeof node.value === 'string') {
+      if (node.value && typeof node.value === 'string') {
         text += node.value + ' ';
       }
       
@@ -58,40 +76,58 @@ const MediaDashboard = () => {
         text += node.url + ' ';
       }
       
-      // Handle MDX elements with src/href attributes
-      if (node.type === 'element' || node.type === 'mdxJsxFlowElement' || node.type === 'mdxJsxTextElement') {
-        // Extract attributes that might contain image paths
-        if (node.attributes && Array.isArray(node.attributes)) {
-          node.attributes.forEach(attr => {
-            if (attr.value && typeof attr.value === 'string') {
+      // Handle Figure components specifically (common pattern in docStatic)
+      if ((node.type === 'mdxJsxFlowElement' || node.type === 'mdxJsxTextElement' || node.name === 'Figure') && 
+          (node.props || node.attributes)) {
+        const propsToCheck = node.props || {};
+        const attrsToCheck = node.attributes || [];
+        
+        // Check props for img attribute
+        if (propsToCheck.img && typeof propsToCheck.img === 'string') {
+          text += propsToCheck.img + ' ';
+        }
+        
+        // Check attributes array format
+        attrsToCheck.forEach(attr => {
+          if (attr.name === 'img' && attr.value) {
+            if (typeof attr.value === 'string') {
               text += attr.value + ' ';
-            }
-            if (attr.value && attr.value.value) {
+            } else if (attr.value.value && typeof attr.value.value === 'string') {
               text += attr.value.value + ' ';
             }
-          });
+          }
+        });
+        
+        // Fallback: stringify props/attributes and search for /img/ patterns
+        const propsStr = JSON.stringify(propsToCheck);
+        const imgMatches = propsStr.match(/\/img\/[^"'\s)]+/g);
+        if (imgMatches) {
+          imgMatches.forEach(match => text += match + ' ');
         }
       }
       
-      // Handle nodes with props (like Figure components)
-      if (node.props) {
-        text += JSON.stringify(node.props) + ' ';
+      // Handle other MDX elements with src/href attributes
+      if (node.type && (node.type.includes('mdx') || node.type === 'element')) {
+        const attrs = node.attributes || [];
+        attrs.forEach(attr => {
+          if ((attr.name === 'src' || attr.name === 'href') && attr.value) {
+            if (typeof attr.value === 'string') {
+              text += attr.value + ' ';
+            } else if (attr.value.value && typeof attr.value.value === 'string') {
+              text += attr.value.value + ' ';
+            }
+          }
+        });
       }
       
-      // Handle JSX elements
-      if (node.type === 'element' && node.props) {
-        text += JSON.stringify(node.props) + ' ';
-      }
-      
-      // Handle MDX JSX elements
-      if (node.name === 'Figure' && node.props) {
-        text += JSON.stringify(node.props) + ' ';
-      }
-      
-      // Extract any other string properties that might contain image paths
+      // Deep search for image paths in any string property
       Object.keys(node).forEach(key => {
-        if (typeof node[key] === 'string' && node[key].includes('/img/')) {
-          text += node[key] + ' ';
+        if (typeof node[key] === 'string') {
+          // Look for /img/ patterns specifically
+          const imgMatches = node[key].match(/\/img\/[^"'\s)]+/g);
+          if (imgMatches) {
+            imgMatches.forEach(match => text += match + ' ');
+          }
         }
       });
       
@@ -102,10 +138,17 @@ const MediaDashboard = () => {
         }
       }
       
-      // Handle other array-like structures
-      if (Array.isArray(node)) {
-        for (const item of node) {
-          text += extractTextFromAST(item);
+      // Fallback: if this looks like a complex object that might contain image references,
+      // stringify and search for image patterns
+      if (!text && (node.type || node.name || Object.keys(node).length > 3)) {
+        try {
+          const stringified = JSON.stringify(node);
+          const imgMatches = stringified.match(/\/img\/[^"'\s)]+/g);
+          if (imgMatches) {
+            imgMatches.forEach(match => text += match + ' ');
+          }
+        } catch (err) {
+          // Ignore circular reference errors
         }
       }
     }
@@ -122,39 +165,83 @@ const MediaDashboard = () => {
         first: 500  // Request more documents
       });
       const docs = docsResult.data.docConnection.edges || [];
-            const usages = {};
+      
+      const usages = {};
       mediaFiles.forEach(file => { usages[file.path] = []; });
+      
       docs.forEach(edge => {
         const node = edge.node;
         const title = node.title || node._sys.filename;
         const relativePath = node._sys.relativePath;
         let content = '';
+        
+        // Multi-strategy content extraction to handle different environments
         if (node.body && typeof node.body === 'object') {
+          // Strategy 1: Use our improved AST extraction
           content = extractTextFromAST(node.body);
         } else if (typeof node.body === 'string') {
+          // Strategy 2: Direct string content
           content = node.body;
         }
         
-        // Fallback: try to get raw content if AST extraction seems incomplete
-        if (content.length < 100 && node.body) {
-          // Try to extract from raw body structure
-          const fallbackContent = JSON.stringify(node.body);
-          if (fallbackContent.length > content.length) {
-            content = fallbackContent;
+        // Strategy 3: If content seems incomplete, try fallback extraction
+        if (content.length < 50 && node.body) {
+          try {
+            const fallbackContent = JSON.stringify(node.body);
+            // Look specifically for image patterns in the stringified content
+            const imgMatches = fallbackContent.match(/\/img\/[^"'\s)]+/g);
+            if (imgMatches && imgMatches.length > 0) {
+              content += ' ' + imgMatches.join(' ');
+            }
+            // If we found image patterns but still have short content, use full stringified version
+            if (imgMatches && content.length < 200) {
+              content = fallbackContent;
+            }
+          } catch (err) {
+            console.warn('Error with fallback content extraction:', err);
           }
         }
 
+        // Debug logging for problematic files
         if (content && (relativePath.includes('figures.mdx') || relativePath.includes('assets.mdx'))) {
-          console.log(`Main scan - ${relativePath}, content length: ${content.length}`);
+          console.log(`Image scan - ${relativePath}:`, {
+            contentLength: content.length,
+            bodyType: typeof node.body,
+            hasChildren: node.body?.children ? node.body.children.length : 'none',
+            extractedContentSample: content.substring(0, 200) + '...'
+          });
         }
 
+        // Search for image usage with multiple patterns
         mediaFiles.forEach(file => {
-          // Simplified search pattern - only check for /img/ paths
-          const searchPattern = `/img/${file.path}`;
-          const isUsed = content.includes(searchPattern);
+          let isUsed = false;
+          
+          // Primary search: exact /img/ path
+          const exactPattern = `/img/${file.path}`;
+          if (content.includes(exactPattern)) {
+            isUsed = true;
+          }
+          
+          // Secondary search: handle potential path variations and URL encoding
+          if (!isUsed) {
+            const filename = file.filename;
+            const pathVariations = [
+              file.path,
+              encodeURIComponent(file.path),
+              filename,
+              encodeURIComponent(filename)
+            ];
+            
+            for (const variation of pathVariations) {
+              if (content.includes(variation)) {
+                isUsed = true;
+                break;
+              }
+            }
+          }
           
           if (isUsed) {
-            // Generate correct edit URL format: /admin/index.html#/collections/edit/doc/{path-without-extension}
+            // Generate correct edit URL format
             const pathWithoutExtension = relativePath.replace(/\.mdx?$/, '');
             const editUrl = `/admin#/collections/edit/doc/${pathWithoutExtension}`;
             
@@ -167,7 +254,8 @@ const MediaDashboard = () => {
             });
           }
         });
-      });      
+      });
+      
       setImageUsages(usages);
       return usages;
     } catch (err) {
@@ -181,9 +269,19 @@ const MediaDashboard = () => {
     setError(null);
     try {
       const { client } = await import('../../../tina/__generated__/client');
+      
+      // Detect environment for debugging
+      const isLocalDev = typeof window !== 'undefined' && 
+                        (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1');
+      const clientId = process.env.NEXT_PUBLIC_TINA_CLIENT_ID;
+      const environment = isLocalDev ? 'local' : (clientId ? 'cloud' : 'unknown');
+      
+      console.log('MediaDashboard Environment:', environment);
+      
       // Query Tina's MediaCollection (reuse/media/index.json)
       const mediaResult = await client.queries.media({ relativePath: "index.json" });
       const mediaList = (mediaResult?.data?.media?.media) || [];
+      
       // Add type, extension, url, and name fields for UI compatibility
       const files = mediaList.map((file) => {
         const ext = getExtension(file.filename);
@@ -200,6 +298,7 @@ const MediaDashboard = () => {
           dimensions: file.dimensions || '',
         };
       });
+      
       setMediaFiles(files);
       const mediaStats = {
         total: files.length,
@@ -210,6 +309,7 @@ const MediaDashboard = () => {
         files,
         stats: mediaStats
       });
+      
       await scanDocumentsForImageUsage(files);
     } catch (err) {
       console.error('Error fetching media files:', err);
@@ -260,6 +360,11 @@ const MediaDashboard = () => {
       year: 'numeric'
     });
   };
+
+  // Optional: Auto-load on mount (commented out to preserve current manual-load behavior)
+  // useEffect(() => {
+  //   fetchMediaFiles();
+  // }, []);
 
   // Always show the heading and button row, but if not loaded, only show the Load button (no dashboard content)
   if (!mediaData && !loading && !error) {
