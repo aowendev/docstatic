@@ -202,6 +202,18 @@ const MediaDashboard = () => {
           }
         }
 
+        // Strategy 4: Additional markdown image pattern extraction
+        // Look for markdown image syntax: ![alt text](/img/path)
+        const markdownImageRegex = /!\[[^\]]*\]\(([^)]+)\)/g;
+        let markdownMatch;
+        let markdownImages = [];
+        while ((markdownMatch = markdownImageRegex.exec(content)) !== null) {
+          markdownImages.push(markdownMatch[1]);
+        }
+        if (markdownImages.length > 0) {
+          content += ' ' + markdownImages.join(' ');
+        }
+
         // Debug logging for problematic files
         if (content && (relativePath.includes('figures.mdx') || relativePath.includes('assets.mdx'))) {
           console.log(`Image scan - ${relativePath}:`, {
@@ -215,29 +227,51 @@ const MediaDashboard = () => {
         // Search for image usage with multiple patterns
         mediaFiles.forEach(file => {
           let isUsed = false;
+          let matchedPattern = '';
           
           // Primary search: exact /img/ path
           const exactPattern = `/img/${file.path}`;
           if (content.includes(exactPattern)) {
             isUsed = true;
+            matchedPattern = exactPattern;
           }
           
           // Secondary search: handle potential path variations and URL encoding
           if (!isUsed) {
             const filename = file.filename;
             const pathVariations = [
+              `/img/${file.path}`,
+              `/img/${filename}`,
               file.path,
               encodeURIComponent(file.path),
               filename,
-              encodeURIComponent(filename)
+              encodeURIComponent(filename),
+              // Handle case where path might not include directory
+              file.path.includes('/') ? file.path.split('/').pop() : file.path
             ];
             
             for (const variation of pathVariations) {
               if (content.includes(variation)) {
                 isUsed = true;
+                matchedPattern = variation;
                 break;
               }
             }
+          }
+          
+          // Special debug logging for example.svg
+          if (file.filename === 'example.svg') {
+            console.log(`Debug example.svg search:`, {
+              filename: file.filename,
+              filePath: file.path,
+              searchPattern: exactPattern,
+              isUsed,
+              matchedPattern,
+              contentLength: content.length,
+              contentContainsExact: content.includes(exactPattern),
+              contentSample: content.substring(0, 500),
+              relativePathContext: relativePath
+            });
           }
           
           if (isUsed) {
