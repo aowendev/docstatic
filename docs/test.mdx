@@ -1,32 +1,35 @@
 ---
-lastmod: "2026-02-11T12:37:54.741Z"
+lastmod: "2026-02-11T21:03:22.546Z"
 modifiedBy: "aowendev <aowen@translationcommons.org>"
-title: test
-draft: true
+title: Check list test
+draft: false
 review: false
 translate: false
 approved: false
 published: false
-unlisted: false
+unlisted: true
 ---
 
-<Passthrough
-  summary="test"
-  type="markdown"
-  string="`- [X] checked
-^- [ ] not check, indented
-^^- [x] checked, indented
-^- [ ] not checked`
+## Passthrough component
 
-Plain text"
+<Passthrough
+  summary="Check List"
+  string="- [X] 1
+  ^- [X] 2
+  ^^- [X] 3
+  - [ ] 4"
 />
 
-- [X] checked
-  - [ ] not check, indented
-    - [x] checked, indented
-  - [ ] not checked`
+## GFM list
+- [X] 1
+  - [X] 2
+    - [X] 3
+- [ ] 4
 
-* List
-  * list
-    * list
-  * list
+
+## Bullet list
+
+* 1
+  * 2
+    * 3
+* 4

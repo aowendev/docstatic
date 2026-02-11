@@ -28,23 +28,36 @@ const Passthrough = ({ summary, string, type }) => {
     const CustomInput = ({ disabled, style, ...props }) => {
       // Remove disabled attribute from task list checkboxes and add readOnly
       if (props.type === "checkbox") {
-        return <input {...props} readOnly style={{ ...style }} />;
+        return <input {...props} readOnly />;
       }
-      return <input disabled={disabled} style={style} {...props} />;
+      return <input disabled={disabled} {...props} />;
     };
 
-    // Custom ul renderer - removes default padding/margins
-    const CustomUl = ({ className, children, style, ...props }) => {
+    // Custom ul renderer with consistent nesting indentation
+    const CustomUl = ({ className, children, ...props }) => {
       const isTaskList = className?.includes('contains-task-list');
       
       if (isTaskList) {
         return (
           <ul 
             className={className} 
-            style={{ 
-              listStyle: 'none',
-              paddingLeft: 0,
-              marginLeft: 0
+            style={{marginLeft: '0', paddingLeft: '0'}} // Reset default ul padding
+            ref={(el) => {
+              if (el) {
+                // Count the actual nesting level by checking parent ul elements
+                let depth = 0;
+                let parent = el.parentElement;
+                while (parent) {
+                  if (parent.tagName === 'UL' && parent.classList?.contains('contains-task-list')) {
+                    depth++;
+                  }
+                  parent = parent.parentElement;
+                }
+                // Add padding for nested levels (depth > 0)
+                if (depth > 0) {
+                  el.style.paddingLeft = `2em`;
+                }
+              }
             }}
             {...props}
           >
@@ -54,26 +67,22 @@ const Passthrough = ({ summary, string, type }) => {
       }
       
       return (
-        <ul className={className} style={style} {...props}>
+        <ul className={className} {...props}>
           {children}
         </ul>
       );
     };
 
-    // Custom li renderer - adds only the indentation we want  
-    const CustomLi = ({ className, children, style, ...props }) => {
+    // Custom li renderer with proper task list styling
+    const CustomLi = ({ className, children, ...props }) => {
       const isTaskListItem = className?.includes('task-list-item');
-      // Check if this is a nested task list by looking at parent structure
-      const isNested = props['data-nested'] || false;
       
       return (
         <li 
           className={className}
           style={isTaskListItem ? { 
             listStyle: 'none',
-            paddingLeft: 0,
-            marginLeft: 0
-          } : {}}
+          } : undefined}
           {...props}
         >
           {children}
@@ -83,13 +92,8 @@ const Passthrough = ({ summary, string, type }) => {
 
   if (!string) return null;
   
-  // Extract content between backticks and process indentation markers
-  const backtickContent = string.match(/`([^`]*)`/)?.[1] || '';
-  const remainingContent = string.replace(/`[^`]*`/, '').trim();
-  
-  // Convert ^ characters to spaces for indentation (each ^ = 2 spaces)
-  const processedBacktickContent = backtickContent.replace(/\^/g, "  "); 
-  const processedString = processedBacktickContent + (remainingContent ? '\n\n' + remainingContent : '');
+  // Process ^ symbols for indentation (each ^ = 2 spaces)
+  const processedString = string.replace(/\^/g, "  ");
 
   if (type === "html") {
     return (
