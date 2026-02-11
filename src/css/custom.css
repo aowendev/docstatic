@@ -782,3 +782,8 @@ main s,
 .contains-task-list .task-list-item input[type="checkbox"] {
   accent-color: var(--ifm-color-primary) !important;
 }
+
+/* Static CSS-only task list nesting indentation */
+.contains-task-list .contains-task-list {
+  padding-left: 2em !important;
+}

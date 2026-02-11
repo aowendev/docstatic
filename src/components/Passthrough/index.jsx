@@ -33,7 +33,7 @@ const Passthrough = ({ summary, string, type }) => {
       return <input disabled={disabled} {...props} />;
     };
 
-    // Custom ul renderer with consistent nesting indentation
+    // Custom ul renderer with static CSS-only indentation
     const CustomUl = ({ className, children, ...props }) => {
       const isTaskList = className?.includes('contains-task-list');
       
@@ -41,23 +41,10 @@ const Passthrough = ({ summary, string, type }) => {
         return (
           <ul 
             className={className} 
-            style={{marginLeft: '0', paddingLeft: '0'}} // Reset default ul padding
-            ref={(el) => {
-              if (el) {
-                // Count the actual nesting level by checking parent ul elements
-                let depth = 0;
-                let parent = el.parentElement;
-                while (parent) {
-                  if (parent.tagName === 'UL' && parent.classList?.contains('contains-task-list')) {
-                    depth++;
-                  }
-                  parent = parent.parentElement;
-                }
-                // Add padding for nested levels (depth > 0)
-                if (depth > 0) {
-                  el.style.paddingLeft = `2em`;
-                }
-              }
+            style={{
+              marginLeft: '0', 
+              paddingLeft: '0',
+              listStyle: 'none'
             }}
             {...props}
           >
