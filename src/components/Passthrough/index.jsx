@@ -11,6 +11,7 @@ import rehypeKatex from "rehype-katex";
 import rehypeRaw from "rehype-raw";
 import remarkBreaks from "remark-breaks";
 import remarkMath from "remark-math";
+import remarkGfm from "remark-gfm";
 import "katex/dist/katex.min.css"; // Import KaTeX CSS
 
 // Import available components that can be used in JSX
@@ -23,16 +24,59 @@ import ColorGenerator from "@site/src/components/ColorGenerator";
  * @param {string} type - The content type: 'jsx', 'html', 'markdown', 'code', or 'auto' (default)
  */
 const Passthrough = ({ summary, string, type }) => {
+    // Custom input renderer to make task list checkboxes interactive
+    const CustomInput = ({ disabled, ...props }) => {
+      // Remove disabled attribute from task list checkboxes
+      if (props.type === "checkbox") {
+        return <input {...props} />;
+      }
+      return <input disabled={disabled} {...props} />;
+    };
+
+    // Custom ul renderer to handle task lists
+    const CustomUl = ({ className, children, ...props }) => {
+      const isTaskList = className?.includes('contains-task-list');
+      return (
+        <ul 
+          className={className} 
+          style={isTaskList ? { listStyle: 'none', paddingLeft: 0 } : {}}
+          {...props}
+        >
+          {children}
+        </ul>
+      );
+    };
+
+    // Custom li renderer to handle task list items
+    const CustomLi = ({ className, children, ...props }) => {
+      const isTaskListItem = className?.includes('task-list-item');
+      return (
+        <li 
+          className={className}
+          style={isTaskListItem ? { listStyle: 'none' } : {}}
+          {...props}
+        >
+          {children}
+        </li>
+      );
+    };
+
   if (!string) return null;
-  const processedString = string.replace(/\\n/g, "\n");
+  
+  // Process backslashes as line breaks while preserving indentation
+  const processedString = string
+    .replace(/\\n/g, "\n") // handle escaped newlines  
+    .replace(/\\(\s*)/g, "\n$1") // treat backslash as line break but preserve following whitespace
+    .trim(); // remove leading/trailing whitespace
 
   if (type === "html") {
     return (
       <Markdown
-        remarkPlugins={[remarkMath, remarkBreaks]}
+        remarkPlugins={[remarkMath, remarkBreaks, remarkGfm]}
         rehypePlugins={[rehypeKatex, rehypeRaw]}
         components={{
           p: ({ children, ...props }) => <span {...props}>{children}</span>,
+          input: CustomInput,
         }}
       >
         {processedString}
@@ -57,10 +101,19 @@ const Passthrough = ({ summary, string, type }) => {
   // Default to markdown
   return (
     <Markdown
-      remarkPlugins={[remarkMath, remarkBreaks]}
+      remarkPlugins={[remarkMath, remarkBreaks, remarkGfm]}
       rehypePlugins={[rehypeKatex]}
       components={{
-        p: ({ children, ...props }) => <span {...props}>{children}</span>,
+        p: ({ children, ...props }) => {
+          // Check if this paragraph contains a task list checkbox
+          const hasCheckbox = React.Children.toArray(children).some(
+            child => child?.type === 'input' && child?.props?.type === 'checkbox'
+          );
+          // If it contains a checkbox, render as span to avoid breaking task list structure
+          return hasCheckbox ? <span {...props}>{children}</span> : <p {...props}>{children}</p>;
+        },
+        ul: CustomUl,
+        li: CustomLi,
         br: () => <br />,
         strong: ({ children, ...props }) => (
           <strong {...props}>{children}</strong>
@@ -68,9 +121,7 @@ const Passthrough = ({ summary, string, type }) => {
         em: ({ children, ...props }) => <em {...props}>{children}</em>,
         code: ({ children, ...props }) => <code {...props}>{children}</code>,
         a: ({ children, ...props }) => <a {...props}>{children}</a>,
-        ul: ({ children, ...props }) => <ul {...props}>{children}</ul>,
-        ol: ({ children, ...props }) => <ol {...props}>{children}</ol>,
-        li: ({ children, ...props }) => <li {...props}>{children}</li>,
+        input: CustomInput,
         h1: ({ children, ...props }) => <h1 {...props}>{children}</h1>,
         h2: ({ children, ...props }) => <h2 {...props}>{children}</h2>,
         h3: ({ children, ...props }) => <h3 {...props}>{children}</h3>,
