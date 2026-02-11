@@ -777,3 +777,9 @@ main s,
   background: transparent;
   color: inherit;
 }
+
+/* Task list checkbox styling - interactive checkboxes */
+.contains-task-list .task-list-item input[type="checkbox"] {
+  accent-color: var(--ifm-color-primary) !important;
+  margin-right: 0.5rem !important;
+}
