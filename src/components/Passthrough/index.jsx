@@ -26,20 +26,20 @@ import ColorGenerator from "@site/src/components/ColorGenerator";
 const Passthrough = ({ summary, string, type }) => {
     // Custom input renderer to make task list checkboxes interactive
     const CustomInput = ({ disabled, ...props }) => {
-      // Remove disabled attribute from task list checkboxes
+      // Remove disabled attribute from task list checkboxes and add readOnly
       if (props.type === "checkbox") {
-        return <input {...props} />;
+        return <input {...props} readOnly />;
       }
       return <input disabled={disabled} {...props} />;
     };
 
-    // Custom ul renderer to handle task lists
+    // Custom ul renderer to handle task lists without interfering with structure
     const CustomUl = ({ className, children, ...props }) => {
       const isTaskList = className?.includes('contains-task-list');
       return (
         <ul 
           className={className} 
-          style={isTaskList ? { listStyle: 'none', paddingLeft: 0 } : {}}
+          style={isTaskList ? { listStyle: 'none' } : {}}
           {...props}
         >
           {children}
@@ -47,7 +47,7 @@ const Passthrough = ({ summary, string, type }) => {
       );
     };
 
-    // Custom li renderer to handle task list items
+    // Custom li renderer to handle task list items without interfering with structure
     const CustomLi = ({ className, children, ...props }) => {
       const isTaskListItem = className?.includes('task-list-item');
       return (
@@ -63,11 +63,13 @@ const Passthrough = ({ summary, string, type }) => {
 
   if (!string) return null;
   
-  // Process backslashes as line breaks while preserving indentation
-  const processedString = string
-    .replace(/\\n/g, "\n") // handle escaped newlines  
-    .replace(/\\(\s*)/g, "\n$1") // treat backslash as line break but preserve following whitespace
-    .trim(); // remove leading/trailing whitespace
+  // Extract content between backticks and process indentation markers
+  const backtickContent = string.match(/`([^`]*)`/)?.[1] || '';
+  const remainingContent = string.replace(/`[^`]*`/, '').trim();
+  
+  // Convert ^ characters to spaces for indentation (each ^ = 2 spaces)
+  const processedBacktickContent = backtickContent.replace(/\^/g, "  "); 
+  const processedString = processedBacktickContent + (remainingContent ? '\n\n' + remainingContent : '');
 
   if (type === "html") {
     return (
