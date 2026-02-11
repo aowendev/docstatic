@@ -25,35 +25,55 @@ import ColorGenerator from "@site/src/components/ColorGenerator";
  */
 const Passthrough = ({ summary, string, type }) => {
     // Custom input renderer to make task list checkboxes interactive
-    const CustomInput = ({ disabled, ...props }) => {
+    const CustomInput = ({ disabled, style, ...props }) => {
       // Remove disabled attribute from task list checkboxes and add readOnly
       if (props.type === "checkbox") {
-        return <input {...props} readOnly />;
+        return <input {...props} readOnly style={{ marginRight: '0.5rem', ...style }} />;
       }
-      return <input disabled={disabled} {...props} />;
+      return <input disabled={disabled} style={style} {...props} />;
     };
 
-    // Custom ul renderer to handle task lists without interfering with structure
-    const CustomUl = ({ className, children, ...props }) => {
+    // Custom ul renderer - removes default padding/margins
+    const CustomUl = ({ className, children, style, ...props }) => {
       const isTaskList = className?.includes('contains-task-list');
+      
+      if (isTaskList) {
+        return (
+          <ul 
+            className={className} 
+            style={{ 
+              listStyle: 'none',
+              paddingLeft: 0,
+              marginLeft: 0
+            }}
+            {...props}
+          >
+            {children}
+          </ul>
+        );
+      }
+      
       return (
-        <ul 
-          className={className} 
-          style={isTaskList ? { listStyle: 'none' } : {}}
-          {...props}
-        >
+        <ul className={className} style={style} {...props}>
           {children}
         </ul>
       );
     };
 
-    // Custom li renderer to handle task list items without interfering with structure
-    const CustomLi = ({ className, children, ...props }) => {
+    // Custom li renderer - adds only the indentation we want  
+    const CustomLi = ({ className, children, style, ...props }) => {
       const isTaskListItem = className?.includes('task-list-item');
+      // Check if this is a nested task list by looking at parent structure
+      const isNested = props['data-nested'] || false;
+      
       return (
         <li 
           className={className}
-          style={isTaskListItem ? { listStyle: 'none' } : {}}
+          style={isTaskListItem ? { 
+            listStyle: 'none',
+            paddingLeft: 0,
+            marginLeft: 0
+          } : {}}
           {...props}
         >
           {children}
