@@ -28,7 +28,7 @@ const Passthrough = ({ summary, string, type }) => {
     const CustomInput = ({ disabled, style, ...props }) => {
       // Remove disabled attribute from task list checkboxes and add readOnly
       if (props.type === "checkbox") {
-        return <input {...props} readOnly style={{ marginRight: '0.5rem', ...style }} />;
+        return <input {...props} readOnly style={{ ...style }} />;
       }
       return <input disabled={disabled} style={style} {...props} />;
     };
