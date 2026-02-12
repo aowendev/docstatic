@@ -778,12 +778,43 @@ main s,
   color: inherit;
 }
 
-/* Task list checkbox styling - interactive checkboxes */
-.contains-task-list .task-list-item input[type="checkbox"] {
-  accent-color: var(--ifm-color-primary) !important;
+/* Hanging indent for task list items to align wrapped text */
+.passthrough-content li.task-list-item {
+  padding-left: 2em;
+  text-indent: -2em;
 }
 
-/* Static CSS-only task list nesting indentation */
-.contains-task-list .contains-task-list {
-  padding-left: 2em !important;
+/* Task list checkbox styling with primary color (static, non-interactive) */
+.contains-task-list input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 1.2em;
+  height: 1.2em;
+  border: 2px solid var(--ifm-color-primary);
+  border-radius: 3px;
+  outline: none;
+  cursor: default;
+  position: relative;
+  margin-right: 0.5em;
+  vertical-align: middle;
+  background-color: transparent;
+  pointer-events: none;
+}
+
+.contains-task-list input[type="checkbox"]:checked {
+  background-color: var(--ifm-color-primary);
+  border-color: var(--ifm-color-primary);
+}
+
+.contains-task-list input[type="checkbox"]:checked::after {
+  content: "";
+  position: absolute;
+  left: 0.2em;
+  top: 0.05em;
+  width: 0.35em;
+  height: 0.65em;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
 }
