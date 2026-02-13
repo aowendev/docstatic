@@ -37,6 +37,11 @@
   resolved "https://registry.yarnpkg.com/@algolia/client-common/-/client-common-5.47.0.tgz#de05deb8c058e9f125eea51de317ab1406247642"
   integrity sha512-Wzg5Me2FqgRDj0lFuPWFK05UOWccSMsIBL2YqmTmaOzxVlLZ+oUqvKbsUSOE5ud8Fo1JU7JyiLmEXBtgDKzTwg==
 
+"@algolia/client-common@5.48.0":
+  version "5.48.0"
+  resolved "https://registry.yarnpkg.com/@algolia/client-common/-/client-common-5.48.0.tgz#fb1009f6a0e5afdf7a37d0c50c0b6394f94bf81a"
+  integrity sha512-7H3DgRyi7UByScc0wz7EMrhgNl7fKPDjKX9OcWixLwCj7yrRXDSIzwunykuYUUO7V7HD4s319e15FlJ9CQIIFQ==
+
 "@algolia/client-insights@5.47.0":
   version "5.47.0"
   resolved "https://registry.yarnpkg.com/@algolia/client-insights/-/client-insights-5.47.0.tgz#9adbc82f6bfa896266559843fc74eddaaf9bff15"
@@ -67,7 +72,7 @@
     "@algolia/requester-fetch" "5.47.0"
     "@algolia/requester-node-http" "5.47.0"
 
-"@algolia/client-search@5.47.0", "@algolia/client-search@^5.47.0":
+"@algolia/client-search@5.47.0":
   version "5.47.0"
   resolved "https://registry.yarnpkg.com/@algolia/client-search/-/client-search-5.47.0.tgz#b74b948adbd2908cb70a73a17e8a23d7e5ae439c"
   integrity sha512-b5hlU69CuhnS2Rqgsz7uSW0t4VqrLMLTPbUpEl0QVz56rsSwr1Sugyogrjb493sWDA+XU1FU5m9eB8uH7MoI0g==
@@ -76,6 +81,16 @@
     "@algolia/requester-browser-xhr" "5.47.0"
     "@algolia/requester-fetch" "5.47.0"
     "@algolia/requester-node-http" "5.47.0"
+
+"@algolia/client-search@^5.48.0":
+  version "5.48.0"
+  resolved "https://registry.yarnpkg.com/@algolia/client-search/-/client-search-5.48.0.tgz#6ff8781ee219b0f1d7a19dfb86c5b9f85db90532"
+  integrity sha512-RB9bKgYTVUiOcEb5bOcZ169jiiVW811dCsJoLT19DcbbFmU4QaK0ghSTssij35QBQ3SCOitXOUrHcGgNVwS7sQ==
+  dependencies:
+    "@algolia/client-common" "5.48.0"
+    "@algolia/requester-browser-xhr" "5.48.0"
+    "@algolia/requester-fetch" "5.48.0"
+    "@algolia/requester-node-http" "5.48.0"
 
 "@algolia/events@^4.0.1":
   version "4.0.1"
@@ -119,6 +134,13 @@
   dependencies:
     "@algolia/client-common" "5.47.0"
 
+"@algolia/requester-browser-xhr@5.48.0":
+  version "5.48.0"
+  resolved "https://registry.yarnpkg.com/@algolia/requester-browser-xhr/-/requester-browser-xhr-5.48.0.tgz#d7e65692b96e90a1db0faf1b580dd8e8b5b6d6de"
+  integrity sha512-XshyfpsQB7BLnHseMinp3fVHOGlTv6uEHOzNK/3XrEF9mjxoZAcdVfY1OCXObfwRWX5qXZOq8FnrndFd44iVsQ==
+  dependencies:
+    "@algolia/client-common" "5.48.0"
+
 "@algolia/requester-fetch@5.47.0":
   version "5.47.0"
   resolved "https://registry.yarnpkg.com/@algolia/requester-fetch/-/requester-fetch-5.47.0.tgz#de68b44bef30d03919be249a6ff30e82975494a9"
@@ -126,12 +148,26 @@
   dependencies:
     "@algolia/client-common" "5.47.0"
 
+"@algolia/requester-fetch@5.48.0":
+  version "5.48.0"
+  resolved "https://registry.yarnpkg.com/@algolia/requester-fetch/-/requester-fetch-5.48.0.tgz#8a8f44b1b417c0cfa8f06742e04b77e3b188ffba"
+  integrity sha512-Q4XNSVQU89bKNAPuvzSYqTH9AcbOOiIo6AeYMQTxgSJ2+uvT78CLPMG89RIIloYuAtSfE07s40OLV50++l1Bbw==
+  dependencies:
+    "@algolia/client-common" "5.48.0"
+
 "@algolia/requester-node-http@5.47.0":
   version "5.47.0"
   resolved "https://registry.yarnpkg.com/@algolia/requester-node-http/-/requester-node-http-5.47.0.tgz#b8e46c1e80b74d9146dec7b0219131198951198a"
   integrity sha512-z1oyLq5/UVkohVXNDEY70mJbT/sv/t6HYtCvCwNrOri6pxBJDomP9R83KOlwcat+xqBQEdJHjbrPh36f1avmZA==
   dependencies:
     "@algolia/client-common" "5.47.0"
+
+"@algolia/requester-node-http@5.48.0":
+  version "5.48.0"
+  resolved "https://registry.yarnpkg.com/@algolia/requester-node-http/-/requester-node-http-5.48.0.tgz#53f421da09c064850b3395f72cc520ce958954b0"
+  integrity sha512-ZgxV2+5qt3NLeUYBTsi6PLyHcENQWC0iFppFZekHSEDA2wcLdTUjnaJzimTEULHIvJuLRCkUs4JABdhuJktEag==
+  dependencies:
+    "@algolia/client-common" "5.48.0"
 
 "@alloc/quick-lru@^5.2.0":
   version "5.2.0"
@@ -4414,10 +4450,10 @@
     typescript "^5.7.3"
     zod "^3.24.2"
 
-"@tinacms/cli@^2.1.4":
-  version "2.1.4"
-  resolved "https://registry.yarnpkg.com/@tinacms/cli/-/cli-2.1.4.tgz#00df401b058d43148eff4c376cf4d65cda641509"
-  integrity sha512-HOj53AwSliONYugFFCsdFYlq/6+UNwxZqAxaM4G5o1rVJ0iv/J8poQ33ARck+hQi5Z4Xzh1P96xA40pCyGkZaQ==
+"@tinacms/cli@^2.1.5":
+  version "2.1.5"
+  resolved "https://registry.yarnpkg.com/@tinacms/cli/-/cli-2.1.5.tgz#58004211864f0b82059d53f66e9755fcdbc64d15"
+  integrity sha512-f3QOi3rPV9PTHxQuJgpIOlSYUrIpxK9ErdubqdhFVdUgd1WZJxGFUxE8Q3ju9FZtb/0gPkaX/CnmMBJG+OImuQ==
   dependencies:
     "@graphql-codegen/core" "^2.6.8"
     "@graphql-codegen/plugin-helpers" latest
@@ -5108,10 +5144,10 @@
   dependencies:
     csstype "^3.2.2"
 
-"@types/react@^18.3.1":
-  version "18.3.27"
-  resolved "https://registry.yarnpkg.com/@types/react/-/react-18.3.27.tgz#74a3b590ea183983dc65a474dc17553ae1415c34"
-  integrity sha512-cisd7gxkzjBKU2GgdYrTdtQx1SORymWyaAFhaxQPK9bYO9ot3Y5OikQRvY0VYQtvwjeQnizCINJAenh/V7MK2w==
+"@types/react@^18.3.28":
+  version "18.3.28"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-18.3.28.tgz#0a85b1a7243b4258d9f626f43797ba18eb5f8781"
+  integrity sha512-z9VXpC7MWrhfWipitjNdgCauoMLRdIILQsAEV+ZesIzBq/oUlxk0m3ApZuMFCXdnS4U7KrI+l3WRUEGQ8K1QKw==
   dependencies:
     "@types/prop-types" "*"
     csstype "^3.2.2"
@@ -17155,7 +17191,38 @@ webpack-sources@^3.3.3:
   resolved "https://registry.yarnpkg.com/webpack-sources/-/webpack-sources-3.3.3.tgz#d4bf7f9909675d7a070ff14d0ef2a4f3c982c723"
   integrity sha512-yd1RBzSGanHkitROoPFd6qsrxt+oFhg/129YzheDGqeustzX0vTZJZsSsQjVQC4yzBQ56K55XU8gaNCtIzOnTg==
 
-webpack@^5.105.0, webpack@^5.88.1, webpack@^5.95.0:
+webpack@^5.105.1:
+  version "5.105.1"
+  resolved "https://registry.yarnpkg.com/webpack/-/webpack-5.105.1.tgz#c05cb3621196c76fa3b3a9bea446d14616b83778"
+  integrity sha512-Gdj3X74CLJJ8zy4URmK42W7wTZUJrqL+z8nyGEr4dTN0kb3nVs+ZvjbTOqRYPD7qX4tUmwyHL9Q9K6T1seW6Yw==
+  dependencies:
+    "@types/eslint-scope" "^3.7.7"
+    "@types/estree" "^1.0.8"
+    "@types/json-schema" "^7.0.15"
+    "@webassemblyjs/ast" "^1.14.1"
+    "@webassemblyjs/wasm-edit" "^1.14.1"
+    "@webassemblyjs/wasm-parser" "^1.14.1"
+    acorn "^8.15.0"
+    acorn-import-phases "^1.0.3"
+    browserslist "^4.28.1"
+    chrome-trace-event "^1.0.2"
+    enhanced-resolve "^5.19.0"
+    es-module-lexer "^2.0.0"
+    eslint-scope "5.1.1"
+    events "^3.2.0"
+    glob-to-regexp "^0.4.1"
+    graceful-fs "^4.2.11"
+    json-parse-even-better-errors "^2.3.1"
+    loader-runner "^4.3.1"
+    mime-types "^2.1.27"
+    neo-async "^2.6.2"
+    schema-utils "^4.3.3"
+    tapable "^2.3.0"
+    terser-webpack-plugin "^5.3.16"
+    watchpack "^2.5.1"
+    webpack-sources "^3.3.3"
+
+webpack@^5.88.1, webpack@^5.95.0:
   version "5.105.0"
   resolved "https://registry.yarnpkg.com/webpack/-/webpack-5.105.0.tgz#38b5e6c5db8cbe81debbd16e089335ada05ea23a"
   integrity sha512-gX/dMkRQc7QOMzgTe6KsYFM7DxeIONQSui1s0n/0xht36HvrgbxtM1xBlgx596NbpHuQU8P7QpKwrZYwUX48nw==
