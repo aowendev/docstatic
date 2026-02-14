@@ -15,7 +15,7 @@ import remarkGfm from "remark-gfm";
 import "katex/dist/katex.min.css"; // Import KaTeX CSS
 
 // Import available components that can be used in JSX
-import ColorGenerator from "@site/src/components/ColorGenerator";
+// import ColorGenerator from "@site/src/components/ColorGenerator";
 
 /**
  * Passthrough component that renders content as JSX, HTML, markdown, or plain text
@@ -113,38 +113,32 @@ const Passthrough = ({ summary, string, type }) => {
 
   // Default to markdown
   return (
-    <Markdown
-      remarkPlugins={[remarkMath, remarkBreaks, remarkGfm]}
-      rehypePlugins={[rehypeKatex]}
-      components={{
-        p: ({ children, ...props }) => {
-          // Check if this paragraph contains a task list checkbox
-          const hasCheckbox = React.Children.toArray(children).some(
-            child => child?.type === 'input' && child?.props?.type === 'checkbox'
-          );
-          // If it contains a checkbox, render as span to avoid breaking task list structure
-          return hasCheckbox ? <span {...props}>{children}</span> : <p {...props}>{children}</p>;
-        },
-        ul: CustomUl,
-        li: CustomLi,
-        br: () => <br />,
-        strong: ({ children, ...props }) => (
-          <strong {...props}>{children}</strong>
-        ),
-        em: ({ children, ...props }) => <em {...props}>{children}</em>,
-        code: ({ children, ...props }) => <code {...props}>{children}</code>,
-        a: ({ children, ...props }) => <a {...props}>{children}</a>,
-        input: CustomInput,
-        h1: ({ children, ...props }) => <h1 {...props}>{children}</h1>,
-        h2: ({ children, ...props }) => <h2 {...props}>{children}</h2>,
-        h3: ({ children, ...props }) => <h3 {...props}>{children}</h3>,
-        h4: ({ children, ...props }) => <h4 {...props}>{children}</h4>,
-        h5: ({ children, ...props }) => <h5 {...props}>{children}</h5>,
-        h6: ({ children, ...props }) => <h6 {...props}>{children}</h6>,
-      }}
-    >
-      {processedString}
-    </Markdown>
+    <div className="passthrough-content">
+      <Markdown
+        remarkPlugins={[remarkMath, remarkBreaks, remarkGfm]}
+        rehypePlugins={[rehypeKatex]}
+        components={{
+          ul: CustomUl,
+          li: CustomLi,
+          br: () => <br />,
+          strong: ({ children, ...props }) => (
+            <strong {...props}>{children}</strong>
+          ),
+          em: ({ children, ...props }) => <em {...props}>{children}</em>,
+          code: ({ children, ...props }) => <code {...props}>{children}</code>,
+          a: ({ children, ...props }) => <a {...props}>{children}</a>,
+          input: CustomInput,
+          h1: ({ children, ...props }) => <h1 {...props}>{children}</h1>,
+          h2: ({ children, ...props }) => <h2 {...props}>{children}</h2>,
+          h3: ({ children, ...props }) => <h3 {...props}>{children}</h3>,
+          h4: ({ children, ...props }) => <h4 {...props}>{children}</h4>,
+          h5: ({ children, ...props }) => <h5 {...props}>{children}</h5>,
+          h6: ({ children, ...props }) => <h6 {...props}>{children}</h6>,
+        }}
+      >
+        {processedString}
+      </Markdown>
+    </div>
   );
 };
 
