@@ -15,7 +15,7 @@ import remarkGfm from "remark-gfm";
 import "katex/dist/katex.min.css"; // Import KaTeX CSS
 
 // Import available components that can be used in JSX
-// import ColorGenerator from "@site/src/components/ColorGenerator";
+import ColorGenerator from "@site/src/components/ColorGenerator";
 
 /**
  * Passthrough component that renders content as JSX, HTML, markdown, or plain text
