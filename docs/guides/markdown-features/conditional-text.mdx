@@ -1,25 +1,30 @@
 ---
+lastmod: '2026-02-18T23:00:48.814Z'
+modifiedBy: aowendev <aowen@translationcommons.org>
 title: Conditional text
+conditions:
+  - production
 description: Filtering content with conditional text settings.
 tags:
-  - "metadata"
-  - "metadata_conditions"
-  - "reuse"
-  - "reuse_conditional-text"
+  - metadata
+  - metadata_conditions
+  - reuse
+  - reuse_conditional-text
 draft: false
 review: false
 translate: false
 approved: false
 published: true
 unlisted: false
-lastmod: "2026-01-25T00:21:23.770Z"
 ---
+
 # Conditional text
 
-The **Conditions** component enables you to wrap text in a set of conditions that determine when it should be displayed.
-Conditions can be any combination of languages or user-defined conditions.
-The text can be displayed if one or more conditions are met (OR) or only if all conditions are met (AND).
-You can also specify fallback text to display if no conditions are met.
+The **Conditional Text** component enables you to wrap conetnt in a set of conditions that determine when it should be displayed:
+
+* Conditions can be any combination of languages or user-defined conditions.
+* The content can be displayed or hidden if one or more conditions are met (OR) or only if all conditions are met (AND).
+  You can also specify fallback text to display if no conditions are met.
 
 ## Create categories and conditions
 
@@ -42,10 +47,15 @@ Conditions are set at the topic level. The language is determined by the page la
 
 1. Select **Conditional Text** from the **Embed** list.
 2. Edit the component.
-3. Enter the **Text Content**.
-4. Add any **Required Conditions**.
-5. Add any **Required Languages**.
-6. Set the **Condition Logic**.
-7. Set the **Language Logic**.
-8. Select if both conditions and languages are required.
-9. (Optional) Enter the **Fallback Text**.
+3. Enter the **Content**.
+4. Set the **Action** (show or hide).
+5. Add any **Required Conditions**.
+6. Add any **Required Languages**.
+7. Set the **Condition Logic**.
+8. Set the **Language Logic**.
+9. Select if both conditions and languages are required.
+10. (Optional) Enter the **Fallback Text**.
+
+### Example
+
+<ConditionalText action="show" conditions={["production"]} languages={[]} logic="any" languageLogic="any" requireBothConditions={false} fallback="">The `production` condition is set on this page.</ConditionalText>
