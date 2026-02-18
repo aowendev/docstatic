@@ -110,7 +110,7 @@ const ConditionalText = ({
   //   : null;
 
   return (
-    <div className="conditional-text">
+    <>
       {/* {debug && (
         <details
           style={{
@@ -132,11 +132,11 @@ const ConditionalText = ({
       )} */}
 
       {shouldShow ? (
-        <div className="conditional-text__content">{children}</div>
+        children
       ) : (
-        fallback && <div className="conditional-text__fallback">{fallback}</div>
+        fallback && <span className="conditional-text__fallback">{fallback}</span>
       )}
-    </div>
+    </>
   );
 };
 
