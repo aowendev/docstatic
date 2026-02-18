@@ -5,86 +5,113 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { useDoc } from "@docusaurus/plugin-content-docs/client";
+import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import React from "react";
 
 const ConditionalText = ({
-  tags = [],
-  conditions = [], // Pass conditions explicitly as props
+  action = "show", // "show" or "hide" when conditions are met
+  conditions = [], // Required conditions to check (from template)
   logic = "any",
-  languages = [],
-  currentLanguage = "en", // Default to English if not provided
+  languages = [], // Required languages to check
   languageLogic = "any",
-  text = "",
+  children = null,
   fallback = "",
   requireBothConditions = false,
-  debug = false,
+  // debug = false,
 }) => {
-  // Check if tags/conditions are satisfied (static evaluation)
-  const checkTagConditions = () => {
-    if (tags.length === 0) return true;
+  // Get page conditions from document frontmatter
+  let pageConditions = [];
+  let currentLanguage = "en";
+
+  try {
+    // Get document metadata (conditions from frontmatter)
+    const doc = useDoc();
+    pageConditions = doc?.frontMatter?.conditions || [];
+  } catch {
+    // Not in a doc context, pageConditions stays empty
+  }
+
+  try {
+    // Get current language from Docusaurus context
+    const { i18n } = useDocusaurusContext();
+    currentLanguage = i18n?.currentLocale || "en";
+  } catch {
+    // Context not available, use default
+  }
+
+  // Check if required conditions are met against page metadata conditions
+  const checkConditionsMet = () => {
+    if (conditions.length === 0) return true;
 
     if (logic === "all") {
-      return tags.every((tag) => conditions.includes(tag));
+      // All required conditions must be present in page metadata
+      return conditions.every((condition) => pageConditions.includes(condition));
     }
-    return tags.some((tag) => conditions.includes(tag));
+    // Any required condition must be present in page metadata
+    return conditions.some((condition) => pageConditions.includes(condition));
   };
 
-  // Check if language conditions are satisfied (static evaluation)
+  // Check if language conditions are satisfied
   const checkLanguageConditions = () => {
     if (languages.length === 0) return true;
 
     if (languageLogic === "all") {
-      // For 'all' logic with languages, current language must match all (usually just one)
+      // For 'all' logic, current language must be in the list
       return languages.includes(currentLanguage);
     }
     // For 'any' logic, current language must match at least one
     return languages.includes(currentLanguage);
   };
 
-  const tagConditionsMet = checkTagConditions();
+  const conditionsMet = checkConditionsMet();
   const languageConditionsMet = checkLanguageConditions();
 
-  // Determine if content should be shown
-  let shouldShow;
+  // Determine if conditions are satisfied based on logic
+  let conditionsSatisfied;
   if (requireBothConditions) {
-    // Both tag conditions AND language conditions must be true
-    shouldShow = tagConditionsMet && languageConditionsMet;
+    // Both conditions AND language conditions must be true
+    conditionsSatisfied = conditionsMet && languageConditionsMet;
   } else {
-    // Either tag conditions OR language conditions must be true (if either is specified)
-    if (tags.length > 0 && languages.length > 0) {
+    // Either conditions OR language conditions must be true (if either is specified)
+    if (conditions.length > 0 && languages.length > 0) {
       // Both types of conditions specified, at least one must pass
-      shouldShow = tagConditionsMet || languageConditionsMet;
-    } else if (tags.length > 0) {
-      // Only tag conditions specified
-      shouldShow = tagConditionsMet;
+      conditionsSatisfied = conditionsMet || languageConditionsMet;
+    } else if (conditions.length > 0) {
+      // Only conditions specified
+      conditionsSatisfied = conditionsMet;
     } else if (languages.length > 0) {
       // Only language conditions specified
-      shouldShow = languageConditionsMet;
+      conditionsSatisfied = languageConditionsMet;
     } else {
-      // No conditions specified, show content
-      shouldShow = true;
+      // No conditions specified, conditions are satisfied
+      conditionsSatisfied = true;
     }
   }
 
-  const debugInfo = debug
-    ? {
-        currentLanguage,
-        conditions, // Show the conditions being used
-        tags,
-        languages,
-        logic,
-        languageLogic,
-        requireBothConditions,
-        tagConditionsMet,
-        languageConditionsMet,
-        shouldShow,
-        evaluationType: "static", // Indicate this is static evaluation
-      }
-    : null;
+  // Apply action logic: show or hide based on whether conditions are met
+  const shouldShow = action === "hide" ? !conditionsSatisfied : conditionsSatisfied;
+
+  // const debugInfo = debug
+  //   ? {
+  //       action,
+  //       currentLanguage,
+  //       pageConditions,
+  //       conditions,
+  //       languages,
+  //       logic,
+  //       languageLogic,
+  //       requireBothConditions,
+  //       conditionsMet,
+  //       languageConditionsMet,
+  //       conditionsSatisfied,
+  //       shouldShow,
+  //     }
+  //   : null;
 
   return (
     <div className="conditional-text">
-      {debug && (
+      {/* {debug && (
         <details
           style={{
             background: "#f5f5f5",
@@ -96,16 +123,16 @@ const ConditionalText = ({
           }}
         >
           <summary style={{ fontWeight: "bold", cursor: "pointer" }}>
-            🐛 ConditionalText Debug Info (Static)
+            🐛 ConditionalText Debug Info
           </summary>
           <pre style={{ margin: "10px 0 0 0", whiteSpace: "pre-wrap" }}>
             {JSON.stringify(debugInfo, null, 2)}
           </pre>
         </details>
-      )}
+      )} */}
 
       {shouldShow ? (
-        <div className="conditional-text__content">{text}</div>
+        <div className="conditional-text__content">{children}</div>
       ) : (
         fallback && <div className="conditional-text__fallback">{fallback}</div>
       )}
