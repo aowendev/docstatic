@@ -818,3 +818,18 @@ main s,
   border-width: 0 2px 2px 0;
   transform: rotate(45deg);
 }
+
+
+/*
+ * Merge consecutive lists separated by ConditionalText components.
+ * Also handle cases where empty elements are between lists 
+ */
+ul + ul,
+ol + ol {
+  margin-top: -1em;
+}
+
+ul + :empty + ul,
+ol + :empty + ol {
+  margin-top: -1em;
+}
