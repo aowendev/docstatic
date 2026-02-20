@@ -7,11 +7,22 @@
 
 import React, { useState } from "react";
 
-const Figure = ({ img, caption, size }) => {
+const Figure = ({ img, caption, size, hideCaption = false, align }) => {
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
 
   const openLightbox = () => setIsLightboxOpen(true);
   const closeLightbox = () => setIsLightboxOpen(false);
+
+  // Convert size to percentage width (e.g., 25 becomes "25%")
+  const imageWidth = size ? `${size}%` : "100%";
+
+  // Determine text alignment - only apply left/right if size < 100
+  const getAlignment = () => {
+    if (size && size < 100 && align) {
+      return align;
+    }
+    return "center";
+  };
 
   const lightboxStyles = {
     overlay: {
@@ -58,15 +69,15 @@ const Figure = ({ img, caption, size }) => {
 
   return (
     <>
-      <div style={{ textAlign: "center", margin: "2rem 0" }}>
+      <div style={{ textAlign: getAlignment(), margin: "2rem 0" }}>
         <figure>
           <img
             src={img}
             alt={caption}
-            style={{ cursor: "pointer", maxWidth: size, height: "auto" }}
+            style={{ cursor: "pointer", width: imageWidth, maxWidth: "100%", height: "auto" }}
             onClick={openLightbox}
           />
-          <figcaption>{caption}</figcaption>
+          {!hideCaption && <figcaption>{caption}</figcaption>}
         </figure>
       </div>
 
