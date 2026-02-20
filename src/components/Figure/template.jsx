@@ -30,8 +30,25 @@ export const FigureBlockTemplate = {
     },
     {
       name: "size",
-      label: "Size",
+      label: "Size (%)",
+      type: "number",
+      description: "Width as a percentage of the container (e.g., 25 for quarter width, 50 for half width)",
+    },
+    {
+      name: "align",
+      label: "Alignment",
       type: "string",
+      description: "Align the image left or right (only applies when size is less than 100)",
+      options: [
+        { value: "left", label: "Left" },
+        { value: "center", label: "Center" },
+        { value: "right", label: "Right" },
+      ],
+    },
+    {
+      name: "hideCaption",
+      label: "Hide Caption",
+      type: "boolean",
     },
   ],
 };
