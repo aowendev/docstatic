@@ -1,6 +1,82 @@
 import React, { useState, useEffect } from 'react';
 
 const TranslationDashboard = () => {
+  const [status, setStatus] = useState('');
+    // Delete all orphan topics
+    const handleDeleteOrphanTopics = async () => {
+      setStatus('');
+      try {
+        const { client } = await import('../../../tina/__generated__/client');
+        const lang = selectedLanguage;
+        const orphaned = translationData && translationData[lang] ? translationData[lang].orphaned : [];
+        for (const item of orphaned) {
+          await client.request({
+            query: `
+              mutation DeleteI18n($collection: String!, $relativePath: String!) {
+                deleteDocument(collection: $collection, relativePath: $relativePath) {
+                  ... on I18n {
+                    id
+                  }
+                }
+              }
+            `,
+            variables: {
+              collection: 'i18n',
+              relativePath: item.file
+            }
+          });
+        }
+        setStatus(`Deleted ${orphaned.length} orphan topics for ${lang}`);
+        await scanTranslations();
+      } catch (err) {
+        setStatus(`Error: ${err.message}`);
+      }
+    };
+
+    // Add all missing topics
+    const handleAddMissingTopics = async () => {
+      setStatus('');
+      try {
+        const { client } = await import('../../../tina/__generated__/client');
+        const lang = selectedLanguage;
+        const missing = translationData && translationData[lang] ? translationData[lang].missing : [];
+        for (const item of missing) {
+          await client.request({
+            query: `
+              mutation CreateI18n($collection: String!, $relativePath: String!, $params: I18nMutation!) {
+                createDocument(collection: $collection, relativePath: $relativePath, params: $params) {
+                  ... on I18n {
+                    id
+                    date
+                  }
+                }
+              }
+            `,
+            variables: {
+              collection: 'i18n',
+              relativePath: `${lang}/docusaurus-plugin-content-docs/current/${item.file.replace(/^docs\//, '')}`,
+              params: {
+                i18n: {
+                  title: item.title,
+                  date: item.sourceLastMod && item.sourceLastMod !== 'No date' ? new Date(new Date(item.sourceLastMod).getTime() - 86400000).toISOString() : new Date(Date.now() - 86400000).toISOString(),
+                  sourceId: item.file
+                }
+              }
+            }
+          });
+        }
+        setStatus(`Added ${missing.length} missing topics for ${lang}`);
+        await scanTranslations();
+      } catch (err) {
+        setStatus(`Error: ${err.message}`);
+      }
+    };
+
+    // Edit out-of-date doc
+    const handleEditOutOfDateDoc = (file) => {
+      const cleanFile = file.replace(/^docs\//, '').replace(/\.mdx$/, '').replace(/\.md$/, '');
+      window.open(`/admin#/collections/edit/i18n/${selectedLanguage}/docusaurus-plugin-content-docs/current/${cleanFile}`, '_blank');
+    };
   const [translationData, setTranslationData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -453,9 +529,9 @@ const TranslationDashboard = () => {
         marginBottom: '20px',
         borderBottom: '2px solid #e9ecef',
         paddingBottom: '10px',
-        gap: '16px' // Add gap between title and button
+        gap: '16px'
       }}>
-        <h3 class="font-sans text-2xl text-tina-orange">
+        <h3 className="font-sans text-2xl text-tina-orange">
           🌍 Translations
         </h3>
         <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
@@ -488,8 +564,39 @@ const TranslationDashboard = () => {
           >
             {loading ? 'Refreshing...' : 'Refresh'}
           </button>
+          <button
+            onClick={handleDeleteOrphanTopics}
+            style={{
+              padding: '5px 10px',
+              backgroundColor: '#9c88ff',
+              color: 'white',
+              border: 'none',
+              borderRadius: '4px',
+              cursor: 'pointer',
+              fontSize: '12px'
+            }}
+            disabled={loading}
+          >
+            Delete Orphan Topics
+          </button>
+          <button
+            onClick={handleAddMissingTopics}
+            style={{
+              padding: '5px 10px',
+              backgroundColor: '#ff6b6b',
+              color: 'white',
+              border: 'none',
+              borderRadius: '4px',
+              cursor: 'pointer',
+              fontSize: '12px'
+            }}
+            disabled={loading}
+          >
+            Add Missing Topics
+          </button>
         </div>
       </div>
+  {status && <div style={{ color: 'green', marginBottom: '1rem' }}>{status}</div>}
 
       {/* Summary Cards */}
       <div style={{
@@ -594,30 +701,39 @@ const TranslationDashboard = () => {
                   backgroundColor: '#fff3e0',
                   border: '1px solid #ffcc02',
                   borderRadius: '4px',
-                  padding: '15px'
+                  padding: '6px'
                 }}>
                   {data.outdated.map((item, index) => (
                     <div key={index} style={{
                       display: 'flex',
-                      justifyContent: 'space-between',
-                      alignItems: 'center',
-                      padding: '8px 0',
-                      borderBottom: index < data.outdated.length - 1 ? '1px solid #ffcc02' : 'none'
+                      flexDirection: 'column',
+                      borderBottom: index < data.outdated.length - 1 ? '1px solid #ffcc02' : 'none',
+                      padding: '4px 0'
                     }}>
-                      <div>
-                        <strong>{item.title}</strong>
-                        <div style={{ fontSize: '12px', color: '#666' }}>
-                          {item.file}
-                        </div>
-                        {item.daysBehind && (
-                          <div style={{ fontSize: '11px', color: '#e67e22' }}>
-                            {item.daysBehind} days behind
-                          </div>
-                        )}
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
+                        <span style={{ fontWeight: 'bold' }}>{item.title}</span>
+                        <button
+                          onClick={() => handleEditOutOfDateDoc(item.file)}
+                          style={{
+                            padding: '3px 8px',
+                            backgroundColor: '#2563eb',
+                            color: 'white',
+                            border: 'none',
+                            borderRadius: '4px',
+                            cursor: 'pointer',
+                            fontSize: '11px'
+                          }}
+                        >
+                          Edit
+                        </button>
                       </div>
-                      <div style={{ fontSize: '12px', color: '#666', textAlign: 'right' }}>
-                        <div>Source: {formatDate(item.sourceLastMod)}</div>
-                        <div>Translation: {formatDate(item.translationLastMod)}</div>
+                      <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '12px', color: '#666', marginTop: '2px' }}>
+                        <span>{item.file}</span>
+                        <span>Source: {formatDate(item.sourceLastMod)}</span>
+                      </div>
+                      <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '12px', color: '#666', marginTop: '2px' }}>
+                        <span>{item.daysBehind ? `${item.daysBehind} days behind` : ''}</span>
+                        <span>Translation: {formatDate(item.translationLastMod)}</span>
                       </div>
                     </div>
                   ))}
