@@ -145,7 +145,7 @@ const TranslationDashboard = () => {
         sourceMap[canonical] = node;
       }
 
-      console.debug('[TranslationScan] docs sample rels:', docsEdges.slice(0,10).map(e => e.node._sys?.relativePath || e.node._sys?.filename));
+      
 
       // Fetch translations and build map for the selected language with pagination
       let i18nEdges = [];
@@ -181,7 +181,6 @@ const TranslationDashboard = () => {
           // prefer non-index/readme over index/readme
           if (isExistingIndex && !isNewIndex) {
             translationsMap[canonical] = { node, originalPath: cleanAfter };
-            console.debug('[TranslationScan] replaced index/readme with explicit file for', canonical, cleanAfter);
           } else {
             // otherwise, keep the one with the latest lastmod
             try {
@@ -189,9 +188,8 @@ const TranslationDashboard = () => {
               const newDate = node?.lastmod ? new Date(node.lastmod) : null;
               if (newDate && (!existingDate || newDate > existingDate)) {
                 translationsMap[canonical] = { node, originalPath: cleanAfter };
-                console.debug('[TranslationScan] chose newer translation for', canonical, cleanAfter);
               } else {
-                console.debug('[TranslationScan] keeping existing translation for', canonical, existing.originalPath || 'unknown');
+                // keep existing
               }
             } catch (e) {
               // fallback: keep existing
@@ -205,22 +203,6 @@ const TranslationDashboard = () => {
       // Compare sets
       const sourceKeys = new Set(Object.keys(sourceMap));
       const translationKeys = new Set(Object.keys(translationsMap));
-
-      console.debug('[TranslationScan] docsEdges:', docsEdges.length, 'i18nEdges:', i18nEdges.length);
-      console.debug('[TranslationScan] sourceKeys:', sourceKeys.size, 'translationKeys:', translationKeys.size);
-      console.debug('[TranslationScan] sample source keys:', [...sourceKeys].slice(0,10));
-      console.debug('[TranslationScan] sample translation keys:', [...translationKeys].slice(0,10));
-
-      const missingKeys = [...sourceKeys].filter(k => !translationKeys.has(k));
-      const orphanKeys = [...translationKeys].filter(k => !sourceKeys.has(k));
-      console.debug('[TranslationScan] missingKeys count:', missingKeys.length, 'examples:', missingKeys.slice(0,50));
-      console.debug('[TranslationScan] orphanKeys count:', orphanKeys.length, 'examples:', orphanKeys.slice(0,50));
-      console.debug('[TranslationScan] translationsMap sample originals:', Object.entries(translationsMap).slice(0,20).map(([k, v]) => ({ key: k, original: v.originalPath })));
-      if (translationsMap['orphan']) {
-        console.debug('[TranslationScan] orphan key mapped to:', translationsMap['orphan'].originalPath, translationsMap['orphan'].node?._sys?.relativePath);
-      } else {
-        console.debug('[TranslationScan] no translationsMap entry for key "orphan"');
-      }
 
       const missing = [];
       const outdated = [];
