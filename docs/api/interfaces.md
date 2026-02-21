@@ -12,8 +12,9 @@ A relay-compliant pagination connection
 <p style={{ marginBottom: "0.4em" }}><strong>Implemented by</strong></p>
 
 - [DocumentConnection](/docs/api/objects#documentconnection)
-- [ConditionsConnection](/docs/api/objects#conditionsconnection)
 - [PostConnection](/docs/api/objects#postconnection)
+- [ConditionsConnection](/docs/api/objects#conditionsconnection)
+- [DashboardsConnection](/docs/api/objects#dashboardsconnection)
 - [GlossaryTermsConnection](/docs/api/objects#glossarytermsconnection)
 - [HomepageConnection](/docs/api/objects#homepageconnection)
 - [PagesConnection](/docs/api/objects#pagesconnection)
@@ -21,10 +22,13 @@ A relay-compliant pagination connection
 - [SnippetsConnection](/docs/api/objects#snippetsconnection)
 - [SidebarConnection](/docs/api/objects#sidebarconnection)
 - [TaxonomyConnection](/docs/api/objects#taxonomyconnection)
+- [ThemeConnection](/docs/api/objects#themeconnection)
 - [DocConnection](/docs/api/objects#docconnection)
 - [I18nConnection](/docs/api/objects#i18nconnection)
 - [VariableSetsConnection](/docs/api/objects#variablesetsconnection)
 - [WikiConnection](/docs/api/objects#wikiconnection)
+- [GeneratedConnection](/docs/api/objects#generatedconnection)
+- [MediaConnection](/docs/api/objects#mediaconnection)
 
 <p style={{ marginBottom: "0.4em" }}><strong>Fields</strong></p>
 
@@ -58,8 +62,9 @@ pageInfo<br />
 
 <p style={{ marginBottom: "0.4em" }}><strong>Implemented by</strong></p>
 
-- [Conditions](/docs/api/objects#conditions)
 - [Post](/docs/api/objects#post)
+- [Conditions](/docs/api/objects#conditions)
+- [Dashboards](/docs/api/objects#dashboards)
 - [GlossaryTerms](/docs/api/objects#glossaryterms)
 - [Homepage](/docs/api/objects#homepage)
 - [Pages](/docs/api/objects#pages)
@@ -67,10 +72,13 @@ pageInfo<br />
 - [Snippets](/docs/api/objects#snippets)
 - [Sidebar](/docs/api/objects#sidebar)
 - [Taxonomy](/docs/api/objects#taxonomy)
+- [Theme](/docs/api/objects#theme)
 - [Doc](/docs/api/objects#doc)
 - [I18n](/docs/api/objects#i18n)
 - [VariableSets](/docs/api/objects#variablesets)
 - [Wiki](/docs/api/objects#wiki)
+- [Generated](/docs/api/objects#generated)
+- [Media](/docs/api/objects#media)
 
 <p style={{ marginBottom: "0.4em" }}><strong>Fields</strong></p>
 
@@ -113,8 +121,9 @@ _values<br />
 
 <p style={{ marginBottom: "0.4em" }}><strong>Implemented by</strong></p>
 
-- [Conditions](/docs/api/objects#conditions)
 - [Post](/docs/api/objects#post)
+- [Conditions](/docs/api/objects#conditions)
+- [Dashboards](/docs/api/objects#dashboards)
 - [GlossaryTerms](/docs/api/objects#glossaryterms)
 - [Homepage](/docs/api/objects#homepage)
 - [Pages](/docs/api/objects#pages)
@@ -122,10 +131,13 @@ _values<br />
 - [Snippets](/docs/api/objects#snippets)
 - [Sidebar](/docs/api/objects#sidebar)
 - [Taxonomy](/docs/api/objects#taxonomy)
+- [Theme](/docs/api/objects#theme)
 - [Doc](/docs/api/objects#doc)
 - [I18n](/docs/api/objects#i18n)
 - [VariableSets](/docs/api/objects#variablesets)
 - [Wiki](/docs/api/objects#wiki)
+- [Generated](/docs/api/objects#generated)
+- [Media](/docs/api/objects#media)
 
 <p style={{ marginBottom: "0.4em" }}><strong>Fields</strong></p>
 

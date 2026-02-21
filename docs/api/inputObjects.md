@@ -202,6 +202,15 @@ conditions<br />
 <tbody>
 <tr>
 <td>
+help<br />
+<a href="/docs/api/inputObjects#booleanfilter"><code>BooleanFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
 categories<br />
 <a href="/docs/api/inputObjects#conditionscategoriesfilter"><code>ConditionsCategoriesFilter</code></a>
 </td>
@@ -223,8 +232,167 @@ categories<br />
 <tbody>
 <tr>
 <td>
+help<br />
+<a href="/docs/api/scalars#boolean"><code>Boolean</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
 categories<br />
 <a href="/docs/api/inputObjects#conditionscategoriesmutation"><code>[ConditionsCategoriesMutation]</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## DashboardsFilter
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+miniWriteDashboard<br />
+<a href="/docs/api/inputObjects#booleanfilter"><code>BooleanFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+statusBar<br />
+<a href="/docs/api/inputObjects#booleanfilter"><code>BooleanFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+help<br />
+<a href="/docs/api/inputObjects#booleanfilter"><code>BooleanFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+dashboard1<br />
+<a href="/docs/api/inputObjects#booleanfilter"><code>BooleanFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+mediaDashboard<br />
+<a href="/docs/api/inputObjects#booleanfilter"><code>BooleanFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+translationDashboard<br />
+<a href="/docs/api/inputObjects#booleanfilter"><code>BooleanFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+brokenLinksDashboard<br />
+<a href="/docs/api/inputObjects#booleanfilter"><code>BooleanFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## DashboardsMutation
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+miniWriteDashboard<br />
+<a href="/docs/api/scalars#boolean"><code>Boolean</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+statusBar<br />
+<a href="/docs/api/scalars#boolean"><code>Boolean</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+help<br />
+<a href="/docs/api/scalars#boolean"><code>Boolean</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+dashboard1<br />
+<a href="/docs/api/scalars#boolean"><code>Boolean</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+mediaDashboard<br />
+<a href="/docs/api/scalars#boolean"><code>Boolean</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+translationDashboard<br />
+<a href="/docs/api/scalars#boolean"><code>Boolean</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+brokenLinksDashboard<br />
+<a href="/docs/api/scalars#boolean"><code>Boolean</code></a>
 </td>
 <td>
 
@@ -332,6 +500,36 @@ filepath<br />
 </tbody>
 </table>
 
+## DocBodyCommentFilter
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+reviewer<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+comment<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
 ## DocBodyConditionalTextFilter
 
 
@@ -343,7 +541,16 @@ filepath<br />
 <tbody>
 <tr>
 <td>
-text<br />
+children<br />
+<a href="/docs/api/inputObjects#richtextfilter"><code>RichTextFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+action<br />
 <a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
 </td>
 <td>
@@ -399,15 +606,6 @@ requireBothConditions<br />
 <td>
 fallback<br />
 <a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
-</td>
-<td>
-
-</td>
-</tr>
-<tr>
-<td>
-debug<br />
-<a href="/docs/api/inputObjects#booleanfilter"><code>BooleanFilter</code></a>
 </td>
 <td>
 
@@ -497,7 +695,25 @@ caption<br />
 <tr>
 <td>
 size<br />
+<a href="/docs/api/inputObjects#numberfilter"><code>NumberFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+align<br />
 <a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+hideCaption<br />
+<a href="/docs/api/inputObjects#booleanfilter"><code>BooleanFilter</code></a>
 </td>
 <td>
 
@@ -535,8 +751,8 @@ CodeSnippet<br />
 </tr>
 <tr>
 <td>
-hidden<br />
-<a href="/docs/api/inputObjects#docbodyhiddenfilter"><code>DocBodyHiddenFilter</code></a>
+Comment<br />
+<a href="/docs/api/inputObjects#docbodycommentfilter"><code>DocBodyCommentFilter</code></a>
 </td>
 <td>
 
@@ -701,22 +917,19 @@ termKey<br />
 
 </td>
 </tr>
-</tbody>
-</table>
-
-## DocBodyHiddenFilter
-
-
-
-<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
-
-<table>
-<thead><tr><th>Name</th><th>Description</th></tr></thead>
-<tbody>
 <tr>
 <td>
-comment<br />
-<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+initcap<br />
+<a href="/docs/api/inputObjects#booleanfilter"><code>BooleanFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+bold<br />
+<a href="/docs/api/inputObjects#booleanfilter"><code>BooleanFilter</code></a>
 </td>
 <td>
 
@@ -907,7 +1120,7 @@ deactivate<br />
 <tbody>
 <tr>
 <td>
-setKey<br />
+variableSelection<br />
 <a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
 </td>
 <td>
@@ -916,8 +1129,17 @@ setKey<br />
 </tr>
 <tr>
 <td>
-variableKey<br />
-<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+initcap<br />
+<a href="/docs/api/inputObjects#booleanfilter"><code>BooleanFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+bold<br />
+<a href="/docs/api/inputObjects#booleanfilter"><code>BooleanFilter</code></a>
 </td>
 <td>
 
@@ -937,7 +1159,52 @@ variableKey<br />
 <tbody>
 <tr>
 <td>
+help<br />
+<a href="/docs/api/inputObjects#booleanfilter"><code>BooleanFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+lastmod<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+modifiedBy<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
 title<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+body<br />
+<a href="/docs/api/inputObjects#docbodyfilter"><code>DocBodyFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+conditions<br />
 <a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
 </td>
 <td>
@@ -955,7 +1222,7 @@ description<br />
 </tr>
 <tr>
 <td>
-tags<br />
+slug<br />
 <a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
 </td>
 <td>
@@ -964,7 +1231,7 @@ tags<br />
 </tr>
 <tr>
 <td>
-conditions<br />
+tags<br />
 <a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
 </td>
 <td>
@@ -1020,15 +1287,6 @@ published<br />
 <td>
 unlisted<br />
 <a href="/docs/api/inputObjects#booleanfilter"><code>BooleanFilter</code></a>
-</td>
-<td>
-
-</td>
-</tr>
-<tr>
-<td>
-body<br />
-<a href="/docs/api/inputObjects#docbodyfilter"><code>DocBodyFilter</code></a>
 </td>
 <td>
 
@@ -1048,8 +1306,53 @@ body<br />
 <tbody>
 <tr>
 <td>
+help<br />
+<a href="/docs/api/scalars#boolean"><code>Boolean</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+lastmod<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+modifiedBy<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
 title<br />
 <a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+body<br />
+<a href="/docs/api/scalars#json"><code>JSON</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+conditions<br />
+<a href="/docs/api/scalars#string"><code>[String]</code></a>
 </td>
 <td>
 
@@ -1066,8 +1369,8 @@ description<br />
 </tr>
 <tr>
 <td>
-tags<br />
-<a href="/docs/api/scalars#string"><code>[String]</code></a>
+slug<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
 </td>
 <td>
 
@@ -1075,7 +1378,7 @@ tags<br />
 </tr>
 <tr>
 <td>
-conditions<br />
+tags<br />
 <a href="/docs/api/scalars#string"><code>[String]</code></a>
 </td>
 <td>
@@ -1136,15 +1439,6 @@ unlisted<br />
 
 </td>
 </tr>
-<tr>
-<td>
-body<br />
-<a href="/docs/api/scalars#json"><code>JSON</code></a>
-</td>
-<td>
-
-</td>
-</tr>
 </tbody>
 </table>
 
@@ -1159,6 +1453,15 @@ body<br />
 <tbody>
 <tr>
 <td>
+post<br />
+<a href="/docs/api/inputObjects#postfilter"><code>PostFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
 conditions<br />
 <a href="/docs/api/inputObjects#conditionsfilter"><code>ConditionsFilter</code></a>
 </td>
@@ -1168,8 +1471,8 @@ conditions<br />
 </tr>
 <tr>
 <td>
-post<br />
-<a href="/docs/api/inputObjects#postfilter"><code>PostFilter</code></a>
+dashboards<br />
+<a href="/docs/api/inputObjects#dashboardsfilter"><code>DashboardsFilter</code></a>
 </td>
 <td>
 
@@ -1240,6 +1543,15 @@ taxonomy<br />
 </tr>
 <tr>
 <td>
+theme<br />
+<a href="/docs/api/inputObjects#themefilter"><code>ThemeFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
 doc<br />
 <a href="/docs/api/inputObjects#docfilter"><code>DocFilter</code></a>
 </td>
@@ -1274,6 +1586,24 @@ wiki<br />
 
 </td>
 </tr>
+<tr>
+<td>
+generated<br />
+<a href="/docs/api/inputObjects#generatedfilter"><code>GeneratedFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+media<br />
+<a href="/docs/api/inputObjects#mediafilter"><code>MediaFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
 </tbody>
 </table>
 
@@ -1288,6 +1618,15 @@ wiki<br />
 <tbody>
 <tr>
 <td>
+post<br />
+<a href="/docs/api/inputObjects#postmutation"><code>PostMutation</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
 conditions<br />
 <a href="/docs/api/inputObjects#conditionsmutation"><code>ConditionsMutation</code></a>
 </td>
@@ -1297,8 +1636,8 @@ conditions<br />
 </tr>
 <tr>
 <td>
-post<br />
-<a href="/docs/api/inputObjects#postmutation"><code>PostMutation</code></a>
+dashboards<br />
+<a href="/docs/api/inputObjects#dashboardsmutation"><code>DashboardsMutation</code></a>
 </td>
 <td>
 
@@ -1369,6 +1708,15 @@ taxonomy<br />
 </tr>
 <tr>
 <td>
+theme<br />
+<a href="/docs/api/inputObjects#thememutation"><code>ThemeMutation</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
 doc<br />
 <a href="/docs/api/inputObjects#docmutation"><code>DocMutation</code></a>
 </td>
@@ -1398,6 +1746,24 @@ variableSets<br />
 <td>
 wiki<br />
 <a href="/docs/api/inputObjects#wikimutation"><code>WikiMutation</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+generated<br />
+<a href="/docs/api/inputObjects#generatedmutation"><code>GeneratedMutation</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+media<br />
+<a href="/docs/api/inputObjects#mediamutation"><code>MediaMutation</code></a>
 </td>
 <td>
 
@@ -1417,6 +1783,15 @@ wiki<br />
 <tbody>
 <tr>
 <td>
+post<br />
+<a href="/docs/api/inputObjects#postmutation"><code>PostMutation</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
 conditions<br />
 <a href="/docs/api/inputObjects#conditionsmutation"><code>ConditionsMutation</code></a>
 </td>
@@ -1426,8 +1801,8 @@ conditions<br />
 </tr>
 <tr>
 <td>
-post<br />
-<a href="/docs/api/inputObjects#postmutation"><code>PostMutation</code></a>
+dashboards<br />
+<a href="/docs/api/inputObjects#dashboardsmutation"><code>DashboardsMutation</code></a>
 </td>
 <td>
 
@@ -1498,6 +1873,15 @@ taxonomy<br />
 </tr>
 <tr>
 <td>
+theme<br />
+<a href="/docs/api/inputObjects#thememutation"><code>ThemeMutation</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
 doc<br />
 <a href="/docs/api/inputObjects#docmutation"><code>DocMutation</code></a>
 </td>
@@ -1534,8 +1918,68 @@ wiki<br />
 </tr>
 <tr>
 <td>
+generated<br />
+<a href="/docs/api/inputObjects#generatedmutation"><code>GeneratedMutation</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+media<br />
+<a href="/docs/api/inputObjects#mediamutation"><code>MediaMutation</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
 relativePath<br />
 <a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## GeneratedFilter
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+help<br />
+<a href="/docs/api/inputObjects#booleanfilter"><code>BooleanFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## GeneratedMutation
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+help<br />
+<a href="/docs/api/scalars#boolean"><code>Boolean</code></a>
 </td>
 <td>
 
@@ -1553,6 +1997,15 @@ relativePath<br />
 <table>
 <thead><tr><th>Name</th><th>Description</th></tr></thead>
 <tbody>
+<tr>
+<td>
+help<br />
+<a href="/docs/api/inputObjects#booleanfilter"><code>BooleanFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
 <tr>
 <td>
 glossaryTerms<br />
@@ -1606,212 +2059,8 @@ key<br />
 </tr>
 <tr>
 <td>
-languages<br />
-<a href="/docs/api/inputObjects#glossarytermsglossarytermsglossarytermlanguagesfilter"><code>GlossaryTermsGlossaryTermsGlossaryTermLanguagesFilter</code></a>
-</td>
-<td>
-
-</td>
-</tr>
-</tbody>
-</table>
-
-## GlossaryTermsGlossaryTermsGlossaryTermLanguagesFilter
-
-
-
-<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
-
-<table>
-<thead><tr><th>Name</th><th>Description</th></tr></thead>
-<tbody>
-<tr>
-<td>
-language<br />
-<a href="/docs/api/inputObjects#glossarytermsglossarytermsglossarytermlanguageslanguagefilter"><code>GlossaryTermsGlossaryTermsGlossaryTermLanguagesLanguageFilter</code></a>
-</td>
-<td>
-
-</td>
-</tr>
-</tbody>
-</table>
-
-## GlossaryTermsGlossaryTermsGlossaryTermLanguagesLanguageFilter
-
-
-
-<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
-
-<table>
-<thead><tr><th>Name</th><th>Description</th></tr></thead>
-<tbody>
-<tr>
-<td>
-lang<br />
-<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
-</td>
-<td>
-
-</td>
-</tr>
-<tr>
-<td>
 translations<br />
-<a href="/docs/api/inputObjects#glossarytermsglossarytermsglossarytermlanguageslanguagetranslationsfilter"><code>GlossaryTermsGlossaryTermsGlossaryTermLanguagesLanguageTranslationsFilter</code></a>
-</td>
-<td>
-
-</td>
-</tr>
-</tbody>
-</table>
-
-## GlossaryTermsGlossaryTermsGlossaryTermLanguagesLanguageMutation
-
-
-
-<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
-
-<table>
-<thead><tr><th>Name</th><th>Description</th></tr></thead>
-<tbody>
-<tr>
-<td>
-lang<br />
-<a href="/docs/api/scalars#string"><code>String</code></a>
-</td>
-<td>
-
-</td>
-</tr>
-<tr>
-<td>
-translations<br />
-<a href="/docs/api/inputObjects#glossarytermsglossarytermsglossarytermlanguageslanguagetranslationsmutation"><code>[GlossaryTermsGlossaryTermsGlossaryTermLanguagesLanguageTranslationsMutation]</code></a>
-</td>
-<td>
-
-</td>
-</tr>
-</tbody>
-</table>
-
-## GlossaryTermsGlossaryTermsGlossaryTermLanguagesLanguageTranslationsFilter
-
-
-
-<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
-
-<table>
-<thead><tr><th>Name</th><th>Description</th></tr></thead>
-<tbody>
-<tr>
-<td>
-translation<br />
-<a href="/docs/api/inputObjects#glossarytermsglossarytermsglossarytermlanguageslanguagetranslationstranslationfilter"><code>GlossaryTermsGlossaryTermsGlossaryTermLanguagesLanguageTranslationsTranslationFilter</code></a>
-</td>
-<td>
-
-</td>
-</tr>
-</tbody>
-</table>
-
-## GlossaryTermsGlossaryTermsGlossaryTermLanguagesLanguageTranslationsMutation
-
-
-
-<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
-
-<table>
-<thead><tr><th>Name</th><th>Description</th></tr></thead>
-<tbody>
-<tr>
-<td>
-translation<br />
-<a href="/docs/api/inputObjects#glossarytermsglossarytermsglossarytermlanguageslanguagetranslationstranslationmutation"><code>GlossaryTermsGlossaryTermsGlossaryTermLanguagesLanguageTranslationsTranslationMutation</code></a>
-</td>
-<td>
-
-</td>
-</tr>
-</tbody>
-</table>
-
-## GlossaryTermsGlossaryTermsGlossaryTermLanguagesLanguageTranslationsTranslationFilter
-
-
-
-<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
-
-<table>
-<thead><tr><th>Name</th><th>Description</th></tr></thead>
-<tbody>
-<tr>
-<td>
-term<br />
-<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
-</td>
-<td>
-
-</td>
-</tr>
-<tr>
-<td>
-definition<br />
-<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
-</td>
-<td>
-
-</td>
-</tr>
-</tbody>
-</table>
-
-## GlossaryTermsGlossaryTermsGlossaryTermLanguagesLanguageTranslationsTranslationMutation
-
-
-
-<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
-
-<table>
-<thead><tr><th>Name</th><th>Description</th></tr></thead>
-<tbody>
-<tr>
-<td>
-term<br />
-<a href="/docs/api/scalars#string"><code>String</code></a>
-</td>
-<td>
-
-</td>
-</tr>
-<tr>
-<td>
-definition<br />
-<a href="/docs/api/scalars#string"><code>String</code></a>
-</td>
-<td>
-
-</td>
-</tr>
-</tbody>
-</table>
-
-## GlossaryTermsGlossaryTermsGlossaryTermLanguagesMutation
-
-
-
-<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
-
-<table>
-<thead><tr><th>Name</th><th>Description</th></tr></thead>
-<tbody>
-<tr>
-<td>
-language<br />
-<a href="/docs/api/inputObjects#glossarytermsglossarytermsglossarytermlanguageslanguagemutation"><code>GlossaryTermsGlossaryTermsGlossaryTermLanguagesLanguageMutation</code></a>
+<a href="/docs/api/inputObjects#glossarytermsglossarytermsglossarytermtranslationsfilter"><code>GlossaryTermsGlossaryTermsGlossaryTermTranslationsFilter</code></a>
 </td>
 <td>
 
@@ -1840,8 +2089,128 @@ key<br />
 </tr>
 <tr>
 <td>
-languages<br />
-<a href="/docs/api/inputObjects#glossarytermsglossarytermsglossarytermlanguagesmutation"><code>[GlossaryTermsGlossaryTermsGlossaryTermLanguagesMutation]</code></a>
+translations<br />
+<a href="/docs/api/inputObjects#glossarytermsglossarytermsglossarytermtranslationsmutation"><code>[GlossaryTermsGlossaryTermsGlossaryTermTranslationsMutation]</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## GlossaryTermsGlossaryTermsGlossaryTermTranslationsFilter
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+translation<br />
+<a href="/docs/api/inputObjects#glossarytermsglossarytermsglossarytermtranslationstranslationfilter"><code>GlossaryTermsGlossaryTermsGlossaryTermTranslationsTranslationFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## GlossaryTermsGlossaryTermsGlossaryTermTranslationsMutation
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+translation<br />
+<a href="/docs/api/inputObjects#glossarytermsglossarytermsglossarytermtranslationstranslationmutation"><code>GlossaryTermsGlossaryTermsGlossaryTermTranslationsTranslationMutation</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## GlossaryTermsGlossaryTermsGlossaryTermTranslationsTranslationFilter
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+lang<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+term<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+definition<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## GlossaryTermsGlossaryTermsGlossaryTermTranslationsTranslationMutation
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+lang<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+term<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+definition<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
 </td>
 <td>
 
@@ -1880,6 +2249,15 @@ glossaryTerm<br />
 <table>
 <thead><tr><th>Name</th><th>Description</th></tr></thead>
 <tbody>
+<tr>
+<td>
+help<br />
+<a href="/docs/api/scalars#boolean"><code>Boolean</code></a>
+</td>
+<td>
+
+</td>
+</tr>
 <tr>
 <td>
 glossaryTerms<br />
@@ -2101,6 +2479,15 @@ subtitle<br />
 </tr>
 <tr>
 <td>
+description<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
 document<br />
 <a href="/docs/api/inputObjects#homepageblocksherodocumentfilter"><code>HomepageBlocksHeroDocumentFilter</code></a>
 </td>
@@ -2112,6 +2499,93 @@ document<br />
 <td>
 documentLabel<br />
 <a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+secondaryButtonText<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+secondaryButtonLink<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+showHeroCard<br />
+<a href="/docs/api/inputObjects#booleanfilter"><code>BooleanFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+heroCardTitle<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+heroCardFeatures<br />
+<a href="/docs/api/inputObjects#homepageblocksheroherocardfeaturesfilter"><code>HomepageBlocksHeroHeroCardFeaturesFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## HomepageBlocksHeroHeroCardFeaturesFilter
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+feature<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## HomepageBlocksHeroHeroCardFeaturesMutation
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+feature<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
 </td>
 <td>
 
@@ -2149,6 +2623,15 @@ subtitle<br />
 </tr>
 <tr>
 <td>
+description<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
 document<br />
 <a href="/docs/api/scalars#string"><code>String</code></a>
 </td>
@@ -2160,6 +2643,51 @@ document<br />
 <td>
 documentLabel<br />
 <a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+secondaryButtonText<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+secondaryButtonLink<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+showHeroCard<br />
+<a href="/docs/api/scalars#boolean"><code>Boolean</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+heroCardTitle<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+heroCardFeatures<br />
+<a href="/docs/api/inputObjects#homepageblocksheroherocardfeaturesmutation"><code>[HomepageBlocksHeroHeroCardFeaturesMutation]</code></a>
 </td>
 <td>
 
@@ -2296,6 +2824,15 @@ caption<br />
 <tbody>
 <tr>
 <td>
+help<br />
+<a href="/docs/api/inputObjects#booleanfilter"><code>BooleanFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
 _warning<br />
 <a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
 </td>
@@ -2351,6 +2888,15 @@ blocks<br />
 <table>
 <thead><tr><th>Name</th><th>Description</th></tr></thead>
 <tbody>
+<tr>
+<td>
+help<br />
+<a href="/docs/api/scalars#boolean"><code>Boolean</code></a>
+</td>
+<td>
+
+</td>
+</tr>
 <tr>
 <td>
 _warning<br />
@@ -2498,6 +3044,36 @@ filepath<br />
 </tbody>
 </table>
 
+## I18nBodyCommentFilter
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+reviewer<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+comment<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
 ## I18nBodyConditionalTextFilter
 
 
@@ -2509,7 +3085,16 @@ filepath<br />
 <tbody>
 <tr>
 <td>
-text<br />
+children<br />
+<a href="/docs/api/inputObjects#richtextfilter"><code>RichTextFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+action<br />
 <a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
 </td>
 <td>
@@ -2565,15 +3150,6 @@ requireBothConditions<br />
 <td>
 fallback<br />
 <a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
-</td>
-<td>
-
-</td>
-</tr>
-<tr>
-<td>
-debug<br />
-<a href="/docs/api/inputObjects#booleanfilter"><code>BooleanFilter</code></a>
 </td>
 <td>
 
@@ -2663,7 +3239,25 @@ caption<br />
 <tr>
 <td>
 size<br />
+<a href="/docs/api/inputObjects#numberfilter"><code>NumberFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+align<br />
 <a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+hideCaption<br />
+<a href="/docs/api/inputObjects#booleanfilter"><code>BooleanFilter</code></a>
 </td>
 <td>
 
@@ -2701,8 +3295,8 @@ CodeSnippet<br />
 </tr>
 <tr>
 <td>
-hidden<br />
-<a href="/docs/api/inputObjects#i18nbodyhiddenfilter"><code>I18nBodyHiddenFilter</code></a>
+Comment<br />
+<a href="/docs/api/inputObjects#i18nbodycommentfilter"><code>I18nBodyCommentFilter</code></a>
 </td>
 <td>
 
@@ -2867,22 +3461,19 @@ termKey<br />
 
 </td>
 </tr>
-</tbody>
-</table>
-
-## I18nBodyHiddenFilter
-
-
-
-<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
-
-<table>
-<thead><tr><th>Name</th><th>Description</th></tr></thead>
-<tbody>
 <tr>
 <td>
-comment<br />
-<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+initcap<br />
+<a href="/docs/api/inputObjects#booleanfilter"><code>BooleanFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+bold<br />
+<a href="/docs/api/inputObjects#booleanfilter"><code>BooleanFilter</code></a>
 </td>
 <td>
 
@@ -3073,7 +3664,7 @@ deactivate<br />
 <tbody>
 <tr>
 <td>
-setKey<br />
+variableSelection<br />
 <a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
 </td>
 <td>
@@ -3082,8 +3673,17 @@ setKey<br />
 </tr>
 <tr>
 <td>
-variableKey<br />
-<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+initcap<br />
+<a href="/docs/api/inputObjects#booleanfilter"><code>BooleanFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+bold<br />
+<a href="/docs/api/inputObjects#booleanfilter"><code>BooleanFilter</code></a>
 </td>
 <td>
 
@@ -3103,7 +3703,52 @@ variableKey<br />
 <tbody>
 <tr>
 <td>
+help<br />
+<a href="/docs/api/inputObjects#booleanfilter"><code>BooleanFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+lastmod<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+modifiedBy<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
 title<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+body<br />
+<a href="/docs/api/inputObjects#i18nbodyfilter"><code>I18nBodyFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+conditions<br />
 <a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
 </td>
 <td>
@@ -3121,6 +3766,15 @@ description<br />
 </tr>
 <tr>
 <td>
+slug<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
 tags<br />
 <a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
 </td>
@@ -3130,8 +3784,8 @@ tags<br />
 </tr>
 <tr>
 <td>
-status<br />
-<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+draft<br />
+<a href="/docs/api/inputObjects#booleanfilter"><code>BooleanFilter</code></a>
 </td>
 <td>
 
@@ -3139,8 +3793,44 @@ status<br />
 </tr>
 <tr>
 <td>
-body<br />
-<a href="/docs/api/inputObjects#i18nbodyfilter"><code>I18nBodyFilter</code></a>
+review<br />
+<a href="/docs/api/inputObjects#booleanfilter"><code>BooleanFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+translate<br />
+<a href="/docs/api/inputObjects#booleanfilter"><code>BooleanFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+approved<br />
+<a href="/docs/api/inputObjects#booleanfilter"><code>BooleanFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+published<br />
+<a href="/docs/api/inputObjects#booleanfilter"><code>BooleanFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+unlisted<br />
+<a href="/docs/api/inputObjects#booleanfilter"><code>BooleanFilter</code></a>
 </td>
 <td>
 
@@ -3160,6 +3850,33 @@ body<br />
 <tbody>
 <tr>
 <td>
+help<br />
+<a href="/docs/api/scalars#boolean"><code>Boolean</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+lastmod<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+modifiedBy<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
 title<br />
 <a href="/docs/api/scalars#string"><code>String</code></a>
 </td>
@@ -3169,7 +3886,34 @@ title<br />
 </tr>
 <tr>
 <td>
+body<br />
+<a href="/docs/api/scalars#json"><code>JSON</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+conditions<br />
+<a href="/docs/api/scalars#string"><code>[String]</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
 description<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+slug<br />
 <a href="/docs/api/scalars#string"><code>String</code></a>
 </td>
 <td>
@@ -3187,8 +3931,8 @@ tags<br />
 </tr>
 <tr>
 <td>
-status<br />
-<a href="/docs/api/scalars#string"><code>String</code></a>
+draft<br />
+<a href="/docs/api/scalars#boolean"><code>Boolean</code></a>
 </td>
 <td>
 
@@ -3196,8 +3940,44 @@ status<br />
 </tr>
 <tr>
 <td>
-body<br />
-<a href="/docs/api/scalars#json"><code>JSON</code></a>
+review<br />
+<a href="/docs/api/scalars#boolean"><code>Boolean</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+translate<br />
+<a href="/docs/api/scalars#boolean"><code>Boolean</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+approved<br />
+<a href="/docs/api/scalars#boolean"><code>Boolean</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+published<br />
+<a href="/docs/api/scalars#boolean"><code>Boolean</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+unlisted<br />
+<a href="/docs/api/scalars#boolean"><code>Boolean</code></a>
 </td>
 <td>
 
@@ -3246,6 +4026,237 @@ exists<br />
 <td>
 in<br />
 <a href="/docs/api/scalars#string"><code>[String]</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## MediaFilter
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+media<br />
+<a href="/docs/api/inputObjects#mediamediafilter"><code>MediaMediaFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## MediaMediaFilter
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+filename<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+path<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+size<br />
+<a href="/docs/api/inputObjects#numberfilter"><code>NumberFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+dimensions<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+lastModified<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## MediaMediaMutation
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+filename<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+path<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+size<br />
+<a href="/docs/api/scalars#float"><code>Float</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+dimensions<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+lastModified<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## MediaMutation
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+media<br />
+<a href="/docs/api/inputObjects#mediamediamutation"><code>[MediaMediaMutation]</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## NumberFilter
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+lt<br />
+<a href="/docs/api/scalars#float"><code>Float</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+lte<br />
+<a href="/docs/api/scalars#float"><code>Float</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+gte<br />
+<a href="/docs/api/scalars#float"><code>Float</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+gt<br />
+<a href="/docs/api/scalars#float"><code>Float</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+eq<br />
+<a href="/docs/api/scalars#float"><code>Float</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+exists<br />
+<a href="/docs/api/scalars#boolean"><code>Boolean</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+in<br />
+<a href="/docs/api/scalars#float"><code>[Float]</code></a>
 </td>
 <td>
 
@@ -3353,6 +4364,36 @@ filepath<br />
 </tbody>
 </table>
 
+## PagesBodyCommentFilter
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+reviewer<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+comment<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
 ## PagesBodyConditionalTextFilter
 
 
@@ -3364,7 +4405,16 @@ filepath<br />
 <tbody>
 <tr>
 <td>
-text<br />
+children<br />
+<a href="/docs/api/inputObjects#richtextfilter"><code>RichTextFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+action<br />
 <a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
 </td>
 <td>
@@ -3420,15 +4470,6 @@ requireBothConditions<br />
 <td>
 fallback<br />
 <a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
-</td>
-<td>
-
-</td>
-</tr>
-<tr>
-<td>
-debug<br />
-<a href="/docs/api/inputObjects#booleanfilter"><code>BooleanFilter</code></a>
 </td>
 <td>
 
@@ -3518,7 +4559,25 @@ caption<br />
 <tr>
 <td>
 size<br />
+<a href="/docs/api/inputObjects#numberfilter"><code>NumberFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+align<br />
 <a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+hideCaption<br />
+<a href="/docs/api/inputObjects#booleanfilter"><code>BooleanFilter</code></a>
 </td>
 <td>
 
@@ -3556,8 +4615,8 @@ CodeSnippet<br />
 </tr>
 <tr>
 <td>
-hidden<br />
-<a href="/docs/api/inputObjects#pagesbodyhiddenfilter"><code>PagesBodyHiddenFilter</code></a>
+Comment<br />
+<a href="/docs/api/inputObjects#pagesbodycommentfilter"><code>PagesBodyCommentFilter</code></a>
 </td>
 <td>
 
@@ -3722,22 +4781,19 @@ termKey<br />
 
 </td>
 </tr>
-</tbody>
-</table>
-
-## PagesBodyHiddenFilter
-
-
-
-<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
-
-<table>
-<thead><tr><th>Name</th><th>Description</th></tr></thead>
-<tbody>
 <tr>
 <td>
-comment<br />
-<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+initcap<br />
+<a href="/docs/api/inputObjects#booleanfilter"><code>BooleanFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+bold<br />
+<a href="/docs/api/inputObjects#booleanfilter"><code>BooleanFilter</code></a>
 </td>
 <td>
 
@@ -3928,7 +4984,7 @@ deactivate<br />
 <tbody>
 <tr>
 <td>
-setKey<br />
+variableSelection<br />
 <a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
 </td>
 <td>
@@ -3937,8 +4993,17 @@ setKey<br />
 </tr>
 <tr>
 <td>
-variableKey<br />
-<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+initcap<br />
+<a href="/docs/api/inputObjects#booleanfilter"><code>BooleanFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+bold<br />
+<a href="/docs/api/inputObjects#booleanfilter"><code>BooleanFilter</code></a>
 </td>
 <td>
 
@@ -3956,6 +5021,15 @@ variableKey<br />
 <table>
 <thead><tr><th>Name</th><th>Description</th></tr></thead>
 <tbody>
+<tr>
+<td>
+help<br />
+<a href="/docs/api/inputObjects#booleanfilter"><code>BooleanFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
 <tr>
 <td>
 title<br />
@@ -3995,6 +5069,15 @@ body<br />
 <table>
 <thead><tr><th>Name</th><th>Description</th></tr></thead>
 <tbody>
+<tr>
+<td>
+help<br />
+<a href="/docs/api/scalars#boolean"><code>Boolean</code></a>
+</td>
+<td>
+
+</td>
+</tr>
 <tr>
 <td>
 title<br />
@@ -4220,6 +5303,36 @@ filepath<br />
 </tbody>
 </table>
 
+## PostBodyCommentFilter
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+reviewer<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+comment<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
 ## PostBodyConditionalTextFilter
 
 
@@ -4231,7 +5344,16 @@ filepath<br />
 <tbody>
 <tr>
 <td>
-text<br />
+children<br />
+<a href="/docs/api/inputObjects#richtextfilter"><code>RichTextFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+action<br />
 <a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
 </td>
 <td>
@@ -4287,15 +5409,6 @@ requireBothConditions<br />
 <td>
 fallback<br />
 <a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
-</td>
-<td>
-
-</td>
-</tr>
-<tr>
-<td>
-debug<br />
-<a href="/docs/api/inputObjects#booleanfilter"><code>BooleanFilter</code></a>
 </td>
 <td>
 
@@ -4385,7 +5498,25 @@ caption<br />
 <tr>
 <td>
 size<br />
+<a href="/docs/api/inputObjects#numberfilter"><code>NumberFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+align<br />
 <a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+hideCaption<br />
+<a href="/docs/api/inputObjects#booleanfilter"><code>BooleanFilter</code></a>
 </td>
 <td>
 
@@ -4423,8 +5554,8 @@ CodeSnippet<br />
 </tr>
 <tr>
 <td>
-hidden<br />
-<a href="/docs/api/inputObjects#postbodyhiddenfilter"><code>PostBodyHiddenFilter</code></a>
+Comment<br />
+<a href="/docs/api/inputObjects#postbodycommentfilter"><code>PostBodyCommentFilter</code></a>
 </td>
 <td>
 
@@ -4589,22 +5720,19 @@ termKey<br />
 
 </td>
 </tr>
-</tbody>
-</table>
-
-## PostBodyHiddenFilter
-
-
-
-<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
-
-<table>
-<thead><tr><th>Name</th><th>Description</th></tr></thead>
-<tbody>
 <tr>
 <td>
-comment<br />
-<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+initcap<br />
+<a href="/docs/api/inputObjects#booleanfilter"><code>BooleanFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+bold<br />
+<a href="/docs/api/inputObjects#booleanfilter"><code>BooleanFilter</code></a>
 </td>
 <td>
 
@@ -4795,7 +5923,7 @@ deactivate<br />
 <tbody>
 <tr>
 <td>
-setKey<br />
+variableSelection<br />
 <a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
 </td>
 <td>
@@ -4804,8 +5932,17 @@ setKey<br />
 </tr>
 <tr>
 <td>
-variableKey<br />
-<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+initcap<br />
+<a href="/docs/api/inputObjects#booleanfilter"><code>BooleanFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+bold<br />
+<a href="/docs/api/inputObjects#booleanfilter"><code>BooleanFilter</code></a>
 </td>
 <td>
 
@@ -4823,6 +5960,24 @@ variableKey<br />
 <table>
 <thead><tr><th>Name</th><th>Description</th></tr></thead>
 <tbody>
+<tr>
+<td>
+help<br />
+<a href="/docs/api/inputObjects#booleanfilter"><code>BooleanFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+lastmod<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
 <tr>
 <td>
 title<br />
@@ -4880,6 +6035,24 @@ body<br />
 <table>
 <thead><tr><th>Name</th><th>Description</th></tr></thead>
 <tbody>
+<tr>
+<td>
+help<br />
+<a href="/docs/api/scalars#boolean"><code>Boolean</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+lastmod<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
 <tr>
 <td>
 title<br />
@@ -4967,6 +6140,84 @@ exists<br />
 </tbody>
 </table>
 
+## SettingsColorModeFilter
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+defaultMode<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+disableSwitch<br />
+<a href="/docs/api/inputObjects#booleanfilter"><code>BooleanFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+respectPrefersColorScheme<br />
+<a href="/docs/api/inputObjects#booleanfilter"><code>BooleanFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## SettingsColorModeMutation
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+defaultMode<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+disableSwitch<br />
+<a href="/docs/api/scalars#boolean"><code>Boolean</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+respectPrefersColorScheme<br />
+<a href="/docs/api/scalars#boolean"><code>Boolean</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
 ## SettingsFilter
 
 
@@ -4976,6 +6227,15 @@ exists<br />
 <table>
 <thead><tr><th>Name</th><th>Description</th></tr></thead>
 <tbody>
+<tr>
+<td>
+help<br />
+<a href="/docs/api/inputObjects#booleanfilter"><code>BooleanFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
 <tr>
 <td>
 _warning<br />
@@ -4989,15 +6249,6 @@ _warning<br />
 <td>
 label<br />
 <a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
-</td>
-<td>
-
-</td>
-</tr>
-<tr>
-<td>
-logo<br />
-<a href="/docs/api/inputObjects#settingslogofilter"><code>SettingsLogoFilter</code></a>
 </td>
 <td>
 
@@ -5023,8 +6274,26 @@ tagline<br />
 </tr>
 <tr>
 <td>
-url<br />
+favicon<br />
+<a href="/docs/api/inputObjects#imagefilter"><code>ImageFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+graphql<br />
 <a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+colorMode<br />
+<a href="/docs/api/inputObjects#settingscolormodefilter"><code>SettingsColorModeFilter</code></a>
 </td>
 <td>
 
@@ -5034,6 +6303,87 @@ url<br />
 <td>
 footer<br />
 <a href="/docs/api/inputObjects#settingsfooterfilter"><code>SettingsFooterFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+github<br />
+<a href="/docs/api/inputObjects#settingsgithubfilter"><code>SettingsGithubFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+languages<br />
+<a href="/docs/api/inputObjects#settingslanguagesfilter"><code>SettingsLanguagesFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+logo<br />
+<a href="/docs/api/inputObjects#settingslogofilter"><code>SettingsLogoFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+openapi<br />
+<a href="/docs/api/inputObjects#settingsopenapifilter"><code>SettingsOpenapiFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+prism<br />
+<a href="/docs/api/inputObjects#settingsprismfilter"><code>SettingsPrismFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+url<br />
+<a href="/docs/api/inputObjects#settingsurlfilter"><code>SettingsUrlFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+navbar<br />
+<a href="/docs/api/inputObjects#settingsnavbarfilter"><code>SettingsNavbarFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+sidebarHideable<br />
+<a href="/docs/api/inputObjects#booleanfilter"><code>BooleanFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+showReadingTime<br />
+<a href="/docs/api/inputObjects#booleanfilter"><code>BooleanFilter</code></a>
 </td>
 <td>
 
@@ -5459,6 +6809,186 @@ copyright<br />
 </tbody>
 </table>
 
+## SettingsGithubFilter
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+projectName<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+organizationName<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## SettingsGithubMutation
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+projectName<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+organizationName<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## SettingsLanguagesFilter
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+supported<br />
+<a href="/docs/api/inputObjects#settingslanguagessupportedfilter"><code>SettingsLanguagesSupportedFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+default<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## SettingsLanguagesMutation
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+supported<br />
+<a href="/docs/api/inputObjects#settingslanguagessupportedmutation"><code>[SettingsLanguagesSupportedMutation]</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+default<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## SettingsLanguagesSupportedFilter
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+code<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+label<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## SettingsLanguagesSupportedMutation
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+code<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+label<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
 ## SettingsLogoFilter
 
 
@@ -5530,6 +7060,15 @@ src<br />
 <tbody>
 <tr>
 <td>
+help<br />
+<a href="/docs/api/scalars#boolean"><code>Boolean</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
 _warning<br />
 <a href="/docs/api/scalars#string"><code>String</code></a>
 </td>
@@ -5541,15 +7080,6 @@ _warning<br />
 <td>
 label<br />
 <a href="/docs/api/scalars#string"><code>String</code></a>
-</td>
-<td>
-
-</td>
-</tr>
-<tr>
-<td>
-logo<br />
-<a href="/docs/api/inputObjects#settingslogomutation"><code>SettingsLogoMutation</code></a>
 </td>
 <td>
 
@@ -5575,8 +7105,26 @@ tagline<br />
 </tr>
 <tr>
 <td>
-url<br />
+favicon<br />
 <a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+graphql<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+colorMode<br />
+<a href="/docs/api/inputObjects#settingscolormodemutation"><code>SettingsColorModeMutation</code></a>
 </td>
 <td>
 
@@ -5586,6 +7134,1257 @@ url<br />
 <td>
 footer<br />
 <a href="/docs/api/inputObjects#settingsfootermutation"><code>SettingsFooterMutation</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+github<br />
+<a href="/docs/api/inputObjects#settingsgithubmutation"><code>SettingsGithubMutation</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+languages<br />
+<a href="/docs/api/inputObjects#settingslanguagesmutation"><code>SettingsLanguagesMutation</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+logo<br />
+<a href="/docs/api/inputObjects#settingslogomutation"><code>SettingsLogoMutation</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+openapi<br />
+<a href="/docs/api/inputObjects#settingsopenapimutation"><code>SettingsOpenapiMutation</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+prism<br />
+<a href="/docs/api/inputObjects#settingsprismmutation"><code>SettingsPrismMutation</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+url<br />
+<a href="/docs/api/inputObjects#settingsurlmutation"><code>SettingsUrlMutation</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+navbar<br />
+<a href="/docs/api/inputObjects#settingsnavbarmutation"><code>[SettingsNavbarMutation]</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+sidebarHideable<br />
+<a href="/docs/api/scalars#boolean"><code>Boolean</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+showReadingTime<br />
+<a href="/docs/api/scalars#boolean"><code>Boolean</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## SettingsNavbarDocLinkFilter
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+doc<br />
+<a href="/docs/api/inputObjects#docfilter"><code>DocFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## SettingsNavbarFilter
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+label<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+link<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+docLink<br />
+<a href="/docs/api/inputObjects#settingsnavbardoclinkfilter"><code>SettingsNavbarDocLinkFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+pageLink<br />
+<a href="/docs/api/inputObjects#settingsnavbarpagelinkfilter"><code>SettingsNavbarPageLinkFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+externalLink<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+manualPath<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+docId<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+position<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+items<br />
+<a href="/docs/api/inputObjects#settingsnavbaritemsfilter"><code>SettingsNavbarItemsFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## SettingsNavbarItemsDocLinkFilter
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+doc<br />
+<a href="/docs/api/inputObjects#docfilter"><code>DocFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## SettingsNavbarItemsFilter
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+label<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+link<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+docLink<br />
+<a href="/docs/api/inputObjects#settingsnavbaritemsdoclinkfilter"><code>SettingsNavbarItemsDocLinkFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+pageLink<br />
+<a href="/docs/api/inputObjects#settingsnavbaritemspagelinkfilter"><code>SettingsNavbarItemsPageLinkFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+externalLink<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+manualPath<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+docId<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+position<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+items<br />
+<a href="/docs/api/inputObjects#settingsnavbaritemsitemsfilter"><code>SettingsNavbarItemsItemsFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## SettingsNavbarItemsItemsDocLinkFilter
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+doc<br />
+<a href="/docs/api/inputObjects#docfilter"><code>DocFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## SettingsNavbarItemsItemsFilter
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+label<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+link<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+docLink<br />
+<a href="/docs/api/inputObjects#settingsnavbaritemsitemsdoclinkfilter"><code>SettingsNavbarItemsItemsDocLinkFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+pageLink<br />
+<a href="/docs/api/inputObjects#settingsnavbaritemsitemspagelinkfilter"><code>SettingsNavbarItemsItemsPageLinkFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+externalLink<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+manualPath<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+docId<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+position<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## SettingsNavbarItemsItemsMutation
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+label<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+link<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+docLink<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+pageLink<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+externalLink<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+manualPath<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+docId<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+position<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## SettingsNavbarItemsItemsPageLinkFilter
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+pages<br />
+<a href="/docs/api/inputObjects#pagesfilter"><code>PagesFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## SettingsNavbarItemsMutation
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+label<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+link<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+docLink<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+pageLink<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+externalLink<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+manualPath<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+docId<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+position<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+items<br />
+<a href="/docs/api/inputObjects#settingsnavbaritemsitemsmutation"><code>[SettingsNavbarItemsItemsMutation]</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## SettingsNavbarItemsPageLinkFilter
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+pages<br />
+<a href="/docs/api/inputObjects#pagesfilter"><code>PagesFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## SettingsNavbarMutation
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+label<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+link<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+docLink<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+pageLink<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+externalLink<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+manualPath<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+docId<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+position<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+items<br />
+<a href="/docs/api/inputObjects#settingsnavbaritemsmutation"><code>[SettingsNavbarItemsMutation]</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## SettingsNavbarPageLinkFilter
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+pages<br />
+<a href="/docs/api/inputObjects#pagesfilter"><code>PagesFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## SettingsOpenapiApisFilter
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+name<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+specPath<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+outputDir<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+downloadUrl<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+groupPathsBy<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+categoryLinkSource<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## SettingsOpenapiApisMutation
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+name<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+specPath<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+outputDir<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+downloadUrl<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+groupPathsBy<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+categoryLinkSource<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## SettingsOpenapiFilter
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+apis<br />
+<a href="/docs/api/inputObjects#settingsopenapiapisfilter"><code>SettingsOpenapiApisFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+languageTabs<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## SettingsOpenapiMutation
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+apis<br />
+<a href="/docs/api/inputObjects#settingsopenapiapismutation"><code>[SettingsOpenapiApisMutation]</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+languageTabs<br />
+<a href="/docs/api/scalars#string"><code>[String]</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## SettingsPrismFilter
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+additionalLanguages<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+magicComments<br />
+<a href="/docs/api/inputObjects#settingsprismmagiccommentsfilter"><code>SettingsPrismMagicCommentsFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+theme<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+darkTheme<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## SettingsPrismMagicCommentsBlockFilter
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+start<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+end<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## SettingsPrismMagicCommentsBlockMutation
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+start<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+end<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## SettingsPrismMagicCommentsFilter
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+className<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+line<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+block<br />
+<a href="/docs/api/inputObjects#settingsprismmagiccommentsblockfilter"><code>SettingsPrismMagicCommentsBlockFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## SettingsPrismMagicCommentsMutation
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+className<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+line<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+block<br />
+<a href="/docs/api/inputObjects#settingsprismmagiccommentsblockmutation"><code>SettingsPrismMagicCommentsBlockMutation</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## SettingsPrismMutation
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+additionalLanguages<br />
+<a href="/docs/api/scalars#string"><code>[String]</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+magicComments<br />
+<a href="/docs/api/inputObjects#settingsprismmagiccommentsmutation"><code>[SettingsPrismMagicCommentsMutation]</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+theme<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+darkTheme<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## SettingsUrlFilter
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+siteUrl<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+baseUrl<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+trailingSlash<br />
+<a href="/docs/api/inputObjects#booleanfilter"><code>BooleanFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## SettingsUrlMutation
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+siteUrl<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+baseUrl<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+trailingSlash<br />
+<a href="/docs/api/scalars#boolean"><code>Boolean</code></a>
 </td>
 <td>
 
@@ -5603,6 +8402,15 @@ footer<br />
 <table>
 <thead><tr><th>Name</th><th>Description</th></tr></thead>
 <tbody>
+<tr>
+<td>
+help<br />
+<a href="/docs/api/inputObjects#booleanfilter"><code>BooleanFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
 <tr>
 <td>
 _warning<br />
@@ -6853,6 +9661,15 @@ link<br />
 <tbody>
 <tr>
 <td>
+help<br />
+<a href="/docs/api/scalars#boolean"><code>Boolean</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
 _warning<br />
 <a href="/docs/api/scalars#string"><code>String</code></a>
 </td>
@@ -6980,6 +9797,36 @@ filepath<br />
 </tbody>
 </table>
 
+## SnippetsBodyCommentFilter
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+reviewer<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+comment<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
 ## SnippetsBodyConditionalTextFilter
 
 
@@ -6991,7 +9838,16 @@ filepath<br />
 <tbody>
 <tr>
 <td>
-text<br />
+children<br />
+<a href="/docs/api/inputObjects#richtextfilter"><code>RichTextFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+action<br />
 <a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
 </td>
 <td>
@@ -7047,15 +9903,6 @@ requireBothConditions<br />
 <td>
 fallback<br />
 <a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
-</td>
-<td>
-
-</td>
-</tr>
-<tr>
-<td>
-debug<br />
-<a href="/docs/api/inputObjects#booleanfilter"><code>BooleanFilter</code></a>
 </td>
 <td>
 
@@ -7145,7 +9992,25 @@ caption<br />
 <tr>
 <td>
 size<br />
+<a href="/docs/api/inputObjects#numberfilter"><code>NumberFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+align<br />
 <a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+hideCaption<br />
+<a href="/docs/api/inputObjects#booleanfilter"><code>BooleanFilter</code></a>
 </td>
 <td>
 
@@ -7183,8 +10048,8 @@ CodeSnippet<br />
 </tr>
 <tr>
 <td>
-hidden<br />
-<a href="/docs/api/inputObjects#snippetsbodyhiddenfilter"><code>SnippetsBodyHiddenFilter</code></a>
+Comment<br />
+<a href="/docs/api/inputObjects#snippetsbodycommentfilter"><code>SnippetsBodyCommentFilter</code></a>
 </td>
 <td>
 
@@ -7349,22 +10214,19 @@ termKey<br />
 
 </td>
 </tr>
-</tbody>
-</table>
-
-## SnippetsBodyHiddenFilter
-
-
-
-<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
-
-<table>
-<thead><tr><th>Name</th><th>Description</th></tr></thead>
-<tbody>
 <tr>
 <td>
-comment<br />
-<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+initcap<br />
+<a href="/docs/api/inputObjects#booleanfilter"><code>BooleanFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+bold<br />
+<a href="/docs/api/inputObjects#booleanfilter"><code>BooleanFilter</code></a>
 </td>
 <td>
 
@@ -7555,7 +10417,7 @@ deactivate<br />
 <tbody>
 <tr>
 <td>
-setKey<br />
+variableSelection<br />
 <a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
 </td>
 <td>
@@ -7564,8 +10426,17 @@ setKey<br />
 </tr>
 <tr>
 <td>
-variableKey<br />
-<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+initcap<br />
+<a href="/docs/api/inputObjects#booleanfilter"><code>BooleanFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+bold<br />
+<a href="/docs/api/inputObjects#booleanfilter"><code>BooleanFilter</code></a>
 </td>
 <td>
 
@@ -7583,6 +10454,15 @@ variableKey<br />
 <table>
 <thead><tr><th>Name</th><th>Description</th></tr></thead>
 <tbody>
+<tr>
+<td>
+help<br />
+<a href="/docs/api/inputObjects#booleanfilter"><code>BooleanFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
 <tr>
 <td>
 title<br />
@@ -7622,6 +10502,15 @@ body<br />
 <table>
 <thead><tr><th>Name</th><th>Description</th></tr></thead>
 <tbody>
+<tr>
+<td>
+help<br />
+<a href="/docs/api/scalars#boolean"><code>Boolean</code></a>
+</td>
+<td>
+
+</td>
+</tr>
 <tr>
 <td>
 title<br />
@@ -7711,6 +10600,15 @@ in<br />
 <tbody>
 <tr>
 <td>
+help<br />
+<a href="/docs/api/inputObjects#booleanfilter"><code>BooleanFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
 taxonomy<br />
 <a href="/docs/api/inputObjects#taxonomytaxonomyfilter"><code>TaxonomyTaxonomyFilter</code></a>
 </td>
@@ -7730,6 +10628,15 @@ taxonomy<br />
 <table>
 <thead><tr><th>Name</th><th>Description</th></tr></thead>
 <tbody>
+<tr>
+<td>
+help<br />
+<a href="/docs/api/scalars#boolean"><code>Boolean</code></a>
+</td>
+<td>
+
+</td>
+</tr>
 <tr>
 <td>
 taxonomy<br />
@@ -7904,6 +10811,702 @@ children<br />
 </tbody>
 </table>
 
+## ThemeColorsFilter
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+primary<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+primaryDark<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+primaryDarker<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+primaryDarkest<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+primaryLight<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+primaryLighter<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+primaryLightest<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+footerBackground<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+highlightedCodeLineBackground<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## ThemeColorsMutation
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+primary<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+primaryDark<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+primaryDarker<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+primaryDarkest<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+primaryLight<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+primaryLighter<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+primaryLightest<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+footerBackground<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+highlightedCodeLineBackground<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## ThemeDarkColorsFilter
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+primary<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+primaryDark<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+primaryDarker<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+primaryDarkest<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+primaryLight<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+primaryLighter<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+primaryLightest<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+footerBackground<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+highlightedCodeLineBackground<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## ThemeDarkColorsMutation
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+primary<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+primaryDark<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+primaryDarker<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+primaryDarkest<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+primaryLight<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+primaryLighter<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+primaryLightest<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+footerBackground<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+highlightedCodeLineBackground<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## ThemeFilter
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+_warning<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+help<br />
+<a href="/docs/api/inputObjects#booleanfilter"><code>BooleanFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+colors<br />
+<a href="/docs/api/inputObjects#themecolorsfilter"><code>ThemeColorsFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+darkColors<br />
+<a href="/docs/api/inputObjects#themedarkcolorsfilter"><code>ThemeDarkColorsFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+typography<br />
+<a href="/docs/api/inputObjects#themetypographyfilter"><code>ThemeTypographyFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+layout<br />
+<a href="/docs/api/inputObjects#themelayoutfilter"><code>ThemeLayoutFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+customCSS<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## ThemeLayoutFilter
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+globalRadius<br />
+<a href="/docs/api/inputObjects#numberfilter"><code>NumberFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+buttonRadius<br />
+<a href="/docs/api/inputObjects#numberfilter"><code>NumberFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+cardRadius<br />
+<a href="/docs/api/inputObjects#numberfilter"><code>NumberFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+navbarHeight<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## ThemeLayoutMutation
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+globalRadius<br />
+<a href="/docs/api/scalars#float"><code>Float</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+buttonRadius<br />
+<a href="/docs/api/scalars#float"><code>Float</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+cardRadius<br />
+<a href="/docs/api/scalars#float"><code>Float</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+navbarHeight<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## ThemeMutation
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+_warning<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+help<br />
+<a href="/docs/api/scalars#boolean"><code>Boolean</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+colors<br />
+<a href="/docs/api/inputObjects#themecolorsmutation"><code>ThemeColorsMutation</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+darkColors<br />
+<a href="/docs/api/inputObjects#themedarkcolorsmutation"><code>ThemeDarkColorsMutation</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+typography<br />
+<a href="/docs/api/inputObjects#themetypographymutation"><code>ThemeTypographyMutation</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+layout<br />
+<a href="/docs/api/inputObjects#themelayoutmutation"><code>ThemeLayoutMutation</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+customCSS<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## ThemeTypographyFilter
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+baseFontFamily<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+monospaceFontFamily<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+codeFontSize<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## ThemeTypographyMutation
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+baseFontFamily<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+monospaceFontFamily<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+codeFontSize<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
 ## VariableSetsFilter
 
 
@@ -7913,6 +11516,15 @@ children<br />
 <table>
 <thead><tr><th>Name</th><th>Description</th></tr></thead>
 <tbody>
+<tr>
+<td>
+help<br />
+<a href="/docs/api/inputObjects#booleanfilter"><code>BooleanFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
 <tr>
 <td>
 variableSets<br />
@@ -7934,6 +11546,15 @@ variableSets<br />
 <table>
 <thead><tr><th>Name</th><th>Description</th></tr></thead>
 <tbody>
+<tr>
+<td>
+help<br />
+<a href="/docs/api/scalars#boolean"><code>Boolean</code></a>
+</td>
+<td>
+
+</td>
+</tr>
 <tr>
 <td>
 variableSets<br />
@@ -8225,6 +11846,36 @@ filepath<br />
 </tbody>
 </table>
 
+## WikiBodyCommentFilter
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+reviewer<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+comment<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
 ## WikiBodyConditionalTextFilter
 
 
@@ -8236,7 +11887,16 @@ filepath<br />
 <tbody>
 <tr>
 <td>
-text<br />
+children<br />
+<a href="/docs/api/inputObjects#richtextfilter"><code>RichTextFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+action<br />
 <a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
 </td>
 <td>
@@ -8292,15 +11952,6 @@ requireBothConditions<br />
 <td>
 fallback<br />
 <a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
-</td>
-<td>
-
-</td>
-</tr>
-<tr>
-<td>
-debug<br />
-<a href="/docs/api/inputObjects#booleanfilter"><code>BooleanFilter</code></a>
 </td>
 <td>
 
@@ -8390,7 +12041,25 @@ caption<br />
 <tr>
 <td>
 size<br />
+<a href="/docs/api/inputObjects#numberfilter"><code>NumberFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+align<br />
 <a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+hideCaption<br />
+<a href="/docs/api/inputObjects#booleanfilter"><code>BooleanFilter</code></a>
 </td>
 <td>
 
@@ -8428,8 +12097,8 @@ CodeSnippet<br />
 </tr>
 <tr>
 <td>
-hidden<br />
-<a href="/docs/api/inputObjects#wikibodyhiddenfilter"><code>WikiBodyHiddenFilter</code></a>
+Comment<br />
+<a href="/docs/api/inputObjects#wikibodycommentfilter"><code>WikiBodyCommentFilter</code></a>
 </td>
 <td>
 
@@ -8594,22 +12263,19 @@ termKey<br />
 
 </td>
 </tr>
-</tbody>
-</table>
-
-## WikiBodyHiddenFilter
-
-
-
-<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
-
-<table>
-<thead><tr><th>Name</th><th>Description</th></tr></thead>
-<tbody>
 <tr>
 <td>
-comment<br />
-<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+initcap<br />
+<a href="/docs/api/inputObjects#booleanfilter"><code>BooleanFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+bold<br />
+<a href="/docs/api/inputObjects#booleanfilter"><code>BooleanFilter</code></a>
 </td>
 <td>
 
@@ -8800,7 +12466,7 @@ deactivate<br />
 <tbody>
 <tr>
 <td>
-setKey<br />
+variableSelection<br />
 <a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
 </td>
 <td>
@@ -8809,8 +12475,17 @@ setKey<br />
 </tr>
 <tr>
 <td>
-variableKey<br />
-<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+initcap<br />
+<a href="/docs/api/inputObjects#booleanfilter"><code>BooleanFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+bold<br />
+<a href="/docs/api/inputObjects#booleanfilter"><code>BooleanFilter</code></a>
 </td>
 <td>
 
@@ -8828,6 +12503,24 @@ variableKey<br />
 <table>
 <thead><tr><th>Name</th><th>Description</th></tr></thead>
 <tbody>
+<tr>
+<td>
+help<br />
+<a href="/docs/api/inputObjects#booleanfilter"><code>BooleanFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+lastmod<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
 <tr>
 <td>
 title<br />
@@ -8858,6 +12551,24 @@ body<br />
 <table>
 <thead><tr><th>Name</th><th>Description</th></tr></thead>
 <tbody>
+<tr>
+<td>
+help<br />
+<a href="/docs/api/scalars#boolean"><code>Boolean</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+lastmod<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
 <tr>
 <td>
 title<br />

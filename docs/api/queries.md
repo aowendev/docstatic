@@ -125,6 +125,97 @@ filter<br />
 </tbody>
 </table>
 
+## dashboards
+
+**Type:** [Dashboards!](/docs/api/objects#dashboards)
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+relativePath<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## dashboardsConnection
+
+**Type:** [DashboardsConnection!](/docs/api/objects#dashboardsconnection)
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+before<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+after<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+first<br />
+<a href="/docs/api/scalars#float"><code>Float</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+last<br />
+<a href="/docs/api/scalars#float"><code>Float</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+sort<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+filter<br />
+<a href="/docs/api/inputObjects#dashboardsfilter"><code>DashboardsFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
 ## doc
 
 **Type:** [Doc!](/docs/api/objects#doc)
@@ -240,6 +331,97 @@ collection<br />
 <td>
 relativePath<br />
 <a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## generated
+
+**Type:** [Generated!](/docs/api/objects#generated)
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+relativePath<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## generatedConnection
+
+**Type:** [GeneratedConnection!](/docs/api/objects#generatedconnection)
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+before<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+after<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+first<br />
+<a href="/docs/api/scalars#float"><code>Float</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+last<br />
+<a href="/docs/api/scalars#float"><code>Float</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+sort<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+filter<br />
+<a href="/docs/api/inputObjects#generatedfilter"><code>GeneratedFilter</code></a>
 </td>
 <td>
 
@@ -536,6 +718,97 @@ sort<br />
 <td>
 filter<br />
 <a href="/docs/api/inputObjects#i18nfilter"><code>I18nFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## media
+
+**Type:** [Media!](/docs/api/objects#media)
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+relativePath<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## mediaConnection
+
+**Type:** [MediaConnection!](/docs/api/objects#mediaconnection)
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+before<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+after<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+first<br />
+<a href="/docs/api/scalars#float"><code>Float</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+last<br />
+<a href="/docs/api/scalars#float"><code>Float</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+sort<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+filter<br />
+<a href="/docs/api/inputObjects#mediafilter"><code>MediaFilter</code></a>
 </td>
 <td>
 
@@ -1105,6 +1378,97 @@ sort<br />
 <td>
 filter<br />
 <a href="/docs/api/inputObjects#taxonomyfilter"><code>TaxonomyFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## theme
+
+**Type:** [Theme!](/docs/api/objects#theme)
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+relativePath<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## themeConnection
+
+**Type:** [ThemeConnection!](/docs/api/objects#themeconnection)
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+before<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+after<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+first<br />
+<a href="/docs/api/scalars#float"><code>Float</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+last<br />
+<a href="/docs/api/scalars#float"><code>Float</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+sort<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+filter<br />
+<a href="/docs/api/inputObjects#themefilter"><code>ThemeFilter</code></a>
 </td>
 <td>
 

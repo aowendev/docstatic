@@ -11,8 +11,9 @@ sidebar_position: 6
 
 <p style={{ marginBottom: "0.4em" }}><strong>Possible types</strong></p>
 
-- [Conditions](/docs/api/objects#conditions)
 - [Post](/docs/api/objects#post)
+- [Conditions](/docs/api/objects#conditions)
+- [Dashboards](/docs/api/objects#dashboards)
 - [GlossaryTerms](/docs/api/objects#glossaryterms)
 - [Homepage](/docs/api/objects#homepage)
 - [Pages](/docs/api/objects#pages)
@@ -20,10 +21,13 @@ sidebar_position: 6
 - [Snippets](/docs/api/objects#snippets)
 - [Sidebar](/docs/api/objects#sidebar)
 - [Taxonomy](/docs/api/objects#taxonomy)
+- [Theme](/docs/api/objects#theme)
 - [Doc](/docs/api/objects#doc)
 - [I18n](/docs/api/objects#i18n)
 - [VariableSets](/docs/api/objects#variablesets)
 - [Wiki](/docs/api/objects#wiki)
+- [Generated](/docs/api/objects#generated)
+- [Media](/docs/api/objects#media)
 - [Folder](/docs/api/objects#folder)
 
 ## GlossaryTermsGlossaryTerms
@@ -34,21 +38,13 @@ sidebar_position: 6
 
 - [GlossaryTermsGlossaryTermsGlossaryTerm](/docs/api/objects#glossarytermsglossarytermsglossaryterm)
 
-## GlossaryTermsGlossaryTermsGlossaryTermLanguages
+## GlossaryTermsGlossaryTermsGlossaryTermTranslations
 
 
 
 <p style={{ marginBottom: "0.4em" }}><strong>Possible types</strong></p>
 
-- [GlossaryTermsGlossaryTermsGlossaryTermLanguagesLanguage](/docs/api/objects#glossarytermsglossarytermsglossarytermlanguageslanguage)
-
-## GlossaryTermsGlossaryTermsGlossaryTermLanguagesLanguageTranslations
-
-
-
-<p style={{ marginBottom: "0.4em" }}><strong>Possible types</strong></p>
-
-- [GlossaryTermsGlossaryTermsGlossaryTermLanguagesLanguageTranslationsTranslation](/docs/api/objects#glossarytermsglossarytermsglossarytermlanguageslanguagetranslationstranslation)
+- [GlossaryTermsGlossaryTermsGlossaryTermTranslationsTranslation](/docs/api/objects#glossarytermsglossarytermsglossarytermtranslationstranslation)
 
 ## HomepageBlocks
 
@@ -87,6 +83,54 @@ sidebar_position: 6
 - [Post](/docs/api/objects#post)
 - [Pages](/docs/api/objects#pages)
 - [Doc](/docs/api/objects#doc)
+
+## SettingsNavbarDocLink
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Possible types</strong></p>
+
+- [Doc](/docs/api/objects#doc)
+
+## SettingsNavbarItemsDocLink
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Possible types</strong></p>
+
+- [Doc](/docs/api/objects#doc)
+
+## SettingsNavbarItemsItemsDocLink
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Possible types</strong></p>
+
+- [Doc](/docs/api/objects#doc)
+
+## SettingsNavbarItemsItemsPageLink
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Possible types</strong></p>
+
+- [Pages](/docs/api/objects#pages)
+
+## SettingsNavbarItemsPageLink
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Possible types</strong></p>
+
+- [Pages](/docs/api/objects#pages)
+
+## SettingsNavbarPageLink
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Possible types</strong></p>
+
+- [Pages](/docs/api/objects#pages)
 
 ## SidebarItems
 

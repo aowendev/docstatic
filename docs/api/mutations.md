@@ -78,6 +78,38 @@ params<br />
 </tbody>
 </table>
 
+## createDashboards
+
+**Type:** [Dashboards!](/docs/api/objects#dashboards)
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+relativePath<br />
+<a href="/docs/api/scalars#string"><code>String!</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+params<br />
+<a href="/docs/api/inputObjects#dashboardsmutation"><code>DashboardsMutation!</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
 ## createDoc
 
 **Type:** [Doc!](/docs/api/objects#doc)
@@ -183,6 +215,38 @@ relativePath<br />
 </tbody>
 </table>
 
+## createGenerated
+
+**Type:** [Generated!](/docs/api/objects#generated)
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+relativePath<br />
+<a href="/docs/api/scalars#string"><code>String!</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+params<br />
+<a href="/docs/api/inputObjects#generatedmutation"><code>GeneratedMutation!</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
 ## createGlossaryTerms
 
 **Type:** [GlossaryTerms!](/docs/api/objects#glossaryterms)
@@ -271,6 +335,38 @@ relativePath<br />
 <td>
 params<br />
 <a href="/docs/api/inputObjects#i18nmutation"><code>I18nMutation!</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## createMedia
+
+**Type:** [Media!](/docs/api/objects#media)
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+relativePath<br />
+<a href="/docs/api/scalars#string"><code>String!</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+params<br />
+<a href="/docs/api/inputObjects#mediamutation"><code>MediaMutation!</code></a>
 </td>
 <td>
 
@@ -471,6 +567,38 @@ params<br />
 </tbody>
 </table>
 
+## createTheme
+
+**Type:** [Theme!](/docs/api/objects#theme)
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+relativePath<br />
+<a href="/docs/api/scalars#string"><code>String!</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+params<br />
+<a href="/docs/api/inputObjects#thememutation"><code>ThemeMutation!</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
 ## createVariableSets
 
 **Type:** [VariableSets!](/docs/api/objects#variablesets)
@@ -599,6 +727,38 @@ params<br />
 </tbody>
 </table>
 
+## updateDashboards
+
+**Type:** [Dashboards!](/docs/api/objects#dashboards)
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+relativePath<br />
+<a href="/docs/api/scalars#string"><code>String!</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+params<br />
+<a href="/docs/api/inputObjects#dashboardsmutation"><code>DashboardsMutation!</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
 ## updateDoc
 
 **Type:** [Doc!](/docs/api/objects#doc)
@@ -664,6 +824,38 @@ relativePath<br />
 <td>
 params<br />
 <a href="/docs/api/inputObjects#documentupdatemutation"><code>DocumentUpdateMutation!</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## updateGenerated
+
+**Type:** [Generated!](/docs/api/objects#generated)
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+relativePath<br />
+<a href="/docs/api/scalars#string"><code>String!</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+params<br />
+<a href="/docs/api/inputObjects#generatedmutation"><code>GeneratedMutation!</code></a>
 </td>
 <td>
 
@@ -760,6 +952,38 @@ relativePath<br />
 <td>
 params<br />
 <a href="/docs/api/inputObjects#i18nmutation"><code>I18nMutation!</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## updateMedia
+
+**Type:** [Media!](/docs/api/objects#media)
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+relativePath<br />
+<a href="/docs/api/scalars#string"><code>String!</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+params<br />
+<a href="/docs/api/inputObjects#mediamutation"><code>MediaMutation!</code></a>
 </td>
 <td>
 
@@ -952,6 +1176,38 @@ relativePath<br />
 <td>
 params<br />
 <a href="/docs/api/inputObjects#taxonomymutation"><code>TaxonomyMutation!</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## updateTheme
+
+**Type:** [Theme!](/docs/api/objects#theme)
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+relativePath<br />
+<a href="/docs/api/scalars#string"><code>String!</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+params<br />
+<a href="/docs/api/inputObjects#thememutation"><code>ThemeMutation!</code></a>
 </td>
 <td>
 

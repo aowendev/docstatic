@@ -186,6 +186,15 @@ folder<br />
 <tbody>
 <tr>
 <td>
+help<br />
+<a href="/docs/api/scalars#boolean"><code>Boolean</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
 categories<br />
 <a href="/docs/api/objects#conditionscategories"><code>[ConditionsCategories]</code></a>
 </td>
@@ -374,6 +383,186 @@ node<br />
 </tbody>
 </table>
 
+## Dashboards
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Implements</strong></p>
+
+- [Node](/docs/api/interfaces#node)
+- [Document](/docs/api/interfaces#document)
+
+<p style={{ marginBottom: "0.4em" }}><strong>Fields</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+miniWriteDashboard<br />
+<a href="/docs/api/scalars#boolean"><code>Boolean</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+statusBar<br />
+<a href="/docs/api/scalars#boolean"><code>Boolean</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+help<br />
+<a href="/docs/api/scalars#boolean"><code>Boolean</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+dashboard1<br />
+<a href="/docs/api/scalars#boolean"><code>Boolean</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+mediaDashboard<br />
+<a href="/docs/api/scalars#boolean"><code>Boolean</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+translationDashboard<br />
+<a href="/docs/api/scalars#boolean"><code>Boolean</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+brokenLinksDashboard<br />
+<a href="/docs/api/scalars#boolean"><code>Boolean</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+id<br />
+<a href="/docs/api/scalars#id"><code>ID!</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+_sys<br />
+<a href="/docs/api/objects#systeminfo"><code>SystemInfo!</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+_values<br />
+<a href="/docs/api/scalars#json"><code>JSON!</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## DashboardsConnection
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Implements</strong></p>
+
+- [Connection](/docs/api/interfaces#connection)
+
+<p style={{ marginBottom: "0.4em" }}><strong>Fields</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+pageInfo<br />
+<a href="/docs/api/objects#pageinfo"><code>PageInfo!</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+totalCount<br />
+<a href="/docs/api/scalars#float"><code>Float!</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+edges<br />
+<a href="/docs/api/objects#dashboardsconnectionedges"><code>[DashboardsConnectionEdges]</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## DashboardsConnectionEdges
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Fields</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+cursor<br />
+<a href="/docs/api/scalars#string"><code>String!</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+node<br />
+<a href="/docs/api/objects#dashboards"><code>Dashboards</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
 ## Doc
 
 
@@ -390,8 +579,53 @@ node<br />
 <tbody>
 <tr>
 <td>
+help<br />
+<a href="/docs/api/scalars#boolean"><code>Boolean</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+lastmod<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+modifiedBy<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
 title<br />
 <a href="/docs/api/scalars#string"><code>String!</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+body<br />
+<a href="/docs/api/scalars#json"><code>JSON</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+conditions<br />
+<a href="/docs/api/scalars#string"><code>[String]</code></a>
 </td>
 <td>
 
@@ -408,8 +642,8 @@ description<br />
 </tr>
 <tr>
 <td>
-tags<br />
-<a href="/docs/api/scalars#string"><code>[String]</code></a>
+slug<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
 </td>
 <td>
 
@@ -417,7 +651,7 @@ tags<br />
 </tr>
 <tr>
 <td>
-conditions<br />
+tags<br />
 <a href="/docs/api/scalars#string"><code>[String]</code></a>
 </td>
 <td>
@@ -473,15 +707,6 @@ published<br />
 <td>
 unlisted<br />
 <a href="/docs/api/scalars#boolean"><code>Boolean</code></a>
-</td>
-<td>
-
-</td>
-</tr>
-<tr>
-<td>
-body<br />
-<a href="/docs/api/scalars#json"><code>JSON</code></a>
 </td>
 <td>
 
@@ -693,6 +918,132 @@ path<br />
 </tbody>
 </table>
 
+## Generated
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Implements</strong></p>
+
+- [Node](/docs/api/interfaces#node)
+- [Document](/docs/api/interfaces#document)
+
+<p style={{ marginBottom: "0.4em" }}><strong>Fields</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+help<br />
+<a href="/docs/api/scalars#boolean"><code>Boolean</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+id<br />
+<a href="/docs/api/scalars#id"><code>ID!</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+_sys<br />
+<a href="/docs/api/objects#systeminfo"><code>SystemInfo!</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+_values<br />
+<a href="/docs/api/scalars#json"><code>JSON!</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## GeneratedConnection
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Implements</strong></p>
+
+- [Connection](/docs/api/interfaces#connection)
+
+<p style={{ marginBottom: "0.4em" }}><strong>Fields</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+pageInfo<br />
+<a href="/docs/api/objects#pageinfo"><code>PageInfo!</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+totalCount<br />
+<a href="/docs/api/scalars#float"><code>Float!</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+edges<br />
+<a href="/docs/api/objects#generatedconnectionedges"><code>[GeneratedConnectionEdges]</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## GeneratedConnectionEdges
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Fields</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+cursor<br />
+<a href="/docs/api/scalars#string"><code>String!</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+node<br />
+<a href="/docs/api/objects#generated"><code>Generated</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
 ## GlossaryTerms
 
 
@@ -707,6 +1058,15 @@ path<br />
 <table>
 <thead><tr><th>Name</th><th>Description</th></tr></thead>
 <tbody>
+<tr>
+<td>
+help<br />
+<a href="/docs/api/scalars#boolean"><code>Boolean</code></a>
+</td>
+<td>
+
+</td>
+</tr>
 <tr>
 <td>
 glossaryTerms<br />
@@ -839,8 +1199,8 @@ key<br />
 </tr>
 <tr>
 <td>
-languages<br />
-<a href="/docs/api/unions#glossarytermsglossarytermsglossarytermlanguages"><code>[GlossaryTermsGlossaryTermsGlossaryTermLanguages]</code></a>
+translations<br />
+<a href="/docs/api/unions#glossarytermsglossarytermsglossarytermtranslations"><code>[GlossaryTermsGlossaryTermsGlossaryTermTranslations]</code></a>
 </td>
 <td>
 
@@ -849,7 +1209,7 @@ languages<br />
 </tbody>
 </table>
 
-## GlossaryTermsGlossaryTermsGlossaryTermLanguagesLanguage
+## GlossaryTermsGlossaryTermsGlossaryTermTranslationsTranslation
 
 
 
@@ -867,27 +1227,6 @@ lang<br />
 
 </td>
 </tr>
-<tr>
-<td>
-translations<br />
-<a href="/docs/api/unions#glossarytermsglossarytermsglossarytermlanguageslanguagetranslations"><code>[GlossaryTermsGlossaryTermsGlossaryTermLanguagesLanguageTranslations]</code></a>
-</td>
-<td>
-
-</td>
-</tr>
-</tbody>
-</table>
-
-## GlossaryTermsGlossaryTermsGlossaryTermLanguagesLanguageTranslationsTranslation
-
-
-
-<p style={{ marginBottom: "0.4em" }}><strong>Fields</strong></p>
-
-<table>
-<thead><tr><th>Name</th><th>Description</th></tr></thead>
-<tbody>
 <tr>
 <td>
 term<br />
@@ -923,6 +1262,15 @@ definition<br />
 <table>
 <thead><tr><th>Name</th><th>Description</th></tr></thead>
 <tbody>
+<tr>
+<td>
+help<br />
+<a href="/docs/api/scalars#boolean"><code>Boolean</code></a>
+</td>
+<td>
+
+</td>
+</tr>
 <tr>
 <td>
 _warning<br />
@@ -1087,6 +1435,15 @@ subtitle<br />
 </tr>
 <tr>
 <td>
+description<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
 document<br />
 <a href="/docs/api/unions#homepageblocksherodocument"><code>HomepageBlocksHeroDocument</code></a>
 </td>
@@ -1097,6 +1454,72 @@ document<br />
 <tr>
 <td>
 documentLabel<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+secondaryButtonText<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+secondaryButtonLink<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+showHeroCard<br />
+<a href="/docs/api/scalars#boolean"><code>Boolean</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+heroCardTitle<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+heroCardFeatures<br />
+<a href="/docs/api/objects#homepageblocksheroherocardfeatures"><code>[HomepageBlocksHeroHeroCardFeatures]</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## HomepageBlocksHeroHeroCardFeatures
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Fields</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+feature<br />
 <a href="/docs/api/scalars#string"><code>String</code></a>
 </td>
 <td>
@@ -1234,6 +1657,33 @@ node<br />
 <tbody>
 <tr>
 <td>
+help<br />
+<a href="/docs/api/scalars#boolean"><code>Boolean</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+lastmod<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+modifiedBy<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
 title<br />
 <a href="/docs/api/scalars#string"><code>String!</code></a>
 </td>
@@ -1243,7 +1693,34 @@ title<br />
 </tr>
 <tr>
 <td>
+body<br />
+<a href="/docs/api/scalars#json"><code>JSON</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+conditions<br />
+<a href="/docs/api/scalars#string"><code>[String]</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
 description<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+slug<br />
 <a href="/docs/api/scalars#string"><code>String</code></a>
 </td>
 <td>
@@ -1261,8 +1738,8 @@ tags<br />
 </tr>
 <tr>
 <td>
-status<br />
-<a href="/docs/api/scalars#string"><code>String</code></a>
+draft<br />
+<a href="/docs/api/scalars#boolean"><code>Boolean</code></a>
 </td>
 <td>
 
@@ -1270,8 +1747,44 @@ status<br />
 </tr>
 <tr>
 <td>
-body<br />
-<a href="/docs/api/scalars#json"><code>JSON</code></a>
+review<br />
+<a href="/docs/api/scalars#boolean"><code>Boolean</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+translate<br />
+<a href="/docs/api/scalars#boolean"><code>Boolean</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+approved<br />
+<a href="/docs/api/scalars#boolean"><code>Boolean</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+published<br />
+<a href="/docs/api/scalars#boolean"><code>Boolean</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+unlisted<br />
+<a href="/docs/api/scalars#boolean"><code>Boolean</code></a>
 </td>
 <td>
 
@@ -1380,6 +1893,189 @@ node<br />
 </tbody>
 </table>
 
+## Media
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Implements</strong></p>
+
+- [Node](/docs/api/interfaces#node)
+- [Document](/docs/api/interfaces#document)
+
+<p style={{ marginBottom: "0.4em" }}><strong>Fields</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+media<br />
+<a href="/docs/api/objects#mediamedia"><code>[MediaMedia]</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+id<br />
+<a href="/docs/api/scalars#id"><code>ID!</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+_sys<br />
+<a href="/docs/api/objects#systeminfo"><code>SystemInfo!</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+_values<br />
+<a href="/docs/api/scalars#json"><code>JSON!</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## MediaConnection
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Implements</strong></p>
+
+- [Connection](/docs/api/interfaces#connection)
+
+<p style={{ marginBottom: "0.4em" }}><strong>Fields</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+pageInfo<br />
+<a href="/docs/api/objects#pageinfo"><code>PageInfo!</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+totalCount<br />
+<a href="/docs/api/scalars#float"><code>Float!</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+edges<br />
+<a href="/docs/api/objects#mediaconnectionedges"><code>[MediaConnectionEdges]</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## MediaConnectionEdges
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Fields</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+cursor<br />
+<a href="/docs/api/scalars#string"><code>String!</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+node<br />
+<a href="/docs/api/objects#media"><code>Media</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## MediaMedia
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Fields</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+filename<br />
+<a href="/docs/api/scalars#string"><code>String!</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+path<br />
+<a href="/docs/api/scalars#string"><code>String!</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+size<br />
+<a href="/docs/api/scalars#float"><code>Float!</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+dimensions<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+lastModified<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
 ## PageInfo
 
 
@@ -1442,6 +2138,15 @@ endCursor<br />
 <table>
 <thead><tr><th>Name</th><th>Description</th></tr></thead>
 <tbody>
+<tr>
+<td>
+help<br />
+<a href="/docs/api/scalars#boolean"><code>Boolean</code></a>
+</td>
+<td>
+
+</td>
+</tr>
 <tr>
 <td>
 title<br />
@@ -1586,6 +2291,24 @@ node<br />
 <table>
 <thead><tr><th>Name</th><th>Description</th></tr></thead>
 <tbody>
+<tr>
+<td>
+help<br />
+<a href="/docs/api/scalars#boolean"><code>Boolean</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+lastmod<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
 <tr>
 <td>
 title<br />
@@ -1798,6 +2521,15 @@ node<br />
 <tbody>
 <tr>
 <td>
+help<br />
+<a href="/docs/api/scalars#boolean"><code>Boolean</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
 _warning<br />
 <a href="/docs/api/scalars#string"><code>String</code></a>
 </td>
@@ -1809,15 +2541,6 @@ _warning<br />
 <td>
 label<br />
 <a href="/docs/api/scalars#string"><code>String!</code></a>
-</td>
-<td>
-
-</td>
-</tr>
-<tr>
-<td>
-logo<br />
-<a href="/docs/api/objects#settingslogo"><code>SettingsLogo</code></a>
 </td>
 <td>
 
@@ -1843,8 +2566,26 @@ tagline<br />
 </tr>
 <tr>
 <td>
-url<br />
-<a href="/docs/api/scalars#string"><code>String!</code></a>
+favicon<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+graphql<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+colorMode<br />
+<a href="/docs/api/objects#settingscolormode"><code>SettingsColorMode</code></a>
 </td>
 <td>
 
@@ -1854,6 +2595,87 @@ url<br />
 <td>
 footer<br />
 <a href="/docs/api/objects#settingsfooter"><code>SettingsFooter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+github<br />
+<a href="/docs/api/objects#settingsgithub"><code>SettingsGithub</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+languages<br />
+<a href="/docs/api/objects#settingslanguages"><code>SettingsLanguages</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+logo<br />
+<a href="/docs/api/objects#settingslogo"><code>SettingsLogo</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+openapi<br />
+<a href="/docs/api/objects#settingsopenapi"><code>SettingsOpenapi</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+prism<br />
+<a href="/docs/api/objects#settingsprism"><code>SettingsPrism</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+url<br />
+<a href="/docs/api/objects#settingsurl"><code>SettingsUrl</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+navbar<br />
+<a href="/docs/api/objects#settingsnavbar"><code>[SettingsNavbar]</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+sidebarHideable<br />
+<a href="/docs/api/scalars#boolean"><code>Boolean</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+showReadingTime<br />
+<a href="/docs/api/scalars#boolean"><code>Boolean</code></a>
 </td>
 <td>
 
@@ -1881,6 +2703,45 @@ _sys<br />
 <td>
 _values<br />
 <a href="/docs/api/scalars#json"><code>JSON!</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## SettingsColorMode
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Fields</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+defaultMode<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+disableSwitch<br />
+<a href="/docs/api/scalars#boolean"><code>Boolean</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+respectPrefersColorScheme<br />
+<a href="/docs/api/scalars#boolean"><code>Boolean</code></a>
 </td>
 <td>
 
@@ -2112,6 +2973,96 @@ to<br />
 </tbody>
 </table>
 
+## SettingsGithub
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Fields</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+projectName<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+organizationName<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## SettingsLanguages
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Fields</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+supported<br />
+<a href="/docs/api/objects#settingslanguagessupported"><code>[SettingsLanguagesSupported]</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+default<br />
+<a href="/docs/api/scalars#string"><code>String!</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## SettingsLanguagesSupported
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Fields</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+code<br />
+<a href="/docs/api/scalars#string"><code>String!</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+label<br />
+<a href="/docs/api/scalars#string"><code>String!</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
 ## SettingsLogo
 
 
@@ -2142,6 +3093,528 @@ src<br />
 </tbody>
 </table>
 
+## SettingsNavbar
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Fields</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+label<br />
+<a href="/docs/api/scalars#string"><code>String!</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+link<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+docLink<br />
+<a href="/docs/api/unions#settingsnavbardoclink"><code>SettingsNavbarDocLink</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+pageLink<br />
+<a href="/docs/api/unions#settingsnavbarpagelink"><code>SettingsNavbarPageLink</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+externalLink<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+manualPath<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+docId<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+position<br />
+<a href="/docs/api/scalars#string"><code>String!</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+items<br />
+<a href="/docs/api/objects#settingsnavbaritems"><code>[SettingsNavbarItems]</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## SettingsNavbarItems
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Fields</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+label<br />
+<a href="/docs/api/scalars#string"><code>String!</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+link<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+docLink<br />
+<a href="/docs/api/unions#settingsnavbaritemsdoclink"><code>SettingsNavbarItemsDocLink</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+pageLink<br />
+<a href="/docs/api/unions#settingsnavbaritemspagelink"><code>SettingsNavbarItemsPageLink</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+externalLink<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+manualPath<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+docId<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+position<br />
+<a href="/docs/api/scalars#string"><code>String!</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+items<br />
+<a href="/docs/api/objects#settingsnavbaritemsitems"><code>[SettingsNavbarItemsItems]</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## SettingsNavbarItemsItems
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Fields</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+label<br />
+<a href="/docs/api/scalars#string"><code>String!</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+link<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+docLink<br />
+<a href="/docs/api/unions#settingsnavbaritemsitemsdoclink"><code>SettingsNavbarItemsItemsDocLink</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+pageLink<br />
+<a href="/docs/api/unions#settingsnavbaritemsitemspagelink"><code>SettingsNavbarItemsItemsPageLink</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+externalLink<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+manualPath<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+docId<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+position<br />
+<a href="/docs/api/scalars#string"><code>String!</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## SettingsOpenapi
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Fields</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+apis<br />
+<a href="/docs/api/objects#settingsopenapiapis"><code>[SettingsOpenapiApis]</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+languageTabs<br />
+<a href="/docs/api/scalars#string"><code>[String]</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## SettingsOpenapiApis
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Fields</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+name<br />
+<a href="/docs/api/scalars#string"><code>String!</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+specPath<br />
+<a href="/docs/api/scalars#string"><code>String!</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+outputDir<br />
+<a href="/docs/api/scalars#string"><code>String!</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+downloadUrl<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+groupPathsBy<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+categoryLinkSource<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## SettingsPrism
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Fields</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+additionalLanguages<br />
+<a href="/docs/api/scalars#string"><code>[String]</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+magicComments<br />
+<a href="/docs/api/objects#settingsprismmagiccomments"><code>[SettingsPrismMagicComments]</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+theme<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+darkTheme<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## SettingsPrismMagicComments
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Fields</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+className<br />
+<a href="/docs/api/scalars#string"><code>String!</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+line<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+block<br />
+<a href="/docs/api/objects#settingsprismmagiccommentsblock"><code>SettingsPrismMagicCommentsBlock</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## SettingsPrismMagicCommentsBlock
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Fields</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+start<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+end<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## SettingsUrl
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Fields</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+siteUrl<br />
+<a href="/docs/api/scalars#string"><code>String!</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+baseUrl<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+trailingSlash<br />
+<a href="/docs/api/scalars#boolean"><code>Boolean</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
 ## Sidebar
 
 
@@ -2156,6 +3629,15 @@ src<br />
 <table>
 <thead><tr><th>Name</th><th>Description</th></tr></thead>
 <tbody>
+<tr>
+<td>
+help<br />
+<a href="/docs/api/scalars#boolean"><code>Boolean</code></a>
+</td>
+<td>
+
+</td>
+</tr>
 <tr>
 <td>
 _warning<br />
@@ -2686,6 +4168,15 @@ href<br />
 <tbody>
 <tr>
 <td>
+help<br />
+<a href="/docs/api/scalars#boolean"><code>Boolean</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
 title<br />
 <a href="/docs/api/scalars#string"><code>String!</code></a>
 </td>
@@ -2950,6 +4441,15 @@ collection<br />
 <tbody>
 <tr>
 <td>
+help<br />
+<a href="/docs/api/scalars#boolean"><code>Boolean</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
 taxonomy<br />
 <a href="/docs/api/objects#taxonomytaxonomy"><code>[TaxonomyTaxonomy]</code></a>
 </td>
@@ -3141,6 +4641,459 @@ tag<br />
 </tbody>
 </table>
 
+## Theme
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Implements</strong></p>
+
+- [Node](/docs/api/interfaces#node)
+- [Document](/docs/api/interfaces#document)
+
+<p style={{ marginBottom: "0.4em" }}><strong>Fields</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+_warning<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+help<br />
+<a href="/docs/api/scalars#boolean"><code>Boolean</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+colors<br />
+<a href="/docs/api/objects#themecolors"><code>ThemeColors</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+darkColors<br />
+<a href="/docs/api/objects#themedarkcolors"><code>ThemeDarkColors</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+typography<br />
+<a href="/docs/api/objects#themetypography"><code>ThemeTypography</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+layout<br />
+<a href="/docs/api/objects#themelayout"><code>ThemeLayout</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+customCSS<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+id<br />
+<a href="/docs/api/scalars#id"><code>ID!</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+_sys<br />
+<a href="/docs/api/objects#systeminfo"><code>SystemInfo!</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+_values<br />
+<a href="/docs/api/scalars#json"><code>JSON!</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## ThemeColors
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Fields</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+primary<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+primaryDark<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+primaryDarker<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+primaryDarkest<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+primaryLight<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+primaryLighter<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+primaryLightest<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+footerBackground<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+highlightedCodeLineBackground<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## ThemeConnection
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Implements</strong></p>
+
+- [Connection](/docs/api/interfaces#connection)
+
+<p style={{ marginBottom: "0.4em" }}><strong>Fields</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+pageInfo<br />
+<a href="/docs/api/objects#pageinfo"><code>PageInfo!</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+totalCount<br />
+<a href="/docs/api/scalars#float"><code>Float!</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+edges<br />
+<a href="/docs/api/objects#themeconnectionedges"><code>[ThemeConnectionEdges]</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## ThemeConnectionEdges
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Fields</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+cursor<br />
+<a href="/docs/api/scalars#string"><code>String!</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+node<br />
+<a href="/docs/api/objects#theme"><code>Theme</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## ThemeDarkColors
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Fields</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+primary<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+primaryDark<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+primaryDarker<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+primaryDarkest<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+primaryLight<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+primaryLighter<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+primaryLightest<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+footerBackground<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+highlightedCodeLineBackground<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## ThemeLayout
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Fields</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+globalRadius<br />
+<a href="/docs/api/scalars#float"><code>Float</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+buttonRadius<br />
+<a href="/docs/api/scalars#float"><code>Float</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+cardRadius<br />
+<a href="/docs/api/scalars#float"><code>Float</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+navbarHeight<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## ThemeTypography
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Fields</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+baseFontFamily<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+monospaceFontFamily<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+codeFontSize<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
 ## VariableSets
 
 
@@ -3155,6 +5108,15 @@ tag<br />
 <table>
 <thead><tr><th>Name</th><th>Description</th></tr></thead>
 <tbody>
+<tr>
+<td>
+help<br />
+<a href="/docs/api/scalars#boolean"><code>Boolean</code></a>
+</td>
+<td>
+
+</td>
+</tr>
 <tr>
 <td>
 variableSets<br />
@@ -3371,6 +5333,24 @@ value<br />
 <table>
 <thead><tr><th>Name</th><th>Description</th></tr></thead>
 <tbody>
+<tr>
+<td>
+help<br />
+<a href="/docs/api/scalars#boolean"><code>Boolean</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+lastmod<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
 <tr>
 <td>
 title<br />
