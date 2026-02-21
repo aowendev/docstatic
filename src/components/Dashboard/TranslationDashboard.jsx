@@ -106,15 +106,11 @@ const TranslationDashboard = () => {
       setLoading(true);
       setError(null);
       try {
-      // Build results container and maps of sources and translations
+      // Build results container
       const results = {};
-      // ensure we have a client and fetch source docs
       const { client } = await import('../../../tina/__generated__/client');
-      const docsResult = await client.queries.docConnection({ sort: 'title', first: 500 });
-      const filteredDocs = docsResult.data?.docConnection?.edges || [];
 
-      const sourceMap = {}; // cleanPath -> source node
-      const sourceList = [];
+      // Helper to normalize paths for comparison (strip extensions and index/readme)
       const canonicalize = (p) => {
         if (!p) return p;
         let s = p.replace(/\.mdx?$|\.md$/i, '');
@@ -123,89 +119,156 @@ const TranslationDashboard = () => {
         return s;
       };
 
-      for (const edge of filteredDocs) {
+      // Fetch docs (source files) with pagination
+      let docsEdges = [];
+      let docsAfter = null;
+      while (true) {
+        const docsResult = await client.queries.docConnection({ sort: 'title', first: 100, after: docsAfter });
+        const chunk = docsResult.data?.docConnection?.edges || [];
+        docsEdges = docsEdges.concat(chunk);
+        const pageInfo = docsResult.data?.docConnection?.pageInfo;
+        if (!pageInfo || !pageInfo.hasNextPage) break;
+        docsAfter = pageInfo.endCursor;
+      }
+      const sourceMap = {}; // canonical -> node
+      for (const edge of docsEdges) {
         const node = edge.node;
         const rel = node._sys?.relativePath || node._sys?.filename || '';
-        const clean = rel.replace(/^docs\//, '');
-        const canonical = canonicalize(clean);
+        // derive clean path by removing only a leading 'docs/' prefix
+        let clean = rel;
+        if (rel.startsWith('docs/')) {
+          clean = rel.replace(/^docs\//, '');
+        }
+        // exclude generated API folder
+        if (clean.startsWith('api/')) continue;
+        const canonical = canonicalize(clean || rel);
         sourceMap[canonical] = node;
-        sourceList.push({ clean, canonical, node });
       }
 
-      // Fetch all i18n docs (already requested earlier for languages) and build translations map
-      const i18nQuery = await client.queries.i18nConnection({ sort: 'title', first: 500 });
-      const i18nDocs = i18nQuery.data?.i18nConnection?.edges || [];
-      const translationsByLang = {};
-      for (const edge of i18nDocs) {
+      console.debug('[TranslationScan] docs sample rels:', docsEdges.slice(0,10).map(e => e.node._sys?.relativePath || e.node._sys?.filename));
+
+      // Fetch translations and build map for the selected language with pagination
+      let i18nEdges = [];
+      let i18nAfter = null;
+      while (true) {
+        const i18nResult = await client.queries.i18nConnection({ sort: 'title', first: 100, after: i18nAfter });
+        const chunk = i18nResult.data?.i18nConnection?.edges || [];
+        i18nEdges = i18nEdges.concat(chunk);
+        const pageInfo = i18nResult.data?.i18nConnection?.pageInfo;
+        if (!pageInfo || !pageInfo.hasNextPage) break;
+        i18nAfter = pageInfo.endCursor;
+      }
+      const translationsMap = {}; // canonical -> { node, originalPath }
+      for (const edge of i18nEdges) {
         const node = edge.node;
         const relPath = node._sys?.relativePath || node._sys?.filename || '';
         const m = relPath.match(/^([a-zA-Z0-9_-]+)\/(.*)$/);
         if (!m) continue;
         const lang = m[1];
-        const afterLang = m[2];
-        // Only care about docusaurus-plugin-content-docs paths
-        const cleanAfter = afterLang.replace(/^docusaurus-plugin-content-docs\/current\//, '');
+        if (lang !== selectedLanguage) continue;
+        const after = m[2];
+        const prefix = 'docusaurus-plugin-content-docs/current/';
+        if (!after.startsWith(prefix)) continue;
+        const cleanAfter = after.replace(new RegExp(`^${prefix}`), '');
+        // skip generated or excluded doc areas (api, wiki)
+        if (cleanAfter.startsWith('api/') || cleanAfter.startsWith('wiki/')) continue;
         const canonical = canonicalize(cleanAfter);
-        if (!translationsByLang[lang]) translationsByLang[lang] = {};
-        translationsByLang[lang][canonical] = { node, originalPath: cleanAfter };
-      }
-
-      // Determine languages present (ensure selectedLanguage included)
-      let availableLanguages = Object.keys(translationsByLang || {});
-      if (!availableLanguages.includes(selectedLanguage)) availableLanguages.push(selectedLanguage);
-
-      // Initialize results for each language and compute missing/outdated/upToDate
-      for (const lang of availableLanguages) {
-        results[lang] = { outdated: [], missing: [], upToDate: [], orphaned: [], errors: [], total: 0 };
-        const matched = new Set();
-
-        const translationsForLang = translationsByLang[lang] || {};
-
-        for (const { clean, canonical, node } of sourceList) {
-          try {
-            results[lang].total++;
-            const sourceNode = node;
-            const sourceDate = sourceNode.lastmod ? new Date(sourceNode.lastmod) : null;
-            const title = sourceNode.title || clean;
-            const translationEntry = translationsForLang[canonical] || translationsForLang[clean];
-            const translationNode = translationEntry ? translationEntry.node || translationEntry : null;
-            if (!translationNode) {
-              results[lang].missing.push({ file: `docs/${clean}`, sourceLastMod: sourceNode.lastmod || 'No date', title, sourceNode });
-              continue;
-            }
-            matched.add(canonical);
-            const translationDate = translationNode.lastmod ? new Date(translationNode.lastmod) : null;
-            const translationDateString = translationNode.lastmod || 'No date';
-            if (!sourceDate && !translationDate) {
-              results[lang].upToDate.push({ file: `docs/${clean}`, sourceLastMod: 'No date', translationLastMod: 'No date', title });
-            } else if (sourceDate && !translationDate) {
-              results[lang].outdated.push({ file: `docs/${clean}`, sourceLastMod: sourceNode.lastmod, translationLastMod: 'No date', title });
-            } else if (!sourceDate && translationDate) {
-              results[lang].upToDate.push({ file: `docs/${clean}`, sourceLastMod: 'No date', translationLastMod: translationDateString, title });
-            } else {
-              if (sourceDate > translationDate) {
-                const daysBehind = Math.ceil((sourceDate - translationDate) / (1000 * 60 * 60 * 24));
-                results[lang].outdated.push({ file: `docs/${clean}`, sourceLastMod: sourceNode.lastmod, translationLastMod: translationDateString, title, daysBehind });
+        // handle duplicate canonical keys (e.g., index/readme variants)
+        if (translationsMap[canonical]) {
+          const existing = translationsMap[canonical];
+          const isExistingIndex = /(?:^|\/)index$|(?:^|\/)readme$/i.test(existing.originalPath || '');
+          const isNewIndex = /(?:^|\/)index$|(?:^|\/)readme$/i.test(cleanAfter);
+          // prefer non-index/readme over index/readme
+          if (isExistingIndex && !isNewIndex) {
+            translationsMap[canonical] = { node, originalPath: cleanAfter };
+            console.debug('[TranslationScan] replaced index/readme with explicit file for', canonical, cleanAfter);
+          } else {
+            // otherwise, keep the one with the latest lastmod
+            try {
+              const existingDate = existing.node?.lastmod ? new Date(existing.node.lastmod) : null;
+              const newDate = node?.lastmod ? new Date(node.lastmod) : null;
+              if (newDate && (!existingDate || newDate > existingDate)) {
+                translationsMap[canonical] = { node, originalPath: cleanAfter };
+                console.debug('[TranslationScan] chose newer translation for', canonical, cleanAfter);
               } else {
-                results[lang].upToDate.push({ file: `docs/${clean}`, sourceLastMod: sourceNode.lastmod, translationLastMod: translationDateString, title });
+                console.debug('[TranslationScan] keeping existing translation for', canonical, existing.originalPath || 'unknown');
               }
+            } catch (e) {
+              // fallback: keep existing
             }
-          } catch (fileError) {
-            results[lang].errors.push({ file: clean, error: fileError.message });
           }
+        } else {
+          translationsMap[canonical] = { node, originalPath: cleanAfter };
         }
+      }
 
-        // Orphans: translations present that weren't matched to a source
-        const translationsKeys = Object.keys(translationsForLang || {});
-        for (const tkey of translationsKeys) {
-          if (!matched.has(tkey)) {
-            const entry = translationsForLang[tkey];
-            const node = entry.node || entry;
-            const orig = entry.originalPath || tkey;
-            results[lang].orphaned.push({ file: `${lang}/docusaurus-plugin-content-docs/current/${orig}`, translationLastMod: node.lastmod || 'No date', title: node.title || orig });
+      // Compare sets
+      const sourceKeys = new Set(Object.keys(sourceMap));
+      const translationKeys = new Set(Object.keys(translationsMap));
+
+      console.debug('[TranslationScan] docsEdges:', docsEdges.length, 'i18nEdges:', i18nEdges.length);
+      console.debug('[TranslationScan] sourceKeys:', sourceKeys.size, 'translationKeys:', translationKeys.size);
+      console.debug('[TranslationScan] sample source keys:', [...sourceKeys].slice(0,10));
+      console.debug('[TranslationScan] sample translation keys:', [...translationKeys].slice(0,10));
+
+      const missingKeys = [...sourceKeys].filter(k => !translationKeys.has(k));
+      const orphanKeys = [...translationKeys].filter(k => !sourceKeys.has(k));
+      console.debug('[TranslationScan] missingKeys count:', missingKeys.length, 'examples:', missingKeys.slice(0,50));
+      console.debug('[TranslationScan] orphanKeys count:', orphanKeys.length, 'examples:', orphanKeys.slice(0,50));
+      console.debug('[TranslationScan] translationsMap sample originals:', Object.entries(translationsMap).slice(0,20).map(([k, v]) => ({ key: k, original: v.originalPath })));
+      if (translationsMap['orphan']) {
+        console.debug('[TranslationScan] orphan key mapped to:', translationsMap['orphan'].originalPath, translationsMap['orphan'].node?._sys?.relativePath);
+      } else {
+        console.debug('[TranslationScan] no translationsMap entry for key "orphan"');
+      }
+
+      const missing = [];
+      const outdated = [];
+      const upToDate = [];
+      const orphaned = [];
+
+      for (const key of sourceKeys) {
+        const src = sourceMap[key];
+        const srcDate = src.lastmod ? new Date(src.lastmod) : null;
+        const title = src.title || key;
+        if (!translationKeys.has(key)) {
+          missing.push({ file: `docs/${key}`, sourceLastMod: src.lastmod || 'No date', title });
+          continue;
+        }
+        const tr = translationsMap[key].node;
+        const trDate = tr.lastmod ? new Date(tr.lastmod) : null;
+        if (!srcDate && !trDate) {
+          upToDate.push({ file: `docs/${key}`, sourceLastMod: 'No date', translationLastMod: 'No date', title });
+        } else if (srcDate && !trDate) {
+          outdated.push({ file: `docs/${key}`, sourceLastMod: src.lastmod, translationLastMod: 'No date', title });
+        } else if (!srcDate && trDate) {
+          upToDate.push({ file: `docs/${key}`, sourceLastMod: 'No date', translationLastMod: tr.lastmod, title });
+        } else {
+          if (trDate >= srcDate) {
+            upToDate.push({ file: `docs/${key}`, sourceLastMod: src.lastmod, translationLastMod: tr.lastmod, title });
+          } else {
+            outdated.push({ file: `docs/${key}`, sourceLastMod: src.lastmod, translationLastMod: tr.lastmod, title, daysBehind: Math.ceil((srcDate - trDate) / (1000*60*60*24)) });
           }
         }
       }
+
+      for (const key of translationKeys) {
+        if (!sourceKeys.has(key)) {
+          const entry = translationsMap[key];
+          const node = entry.node;
+          const orig = entry.originalPath || key;
+          orphaned.push({ file: `${selectedLanguage}/docusaurus-plugin-content-docs/current/${orig}`, translationLastMod: node.lastmod || 'No date', title: node.title || orig });
+        }
+      }
+
+      results[selectedLanguage] = {
+        missing,
+        outdated,
+        upToDate,
+        orphaned,
+        errors: [],
+        total: Object.keys(sourceMap).length
+      };
 
       setTranslationData(results);
     } catch (error) {

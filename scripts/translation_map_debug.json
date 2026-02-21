@@ -1,0 +1,716 @@
+{
+  "generatedAt": "2026-02-21T09:33:34.329Z",
+  "fs": {
+    "docs": [
+      {
+        "full": "/Volumes/External HD/Development/docstatic/docs/Getting-started---working-in-the-cloud.mdx",
+        "rel": "Getting-started---working-in-the-cloud.mdx",
+        "canonical": "Getting-started---working-in-the-cloud"
+      },
+      {
+        "full": "/Volumes/External HD/Development/docstatic/docs/Getting-started---working-locally.mdx",
+        "rel": "Getting-started---working-locally.mdx",
+        "canonical": "Getting-started---working-locally"
+      },
+      {
+        "full": "/Volumes/External HD/Development/docstatic/docs/advanced/adding-the-cms-to-an-ipad-home-screen.mdx",
+        "rel": "advanced/adding-the-cms-to-an-ipad-home-screen.mdx",
+        "canonical": "advanced/adding-the-cms-to-an-ipad-home-screen"
+      },
+      {
+        "full": "/Volumes/External HD/Development/docstatic/docs/advanced/front-matter-cms.mdx",
+        "rel": "advanced/front-matter-cms.mdx",
+        "canonical": "advanced/front-matter-cms"
+      },
+      {
+        "full": "/Volumes/External HD/Development/docstatic/docs/advanced/hosted-cms.mdx",
+        "rel": "advanced/hosted-cms.mdx",
+        "canonical": "advanced/hosted-cms"
+      },
+      {
+        "full": "/Volumes/External HD/Development/docstatic/docs/advanced/index.mdx",
+        "rel": "advanced/index.mdx",
+        "canonical": "advanced"
+      },
+      {
+        "full": "/Volumes/External HD/Development/docstatic/docs/advanced/notifications.mdx",
+        "rel": "advanced/notifications.mdx",
+        "canonical": "advanced/notifications"
+      },
+      {
+        "full": "/Volumes/External HD/Development/docstatic/docs/advanced/style.mdx",
+        "rel": "advanced/style.mdx",
+        "canonical": "advanced/style"
+      },
+      {
+        "full": "/Volumes/External HD/Development/docstatic/docs/api/enums.md",
+        "rel": "api/enums.md",
+        "canonical": "api/enums"
+      },
+      {
+        "full": "/Volumes/External HD/Development/docstatic/docs/api/inputObjects.md",
+        "rel": "api/inputObjects.md",
+        "canonical": "api/inputObjects"
+      },
+      {
+        "full": "/Volumes/External HD/Development/docstatic/docs/api/interfaces.md",
+        "rel": "api/interfaces.md",
+        "canonical": "api/interfaces"
+      },
+      {
+        "full": "/Volumes/External HD/Development/docstatic/docs/api/mutations.md",
+        "rel": "api/mutations.md",
+        "canonical": "api/mutations"
+      },
+      {
+        "full": "/Volumes/External HD/Development/docstatic/docs/api/objects.md",
+        "rel": "api/objects.md",
+        "canonical": "api/objects"
+      },
+      {
+        "full": "/Volumes/External HD/Development/docstatic/docs/api/petstore/add-pet.api.mdx",
+        "rel": "api/petstore/add-pet.api.mdx",
+        "canonical": "api/petstore/add-pet.api"
+      },
+      {
+        "full": "/Volumes/External HD/Development/docstatic/docs/api/petstore/create-user.api.mdx",
+        "rel": "api/petstore/create-user.api.mdx",
+        "canonical": "api/petstore/create-user.api"
+      },
+      {
+        "full": "/Volumes/External HD/Development/docstatic/docs/api/petstore/create-users-with-array-input.api.mdx",
+        "rel": "api/petstore/create-users-with-array-input.api.mdx",
+        "canonical": "api/petstore/create-users-with-array-input.api"
+      },
+      {
+        "full": "/Volumes/External HD/Development/docstatic/docs/api/petstore/create-users-with-list-input.api.mdx",
+        "rel": "api/petstore/create-users-with-list-input.api.mdx",
+        "canonical": "api/petstore/create-users-with-list-input.api"
+      },
+      {
+        "full": "/Volumes/External HD/Development/docstatic/docs/api/petstore/delete-order.api.mdx",
+        "rel": "api/petstore/delete-order.api.mdx",
+        "canonical": "api/petstore/delete-order.api"
+      },
+      {
+        "full": "/Volumes/External HD/Development/docstatic/docs/api/petstore/delete-pet.api.mdx",
+        "rel": "api/petstore/delete-pet.api.mdx",
+        "canonical": "api/petstore/delete-pet.api"
+      },
+      {
+        "full": "/Volumes/External HD/Development/docstatic/docs/api/petstore/delete-user.api.mdx",
+        "rel": "api/petstore/delete-user.api.mdx",
+        "canonical": "api/petstore/delete-user.api"
+      },
+      {
+        "full": "/Volumes/External HD/Development/docstatic/docs/api/petstore/find-pets-by-status.api.mdx",
+        "rel": "api/petstore/find-pets-by-status.api.mdx",
+        "canonical": "api/petstore/find-pets-by-status.api"
+      },
+      {
+        "full": "/Volumes/External HD/Development/docstatic/docs/api/petstore/find-pets-by-tags.api.mdx",
+        "rel": "api/petstore/find-pets-by-tags.api.mdx",
+        "canonical": "api/petstore/find-pets-by-tags.api"
+      },
+      {
+        "full": "/Volumes/External HD/Development/docstatic/docs/api/petstore/get-inventory.api.mdx",
+        "rel": "api/petstore/get-inventory.api.mdx",
+        "canonical": "api/petstore/get-inventory.api"
+      },
+      {
+        "full": "/Volumes/External HD/Development/docstatic/docs/api/petstore/get-order-by-id.api.mdx",
+        "rel": "api/petstore/get-order-by-id.api.mdx",
+        "canonical": "api/petstore/get-order-by-id.api"
+      },
+      {
+        "full": "/Volumes/External HD/Development/docstatic/docs/api/petstore/get-pet-by-id.api.mdx",
+        "rel": "api/petstore/get-pet-by-id.api.mdx",
+        "canonical": "api/petstore/get-pet-by-id.api"
+      },
+      {
+        "full": "/Volumes/External HD/Development/docstatic/docs/api/petstore/get-user-by-name.api.mdx",
+        "rel": "api/petstore/get-user-by-name.api.mdx",
+        "canonical": "api/petstore/get-user-by-name.api"
+      },
+      {
+        "full": "/Volumes/External HD/Development/docstatic/docs/api/petstore/login-user.api.mdx",
+        "rel": "api/petstore/login-user.api.mdx",
+        "canonical": "api/petstore/login-user.api"
+      },
+      {
+        "full": "/Volumes/External HD/Development/docstatic/docs/api/petstore/logout-user.api.mdx",
+        "rel": "api/petstore/logout-user.api.mdx",
+        "canonical": "api/petstore/logout-user.api"
+      },
+      {
+        "full": "/Volumes/External HD/Development/docstatic/docs/api/petstore/new-pet.api.mdx",
+        "rel": "api/petstore/new-pet.api.mdx",
+        "canonical": "api/petstore/new-pet.api"
+      },
+      {
+        "full": "/Volumes/External HD/Development/docstatic/docs/api/petstore/pet.tag.mdx",
+        "rel": "api/petstore/pet.tag.mdx",
+        "canonical": "api/petstore/pet.tag"
+      },
+      {
+        "full": "/Volumes/External HD/Development/docstatic/docs/api/petstore/place-order.api.mdx",
+        "rel": "api/petstore/place-order.api.mdx",
+        "canonical": "api/petstore/place-order.api"
+      },
+      {
+        "full": "/Volumes/External HD/Development/docstatic/docs/api/petstore/schemas/cat.schema.mdx",
+        "rel": "api/petstore/schemas/cat.schema.mdx",
+        "canonical": "api/petstore/schemas/cat.schema"
+      },
+      {
+        "full": "/Volumes/External HD/Development/docstatic/docs/api/petstore/store.tag.mdx",
+        "rel": "api/petstore/store.tag.mdx",
+        "canonical": "api/petstore/store.tag"
+      },
+      {
+        "full": "/Volumes/External HD/Development/docstatic/docs/api/petstore/subscribe-to-the-store-events.api.mdx",
+        "rel": "api/petstore/subscribe-to-the-store-events.api.mdx",
+        "canonical": "api/petstore/subscribe-to-the-store-events.api"
+      },
+      {
+        "full": "/Volumes/External HD/Development/docstatic/docs/api/petstore/swagger-petstore-yaml.info.mdx",
+        "rel": "api/petstore/swagger-petstore-yaml.info.mdx",
+        "canonical": "api/petstore/swagger-petstore-yaml.info"
+      },
+      {
+        "full": "/Volumes/External HD/Development/docstatic/docs/api/petstore/update-pet-with-form.api.mdx",
+        "rel": "api/petstore/update-pet-with-form.api.mdx",
+        "canonical": "api/petstore/update-pet-with-form.api"
+      },
+      {
+        "full": "/Volumes/External HD/Development/docstatic/docs/api/petstore/update-pet.api.mdx",
+        "rel": "api/petstore/update-pet.api.mdx",
+        "canonical": "api/petstore/update-pet.api"
+      },
+      {
+        "full": "/Volumes/External HD/Development/docstatic/docs/api/petstore/update-user.api.mdx",
+        "rel": "api/petstore/update-user.api.mdx",
+        "canonical": "api/petstore/update-user.api"
+      },
+      {
+        "full": "/Volumes/External HD/Development/docstatic/docs/api/petstore/upload-file.api.mdx",
+        "rel": "api/petstore/upload-file.api.mdx",
+        "canonical": "api/petstore/upload-file.api"
+      },
+      {
+        "full": "/Volumes/External HD/Development/docstatic/docs/api/petstore/user.tag.mdx",
+        "rel": "api/petstore/user.tag.mdx",
+        "canonical": "api/petstore/user.tag"
+      },
+      {
+        "full": "/Volumes/External HD/Development/docstatic/docs/api/queries.md",
+        "rel": "api/queries.md",
+        "canonical": "api/queries"
+      },
+      {
+        "full": "/Volumes/External HD/Development/docstatic/docs/api/scalars.md",
+        "rel": "api/scalars.md",
+        "canonical": "api/scalars"
+      },
+      {
+        "full": "/Volumes/External HD/Development/docstatic/docs/api/unions.md",
+        "rel": "api/unions.md",
+        "canonical": "api/unions"
+      },
+      {
+        "full": "/Volumes/External HD/Development/docstatic/docs/blog.mdx",
+        "rel": "blog.mdx",
+        "canonical": "blog"
+      },
+      {
+        "full": "/Volumes/External HD/Development/docstatic/docs/browser-support.mdx",
+        "rel": "browser-support.mdx",
+        "canonical": "browser-support"
+      },
+      {
+        "full": "/Volumes/External HD/Development/docstatic/docs/cli.mdx",
+        "rel": "cli.mdx",
+        "canonical": "cli"
+      },
+      {
+        "full": "/Volumes/External HD/Development/docstatic/docs/configuration.mdx",
+        "rel": "configuration.mdx",
+        "canonical": "configuration"
+      },
+      {
+        "full": "/Volumes/External HD/Development/docstatic/docs/deployment.mdx",
+        "rel": "deployment.mdx",
+        "canonical": "deployment"
+      },
+      {
+        "full": "/Volumes/External HD/Development/docstatic/docs/guides/creating-pages.mdx",
+        "rel": "guides/creating-pages.mdx",
+        "canonical": "guides/creating-pages"
+      },
+      {
+        "full": "/Volumes/External HD/Development/docstatic/docs/guides/dashboards.mdx",
+        "rel": "guides/dashboards.mdx",
+        "canonical": "guides/dashboards"
+      },
+      {
+        "full": "/Volumes/External HD/Development/docstatic/docs/guides/docs/create-doc.mdx",
+        "rel": "guides/docs/create-doc.mdx",
+        "canonical": "guides/docs/create-doc"
+      },
+      {
+        "full": "/Volumes/External HD/Development/docstatic/docs/guides/docs/introduction.mdx",
+        "rel": "guides/docs/introduction.mdx",
+        "canonical": "guides/docs/introduction"
+      },
+      {
+        "full": "/Volumes/External HD/Development/docstatic/docs/guides/docs/taxonomies.mdx",
+        "rel": "guides/docs/taxonomies.mdx",
+        "canonical": "guides/docs/taxonomies"
+      },
+      {
+        "full": "/Volumes/External HD/Development/docstatic/docs/guides/index.mdx",
+        "rel": "guides/index.mdx",
+        "canonical": "guides"
+      },
+      {
+        "full": "/Volumes/External HD/Development/docstatic/docs/guides/markdown-features/admonitions.mdx",
+        "rel": "guides/markdown-features/admonitions.mdx",
+        "canonical": "guides/markdown-features/admonitions"
+      },
+      {
+        "full": "/Volumes/External HD/Development/docstatic/docs/guides/markdown-features/assets.mdx",
+        "rel": "guides/markdown-features/assets.mdx",
+        "canonical": "guides/markdown-features/assets"
+      },
+      {
+        "full": "/Volumes/External HD/Development/docstatic/docs/guides/markdown-features/code-blocks.mdx",
+        "rel": "guides/markdown-features/code-blocks.mdx",
+        "canonical": "guides/markdown-features/code-blocks"
+      },
+      {
+        "full": "/Volumes/External HD/Development/docstatic/docs/guides/markdown-features/comments.mdx",
+        "rel": "guides/markdown-features/comments.mdx",
+        "canonical": "guides/markdown-features/comments"
+      },
+      {
+        "full": "/Volumes/External HD/Development/docstatic/docs/guides/markdown-features/conditional-text.mdx",
+        "rel": "guides/markdown-features/conditional-text.mdx",
+        "canonical": "guides/markdown-features/conditional-text"
+      },
+      {
+        "full": "/Volumes/External HD/Development/docstatic/docs/guides/markdown-features/context-help.mdx",
+        "rel": "guides/markdown-features/context-help.mdx",
+        "canonical": "guides/markdown-features/context-help"
+      },
+      {
+        "full": "/Volumes/External HD/Development/docstatic/docs/guides/markdown-features/diagrams.mdx",
+        "rel": "guides/markdown-features/diagrams.mdx",
+        "canonical": "guides/markdown-features/diagrams"
+      },
+      {
+        "full": "/Volumes/External HD/Development/docstatic/docs/guides/markdown-features/figures.mdx",
+        "rel": "guides/markdown-features/figures.mdx",
+        "canonical": "guides/markdown-features/figures"
+      },
+      {
+        "full": "/Volumes/External HD/Development/docstatic/docs/guides/markdown-features/footnotes.mdx",
+        "rel": "guides/markdown-features/footnotes.mdx",
+        "canonical": "guides/markdown-features/footnotes"
+      },
+      {
+        "full": "/Volumes/External HD/Development/docstatic/docs/guides/markdown-features/glossary.mdx",
+        "rel": "guides/markdown-features/glossary.mdx",
+        "canonical": "guides/markdown-features/glossary"
+      },
+      {
+        "full": "/Volumes/External HD/Development/docstatic/docs/guides/markdown-features/intro.mdx",
+        "rel": "guides/markdown-features/intro.mdx",
+        "canonical": "guides/markdown-features/intro"
+      },
+      {
+        "full": "/Volumes/External HD/Development/docstatic/docs/guides/markdown-features/links.mdx",
+        "rel": "guides/markdown-features/links.mdx",
+        "canonical": "guides/markdown-features/links"
+      },
+      {
+        "full": "/Volumes/External HD/Development/docstatic/docs/guides/markdown-features/math-equations.mdx",
+        "rel": "guides/markdown-features/math-equations.mdx",
+        "canonical": "guides/markdown-features/math-equations"
+      },
+      {
+        "full": "/Volumes/External HD/Development/docstatic/docs/guides/markdown-features/metadata.mdx",
+        "rel": "guides/markdown-features/metadata.mdx",
+        "canonical": "guides/markdown-features/metadata"
+      },
+      {
+        "full": "/Volumes/External HD/Development/docstatic/docs/guides/markdown-features/plugins.mdx",
+        "rel": "guides/markdown-features/plugins.mdx",
+        "canonical": "guides/markdown-features/plugins"
+      },
+      {
+        "full": "/Volumes/External HD/Development/docstatic/docs/guides/markdown-features/react.mdx",
+        "rel": "guides/markdown-features/react.mdx",
+        "canonical": "guides/markdown-features/react"
+      },
+      {
+        "full": "/Volumes/External HD/Development/docstatic/docs/guides/markdown-features/snippets.mdx",
+        "rel": "guides/markdown-features/snippets.mdx",
+        "canonical": "guides/markdown-features/snippets"
+      },
+      {
+        "full": "/Volumes/External HD/Development/docstatic/docs/guides/markdown-features/tabs.mdx",
+        "rel": "guides/markdown-features/tabs.mdx",
+        "canonical": "guides/markdown-features/tabs"
+      },
+      {
+        "full": "/Volumes/External HD/Development/docstatic/docs/guides/markdown-features/taxonomies.mdx",
+        "rel": "guides/markdown-features/taxonomies.mdx",
+        "canonical": "guides/markdown-features/taxonomies"
+      },
+      {
+        "full": "/Volumes/External HD/Development/docstatic/docs/guides/markdown-features/toc.mdx",
+        "rel": "guides/markdown-features/toc.mdx",
+        "canonical": "guides/markdown-features/toc"
+      },
+      {
+        "full": "/Volumes/External HD/Development/docstatic/docs/guides/markdown-features/variables.mdx",
+        "rel": "guides/markdown-features/variables.mdx",
+        "canonical": "guides/markdown-features/variables"
+      },
+      {
+        "full": "/Volumes/External HD/Development/docstatic/docs/guides/wikis.mdx",
+        "rel": "guides/wikis.mdx",
+        "canonical": "guides/wikis"
+      },
+      {
+        "full": "/Volumes/External HD/Development/docstatic/docs/i18n/introduction.mdx",
+        "rel": "i18n/introduction.mdx",
+        "canonical": "i18n/introduction"
+      },
+      {
+        "full": "/Volumes/External HD/Development/docstatic/docs/installation.mdx",
+        "rel": "installation.mdx",
+        "canonical": "installation"
+      },
+      {
+        "full": "/Volumes/External HD/Development/docstatic/docs/introduction.mdx",
+        "rel": "introduction.mdx",
+        "canonical": "introduction"
+      },
+      {
+        "full": "/Volumes/External HD/Development/docstatic/docs/migration/index.mdx",
+        "rel": "migration/index.mdx",
+        "canonical": "migration"
+      },
+      {
+        "full": "/Volumes/External HD/Development/docstatic/docs/search.mdx",
+        "rel": "search.mdx",
+        "canonical": "search"
+      },
+      {
+        "full": "/Volumes/External HD/Development/docstatic/docs/seo.mdx",
+        "rel": "seo.mdx",
+        "canonical": "seo"
+      },
+      {
+        "full": "/Volumes/External HD/Development/docstatic/docs/static-assets.mdx",
+        "rel": "static-assets.mdx",
+        "canonical": "static-assets"
+      },
+      {
+        "full": "/Volumes/External HD/Development/docstatic/docs/styling-layout.mdx",
+        "rel": "styling-layout.mdx",
+        "canonical": "styling-layout"
+      },
+      {
+        "full": "/Volumes/External HD/Development/docstatic/docs/test.mdx",
+        "rel": "test.mdx",
+        "canonical": "test"
+      },
+      {
+        "full": "/Volumes/External HD/Development/docstatic/docs/using-plugins.mdx",
+        "rel": "using-plugins.mdx",
+        "canonical": "using-plugins"
+      },
+      {
+        "full": "/Volumes/External HD/Development/docstatic/docs/wiki/readme.mdx",
+        "rel": "wiki/readme.mdx",
+        "canonical": "wiki"
+      }
+    ],
+    "translations": {
+      "fr": [
+        {
+          "full": "/Volumes/External HD/Development/docstatic/i18n/fr/docusaurus-plugin-content-docs/current/Getting-started---working-in-the-cloud.mdx",
+          "rel": "Getting-started---working-in-the-cloud.mdx",
+          "canonical": "Getting-started---working-in-the-cloud"
+        },
+        {
+          "full": "/Volumes/External HD/Development/docstatic/i18n/fr/docusaurus-plugin-content-docs/current/Getting-started---working-locally.mdx",
+          "rel": "Getting-started---working-locally.mdx",
+          "canonical": "Getting-started---working-locally"
+        },
+        {
+          "full": "/Volumes/External HD/Development/docstatic/i18n/fr/docusaurus-plugin-content-docs/current/advanced/adding-the-cms-to-an-ipad-home-screen.mdx",
+          "rel": "advanced/adding-the-cms-to-an-ipad-home-screen.mdx",
+          "canonical": "advanced/adding-the-cms-to-an-ipad-home-screen"
+        },
+        {
+          "full": "/Volumes/External HD/Development/docstatic/i18n/fr/docusaurus-plugin-content-docs/current/advanced/front-matter-cms.mdx",
+          "rel": "advanced/front-matter-cms.mdx",
+          "canonical": "advanced/front-matter-cms"
+        },
+        {
+          "full": "/Volumes/External HD/Development/docstatic/i18n/fr/docusaurus-plugin-content-docs/current/advanced/hosted-cms.mdx",
+          "rel": "advanced/hosted-cms.mdx",
+          "canonical": "advanced/hosted-cms"
+        },
+        {
+          "full": "/Volumes/External HD/Development/docstatic/i18n/fr/docusaurus-plugin-content-docs/current/advanced/index.mdx",
+          "rel": "advanced/index.mdx",
+          "canonical": "advanced"
+        },
+        {
+          "full": "/Volumes/External HD/Development/docstatic/i18n/fr/docusaurus-plugin-content-docs/current/advanced/notifications.mdx",
+          "rel": "advanced/notifications.mdx",
+          "canonical": "advanced/notifications"
+        },
+        {
+          "full": "/Volumes/External HD/Development/docstatic/i18n/fr/docusaurus-plugin-content-docs/current/advanced/style.mdx",
+          "rel": "advanced/style.mdx",
+          "canonical": "advanced/style"
+        },
+        {
+          "full": "/Volumes/External HD/Development/docstatic/i18n/fr/docusaurus-plugin-content-docs/current/blog.mdx",
+          "rel": "blog.mdx",
+          "canonical": "blog"
+        },
+        {
+          "full": "/Volumes/External HD/Development/docstatic/i18n/fr/docusaurus-plugin-content-docs/current/browser-support.mdx",
+          "rel": "browser-support.mdx",
+          "canonical": "browser-support"
+        },
+        {
+          "full": "/Volumes/External HD/Development/docstatic/i18n/fr/docusaurus-plugin-content-docs/current/cli.mdx",
+          "rel": "cli.mdx",
+          "canonical": "cli"
+        },
+        {
+          "full": "/Volumes/External HD/Development/docstatic/i18n/fr/docusaurus-plugin-content-docs/current/configuration.mdx",
+          "rel": "configuration.mdx",
+          "canonical": "configuration"
+        },
+        {
+          "full": "/Volumes/External HD/Development/docstatic/i18n/fr/docusaurus-plugin-content-docs/current/deployment.mdx",
+          "rel": "deployment.mdx",
+          "canonical": "deployment"
+        },
+        {
+          "full": "/Volumes/External HD/Development/docstatic/i18n/fr/docusaurus-plugin-content-docs/current/guides/creating-pages.mdx",
+          "rel": "guides/creating-pages.mdx",
+          "canonical": "guides/creating-pages"
+        },
+        {
+          "full": "/Volumes/External HD/Development/docstatic/i18n/fr/docusaurus-plugin-content-docs/current/guides/dashboards.mdx",
+          "rel": "guides/dashboards.mdx",
+          "canonical": "guides/dashboards"
+        },
+        {
+          "full": "/Volumes/External HD/Development/docstatic/i18n/fr/docusaurus-plugin-content-docs/current/guides/docs/create-doc.mdx",
+          "rel": "guides/docs/create-doc.mdx",
+          "canonical": "guides/docs/create-doc"
+        },
+        {
+          "full": "/Volumes/External HD/Development/docstatic/i18n/fr/docusaurus-plugin-content-docs/current/guides/docs/introduction.mdx",
+          "rel": "guides/docs/introduction.mdx",
+          "canonical": "guides/docs/introduction"
+        },
+        {
+          "full": "/Volumes/External HD/Development/docstatic/i18n/fr/docusaurus-plugin-content-docs/current/guides/docs/taxonomies.mdx",
+          "rel": "guides/docs/taxonomies.mdx",
+          "canonical": "guides/docs/taxonomies"
+        },
+        {
+          "full": "/Volumes/External HD/Development/docstatic/i18n/fr/docusaurus-plugin-content-docs/current/guides/index.mdx",
+          "rel": "guides/index.mdx",
+          "canonical": "guides"
+        },
+        {
+          "full": "/Volumes/External HD/Development/docstatic/i18n/fr/docusaurus-plugin-content-docs/current/guides/markdown-features/admonitions.mdx",
+          "rel": "guides/markdown-features/admonitions.mdx",
+          "canonical": "guides/markdown-features/admonitions"
+        },
+        {
+          "full": "/Volumes/External HD/Development/docstatic/i18n/fr/docusaurus-plugin-content-docs/current/guides/markdown-features/assets.mdx",
+          "rel": "guides/markdown-features/assets.mdx",
+          "canonical": "guides/markdown-features/assets"
+        },
+        {
+          "full": "/Volumes/External HD/Development/docstatic/i18n/fr/docusaurus-plugin-content-docs/current/guides/markdown-features/code-blocks.mdx",
+          "rel": "guides/markdown-features/code-blocks.mdx",
+          "canonical": "guides/markdown-features/code-blocks"
+        },
+        {
+          "full": "/Volumes/External HD/Development/docstatic/i18n/fr/docusaurus-plugin-content-docs/current/guides/markdown-features/comments.mdx",
+          "rel": "guides/markdown-features/comments.mdx",
+          "canonical": "guides/markdown-features/comments"
+        },
+        {
+          "full": "/Volumes/External HD/Development/docstatic/i18n/fr/docusaurus-plugin-content-docs/current/guides/markdown-features/conditional-text.mdx",
+          "rel": "guides/markdown-features/conditional-text.mdx",
+          "canonical": "guides/markdown-features/conditional-text"
+        },
+        {
+          "full": "/Volumes/External HD/Development/docstatic/i18n/fr/docusaurus-plugin-content-docs/current/guides/markdown-features/context-help.mdx",
+          "rel": "guides/markdown-features/context-help.mdx",
+          "canonical": "guides/markdown-features/context-help"
+        },
+        {
+          "full": "/Volumes/External HD/Development/docstatic/i18n/fr/docusaurus-plugin-content-docs/current/guides/markdown-features/diagrams.mdx",
+          "rel": "guides/markdown-features/diagrams.mdx",
+          "canonical": "guides/markdown-features/diagrams"
+        },
+        {
+          "full": "/Volumes/External HD/Development/docstatic/i18n/fr/docusaurus-plugin-content-docs/current/guides/markdown-features/figures.mdx",
+          "rel": "guides/markdown-features/figures.mdx",
+          "canonical": "guides/markdown-features/figures"
+        },
+        {
+          "full": "/Volumes/External HD/Development/docstatic/i18n/fr/docusaurus-plugin-content-docs/current/guides/markdown-features/footnotes.mdx",
+          "rel": "guides/markdown-features/footnotes.mdx",
+          "canonical": "guides/markdown-features/footnotes"
+        },
+        {
+          "full": "/Volumes/External HD/Development/docstatic/i18n/fr/docusaurus-plugin-content-docs/current/guides/markdown-features/glossary.mdx",
+          "rel": "guides/markdown-features/glossary.mdx",
+          "canonical": "guides/markdown-features/glossary"
+        },
+        {
+          "full": "/Volumes/External HD/Development/docstatic/i18n/fr/docusaurus-plugin-content-docs/current/guides/markdown-features/intro.mdx",
+          "rel": "guides/markdown-features/intro.mdx",
+          "canonical": "guides/markdown-features/intro"
+        },
+        {
+          "full": "/Volumes/External HD/Development/docstatic/i18n/fr/docusaurus-plugin-content-docs/current/guides/markdown-features/links.mdx",
+          "rel": "guides/markdown-features/links.mdx",
+          "canonical": "guides/markdown-features/links"
+        },
+        {
+          "full": "/Volumes/External HD/Development/docstatic/i18n/fr/docusaurus-plugin-content-docs/current/guides/markdown-features/math-equations.mdx",
+          "rel": "guides/markdown-features/math-equations.mdx",
+          "canonical": "guides/markdown-features/math-equations"
+        },
+        {
+          "full": "/Volumes/External HD/Development/docstatic/i18n/fr/docusaurus-plugin-content-docs/current/guides/markdown-features/metadata.mdx",
+          "rel": "guides/markdown-features/metadata.mdx",
+          "canonical": "guides/markdown-features/metadata"
+        },
+        {
+          "full": "/Volumes/External HD/Development/docstatic/i18n/fr/docusaurus-plugin-content-docs/current/guides/markdown-features/plugins.mdx",
+          "rel": "guides/markdown-features/plugins.mdx",
+          "canonical": "guides/markdown-features/plugins"
+        },
+        {
+          "full": "/Volumes/External HD/Development/docstatic/i18n/fr/docusaurus-plugin-content-docs/current/guides/markdown-features/react.mdx",
+          "rel": "guides/markdown-features/react.mdx",
+          "canonical": "guides/markdown-features/react"
+        },
+        {
+          "full": "/Volumes/External HD/Development/docstatic/i18n/fr/docusaurus-plugin-content-docs/current/guides/markdown-features/snippets.mdx",
+          "rel": "guides/markdown-features/snippets.mdx",
+          "canonical": "guides/markdown-features/snippets"
+        },
+        {
+          "full": "/Volumes/External HD/Development/docstatic/i18n/fr/docusaurus-plugin-content-docs/current/guides/markdown-features/tabs.mdx",
+          "rel": "guides/markdown-features/tabs.mdx",
+          "canonical": "guides/markdown-features/tabs"
+        },
+        {
+          "full": "/Volumes/External HD/Development/docstatic/i18n/fr/docusaurus-plugin-content-docs/current/guides/markdown-features/taxonomies.mdx",
+          "rel": "guides/markdown-features/taxonomies.mdx",
+          "canonical": "guides/markdown-features/taxonomies"
+        },
+        {
+          "full": "/Volumes/External HD/Development/docstatic/i18n/fr/docusaurus-plugin-content-docs/current/guides/markdown-features/toc.mdx",
+          "rel": "guides/markdown-features/toc.mdx",
+          "canonical": "guides/markdown-features/toc"
+        },
+        {
+          "full": "/Volumes/External HD/Development/docstatic/i18n/fr/docusaurus-plugin-content-docs/current/guides/markdown-features/variables.mdx",
+          "rel": "guides/markdown-features/variables.mdx",
+          "canonical": "guides/markdown-features/variables"
+        },
+        {
+          "full": "/Volumes/External HD/Development/docstatic/i18n/fr/docusaurus-plugin-content-docs/current/guides/wikis.mdx",
+          "rel": "guides/wikis.mdx",
+          "canonical": "guides/wikis"
+        },
+        {
+          "full": "/Volumes/External HD/Development/docstatic/i18n/fr/docusaurus-plugin-content-docs/current/i18n/introduction.mdx",
+          "rel": "i18n/introduction.mdx",
+          "canonical": "i18n/introduction"
+        },
+        {
+          "full": "/Volumes/External HD/Development/docstatic/i18n/fr/docusaurus-plugin-content-docs/current/installation.mdx",
+          "rel": "installation.mdx",
+          "canonical": "installation"
+        },
+        {
+          "full": "/Volumes/External HD/Development/docstatic/i18n/fr/docusaurus-plugin-content-docs/current/introduction.mdx",
+          "rel": "introduction.mdx",
+          "canonical": "introduction"
+        },
+        {
+          "full": "/Volumes/External HD/Development/docstatic/i18n/fr/docusaurus-plugin-content-docs/current/migration/index.mdx",
+          "rel": "migration/index.mdx",
+          "canonical": "migration"
+        },
+        {
+          "full": "/Volumes/External HD/Development/docstatic/i18n/fr/docusaurus-plugin-content-docs/current/orphan.mdx",
+          "rel": "orphan.mdx",
+          "canonical": "orphan"
+        },
+        {
+          "full": "/Volumes/External HD/Development/docstatic/i18n/fr/docusaurus-plugin-content-docs/current/search.mdx",
+          "rel": "search.mdx",
+          "canonical": "search"
+        },
+        {
+          "full": "/Volumes/External HD/Development/docstatic/i18n/fr/docusaurus-plugin-content-docs/current/seo.mdx",
+          "rel": "seo.mdx",
+          "canonical": "seo"
+        },
+        {
+          "full": "/Volumes/External HD/Development/docstatic/i18n/fr/docusaurus-plugin-content-docs/current/static-assets.mdx",
+          "rel": "static-assets.mdx",
+          "canonical": "static-assets"
+        },
+        {
+          "full": "/Volumes/External HD/Development/docstatic/i18n/fr/docusaurus-plugin-content-docs/current/styling-layout.mdx",
+          "rel": "styling-layout.mdx",
+          "canonical": "styling-layout"
+        },
+        {
+          "full": "/Volumes/External HD/Development/docstatic/i18n/fr/docusaurus-plugin-content-docs/current/test.mdx",
+          "rel": "test.mdx",
+          "canonical": "test"
+        },
+        {
+          "full": "/Volumes/External HD/Development/docstatic/i18n/fr/docusaurus-plugin-content-docs/current/using-plugins.mdx",
+          "rel": "using-plugins.mdx",
+          "canonical": "using-plugins"
+        },
+        {
+          "full": "/Volumes/External HD/Development/docstatic/i18n/fr/docusaurus-plugin-content-docs/current/wiki/readme.mdx",
+          "rel": "wiki/readme.mdx",
+          "canonical": "wiki"
+        }
+      ]
+    }
+  },
+  "gql": {
+    "docs": [],
+    "i18n": [],
+    "error": "Cannot find module '/Volumes/External HD/Development/docstatic/tina/__generated__/types' imported from /Volumes/External HD/Development/docstatic/tina/__generated__/client.js"
+  }
+}
