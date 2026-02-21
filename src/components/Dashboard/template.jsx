@@ -6,6 +6,7 @@ import BrokenLinksDashboard from './BrokenLinksDashboard';
 // import ContentReuseDashboard from './ContentReuseDashboard';
 import StatusBar from './StatusBar';
 import HelpButton from '../HelpButton';
+import DocumentMutationDashboard from './DocumentMutationDashboard';
 
 export const DashboardsCollection = {
   name: "dashboards",
@@ -108,7 +109,19 @@ export const DashboardsCollection = {
 		),
 	  },
 	},
-  ],
+
+		{
+			type: "boolean",
+			name: "documentMutationDashboard",
+			label: "Document Mutations",
+			required: false,
+			ui: {
+				component: (props) => (
+					<DocumentMutationDashboard />
+				),
+			},
+		},
+	],
 };
 
-export { Dashboard1, MediaDashboard, TranslationDashboard, BrokenLinksDashboard, StatusBar };
+export { Dashboard1, MediaDashboard, TranslationDashboard, BrokenLinksDashboard, StatusBar, DocumentMutationDashboard };
