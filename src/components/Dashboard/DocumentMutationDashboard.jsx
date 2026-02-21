@@ -42,7 +42,7 @@ const DocumentMutationDashboard = () => {
         const variables = {
           collection: 'doc',
           relativePath: `${createTitle.replace(/\s+/g, '-')}.mdx`,
-          params: { docs: { title: createTitle } }
+          params: { doc: { title: createTitle } }
       };
       const result = await client.request({ query: mutation, variables });
       setStatus(`Created document: ${result.data.createDocument.title}`);
