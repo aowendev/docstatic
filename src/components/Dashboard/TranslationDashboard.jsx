@@ -41,27 +41,47 @@ const TranslationDashboard = () => {
         const lang = selectedLanguage;
         const missing = translationData && translationData[lang] ? translationData[lang].missing : [];
         for (const item of missing) {
+          // copy full metadata and body from sourceNode when available
+          const sourceNode = item.sourceNode || null;
+          const relPath = `${lang}/docusaurus-plugin-content-docs/current/${item.file.replace(/^docs\//, '')}`;
+          const paramsBody = {};
+          if (sourceNode) {
+            // copy known i18n fields from source node
+            paramsBody.title = sourceNode.title || item.title;
+            if (sourceNode.body) paramsBody.body = sourceNode.body;
+            if (sourceNode.modifiedBy) paramsBody.modifiedBy = sourceNode.modifiedBy;
+            if (sourceNode.help !== undefined) paramsBody.help = sourceNode.help;
+            if (sourceNode.slug) paramsBody.slug = sourceNode.slug;
+            if (sourceNode.tags) paramsBody.tags = sourceNode.tags;
+            if (sourceNode.draft !== undefined) paramsBody.draft = sourceNode.draft;
+            if (sourceNode.review !== undefined) paramsBody.review = sourceNode.review;
+            if (sourceNode.translate !== undefined) paramsBody.translate = sourceNode.translate;
+            if (sourceNode.approved !== undefined) paramsBody.approved = sourceNode.approved;
+            if (sourceNode.published !== undefined) paramsBody.published = sourceNode.published;
+            if (sourceNode.unlisted !== undefined) paramsBody.unlisted = sourceNode.unlisted;
+          } else {
+            paramsBody.title = item.title;
+          }
+          // ensure created translations start as drafts
+          paramsBody.draft = true;
+          // set lastmod to one day earlier than source (or yesterday)
+          const lastmodSource = sourceNode && sourceNode.lastmod ? new Date(sourceNode.lastmod) : null;
+          paramsBody.lastmod = lastmodSource ? new Date(lastmodSource.getTime() - 86400000).toISOString() : new Date(Date.now() - 86400000).toISOString();
+
           await client.request({
             query: `
-              mutation CreateI18n($collection: String!, $relativePath: String!, $params: I18nMutation!) {
+              mutation CreateI18n($collection: String!, $relativePath: String!, $params: DocumentMutation!) {
                 createDocument(collection: $collection, relativePath: $relativePath, params: $params) {
                   ... on I18n {
                     id
-                    date
                   }
                 }
               }
             `,
             variables: {
               collection: 'i18n',
-              relativePath: `${lang}/docusaurus-plugin-content-docs/current/${item.file.replace(/^docs\//, '')}`,
-              params: {
-                i18n: {
-                  title: item.title,
-                  date: item.sourceLastMod && item.sourceLastMod !== 'No date' ? new Date(new Date(item.sourceLastMod).getTime() - 86400000).toISOString() : new Date(Date.now() - 86400000).toISOString(),
-                  sourceId: item.file
-                }
-              }
+              relativePath: relPath,
+              params: { i18n: paramsBody }
             }
           });
         }
@@ -83,247 +103,107 @@ const TranslationDashboard = () => {
   const [selectedLanguage, setSelectedLanguage] = useState('fr');
 
   const scanTranslations = async () => {
-    setLoading(true);
-    setError(null);
-
-    try {
-      // Import TinaCMS client
-      const { client } = await import('../../../tina/__generated__/client');
-      
-      // Get all docs from main collection
-      const docsResult = await client.queries.docConnection({
-        sort: 'title',
-        first: 500  // Request more documents
-      });
-
-      const docs = docsResult.data.docConnection.edges || [];
-      
-      // Use all docs like Dashboard1 does - no filtering
-      // Note: i18n/ is a source folder (internationalization docs), not translations
-      const filteredDocs = docs;
-      
-      console.log(`Processing ${filteredDocs.length} source documents`);
-      
-      // Dynamically determine available languages from i18n collection
-      let availableLanguages = [];
+      setLoading(true);
+      setError(null);
       try {
-        const i18nQuery = await client.queries.i18nConnection({ sort: 'title' });
-        const i18nDocs = i18nQuery.data?.i18nConnection?.edges || [];
-        // Extract language codes from the relativePath (e.g., 'fr/filename.mdx' => 'fr')
-        const langSet = new Set();
-        for (const edge of i18nDocs) {
-          const relPath = edge.node._sys?.relativePath || edge.node._sys?.filename || '';
-          // Match language code at the start of the path (e.g., 'fr/...' or 'fr/docusaurus-plugin-content-docs/...')
-          const match = relPath.match(/^([a-zA-Z0-9_-]+)\//);
-          if (match && match[1]) {
-            langSet.add(match[1]);
-          }
-        }
-        availableLanguages = Array.from(langSet);
-        if (availableLanguages.length === 0) {
-          // Fallback to 'fr' if nothing found
-          availableLanguages = ['fr'];
-        }
-      } catch (e) {
-        console.warn('Could not dynamically determine available languages from i18n collection:', e.message);
-        availableLanguages = ['fr'];
-      }
-      
+      // Build results container and maps of sources and translations
       const results = {};
+      // ensure we have a client and fetch source docs
+      const { client } = await import('../../../tina/__generated__/client');
+      const docsResult = await client.queries.docConnection({ sort: 'title', first: 500 });
+      const filteredDocs = docsResult.data?.docConnection?.edges || [];
 
-      // Initialize results for each language
-      for (const lang of availableLanguages) {
-        results[lang] = {
-          outdated: [],
-          missing: [],
-          upToDate: [],
-          orphaned: [],
-          errors: [],
-          total: 0
-        };
+      const sourceMap = {}; // cleanPath -> source node
+      const sourceList = [];
+      const canonicalize = (p) => {
+        if (!p) return p;
+        let s = p.replace(/\.mdx?$|\.md$/i, '');
+        s = s.replace(/\/(index|readme)$/i, '');
+        if (s.startsWith('/')) s = s.slice(1);
+        return s;
+      };
+
+      for (const edge of filteredDocs) {
+        const node = edge.node;
+        const rel = node._sys?.relativePath || node._sys?.filename || '';
+        const clean = rel.replace(/^docs\//, '');
+        const canonical = canonicalize(clean);
+        sourceMap[canonical] = node;
+        sourceList.push({ clean, canonical, node });
       }
 
-      // Process each source document
-      for (const docEdge of filteredDocs) {
-        const doc = docEdge.node;
-        for (const lang of availableLanguages) {
+      // Fetch all i18n docs (already requested earlier for languages) and build translations map
+      const i18nQuery = await client.queries.i18nConnection({ sort: 'title', first: 500 });
+      const i18nDocs = i18nQuery.data?.i18nConnection?.edges || [];
+      const translationsByLang = {};
+      for (const edge of i18nDocs) {
+        const node = edge.node;
+        const relPath = node._sys?.relativePath || node._sys?.filename || '';
+        const m = relPath.match(/^([a-zA-Z0-9_-]+)\/(.*)$/);
+        if (!m) continue;
+        const lang = m[1];
+        const afterLang = m[2];
+        // Only care about docusaurus-plugin-content-docs paths
+        const cleanAfter = afterLang.replace(/^docusaurus-plugin-content-docs\/current\//, '');
+        const canonical = canonicalize(cleanAfter);
+        if (!translationsByLang[lang]) translationsByLang[lang] = {};
+        translationsByLang[lang][canonical] = { node, originalPath: cleanAfter };
+      }
+
+      // Determine languages present (ensure selectedLanguage included)
+      let availableLanguages = Object.keys(translationsByLang || {});
+      if (!availableLanguages.includes(selectedLanguage)) availableLanguages.push(selectedLanguage);
+
+      // Initialize results for each language and compute missing/outdated/upToDate
+      for (const lang of availableLanguages) {
+        results[lang] = { outdated: [], missing: [], upToDate: [], orphaned: [], errors: [], total: 0 };
+        const matched = new Set();
+
+        const translationsForLang = translationsByLang[lang] || {};
+
+        for (const { clean, canonical, node } of sourceList) {
           try {
-            const sourceDate = doc.lastmod ? new Date(doc.lastmod) : null;
-            const fileName = doc._sys.relativePath || doc._sys.filename;
-            const title = doc.title || fileName;
-
-            // Query the i18n collection directly since i18n is a separate GraphQL node
-            let translationDoc = null;
-            try {
-              const i18nQuery = await client.queries.i18nConnection({ sort: 'title' });
-              const i18nDocs = i18nQuery.data?.i18nConnection?.edges || [];
-              // Clean up the fileName for matching
-              const cleanFileName = fileName.replace(/^docs\//, '');
-              const baseFileName = cleanFileName.replace(/\.(mdx|md)$/, '');
-
-              // Look for matching translation in i18n collection for the specific language only
-              const potentialTranslations = i18nDocs.filter(edge => {
-                const doc = edge.node;
-                const docPath = doc._sys?.relativePath || doc._sys?.filename || '';
-                // Only match if the path starts with the language code
-                if (!docPath.startsWith(`${lang}/`)) return false;
-                // Get the path after the language code
-                const afterLang = docPath.substring(lang.length + 1); // skip lang + '/'
-                // Try to match by full relative path after lang, or by base filename
-                return (
-                  afterLang === cleanFileName ||
-                  afterLang === baseFileName ||
-                  afterLang.endsWith(`/${cleanFileName}`) ||
-                  afterLang.endsWith(`/${baseFileName}`) ||
-                  docPath.endsWith(cleanFileName) ||
-                  docPath.endsWith(baseFileName) ||
-                  (doc.title && title && doc.title === title)
-                );
-              });
-              if (potentialTranslations.length > 0) {
-                translationDoc = potentialTranslations[0].node;
-              }
-            } catch (e) {
-              // Fallback: try querying all docs if i18n collection doesn't exist
-              const allDocsQuery = await client.queries.docConnection({ 
-                sort: 'title',
-                first: 500  // Request more documents
-              });
-              const allDocs = allDocsQuery.data?.docConnection?.edges || [];
-              const cleanFileName = fileName.replace(/^docs\//, '');
-              // Filter for i18n documents in the correct language
-              const i18nDocs = allDocs.filter(edge => {
-                const path = edge.node._sys?.relativePath || '';
-                return path.startsWith(`i18n/${lang}/`);
-              });
-              const potentialTranslations = i18nDocs.filter(edge => {
-                const docPath = edge.node._sys?.relativePath || '';
-                return docPath.endsWith(cleanFileName) || docPath.endsWith(baseFileName);
-              });
-              if (potentialTranslations.length > 0) {
-                translationDoc = potentialTranslations[0].node;
-              }
-            }
-
-            if (!translationDoc) {
-              // No translation found in TinaCMS
-              results[lang].missing.push({
-                file: fileName,
-                sourceLastMod: doc.lastmod || 'No date',
-                title: title
-              });
-            } else {
-              // Translation found, compare dates
-              const translationDate = translationDoc.lastmod ? new Date(translationDoc.lastmod) : null;
-              const translationDateString = translationDoc.lastmod || 'No date';
-              if (!sourceDate && !translationDate) {
-                results[lang].upToDate.push({
-                  file: fileName,
-                  sourceLastMod: 'No date',
-                  translationLastMod: 'No date',
-                  title: title
-                });
-              } else if (sourceDate && !translationDate) {
-                results[lang].outdated.push({
-                  file: fileName,
-                  sourceLastMod: doc.lastmod,
-                  translationLastMod: 'No date',
-                  title: title
-                });
-              } else if (!sourceDate && translationDate) {
-                results[lang].upToDate.push({
-                  file: fileName,
-                  sourceLastMod: 'No date',
-                  translationLastMod: translationDateString,
-                  title: title
-                });
-              } else {
-                if (sourceDate > translationDate) {
-                  const daysBehind = Math.ceil((sourceDate - translationDate) / (1000 * 60 * 60 * 24));
-                  results[lang].outdated.push({
-                    file: fileName,
-                    sourceLastMod: doc.lastmod,
-                    translationLastMod: translationDateString,
-                    title: title,
-                    daysBehind: daysBehind
-                  });
-                } else {
-                  results[lang].upToDate.push({
-                    file: fileName,
-                    sourceLastMod: doc.lastmod,
-                    translationLastMod: translationDateString,
-                    title: title
-                  });
-                }
-              }
-            }
             results[lang].total++;
+            const sourceNode = node;
+            const sourceDate = sourceNode.lastmod ? new Date(sourceNode.lastmod) : null;
+            const title = sourceNode.title || clean;
+            const translationEntry = translationsForLang[canonical] || translationsForLang[clean];
+            const translationNode = translationEntry ? translationEntry.node || translationEntry : null;
+            if (!translationNode) {
+              results[lang].missing.push({ file: `docs/${clean}`, sourceLastMod: sourceNode.lastmod || 'No date', title, sourceNode });
+              continue;
+            }
+            matched.add(canonical);
+            const translationDate = translationNode.lastmod ? new Date(translationNode.lastmod) : null;
+            const translationDateString = translationNode.lastmod || 'No date';
+            if (!sourceDate && !translationDate) {
+              results[lang].upToDate.push({ file: `docs/${clean}`, sourceLastMod: 'No date', translationLastMod: 'No date', title });
+            } else if (sourceDate && !translationDate) {
+              results[lang].outdated.push({ file: `docs/${clean}`, sourceLastMod: sourceNode.lastmod, translationLastMod: 'No date', title });
+            } else if (!sourceDate && translationDate) {
+              results[lang].upToDate.push({ file: `docs/${clean}`, sourceLastMod: 'No date', translationLastMod: translationDateString, title });
+            } else {
+              if (sourceDate > translationDate) {
+                const daysBehind = Math.ceil((sourceDate - translationDate) / (1000 * 60 * 60 * 24));
+                results[lang].outdated.push({ file: `docs/${clean}`, sourceLastMod: sourceNode.lastmod, translationLastMod: translationDateString, title, daysBehind });
+              } else {
+                results[lang].upToDate.push({ file: `docs/${clean}`, sourceLastMod: sourceNode.lastmod, translationLastMod: translationDateString, title });
+              }
+            }
           } catch (fileError) {
-            results[lang].errors.push({
-              file: doc._sys.relativePath || doc._sys.filename,
-              error: fileError.message
-            });
+            results[lang].errors.push({ file: clean, error: fileError.message });
           }
         }
-      }
 
-      // Process orphaned files (files in i18n that don't have corresponding source files)
-      for (const lang of availableLanguages) {
-        try {
-          const i18nQuery = await client.queries.i18nConnection({ sort: 'title' });
-          const i18nDocs = i18nQuery.data?.i18nConnection?.edges || [];
-          
-          // Get all i18n files for this language
-          const langFiles = i18nDocs.filter(edge => {
-            const docPath = edge.node._sys?.relativePath || edge.node._sys?.filename || '';
-            // Only consider docs with docusaurus-plugin-content-docs in the path after the lang prefix
-            if (!docPath.startsWith(`${lang}/`)) return false;
-            const afterLang = docPath.substring(lang.length + 1); // skip lang + '/'
-            return afterLang.startsWith('docusaurus-plugin-content-docs/');
-          });
-          
-          // Check each i18n file to see if it has a corresponding source file
-          for (const i18nEdge of langFiles) {
-            const i18nDoc = i18nEdge.node;
-            const i18nPath = i18nDoc._sys?.relativePath || i18nDoc._sys?.filename || '';
-            const i18nTitle = i18nDoc.title || i18nPath;
-            
-            // Extract the file path after the language prefix
-            const afterLang = i18nPath.substring(lang.length + 1); // skip lang + '/'
-            const cleanPath = afterLang.replace(/^docusaurus-plugin-content-docs\/current\//, '');
-            
-            // Check if there's a corresponding source file
-            let hasSourceFile = false;
-            for (const docEdge of filteredDocs) {
-              const sourceDoc = docEdge.node;
-              const sourcePath = sourceDoc._sys?.relativePath || sourceDoc._sys?.filename || '';
-              const cleanSourcePath = sourcePath.replace(/^docs\//, '');
-              const baseSourcePath = cleanSourcePath.replace(/\.(mdx|md)$/, '');
-              
-              if (
-                cleanPath === cleanSourcePath ||
-                cleanPath === baseSourcePath ||
-                cleanPath.endsWith(`/${cleanSourcePath}`) ||
-                cleanPath.endsWith(`/${baseSourcePath}`) ||
-                afterLang === cleanSourcePath ||
-                afterLang === baseSourcePath ||
-                (sourceDoc.title && i18nTitle && sourceDoc.title === i18nTitle)
-              ) {
-                hasSourceFile = true;
-                break;
-              }
-            }
-            
-            if (!hasSourceFile) {
-              results[lang].orphaned.push({
-                file: i18nPath,
-                translationLastMod: i18nDoc.lastmod || 'No date',
-                title: i18nTitle
-              });
-            }
+        // Orphans: translations present that weren't matched to a source
+        const translationsKeys = Object.keys(translationsForLang || {});
+        for (const tkey of translationsKeys) {
+          if (!matched.has(tkey)) {
+            const entry = translationsForLang[tkey];
+            const node = entry.node || entry;
+            const orig = entry.originalPath || tkey;
+            results[lang].orphaned.push({ file: `${lang}/docusaurus-plugin-content-docs/current/${orig}`, translationLastMod: node.lastmod || 'No date', title: node.title || orig });
           }
-        } catch (error) {
-          console.warn(`Error detecting orphaned files for language ${lang}:`, error.message);
         }
       }
 
