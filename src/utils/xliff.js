@@ -132,6 +132,17 @@ function serializeRichTextToMarkdown(node) {
       return (node.children || []).map(serializeRichTextToMarkdown).join('\n\n');
     case 'p':
       return (node.children || []).map(serializeRichTextToMarkdown).join('');
+    case 'h1':
+    case 'h2':
+    case 'h3':
+    case 'h4':
+    case 'h5':
+    case 'h6': {
+      const depth = parseInt(type.slice(1), 10) || 1;
+      const prefix = '#'.repeat(Math.max(1, Math.min(6, depth)));
+      const content = (node.children || []).map(serializeRichTextToMarkdown).join('');
+      return `${prefix} ${content}`;
+    }
     case 'heading': {
       const depth = node.depth || 1;
       const prefix = '#'.repeat(Math.max(1, Math.min(6, depth)));
@@ -143,6 +154,8 @@ function serializeRichTextToMarkdown(node) {
       const content = node.value || (node.children || []).map(serializeRichTextToMarkdown).join('');
       return '\n\n```' + (lang ? ' ' + lang : '') + '\n' + content + '\n```\n\n';
     }
+    case 'hr':
+      return '\n\n---\n\n';
     case 'break':
       // represent an explicit hard line-break within a paragraph
       return '\n';
@@ -224,13 +237,19 @@ function serializeRichTextToMarkdown(node) {
           try { return JSON.stringify(candidate); } catch (e) { return String(candidate); }
         };
 
-        // 1) children
+        // 1) children — but if children serialize to an empty string, prefer
+        // attribute/props-based serialization so components that store props
+        // (e.g. `Figure` with `caption`) aren't dropped when the AST contains
+        // an empty text child.
         if (node.children && node.children.length) {
-          const props = propsToString(node.attributes);
-          const open = node.name ? (props ? `<${node.name} ${props}>` : `<${node.name}>`) : '';
           const children = tryChildren(node.children);
-          const close = node.name ? `</${node.name}>` : '';
-          return `${open}${children}${close}`;
+          if (String(children || '').trim()) {
+            const props = propsToString(node.attributes);
+            const open = node.name ? (props ? `<${node.name} ${props}>` : `<${node.name}>`) : '';
+            const close = node.name ? `</${node.name}>` : '';
+            return `${open}${children}${close}`;
+          }
+          // else fall through and allow props/attributes to provide content
         }
 
         // 2) attributes with name 'children'
@@ -243,6 +262,16 @@ function serializeRichTextToMarkdown(node) {
             const close = node.name ? `</${node.name}>` : '';
             return `${open}${children}${close}`;
           }
+        }
+
+        // 2b) Tina AST may put JSX props under `props` instead of `attributes`.
+        // Support `node.props.children` which often contains a nested AST.
+        if (node.props && node.props.children) {
+          const props = propsToString(Object.keys(node.props).map(k => ({ name: k, value: node.props[k] })));
+          const open = node.name ? (props ? `<${node.name} ${props}>` : `<${node.name}>`) : '';
+          const children = tryChildren(node.props.children);
+          const close = node.name ? `</${node.name}>` : '';
+          return `${open}${children}${close}`;
         }
 
         // 3) _values/raw/_raw
@@ -259,9 +288,15 @@ function serializeRichTextToMarkdown(node) {
           return String(node._raw || node.raw);
         }
 
-        // last resort: emit empty element with props preserved
+        // last resort: emit empty element with props preserved. Prefer
+        // `node.props` (Tina AST) when available, otherwise fall back to
+        // `node.attributes` (mdx AST). This makes the handling generic for
+        // any component (Figure, DocCardList, Passthrough, CodeSnippet, etc.).
         if (node.name) {
-          const props = propsToString(node.attributes);
+          let props = propsToString(node.attributes);
+          if ((!props || !String(props).trim()) && node.props) {
+            props = propsToString(Object.keys(node.props).map(k => ({ name: k, value: node.props[k] })));
+          }
           return props ? `<${node.name} ${props}></${node.name}>` : `<${node.name}></${node.name}>`;
         }
         return '';

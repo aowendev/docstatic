@@ -1,0 +1,2833 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff version="2.2" xmlns="urn:oasis:names:tc:xliff:document:2.2">
+  <file id="fr" original="docstatic-export">
+    <unit id="advanced/adding-the-cms-to-an-ipad-home-screen">
+      <notes><note>path:advanced/adding-the-cms-to-an-ipad-home-screen.mdx</note><note>title:Adding the CMS to an iPad home screen</note></notes>
+      <segment>
+        <source xml:space="preserve">With Apple iPadOS you can convert any web page into a web app that runs in its own instance of Safari with its own icon on your home screen. You can use this ability to create an app for the cloud hosted CMS.
+
+1. Sign in to the CMS.
+2. Navigate to the collection you want to use as the home page. For example, the **Topics** collection or the **Table of Contents**.
+3. Tap the **Share** icon, tap **More** ( **…** ) and tap **Add to Home Screen** ( **+** ).
+4. Give the app a name. By default it will use TinaCMS.
+5. Click **Add**.</source>
+        <target xml:space="preserve">Avec l&apos;iPadOS d&apos;Apple, vous pouvez convertir n&apos;importe quelle page web en une application web qui s&apos;exécute dans sa propre instance de Safari avec sa propre icône sur votre écran d&apos;accueil. Vous pouvez utiliser cette capacité pour créer une application pour le CMS hébergé dans le nuage.
+
+1. Connectez-vous au CMS.
+2. Naviguez jusqu&apos;à la collection que vous souhaitez utiliser comme page d&apos;accueil. Par exemple, la collection **Topics** ou la **Table of Contents**.
+3. Appuyez sur l&apos;icône **Partager**, appuyez sur **Plus** ( **…** ) et appuyez sur **Ajouter à l&apos;écran d&apos;accueil** ( **+** ).
+4. Donnez un nom à l&apos;application. Par défaut, elle utilisera TinaCMS.
+5. Cliquez sur **Ajouter**.</target>
+      </segment>
+    </unit>
+    <unit id="guides/markdown-features/admonitions">
+      <notes><note>path:guides/markdown-features/admonitions.mdx</note><note>title:Admonitions</note></notes>
+      <segment>
+        <source xml:space="preserve"># Admonitions
+
+The **Admonitions** component enables you to add styled admonitions.
+
+1. Select **Admonition** from the **Embed** list.
+2. Edit the component and select a **Type** (**Note**, **Tip**, **Info**, **Caution** or **Warning**).
+3. Give it a **Title**.
+4. Enter the **Content**.
+
+#### Examples:
+
+&lt;Admonition type=&quot;note&quot; title=&quot;Note&quot; children={Use note admonitions for supplementary information.}&gt; (type:note, title:Note)Use note admonitions for supplementary information.&lt;/Admonition&gt;
+
+&lt;Admonition type=&quot;tip&quot; title=&quot;Tip&quot; children={Use tip admonitions to provide advice that it&apos;s safe to ignore.}&gt; (type:tip, title:Tip)Use tip admonitions to provide advice that it&apos;s safe to ignore.&lt;/Admonition&gt;
+
+&lt;Admonition type=&quot;info&quot; title=&quot;Info&quot; children={Use info admonitions for information that&apos;s sufficiently important that it needs to stand apart from the rest of the text.}&gt; (type:info, title:Info)Use info admonitions for information that&apos;s sufficiently important that it needs to stand apart from the rest of the text.&lt;/Admonition&gt;
+
+&lt;Admonition type=&quot;caution&quot; title=&quot;Caution&quot; children={Use caution admonitions when something may prevent an intended action from being completed.}&gt; (type:caution, title:Caution)Use caution admonitions when something may prevent an intended action from being completed.&lt;/Admonition&gt;
+
+&lt;Admonition type=&quot;danger&quot; title=&quot;Warning&quot; children={Use warning admonitions when there is a risk of injury, security breach or data loss.}&gt; (type:danger, title:Warning)Use warning admonitions when there is a risk of injury, security breach or data loss.&lt;/Admonition&gt;</source>
+        <target xml:space="preserve"># Admonitions
+
+Le composant **Admonitions** vous permet d&apos;ajouter des avertissements stylisés.
+
+1. Sélectionnez **Admonition** dans la liste **Embed**.
+2. Modifiez le composant et sélectionnez un **Type** (**Note**, **Conseil**, **Info**, **Caution** ou **Warning**).
+3. Donnez-lui un **Title**.
+4. Saisissez le **Content**.
+
+#### Exemples :
+
+&lt;Admonition type=&quot;note&quot; title=&quot;Note&quot; children={Utilisez les admonitions de note pour obtenir des informations supplémentaires.}&gt;Utilisez les admonitions de note pour obtenir des informations supplémentaires.&lt;/Admonition&gt;
+
+&lt;Admonition type=&quot;tip&quot; title=&quot;Conseil&quot; children={Utilisez les avertissements de type &quot;tip&quot; pour fournir des conseils qu&apos;il est prudent d&apos;ignorer.}&gt;Utilisez les avertissements de type &quot;tip&quot; pour fournir des conseils qu&apos;il est prudent d&apos;ignorer.&lt;/Admonition&gt;
+
+&lt;Admonition type=&quot;info&quot; title=&quot;Info&quot; children={Utilisez les avertissements de type &quot;info&quot; pour les informations suffisamment importantes pour se démarquer du reste du texte.}&gt;Utilisez les avertissements de type &quot;info&quot; pour les informations suffisamment importantes pour se démarquer du reste du texte.&lt;/Admonition&gt;
+
+&lt;Admonition type=&quot;caution&quot; title=&quot;Prudence&quot; children={Utilisez les avertissements de prudence lorsque quelque chose risque d&apos;empêcher la réalisation d&apos;une action prévue.}&gt;Utilisez les avertissements de prudence lorsque quelque chose risque d&apos;empêcher la réalisation d&apos;une action prévue.&lt;/Admonition&gt;
+
+&lt;Admonition type=&quot;danger&quot; title=&quot;Avertissement&quot; children={Utilisez des avertissements lorsqu&apos;il existe un risque de blessure, de violation de la sécurité ou de perte de données.}&gt;Utilisez des avertissements lorsqu&apos;il existe un risque de blessure, de violation de la sécurité ou de perte de données.&lt;/Admonition&gt;</target>
+      </segment>
+    </unit>
+    <unit id="advanced">
+      <notes><note>path:advanced/index.mdx</note><note>title:Advanced guides</note></notes>
+      <segment>
+        <source xml:space="preserve">This section covers the more advanced features of DocStatic including integrations:
+
+&lt;DocCardList title=&quot;Advanced guides&quot;&gt; (title:Advanced guides)&lt;/DocCardList&gt;
+
+Developers who are interested in extending the functionality of DocStatic should refer to the  Guides and Advanced Guides in the Docusaurus documentation.</source>
+        <target xml:space="preserve">Cette section couvre les fonctionnalités plus avancées de DocStatic, y compris les intégrations :
+
+&lt;DocCardList title=&quot;Advanced guides&quot;&gt;&lt;/DocCardList&gt;
+
+Les développeurs intéressés par l&apos;extension des fonctionnalités de DocStatic doivent se référer aux Guides et aux Tutoriels avancés dans la documentation de Docusaurus.</target>
+      </segment>
+    </unit>
+    <unit id="guides/markdown-features/assets">
+      <notes><note>path:guides/markdown-features/assets.mdx</note><note>title:Assets</note></notes>
+      <segment>
+        <source xml:space="preserve"># Assets
+
+Sometimes you want to link to assets (for example, docx files, images and so on) directly from topics. DocStatic manages this through the static/ folder.
+
+Any content placed in the folder will be available from the root of the published site. For example:
+
+
+
+## Images
+
+DocStatic provides two ways to add images to topics. For inline images you can click the **Image** icon to place an image in a topic. This works best for icons () and small images. Icons should be stored as pre-scaled SVG files. These will be inverted and have their color space rotated by 180° in dark mode.
+
+&lt;Admonition type=&quot;tip&quot; title=&quot;Tip&quot; children={You can use Librsvg to scale SVGs. For example, rsvg-convert example.svg -h 12 -f svg -o example.svg sets a height of 12 points.}&gt; (type:tip, title:Tip)You can use Librsvg to scale SVGs. For example, rsvg-convert example.svg -h 12 -f svg -o example.svg sets a height of 12 points.&lt;/Admonition&gt;
+
+For larger images, it&apos;s better to use the Figure component.
+
+1. Select **Figure** from the **Embed** list.
+2. Edit the component.
+3. Click the **Image** area to open the **Media Manager**.
+4. Upload or select an image.
+5. Give it a **Caption**.
+
+#### Example
+
+&lt;Figure img=&quot;/img/docStaticDemo.jpg&quot; caption=&quot;Example Figure&quot;&gt; (img:/img/docStaticDemo.jpg, caption:Example Figure)&lt;/Figure&gt;
+
+The figure resizes based on the view window. Clicking it will open it at maximum size in a light box.
+
+For more information about the Media Manager, refer to Media Overview in the TinaCMS documentation.
+
+## Files
+
+In the same way you can link to existing assets by using the path from the static/ folder in the URL. For example:
+
+
+
+For more information, refer to Static assets in the Docusaurus documentation.</source>
+        <target xml:space="preserve"></target>
+      </segment>
+    </unit>
+    <unit id="cli">
+      <notes><note>path:cli.mdx</note><note>title:CLI</note></notes>
+      <segment>
+        <source xml:space="preserve">DocStatic provides a set of scripts to help you generate, serve, and deploy your website.
+
+
+
+## DocStatic CLI commands
+
+To invoke the commands, use yarn. For example, yarn dev.
+
+These commands are described in CLI in the Docusaurus documentation:
+
+- docusaurus
+- start
+- build
+- swizzle
+- deploy
+- clear
+- serve
+- write-translations
+- write-heading-ids
+
+### Automated commands
+
+These commands are run automatically at build time or when starting the dev server:
+
+- generate-files
+- prebuild
+- predev
+
+### API commands
+
+- clean-api-docs
+- gen-api-docs
+- gen-graphql
+
+For more information on the OpenAPI commands, refer to CLI Usage in the Docusaurus OpenAPI Plugin documentation.
+
+For more information on the GraphQL command, refer to Usage in the Docusaurus GraphQL Plugin documentation.
+
+### Linting commands
+
+For more information about the linting commands, refer to CLI in the Biome documentation.</source>
+        <target xml:space="preserve">DocStatic fournit un ensemble de scripts pour vous aider à générer, servir et déployer votre site web.
+
+
+
+## Commandes CLI de DocStatic
+
+Pour invoquer les commandes, utilisez yarn. Par exemple, yarn dev.
+
+Ces commandes sont décrites dans CLI dans la documentation de Docusaurus :
+
+- docusaurus
+- start
+- build
+- swizzle
+- deploy
+- clear
+- serve
+- write-translations
+- write-heading-ids
+
+### Commandes automatisées
+
+Ces commandes sont exécutées automatiquement au moment de la construction ou lors du démarrage du serveur de développement :
+
+- generate-files
+- prebuild
+- predev
+
+### Commandes API
+
+- clean-api-docs
+- gen-api-docs
+- gen-graphql
+
+Pour plus d&apos;informations sur les commandes OpenAPI, reportez-vous à CLI Usage) dans la documentation Docusaurus OpenAPI Plugin.
+
+Pour plus d&apos;informations sur la commande GraphQL, voir Usage dans la documentation du plugin GraphQL de Docusaurus.
+
+### Commandes d&apos;archivage
+
+Pour plus d&apos;informations sur les commandes de classement, voir CLI dans la documentation de Biome.</target>
+      </segment>
+    </unit>
+    <unit id="test">
+      <notes><note>path:test.mdx</note><note>title:Check list test</note></notes>
+      <segment>
+        <source xml:space="preserve">## Passthrough component
+
+&lt;Passthrough summary=&quot;Check List&quot; string=&quot;- [X] 1\n^- [X] 2\n^^- [X] 3\n- [ ] 4&quot;&gt; (summary:Check List, string:- [X] 1\n^- [X] 2\n^^- [X] 3\n- [ ] 4)&lt;/Passthrough&gt;
+
+## GFM list
+
+- 1- 2- 3
+- 4
+
+## Bullet list
+
+- 1- 2- 3
+- 4</source>
+        <target xml:space="preserve">## Passthrough component
+
+&lt;Passthrough summary=&quot;Check List&quot; string=&quot;- [X] 1\n^- [X] 2\n^^- [X] 3\n- [ ] 4&quot;&gt;&lt;/Passthrough&gt;
+
+## GFM list
+
+- 1- 2- 3
+- 4
+
+## Bullet list
+
+- 1- 2- 3
+- 4</target>
+      </segment>
+    </unit>
+    <unit id="guides/markdown-features/code-blocks">
+      <notes><note>path:guides/markdown-features/code-blocks.mdx</note><note>title:Code blocks and snippets</note></notes>
+      <segment>
+        <source xml:space="preserve"># Code blocks and snippets
+
+DocStatic provides two ways to include code in your documentation. Both support syntax highlighting.
+
+## Code blocks
+
+1. Click the **Code Block** icon in the rich text editor.
+2. Click the language list and select or search for a language.
+3. Enter your code in the box.
+
+#### Example:
+
+
+
+## Code snippets
+
+1. Select **Code Snippet** from the **Embed** list.
+2. Give it a **Title**.
+3. Select a **Language**.
+4. Choose a file from the list. The list is populated with all the files in the reuse/code/ folder every time you run the dev server or do a build.
+
+#### Example:
+
+&lt;CodeSnippet title=&quot;Example Title&quot; language=&quot;xml&quot; filepath=&quot;example.xml&quot;&gt; (title:Example Title, language:xml, filepath:example.xml)&lt;/CodeSnippet&gt;
+
+The advantage of using code snippets is that there is a physical file that can be unit tested.</source>
+        <target xml:space="preserve"># Blocs de code et extraits
+
+DocStatic propose deux façons d&apos;inclure du code dans votre documentation. Toutes deux prennent en charge la mise en évidence de la syntaxe.
+
+## Blocs de code
+
+1. Cliquez sur l&apos;icône **Code Block** dans l&apos;éditeur de texte riche.
+2. Cliquez sur la liste des langues et sélectionnez ou recherchez une langue.
+3. Saisissez votre code dans la boîte.
+
+#### Exemple :
+
+
+
+## Extraits de code
+
+1. Sélectionnez **Code Snippet** dans la liste **Embed**.
+2. Donnez-lui un **Title**.
+3. Sélectionnez une **Language**.
+4. Choisissez un fichier dans la liste. La liste est remplie avec tous les fichiers du dossier reuse/code/ chaque fois que vous lancez le serveur de développement ou que vous faites une compilation.
+
+#### Exemple :
+
+&lt;CodeSnippet title=&quot;Titre de l&apos;exemple&quot; language=&quot;xml&quot; filepath=&quot;example.xml&quot;&gt;&lt;/CodeSnippet&gt;
+
+L&apos;avantage d&apos;utiliser des extraits de code est qu&apos;il existe un fichier physique qui peut être testé de manière unitaire.</target>
+      </segment>
+    </unit>
+    <unit id="guides/markdown-features/comments">
+      <notes><note>path:guides/markdown-features/comments.mdx</note><note>title:Comments</note></notes>
+      <segment>
+        <source xml:space="preserve"># Comments
+
+The **Comment** component enables you to add comments that are visible in the CMS but not on the rendered page, even in the raw source.
+
+1. Select **Comment** from the **Embed** list.
+2. Edit the component.
+3. Enter a **Reviewer**.
+4. Enter a **Comment**.
+
+#### Example
+
+&lt;Comment comment=&quot;This comment is invisible in the published website.&quot; reviewer=&quot;AOwenDev&quot;&gt; (comment:This comment is invisible in the published website., reviewer:AOwenDev)&lt;/Comment&gt;</source>
+        <target xml:space="preserve"></target>
+      </segment>
+    </unit>
+    <unit id="guides/markdown-features/conditional-text">
+      <notes><note>path:guides/markdown-features/conditional-text.mdx</note><note>title:Conditional text</note></notes>
+      <segment>
+        <source xml:space="preserve"># Conditional text
+
+The **Conditional Text** component enables you to wrap conetnt in a set of conditions that determine when it should be displayed:
+
+- Conditions can be any combination of languages or user-defined conditions.
+- The content can be displayed or hidden if one or more conditions are met (OR) or only if all conditions are met (AND).
+You can also specify fallback text to display if no conditions are met.
+
+## Create categories and conditions
+
+1. In the CMS, click  the **Conditions** collection.
+2. Click the **Add** icon to add a new **Category**
+3. Give it a **Name** and **Description**.
+4. For each **Condition** you want to add:1. Click the **Add** icon.
+2. Name the **Condition** and give it a **Description**.
+3. Toggle the **Active** status of the condition as required.
+
+## Add conditions to a topic
+
+Conditions are set at the topic level. The language is determined by the page language. Other conditions are defined as an array in the metadata at the start of the topic.
+
+1. Create or edit a topic.
+2. In the **Conditions** area, expand the **Categories** and select the box of any **Conditions** you want to apply to the topic.
+
+## Add conditional text
+
+1. Select **Conditional Text** from the **Embed** list.
+2. Edit the component.
+3. Enter the **Content**.
+4. Set the **Action** (show or hide).
+5. Add any **Required Conditions**.
+6. Add any **Required Languages**.
+7. Set the **Condition Logic**.
+8. Set the **Language Logic**.
+9. Select if both conditions and languages are required.
+10. (Optional) Enter the **Fallback Text**.
+
+### Example
+
+&lt;ConditionalText action=&quot;show&quot; conditions={production} languages={} logic=&quot;any&quot; languageLogic=&quot;any&quot; requireBothConditions=false fallback=&quot;&quot; children={The production condition is set on this page.}&gt; (action:show, logic:any, languageLogic:any)The production condition is set on this page.&lt;/ConditionalText&gt;</source>
+        <target xml:space="preserve"># Texte conditionnel
+
+Le composant **Conditions** vous permet d&apos;envelopper du texte dans un ensemble de conditions qui déterminent quand il doit être affiché.
+Les conditions peuvent être n&apos;importe quelle combinaison de langues ou de conditions définies par l&apos;utilisateur.
+Le texte peut être affiché si une ou plusieurs conditions sont remplies (OR) ou seulement si toutes les conditions sont remplies (AND).
+Vous pouvez également spécifier un texte de remplacement à afficher si aucune condition n&apos;est remplie.
+
+## Créer des catégories et des conditions
+
+1. Dans le CMS, cliquez sur la collection **Conditions**.
+2. Cliquez sur l&apos;icône **Add** pour ajouter une nouvelle **Category**
+3. Donnez-lui un **Name** et une **Description**.
+4. Pour chaque **Condition** que vous souhaitez ajouter :1. Cliquez sur l&apos;icône **Add**.
+2. Nommez la **Condition** et donnez-lui une **Description**.
+3. Faites basculer le statut **Active** de la condition si nécessaire.
+
+## Ajouter des conditions à une rubrique
+
+Les conditions sont définies au niveau de la rubrique. La langue est déterminée par la langue de la page. Les autres conditions sont définies sous forme de tableau dans les métadonnées au début du sujet.
+
+1. Créez ou modifiez une rubrique.
+2. Dans la zone **Conditions**, développez les **Categories** et cochez la case des **Conditions** que vous souhaitez appliquer au sujet.
+
+## Ajouter un texte conditionnel
+
+1. Sélectionnez **Conditional Text** dans la liste **Embed**.
+2. Modifiez le composant.
+3. Saisissez le **Text Content**.
+4. Ajoutez les **Required Conditions**.
+5. Ajoutez les **Required Languages**.
+6. Définissez la **Condition Logic**.
+7. Définissez la **Language Logic**.
+8. Sélectionnez si les deux conditions et les deux langues sont requises.
+9. (Facultatif) Saisissez le **Fallback Text**.</target>
+      </segment>
+    </unit>
+    <unit id="configuration">
+      <notes><note>path:configuration.mdx</note><note>title:Configuration</note></notes>
+      <segment>
+        <source xml:space="preserve"># Configuration
+
+DocStatic site configuration is managed through the docusaurus.config.ts file. For information about editing this file directly, refer to Configuration in the Docusaurus documentation.
+
+To use the CMS to edit the configuration, navigate to the **Settings** collection. From here, you can configure the site&apos;s:
+
+- **Title**.
+- **Tagline**.
+- **Favicon**.
+- **GraphQL Schema URL**.
+- Default **Color Mode** (dark or light).
+- **Footer** items.
+- **Languages**.
+- **Logo**.
+- **OpenAPI** schemas.
+- **Syntax Highlighting**.
+- **URL**.
+- **Navbar**.
+- **Sidebar** settings.
+- **Blog** settings.
+
+There is a separate **Theme** collection for changing the color scheme and typography settings.</source>
+        <target xml:space="preserve"># Configuration
+
+La configuration du site DocStatic est gérée par le fichier docusaurus.config.ts. Pour plus d&apos;informations sur l&apos;édition directe de ce fichier, reportez-vous à Configuration dans la documentation de Docusaurus.
+
+Pour utiliser le CMS afin de modifier la configuration, naviguez vers la collection Settings. À partir de là, vous pouvez configurer le logo du site, le titre, l&apos;accroche et le pied de page.</target>
+      </segment>
+    </unit>
+    <unit id="guides/markdown-features/context-help">
+      <notes><note>path:guides/markdown-features/context-help.mdx</note><note>title:Context-sensitive help</note></notes>
+      <segment>
+        <source xml:space="preserve"># Context-sensitive help
+
+&gt; &quot;Context-sensitive help is a kind of 
+&gt; online help
+&gt;  that is obtained from a specific point in the state of the software, providing help for the situation that is associated with that state. Context-sensitive help, as opposed to general online help or online manuals, does not need to be accessible for reading as a whole. Each topic is supposed to describe extensively one state, situation, or feature of the software.&quot;—
+&gt; Wikipedia
+
+Typically, context-sensitive help is implemented by having a help icon that users can click that will take them to the appropriate part of the documentation for the part of the software they are using. This involves creating a map of context URLs.
+
+The static site generator automatically generates links to headings. However, if you change the heading, the link will change. For this reason, DocStatic provides the Context Help element. It enables you to add an anchor tag anywhere within a topic. Providing that a slug is defined for the topic in the metadata, the link will not break.
+
+1. Select **Context Help** from the Embed list.
+2. Enter a unique ID.
+
+The link will be in the form: &lt;URL&gt;/docs/&lt;slug&gt;#&lt;id&gt;.
+
+#### Examlpe
+
+https://docstatic.com/docs/context-help#help-example
+
+&lt;a id=&quot;help-example&quot;&gt;&lt;/a&gt;
+
+## Developers
+
+For an example of how to include context help links in your code, examine the HelpButton React component in the source code for this site. Because DocStatic doesn&apos;t have direct access to the CMS code, it implements the button by applying it as a UI element on an unused field in a CMS collection. The HelpButton component attaches the button to the nav element on the page and links it to the URL passed in the template:
+
+</source>
+        <target xml:space="preserve"># Aide contextuelle
+
+&gt; &quot;L&apos;aide contextuelle est un type d&apos;
+&gt; aide en ligne
+&gt;  qui est obtenu à partir d&apos;un point spécifique de l&apos;état du logiciel, fournissant de l&apos;aide pour la situation qui est associée à cet état. L&apos;aide contextuelle, contrairement à l&apos;aide en ligne générale ou aux manuels en ligne, n&apos;a pas besoin d&apos;être accessible à la lecture dans son ensemble. Chaque rubrique est censée décrire de manière exhaustive un état, une situation ou une fonctionnalité du logiciel.&quot; - 
+&gt; Wikipedia
+
+En règle générale, l&apos;aide contextuelle est mise en œuvre au moyen d&apos;une icône d&apos;aide sur laquelle l&apos;utilisateur peut cliquer et qui l&apos;amène à la partie de la documentation correspondant à la partie du logiciel qu&apos;il utilise. Cela implique la création d&apos;une carte des URL contextuelles.
+
+Le générateur de site statique génère automatiquement des liens vers les titres. Cependant, si vous modifiez le titre, le lien changera. C&apos;est pourquoi DocStatic fournit l&apos;élément Aide contextuelle. Il vous permet d&apos;ajouter une balise d&apos;ancrage n&apos;importe où dans un sujet. À condition qu&apos;une balise soit définie pour le sujet dans les métadonnées, le lien ne sera pas rompu.
+
+1. Sélectionnez **Context Helpe** dans la liste **Embed**.
+2. Saisissez un identifiant unique.
+
+Le lien se présentera sous la forme suivante : &lt;URL&gt;/docs/&lt;slug&gt;#&lt;id&gt; : &lt;URL&gt;/docs/&lt;slug&gt;#&lt;id&gt;.
+
+#### Exemple
+
+https://docstatic.com/docs/fr/context-help#help-example
+
+&lt;a id=&quot;help-example&quot;&gt;&lt;/a&gt;
+
+## Développeurs
+
+Pour un exemple de la façon d&apos;inclure des liens d&apos;aide contextuelle dans votre code, examinez le composant React HelpButton dans le code source de ce site. DocStatic n&apos;ayant pas d&apos;accès direct au code du CMS, il implémente le bouton en l&apos;appliquant en tant qu&apos;élément d&apos;interface utilisateur sur un champ inutilisé dans une collection du CMS. Le composant HelpButton attache le bouton à l&apos;élément nav de la page et le lie à l&apos;URL passée dans le modèle :
+
+</target>
+      </segment>
+    </unit>
+    <unit id="guides/docs/create-doc">
+      <notes><note>path:guides/docs/create-doc.mdx</note><note>title:Create a doc</note></notes>
+      <segment>
+        <source xml:space="preserve"># Create a doc
+
+In DocStatic, you write your content as Markdown in files called “Topics”. Typically, you will create each topic yourself, although certain types of docs may have autogenerated topics.
+
+&lt;Admonition type=&quot;note&quot; title=&quot;Note&quot; children={GraphQL and OpenAPI docs are autogenerated from a server or schema.}&gt; (type:note, title:Note)GraphQL and OpenAPI docs are autogenerated from a server or schema.&lt;/Admonition&gt;
+
+To create a topic:
+
+1. From the **Topics** collection, click **Add File**.
+2. Give the topic a **Title**.
+3. (Optional) If you want to use the topic in context-sensitive help, give it a **Slug**. This is a fixed path from /docs/.
+4. Give the topic a **Description**. This is displayed in the Doc Card List.
+5. (Optional) Add any required taxonomy **Tags**.
+6. (Optional) Set any **Conditions**.
+7. Make sure the Workflow status is set to **Draft**.
+8. Enter your content.
+9. Click **Save**.
+
+## Doc front matter
+
+At the start of every topic is a section of YAML contained between two sets of three hyphens (---). DocStatic uses this for things such as:
+
+- Conditional Text
+- Taxonomies (doc tags)
+- Workflows
+
+For more information, refer to Create a doc in the Docusaurus documentation.</source>
+        <target xml:space="preserve"># Créer un document
+
+Dans DocStatic, vous écrivez votre contenu en Markdown dans des fichiers appelés &quot;Topics&quot;. En règle générale, vous créez vous-même chaque sujet, bien que certains types de documents puissent avoir des sujets autogénérés.
+
+&lt;Admonition type=&quot;note&quot; title=&quot;Note&quot; children={Les documents GraphQL et OpenAPI sont autogénérés à partir d&apos;un serveur ou d&apos;un schéma.}&gt;Les documents GraphQL et OpenAPI sont autogénérés à partir d&apos;un serveur ou d&apos;un schéma.&lt;/Admonition&gt;
+
+Pour créer un sujet :
+
+1. Dans la collection **Topics**, cliquez sur **Add File**.
+2. Donnez un **Title** à la rubrique.
+3. (Facultatif) Si vous souhaitez utiliser la rubrique dans l&apos;aide contextuelle, offrez-lui un **Slug**. Il s&apos;agit d&apos;un chemin fixe à partir de /docs/.
+4. Offrez à la rubrique une **Description**. Celle-ci est affichée dans la liste des cartes de documents.
+5. (Facultatif) Ajoutez les **Tags** de la taxonomie.
+6. (Facultatif) Définir les **Conditions**.
+7. Assurez-vous que le statut du flux de travail est défini sur **Draft**.
+8. Saisissez votre contenu.
+9. Cliquez sur **Save**.
+
+## Document recto
+
+Au début de chaque sujet se trouve une section de YAML contenue entre deux séries de trois traits d&apos;union (---). DocStatic l&apos;utilise pour des choses telles que :
+
+- Texte conditionnel
+- Taxonomies (étiquettes de documents)
+- les flux de travail
+
+Pour plus d&apos;informations, voir Créer un doc dans la documentation de Docusaurus.</target>
+      </segment>
+    </unit>
+    <unit id="guides/dashboards">
+      <notes><note>path:guides/dashboards.mdx</note><note>title:Dashboards</note></notes>
+      <segment>
+        <source xml:space="preserve">DocStatic adds dashboard functionality to TinaCMS. Tina generates a GraphQL API using the filesystem in the Git repository as the database. Dashboards query the API (locally or in the cloud) and present actionable reports directly in the CMS. Dashboard functionality is currently considered beta. The functionality is fully tested, but the user interface is provisional and requires refinement. Dashboards update when the page is updated. If another user has made changes since you viewed a dashboard, you can click **Refresh** to update the dashboard.
+
+&lt;Admonition type=&quot;note&quot; title=&quot;Note&quot; children={Depending on the amount of content in the system, some dashboards may take some time to load. These dashboards will typically update slightly faster when running locally.}&gt; (type:note, title:Note)Depending on the amount of content in the system, some dashboards may take some time to load. These dashboards will typically update slightly faster when running locally.&lt;/Admonition&gt;
+
+## Viewing the dashboards
+
+From the CMS, navigate to the Dashboards collection. At the top of the page is a status bar that shows the GraphQL connection. It indicates if you are connected to the cloud or localhost. If the localhost is available, it will always connect to the localhost. To use the cloud, ensure the local dev server is stopped. The status bar also displays the environment and checks all settings are valid.
+
+## Viewing workflow status
+
+The Content Overview dashboard show the total number of topics in the /docs path and the topics in each workflow status:
+
+- Draft
+- Review
+- Translate
+- Approved
+- Published
+- Unlisted
+
+Click the status link to display all topics in that status.
+
+Click Edit to open the topic for editing.
+
+Click the Close icon to close the list of topics.
+
+### Viewing recent activity
+
+The Recent Activity section shows recently changed topics. You can filter the time range (All time, Last week or Last month) and set the number of results from 5 to 50.
+
+## Viewing translation status
+
+The Translations dashboard shows the status of each topic for the language selected from the list:
+
+- Up to date: The last modified date of the translation is later than the source.
+- Outdated: The last modified date of the source is later than the translation.
+- Missing: There is a source file with no equivalent translation file.
+
+## Viewing media reuse
+
+The Media Library dashboard shows where content in the /static/img path is used. It shows the total number of files and images, file size, image paths and image sizes.
+
+You can filter by:
+
+- All content.
+- Images only.
+- Recent (7 days).
+- Used.
+- Unused.
+
+For used content, click Used in n docs to display the topics where the content is used. You can then click Edit to edit those topics.
+
+## Checking broken links
+
+The Broken Links dashboard validates all the hyperlinks in the topics. The report includes number for:
+
+- Total links.
+- Valid links where a connection could be established.
+- Broken links where no connection could be established.
+- Warning links where the connecton was rejected but the link could still be valid.
+
+You can safely ignore warnings about http://localhost if you are describing software running locally. But document links should be relative.
+
+Warnings are typically the results of aggressive CORS/CORP policies that do not respect no-cors settings. You must manually validate these sites by clicking the hyperlink.
+
+The dashboard lists files with problem links. You can open them by clicking Edit in either list.
+
+The dashboard also provides a summary with the date when the report was run.</source>
+        <target xml:space="preserve">DocStatic adds dashboard functionality to TinaCMS. Tina generates a GraphQL API using the filesystem in the Git repository as the database. Dashboards query the API (locally or in the cloud) and present actionable reports directly in the CMS. Dashboard functionality is currently considered beta. The functionality is fully tested, but the user interface is provisional and requires refinement. Dashboards update when the page is updated. If another user has made changes since you viewed a dashboard, you can click **Refresh** to update the dashboard.
+
+&lt;Admonition type=&quot;note&quot; title=&quot;Note&quot; children={Depending on the amount of content in the system, some dashboards may take some time to load. These dashboards will typically update slightly faster when running locally.}&gt;Depending on the amount of content in the system, some dashboards may take some time to load. These dashboards will typically update slightly faster when running locally.&lt;/Admonition&gt;
+
+## Viewing the dashboards
+
+From the CMS, navigate to the Dashboards collection. At the top of the page is a status bar that shows the GraphQL connection. It indicates if you are connected to the cloud or localhost. If the localhost is available, it will always connect to the localhost. To use the cloud, ensure the local dev server is stopped. The status bar also displays the environment and checks all settings are valid.
+
+## Viewing workflow status
+
+The Content Overview dashboard show the total number of topics in the /docs path and the topics in each workflow status:
+
+- Draft
+- Review
+- Translate
+- Approved
+- Published
+- Unlisted
+
+Click the status link to display all topics in that status.
+
+Click Edit to open the topic for editing.
+
+Click the Close icon to close the list of topics.
+
+### Viewing recent activity
+
+The Recent Activity section shows recently changed topics. You can filter the time range (All time, Last week or Last month) and set the number of results from 5 to 50.
+
+## Viewing translation status
+
+The Translations dashboard shows the status of each topic for the language selected from the list:
+
+- Up to date: The last modified date of the translation is later than the source.
+- Outdated: The last modified date of the source is later than the translation.
+- Missing: There is a source file with no equivalent translation file.
+
+## Viewing media reuse
+
+The Media Library dashboard shows where content in the /static/img path is used. It shows the total number of files and images, file size, image paths and image sizes.
+
+You can filter by:
+
+- All content.
+- Images only.
+- Recent (7 days).
+- Used.
+- Unused.
+
+For used content, click Used in n docs to display the topics where the content is used. You can then click Edit to edit those topics.
+
+## Checking broken links
+
+The Broken Links dashboard validates all the hyperlinks in the topics. The report includes number for:
+
+- Total links.
+- Valid links where a connection could be established.
+- Broken links where no connection could be established.
+- Warning links where the connecton was rejected but the link could still be valid.
+
+You can safely ignore warnings about http://localhost if you are describing software running locally. But document links should be relative.
+
+Warnings are typically the results of aggressive CORS/CORP policies that do not respect no-cors settings. You must manually validate these sites by clicking the hyperlink.
+
+The dashboard lists files with problem links. You can open them by clicking Edit in either list.
+
+The dashboard also provides a summary with the date when the report was run.</target>
+      </segment>
+    </unit>
+    <unit id="deployment">
+      <notes><note>path:deployment.mdx</note><note>title:Deployment</note></notes>
+      <segment>
+        <source xml:space="preserve">By default, DocStatic deploys to GitHub Pages. For other options, refer to Deployment in the Docusaurus documentation.</source>
+        <target xml:space="preserve">Par défaut, DocStatic se déploie sur GitHub Pages. Pour d&apos;autres options, voir Déploiement dans la documentation de Docusaurus.</target>
+      </segment>
+    </unit>
+    <unit id="guides/markdown-features/diagrams">
+      <notes><note>path:guides/markdown-features/diagrams.mdx</note><note>title:Diagrams</note></notes>
+      <segment>
+        <source xml:space="preserve"># Diagrams
+
+Diagrams can be rendered using Mermaid in a code block.
+
+## Use
+
+The CMS directly supports editing Mermaid diagrams.
+
+1. Click the **Mermaid** icon.
+2. Enter the Markdown in the box.
+
+Click **Preview** to view your diagram.
+
+#### Example:
+
+
+
+&lt;Admonition type=&quot;note&quot; title=&quot;Note&quot; children={Currently, zenUML diagrams are not supported and mind map diagrams may produce unusual behavior. Not all diagram types can be previewed in the CMS.}&gt; (type:note, title:Note)Currently, zenUML diagrams are not supported and mind map diagrams may produce unusual behavior. Not all diagram types can be previewed in the CMS.&lt;/Admonition&gt;
+
+For more information, refer to Mermaid in the TinaCMS documentation.
+
+For information on theming Mermaid, refer to Diagrams in the Docusaurus documentation.</source>
+        <target xml:space="preserve"># Diagrammes
+
+Les diagrammes peuvent être rendus avec Mermaid dans un bloc de code.
+
+## Utiliser
+
+Le CMS prend directement en charge l&apos;édition des diagrammes Mermaid.
+
+1. Cliquez sur l&apos;icône **Mermaid**.
+2. Entrez le Markdown dans la boîte.
+
+Cliquez sur **Examen** pour visualiser votre diagramme.
+
+#### Exemple :
+
+
+
+&lt;Admonition type=&quot;note&quot; title=&quot;Note&quot; children={Actuellement, les diagrammes zenUML ne sont pas pris en charge et les diagrammes de cartes heuristiques peuvent produire un comportement inhabituel. Tous les types de diagrammes ne peuvent pas être prévisualisés dans le CMS.}&gt;Actuellement, les diagrammes zenUML ne sont pas pris en charge et les diagrammes de cartes heuristiques peuvent produire un comportement inhabituel. Tous les types de diagrammes ne peuvent pas être prévisualisés dans le CMS.&lt;/Admonition&gt;
+
+Pour plus d&apos;informations, reportez-vous à Mermaid dans la documentation de TinaCMS.
+
+Pour plus d&apos;informations sur la thématisation de Mermaid, voir Diagrammes dans la documentation de Docusaurus.</target>
+      </segment>
+    </unit>
+    <unit id="guides/docs/introduction">
+      <notes><note>path:guides/docs/introduction.mdx</note><note>title:Docs introduction</note></notes>
+      <segment>
+        <source xml:space="preserve"># Docs introduction
+
+The docs feature provides you with a way to organize Markdown files in a hierarchical format.
+
+&lt;Admonition type=&quot;info&quot; title=&quot;Info&quot; children={Refer to Docs Plugin API Reference in the Docusaurus documentation for an exhaustive list of options.}&gt; (type:info, title:Info)Refer to Docs Plugin API Reference in the Docusaurus documentation for an exhaustive list of options.&lt;/Admonition&gt;
+
+For information on configuring docs-only or blog-only modes, refer to Docs introduction in the Docusaurus documentation.
+
+&lt;DocCardList title=&quot;Docs&quot;&gt; (title:Docs)&lt;/DocCardList&gt;</source>
+        <target xml:space="preserve"># Docs introduction
+
+La fonctionnalité docs permet d&apos;organiser les fichiers Markdown dans un format hiérarchique.
+
+&lt;Admonition type=&quot;info&quot; title=&quot;Info&quot; children={Reportez-vous à Docs Plugin API Reference dans la documentation de Docusaurus pour une liste exhaustive des options.}&gt;Reportez-vous à Docs Plugin API Reference dans la documentation de Docusaurus pour une liste exhaustive des options.&lt;/Admonition&gt;
+
+Pour plus d&apos;informations sur la configuration des modes “docs-only” ou “blog-only”, voir Introduction des docs dans la documentation de Docusaurus.
+
+&lt;DocCardList title=&quot;Docs&quot;&gt;&lt;/DocCardList&gt;</target>
+      </segment>
+    </unit>
+    <unit id="guides/markdown-features/footnotes">
+      <notes><note>path:guides/markdown-features/footnotes.mdx</note><note>title:Footnotes</note></notes>
+      <segment>
+        <source xml:space="preserve"># Footnotes
+
+There is an extension to Markdown that provides footnotes, but its implementation is not consistent and it separates the content from the number. For example:
+
+
+
+In DocStatic this would be represented as:
+
+
+
+The **Footnotes** component enables you add inline footnotes to your text.
+
+1. Select **Footnotes** from the **Embed** list.
+2. Edit the component.
+3. Give it a **Summary**.
+4. Enter the **Footnote**.
+
+#### Example
+
+Markdown is a lightweight markup language&lt;Footnote summary=&quot;1&quot; children={ Markdown uses simple syntax to achieve text formatting.}&gt; (summary:1) Markdown uses simple syntax to achieve text formatting.&lt;/Footnote&gt; created by John Gruber&lt;Footnote summary=&quot;2&quot; children={John Gruber created Markdown in 2004.}&gt; (summary:2)John Gruber created Markdown in 2004.&lt;/Footnote&gt;, now widely used in writing&lt;Footnote summary=&quot;3&quot; children={Many platforms such as GitHub, Stack Overflow, and blog platforms support Markdown.}&gt; (summary:3)Many platforms such as GitHub, Stack Overflow, and blog platforms support Markdown.&lt;/Footnote&gt;.
+
+&lt;Admonition type=&quot;note&quot; title=&quot;Note&quot; children={If two footnotes have the same content, they will only appear once in the footer and will share a number.}&gt; (type:note, title:Note)If two footnotes have the same content, they will only appear once in the footer and will share a number.&lt;/Admonition&gt;</source>
+        <target xml:space="preserve"># Notes de bas de page
+
+Il existe une extension de Markdown qui fournit des notes de bas de page, mais sa mise en œuvre n&apos;est pas cohérente et elle sépare le contenu du numéro. Par exemple :
+
+
+
+Dans DocStatic, cela serait représenté par :
+
+
+
+Le composant **Footnotes** vous permet d&apos;ajouter des notes de bas de page en ligne à votre texte.
+
+1. Sélectionnez **Footnotes** dans la liste **Embed**.
+2. Modifiez le composant.
+3. Donnez-lui un **Summary**.
+4. Saisissez la **Footnote**.
+
+#### Exemple
+
+Markdown est un langage de balisage léger&lt;Footnote summary=&quot;1&quot; children={ Markdown utilise une syntaxe simple pour réaliser le formatage du texte.}&gt; Markdown utilise une syntaxe simple pour réaliser le formatage du texte.&lt;/Footnote&gt; créé par John Gruber&lt;Footnote summary=&quot;2&quot; children={John Gruber a créé Markdown en 2004.}&gt;John Gruber a créé Markdown en 2004.&lt;/Footnote&gt;, aujourd&apos;hui largement utilisé dans la rédaction&lt;Footnote summary=&quot;3&quot; children={De nombreuses plateformes telles que GitHub, Stack Overflow, et des plateformes de blogs prennent en charge Markdown.}&gt;De nombreuses plateformes telles que GitHub, Stack Overflow, et des plateformes de blogs prennent en charge Markdown.&lt;/Footnote&gt;.
+
+&lt;Admonition type=&quot;note&quot; title=&quot;Note&quot; children={Si deux notes de bas de page ont le même contenu, elles n&apos;apparaîtront qu&apos;une seule fois dans le pied de page et partageront un numéro.}&gt;Si deux notes de bas de page ont le même contenu, elles n&apos;apparaîtront qu&apos;une seule fois dans le pied de page et partageront un numéro.&lt;/Admonition&gt;</target>
+      </segment>
+    </unit>
+    <unit id="Getting-started---working-in-the-cloud">
+      <notes><note>path:Getting-started---working-in-the-cloud.mdx</note><note>title:Getting started - working in the cloud</note></notes>
+      <segment>
+        <source xml:space="preserve"># Getting started: Working with DocStatic in the Cloud
+
+Welcome! This guide walks you through setting up DocStatic for the first time.
+
+If you’ve never worked with GitHub or docs-as-code before, don’t worry — we’ll explain what’s needed, why, and where to find more detail.
+
+## Prerequisites
+
+You can run DocStatic locally (on your computer) or host it in the cloud. In this article, we explain how to host it in the cloud.
+
+For the easiest cloud setup, create free accounts with these services:
+
+- GitHub — stores your content and tracks changes
+- TinaCMS — enables browser-based editing
+- LanguageTool — provides optional grammar and style checking
+
+
+
+---
+
+
+
+## Fork the DocStatic repository
+
+DocStatic’s source code lives on GitHub. To start, you’ll need to fork it. This gives you a personal copy that you can use in your own repository, without affecting the original version.
+
+1. Log in to your account in GitHub.
+2. Visit https://github.com/aowendev/docstatic.
+3. Click **Fork** (it is usually to the top-right).
+4. Leave the default **Repository name** in place.
+5. Enter a description of your project.
+6. Make sure **Copy the main branch only** is checked.
+7. Click **Create fork**.
+
+
+
+---
+
+
+
+## Project structure
+
+After forking and cloning the repository, you will see various files in your in your docstatic/ folder. Below, we&apos;ve included **some** of the project structure files and folders that you need to be aware of. **It is not a complete list of everything in the project**.
+
+
+
+### Project structure rundown
+
+- /apis/ - OpenAPI YAML files.
+- /blog/ - Blog MDX files.
+- /config/ - JSON files used by TinaCMS to configure DocStatic.
+- /docs/ - Docs MDX files.
+- /i18n/ - Translation files.
+- /reuse/ - Reusable content.
+- /src/ - Non-documentation files like pages or custom React components.- /src/pages - Any JSX/TSX/MDX file within this directory are converted into a website page.
+- /static/ - Static folder. Any content inside here is copied into the root of the final build folder.
+- /docusaurus.config.ts - A config file containing the site configuration.
+- /package.json - A DocStatic website is a React app. You can install and use any npm packages you want.
+- /sidebars.ts - Specifies the order of documents in the sidebar. Use this for your “table of contents” structure.
+
+Next, let&apos;s look at where you&apos;ll need to create and store your documentation files.
+
+
+
+---
+
+
+
+## Clear the Docs folder
+
+The Docs folder contains a copy of the DocStatic documentation. The idea is that you clear out the DocStatic documentation. When you create your own documentation, you should save it to the Docs folder.
+
+
+
+---
+
+
+
+## Monorepos
+
+DocStatic allows the use of a single repo that contains both the project code and the project documentation. In Docusaurus terminology, this concept is called a “monorepo”.
+
+For more information, see Monorepos in the Docusaurus documentation.
+
+
+
+---
+
+
+
+## Preview changes
+
+To preview your changes as you edit the files, you can run a **local development server** that will serve your website and reflect the latest changes.
+
+Open a terminal or command prompt and enter:
+
+
+
+By default, a browser window will open at http://localhost:3000.
+
+
+
+---
+
+
+
+## Build
+
+DocStatic uses a static site generator to build the website into a folder of static contents and put it on a web server where it can be viewed. To build the website, use:
+
+
+
+The contents are generated in the /build folder, which you can copy to any static file hosting service such as GitHub pages, Netlify or Vercel. For more information, refer to Deployment in the Docusaurus documentation.</source>
+        <target xml:space="preserve"># Getting started: Working with DocStatic in the Cloud
+
+Welcome! This guide walks you through setting up DocStatic for the first time.
+
+If you’ve never worked with GitHub or docs-as-code before, don’t worry — we’ll explain what’s needed, why, and where to find more detail.
+
+## Prerequisites
+
+You can run DocStatic locally (on your computer) or host it in the cloud. In this article, we explain how to host it in the cloud.
+
+For the easiest cloud setup, create free accounts with these services:
+
+- GitHub — stores your content and tracks changes
+- TinaCMS — enables browser-based editing
+- LanguageTool — provides optional grammar and style checking
+
+
+
+---
+
+
+
+## Fork the DocStatic repository
+
+DocStatic’s source code lives on GitHub. To start, you’ll need to fork it. This gives you a personal copy that you can use in your own repository, without affecting the original version.
+
+1. Log in to your account in GitHub.
+2. Visit https://github.com/aowendev/docstatic.
+3. Click **Fork** (it is usually to the top-right).
+4. Leave the default **Repository name** in place.
+5. Enter a description of your project.
+6. Make sure **Copy the main branch only** is checked.
+7. Click **Create fork**.
+
+
+
+---
+
+
+
+## Project structure
+
+After forking and cloning the repository, you will see various files in your in your docstatic/ folder. Below, we&apos;ve included **some** of the project structure files and folders that you need to be aware of. **It is not a complete list of everything in the project**.
+
+
+
+### Project structure rundown
+
+- /apis/ - OpenAPI YAML files.
+- /blog/ - Blog MDX files.
+- /config/ - JSON files used by TinaCMS to configure DocStatic.
+- /docs/ - Docs MDX files.
+- /i18n/ - Translation files.
+- /reuse/ - Reusable content.
+- /src/ - Non-documentation files like pages or custom React components.- /src/pages - Any JSX/TSX/MDX file within this directory are converted into a website page.
+- /static/ - Static folder. Any content inside here is copied into the root of the final build folder.
+- /docusaurus.config.ts - A config file containing the site configuration.
+- /package.json - A DocStatic website is a React app. You can install and use any npm packages you want.
+- /sidebars.ts - Specifies the order of documents in the sidebar. Use this for your “table of contents” structure.
+
+Next, let&apos;s look at where you&apos;ll need to create and store your documentation files.
+
+
+
+---
+
+
+
+## Clear the Docs folder
+
+The Docs folder contains a copy of the DocStatic documentation. The idea is that you clear out the DocStatic documentation. When you create your own documentation, you should save it to the Docs folder.
+
+
+
+---
+
+
+
+## Monorepos
+
+DocStatic allows the use of a single repo that contains both the project code and the project documentation. In Docusaurus terminology, this concept is called a “monorepo”.
+
+For more information, see Monorepos in the Docusaurus documentation.
+
+
+
+---
+
+
+
+## Preview changes
+
+To preview your changes as you edit the files, you can run a **local development server** that will serve your website and reflect the latest changes.
+
+Open a terminal or command prompt and enter:
+
+
+
+By default, a browser window will open at http://localhost:3000.
+
+
+
+---
+
+
+
+## Build
+
+DocStatic uses a static site generator to build the website into a folder of static contents and put it on a web server where it can be viewed. To build the website, use:
+
+
+
+The contents are generated in the /build folder, which you can copy to any static file hosting service such as GitHub pages, Netlify or Vercel. For more information, refer to Deployment in the Docusaurus documentation.</target>
+      </segment>
+    </unit>
+    <unit id="Getting-started---working-locally">
+      <notes><note>path:Getting-started---working-locally.mdx</note><note>title:Getting started - working locally</note></notes>
+      <segment>
+        <source xml:space="preserve"># Getting started for working with DocStatic locally
+
+Welcome! This guide walks you through setting up DocStatic for the first time.
+
+If you’ve never worked with GitHub or docs-as-code before, don’t worry — we’ll explain what’s needed, why, and where to find more detail.
+
+## Prerequisites
+
+You can run DocStatic locally (on your computer) or host it in the cloud. Here, we explain how to set it up to work locally.
+
+Before you begin, you&apos;ll need:
+
+- GitHub — create a free account. GitHub will store your content and track changes.
+- An Integrated Development Environment (IDE) or a text editor. Two open-source options are:- Eclipse
+- VSCodium
+
+When you have those in place, you can begin the installation (as described in this article).
+
+
+
+---
+
+
+
+## Install Node.js
+
+You need to install Node.js version 18.0 or above as DocStatic uses its build tools.
+
+First, check if you have Node.js installed already:
+
+1. Open a terminal (Command Prompt or Terminal app).
+2. Run:
+
+
+
+If you see a version number starting with **v18 or higher**, you already have a suitable version of Node.js installed.
+
+If Node.js is **not installed** or you have an **older version**:
+
+1. Go to the official Node.js downloads page.
+2. Choose the LTS (Long-Term Support) version for your operating system.
+The installer includes npm, the Node Package Manager, which you&apos;ll need in later steps.
+3. During installation:- Keep the default options selected (these include required dependencies)
+- When the installer finishes, close and reopen your terminal.
+4. (Optional) if you work on different projects that need different Node versions, install nvm (Node Version Manager). With nvm, you can switch between versions of Node without breaking your setup.
+
+Next: Install Yarn.
+
+
+
+---
+
+
+
+## Install Yarn
+
+DocStatic uses Yarn for package management.
+
+Check if Yarn is already installed.
+
+1. Open your terminal or command prompt.
+2. Type:
+
+
+
+If you see a version number, Yarn is already installed.
+
+If you get a “command not found” message or similar error:
+
+1. Open a terminal (Command Prompt or Terminal app)
+2. Run:
+
+
+
+&lt;Admonition type=&quot;note&quot; title=&quot;Note&quot; children={On macOS or Linux, you might need to prefix the command with sudo to grant permission:
+
+}&gt; (type:note, title:Note)On macOS or Linux, you might need to prefix the command with sudo to grant permission:
+
+&lt;/Admonition&gt;
+
+&lt;Admonition type=&quot;note&quot; title=&quot;Note&quot; children={On Windows, you don’t use sudo. Just open your terminal as Administrator and run the command.}&gt; (type:note, title:Note)On Windows, you don’t use sudo. Just open your terminal as Administrator and run the command.&lt;/Admonition&gt;
+
+Next: Fork the DocStatic repository
+
+
+
+---
+
+
+
+## Fork the DocStatic repository
+
+DocStatic’s source code lives on GitHub. To start, you’ll need to fork the repository.
+
+When you fork a repository, you create your own personal copy of it in GitHub. As it is your own copy, you have management rights for it and can to push content into it. This is how you work on a repository without affecting the original DocStatic repository.
+
+1. Log in to your account in GitHub.
+2. Visit https://github.com/aowendev/docstatic.
+3. Click **Fork** (it is usually to the top-right).
+4. Leave the default **Repository name** in place.
+5. Enter a description of your project.
+6. Make sure **Copy the main branch only** is checked.
+7. Click **Create fork**.
+
+GitHub makes a new branch of the repository in your GitHub account.
+
+Next: Clone your fork.
+
+
+
+---
+
+
+
+## Clone your fork of the DocStatic repository
+
+Cloning allows you to work locally on content that you will push to your fork on GitHub.
+
+- Fork = ownership on GitHub
+- Clone = ability to work locally
+
+To create a clone:
+
+1. Log in to your GitHub account.
+2. Navigate to the repository for the fork.
+3. Click on the repository to open it.
+4. Click on **&lt;&gt; Code** and then copy the url.
+5. Open your terminal or command prompt.
+6. Use cd to navigate to the location where you want to store the clone. For example, cd Documents/Projects/.
+7. Enter git clone followed by the url of your clone.
+
+
+
+Next: Install the project dependencies.
+
+
+
+---
+
+
+
+## Install the project dependencies
+
+To work locally, you also need to install the project dependencies.
+
+1. Open your terminal or command prompt.
+2. Use cd to navigate to the root folder of your cloned or forked DocStatic repository and install the packages:
+
+
+
+Yarn will download everything listed in package.json. This may take a few minutes.
+
+You&apos;ve now set everything up. Next, let&apos;s look at the project structure.
+
+
+
+---
+
+
+
+## Project structure
+
+After forking and cloning the repository, you will see various files in your in your docstatic/ folder. Below, we&apos;ve included **some** of the project structure files and folders that you need to be aware of. **It is not a complete list of everything in the project**.
+
+
+
+### Project structure rundown
+
+- /apis/ - OpenAPI YAML files.
+- /blog/ - Blog MDX files.
+- /config/ - JSON files used by TinaCMS to configure DocStatic.
+- /docs/ - Docs MDX files.
+- /i18n/ - Translation files.
+- /reuse/ - Reusable content.
+- /src/ - Non-documentation files like pages or custom React components.- /src/pages - Any JSX/TSX/MDX file within this directory are converted into a website page.
+- /static/ - Static folder. Any content inside here is copied into the root of the final build folder.
+- /docusaurus.config.ts - A config file containing the site configuration.
+- /package.json - A DocStatic website is a React app. You can install and use any npm packages you want.
+- /sidebars.ts - Specifies the order of documents in the sidebar. Use this for your “table of contents” structure.
+
+Next, let&apos;s look at where you&apos;ll need to create and store your documentation files.
+
+
+
+---
+
+
+
+## Clear the Docs folder
+
+The Docs folder contains a copy of the DocStatic documentation. The idea is that you clear out the DocStatic documentation. When you create your own documentation, you should save it to the Docs folder.
+
+
+
+---
+
+
+
+## Monorepos
+
+DocStatic allows the use of a single repo that contains both the project code and the project documentation. In Docusaurus terminology, this concept is called a “monorepo”.
+
+For more information, see Monorepos in the Docusaurus documentation.
+
+
+
+---
+
+
+
+## Preview changes
+
+To preview your changes as you edit the files, you can run a **local development server** that will serve your website and reflect the latest changes.
+
+Open a terminal or command prompt and enter:
+
+
+
+By default, a browser window will open at http://localhost:3000.
+
+
+
+---
+
+
+
+## Build
+
+DocStatic uses a static site generator to build the website into a folder of static contents and put it on a web server where it can be viewed. To build the website, use:
+
+
+
+The contents are generated in the /build folder, which you can copy to any static file hosting service such as GitHub pages, Netlify or Vercel. For more information, refer to Deployment in the Docusaurus documentation.</source>
+        <target xml:space="preserve"># Getting started for working with DocStatic locally
+
+Welcome! This guide walks you through setting up DocStatic for the first time.
+
+If you’ve never worked with GitHub or docs-as-code before, don’t worry — we’ll explain what’s needed, why, and where to find more detail.
+
+## Prerequisites
+
+You can run DocStatic locally (on your computer) or host it in the cloud. Here, we explain how to set it up to work locally.
+
+Before you begin, you&apos;ll need:
+
+- GitHub — create a free account. GitHub will store your content and track changes.
+- An Integrated Development Environment (IDE) or a text editor. Two open-source options are:- Eclipse
+- VSCodium
+
+When you have those in place, you can begin the installation (as described in this article).
+
+
+
+---
+
+
+
+## Install Node.js
+
+You need to install Node.js version 18.0 or above as DocStatic uses its build tools.
+
+First, check if you have Node.js installed already:
+
+1. Open a terminal (Command Prompt or Terminal app).
+2. Run:
+
+
+
+If you see a version number starting with **v18 or higher**, you already have a suitable version of Node.js installed.
+
+If Node.js is **not installed** or you have an **older version**:
+
+1. Go to the official Node.js downloads page.
+2. Choose the LTS (Long-Term Support) version for your operating system.
+The installer includes npm, the Node Package Manager, which you&apos;ll need in later steps.
+3. During installation:- Keep the default options selected (these include required dependencies)
+- When the installer finishes, close and reopen your terminal.
+4. (Optional) if you work on different projects that need different Node versions, install nvm (Node Version Manager). With nvm, you can switch between versions of Node without breaking your setup.
+
+Next: Install Yarn.
+
+
+
+---
+
+
+
+## Install Yarn
+
+DocStatic uses Yarn for package management.
+
+Check if Yarn is already installed.
+
+1. Open your terminal or command prompt.
+2. Type:
+
+
+
+If you see a version number, Yarn is already installed.
+
+If you get a “command not found” message or similar error:
+
+1. Open a terminal (Command Prompt or Terminal app)
+2. Run:
+
+
+
+&lt;Admonition type=&quot;note&quot; title=&quot;Note&quot; children={On macOS or Linux, you might need to prefix the command with sudo to grant permission:
+
+}&gt;On macOS or Linux, you might need to prefix the command with sudo to grant permission:
+
+&lt;/Admonition&gt;
+
+&lt;Admonition type=&quot;note&quot; title=&quot;Note&quot; children={On Windows, you don’t use sudo. Just open your terminal as Administrator and run the command.}&gt;On Windows, you don’t use sudo. Just open your terminal as Administrator and run the command.&lt;/Admonition&gt;
+
+Next: Fork the DocStatic repository
+
+
+
+---
+
+
+
+## Fork the DocStatic repository
+
+DocStatic’s source code lives on GitHub. To start, you’ll need to fork the repository.
+
+When you fork a repository, you create your own personal copy of it in GitHub. As it is your own copy, you have management rights for it and can to push content into it. This is how you work on a repository without affecting the original DocStatic repository.
+
+1. Log in to your account in GitHub.
+2. Visit https://github.com/aowendev/docstatic.
+3. Click **Fork** (it is usually to the top-right).
+4. Leave the default **Repository name** in place.
+5. Enter a description of your project.
+6. Make sure **Copy the main branch only** is checked.
+7. Click **Create fork**.
+
+GitHub makes a new branch of the repository in your GitHub account.
+
+Next: Clone your fork.
+
+
+
+---
+
+
+
+## Clone your fork of the DocStatic repository
+
+Cloning allows you to work locally on content that you will push to your fork on GitHub.
+
+- Fork = ownership on GitHub
+- Clone = ability to work locally
+
+To create a clone:
+
+1. Log in to your GitHub account.
+2. Navigate to the repository for the fork.
+3. Click on the repository to open it.
+4. Click on **&lt;&gt; Code** and then copy the url.
+5. Open your terminal or command prompt.
+6. Use cd to navigate to the location where you want to store the clone. For example, cd Documents/Projects/.
+7. Enter git clone followed by the url of your clone.
+
+
+
+Next: Install the project dependencies.
+
+
+
+---
+
+
+
+## Install the project dependencies
+
+To work locally, you also need to install the project dependencies.
+
+1. Open your terminal or command prompt.
+2. Use cd to navigate to the root folder of your cloned or forked DocStatic repository and install the packages:
+
+
+
+Yarn will download everything listed in package.json. This may take a few minutes.
+
+You&apos;ve now set everything up. Next, let&apos;s look at the project structure.
+
+
+
+---
+
+
+
+## Project structure
+
+After forking and cloning the repository, you will see various files in your in your docstatic/ folder. Below, we&apos;ve included **some** of the project structure files and folders that you need to be aware of. **It is not a complete list of everything in the project**.
+
+
+
+### Project structure rundown
+
+- /apis/ - OpenAPI YAML files.
+- /blog/ - Blog MDX files.
+- /config/ - JSON files used by TinaCMS to configure DocStatic.
+- /docs/ - Docs MDX files.
+- /i18n/ - Translation files.
+- /reuse/ - Reusable content.
+- /src/ - Non-documentation files like pages or custom React components.- /src/pages - Any JSX/TSX/MDX file within this directory are converted into a website page.
+- /static/ - Static folder. Any content inside here is copied into the root of the final build folder.
+- /docusaurus.config.ts - A config file containing the site configuration.
+- /package.json - A DocStatic website is a React app. You can install and use any npm packages you want.
+- /sidebars.ts - Specifies the order of documents in the sidebar. Use this for your “table of contents” structure.
+
+Next, let&apos;s look at where you&apos;ll need to create and store your documentation files.
+
+
+
+---
+
+
+
+## Clear the Docs folder
+
+The Docs folder contains a copy of the DocStatic documentation. The idea is that you clear out the DocStatic documentation. When you create your own documentation, you should save it to the Docs folder.
+
+
+
+---
+
+
+
+## Monorepos
+
+DocStatic allows the use of a single repo that contains both the project code and the project documentation. In Docusaurus terminology, this concept is called a “monorepo”.
+
+For more information, see Monorepos in the Docusaurus documentation.
+
+
+
+---
+
+
+
+## Preview changes
+
+To preview your changes as you edit the files, you can run a **local development server** that will serve your website and reflect the latest changes.
+
+Open a terminal or command prompt and enter:
+
+
+
+By default, a browser window will open at http://localhost:3000.
+
+
+
+---
+
+
+
+## Build
+
+DocStatic uses a static site generator to build the website into a folder of static contents and put it on a web server where it can be viewed. To build the website, use:
+
+
+
+The contents are generated in the /build folder, which you can copy to any static file hosting service such as GitHub pages, Netlify or Vercel. For more information, refer to Deployment in the Docusaurus documentation.</target>
+      </segment>
+    </unit>
+    <unit id="guides/markdown-features/glossary">
+      <notes><note>path:guides/markdown-features/glossary.mdx</note><note>title:Glossary terms</note></notes>
+      <segment>
+        <source xml:space="preserve"># Glossary terms
+
+The **Glossary Term** component enables you to enter a key that maps to a localized term and description. The term is displayed underlined. Moving the cursor over the term shows the help cursor, and hovering displays the description as a tooltip. On touch-screen devices, tapping the term displays a pop-up definition.
+
+## Managing glossary terms
+
+You can edit the Glossary Terms collection in the CMS.
+
+1. Click the **Add** icon ( **+** ) to add a new **Key**.
+2. Edit the key and then click the **Add** icon ( **+** ) to add a new **Translation**.
+3. Edit the translation.
+4. Give it a **Language Code**.
+5. Enter how the **Term** should appear in the text.
+6. **Enter the Definition.**
+
+The Glossary Term will use the language version for the page it is displayed on. If no definition exists, it will fall back to the source language.
+
+## Using glossary terms
+
+1. Select **Glossary Term** from the **Embed** list.
+2. Edit the component.
+3. Enter the **Key**.
+
+#### Example
+
+&lt;GlossaryTerm termKey=&quot;single-sourcing&quot; initcap&gt; (termKey:single-sourcing)&lt;/GlossaryTerm&gt;</source>
+        <target xml:space="preserve"># Glossaire
+
+Le composant **Terme du glossaire** vous permet de saisir une clé qui correspond à un terme localisé et à une description. Le terme est souligné. Le passage du curseur sur le terme fait apparaître le curseur d&apos;aide, et le survol affiche la description sous forme d&apos;infobulle. Sur les appareils à écran tactile, le fait d&apos;appuyer sur le terme affiche une définition dans une fenêtre contextuelle.
+
+## Gestion des termes du glossaire
+
+Vous pouvez modifier la collection de termes du glossaire dans le CMS.
+
+1. Cliquez sur l&apos;icône **Add** ( **+** ) pour ajouter une nouvelle **Key**.
+2. Modifiez la clé, puis cliquez sur l&apos;icône **Add** ( **+** ) pour ajouter une nouvelle **Translation**.
+3. Modifiez la traduction.
+4. Donnez-lui un **Language Code**.
+5. Indiquez comment le **Term** doit apparaître dans le texte.
+6. Saisissez la **Definition**.
+
+Le terme du glossaire utilisera la version linguistique de la page sur laquelle il est affiché. S&apos;il n&apos;existe pas de définition, la langue source sera utilisée.
+
+## Utiliser les termes du glossaire
+
+1. Sélectionnez **Glossary Term** dans la liste **Embed**.
+2. Modifiez le composant.
+3. Saisissez la **Key**.
+
+#### Exemple
+
+&lt;GlossaryTerm termKey=&quot;single-sourcing&quot;&gt;&lt;/GlossaryTerm&gt;</target>
+      </segment>
+    </unit>
+    <unit id="guides">
+      <notes><note>path:guides/index.mdx</note><note>title:Guides</note></notes>
+      <segment>
+        <source xml:space="preserve">Learn about the most important DocStatic concepts.
+
+&lt;DocCardList title=&quot;Guides&quot;&gt; (title:Guides)&lt;/DocCardList&gt;</source>
+        <target xml:space="preserve">Découvrez les concepts les plus importants de DocStatic.
+
+&lt;DocCardList title=&quot;Guides&quot;&gt;&lt;/DocCardList&gt;</target>
+      </segment>
+    </unit>
+    <unit id="guides/markdown-features/metadata">
+      <notes><note>path:guides/markdown-features/metadata.mdx</note><note>title:Head metadata</note></notes>
+      <segment>
+        <source xml:space="preserve">
+
+# Head metadata
+
+DocStatic automatically sets useful page metadata in &lt;html&gt;, &lt;head&gt; and &lt;body&gt; for you.
+It is possible to add extra metadata (or override existing ones) with the &lt;head&gt; tag in Markdown files.
+
+In the CMS, this must be added in the Markdown editor. It will not be recognized if you wrap it in the **Passthrough** component.
+
+For more information, refer to Head metadata in the Docusaurus documentation.</source>
+        <target xml:space="preserve">
+
+# Métadonnées d&apos;entête
+
+DocStatic définit automatiquement pour vous des métadonnées utiles dans &lt;html&gt;, &lt;head&gt; et &lt;body&gt;.
+Il est possible d&apos;ajouter des métadonnées supplémentaires (ou de remplacer les métadonnées existantes) avec la balise &lt;head&gt; dans les fichiers Markdown.
+
+Dans le CMS, ces métadonnées doivent être ajoutées dans l&apos;éditeur Markdown. Elle ne sera pas reconnue si vous l&apos;intégrez dans le composant **Passthrough**.
+
+Pour plus d&apos;informations, voir Métadonnées d&apos;entête dans la documentation de Docusaurus.</target>
+      </segment>
+    </unit>
+    <unit id="guides/markdown-features/toc">
+      <notes><note>path:guides/markdown-features/toc.mdx</note><note>title:Headings and table of contents</note></notes>
+      <segment>
+        <source xml:space="preserve"># Headings and table of contents
+
+In the CMS you can select **Paragraph** or **Heading** level (from 1 to 6).
+
+&lt;a id=&quot;anchor-example&quot;&gt;&lt;/a&gt;
+
+## Heading IDs
+
+Heading IDs are generated automatically. For example, heading-ids. You can use these to link directly to topic headings. However, if you change the title of the heading, the link will break. For this reason, DocStatic provides the **Context Help** component. This embeds an anchor tag anywhere on a page, not just at a heading.
+
+1. Select **Context Help** from the **Embed** list.
+2. Edit the component and give it a **Context Help ID**.
+
+To link to the anchor, use the path: &lt;URL&gt;/docs/&lt;slug&gt;#&lt;ID&gt;.
+
+For example: https://docstatic.com/docs/guides/markdown-features/toc#anchor-example
+
+## Table of contents heading level
+
+Each Markdown document displays a table of contents in the top-right corner. By default, this table only shows h2 and h3 headings, which should be sufficient for an overview of the page structure. In case you need to change the range of headings displayed, you can customize the minimum and maximum heading level, either per page or globally.
+
+For more information, refer to Headings and Table of contents in the Docusaurus documentation.</source>
+        <target xml:space="preserve"># Titres et table des matières
+
+Dans le CMS, vous pouvez sélectionner le niveau **Paragraphe** ou **Titre** (de 1 à 6).
+
+&lt;a id=&quot;anchor-example&quot;&gt;&lt;/a&gt;
+
+## ID des rubriques
+
+Les identifiants des titres sont générés automatiquement. Par exemple, heading-ids. Vous pouvez les utiliser pour établir un lien direct avec les titres des rubriques. Cependant, si vous changez le titre de la rubrique, le lien sera rompu. C&apos;est pourquoi DocStatic fournit le composant **Aide contextuelle**. Ce composant permet d&apos;insérer une balise d&apos;ancrage n&apos;importe où sur une page, et simultanément dans un titre.
+
+1. Sélectionnez **Context Help** dans la liste **Embed**.
+2. Modifiez le composant et donnez-lui un **Context Help ID**.
+
+Pour créer un lien vers l&apos;ancre, utilisez le chemin d&apos;accès : &lt;URL&gt;/docs/&lt;slug&gt;#&lt;ID&gt;.
+
+Par exemple : https://docstatic.com/docs/fr/guides/markdown-features/toc#anchor-example
+
+## Niveau de l&apos;en-tête de la table des matières
+
+Chaque document Markdown affiche une table des matières dans le coin supérieur droit. Par défaut, cette table n&apos;affiche que les titres h2 et h3, ce qui devrait être suffisant pour avoir une vue d&apos;ensemble de la structure de la page. Si vous souhaitez modifier l&apos;étendue des titres affichés, vous pouvez personnaliser le niveau minimum et maximum des titres, soit par page, soit globalement.
+
+Pour plus d&apos;informations, reportez-vous à Entêtes et table des matières dans la documentation de Docusaurus.</target>
+      </segment>
+    </unit>
+    <unit id="advanced/hosted-cms">
+      <notes><note>path:advanced/hosted-cms.mdx</note><note>title:Hosted CMS</note></notes>
+      <segment>
+        <source xml:space="preserve"># Hosted CMS
+
+One of the two core components of DocStatic is the CMS (the other is the SSG). Until now, you have most likely used only the local version, invoked from the command line with yarn dev. But DocStatic also supports two ways of using a hosted version of the CMS.
+
+## TinaCloud
+
+The easiest hosted CMS option is TinaCloud. You can register for a free account, connect it to your GitHub repository and start using it immediately. The free tier suports up to two users, which may be sufficient for lone writers and small docs teams. If you need more users, Tina offers a variety of pricing plans for different budgets.
+
+## Self hosted
+
+Because TinaCMS is open-source, you have the option of self-hosting. In this case there are no subscription fees, but you will need a development team to set up your Tina instance and you&apos;ll have to provide your own support.</source>
+        <target xml:space="preserve"># CMS hébergé
+
+L&apos;un des deux composants principaux de DocStatic est le CMS (l&apos;autre étant le SSG). Jusqu&apos;à présent, vous n&apos;avez probablement utilisé que la version locale, invoquée à partir de la ligne de commande avec yarn dev. Mais, DocStatic supporte également deux façons d&apos;utiliser une version hébergée du CMS.
+
+## TinaCloud
+
+L&apos;option de CMS hébergé la plus simple est TinaCloud. Vous pouvez vous inscrire pour un compte gratuit, le connecter à votre dépôt GitHub et commencer à l&apos;utiliser immédiatement. La version gratuite prend en charge jusqu&apos;à deux utilisateurs, ce qui peut être suffisant pour les rédacteurs isolés et les petites équipes de documentation. Si vous avez besoin de plus d&apos;utilisateurs, Tina propose une variété de plans tarifaires pour différents budgets.
+
+## Auto-hébergé
+
+TinaCMS étant un logiciel libre, vous pouvez de l&apos;auto-héberger. Dans ce cas, aucuns frais n&apos;existent d&apos;abonnement. Vous aurez besoin d&apos;une équipe de développement pour mettre en place votre instance de Tina et vous devrez fournir votre propre support.</target>
+      </segment>
+    </unit>
+    <unit id="installation">
+      <notes><note>path:installation.mdx</note><note>title:Installation</note></notes>
+      <segment>
+        <source xml:space="preserve"># Installation
+
+Welcome! This guide walks you through setting up DocStatic for the first time.
+
+If you’ve never worked with GitHub or docs-as-code before, don’t worry — we’ll explain what’s needed, why, and where to find more detail.
+
+## Prerequisites
+
+You can run DocStatic locally (on your computer) or host it in the cloud.
+
+For the easiest cloud setup, create free accounts with these services:
+
+- GitHub — stores your content and tracks changes
+- TinaCMS — enables browser-based editing
+- LanguageTool — provides optional grammar and style checking
+
+If you plan to run DocStatic locally (on your computer) instead, see the Requirements for local development.
+
+
+
+---
+
+
+
+## Requirements for local development
+
+This section only applies if you plan to work locally.
+
+You&apos;ll need an Integrated Development Environment (IDE) or a text editor. Two open-source options are:
+
+- Eclipse
+- VSCodium
+
+You will also need to install Node.js for its build tools and Yarn for package management.
+
+### Install Node.js
+
+You need to install Node.js version 18.0 or above.
+
+Check if Node.js is already installed. Open a terminal (Command Prompt or Terminal app) and run:
+
+
+
+If you see a version number starting with v18 or higher, you&apos;re good to go.
+
+If Node.js is not installed or you have an older version:
+
+1. Go to the official Node.js downloads page.
+2. Choose the LTS (Long-Term Support) version for your operating system.The installer includes npm, the Node Package Manager, which you&apos;ll need in later steps.During installation:* Keep the default options selected (these include required dependencies)
+* When the installer finishes, close and reopen your terminal.
+3. (Optional) if you work on different projects that need different Node versions, install nvm (Node Version Manager). With nvm, you can switch between versions of Node without breaking your setup.
+
+### Install Yarn
+
+DocStatic uses Yarn for package management.
+
+Check if Yarn is already installed. Open your terminal or command prompt and type:
+
+
+
+If you see a version number, Yarn is already installed.
+
+If you get a “command not found” message or similar error, open a terminal (Command Prompt or Terminal app) and run:
+
+
+
+&lt;Admonition type=&quot;note&quot; title=&quot;Note&quot; children={On macOS or Linux, you might need to prefix the command with sudo to grant permission:
+
+}&gt; (type:note, title:Note)On macOS or Linux, you might need to prefix the command with sudo to grant permission:
+
+&lt;/Admonition&gt;
+
+&lt;Admonition type=&quot;note&quot; title=&quot;Note&quot; children={On Windows, you don’t use sudo. Just open your terminal as Administrator and run the command.}&gt; (type:note, title:Note)On Windows, you don’t use sudo. Just open your terminal as Administrator and run the command.&lt;/Admonition&gt;
+
+
+
+---
+
+
+
+## Get the DocStatic repository
+
+DocStatic’s source code lives on GitHub. To start, you’ll need to make your own copy by:
+
+1. **Create a fork** of the DocStatic repository
+Forking creates a copy that you can use to work independently on your own project.
+2. **Create a clone** of your fork.
+Cloning makes a copy that is associated with the original fork that you made. This can be useful for fixing schema issues, should they occur later.
+
+### Fork the DocStatic repository
+
+1. Log in to your account in GitHub.
+2. Visit https://github.com/aowendev/docstatic.
+3. Click Fork (it is usually to the top-right).
+4. Leave the default Repository name in place.
+5. Enter a description of your project.
+6. Make sure Copy the main branch only is checked.
+7. Click Create fork.
+
+GitHub makes a new branch of the repository in your GitHub account.
+
+### Clone your fork of the DocStatic repository
+
+To create a clone:
+
+1. Log in to your GitHub account.
+2. Navigate to the repository for the fork.
+3. Click on the repository to open it.
+4. Click on **&lt;&gt; Code** and then copy the url.
+5. Open your terminal or command prompt and use cd to navigate to the location where you want to store the clone. For example, cd Documents/Projects/.
+6. Enter git clone followed by the url of your clone.
+
+
+
+
+
+---
+
+
+
+## Install the project dependencies
+
+If you&apos;re going to work locally, you also need to install the project dependencies. Use cd to navigate to the root folder of your cloned or forked DocStatic repository and install the packages:
+
+
+
+Yarn will download everything listed in package.json. This may take a few minutes.
+
+
+
+---
+
+
+
+## Project structure
+
+After forking or cloning the repository, you will see various files in your in your docstatic/ folder. Below, we&apos;ve included **some** of the project structure files and folders that you need to be aware of. **It is not a complete list of everything in the project**.
+
+
+
+### Project structure rundown
+
+- /apis/ - OpenAPI YAML files.
+- /blog/ - Blog MDX files.
+- /config/ - JSON files used by TinaCMS to configure DocStatic.
+- /docs/ - Docs MDX files.
+- /i18n/ - Translation files.
+- /reuse/ - Reusable content.
+- /src/ - Non-documentation files like pages or custom React components.- /src/pages - Any JSX/TSX/MDX file within this directory are converted into a website page.
+- /static/ - Static folder. Any content inside here is copied into the root of the final build folder.
+- /docusaurus.config.ts - A config file containing the site configuration.
+- /package.json - A DocStatic website is a React app. You can install and use any npm packages you want.
+- /sidebars.ts - Specifies the order of documents in the sidebar. Use this for your “table of contents” structure.
+
+
+
+---
+
+
+
+### Monorepos
+
+DocStatic allows the use of a single repo that contains both the project code and the project documentation. In Docusaurus terminology, this concept is called a “monorepo”.
+
+For more information, see Monorepos in the Docusaurus documentation.
+
+
+
+---
+
+
+
+### Preview changes
+
+To preview your changes as you edit the files, you can run a **local development server** that will serve your website and reflect the latest changes.
+
+Open a terminal or command prompt and enter:
+
+
+
+By default, a browser window will open at http://localhost:3000.
+
+
+
+---
+
+
+
+### Build
+
+DocStatic uses a static site generator to build the website into a folder of static contents and put it on a web server where it can be viewed. To build the website, use:
+
+
+
+The contents are generated in the /build folder, which you can copy to any static file hosting service such as GitHub pages, Netlify or Vercel. For more information, refer to Deployment in the Docusaurus documentation.</source>
+        <target xml:space="preserve"># Installation
+
+Pour commencer, créez et clonez le Dépôt DocStatic.
+
+
+
+## Prérequis
+
+Il est possible d&apos;utiliser DocStatic localement ou de configurer votre propre déploiement hébergé. Cependant, pour un déploiement dans le nuage le plus facile possible, vous pouvez vous inscrire à des comptes avec :
+
+- GitHub
+- TinaCMS
+- LanguageTool
+
+## Exigences
+
+Pour le développement local, vous devez installer un IDE. Deux options libres et gratuites sont disponibles :
+
+- Eclipse
+- VSCodium
+
+DocStatic consiste en un ensemble de paquets Node.js. Vous aurez besoin de la version 18.0 ou supérieure (qui peut être vérifiée en lançant node -v). Vous pouvez utiliser nvm pour gérer plusieurs versions de Node.js sur une seule machine. Lors de l&apos;installation de Node.js, vous devez cocher toutes les cases relatives aux dépendances.
+
+Yarn est utilisé pour la gestion des paquets. Les responsables de Yarn recommandent d&apos;installer Yarn globalement en utilisant le gestionnaire de paquets NPM, qui est inclus par défaut dans toutes les installations de Node.js. Utilisez le drapeau -g avec npm install pour le faire :
+
+
+
+Ensuite, allez à la racine du dossier docstatic/ et installez les dépendances :
+
+
+
+## Structure du projet
+
+Après avoir cloné le dépôt, vous verrez ces fichiers dans le dossier docstatic/ :
+
+
+
+Cette liste n&apos;est pas exhaustive, mais il s&apos;agit des principaux éléments à prendre en compte.
+
+### Aperçu de la structure du projet
+
+- /apis/ - Fichiers OpenAPI YAML.
+- /blog/ - Fichiers MDX pour les blogs.
+- /config/ - Fichiers JSON utilisés par TinaCMS pour configurer DocStatic.
+- /docs/ - Fichiers MDX Docs.
+- /i18n/ - Fichiers de traduction.
+- /reuse/ - Contenu réutilisable.
+- /src/ - Fichiers non-documentaires comme les pages ou les composants React personnalisés.- /src/pages - Tout fichier JSX/TSX/MDX dans ce répertoire est converti en page web.
+- /static/ - Dossier statique. Tout le contenu qu&apos;il contient est copié à la racine du dossier de construction final.
+- /docusaurus.config.ts - Un fichier de configuration contenant la configuration du site.
+- /package.json - Un site web DocStatic est une application React. Vous pouvez installer et utiliser tous les paquets npm que vous souhaitez.
+- /sidebars.ts - Spécifie l&apos;ordre des documents dans la barre latérale.
+
+### Monorepos
+
+Si vous utilisez DocStatic pour la documentation d&apos;un projet existant, une monorepo peut être la solution pour vous. Pour plus d&apos;informations, voir Monorepos dans la documentation de Docusaurus.
+
+### Exécution du serveur de développement
+
+Pour prévisualiser vos modifications au fur et à mesure que vous éditez les fichiers, vous pouvez lancer un serveur de développement local qui servira votre site web et reflétera les dernières modifications.
+
+
+
+Par défaut, une fenêtre de navigateur s&apos;ouvrira à l&apos;adresse http://localhost:3000.
+
+### Build
+
+DocStatic utilise un générateur de site statique pour construire le site web dans un dossier de contenu statique et le placer sur un serveur web où il peut être visualisé. Pour créer le site web :
+
+
+
+et le contenu sont générés dans le dossier /build, qui peut être copié sur n&apos;importe quel service d&apos;hébergement de fichiers statiques comme les pages GitHub, Netlify ou Vercel. Pour plus d&apos;informations, voir Déploiement dans la documentation de Docusaurus.</target>
+      </segment>
+    </unit>
+    <unit id="i18n/introduction">
+      <notes><note>path:i18n/introduction.mdx</note><note>title:Internationalization</note></notes>
+      <segment>
+        <source xml:space="preserve"># Internationalization
+
+Internationalization (i18n) support is provided by the static site generator. For detailed information, refer to i18n - Introduction in the Docusuarus documentation.
+
+## Edit translated docs in the CMS
+
+1. From the **Translations** collection, select the document you want to edit.
+2. Make your changes
+3. Set the **Document Status** to **In Translation** or **Translation Approved** as required.
+4. Click **Save**.</source>
+        <target xml:space="preserve"># Internationalisation
+
+La prise en charge de l&apos;internationalisation (i18n) est assurée par le générateur de sites statiques. Pour des informations détaillées, voir i18n - Introduction dans la documentation de Docusuarus.
+
+## Editer les documents traduits dans le CMS
+
+1. Dans la collection **Translations**, sélectionnez le document que vous souhaitez éditer.
+2. Effectuez vos modifications
+3. Réglez le **Document Status** sur **In Traduction** ou **Translation Approved** selon le cas.
+4. Cliquez sur **Save**.</target>
+      </segment>
+    </unit>
+    <unit id="introduction">
+      <notes><note>path:introduction.mdx</note><note>title:Introduction</note></notes>
+      <segment>
+        <source xml:space="preserve">DocStatic is a modern documentation platform that bridges the gap between writers and developers to help you create online documentation your users will love.
+
+It simultaneously provides the best features of component content management systems and docs-as-code solutions for online documentation. With DocStatic, anyone on your team can create and edit your documents without sacrificing your developer workflow.
+
+## Features
+
+DocStatic is a refinement of Tinasaurus, an open-source React-based project that combines a static site generator (Docusaurus) with a headless content management system (TinaCMS). It includes:
+
+- An easy-to-use editing interface for Markdown, MDX, JSON, and YAML content.
+- Integration with existing Git and CI/CD workflows.
+- Embedded MDX components.
+- Media manager with support for third-party media providers.
+- Editing in the cloud (no local setup required).
+
+## Easy content management
+
+DocStatic&apos;s default collections include some of the more advanced authoring features you&apos;d expect to find in a CCMS.
+
+The rich text editor makes it easy to add:
+
+- Conditional text, snippets, and variable sets for content reuse
+- Taxonomies
+- Glossary terms
+- Code blocks, comments, collapsible details, figure, footnotes, and tabs. These are available as templates that you can insert into a content file.
+
+The CMS uses a GraphQL schema to describe the shape of your content as a set of collections.
+
+## Git-backed
+
+Source control, automation and, optionally, publishing are managed through GitHub. When editing files with the rich-text editor, TinaCMS either commits on save or saves directly to the file if working locally. Git remains the source of truth for the whole team.
+
+The repository structure is very similar to the Docusaurus defaults, but with some changes required for integration with TinaCMS.
+
+## Preconfigured plugins
+
+DocStatic is preconfigured with plugins supporting features such as KaTeX equations, Lunr search, Mermaid diagrams and OpenAPI docs. There is built-in support for internationalization (i18n). Multilingual spelling, grammar and, optionally, style checking are provided by LanguageTool through browser and IDE plugins.
+
+## React-based
+
+Content is stored in MDX format—an extension to Markdown that supports custom React components for features such as admonitions. These components are available universally and do not need to be declared in individual files. When working locally, the dev server instantly recompiles pages when you save your changes.
+
+## Fully documented
+
+Developers will find all the information they need to configure and start using DocStatic in the Docusaurus and TinaCMS documentation. That information is not duplicated here, to avoid the possibility of it becoming out of date. Instead, the DocStatic documentation focuses on using the CMS.</source>
+        <target xml:space="preserve">DocStatic est une plateforme de documentation moderne qui comble le fossé entre les rédacteurs et les développeurs pour vous aider à créer une documentation en ligne que vos utilisateurs aimeront.
+
+Elle offre simultanément les meilleures caractéristiques des solutions de documentation en ligne systèmes de gestion de contenu de composants et docs-as-code. Il permet à n&apos;importe quel membre de votre équipe de créer et d&apos;éditer vos documents sans sacrifier le flux de travail de vos développeurs.
+
+DocStatic a été créé comme une amélioration de Tinasaurus, un projet open-source basé sur React qui combine un générateur de site statique (Docusaurus) avec un système de gestion de contenu sans tête (TinaCMS). Il comprend :
+
+- Une interface d&apos;édition pour les contenus Markdown, MDX, JSON et YAML.
+- Intégration avec les flux de travail Git et CI/CD existants.
+- Composants MDX intégrés.
+- Gestionnaire de médias avec prise en charge de fournisseurs de médias tiers.
+- Édition dans le nuage (aucune installation locale n&apos;est nécessaire).
+
+## Soutenu par Git
+
+Le contrôle des sources, l&apos;automatisation et, éventuellement, la publication sont gérés par GitHub). La structure du dépôt est très similaire aux valeurs par défaut de Docusaurus, mais avec quelques changements nécessaires pour l&apos;intégration avec TinaCMS. Lors de l&apos;édition de fichiers avec l&apos;éditeur de texte riche, TinaCMS s&apos;engage lors de l&apos;enregistrement ou enregistre directement dans le fichier si l&apos;on travaille localement. Git reste la source de vérité pour toute l&apos;équipe.
+
+## Basé sur React
+
+Le contenu est stocké au format MDX - une extension de Markdown qui prend en charge les composants React personnalisés pour des fonctionnalités telles que les remontrances. Ces composants sont disponibles de manière universelle et n&apos;ont pas besoin d&apos;être déclarés dans des fichiers individuels. Lorsque vous travaillez en local, le serveur de développement recompile instantanément les pages lorsque vous enregistrez vos modifications.
+
+## Gestion facile du contenu
+
+Le CMS utilise un schéma GraphQL pour décrire la forme de votre contenu comme un ensemble de collections. Les collections par défaut de DocStatic comprennent du texte conditionnel, des termes de glossaire, des extraits, des taxonomies et des ensembles de variables. Le CMS définit des composants qui peuvent être intégrés en tant que modèles, ce qui les rend disponibles dans l&apos;éditeur de texte enrichi. Les modèles par défaut de DocStatic comprennent les blocs de code, les commentaires, les détails repliables, les figures, les notes de bas de page et les onglets.
+
+## Plugins préconfigurés
+
+DocStatic est préconfiguré avec des plugins prenant en charge des fonctionnalités telles que KaTeX équations, Lunr recherche, Mermaid diagrammes et OpenAPI docs. Il existe un support intégré pour l&apos;internationalisation (i18n). La vérification multilingue de l&apos;orthographe, de la grammaire et, éventuellement, du style est assurée par LanguageTool au moyen de plugins pour navigateur et IDE.
+
+## Entièrement documenté
+
+Les développeurs trouveront toutes les informations dont ils ont besoin pour configurer et commencer à utiliser DocStatic dans la documentation de Docusaurus et de TinaCMS. Ces informations ne sont pas reproduites ici, afin d&apos;éviter qu&apos;elles ne deviennent obsolètes. La documentation de DocStatic se concentre plutôt sur l&apos;utilisation du CMS.</target>
+      </segment>
+    </unit>
+    <unit id="guides/markdown-features/plugins">
+      <notes><note>path:guides/markdown-features/plugins.mdx</note><note>title:MDX plugins</note></notes>
+      <segment>
+        <source xml:space="preserve"># MDX plugins
+
+MDX has a built-in plugin system that can be used to customize how Markdown files are parsed and transformed to JSX. However, if you change the way Markdown behaves, you must also reflect these changes in the CMS.
+
+&lt;Admonition type=&quot;danger&quot; title=&quot;Warning&quot; children={MDX plugins that change the behavior of standard Markdown components may break compatibility with the CMS. Proceed at your own risk.}&gt; (type:danger, title:Warning)MDX plugins that change the behavior of standard Markdown components may break compatibility with the CMS. Proceed at your own risk.&lt;/Admonition&gt;
+
+For more information, refer to MDX Plugins in the Docusaurus documentation.
+
+&lt;Admonition type=&quot;note&quot; title=&quot;Note&quot; children={DocStatic preinstalls and configures the math plugins for you.}&gt; (type:note, title:Note)DocStatic preinstalls and configures the math plugins for you.&lt;/Admonition&gt;</source>
+        <target xml:space="preserve"># Plugins MDX
+
+MDX dispose d&apos;un système de plugins intégré qui peut être utilisé pour personnaliser la façon dont les fichiers Markdown sont analysés et transformés en JSX. Cependant, si vous modifiez la manière dont Markdown se comporte, vous devez également refléter ces changements dans le CMS.
+
+&lt;Admonition type=&quot;danger&quot; title=&quot;Avertissement&quot; children={Les plugins MDX qui modifient le comportement des composants Markdown standard peuvent rompre la compatibilité avec le CMS. Procédez à vos risques et périls.}&gt;Les plugins MDX qui modifient le comportement des composants Markdown standard peuvent rompre la compatibilité avec le CMS. Procédez à vos risques et périls.&lt;/Admonition&gt;
+
+Pour plus d&apos;informations, voir Plugins MDX dans la documentation de Docusaurus.
+
+&lt;Admonition type=&quot;note&quot; title=&quot;Note&quot; children={DocStatic préinstalle et configure les plugins mathématiques pour vous.}&gt;DocStatic préinstalle et configure les plugins mathématiques pour vous.&lt;/Admonition&gt;</target>
+      </segment>
+    </unit>
+    <unit id="guides/markdown-features/intro">
+      <notes><note>path:guides/markdown-features/intro.mdx</note><note>title:Markdown features</note></notes>
+      <segment>
+        <source xml:space="preserve"># Markdown features
+
+DocStatic uses Markdown as its main content authoring format. You can learn it in ten minutes. But you don&apos;t have to because the CMS provides a full rich text editing environment for metadata, Markdown and React components.
+
+## Simple Structured Authoring
+
+Topics in DocStatic have three parts:
+
+- Metadata (in YAML format)
+- Content (in Markdown)
+- Predefined React components.
+
+The CMS makes sure metadata and Markdown are used consistently, while the React components provide a uniform style and support for content reuse features. You don’t need to add any JSX code yourself as the components are already available globally.
+
+## Standard features
+
+Markdown features include:
+
+- Bold, code, italic and strikethrough character styles.
+- Bulleted and numbered lists.
+- Code blocks.
+- Heading levels (1 to 6).
+- Horizontal rules.
+- Images.
+- Links.
+- Quotes.
+- Simple tables.
+
+These can all be selected directly from the rich text toolbar in the CMS.
+
+To these, Docusaurus adds:
+
+- Admonitions
+- Details (expanding content)
+- Doc card lists
+- Tabs
+
+DocStatic further extends this with:
+
+- Code snippets (from files)
+- Comments
+- Conditional text
+- Context help links
+- Diagrams
+- Figures
+- Footnotes
+- Glossary terms
+- Math equations
+- Snippets
+- Variables
+
+## Front matter
+
+Front matter is used to add metadata to your Markdown file. It&apos;s provided at the very top of the file, enclosed by three dashes ---. Content plugins may have their own front matter schema. DocStatic uses the front matter for:
+
+- Conditions (for conditional text)
+- Descriptions
+- Slugs (fixed paths)
+- Taxonomy tags
+- Titles
+- Workflow status
+
+## Details
+
+1. Select **Details** from the **Embed** list.
+2. Edit the component.
+3. Give it a **Summary**.
+4. Enter the **Details**.
+
+#### Example:
+
+&lt;Details summary=&quot;Toggle me.&quot; children={This is the detailed content.
+
+You can use Markdown here including **bold** and _italic_ text, and inline links.}&gt; (summary:Toggle me.)This is the detailed content.
+
+You can use Markdown here including **bold** and _italic_ text, and inline links.&lt;/Details&gt;
+
+## Doc card lists
+
+Doc card lists are automatically generated for categories in the table of contents. However, you can also manually add them to a topic.
+
+1. Select **Doc Card List** from the **Embed** list.
+2. Give it a **Title**.
+
+For more information, refer to Markdown Features in the Docusarus documentation.
+
+#### Example:
+
+&lt;DocCardList title=&quot;Markdown Features&quot;&gt; (title:Markdown Features)&lt;/DocCardList&gt;</source>
+        <target xml:space="preserve"># Fonctionnalités de Markdown
+
+DocStatic utilise Markdown comme principal format de création de contenu. Vous pouvez l&apos;apprendre en dix minutes. Mais vous n&apos;avez pas à le faire car le CMS fournit un environnement d&apos;édition de texte riche complet pour les métadonnées, Markdown et les composants React.
+
+## Rédaction structurée simple
+
+Les sujets dans DocStatic ont trois parties :
+
+- Métadonnées (au format YAML)
+- Contenu (en Markdown)
+- Composants React prédéfinis.
+
+Le CMS s&apos;assure que les métadonnées et le format Markdown sont utilisés de manière cohérente, tandis que les composants React fournissent un style uniforme et prennent en charge les fonctions de réutilisation du contenu. Vous n&apos;avez pas besoin d&apos;ajouter du code JSX vous-même car les composants sont déjà disponibles globalement.
+
+## Fonctionnalités standard
+
+Les fonctionnalités Markdown incluent :
+
+- Styles de caractères gras, code, italique et barré.
+- Listes numérotées et à puces.
+- Blocs de code.
+- Niveaux de titres (1 à 6).
+- Règles horizontales.
+- Images.
+- Liens.
+- Citations.
+- Tableaux simples.
+
+Tous ces éléments peuvent être sélectionnés directement à partir de la barre d&apos;outils &quot;texte riche&quot; du CMS.
+
+A cela, Docusaurus ajoute :
+
+- Admonitions
+- Détails (expansion du contenu)
+- Listes de fiches doc
+- Onglets
+
+DocStatic étend encore ce système avec :
+
+- Extraits de code (depuis fichiers)
+- Commentaires
+- Texte conditionnel
+- Liens d&apos;aide contextuelle
+- Diagrammes
+- Figures
+- Notes de bas de page
+- Glossaire
+- Équations mathématiques
+- Bribes d&apos;information
+- Variables
+
+## Première page
+
+La page de garde est utilisée pour ajouter des métadonnées à votre fichier Markdown. Il est fourni tout en haut du fichier, entouré de trois tirets ---. Les plugins de contenu peuvent avoir leur propre schéma de contenu. DocStatic utilise la matière première pour :
+
+- Les conditions (pour le texte conditionnel)
+- Les descriptions
+- Slugs (chemins d&apos;accès fixes)
+- Balises de taxonomie
+- Titres
+- Statut du flux de travail
+
+## Détails
+
+1. Sélectionnez **Details** dans la liste **Embed**.
+2. Modifiez le composant.
+3. Donnez-lui un **Summary**.
+4. Saisissez les **Details**.
+
+#### Exemple :
+
+&lt;Details summary=&quot;Toggle me.&quot; children={Il s&apos;agit du contenu détaillé.
+
+Vous pouvez utiliser Markdown ici, y compris le texte en **gras** et _italique_, et les [liens] en ligne (https://docusaurus.io/).}&gt;Il s&apos;agit du contenu détaillé.
+
+Vous pouvez utiliser Markdown ici, y compris le texte en **gras** et _italique_, et les [liens] en ligne (https://docusaurus.io/).&lt;/Details&gt;
+
+## Listes de cartes document
+
+Les listes de fiches sont générées automatiquement pour les catégories de la table des matières. Toutefois, vous pouvez également les ajouter manuellement à une rubrique.
+
+1. Sélectionnez **Doc Card List** dans la liste **Embed**.
+2. Offrez-lui un **Title**.
+
+Pour plus d&apos;informations, voir Fonctionnalités Markdown dans la documentation de Docusarus.
+
+#### Exemple :
+
+&lt;DocCardList title=&quot;Fonctionnalités Markdown&quot;&gt;&lt;/DocCardList&gt;</target>
+      </segment>
+    </unit>
+    <unit id="guides/markdown-features/links">
+      <notes><note>path:guides/markdown-features/links.mdx</note><note>title:Markdown links</note></notes>
+      <segment>
+        <source xml:space="preserve"># Markdown links
+
+There are two ways of adding a link to another page: through a URL path or a file path.
+
+
+
+In the CMS you can add a link from the pasteboard by selecting a section of text and pasting it.
+
+You can also highlight a section of text and click the Link icon to add a path.
+
+Or you can place the cursor where you want the link to appear, click the icon and enter the path and the display text.
+
+For more information on links refer to Markdown links in the Docusuarus documenation.</source>
+        <target xml:space="preserve"># Liens Markdown
+
+Il existe deux façons d&apos;ajouter un lien vers une autre page : par un chemin d&apos;URL ou par un chemin de fichier.
+
+
+
+Dans le CMS, vous pouvez ajouter un lien à partir du bloc-notes en sélectionnant une section de texte et en la collant.
+
+Vous pouvez également mettre en évidence une section de texte et cliquer sur l&apos;icône Lien pour ajouter un chemin d&apos;accès.
+
+Vous pouvez aussi placer le curseur à l&apos;endroit où vous souhaitez que le lien apparaisse, cliquer sur l&apos;icône et saisir le chemin et le texte d&apos;affichage.
+
+Pour plus d&apos;informations sur les liens, voir Liens Markdown dans la documentation Docusuarus.</target>
+      </segment>
+    </unit>
+    <unit id="guides/markdown-features/math-equations">
+      <notes><note>path:guides/markdown-features/math-equations.mdx</note><note>title:Math equations</note></notes>
+      <segment>
+        <source xml:space="preserve"># Math equations
+
+Mathematical equations can be rendered using KaTeX.
+
+## Use
+
+To use KaTeX from the CMS, embed the string in a **Passthrough** component. You can include a **Summary** that will appear inline when editing the topic.
+
+### Inline
+
+Write inline math equations by wrapping LaTeX equations between $:
+
+
+
+&lt;Passthrough type=&quot;markdown&quot; string=&quot;Let $f\\colon[a,b] \\to \\R$ be Riemann integrable. Let $F\\colon[a,b]\\to\\R$ be $F(x)=\\int_{a}^{x} f(t)\\,dt$. Then $F$ is continuous, and at all $x$ such that $f$ is continuous at $x$, $F$ is differentiable at $x$ with $F&apos;(x)=f(x)$.&quot; summary=&quot;inline equation&quot;&gt; (type:markdown, string:Let $f\\colon[a,b] \\to \\R$ be Riemann integrable. Let $F\\colon[a,b]\\to\\R$ be $F(x)=\\int_{a}^{x} f(t)\\,dt$. Then $F$ is continuous, and at all $x$ such that $f$ is continuous at $x$, $F$ is differentiable at $x$ with $F&apos;(x)=f(x)$., summary:inline equation)&lt;/Passthrough&gt;
+
+### Blocks
+
+For equation block or display mode, use line breaks and $$:
+
+
+
+&lt;Passthrough type=&quot;markdown&quot; string=&quot;\n$$\nI = \\int_0^{2\\pi} \\sin(x)\\,dx\n$$\n&quot; summary=&quot;block equation&quot;&gt; (type:markdown, string:\n$$\nI = \\int_0^{2\\pi} \\sin(x)\\,dx\n$$\n, summary:block equation)&lt;/Passthrough&gt;
+
+For more information, refer to the KaTeX documentation.</source>
+        <target xml:space="preserve"># Équations mathématiques
+
+Les équations mathématiques peuvent être rendues avec KaTeX.
+
+## Utiliser
+
+Pour utiliser KaTeX à partir du CMS, intégrez la chaîne dans un composant **Passthrough**. Vous pouvez inclure un **Summary** qui apparaîtra en ligne lors de l&apos;édition du sujet.
+
+### Incliné
+
+Écrire des équations mathématiques en ligne en enveloppant les équations LaTeX entre $ :
+
+
+
+&lt;Passthrough type=&quot;markdown&quot; string=&quot;Let $f\\colon[a,b] \\to \\R$ be Riemann integrable. Soit $F\\colon[a,b]\\to\\R$ $F(x)=\\int_{a}^{x} f(t)\\N,dt$. Alors $F$ est continue, et pour tout $x$ tel que $f$ est continue en $x$, $F$ est différentiable en $x$ avec $F&apos;(x)=f(x)$.&quot; summary=&quot;inline equation&quot;&gt;&lt;/Passthrough&gt;
+
+### Blocs
+
+Pour le bloc d&apos;équation ou le mode d&apos;affichage, utilisez les sauts de ligne et $$ :
+
+
+
+&lt;Passthrough type=&quot;markdown&quot; string=&quot;\n$$\nI = \\int_0^{2\\pi} \\sin(x)\\,dx\n$$\n&quot; summary=&quot;block equation&quot;&gt;&lt;/Passthrough&gt;
+
+Pour plus d&apos;informations, consultez la documentation KaTeX.</target>
+      </segment>
+    </unit>
+    <unit id="advanced/notifications">
+      <notes><note>path:advanced/notifications.mdx</note><note>title:Notifications</note></notes>
+      <segment>
+        <source xml:space="preserve"># Notifications
+
+DocStatic uses GitHub Actions to send workflow notifications. Example review and translate notifications are included in the .github/workflows/ folder. Some configuration in GitHub is required to enable them. You can also use them as the starting point to develop your own custom notifications.
+
+## Email
+
+The email-review.yml and email-translate.yml actions are triggered when either the review or translate tags are set on a markdown file in the main branch. To use them, add these secrets to your repository:
+
+- SMTP_SERVER
+- SMTP_PORT
+- SMTP_USERNAME
+- SMTP_PASSWORD
+- NOTIFY_EMAIL_TO
+- NOTIFY_EMAIL_FROM
+
+You can get this information from your email provider. For example:
+
+- iCloud (requires an app-specific-password).
+- Outlook
+
+## Slack
+
+The slack-review.yml and slack-translate.yml actions use the same triggers as the email versions. To use them, add your Slack webhook URL as a secret named SLACK_WEBHOOK_URL. For more information, refer to Sending messages using incoming webhooks in the Slack documentation.
+
+## Teams
+
+The teams-review.yml and teams-translate.yml actions work like the Slack versions. Microsoft is deprecating the **Incoming Webhooks** app for Teams from December 2025, but currently there isn&apos;t a publicly available GitHub method for sending Adaptive Cards to workflows. The workaround is to use curl:
+
+
+
+1. In Teams, go to the channel you want to send messages, click the elipsis (**…**) and select **Workflows**.
+2. Click **Manage**.
+3. Click **New Flow**.
+4. Search templates for webhooks and click **Send webhook alerts to a channel**.
+5. (Optional) Edit the **Flow name**.
+6. Sign in and click **Next**.
+7. Select a **Team** and **Channel** from the lists and click **Create Flow**.
+8. Copy the MS_TEAMS_HTTP_POST_URL and store it as a secret in GitHub and click **Done**.
+
+&lt;Admonition type=&quot;tip&quot; title=&quot;Tip&quot; children={You can use the Test notifications GitHub action to test your connections.}&gt; (type:tip, title:Tip)You can use the Test notifications GitHub action to test your connections.&lt;/Admonition&gt;</source>
+        <target xml:space="preserve"># Notifications
+
+DocStatic utilise GitHub Actions pour envoyer des notifications de flux de travail. Des exemples de notifications de révision et de traduction sont inclus dans le dossier .github/workflows/. Une configuration dans GitHub est nécessaire pour les activer. Vous pouvez également les utiliser comme point de départ pour développer vos propres notifications personnalisées.
+
+## Email
+
+Les actions email-review.yml et email-translate.yml sont déclenchées lorsque les balises review ou translate sont définies sur un fichier markdown dans la branche principale. Pour les utiliser, ajoutez ces secrets à votre dépôt :
+
+- SMTP_SERVER
+- SMTP_PORT
+- SMTP_USERNAME
+- SMTP_PASSWORD
+- NOTIFY_EMAIL_TO
+- NOTIFY_EMAIL_FROM
+
+Vous pouvez obtenir cette information auprès de votre fournisseur de messagerie. Par exemple, vous pouvez obtenir cette information auprès de votre fournisseur de messagerie :
+
+- iCloud (nécessite un [mot de passe spécifique à l&apos;application])(https://support.apple.com/en-us/102654)).
+- Outlook
+
+## Slack
+
+Les actions slack-review.yml et slack-translate.yml utilisent les mêmes déclencheurs que les versions email. Pour les utiliser, ajoutez l&apos;URL de votre webhook Slack en tant que secret nommé SLACK_WEBHOOK_URL. Pour plus d&apos;informations, consultez Sending messages using incoming webhooks dans la documentation de Slack.
+
+## Équipes
+
+Les actions teams-review.yml et teams-translate.yml fonctionnent comme les versions Slack. Microsoft supprime l&apos;application **Incoming Webhooks** pour Teams à partir de décembre 2025, mais il n&apos;y a actuellement pas de méthode GitHub publiquement disponible pour envoyer des cartes adaptatives à des flux de travail. La solution consiste à utiliser curl :
+
+
+
+1. Dans Teams, accédez au canal dans lequel vous souhaitez envoyer des messages, cliquez sur l&apos;ellipse (**...**) et sélectionnez **Workflows**.
+2. Cliquez sur **Mange**.
+3. Cliquez sur **New flow**.
+4. Recherchez des modèles pour les webhooks et cliquez sur **Send webhook alerts to a channel**.
+5. (Facultatif) Modifiez le **Flow name**.
+6. Connectez-vous et cliquez sur **Next**.
+7. Sélectionnez une **Team** et un **Channel** dans les listes et cliquez sur **Create Flow**.
+8. Copiez le MS_TEAMS_HTTP_POST_URL et stockez-le en tant que secret dans GitHub et cliquez sur **Done**.
+
+&lt;Admonition type=&quot;tip&quot; title=&quot;Conseil&quot; children={Vous pouvez utiliser l&apos;action GitHub Test notifications pour tester vos connexions.}&gt;Vous pouvez utiliser l&apos;action GitHub Test notifications pour tester vos connexions.&lt;/Admonition&gt;</target>
+      </segment>
+    </unit>
+    <unit id="search">
+      <notes><note>path:search.mdx</note><note>title:Search</note></notes>
+      <segment>
+        <source xml:space="preserve">By default, DocStatic is configured to use Lunr search. Its main advantage is that it&apos;s a zero cost solution. Its main disadvantage is that the entire search index is downloaded to the user&apos;s browser; the larger your site gets, the slower it gets.
+
+A variety of alternatives are available as Docusaurus plugins, including:
+
+- Algolia (pre-installed)
+- Markprompt
+- Meilisearch
+- Orama
+- Typesense DocSearch
+
+For more information, refer to Search in the Docusaurus documentation.</source>
+        <target xml:space="preserve">Par défaut, DocStatic est configuré pour utiliser la recherche Lunr. Son principal avantage est qu&apos;il s&apos;agit d&apos;une solution à coût nul. Son principal inconvénient est que l&apos;index de recherche complet est téléchargé dans le navigateur de l&apos;utilisateur ; plus votre site est volumineux, plus il est lent.
+
+Diverses alternatives sont disponibles sous forme de plugins Docusaurus, notamment :
+
+- Algolia (pré-installé)
+- Markprompt
+- Meilisearch
+- Orama
+- Typesense DocSearch
+
+Pour plus d&apos;informations, voir Search dans la documentation de Docusaurus.</target>
+      </segment>
+    </unit>
+    <unit id="seo">
+      <notes><note>path:seo.mdx</note><note>title:Search engine optimization (SEO)</note></notes>
+      <segment>
+        <source xml:space="preserve">DocStatic supports search engine optimization in various ways:
+
+- Global metadata
+- Human readable links
+- Image meta description
+- Rich search information
+- Robots file
+- Single page metadata
+- Sitemap file
+- Structured content
+
+For more information, refer to the Search engine optimization in the Docusaurus documentation.</source>
+        <target xml:space="preserve">DocStatic soutient l&apos;optimisation des moteurs de recherche de différentes manières :
+
+- Métadonnées globales
+- Liens lisibles par l&apos;homme
+- Méta description de l&apos;image
+- Informations de recherche riches
+- Fichier robots
+- Métadonnées de page unique
+- Fichier Sitemap
+- Contenu structuré
+
+Pour plus d&apos;informations, reportez-vous à la section Optimisation des moteurs de recherche dans la documentation de Docusaurus.</target>
+      </segment>
+    </unit>
+    <unit id="guides/markdown-features/snippets">
+      <notes><note>path:guides/markdown-features/snippets.mdx</note><note>title:Snippets</note></notes>
+      <segment>
+        <source xml:space="preserve"># Snippets
+
+The **Snippet** component enables you to reuse content across your documentation. A snippet is a chunk of content that can be inserted inside one or more topics. When you make changes to the snippet, they are made wherever the snippet is used. This can be particularly useful for boilerplate text. Snippets have their own collection in the CMS and are contained in their own separate part of the repository.
+
+1. Select the **Snippet** component from the **Embed** list.
+2. Edit the component.
+3. Choose a file from the list. The list is populated with all the files in the /reuse/snippets/ folder) every time you run the dev server or do a build.
+
+#### Example
+
+&lt;Snippet filepath=&quot;example.mdx&quot;&gt; (filepath:example.mdx)&lt;/Snippet&gt;</source>
+        <target xml:space="preserve"># Snippets
+
+Le composant **Snippet** vous permet de réutiliser du contenu dans votre documentation. Un extrait est un morceau de contenu qui peut être inséré dans une ou plusieurs rubriques. Lorsque vous apportez des modifications à l&apos;extrait, elles sont apportées partout où l&apos;extrait est utilisé. Cela peut s&apos;avérer particulièrement utile pour les textes passe-partout. Les snippets ont leur propre collection dans le CMS et sont contenus dans une partie distincte du référentiel.
+
+1. Sélectionnez le composant **Snippet** dans la liste **Embed**.
+2. Modifiez le composant.
+3. Saisissez le **Path** du snippet (dans le dossier /reuse/snippets/).
+
+#### Exemple
+
+&lt;Snippet filepath=&quot;example.mdx&quot;&gt;&lt;/Snippet&gt;</target>
+      </segment>
+    </unit>
+    <unit id="static-assets">
+      <notes><note>path:static-assets.mdx</note><note>title:Static assets</note></notes>
+      <segment>
+        <source xml:space="preserve">Static assets are the non-code files that are directly copied to the build output. They include images, stylesheets, favicons, fonts, and so on
+
+You should put these assets in the static folder. Every file you put into that folder is copied into the root of the generated build folder with the folder hierarchy preserved. For example, if you add a file named sun.jpg to the static folder, it will be copied to build/sun.jpg.
+
+This means that:
+
+- For site baseUrl: &apos;/&apos;, the image /static/img/sun.jpg will be served at /img/sun.jpg.
+- For site baseUrl: &apos;/subpath/&apos;, the image /static/img/sun.jpg will be served at /subpath/img/sun.jpg.
+
+## Referencing your static asset
+
+### In the CMS
+
+1. Insert a Link.
+2. Enter the absolute path, for example /files/note.docx.
+3. Enter the text to display.
+
+### In Markdown
+
+
+
+For more information, refer to Static Assets in the Docusaurus documentation.</source>
+        <target xml:space="preserve">Les ressources statiques sont les fichiers non codés qui sont directement copiés dans la sortie de la compilation. Ils comprennent les images, les feuilles de style, les favicons, les polices de caractères, etc.
+
+Vous devez placer ces ressources dans le dossier static. Chaque fichier que vous placez dans ce dossier est copié à la racine du dossier de compilation généré, en conservant la hiérarchie des dossiers. Par exemple, si vous ajoutez un fichier nommé sun.jpg dans le dossier statique, il sera copié dans build/sun.jpg.
+
+Cela signifie que :
+
+- Pour le site baseUrl : &apos;/&apos;, l&apos;image /static/img/sun.jpg sera servie à /img/sun.jpg.
+- Pour le site baseUrl : &apos;/subpath/&apos;, l&apos;image /static/img/sun.jpg sera servie à /subpath/img/sun.jpg.
+
+## Référencement de votre ressource statique
+
+### Dans le CMS
+
+1. Insérez un lien.
+2. Saisissez le chemin absolu, par exemple /files/note.docx.
+3. Saisissez le texte à afficher.
+
+### En Markdown
+
+
+
+Pour plus d&apos;informations, voir Ressources statiques dans la documentation de Docusaurus.</target>
+      </segment>
+    </unit>
+    <unit id="advanced/style">
+      <notes><note>path:advanced/style.mdx</note><note>title:Style checking</note></notes>
+      <segment>
+        <source xml:space="preserve"># Style checking
+
+One of the features most missed by writers working in docs-as-code is a good spelling, grammar and style checker. By default, spell-checking is provided by your web browser or integrated development environment. This may be adequate for simple websites, but if you need something more advanced then you need a dedicated grammar checker.
+
+## LanguageTool
+
+DocStatic is tested with LanguageTool, an AI-based grammar checker that supports over 20 languages. It&apos;s free to register for the basic plan. The premium plan adds style-guide support for individuals and teams. Tailored businesses plans are available. There is also a discount for students and non-profits.
+
+## Self hosted
+
+Because LanguageTool is open-source, you have the option of self-hosting. In this case there are no subscription fees, but you will need a development team to set up your LanguageTool instance, and you&apos;ll have to provide your own support.</source>
+        <target xml:space="preserve"># Contrôle du style
+
+L&apos;une des fonctionnalités qui manque le plus aux rédacteurs travaillant dans des documents comme code est un bon correcteur d&apos;orthographe, de grammaire et de style. Par défaut, le correcteur orthographique est fourni par votre navigateur web ou votre environnement de développement intégré. Cela peut suffire pour des sites web simples, mais si vous avez besoin de quelque chose de plus avancé, il vous faut un vérificateur de grammaire dédié.
+
+## LanguageTool
+
+DocStatic a été testé avec LanguageTool, un correcteur grammatical établi sur l&apos;intelligence artificielle qui prend en charge plus de 20 langues. L&apos;inscription à l&apos;offre originelle est gratuite (https://languagetool.org/fr/register). Le plan premium ajoute la prise en charge des guides de style pour les individus et les équipes. Des plans sur mesure pour les entreprises sont disponibles. Il existe également une réduction pour les étudiants et les organisations à but non lucratif.
+
+## Auto-hébergé
+
+LanguageTool étant un logiciel libre, vous pouvez de l&apos;auto-héberger. Dans ce cas, aucuns frais n&apos;existent d&apos;abonnement. Vous aurez besoin d&apos;une équipe de développement pour mettre en place votre instance de LanguageTool, et vous devrez assurer votre propre support.</target>
+      </segment>
+    </unit>
+    <unit id="styling-layout">
+      <notes><note>path:styling-layout.mdx</note><note>title:Styling and layout</note></notes>
+      <segment>
+        <source xml:space="preserve">A DocStatic site is a single-page React application. You can style it the way you style React apps.
+
+## Global styles
+
+DocStatic uses the @docusaurus/preset-classic theme with CSS overrides in the /src/css/custom.css file. Any CSS you write in that file is available globally and can be referenced directly using string literals.
+
+## Styling your site with Infima
+
+DocStatic uses Infima as the underlying styling framework. Infima provides a flexible layout and common UI components styling suitable for content-centric websites (blogs, documentation, home pages). For more details, refer to the Infima website.
+
+Infima uses seven shades of each color. We recommend using ColorBox to find the different shades of colors for your chosen primary color. You can use the tool on the Example page to generate the different shades for your website and copy the variables into /src/css/custom.css.
+
+## Dark mode
+
+In light mode, the &lt;html&gt; element has a data-theme=&quot;light&quot; attribute; in dark mode, it&apos;s data-theme=&quot;dark&quot;. Therefore, you can scope your CSS to dark-mode-only by targeting html with a specific attribute.
+
+
+
+## Mobile view
+
+Docstatic uses 996px as the cutoff between mobile screen width and desktop. If you want your layout to be different in the mobile view, you can use media queries.
+
+
+
+For more information, refer to Styling and Layout in the Docusaurus documentation.</source>
+        <target xml:space="preserve">Un site DocStatic est une application React à page unique. Vous pouvez le styliser de la même manière que les applications React.
+
+## Styles globaux
+
+DocStatic utilise le thème @docusaurus/preset-classic avec des surcharges CSS dans le fichier /src/css/custom.css. Toute CSS que vous écrivez dans ce fichier est disponible globalement et peut être référencée directement à l&apos;aide de chaînes de caractères.
+
+## Styliser votre site avec Infima
+
+DocStatic utilise Infima comme cadre de style sous-jacent. Infima fournit une mise en page flexible et des composants d&apos;interface utilisateur communs adaptés aux sites web centrés sur le contenu (blogs, documentation, pages d&apos;atterrissage). Pour plus de détails, consultez le site web Infima.
+
+Infima utilise sept nuances de chaque couleur. Nous vous recommandons d&apos;utiliser ColorBox pour trouver les différentes nuances de couleurs pour la couleur primaire que vous avez choisie. Vous pouvez utiliser l&apos;outil de la Page d&apos;exemple pour générer les différentes nuances pour votre site web et copier les variables dans /src/css/custom.css.
+
+## Mode sombre
+
+En mode clair, l&apos;élément &lt;html&gt; a un attribut data-theme=&quot;light&quot; ; en mode sombre, il est data-theme=&quot;dark&quot;. Par conséquent, vous pouvez adapter votre CSS au mode sombre uniquement en ciblant l&apos;élément html avec un attribut spécifique.
+
+
+
+## Vue mobile
+
+Docstatic utilise 996px comme limite entre la largeur de l&apos;écran mobile et celle de l&apos;écran de bureau. Si vous voulez que votre mise en page soit différente dans l&apos;affichage mobile, vous pouvez utiliser des requêtes de média.
+
+
+
+Pour plus d&apos;informations, voir Style et mise en page dans la documentation de Docusaurus.</target>
+      </segment>
+    </unit>
+    <unit id="guides/markdown-features/tabs">
+      <notes><note>path:guides/markdown-features/tabs.mdx</note><note>title:Tabs</note></notes>
+      <segment>
+        <source xml:space="preserve">The **Tabs** component enables you to add tabbed content to your topic.
+
+1. Select **Tabs** from the **Embed** list.
+2. Edit the component.
+3. For each tab:1. Select **Tab Item** from the **Embed** list.
+2. Give it a **Value**.
+3. Give it a **Title**.
+4. Enter the **Content**.
+5. (Optional) Make it the **Default** tab.
+4. **Save** your changes.
+
+&lt;Admonition type=&quot;danger&quot; title=&quot;Warning&quot; children={The CMS can lose context when editing tabs. You should save often. The CMS can get into a position where it cannot find the context of the tab. In this case click the **Raw Markdown** icon and make changes directly in the Markdown. Save and then return to the rich text editor.}&gt; (type:danger, title:Warning)The CMS can lose context when editing tabs. You should save often. The CMS can get into a position where it cannot find the context of the tab. In this case click the **Raw Markdown** icon and make changes directly in the Markdown. Save and then return to the rich text editor.&lt;/Admonition&gt;
+
+#### Example:
+
+&lt;Tabs children={&lt;TabItem label=&quot;Apple&quot; value=&quot;apple&quot; children={This is an apple 🍎}&gt; (label:Apple, value:apple)This is an apple 🍎&lt;/TabItem&gt;
+
+&lt;TabItem label=&quot;Orange&quot; value=&quot;orange&quot; children={This is an orange 🍊}&gt; (label:Orange, value:orange)This is an orange 🍊&lt;/TabItem&gt;
+
+&lt;TabItem label=&quot;Banana&quot; value=&quot;banana&quot; children={This is a banana 🍌}&gt; (label:Banana, value:banana)This is a banana 🍌&lt;/TabItem&gt;}&gt;&lt;TabItem label=&quot;Apple&quot; value=&quot;apple&quot; children={This is an apple 🍎}&gt; (label:Apple, value:apple)This is an apple 🍎&lt;/TabItem&gt;
+
+&lt;TabItem label=&quot;Orange&quot; value=&quot;orange&quot; children={This is an orange 🍊}&gt; (label:Orange, value:orange)This is an orange 🍊&lt;/TabItem&gt;
+
+&lt;TabItem label=&quot;Banana&quot; value=&quot;banana&quot; children={This is a banana 🍌}&gt; (label:Banana, value:banana)This is a banana 🍌&lt;/TabItem&gt;&lt;/Tabs&gt;
+
+For more information, refer to Tabs in the Docusaurus documentation.</source>
+        <target xml:space="preserve">Le composant **Tabs** vous permet d&apos;ajouter des onglets à votre sujet.
+
+1. Sélectionnez **Tabs** dans la liste **Embed**.
+2. Modifiez le composant.
+3. Pour chaque onglet :1. Sélectionnez **Tab Item** dans la liste **Embed**.
+2. Donnez-lui une **Value**.
+3. Donnez-lui un **Title**.
+4. Saisissez le **Content**.
+5. (Facultatif) Faites-en l&apos;onglet **Default**.
+4. **Save** vos modifications.
+
+&lt;Admonition type=&quot;danger&quot; title=&quot;Warning&quot; children={Le CMS peut perdre le contexte lors de la modification des onglets. Vous devez sauvegarder souvent. Le CMS peut se retrouver dans une position où il ne peut pas trouver le contexte de l&apos;onglet. Dans ce cas, cliquez sur l&apos;icône **Markdown brut** et apportez des modifications directement dans le Markdown. Sauvegardez et revenez ensuite à l&apos;éditeur de texte riche.}&gt;Le CMS peut perdre le contexte lors de la modification des onglets. Vous devez sauvegarder souvent. Le CMS peut se retrouver dans une position où il ne peut pas trouver le contexte de l&apos;onglet. Dans ce cas, cliquez sur l&apos;icône **Markdown brut** et apportez des modifications directement dans le Markdown. Sauvegardez et revenez ensuite à l&apos;éditeur de texte riche.&lt;/Admonition&gt;
+
+#### Exemple :
+
+&lt;Tabs children={&lt;TabItem label=&quot;Pomme&quot; value=&quot;apple&quot; children={Ceci est une pomme 🍎}&gt;Ceci est une pomme 🍎&lt;/TabItem&gt;
+
+&lt;TabItem label=&quot;Orange&quot; value=&quot;orange&quot; children={Ceci est une orange 🍊}&gt;Ceci est une orange 🍊&lt;/TabItem&gt;
+
+&lt;TabItem label=&quot;Banane&quot; value=&quot;banane&quot; children={Ceci est une banane 🍌}&gt;Ceci est une banane 🍌&lt;/TabItem&gt;}&gt;&lt;TabItem label=&quot;Pomme&quot; value=&quot;apple&quot; children={Ceci est une pomme 🍎}&gt;Ceci est une pomme 🍎&lt;/TabItem&gt;
+
+&lt;TabItem label=&quot;Orange&quot; value=&quot;orange&quot; children={Ceci est une orange 🍊}&gt;Ceci est une orange 🍊&lt;/TabItem&gt;
+
+&lt;TabItem label=&quot;Banane&quot; value=&quot;banane&quot; children={Ceci est une banane 🍌}&gt;Ceci est une banane 🍌&lt;/TabItem&gt;&lt;/Tabs&gt;
+
+Pour plus d&apos;informations, voir Onglets dans la documentation de Docusaurus.</target>
+      </segment>
+    </unit>
+    <unit id="migration">
+      <notes><note>path:migration/index.mdx</note><note>title:Upgrading</note></notes>
+      <segment>
+        <source xml:space="preserve"># Upgrading
+
+While DocStatic is still in early development, changes must be merged individually from the main repository. However, the Node.js components can safely be updated by replacing the package.json file with the latest version from the main repository. After updating, run:
+
+</source>
+        <target xml:space="preserve"># Mise à niveau
+
+DocStatic étant encore au début de son développement, les modifications doivent être fusionnées individuellement à partir du dépôt principal. Cependant, les composants Node.js peuvent être actualisé en toute sécurité en remplaçant le fichier package.json par la dernière version du dépôt principal. Après la mise à jour, exécutez :
+
+</target>
+      </segment>
+    </unit>
+    <unit id="using-plugins">
+      <notes><note>path:using-plugins.mdx</note><note>title:Using plugins</note></notes>
+      <segment>
+        <source xml:space="preserve">The static site generator core doesn&apos;t provide any feature of its own. All features are delegated to individual plugins: the docs feature provided by the docs plugin; the blog feature provided by the blog plugin; or individual pages provided by the pages plugin.
+
+DocStatic is preconfigured to use the plugins required to support:
+
+- KaTeX math equations
+- Lunr search
+- Mermaid diagrams
+- OpenAPI docs
+- GraphQL docs
+
+For more information, refer to Using Plugins in the Docusaurus documentation.</source>
+        <target xml:space="preserve">Le noyau du générateur de sites statiques ne fournit aucune fonctionnalité propre. Toutes les fonctionnalités sont déléguées à des plugins individuels : la fonctionnalité docs fournie par le plugin docs ; la fonctionnalité blog fournie par le plugin blog ; ou les pages individuelles fournies par le plugin pages.
+
+DocStatic est préconfiguré pour utiliser les plugins nécessaires au support :
+
+- équations mathématiques KaTeX
+- Recherche Lunr
+- Diagrammes Mermaid
+- Documents OpenAPI
+- docs GraphQL
+
+Pour plus d&apos;informations, voir Utilisation de Plugins) dans la documentation de Docusaurus.</target>
+      </segment>
+    </unit>
+    <unit id="guides/markdown-features/variables">
+      <notes><note>path:guides/markdown-features/variables.mdx</note><note>title:Variable sets</note></notes>
+      <segment>
+        <source xml:space="preserve"># Variable sets
+
+The Variable component enables you to place a localized variable in your text.
+
+## Manage variable sets
+
+1. In the CMS from the **Variable Sets** collection, add a new set or edit an existing set.
+2. Enter or edit the **Variable Set Name**.
+3. Add or edit a **Variable**.
+4. Enter or edit the **Key**.
+5. Add or edit a **Translation**.
+6. Edit or enter a **Language** and **Value** pair.
+
+## Use variables
+
+1. Select the **Variable** component from the **Embed** list
+2. Edit the component.
+3. Select the **Variable** (**Variable Set**) keys.
+
+#### Example
+
+&lt;VariableSet variableSelection=&quot;writing-terms|single-sourcing&quot; initcap&gt; (variableSelection:writing-terms|single-sourcing)&lt;/VariableSet&gt;</source>
+        <target xml:space="preserve"></target>
+      </segment>
+    </unit>
+    <unit id="guides/wikis">
+      <notes><note>path:guides/wikis.mdx</note><note>title:Wikis</note></notes>
+      <segment>
+        <source xml:space="preserve"># Wikis
+
+A wiki page is a web/documentation page that&apos;s designed for collaboration. They are easy to create and edit and are often used for internal team knowledge sharing as well as public-facing help content.
+
+When working with wiki topics in the CMS:
+
+- Create wiki topics in the /docs/wiki/ folder.
+- You don&apos;t need to add the wiki topics to the table of contents. The sidebar for wiki topics is generated automatically, based on the file structure in the repo.
+- Wiki topics do not include metadata.
+
+DocStatic can automatically link a category to its index document. A category index document is a document following this filename convention:
+
+Named as README (case-insensitive): docs/wiki/folder/readme.mdx.
+
+For more information, refer to Autogenerated in the Docusaurus documenation.
+
+## Create a wiki page in the CMS
+
+1. Select the **Wiki Pages** collection.
+2. Click **Add File**.&lt;Figure img=&quot;/img/docs/wiki-pages-add-wiki.png&quot; caption=&quot;TinaCMS. A callout highlights the Wiki option and the Add file option.&quot;&gt; (img:/img/docs/wiki-pages-add-wiki.png, caption:TinaCMS. A callout highlights the Wiki option and the Add file option.)&lt;/Figure&gt;
+3. Give your new wiki page a **Title**.
+4. Enter the content.
+5. Click **Save**.</source>
+        <target xml:space="preserve"># Wikis
+
+Une page wiki est une page web/documentation conçue pour la collaboration. Elles sont faciles à créer et à modifier et sont souvent utilisées pour le partage des connaissances au sein de l&apos;équipe interne ainsi que pour le contenu d&apos;aide destiné au public.
+
+Lorsque vous travaillez avec des sujets wiki dans le CMS :
+
+- Créez les rubriques wiki dans le dossier /docs/wiki/.
+- Il n&apos;est pas nécessaire d&apos;ajouter les rubriques wiki à la table des matières. La barre latérale des rubriques wiki est générée automatiquement, en fonction de la structure des fichiers dans le répertoire.
+- Les sujets wiki n&apos;incluent pas de métadonnées.
+
+DocStatic peut automatiquement lier une catégorie à son document d&apos;index. Un document d&apos;index de catégorie est un document qui suit cette convention de nom de fichier :
+
+Nommé comme README (insensible à la casse) : docs/wiki/folder/readme.mdx.
+
+Pour plus d&apos;informations, voir Autogénéré dans la documentation de Docusaurus.
+
+## Créer une page wiki dans le CMS
+
+1. Sélectionnez la collection **Wiki Pages**.
+2. Cliquez sur **Add File**.&lt;Figure img=&quot;/img/docs/wiki-pages-add-wiki.png&quot; caption=&quot;TinaCMS. Un callout met en évidence l&apos;option Wiki et l&apos;option Add File.&quot;&gt;&lt;/Figure&gt;
+3. Donnez un **Title** à votre nouvelle page wiki.
+4. Saisissez le contenu.
+5. Cliquez sur **Save**.</target>
+      </segment>
+    </unit>
+  </file>
+</xliff>
