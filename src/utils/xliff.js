@@ -28,6 +28,22 @@ function escapeXmlWithLineBreaks(unsafe) {
   return s.replace(new RegExp(LB, 'g'), '<lb/>');
 }
 
+function extractFrontmatter(text) {
+  if (!text) return { metadata: {}, body: text || '' };
+  const m = String(text).match(/^---\s*\n([\s\S]*?)\n---\s*\n?/);
+  if (!m) return { metadata: {}, body: text };
+  const fmRaw = m[1];
+  const body = text.slice(m[0].length);
+  const metadata = {};
+  fmRaw.split(/\n/).forEach((line) => {
+    const kv = line.match(/^([A-Za-z0-9_\-]+):\s*(?:"([^"]+)"|'([^']+)'|(.+))?$/);
+    if (kv) {
+      metadata[kv[1]] = (kv[2] || kv[3] || (kv[4] || '')).trim();
+    }
+  });
+  return { metadata, body };
+}
+
 function serializeRichTextToMarkdown(node) {
   if (!node) return '';
   if (typeof node === 'string') return node;
@@ -211,32 +227,120 @@ export async function exportOutOfDateAsXliff(client, language) {
     translationsMap[canonical] = node;
   }
 
-  // build units for all source keys that are present in translationsMap
+  // build units only for out-of-date source keys (translation older than source)
   const units = [];
   for (const key of Object.keys(sourceMap)) {
     const src = sourceMap[key];
     if (!translationsMap[key]) continue;
     const tr = translationsMap[key];
+    // Determine lastmod dates consistent with scanTranslations rules
+    const srcDate = src && src.lastmod ? new Date(src.lastmod) : null;
+    const trDate = tr && tr.lastmod ? new Date(tr.lastmod) : null;
+    // Include only when source has a date and translation is missing or older
+    const isOutOfDate = srcDate && (!trDate || trDate < srcDate);
+    if (!isOutOfDate) continue;
     // Prefer raw MDX if available so exported <source> contains original headings
-    // and full MDX/React component contents. Fall back to AST -> Markdown.
+    // and full MDX/React component contents. Strip YAML frontmatter and capture
+    // metadata separately so it can be emitted as <note> elements.
     let sourceBody = '';
+    let sourceMeta = {};
+    // Try several common places where Tina may store raw or rich content
     if (src.raw) {
-      sourceBody = src.raw;
+      const parsed = extractFrontmatter(src.raw);
+      sourceMeta = parsed.metadata || {};
+      sourceBody = parsed.body || '';
+    } else if (src._raw) {
+      const parsed = extractFrontmatter(src._raw);
+      sourceMeta = parsed.metadata || {};
+      sourceBody = parsed.body || '';
+    } else if (src._values && typeof src._values === 'string') {
+      const parsed = extractFrontmatter(src._values);
+      sourceMeta = parsed.metadata || {};
+      sourceBody = parsed.body || '';
+    } else if (src._values && typeof src._values === 'object') {
+      if (src._values.body && typeof src._values.body === 'string') {
+        sourceBody = src._values.body;
+      } else if (src._values.children) {
+        try { sourceBody = serializeRichTextToMarkdown(src._values); } catch (e) { sourceBody = JSON.stringify(src._values); }
+      } else {
+        try { sourceBody = JSON.stringify(src._values); } catch (e) { sourceBody = String(src._values); }
+      }
     } else if (src.body && typeof src.body === 'object') {
       try {
         sourceBody = serializeRichTextToMarkdown(src.body);
       } catch (e) {
         sourceBody = JSON.stringify(src.body);
       }
+    } else if (typeof src.body === 'string') {
+      const parsed = extractFrontmatter(src.body);
+      sourceMeta = parsed.metadata || {};
+      sourceBody = parsed.body || src.body;
     } else {
       sourceBody = src.body || '';
     }
 
+    // If we still have no source text, and we're running in Node (server-side),
+    // try to read the raw MDX from the local filesystem as a fallback. This
+    // keeps the browser/dashboard flow GraphQL-only while allowing server-side
+    // scripts (and local debug runs) to recover missing raw content.
+    // Treat some placeholder serialized values as effectively empty so we
+    // attempt the filesystem fallback when GraphQL gave us an empty object.
+    let isEmptySource = false;
+    if (!sourceBody) isEmptySource = true;
+    else {
+      const s = String(sourceBody).trim();
+      if (!s) isEmptySource = true;
+      if (s === '{}' || s === '[]' || s === '[object Object]') isEmptySource = true;
+    }
+
+    if (isEmptySource && typeof window === 'undefined') {
+      try {
+        // require guarded to avoid bundler/runtime issues in the browser
+        const fs = require('fs');
+        const path = require('path');
+        let rel = src._sys && (src._sys.relativePath || src._sys.filename) ? (src._sys.relativePath || src._sys.filename) : null;
+        // If the GraphQL node didn't include _sys paths, derive from the canonical key
+        if (!rel && typeof key === 'string' && key) {
+          // try likely file candidates under docs/
+          const tryPaths = [path.join('docs', `${key}.mdx`), path.join('docs', `${key}.md`)];
+          for (const p of tryPaths) {
+            const abs = path.resolve(process.cwd(), p);
+            if (fs.existsSync(abs)) {
+              const raw = fs.readFileSync(abs, 'utf8');
+              const parsed = extractFrontmatter(raw);
+              sourceMeta = Object.assign({}, sourceMeta, parsed.metadata || {});
+              sourceBody = parsed.body || sourceBody;
+              rel = p;
+              break;
+            }
+          }
+        } else if (rel) {
+          let filePath = rel;
+          if (!filePath.startsWith('docs/')) {
+            filePath = path.join('docs', filePath);
+          }
+          const abs = path.resolve(process.cwd(), filePath);
+          if (fs.existsSync(abs)) {
+            const raw = fs.readFileSync(abs, 'utf8');
+            const parsed = extractFrontmatter(raw);
+            sourceMeta = Object.assign({}, sourceMeta, parsed.metadata || {});
+            sourceBody = parsed.body || sourceBody;
+          }
+        }
+      } catch (e) {
+        // ignore filesystem fallback errors — continue with whatever we have
+      }
+    }
+    
+
     // For target prefer raw translated MDX if present (tr.raw or tr._values),
     // otherwise try AST -> Markdown or fallback to plain values.
     let targetBody = '';
+    let targetMeta = {};
     if (tr.raw) {
-      targetBody = tr.raw;
+      const parsedT = extractFrontmatter(tr.raw);
+      targetMeta = parsedT.metadata || {};
+      targetBody = parsedT.body || '';
     } else if (tr._values) {
       // some Tina responses embed raw content in _values
       targetBody = typeof tr._values === 'string' ? tr._values : JSON.stringify(tr._values);
@@ -251,7 +355,37 @@ export async function exportOutOfDateAsXliff(client, language) {
     }
     const sourceTitle = src.title || '';
     const targetTitle = tr.title || '';
-    units.push({ id: key, sourceTitle, targetTitle, sourceBody, targetBody });
+
+    // As a last-resort server-side fallback, try reading the file by canonical
+    // key from the local `docs/` tree if the source body is still empty.
+    try {
+      const s = String(sourceBody || '').trim();
+      if ((s === '' || s === '{}' || s === '[]' || s === '[object Object]') && typeof window === 'undefined') {
+        const fs = require('fs');
+        const path = require('path');
+        const tryPaths = [path.join('docs', `${key}.mdx`), path.join('docs', `${key}.md`)];
+        for (const p of tryPaths) {
+          const abs = path.resolve(process.cwd(), p);
+          if (fs.existsSync(abs)) {
+            try {
+              console.error('[xliff] filesystem fallback reading', abs);
+            } catch (e) {}
+            const raw = fs.readFileSync(abs, 'utf8');
+            const parsed = extractFrontmatter(raw);
+            sourceMeta = Object.assign({}, sourceMeta, parsed.metadata || {});
+            sourceBody = parsed.body || sourceBody;
+            try {
+              console.error('[xliff] filesystem fallback populated sourceBody length', String(sourceBody || '').length);
+            } catch (e) {}
+            break;
+          }
+        }
+      }
+    } catch (e) {
+      // ignore
+    }
+
+    units.push({ id: key, sourceTitle, targetTitle, sourceBody, targetBody, sourceMeta, targetMeta });
   }
 
   // build XLIFF 2.2 document
@@ -261,9 +395,51 @@ export async function exportOutOfDateAsXliff(client, language) {
   body += `  <file id="${escapeXml(language)}" original="docstatic-export">\n`;
   for (const u of units) {
     body += `    <unit id="${escapeXml(u.id)}">\n`;
-    body += `      <notes><note>title:${escapeXml(u.sourceTitle)}</note></notes>\n`;
+    // Build notes for metadata. Include title and any frontmatter keys we captured.
+    const notes = [];
+    notes.push(`title:${u.sourceTitle || u.targetTitle || ''}`);
+    // source metadata
+    if (u.sourceMeta) {
+      for (const k of Object.keys(u.sourceMeta)) {
+        if (k === 'title') continue;
+        notes.push(`${k}:${u.sourceMeta[k]}`);
+      }
+    }
+    // target metadata (prefix keys with 't.' to avoid collisions)
+    if (u.targetMeta) {
+      for (const k of Object.keys(u.targetMeta)) {
+        if (k === 'title') continue;
+        notes.push(`t.${k}:${u.targetMeta[k]}`);
+      }
+    }
+    body += `      <notes>`;
+    for (const n of notes) {
+      body += `<note>${escapeXmlWithLineBreaks(n)}</note>`;
+    }
+    body += `</notes>\n`;
     body += `      <segment>\n`;
-    body += `        <source>${escapeXmlWithLineBreaks(u.sourceBody)}</source>\n`;
+    // Ensure source is never empty: insert a visible placeholder if needed
+    let safeSource = (u.sourceBody || '').toString().trim() ? u.sourceBody : '(no source content)';
+    // Last-resort server-side attempt: read the local docs file by unit id
+    if (safeSource === '(no source content)' && typeof window === 'undefined') {
+      try {
+        const fs = require('fs');
+        const path = require('path');
+        const tryPaths = [path.join('docs', `${u.id}.mdx`), path.join('docs', `${u.id}.md`)];
+        for (const p of tryPaths) {
+          const abs = path.resolve(process.cwd(), p);
+          if (fs.existsSync(abs)) {
+            const raw = fs.readFileSync(abs, 'utf8');
+            const parsed = extractFrontmatter(raw);
+            safeSource = parsed.body || safeSource;
+            break;
+          }
+        }
+      } catch (e) {
+        // ignore
+      }
+    }
+    body += `        <source>${escapeXmlWithLineBreaks(safeSource)}</source>\n`;
     body += `        <target>${escapeXmlWithLineBreaks(u.targetBody)}</target>\n`;
     body += `      </segment>\n`;
     body += `    </unit>\n`;

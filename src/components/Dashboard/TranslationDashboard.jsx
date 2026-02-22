@@ -546,59 +546,10 @@ const TranslationDashboard = () => {
           </button>
           <button
             onClick={async () => {
-              setStatus('Exporting XLIFF...');
+              setStatus('Exporting via GraphQL...');
               try {
-                const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
-                if (isLocal) {
-                  // Local export server (dev)
-                  const base = `http://localhost:3001`;
-                  const resp = await fetch(`${base}/export-xliff?lang=${encodeURIComponent(selectedLanguage)}`);
-                  if (!resp.ok) throw new Error(`Server returned ${resp.status}`);
-                  const text = await resp.text();
-                  const blob = new Blob([text], { type: 'application/xml' });
-                  const url = URL.createObjectURL(blob);
-                  const a = document.createElement('a');
-                  a.href = url;
-                  a.download = `${selectedLanguage}-translations.xlf`;
-                  document.body.appendChild(a);
-                  a.click();
-                  a.remove();
-                  URL.revokeObjectURL(url);
-                  setStatus('Export complete');
-                  return;
-                }
-
-                // Try same-origin server first (cloud-hosted export server)
-                try {
-                  const resp = await fetch(`/export-xliff?lang=${encodeURIComponent(selectedLanguage)}`);
-                  if (resp.ok) {
-                    const text = await resp.text();
-                    const blob = new Blob([text], { type: 'application/xml' });
-                    const url = URL.createObjectURL(blob);
-                    const a = document.createElement('a');
-                    a.href = url;
-                    a.download = `${selectedLanguage}-translations.xlf`;
-                    document.body.appendChild(a);
-                    a.click();
-                    a.remove();
-                    URL.revokeObjectURL(url);
-                    setStatus('Export complete');
-                    return;
-                  }
-                } catch (e) {
-                  // ignore and fallback to client-side exporter
-                }
-
-                // Fallback: lazy-load client-side GitHub exporter for static hosts (GitHub Pages)
-                setStatus('Exporting via GitHub API (client)...');
-                const mod = await import('../../utils/exportClient');
-                const exporter = mod.exportFromGithubRepo || (mod.default && mod.default.exportFromGithubRepo);
-                if (!exporter) throw new Error('Client exporter not available');
-                const repo = window.prompt('Enter GitHub repo (owner/repo):');
-                if (!repo) throw new Error('Export cancelled');
-                const branch = window.prompt('Enter branch (default: main):') || 'main';
-                const token = window.prompt('Enter GitHub token (optional):') || undefined;
-                const text = await exporter({ repo, branch, lang: selectedLanguage, token });
+                const { client } = await import('../../../tina/__generated__/client');
+                const text = await xliffUtils.exportOutOfDateAsXliff(client, selectedLanguage);
                 const blob = new Blob([text], { type: 'application/xml' });
                 const url = URL.createObjectURL(blob);
                 const a = document.createElement('a');
