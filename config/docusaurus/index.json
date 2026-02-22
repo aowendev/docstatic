@@ -139,7 +139,13 @@
         "categoryLinkSource": "tag"
       }
     ],
-    "languageTabs": ["csharp", "curl", "nodejs", "javascript", "python"]
+    "languageTabs": [
+      "csharp",
+      "curl",
+      "nodejs",
+      "javascript",
+      "python"
+    ]
   },
   "prism": {
     "additionalLanguages": [
@@ -211,6 +217,12 @@
       "link": "doc",
       "docId": "wiki/readme",
       "position": "left"
+    },
+    {
+      "label": "Dashboard",
+      "link": "manualPath",
+      "manualPath": "/admin#/collections/edit/dashboards/index",
+      "position": "right"
     },
     {
       "label": "Language",

@@ -1,3 +1,10 @@
+/**
+ * Copyright (c) Source Solutions, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 // Attempts to determine the current editor identity.
 // Priority:
 // 1) Tina Cloud authenticated user (decode any JWT in localStorage for name/email)

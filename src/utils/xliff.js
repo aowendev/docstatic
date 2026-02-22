@@ -1,3 +1,10 @@
+/**
+ * Copyright (c) Source Solutions, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 // Minimal XLIFF 2.2 helpers for exporting/importing translation bundles
 // Exports title and body as JSON string in <target> so MDX/React content is preserved.
 
@@ -14,10 +21,11 @@ function escapeXml(unsafe) {
 function escapeXmlWithLineBreaks(unsafe) {
   if (unsafe === null || unsafe === undefined) return '';
   // Normalize newlines
-  let s = String(unsafe).replace(/\r\n?/g, '\n');
-  // Use placeholder to avoid escaping our <lb/> marker
+  let s = String(unsafe);
+  // Match all common newline sequences (CRLF, CR, LF) and normalize to a
+  // placeholder so we can safely escape XML and then restore XLIFF <lb/> tags.
   const LB = '___XLIFF_LB___';
-  s = s.replace(/\n/g, LB);
+  s = s.replace(/\r\n|\r|\n/g, LB);
   s = s
     .replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')
@@ -26,6 +34,76 @@ function escapeXmlWithLineBreaks(unsafe) {
     .replace(/'/g, '&apos;');
   // restore real XLIFF line-break tags
   return s.replace(new RegExp(LB, 'g'), '<lb/>');
+}
+
+// Escape XML but preserve real newline characters so XLIFF consumers
+// (and CAT tools like Swordfish) can round-trip actual line breaks.
+function escapeXmlPreserveNewlines(unsafe) {
+  if (unsafe === null || unsafe === undefined) return '';
+  return String(unsafe)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/\"/g, '&quot;')
+    .replace(/'/g, '&apos;');
+}
+
+// Annotate JSX component occurrences inside raw MDX/markdown strings so that
+// stringy prop values and simple children are included in the exported
+// source text (translators need to see prop text even when it's inside an
+// attribute). This works on plain strings and is intentionally conservative —
+// it only tries to extract simple quoted/templated prop values.
+function annotateJsxPropsAndChildren(text) {
+  if (!text || typeof text !== 'string') return text;
+
+  // regex to capture simple prop string forms: "..." or '...' or `{`...`}` or {"..."}
+  const propStringRe = /([a-zA-Z0-9_:-]+)=?(?:"([^"]*)"|'([^']*)'|\{`([^`]*)`\}|\{\s*"([^"]*)"\s*\}|\{\s*'([^']*)'\s*\})/g;
+
+  // 1) handle self-closing tags: <Comp prop="x" /> -> append annotation after tag
+  text = text.replace(/<([A-Z][\w]*)\b([^>]*)\/>/g, (m, name, propsPart) => {
+    const vals = [];
+    let p;
+    while ((p = propStringRe.exec(propsPart)) !== null) {
+      const v = p[2] || p[3] || p[4] || p[5] || p[6] || '';
+      if (v) vals.push(`${p[1]}:${v}`);
+    }
+    if (vals.length) return `${m} (${vals.join(', ')})`;
+    return m;
+  });
+
+  // 2) handle open tags with attributes: <Comp prop="x"> -> inject annotation immediately after the opening tag
+  text = text.replace(/<([A-Z][\w]*)\b([^>]*)>/g, (m, name, propsPart) => {
+    // skip closing tags which also match pattern (they start with </)
+    if (/^<\//.test(m)) return m;
+    // skip tags that are clearly HTML tags (lowercase) by checking the captured name
+    const vals = [];
+    let p;
+    while ((p = propStringRe.exec(propsPart)) !== null) {
+      const v = p[2] || p[3] || p[4] || p[5] || p[6] || '';
+      if (v) vals.push(`${p[1]}:${v}`);
+    }
+    if (vals.length) return `${m}${vals.length ? ' (' + vals.join(', ') + ')' : ''}`;
+    return m;
+  });
+
+  return text;
+}
+
+// Read an XML element while treating XLIFF <lb/> elements as newline characters.
+function readElementTextPreservingLineBreaks(el) {
+  if (!el) return '';
+  let s = '';
+  const nodes = Array.from(el.childNodes || []);
+  for (const node of nodes) {
+    if (node.nodeType === 3) {
+      s += node.nodeValue || '';
+    } else if (node.nodeType === 1) {
+      const tag = (node.tagName || '').toLowerCase();
+      if (tag === 'lb') s += '\n';
+      else s += node.textContent || '';
+    }
+  }
+  return s;
 }
 
 function extractFrontmatter(text) {
@@ -116,7 +194,15 @@ function serializeRichTextToMarkdown(node) {
           if (!attrs || !attrs.length) return '';
           return attrs.map(attr => {
             if (attr.value === true || attr.value === undefined) return attr.name;
+            // If value is a simple string, keep it quoted
+            if (typeof attr.value === 'string') return `${attr.name}=${JSON.stringify(attr.value)}`;
+            // If value looks like a small AST/MDX node, try to serialize its children
             try {
+              if (Array.isArray(attr.value)) return `${attr.name}={${attr.value.map(serializeRichTextToMarkdown).join('')}}`;
+              if (attr.value && typeof attr.value === 'object') {
+                if (attr.value.children) return `${attr.name}={${serializeRichTextToMarkdown(attr.value)}}`;
+                if (attr.value.value && typeof attr.value.value === 'string') return `${attr.name}=${JSON.stringify(attr.value.value)}`;
+              }
               return `${attr.name}=${JSON.stringify(attr.value)}`;
             } catch (e) {
               return `${attr.name}=${String(attr.value)}`;
@@ -279,6 +365,24 @@ export async function exportOutOfDateAsXliff(client, language) {
       sourceBody = src.body || '';
     }
 
+    // optional debug helper
+    const DEBUG = (typeof process !== 'undefined' && process && process.env && process.env.XLIFF_DEBUG === '1') || (typeof globalThis !== 'undefined' && globalThis && globalThis.__XLIFF_DEBUG);
+    const debug = (...args) => { if (DEBUG) try { console.error('[xliff-debug]', ...args); } catch (e) {} };
+
+    // emit debug info about which path we used to populate sourceBody
+    try {
+      if (DEBUG) {
+        const srcTypes = [];
+        if (src.raw) srcTypes.push('raw');
+        if (src._raw) srcTypes.push('_raw');
+        if (src._values) srcTypes.push('_values');
+        if (src.body && typeof src.body === 'object') srcTypes.push('body(AST)');
+        if (typeof src.body === 'string') srcTypes.push('body(string)');
+        if (src._sys && (src._sys.relativePath || src._sys.filename)) srcTypes.push('has _sys');
+        debug('unit', key, 'srcTypes=' + srcTypes.join(',') + ' sourceBodyLen=' + String(sourceBody || '').length);
+      }
+    } catch (e) {}
+
     // If we still have no source text, and we're running in Node (server-side),
     // try to read the raw MDX from the local filesystem as a fallback. This
     // keeps the browser/dashboard flow GraphQL-only while allowing server-side
@@ -385,7 +489,11 @@ export async function exportOutOfDateAsXliff(client, language) {
       // ignore
     }
 
-    units.push({ id: key, sourceTitle, targetTitle, sourceBody, targetBody, sourceMeta, targetMeta });
+    // capture an explicit source path (if available) so we can store it as
+    // a note for downstream tools (Swordfish may replace unit ids with
+    // numeric placeholders; keeping the original path in notes preserves it).
+    const sourcePath = (src && src._sys && (src._sys.relativePath || src._sys.filename)) || (typeof key === 'string' ? `docs/${key}.mdx` : '');
+    units.push({ id: key, sourceTitle, targetTitle, sourceBody, targetBody, sourceMeta, targetMeta, sourcePath });
   }
 
   // build XLIFF 2.2 document
@@ -397,6 +505,8 @@ export async function exportOutOfDateAsXliff(client, language) {
     body += `    <unit id="${escapeXml(u.id)}">\n`;
     // Build notes for metadata. Include title and any frontmatter keys we captured.
     const notes = [];
+    // store original source file path to aid tools that replace unit ids
+    notes.push(`path:${u.sourcePath || ''}`);
     notes.push(`title:${u.sourceTitle || u.targetTitle || ''}`);
     // source metadata
     if (u.sourceMeta) {
@@ -414,7 +524,7 @@ export async function exportOutOfDateAsXliff(client, language) {
     }
     body += `      <notes>`;
     for (const n of notes) {
-      body += `<note>${escapeXmlWithLineBreaks(n)}</note>`;
+      body += `<note>${escapeXmlPreserveNewlines(n)}</note>`;
     }
     body += `</notes>\n`;
     body += `      <segment>\n`;
@@ -439,8 +549,17 @@ export async function exportOutOfDateAsXliff(client, language) {
         // ignore
       }
     }
-    body += `        <source>${escapeXmlWithLineBreaks(safeSource)}</source>\n`;
-    body += `        <target>${escapeXmlWithLineBreaks(u.targetBody)}</target>\n`;
+    // Annotate JSX props/children so prop string values appear in the exported
+    // source text (they are appended as visible annotations and will be
+    // escaped into the XML target). This ensures translators can translate
+    // values stored inside component props.
+    try {
+      safeSource = annotateJsxPropsAndChildren(safeSource);
+    } catch (e) {
+      // ignore annotation failures and fall back to raw source
+    }
+    body += `        <source xml:space="preserve">${escapeXmlPreserveNewlines(safeSource)}</source>\n`;
+    body += `        <target xml:space="preserve">${escapeXmlPreserveNewlines(u.targetBody)}</target>\n`;
     body += `      </segment>\n`;
     body += `    </unit>\n`;
   }
@@ -460,8 +579,8 @@ export async function importXliffBundle(client, xliffText, language, onProgress)
     const sourceEl = unit.getElementsByTagName('source')[0];
     const targetEl = unit.getElementsByTagName('target')[0];
     const notes = unit.getElementsByTagName('note');
-    const titleNote = notes && notes[0] ? notes[0].textContent.replace(/^title:/, '') : null;
-    const rawTarget = targetEl ? targetEl.textContent : '';
+    const titleNote = notes && notes[0] ? readElementTextPreservingLineBreaks(notes[0]).replace(/^title:/, '') : null;
+    const rawTarget = targetEl ? readElementTextPreservingLineBreaks(targetEl) : '';
     // If XML target contains JSON (export previously stored JSON), parse it;
     // otherwise treat as markdown/plain text and send through as-is.
     let parsedBody = rawTarget;

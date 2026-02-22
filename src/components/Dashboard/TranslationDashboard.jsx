@@ -527,7 +527,7 @@ const TranslationDashboard = () => {
             }}
             disabled={loading}
           >
-            Delete Orphan Topics
+            Remove Orphan Topics
           </button>
           <button
             onClick={handleAddMissingTopics}
