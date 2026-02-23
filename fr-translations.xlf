@@ -34,15 +34,15 @@ The **Admonitions** component enables you to add styled admonitions.
 
 #### Examples:
 
-&lt;Admonition type=&quot;note&quot; title=&quot;Note&quot; children={Use note admonitions for supplementary information.}&gt; (type:note, title:Note)Use note admonitions for supplementary information.&lt;/Admonition&gt;
+(jsx:Admonition type=&quot;note&quot; title=&quot;Note&quot;) (type:note, title:Note)Use note admonitions for supplementary information.}(/jsx:Admonition)Use note admonitions for supplementary information.&lt;/Admonition&gt;
 
-&lt;Admonition type=&quot;tip&quot; title=&quot;Tip&quot; children={Use tip admonitions to provide advice that it&apos;s safe to ignore.}&gt; (type:tip, title:Tip)Use tip admonitions to provide advice that it&apos;s safe to ignore.&lt;/Admonition&gt;
+(jsx:Admonition type=&quot;tip&quot; title=&quot;Tip&quot;) (type:tip, title:Tip)Use tip admonitions to provide advice that it&apos;s safe to ignore.}(/jsx:Admonition)Use tip admonitions to provide advice that it&apos;s safe to ignore.&lt;/Admonition&gt;
 
-&lt;Admonition type=&quot;info&quot; title=&quot;Info&quot; children={Use info admonitions for information that&apos;s sufficiently important that it needs to stand apart from the rest of the text.}&gt; (type:info, title:Info)Use info admonitions for information that&apos;s sufficiently important that it needs to stand apart from the rest of the text.&lt;/Admonition&gt;
+(jsx:Admonition type=&quot;info&quot; title=&quot;Info&quot;) (type:info, title:Info)Use info admonitions for information that&apos;s sufficiently important that it needs to stand apart from the rest of the text.}(/jsx:Admonition)Use info admonitions for information that&apos;s sufficiently important that it needs to stand apart from the rest of the text.&lt;/Admonition&gt;
 
-&lt;Admonition type=&quot;caution&quot; title=&quot;Caution&quot; children={Use caution admonitions when something may prevent an intended action from being completed.}&gt; (type:caution, title:Caution)Use caution admonitions when something may prevent an intended action from being completed.&lt;/Admonition&gt;
+(jsx:Admonition type=&quot;caution&quot; title=&quot;Caution&quot;) (type:caution, title:Caution)Use caution admonitions when something may prevent an intended action from being completed.}(/jsx:Admonition)Use caution admonitions when something may prevent an intended action from being completed.&lt;/Admonition&gt;
 
-&lt;Admonition type=&quot;danger&quot; title=&quot;Warning&quot; children={Use warning admonitions when there is a risk of injury, security breach or data loss.}&gt; (type:danger, title:Warning)Use warning admonitions when there is a risk of injury, security breach or data loss.&lt;/Admonition&gt;</source>
+(jsx:Admonition type=&quot;danger&quot; title=&quot;Warning&quot;) (type:danger, title:Warning)Use warning admonitions when there is a risk of injury, security breach or data loss.}(/jsx:Admonition)Use warning admonitions when there is a risk of injury, security breach or data loss.&lt;/Admonition&gt;</source>
         <target xml:space="preserve"># Admonitions
 
 Le composant **Admonitions** vous permet d&apos;ajouter des avertissements stylisés.
@@ -70,7 +70,7 @@ Le composant **Admonitions** vous permet d&apos;ajouter des avertissements styli
       <segment>
         <source xml:space="preserve">This section covers the more advanced features of DocStatic including integrations:
 
-&lt;DocCardList title=&quot;Advanced guides&quot;&gt; (title:Advanced guides)&lt;/DocCardList&gt;
+(jsx:DocCardList title=&quot;Advanced guides&quot;) (title:Advanced guides)(/jsx:DocCardList)
 
 Developers who are interested in extending the functionality of DocStatic should refer to the  Guides and Advanced Guides in the Docusaurus documentation.</source>
         <target xml:space="preserve">Cette section couvre les fonctionnalités plus avancées de DocStatic, y compris les intégrations :
@@ -95,7 +95,7 @@ Any content placed in the folder will be available from the root of the publishe
 
 DocStatic provides two ways to add images to topics. For inline images you can click the **Image** icon to place an image in a topic. This works best for icons () and small images. Icons should be stored as pre-scaled SVG files. These will be inverted and have their color space rotated by 180° in dark mode.
 
-&lt;Admonition type=&quot;tip&quot; title=&quot;Tip&quot; children={You can use Librsvg to scale SVGs. For example, rsvg-convert example.svg -h 12 -f svg -o example.svg sets a height of 12 points.}&gt; (type:tip, title:Tip)You can use Librsvg to scale SVGs. For example, rsvg-convert example.svg -h 12 -f svg -o example.svg sets a height of 12 points.&lt;/Admonition&gt;
+(jsx:Admonition type=&quot;tip&quot; title=&quot;Tip&quot;) (type:tip, title:Tip)You can use Librsvg to scale SVGs. For example, rsvg-convert example.svg -h 12 -f svg -o example.svg sets a height of 12 points.}(/jsx:Admonition)You can use Librsvg to scale SVGs. For example, rsvg-convert example.svg -h 12 -f svg -o example.svg sets a height of 12 points.&lt;/Admonition&gt;
 
 For larger images, it&apos;s better to use the Figure component.
 
@@ -107,7 +107,7 @@ For larger images, it&apos;s better to use the Figure component.
 
 #### Example
 
-&lt;Figure img=&quot;/img/docStaticDemo.jpg&quot; caption=&quot;Example Figure&quot;&gt; (img:/img/docStaticDemo.jpg, caption:Example Figure)&lt;/Figure&gt;
+(jsx:Figure img=&quot;/img/docStaticDemo.jpg&quot; caption=&quot;Example Figure&quot;) (img:/img/docStaticDemo.jpg, caption:Example Figure)(/jsx:Figure)
 
 The figure resizes based on the view window. Clicking it will open it at maximum size in a light box.
 
@@ -215,7 +215,7 @@ Pour plus d&apos;informations sur les commandes de classement, voir CLI dans la 
       <segment>
         <source xml:space="preserve">## Passthrough component
 
-&lt;Passthrough summary=&quot;Check List&quot; string=&quot;- [X] 1\n^- [X] 2\n^^- [X] 3\n- [ ] 4&quot;&gt; (summary:Check List, string:- [X] 1\n^- [X] 2\n^^- [X] 3\n- [ ] 4)&lt;/Passthrough&gt;
+(jsx:Passthrough summary=&quot;Check List&quot; string=&quot;- [X] 1\n^- [X] 2\n^^- [X] 3\n- [ ] 4&quot;) (summary:Check List, string:- [X] 1\n^- [X] 2\n^^- [X] 3\n- [ ] 4)(/jsx:Passthrough)
 
 ## GFM list
 
@@ -267,7 +267,7 @@ DocStatic provides two ways to include code in your documentation. Both support 
 
 #### Example:
 
-&lt;CodeSnippet title=&quot;Example Title&quot; language=&quot;xml&quot; filepath=&quot;example.xml&quot;&gt; (title:Example Title, language:xml, filepath:example.xml)&lt;/CodeSnippet&gt;
+(jsx:CodeSnippet title=&quot;Example Title&quot; language=&quot;xml&quot; filepath=&quot;example.xml&quot;) (title:Example Title, language:xml, filepath:example.xml)(/jsx:CodeSnippet)
 
 The advantage of using code snippets is that there is a physical file that can be unit tested.</source>
         <target xml:space="preserve"># Blocs de code et extraits
@@ -312,7 +312,7 @@ The **Comment** component enables you to add comments that are visible in the CM
 
 #### Example
 
-&lt;Comment comment=&quot;This comment is invisible in the published website.&quot; reviewer=&quot;AOwenDev&quot;&gt; (comment:This comment is invisible in the published website., reviewer:AOwenDev)&lt;/Comment&gt;</source>
+(jsx:Comment comment=&quot;This comment is invisible in the published website.&quot; reviewer=&quot;AOwenDev&quot;) (comment:This comment is invisible in the published website., reviewer:AOwenDev)(/jsx:Comment)</source>
         <target xml:space="preserve"></target>
       </segment>
     </unit>
@@ -358,7 +358,7 @@ Conditions are set at the topic level. The language is determined by the page la
 
 ### Example
 
-&lt;ConditionalText action=&quot;show&quot; conditions={production} languages={} logic=&quot;any&quot; languageLogic=&quot;any&quot; requireBothConditions=false fallback=&quot;&quot; children={The production condition is set on this page.}&gt; (action:show, logic:any, languageLogic:any)The production condition is set on this page.&lt;/ConditionalText&gt;</source>
+(jsx:ConditionalText action=&quot;show&quot; conditions={production} languages={} logic=&quot;any&quot; languageLogic=&quot;any&quot; requireBothConditions=false fallback=&quot;&quot;) (action:show, logic:any, languageLogic:any)The production condition is set on this page.}(/jsx:ConditionalText)The production condition is set on this page.&lt;/ConditionalText&gt;</source>
         <target xml:space="preserve"># Texte conditionnel
 
 Le composant **Conditions** vous permet d&apos;envelopper du texte dans un ensemble de conditions qui déterminent quand il doit être affiché.
@@ -493,7 +493,7 @@ Pour un exemple de la façon d&apos;inclure des liens d&apos;aide contextuelle d
 
 In DocStatic, you write your content as Markdown in files called “Topics”. Typically, you will create each topic yourself, although certain types of docs may have autogenerated topics.
 
-&lt;Admonition type=&quot;note&quot; title=&quot;Note&quot; children={GraphQL and OpenAPI docs are autogenerated from a server or schema.}&gt; (type:note, title:Note)GraphQL and OpenAPI docs are autogenerated from a server or schema.&lt;/Admonition&gt;
+(jsx:Admonition type=&quot;note&quot; title=&quot;Note&quot;) (type:note, title:Note)GraphQL and OpenAPI docs are autogenerated from a server or schema.}(/jsx:Admonition)GraphQL and OpenAPI docs are autogenerated from a server or schema.&lt;/Admonition&gt;
 
 To create a topic:
 
@@ -550,7 +550,7 @@ Pour plus d&apos;informations, voir Créer un doc dans la documentation de Docus
       <segment>
         <source xml:space="preserve">DocStatic adds dashboard functionality to TinaCMS. Tina generates a GraphQL API using the filesystem in the Git repository as the database. Dashboards query the API (locally or in the cloud) and present actionable reports directly in the CMS. Dashboard functionality is currently considered beta. The functionality is fully tested, but the user interface is provisional and requires refinement. Dashboards update when the page is updated. If another user has made changes since you viewed a dashboard, you can click **Refresh** to update the dashboard.
 
-&lt;Admonition type=&quot;note&quot; title=&quot;Note&quot; children={Depending on the amount of content in the system, some dashboards may take some time to load. These dashboards will typically update slightly faster when running locally.}&gt; (type:note, title:Note)Depending on the amount of content in the system, some dashboards may take some time to load. These dashboards will typically update slightly faster when running locally.&lt;/Admonition&gt;
+(jsx:Admonition type=&quot;note&quot; title=&quot;Note&quot;) (type:note, title:Note)Depending on the amount of content in the system, some dashboards may take some time to load. These dashboards will typically update slightly faster when running locally.}(/jsx:Admonition)Depending on the amount of content in the system, some dashboards may take some time to load. These dashboards will typically update slightly faster when running locally.&lt;/Admonition&gt;
 
 ## Viewing the dashboards
 
@@ -711,7 +711,7 @@ Click **Preview** to view your diagram.
 
 
 
-&lt;Admonition type=&quot;note&quot; title=&quot;Note&quot; children={Currently, zenUML diagrams are not supported and mind map diagrams may produce unusual behavior. Not all diagram types can be previewed in the CMS.}&gt; (type:note, title:Note)Currently, zenUML diagrams are not supported and mind map diagrams may produce unusual behavior. Not all diagram types can be previewed in the CMS.&lt;/Admonition&gt;
+(jsx:Admonition type=&quot;note&quot; title=&quot;Note&quot;) (type:note, title:Note)Currently, zenUML diagrams are not supported and mind map diagrams may produce unusual behavior. Not all diagram types can be previewed in the CMS.}(/jsx:Admonition)Currently, zenUML diagrams are not supported and mind map diagrams may produce unusual behavior. Not all diagram types can be previewed in the CMS.&lt;/Admonition&gt;
 
 For more information, refer to Mermaid in the TinaCMS documentation.
 
@@ -747,11 +747,11 @@ Pour plus d&apos;informations sur la thématisation de Mermaid, voir Diagrammes 
 
 The docs feature provides you with a way to organize Markdown files in a hierarchical format.
 
-&lt;Admonition type=&quot;info&quot; title=&quot;Info&quot; children={Refer to Docs Plugin API Reference in the Docusaurus documentation for an exhaustive list of options.}&gt; (type:info, title:Info)Refer to Docs Plugin API Reference in the Docusaurus documentation for an exhaustive list of options.&lt;/Admonition&gt;
+(jsx:Admonition type=&quot;info&quot; title=&quot;Info&quot;) (type:info, title:Info)Refer to Docs Plugin API Reference in the Docusaurus documentation for an exhaustive list of options.}(/jsx:Admonition)Refer to Docs Plugin API Reference in the Docusaurus documentation for an exhaustive list of options.&lt;/Admonition&gt;
 
 For information on configuring docs-only or blog-only modes, refer to Docs introduction in the Docusaurus documentation.
 
-&lt;DocCardList title=&quot;Docs&quot;&gt; (title:Docs)&lt;/DocCardList&gt;</source>
+(jsx:DocCardList title=&quot;Docs&quot;) (title:Docs)(/jsx:DocCardList)</source>
         <target xml:space="preserve"># Docs introduction
 
 La fonctionnalité docs permet d&apos;organiser les fichiers Markdown dans un format hiérarchique.
@@ -785,9 +785,9 @@ The **Footnotes** component enables you add inline footnotes to your text.
 
 #### Example
 
-Markdown is a lightweight markup language&lt;Footnote summary=&quot;1&quot; children={ Markdown uses simple syntax to achieve text formatting.}&gt; (summary:1) Markdown uses simple syntax to achieve text formatting.&lt;/Footnote&gt; created by John Gruber&lt;Footnote summary=&quot;2&quot; children={John Gruber created Markdown in 2004.}&gt; (summary:2)John Gruber created Markdown in 2004.&lt;/Footnote&gt;, now widely used in writing&lt;Footnote summary=&quot;3&quot; children={Many platforms such as GitHub, Stack Overflow, and blog platforms support Markdown.}&gt; (summary:3)Many platforms such as GitHub, Stack Overflow, and blog platforms support Markdown.&lt;/Footnote&gt;.
+Markdown is a lightweight markup language(jsx:Footnote summary=&quot;1&quot;) (summary:1) Markdown uses simple syntax to achieve text formatting.}(/jsx:Footnote) Markdown uses simple syntax to achieve text formatting.&lt;/Footnote&gt; created by John Gruber(jsx:Footnote summary=&quot;2&quot;) (summary:2)John Gruber created Markdown in 2004.}(/jsx:Footnote)John Gruber created Markdown in 2004.&lt;/Footnote&gt;, now widely used in writing(jsx:Footnote summary=&quot;3&quot;) (summary:3)Many platforms such as GitHub, Stack Overflow, and blog platforms support Markdown.}(/jsx:Footnote)Many platforms such as GitHub, Stack Overflow, and blog platforms support Markdown.&lt;/Footnote&gt;.
 
-&lt;Admonition type=&quot;note&quot; title=&quot;Note&quot; children={If two footnotes have the same content, they will only appear once in the footer and will share a number.}&gt; (type:note, title:Note)If two footnotes have the same content, they will only appear once in the footer and will share a number.&lt;/Admonition&gt;</source>
+(jsx:Admonition type=&quot;note&quot; title=&quot;Note&quot;) (type:note, title:Note)If two footnotes have the same content, they will only appear once in the footer and will share a number.}(/jsx:Admonition)If two footnotes have the same content, they will only appear once in the footer and will share a number.&lt;/Admonition&gt;</source>
         <target xml:space="preserve"># Notes de bas de page
 
 Il existe une extension de Markdown qui fournit des notes de bas de page, mais sa mise en œuvre n&apos;est pas cohérente et elle sépare le contenu du numéro. Par exemple :
@@ -1120,13 +1120,13 @@ If you get a “command not found” message or similar error:
 
 
 
-&lt;Admonition type=&quot;note&quot; title=&quot;Note&quot; children={On macOS or Linux, you might need to prefix the command with sudo to grant permission:
+(jsx:Admonition type=&quot;note&quot; title=&quot;Note&quot;) (type:note, title:Note)On macOS or Linux, you might need to prefix the command with sudo to grant permission:
 
-}&gt; (type:note, title:Note)On macOS or Linux, you might need to prefix the command with sudo to grant permission:
+}(/jsx:Admonition)On macOS or Linux, you might need to prefix the command with sudo to grant permission:
 
 &lt;/Admonition&gt;
 
-&lt;Admonition type=&quot;note&quot; title=&quot;Note&quot; children={On Windows, you don’t use sudo. Just open your terminal as Administrator and run the command.}&gt; (type:note, title:Note)On Windows, you don’t use sudo. Just open your terminal as Administrator and run the command.&lt;/Admonition&gt;
+(jsx:Admonition type=&quot;note&quot; title=&quot;Note&quot;) (type:note, title:Note)On Windows, you don’t use sudo. Just open your terminal as Administrator and run the command.}(/jsx:Admonition)On Windows, you don’t use sudo. Just open your terminal as Administrator and run the command.&lt;/Admonition&gt;
 
 Next: Fork the DocStatic repository
 
@@ -1542,7 +1542,7 @@ The Glossary Term will use the language version for the page it is displayed on.
 
 #### Example
 
-&lt;GlossaryTerm termKey=&quot;single-sourcing&quot; initcap&gt; (termKey:single-sourcing)&lt;/GlossaryTerm&gt;</source>
+(jsx:GlossaryTerm termKey=&quot;single-sourcing&quot; initcap) (termKey:single-sourcing)(/jsx:GlossaryTerm)</source>
         <target xml:space="preserve"># Glossaire
 
 Le composant **Terme du glossaire** vous permet de saisir une clé qui correspond à un terme localisé et à une description. Le terme est souligné. Le passage du curseur sur le terme fait apparaître le curseur d&apos;aide, et le survol affiche la description sous forme d&apos;infobulle. Sur les appareils à écran tactile, le fait d&apos;appuyer sur le terme affiche une définition dans une fenêtre contextuelle.
@@ -1576,7 +1576,7 @@ Le terme du glossaire utilisera la version linguistique de la page sur laquelle 
       <segment>
         <source xml:space="preserve">Learn about the most important DocStatic concepts.
 
-&lt;DocCardList title=&quot;Guides&quot;&gt; (title:Guides)&lt;/DocCardList&gt;</source>
+(jsx:DocCardList title=&quot;Guides&quot;) (title:Guides)(/jsx:DocCardList)</source>
         <target xml:space="preserve">Découvrez les concepts les plus importants de DocStatic.
 
 &lt;DocCardList title=&quot;Guides&quot;&gt;&lt;/DocCardList&gt;</target>
@@ -1752,13 +1752,13 @@ If you get a “command not found” message or similar error, open a terminal (
 
 
 
-&lt;Admonition type=&quot;note&quot; title=&quot;Note&quot; children={On macOS or Linux, you might need to prefix the command with sudo to grant permission:
+(jsx:Admonition type=&quot;note&quot; title=&quot;Note&quot;) (type:note, title:Note)On macOS or Linux, you might need to prefix the command with sudo to grant permission:
 
-}&gt; (type:note, title:Note)On macOS or Linux, you might need to prefix the command with sudo to grant permission:
+}(/jsx:Admonition)On macOS or Linux, you might need to prefix the command with sudo to grant permission:
 
 &lt;/Admonition&gt;
 
-&lt;Admonition type=&quot;note&quot; title=&quot;Note&quot; children={On Windows, you don’t use sudo. Just open your terminal as Administrator and run the command.}&gt; (type:note, title:Note)On Windows, you don’t use sudo. Just open your terminal as Administrator and run the command.&lt;/Admonition&gt;
+(jsx:Admonition type=&quot;note&quot; title=&quot;Note&quot;) (type:note, title:Note)On Windows, you don’t use sudo. Just open your terminal as Administrator and run the command.}(/jsx:Admonition)On Windows, you don’t use sudo. Just open your terminal as Administrator and run the command.&lt;/Admonition&gt;
 
 
 
@@ -2067,11 +2067,11 @@ Les développeurs trouveront toutes les informations dont ils ont besoin pour co
 
 MDX has a built-in plugin system that can be used to customize how Markdown files are parsed and transformed to JSX. However, if you change the way Markdown behaves, you must also reflect these changes in the CMS.
 
-&lt;Admonition type=&quot;danger&quot; title=&quot;Warning&quot; children={MDX plugins that change the behavior of standard Markdown components may break compatibility with the CMS. Proceed at your own risk.}&gt; (type:danger, title:Warning)MDX plugins that change the behavior of standard Markdown components may break compatibility with the CMS. Proceed at your own risk.&lt;/Admonition&gt;
+(jsx:Admonition type=&quot;danger&quot; title=&quot;Warning&quot;) (type:danger, title:Warning)MDX plugins that change the behavior of standard Markdown components may break compatibility with the CMS. Proceed at your own risk.}(/jsx:Admonition)MDX plugins that change the behavior of standard Markdown components may break compatibility with the CMS. Proceed at your own risk.&lt;/Admonition&gt;
 
 For more information, refer to MDX Plugins in the Docusaurus documentation.
 
-&lt;Admonition type=&quot;note&quot; title=&quot;Note&quot; children={DocStatic preinstalls and configures the math plugins for you.}&gt; (type:note, title:Note)DocStatic preinstalls and configures the math plugins for you.&lt;/Admonition&gt;</source>
+(jsx:Admonition type=&quot;note&quot; title=&quot;Note&quot;) (type:note, title:Note)DocStatic preinstalls and configures the math plugins for you.}(/jsx:Admonition)DocStatic preinstalls and configures the math plugins for you.&lt;/Admonition&gt;</source>
         <target xml:space="preserve"># Plugins MDX
 
 MDX dispose d&apos;un système de plugins intégré qui peut être utilisé pour personnaliser la façon dont les fichiers Markdown sont analysés et transformés en JSX. Cependant, si vous modifiez la manière dont Markdown se comporte, vous devez également refléter ces changements dans le CMS.
@@ -2157,9 +2157,9 @@ Front matter is used to add metadata to your Markdown file. It&apos;s provided a
 
 #### Example:
 
-&lt;Details summary=&quot;Toggle me.&quot; children={This is the detailed content.
+(jsx:Details summary=&quot;Toggle me.&quot;) (summary:Toggle me.)This is the detailed content.
 
-You can use Markdown here including **bold** and _italic_ text, and inline links.}&gt; (summary:Toggle me.)This is the detailed content.
+You can use Markdown here including **bold** and _italic_ text, and inline links.}(/jsx:Details)This is the detailed content.
 
 You can use Markdown here including **bold** and _italic_ text, and inline links.&lt;/Details&gt;
 
@@ -2174,7 +2174,7 @@ For more information, refer to Markdown Features in the Docusarus documentation.
 
 #### Example:
 
-&lt;DocCardList title=&quot;Markdown Features&quot;&gt; (title:Markdown Features)&lt;/DocCardList&gt;</source>
+(jsx:DocCardList title=&quot;Markdown Features&quot;) (title:Markdown Features)(/jsx:DocCardList)</source>
         <target xml:space="preserve"># Fonctionnalités de Markdown
 
 DocStatic utilise Markdown comme principal format de création de contenu. Vous pouvez l&apos;apprendre en dix minutes. Mais vous n&apos;avez pas à le faire car le CMS fournit un environnement d&apos;édition de texte riche complet pour les métadonnées, Markdown et les composants React.
@@ -2314,7 +2314,7 @@ Write inline math equations by wrapping LaTeX equations between $:
 
 
 
-&lt;Passthrough type=&quot;markdown&quot; string=&quot;Let $f\\colon[a,b] \\to \\R$ be Riemann integrable. Let $F\\colon[a,b]\\to\\R$ be $F(x)=\\int_{a}^{x} f(t)\\,dt$. Then $F$ is continuous, and at all $x$ such that $f$ is continuous at $x$, $F$ is differentiable at $x$ with $F&apos;(x)=f(x)$.&quot; summary=&quot;inline equation&quot;&gt; (type:markdown, string:Let $f\\colon[a,b] \\to \\R$ be Riemann integrable. Let $F\\colon[a,b]\\to\\R$ be $F(x)=\\int_{a}^{x} f(t)\\,dt$. Then $F$ is continuous, and at all $x$ such that $f$ is continuous at $x$, $F$ is differentiable at $x$ with $F&apos;(x)=f(x)$., summary:inline equation)&lt;/Passthrough&gt;
+(jsx:Passthrough type=&quot;markdown&quot; string=&quot;Let $f\\colon[a,b] \\to \\R$ be Riemann integrable. Let $F\\colon[a,b]\\to\\R$ be $F(x) (type:markdown)=\\int_{a}^{x} f(t)\\,dt$. Then $F$ is continuous, and at all $x$ such that $f$ is continuous at $x$, $F$ is differentiable at $x$ with $F&apos;(x)=f(x)$.&quot; summary=&quot;inline equation&quot;)(/jsx:Passthrough)
 
 ### Blocks
 
@@ -2322,7 +2322,7 @@ For equation block or display mode, use line breaks and $$:
 
 
 
-&lt;Passthrough type=&quot;markdown&quot; string=&quot;\n$$\nI = \\int_0^{2\\pi} \\sin(x)\\,dx\n$$\n&quot; summary=&quot;block equation&quot;&gt; (type:markdown, string:\n$$\nI = \\int_0^{2\\pi} \\sin(x)\\,dx\n$$\n, summary:block equation)&lt;/Passthrough&gt;
+(jsx:Passthrough type=&quot;markdown&quot; string=&quot;\n$$\nI = \\int_0^{2\\pi} \\sin(x) (type:markdown)\\,dx\n$$\n&quot; summary=&quot;block equation&quot;)(/jsx:Passthrough)
 
 For more information, refer to the KaTeX documentation.</source>
         <target xml:space="preserve"># Équations mathématiques
@@ -2394,7 +2394,7 @@ The teams-review.yml and teams-translate.yml actions work like the Slack version
 7. Select a **Team** and **Channel** from the lists and click **Create Flow**.
 8. Copy the MS_TEAMS_HTTP_POST_URL and store it as a secret in GitHub and click **Done**.
 
-&lt;Admonition type=&quot;tip&quot; title=&quot;Tip&quot; children={You can use the Test notifications GitHub action to test your connections.}&gt; (type:tip, title:Tip)You can use the Test notifications GitHub action to test your connections.&lt;/Admonition&gt;</source>
+(jsx:Admonition type=&quot;tip&quot; title=&quot;Tip&quot;) (type:tip, title:Tip)You can use the Test notifications GitHub action to test your connections.}(/jsx:Admonition)You can use the Test notifications GitHub action to test your connections.&lt;/Admonition&gt;</source>
         <target xml:space="preserve"># Notifications
 
 DocStatic utilise GitHub Actions pour envoyer des notifications de flux de travail. Des exemples de notifications de révision et de traduction sont inclus dans le dossier .github/workflows/. Une configuration dans GitHub est nécessaire pour les activer. Vous pouvez également les utiliser comme point de départ pour développer vos propres notifications personnalisées.
@@ -2506,7 +2506,7 @@ The **Snippet** component enables you to reuse content across your documentation
 
 #### Example
 
-&lt;Snippet filepath=&quot;example.mdx&quot;&gt; (filepath:example.mdx)&lt;/Snippet&gt;</source>
+(jsx:Snippet filepath=&quot;example.mdx&quot;) (filepath:example.mdx)(/jsx:Snippet)</source>
         <target xml:space="preserve"># Snippets
 
 Le composant **Snippet** vous permet de réutiliser du contenu dans votre documentation. Un extrait est un morceau de contenu qui peut être inséré dans une ou plusieurs rubriques. Lorsque vous apportez des modifications à l&apos;extrait, elles sont apportées partout où l&apos;extrait est utilisé. Cela peut s&apos;avérer particulièrement utile pour les textes passe-partout. Les snippets ont leur propre collection dans le CMS et sont contenus dans une partie distincte du référentiel.
@@ -2665,19 +2665,19 @@ Pour plus d&apos;informations, voir Style et mise en page dans la documentation 
 5. (Optional) Make it the **Default** tab.
 4. **Save** your changes.
 
-&lt;Admonition type=&quot;danger&quot; title=&quot;Warning&quot; children={The CMS can lose context when editing tabs. You should save often. The CMS can get into a position where it cannot find the context of the tab. In this case click the **Raw Markdown** icon and make changes directly in the Markdown. Save and then return to the rich text editor.}&gt; (type:danger, title:Warning)The CMS can lose context when editing tabs. You should save often. The CMS can get into a position where it cannot find the context of the tab. In this case click the **Raw Markdown** icon and make changes directly in the Markdown. Save and then return to the rich text editor.&lt;/Admonition&gt;
+(jsx:Admonition type=&quot;danger&quot; title=&quot;Warning&quot;) (type:danger, title:Warning)The CMS can lose context when editing tabs. You should save often. The CMS can get into a position where it cannot find the context of the tab. In this case click the **Raw Markdown** icon and make changes directly in the Markdown. Save and then return to the rich text editor.}(/jsx:Admonition)The CMS can lose context when editing tabs. You should save often. The CMS can get into a position where it cannot find the context of the tab. In this case click the **Raw Markdown** icon and make changes directly in the Markdown. Save and then return to the rich text editor.&lt;/Admonition&gt;
 
 #### Example:
 
-&lt;Tabs children={&lt;TabItem label=&quot;Apple&quot; value=&quot;apple&quot; children={This is an apple 🍎}&gt; (label:Apple, value:apple)This is an apple 🍎&lt;/TabItem&gt;
+(jsx:Tabs This is an apple 🍎&lt;/TabItem&gt; (jsx:TabItem label=&quot;Orange&quot; value=&quot;orange&quot;) (label:Orange, value:orange)This is an orange 🍊(/jsx:TabItem)This is an orange 🍊&lt;/TabItem&gt; (jsx:TabItem label=&quot;Banana&quot; value=&quot;banana&quot;) (label:Banana, value:banana)This is a banana 🍌(/jsx:TabItem)This is a banana 🍌&lt;/TabItem&gt;})(jsx:TabItem label=&quot;Apple&quot; value=&quot;apple&quot;) (label:Apple, value:apple)This is an apple 🍎(/jsx:TabItem)This is an apple 🍎&lt;/TabItem&gt;
 
-&lt;TabItem label=&quot;Orange&quot; value=&quot;orange&quot; children={This is an orange 🍊}&gt; (label:Orange, value:orange)This is an orange 🍊&lt;/TabItem&gt;
+(jsx:TabItem label=&quot;Orange&quot; value=&quot;orange&quot;) (label:Orange, value:orange)This is an orange 🍊(/jsx:TabItem)This is an orange 🍊&lt;/TabItem&gt;
 
-&lt;TabItem label=&quot;Banana&quot; value=&quot;banana&quot; children={This is a banana 🍌}&gt; (label:Banana, value:banana)This is a banana 🍌&lt;/TabItem&gt;}&gt;&lt;TabItem label=&quot;Apple&quot; value=&quot;apple&quot; children={This is an apple 🍎}&gt; (label:Apple, value:apple)This is an apple 🍎&lt;/TabItem&gt;
+(jsx:TabItem label=&quot;Banana&quot; value=&quot;banana&quot;) (label:Banana, value:banana)This is a banana 🍌(/jsx:TabItem)This is a banana 🍌&lt;/TabItem&gt;}(/jsx:Tabs)(jsx:TabItem label=&quot;Apple&quot; value=&quot;apple&quot;) (label:Apple, value:apple)This is an apple 🍎}(/jsx:TabItem)This is an apple 🍎&lt;/TabItem&gt;
 
-&lt;TabItem label=&quot;Orange&quot; value=&quot;orange&quot; children={This is an orange 🍊}&gt; (label:Orange, value:orange)This is an orange 🍊&lt;/TabItem&gt;
+(jsx:TabItem label=&quot;Orange&quot; value=&quot;orange&quot;) (label:Orange, value:orange)This is an orange 🍊}(/jsx:TabItem)This is an orange 🍊&lt;/TabItem&gt;
 
-&lt;TabItem label=&quot;Banana&quot; value=&quot;banana&quot; children={This is a banana 🍌}&gt; (label:Banana, value:banana)This is a banana 🍌&lt;/TabItem&gt;&lt;/Tabs&gt;
+(jsx:TabItem label=&quot;Banana&quot; value=&quot;banana&quot;) (label:Banana, value:banana)This is a banana 🍌}(/jsx:TabItem)This is a banana 🍌&lt;/TabItem&gt;&lt;/Tabs&gt;
 
 For more information, refer to Tabs in the Docusaurus documentation.</source>
         <target xml:space="preserve">Le composant **Tabs** vous permet d&apos;ajouter des onglets à votre sujet.
@@ -2774,7 +2774,7 @@ The Variable component enables you to place a localized variable in your text.
 
 #### Example
 
-&lt;VariableSet variableSelection=&quot;writing-terms|single-sourcing&quot; initcap&gt; (variableSelection:writing-terms|single-sourcing)&lt;/VariableSet&gt;</source>
+(jsx:VariableSet variableSelection=&quot;writing-terms|single-sourcing&quot; initcap) (variableSelection:writing-terms|single-sourcing)(/jsx:VariableSet)</source>
         <target xml:space="preserve"></target>
       </segment>
     </unit>
@@ -2800,7 +2800,7 @@ For more information, refer to Autogenerated in the Docusaurus documenation.
 ## Create a wiki page in the CMS
 
 1. Select the **Wiki Pages** collection.
-2. Click **Add File**.&lt;Figure img=&quot;/img/docs/wiki-pages-add-wiki.png&quot; caption=&quot;TinaCMS. A callout highlights the Wiki option and the Add file option.&quot;&gt; (img:/img/docs/wiki-pages-add-wiki.png, caption:TinaCMS. A callout highlights the Wiki option and the Add file option.)&lt;/Figure&gt;
+2. Click **Add File**.(jsx:Figure img=&quot;/img/docs/wiki-pages-add-wiki.png&quot; caption=&quot;TinaCMS. A callout highlights the Wiki option and the Add file option.&quot;) (img:/img/docs/wiki-pages-add-wiki.png, caption:TinaCMS. A callout highlights the Wiki option and the Add file option.)(/jsx:Figure)
 3. Give your new wiki page a **Title**.
 4. Enter the content.
 5. Click **Save**.</source>

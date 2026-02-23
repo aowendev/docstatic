@@ -89,6 +89,130 @@ function annotateJsxPropsAndChildren(text) {
   return text;
 }
 
+// Also annotate marker-form components (jsx:... ) so prop annotations appear
+// when we converted angle-brackets to marker form for CAT tools.
+function annotateMarkerProps(text) {
+  if (!text || typeof text !== 'string') return text;
+  const propStringRe = /([a-zA-Z0-9_:-]+)=?(?:"([^"]*)"|'([^']*)'|\{`([^`]*)`\}|\{\s*"([^"}]*)"\s*\}|\{\s*'([^'}]*)'\s*\})/g;
+  // self-closing marker: (jsx:Name prop="x"/)
+  text = text.replace(/\(jsx:([A-Z][\w-]*)\b([^\)]*)\/\)/g, (m, name, propsPart) => {
+    const vals = [];
+    let p;
+    while ((p = propStringRe.exec(propsPart)) !== null) {
+      const v = p[2] || p[3] || p[4] || p[5] || p[6] || '';
+      if (v) vals.push(`${p[1]}:${v}`);
+    }
+    if (vals.length) return `${m} (${vals.join(', ')})`;
+    return m;
+  });
+  // open marker: (jsx:Name prop="x") -> append annotation after marker
+  text = text.replace(/\(jsx:([A-Z][\w-]*)\b([^\)]*)\)/g, (m, name, propsPart) => {
+    // skip closing markers which look like (/jsx:Name)
+    if (/^\(\/jsx:/.test(m)) return m;
+    const vals = [];
+    let p;
+    while ((p = propStringRe.exec(propsPart)) !== null) {
+      const v = p[2] || p[3] || p[4] || p[5] || p[6] || '';
+      if (v) vals.push(`${p[1]}:${v}`);
+    }
+    if (vals.length) return `${m}${vals.length ? ' (' + vals.join(', ') + ')' : ''}`;
+    return m;
+  });
+  return text;
+}
+
+// Convert angle-bracket JSX/MDX to a robust marker form that begins with
+// `(jsx:` so CAT tools like Swordfish won't treat tags as HTML and drop the
+// component name. Examples:
+//   <Figure img="x" caption="y" />  -> (jsx:Figure img="x" caption="y"/)
+//   <Comp prop="v">child</Comp>     -> (jsx:Comp prop="v")child(/jsx:Comp)
+function angleToMarker(source) {
+  if (!source || typeof source !== 'string') return source;
+  // Robust pass: convert tags that include a children={...} prop where the
+  // prop value may contain nested braces or newlines. Regex alone can fail
+  // on nested braces, so scan for balanced braces and replace each occurrence.
+  source = (function scanChildrenProps(s) {
+    let out = '';
+    let idx = 0;
+    while (true) {
+      const m = s.slice(idx).match(/<([A-Z][\w-]*)\b[^>]*?\bchildren=\{/);
+      if (!m) { out += s.slice(idx); break; }
+      const matchIndex = idx + m.index;
+      out += s.slice(idx, matchIndex);
+      const tagStart = matchIndex;
+      // find position of '{' that starts the children value
+      const bracePos = s.indexOf('{', tagStart + m[0].length - 1);
+      if (bracePos === -1) { out += s.slice(matchIndex); break; }
+      // scan for matching closing '}' with nesting
+      let depth = 0;
+      let j = bracePos;
+      for (; j < s.length; j++) {
+        const ch = s[j];
+        if (ch === '{') depth++;
+        else if (ch === '}') {
+          depth--;
+          if (depth === 0) { j++; break; }
+        }
+      }
+      if (depth !== 0) { out += s.slice(matchIndex); break; }
+      const children = s.slice(bracePos + 1, j - 1 + 1); // content inside braces
+      // now find end of tag '>' after the children prop
+      const tagEnd = s.indexOf('>', j);
+      if (tagEnd === -1) { out += s.slice(matchIndex); break; }
+      const fullTag = s.slice(tagStart, tagEnd + 1);
+      // remove the children={...} piece from fullTag
+      const withoutChildren = fullTag.replace(/\bchildren=\{[\s\S]*?\}/, '').replace(/\s+/g, ' ').trim();
+      // determine if it was self-closing
+      const selfClosing = /\/>\s*$/.test(fullTag);
+      const propsStr = withoutChildren.replace(/^<[^\s]+/, '').replace(/^[\s>]+|[\s>]+$/g, '').trim();
+      const p = propsStr ? ' ' + propsStr : '';
+      out += `(jsx:${m[1]}${p})${children}(/jsx:${m[1]})`;
+      idx = tagEnd + 1;
+    }
+    return out;
+  })(source);
+  // self-closing
+  source = source.replace(/<([A-Z][\w-]*)\b([^>]*)\/>/g, (_m, name, props) => {
+    const p = props.trim().replace(/\s+/g, ' ');
+    return `(jsx:${name}${p ? ' ' + p : ''}/)`;
+  });
+  // tags that pass content via a children={...} prop (no inner text)
+  source = source.replace(/<([A-Z][\w-]*)\b([^>]*)\bchildren=\{([\s\S]*?)\}([^>]*)\/?>/g, (_m, name, before, child, after) => {
+    // merge remaining props (before + after) and trim
+    const props = (before + ' ' + after).trim().replace(/\s+/g, ' ');
+    const p = props ? ' ' + props : '';
+    return `(jsx:${name}${p})${child}(/jsx:${name})`;
+  });
+  // paired tags (non-greedy children)
+  source = source.replace(/<([A-Z][\w-]*)\b([^>]*)>([\s\S]*?)<\/\1>/g, (_m, name, props, children) => {
+    const p = props.trim().replace(/\s+/g, ' ');
+    return `(jsx:${name}${p ? ' ' + p : ''})${children}(/jsx:${name})`;
+  });
+  return source;
+}
+
+// Convert marker form back to angle-bracket JSX/MDX
+function markerToAngle(source) {
+  if (!source || typeof source !== 'string') return source;
+  // paired tags first
+  source = source.replace(/\(jsx:([A-Z][\w-]*)\b([^\)]*)\)([\s\S]*?)\(\/jsx:\1\)/g, (_m, name, props, children) => {
+    const p = props.trim();
+    return `<${name}${p ? ' ' + p : ''}>${children}</${name}>`;
+  });
+  // self-closing marker
+  // self-closing marker
+  source = source.replace(/\(jsx:([A-Z][\w-]*)\b([^\)]*)\/\)/g, (_m, name, props) => {
+    const p = props.trim();
+    return `<${name}${p ? ' ' + p : ''} />`;
+  });
+  // alternate self-closing without extra paren (from earlier replacement)
+  source = source.replace(/\(jsx:([A-Z][\w-]*)\b([^\)]*)\/\)/g, (_m, name, props) => {
+    const p = props.trim();
+    return `<${name}${p ? ' ' + p : ''} />`;
+  });
+  return source;
+}
+
 // Read an XML element while treating XLIFF <lb/> elements as newline characters.
 function readElementTextPreservingLineBreaks(el) {
   if (!el) return '';
@@ -589,9 +713,16 @@ export async function exportOutOfDateAsXliff(client, language) {
     // escaped into the XML target). This ensures translators can translate
     // values stored inside component props.
     try {
-      safeSource = annotateJsxPropsAndChildren(safeSource);
+      // Normalize encoded angle brackets so stored entities like &lt;Details&gt;
+      // are also converted to marker form. Do not unescape &amp; here to avoid
+      // mangling other entities.
+      let conv = String(safeSource).replace(/&lt;/g, '<').replace(/&gt;/g, '>');
+      conv = angleToMarker(conv);
+      conv = annotateJsxPropsAndChildren(conv);
+      conv = annotateMarkerProps(conv);
+      safeSource = conv;
     } catch (e) {
-      // ignore annotation failures and fall back to raw source
+      // ignore and fall back to raw source
     }
     body += `        <source xml:space="preserve">${escapeXmlPreserveNewlines(safeSource)}</source>\n`;
     body += `        <target xml:space="preserve">${escapeXmlPreserveNewlines(u.targetBody)}</target>\n`;
@@ -626,17 +757,25 @@ export async function importXliffBundle(client, xliffText, language, onProgress)
         parsedBody = rawTarget;
       }
     }
+    // If translators used the marker form, convert it back to JSX angle
+    // brackets before storing. Only do this for string payloads.
+    if (typeof parsedBody === 'string') {
+      try { parsedBody = markerToAngle(parsedBody); } catch (e) { /* ignore */ }
+    }
 
     // Build relativePath used by Tina
     const rel = `${language}/docusaurus-plugin-content-docs/current/${id}`;
 
     try {
       // updateI18n mutation
+      // set lastmod to the current time so imported translations are
+      // marked as freshly updated.
       await client.request(`
         mutation UpdateI18n($relativePath: String!, $params: I18nMutation!) {
           updateI18n(relativePath: $relativePath, params: $params) { id }
         }
-      `, { relativePath: rel, params: { i18n: { title: titleNote || undefined, body: parsedBody } } });
+      `, { relativePath: rel, params: { i18n: { title: titleNote || undefined, body: parsedBody, lastmod: (new Date()).toISOString() } } });
+      
       results.push({ id, status: 'updated' });
       if (onProgress) onProgress({ id, status: 'updated' });
     } catch (err) {
