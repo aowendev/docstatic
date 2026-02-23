@@ -675,52 +675,194 @@ export async function exportOutOfDateAsXliff(client, language) {
 }
 
 export async function importXliffBundle(client, xliffText, language, onProgress) {
+  // Surface an immediate progress signal so UI knows the import started
+  try { if (onProgress) onProgress({ id: null, status: 'started' }); } catch (e) {}
   // Parse XLIFF using DOMParser
-  const parser = new DOMParser();
-  const doc = parser.parseFromString(xliffText, 'application/xml');
-  const units = Array.from(doc.getElementsByTagName('unit'));
+  let doc;
+  try {
+    const parser = new DOMParser();
+    doc = parser.parseFromString(xliffText, 'application/xml');
+  } catch (parseErr) {
+    try { console.error && console.error('[xliff] parse error', parseErr); } catch (e) {}
+    if (onProgress) onProgress({ id: null, status: 'error', error: 'XLIFF parse error: ' + (parseErr && parseErr.message ? parseErr.message : String(parseErr)) });
+    return [{ id: null, status: 'error', error: 'XLIFF parse error' }];
+  }
+  // Be tolerant: XLIFF variants (or CAT tools like Swordfish) may wrap
+  // units differently or add extra container tags. Try several fallbacks
+  // to locate translation units: <unit> (XLIFF2), <trans-unit> (XLIFF1.2)
+  // or fall back to scanning for <segment> elements and their parent
+  // <unit> or <file> identifiers. Use a namespace-robust discovery.
+  const allEls = Array.from(doc.getElementsByTagName('*'));
+  let units = allEls.filter(el => {
+    const ln = (el.localName || el.tagName || '').toLowerCase();
+    return ln === 'unit' || ln === 'trans-unit';
+  });
+  if (!units || units.length === 0) {
+    // find <segment> and use its ancestor as a unit-like container
+    const segs = allEls.filter(el => (el.localName || el.tagName || '').toLowerCase() === 'segment');
+    units = segs.map(s => {
+      // prefer parent unit/trans-unit, otherwise parent node
+      if (!s) return s;
+      const p = s.parentNode;
+      if (!p) return s;
+      const pln = (p.localName || p.tagName || '').toLowerCase();
+      if (pln === 'unit' || pln === 'trans-unit') return p;
+      return s;
+    });
+  }
+  // make unique (segments map could include duplicates)
+  units = units.filter((v, i, a) => a.indexOf(v) === i);
+  // diagnostic: report how many units were discovered
+  try { console.log && console.log('[xliff] discovered units:', units.length); } catch (e) {}
+  // inform UI of discovered unit count
+  try { if (onProgress) onProgress({ id: null, status: 'discovered', count: units.length }); } catch (e) {}
   const results = [];
   for (const unit of units) {
-    const id = unit.getAttribute('id');
-    const sourceEl = unit.getElementsByTagName('source')[0];
-    const targetEl = unit.getElementsByTagName('target')[0];
-    const notes = unit.getElementsByTagName('note');
+    try { console.debug && console.debug('[xliff] processing unit element', unit && (unit.getAttribute ? unit.getAttribute('id') : null)); } catch (e) {}
+    // Try to determine an id for this unit. If unit lacks an explicit id,
+    // attempt to find one on ancestor elements or derive one from a
+    // `path:` note emitted by our exporter.
+    const canonicalize = (p) => {
+      if (!p) return p;
+      let s = String(p);
+      // if path contains language + plugin prefix, strip language and prefix
+      const m = s.match(/^[a-zA-Z0-9_-]+\/(.*)$/);
+      if (m) s = m[1];
+      s = s.replace(/^docusaurus-plugin-content-docs\/current\//, '');
+      s = s.replace(/\.mdx?$|\.md$/i, '');
+      s = s.replace(/\/(?:index|readme)$/i, '');
+      if (s.startsWith('/')) s = s.slice(1);
+      return s;
+    };
+
+    let id = null;
+    if (unit.getAttribute && unit.getAttribute('id')) id = unit.getAttribute('id');
+    // try ancestor nodes for id
+    if (!id) {
+      let p = unit.parentNode;
+      while (p) {
+        if (p.getAttribute && p.getAttribute('id')) { id = p.getAttribute('id'); break; }
+        p = p.parentNode;
+      }
+    }
+    // Try to find source/target elements in this unit (tolerant of extra wrapper tags)
+    const sourceEl = unit.getElementsByTagName ? (unit.getElementsByTagName('source')[0] || null) : null;
+    const targetEl = unit.getElementsByTagName ? (unit.getElementsByTagName('target')[0] || null) : null;
+    const notes = unit.getElementsByTagName ? Array.from(unit.getElementsByTagName('note')) : [];
     const titleNote = notes && notes[0] ? readElementTextPreservingLineBreaks(notes[0]).replace(/^title:/, '') : null;
-    const rawTarget = targetEl ? readElementTextPreservingLineBreaks(targetEl) : '';
+    // if no id yet, look for a note that begins with 'path:' which our exporter
+    // includes and derive id/relative path from it. Prefer preserving the
+    // original filename (including extension) for GraphQL relativePath so we
+    // don't lose the .mdx extension required by the API.
+    let rawPathFromNote = null;
+    if (notes && notes.length) {
+      for (const n of notes) {
+        const t = readElementTextPreservingLineBreaks(n) || '';
+        const m = t.match(/^path:\s*(.*)$/i);
+        if (m && m[1]) {
+          rawPathFromNote = m[1].trim();
+          // use canonicalized id (without extensions) for unit id if id missing
+          const cand = canonicalize(rawPathFromNote);
+          if (!id && cand) id = cand;
+          break;
+        }
+      }
+    }
+
+    // Extract visible text from the target while ignoring decorative XML tags
+    const extractVisible = (el) => {
+      if (!el) return '';
+      if (el.nodeType === 3) return el.nodeValue || '';
+      let out = '';
+      const nodes = Array.from(el.childNodes || []);
+      for (const n of nodes) {
+        if (n.nodeType === 3) out += n.nodeValue || '';
+        else if (n.nodeType === 1) {
+          const tag = (n.tagName || '').toLowerCase();
+          if (tag === 'lb') out += '\n';
+          else out += extractVisible(n);
+        }
+      }
+      return out;
+    };
+
+    const rawTarget = targetEl ? extractVisible(targetEl) : '';
     // If XML target contains JSON (export previously stored JSON), parse it;
     // otherwise treat as markdown/plain text and send through as-is.
+    // Targets exported by older flows may be JSON blobs; try to parse
+    // JSON when it looks like a JSON object, otherwise keep string.
     let parsedBody = rawTarget;
-    if (rawTarget && rawTarget.trim().startsWith('{')) {
-      try {
-        parsedBody = JSON.parse(rawTarget);
-      } catch (e) {
-        parsedBody = rawTarget;
-      }
+    if (rawTarget && typeof rawTarget === 'string' && rawTarget.trim().startsWith('{')) {
+      try { parsedBody = JSON.parse(rawTarget); } catch (e) { parsedBody = rawTarget; }
     }
     // If translators used the marker form, convert it back to JSX angle
     // brackets before storing. Only do this for string payloads.
+    // Convert CAT-friendly marker form back to JSX/MDX angle form
     if (typeof parsedBody === 'string') {
       try { parsedBody = markerToAngle(parsedBody); } catch (e) { /* ignore */ }
     }
 
     // Build relativePath used by Tina
-    const rel = `${language}/docusaurus-plugin-content-docs/current/${id}`;
+    // compute relativePath used by Tina update mutation. Prefer the raw path
+    // emitted in notes (which contains filename + extension). If that's not
+    // available, fall back to `id` and append `.mdx` to satisfy the API.
+    let rel = null;
+    if (rawPathFromNote) {
+      let cleaned = rawPathFromNote.replace(/^docs\//, '');
+      rel = `${language}/docusaurus-plugin-content-docs/current/${cleaned}`;
+    } else if (id) {
+      // ensure extension present
+      const withExt = /\.[a-zA-Z0-9]+$/.test(id) ? id : `${id}.mdx`;
+      rel = `${language}/docusaurus-plugin-content-docs/current/${withExt}`;
+    } else {
+      rel = null;
+    }
+    if (!rel) {
+      const errMsg = `missing unit id`;
+      try { console.warn && console.warn('[xliff] skipping unit without id'); } catch (e) {}
+      results.push({ id: id || null, status: 'error', error: errMsg });
+      if (onProgress) onProgress({ id: id || null, status: 'error', error: errMsg });
+      continue;
+    }
 
     try {
-      // updateI18n mutation
-      // set lastmod to the current time so imported translations are
-      // marked as freshly updated.
-      await client.request(`
+      // Use the same request shape the rest of the dashboard uses.
+      const mutation = `
         mutation UpdateI18n($relativePath: String!, $params: I18nMutation!) {
           updateI18n(relativePath: $relativePath, params: $params) { id }
         }
-      `, { relativePath: rel, params: { i18n: { title: titleNote || undefined, body: parsedBody, lastmod: (new Date()).toISOString() } } });
-      
+      `;
+      // Build variables matching the UpdateI18n mutation: `params` must be
+      // an `I18nMutation` object (not wrapped under `i18n`).
+      // Ensure body is a JSON object as expected by the I18nMutation schema.
+      // If parsedBody is a plain string (markdown), wrap it into a minimal
+      // AST-like object so the GraphQL server can accept it.
+      let bodyPayload = parsedBody;
+      if (typeof parsedBody === 'string') {
+        // Split into paragraphs on blank lines and create simple MDAST-like nodes
+        const parts = parsedBody.split(/\n\s*\n/).map(p => p.trim()).filter(Boolean);
+        const children = parts.map(p => ({ type: 'p', children: [{ type: 'text', text: p.replace(/\n/g, ' ') }] }));
+        if (children.length === 0) {
+          bodyPayload = { type: 'root', children: [] };
+        } else {
+          bodyPayload = { type: 'root', children };
+        }
+      }
+      const variables = {
+        relativePath: rel,
+        params: { title: titleNote || undefined, body: bodyPayload, lastmod: (new Date()).toISOString() }
+      };
+      // client.request in the dashboard expects an object with query/variables
+      try { console.debug && console.debug('[xliff] sending update for', rel); } catch (e) {}
+      await client.request({ query: mutation, variables });
+      try { console.debug && console.debug('[xliff] update successful for', rel); } catch (e) {}
+
       results.push({ id, status: 'updated' });
       if (onProgress) onProgress({ id, status: 'updated' });
     } catch (err) {
-      results.push({ id, status: 'error', error: err.message });
-      if (onProgress) onProgress({ id, status: 'error', error: err.message });
+      const errMsg = err && err.message ? err.message : String(err);
+      results.push({ id, status: 'error', error: errMsg });
+      if (onProgress) onProgress({ id, status: 'error', error: errMsg });
     }
   }
   return results;
