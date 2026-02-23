@@ -288,13 +288,13 @@ function serializeRichTextToMarkdown(node) {
       return content.split('\n').map(line => `> ${line}`).join('\n');
     }
     case 'text': {
-      let txt = node.text || '';
+      let txt = node.text || node.value || '';
       if (node.bold) txt = `**${txt}**`;
       if (node.italic) txt = `_${txt}_`;
       return txt;
     }
     case 'inlineCode':
-      return `\`${node.value || node.text || ''}\``;
+      return `\`${(node.value || node.text || node.literal || '')}\``;
     case 'ol': {
       return (node.children || []).map((li, idx) => {
         const content = (li.children || []).map(serializeRichTextToMarkdown).join('');
@@ -323,107 +323,121 @@ function serializeRichTextToMarkdown(node) {
     case 'jsx':
     case 'mdxJsxFlowElement':
     case 'mdxJsxTextElement': {
-        // prefer verbatim value if present
-        if (node.value) return node.value;
-
-        // helper to serialize attributes into tag props string
-        const propsToString = (attrs) => {
-          if (!attrs || !attrs.length) return '';
-          return attrs.map(attr => {
-            if (attr.value === true || attr.value === undefined) return attr.name;
-            // If value is a simple string, keep it quoted
-            if (typeof attr.value === 'string') return `${attr.name}=${JSON.stringify(attr.value)}`;
-            // If value looks like a small AST/MDX node, try to serialize its children
+        // Emit marker-form components (jsx:Name ...) so CAT tools see them
+        const propsToString = (pairs) => {
+          if (!pairs || !pairs.length) return '';
+          return pairs.map(attr => {
+            const name = attr.name || attr.key || '';
+            const value = attr.hasOwnProperty('value') ? attr.value : attr.val || attr.v;
+            if (!name) return '';
+            if (value === true || value === undefined) return name;
+            if (typeof value === 'string') return `${name}=${JSON.stringify(value)}`;
             try {
-              if (Array.isArray(attr.value)) return `${attr.name}={${attr.value.map(serializeRichTextToMarkdown).join('')}}`;
-              if (attr.value && typeof attr.value === 'object') {
-                if (attr.value.children) return `${attr.name}={${serializeRichTextToMarkdown(attr.value)}}`;
-                if (attr.value.value && typeof attr.value.value === 'string') return `${attr.name}=${JSON.stringify(attr.value.value)}`;
-              }
-              return `${attr.name}=${JSON.stringify(attr.value)}`;
+              return `${name}={${JSON.stringify(value)}}`;
             } catch (e) {
-              return `${attr.name}=${String(attr.value)}`;
+              return `${name}=${JSON.stringify(String(value))}`;
             }
-          }).join(' ');
+          }).filter(Boolean).join(' ');
         };
 
-        // Try several places where inner content may be stored:
-        // 1. node.children (usual mdx AST)
-        // 2. node.attributes entry named 'children' (Tina templates sometimes store nested rich-text here)
-        // 3. node._values or node.raw/_raw which may contain serialized content
-        const tryChildren = (candidate) => {
-          if (!candidate) return '';
-          // candidate might be an array, a root-like object, or a simple string
-          if (typeof candidate === 'string') return candidate;
-          if (Array.isArray(candidate)) return candidate.map(serializeRichTextToMarkdown).join('');
-          if (candidate.type === 'root' || candidate.children) return serializeRichTextToMarkdown(candidate);
-          // fallback: try JSON string
-          try { return JSON.stringify(candidate); } catch (e) { return String(candidate); }
-        };
-
-        // 1) children — but if children serialize to an empty string, prefer
-        // attribute/props-based serialization so components that store props
-        // (e.g. `Figure` with `caption`) aren't dropped when the AST contains
-        // an empty text child.
-        if (node.children && node.children.length) {
-          const children = tryChildren(node.children);
-          if (String(children || '').trim()) {
-            const props = propsToString(node.attributes);
-            const open = node.name ? (props ? `<${node.name} ${props}>` : `<${node.name}>`) : '';
-            const close = node.name ? `</${node.name}>` : '';
-            return `${open}${children}${close}`;
+        // Determine children content (prefer explicit children array).
+        // If not present, attempt a deep extraction from nested shapes
+        // (GraphQL/Tina may return varying AST shapes).
+        const deepSerialize = (obj) => {
+          if (obj === null || obj === undefined) return '';
+          if (typeof obj === 'string') return obj;
+          if (Array.isArray(obj)) return obj.map(deepSerialize).join('');
+          if (typeof obj === 'object') {
+            // If this looks like a node, let serializer handle it
+            if (obj.type) return serializeRichTextToMarkdown(obj);
+            // common text fields
+            if (obj.value || obj.text || obj.literal) return String(obj.value || obj.text || obj.literal);
+            // children-like containers
+            if (obj.children) return deepSerialize(obj.children);
+            if (obj._values) return deepSerialize(obj._values);
+            // otherwise inspect own properties
+            const parts = [];
+            for (const k of Object.keys(obj)) {
+              try {
+                parts.push(deepSerialize(obj[k]));
+              } catch (e) {}
+            }
+            return parts.join('');
           }
-          // else fall through and allow props/attributes to provide content
-        }
+          return String(obj);
+        };
 
-        // 2) attributes with name 'children'
-        if (node.attributes && node.attributes.length) {
+        let children = '';
+        if (node.children && node.children.length) {
+          children = node.children.map(serializeRichTextToMarkdown).join('');
+        } else if (node.attributes && node.attributes.length) {
           const childAttr = node.attributes.find(a => a.name === 'children' && (a.value !== undefined && a.value !== null));
           if (childAttr) {
-            const props = propsToString(node.attributes.filter(a => a.name !== 'children'));
-            const open = node.name ? (props ? `<${node.name} ${props}>` : `<${node.name}>`) : '';
-            const children = tryChildren(childAttr.value);
-            const close = node.name ? `</${node.name}>` : '';
-            return `${open}${children}${close}`;
+            children = typeof childAttr.value === 'string' ? childAttr.value : deepSerialize(childAttr.value);
+          }
+        } else if (node.props && node.props.children) {
+          children = typeof node.props.children === 'string' ? node.props.children : deepSerialize(node.props.children);
+        } else if (node._values && node._values.children) {
+          children = typeof node._values.children === 'string' ? node._values.children : deepSerialize(node._values.children);
+        } else {
+          // final attempt: scan the whole node for nested text
+          children = deepSerialize(node);
+        }
+
+        // If children derived from node.children was empty, prefer any
+        // explicit `props.children` or `_values.children` which may contain
+        // meaningful content (some AST shapes put the real child inside props).
+        if ((!children || String(children).trim() === '')) {
+          if (node.props && node.props.children) {
+            children = typeof node.props.children === 'string' ? node.props.children : deepSerialize(node.props.children);
+          } else if (node._values && node._values.children) {
+            children = typeof node._values.children === 'string' ? node._values.children : deepSerialize(node._values.children);
           }
         }
 
-        // 2b) Tina AST may put JSX props under `props` instead of `attributes`.
-        // Support `node.props.children` which often contains a nested AST.
-        if (node.props && node.props.children) {
-          const props = propsToString(Object.keys(node.props).map(k => ({ name: k, value: node.props[k] })));
-          const open = node.name ? (props ? `<${node.name} ${props}>` : `<${node.name}>`) : '';
-          const children = tryChildren(node.props.children);
-          const close = node.name ? `</${node.name}>` : '';
-          return `${open}${children}${close}`;
+        // collect attribute pairs from various node shapes
+        let attrPairs = [];
+        if (node.attributes && Array.isArray(node.attributes) && node.attributes.length) {
+          attrPairs = node.attributes
+            .filter(a => a && a.name && String(a.name).toLowerCase() !== 'children')
+            .map(a => ({ name: a.name, value: a.value }));
+        } else if (node.props && typeof node.props === 'object') {
+          attrPairs = Object.keys(node.props).filter(k => k !== 'children').map(k => ({ name: k, value: node.props[k] }));
+        } else if (node._values && typeof node._values === 'object') {
+          attrPairs = Object.keys(node._values).filter(k => k !== 'children').map(k => ({ name: k, value: node._values[k] }));
         }
-
-        // 3) _values/raw/_raw
-        if (node._values) {
-          const inner = tryChildren(node._values.children || node._values);
-          if (inner) {
-            const props = propsToString(node.attributes);
-            const open = node.name ? (props ? `<${node.name} ${props}>` : `<${node.name}>`) : '';
-            const close = node.name ? `</${node.name}>` : '';
-            return `${open}${inner}${close}`;
-          }
+        const props = propsToString(attrPairs);
+        const p = props ? ' ' + props : '';
+        if (children && children.length) {
+          return `(jsx:${node.name}${p})${children}(/jsx:${node.name})`;
         }
-        if (node.raw || node._raw) {
-          return String(node._raw || node.raw);
+        // Prefer exposing a primary prop value (common keys like title,
+        // summary or caption) as the visible child text when no children
+        // are present. This gives translators the actual text they need
+        // rather than a machine-readable parenthetical list.
+        const preferred = ['title', 'summary', 'caption', 'alt', 'label', 'termKey', 'text'];
+        let primary = null;
+        for (const k of preferred) {
+          const found = (attrPairs || []).find(a => a && String(a.name) === k && typeof a.value === 'string' && String(a.value).trim());
+          if (found) { primary = String(found.value); break; }
         }
-
-        // last resort: emit empty element with props preserved. Prefer
-        // `node.props` (Tina AST) when available, otherwise fall back to
-        // `node.attributes` (mdx AST). This makes the handling generic for
-        // any component (Figure, DocCardList, Passthrough, CodeSnippet, etc.).
-        if (node.name) {
-          let props = propsToString(node.attributes);
-          if ((!props || !String(props).trim()) && node.props) {
-            props = propsToString(Object.keys(node.props).map(k => ({ name: k, value: node.props[k] })));
-          }
-          return props ? `<${node.name} ${props}></${node.name}>` : `<${node.name}></${node.name}>`;
+        if (primary) {
+          return `(jsx:${node.name}${p})${primary}(/jsx:${node.name})`;
         }
-        return '';
+        // Fallback: expose a compact parenthetical annotation containing
+        // simple prop values so translators can still see translatable
+        // strings when no obvious primary prop exists.
+        const annParts = (attrPairs || []).map(a => {
+          const v = a && a.value;
+          if (v === undefined || v === null) return '';
+          if (typeof v === 'string') return `${a.name}:${v}`;
+          try { return `${a.name}:${JSON.stringify(v)}`; } catch (e) { return `${a.name}:${String(v)}`; }
+        }).filter(Boolean);
+        if (annParts.length) {
+          const ann = `(${annParts.join(', ')})`;
+          return `(jsx:${node.name}${p})${ann}(/jsx:${node.name})`;
+        }
+        return `(jsx:${node.name}${p}/)`;
     }
     default:
       // Fallback: serialize children
@@ -503,13 +517,17 @@ export async function exportOutOfDateAsXliff(client, language) {
       sourceMeta = parsed.metadata || {};
       sourceBody = parsed.body || '';
     } else if (src._values && typeof src._values === 'object') {
-      if (src._values.body && typeof src._values.body === 'string') {
-        sourceBody = src._values.body;
-      } else if (src._values.children) {
-        try { sourceBody = serializeRichTextToMarkdown(src._values); } catch (e) { sourceBody = JSON.stringify(src._values); }
-      } else {
-        try { sourceBody = JSON.stringify(src._values); } catch (e) { sourceBody = String(src._values); }
-      }
+        // Support several shapes: _values.body may be a string or an AST-like
+        // object. Prefer serializing AST shapes to Markdown when possible.
+        if (src._values.body && typeof src._values.body === 'object') {
+          try { sourceBody = serializeRichTextToMarkdown(src._values.body); } catch (e) { sourceBody = JSON.stringify(src._values.body); }
+        } else if (src._values.body && typeof src._values.body === 'string') {
+          sourceBody = src._values.body;
+        } else if (src._values.children) {
+          try { sourceBody = serializeRichTextToMarkdown(src._values); } catch (e) { sourceBody = JSON.stringify(src._values); }
+        } else {
+          try { sourceBody = JSON.stringify(src._values); } catch (e) { sourceBody = String(src._values); }
+        }
     } else if (src.body && typeof src.body === 'object') {
       try {
         sourceBody = serializeRichTextToMarkdown(src.body);
@@ -542,71 +560,32 @@ export async function exportOutOfDateAsXliff(client, language) {
       }
     } catch (e) {}
 
-    // If we still have no source text, and we're running in Node (server-side),
-    // try to read the raw MDX from the local filesystem as a fallback. This
-    // keeps the browser/dashboard flow GraphQL-only while allowing server-side
-    // scripts (and local debug runs) to recover missing raw content.
-    // Treat some placeholder serialized values as effectively empty so we
-    // attempt the filesystem fallback when GraphQL gave us an empty object.
-    let isEmptySource = false;
-    if (!sourceBody) isEmptySource = true;
-    else {
-      const s = String(sourceBody).trim();
-      if (!s) isEmptySource = true;
-      if (s === '{}' || s === '[]' || s === '[object Object]') isEmptySource = true;
-    }
-
-    if (isEmptySource && typeof window === 'undefined') {
-      try {
-        // require guarded to avoid bundler/runtime issues in the browser
-        const fs = require('fs');
-        const path = require('path');
-        let rel = src._sys && (src._sys.relativePath || src._sys.filename) ? (src._sys.relativePath || src._sys.filename) : null;
-        // If the GraphQL node didn't include _sys paths, derive from the canonical key
-        if (!rel && typeof key === 'string' && key) {
-          // try likely file candidates under docs/
-          const tryPaths = [path.join('docs', `${key}.mdx`), path.join('docs', `${key}.md`)];
-          for (const p of tryPaths) {
-            const abs = path.resolve(process.cwd(), p);
-            if (fs.existsSync(abs)) {
-              const raw = fs.readFileSync(abs, 'utf8');
-              const parsed = extractFrontmatter(raw);
-              sourceMeta = Object.assign({}, sourceMeta, parsed.metadata || {});
-              sourceBody = parsed.body || sourceBody;
-              rel = p;
-              break;
-            }
-          }
-        } else if (rel) {
-          let filePath = rel;
-          if (!filePath.startsWith('docs/')) {
-            filePath = path.join('docs', filePath);
-          }
-          const abs = path.resolve(process.cwd(), filePath);
-          if (fs.existsSync(abs)) {
-            const raw = fs.readFileSync(abs, 'utf8');
-            const parsed = extractFrontmatter(raw);
-            sourceMeta = Object.assign({}, sourceMeta, parsed.metadata || {});
-            sourceBody = parsed.body || sourceBody;
-          }
-        }
-      } catch (e) {
-        // ignore filesystem fallback errors — continue with whatever we have
-      }
-    }
+    // Cloud-only export: do NOT attempt filesystem fallbacks here.
+    // The exporter should rely exclusively on data returned by GraphQL/Tina.
+    // Any previous server-side filesystem fallbacks have been removed to
+    // ensure exports generated in cloud environments do not access local disk.
     
 
-    // For target prefer raw translated MDX if present (tr.raw or tr._values),
-    // otherwise try AST -> Markdown or fallback to plain values.
+    // For target prefer raw translated MDX if present (tr.raw), otherwise
+    // handle common shapes returned by GraphQL/Tina. When translation content
+    // is provided as an AST-like object (for example in `tr._values.body` or
+    // `tr.body`), serialize it to Markdown so the XLIFF target is human-
+    // readable rather than a JSON blob.
     let targetBody = '';
     let targetMeta = {};
     if (tr.raw) {
       const parsedT = extractFrontmatter(tr.raw);
       targetMeta = parsedT.metadata || {};
       targetBody = parsedT.body || '';
-    } else if (tr._values) {
-      // some Tina responses embed raw content in _values
-      targetBody = typeof tr._values === 'string' ? tr._values : JSON.stringify(tr._values);
+    } else if (tr._values && typeof tr._values === 'object') {
+      // Prefer AST in tr._values.body when available
+      if (tr._values.body && typeof tr._values.body === 'object') {
+        try { targetBody = serializeRichTextToMarkdown(tr._values.body); } catch (e) { targetBody = JSON.stringify(tr._values.body); }
+      } else if (tr._values.body && typeof tr._values.body === 'string') {
+        targetBody = tr._values.body;
+      } else {
+        try { targetBody = JSON.stringify(tr._values); } catch (e) { targetBody = String(tr._values); }
+      }
     } else if (tr.body && typeof tr.body === 'object') {
       try {
         targetBody = serializeRichTextToMarkdown(tr.body);
@@ -619,34 +598,9 @@ export async function exportOutOfDateAsXliff(client, language) {
     const sourceTitle = src.title || '';
     const targetTitle = tr.title || '';
 
-    // As a last-resort server-side fallback, try reading the file by canonical
-    // key from the local `docs/` tree if the source body is still empty.
-    try {
-      const s = String(sourceBody || '').trim();
-      if ((s === '' || s === '{}' || s === '[]' || s === '[object Object]') && typeof window === 'undefined') {
-        const fs = require('fs');
-        const path = require('path');
-        const tryPaths = [path.join('docs', `${key}.mdx`), path.join('docs', `${key}.md`)];
-        for (const p of tryPaths) {
-          const abs = path.resolve(process.cwd(), p);
-          if (fs.existsSync(abs)) {
-            try {
-              console.error('[xliff] filesystem fallback reading', abs);
-            } catch (e) {}
-            const raw = fs.readFileSync(abs, 'utf8');
-            const parsed = extractFrontmatter(raw);
-            sourceMeta = Object.assign({}, sourceMeta, parsed.metadata || {});
-            sourceBody = parsed.body || sourceBody;
-            try {
-              console.error('[xliff] filesystem fallback populated sourceBody length', String(sourceBody || '').length);
-            } catch (e) {}
-            break;
-          }
-        }
-      }
-    } catch (e) {
-      // ignore
-    }
+    // Cloud-only export: do not attempt any additional filesystem fallback
+    // here. If GraphQL/Tina returns an empty or incomplete shape for the
+    // source, retain what we have rather than attempting to read local files.
 
     // capture an explicit source path (if available) so we can store it as
     // a note for downstream tools (Swordfish may replace unit ids with
@@ -689,25 +643,9 @@ export async function exportOutOfDateAsXliff(client, language) {
     body += `      <segment>\n`;
     // Ensure source is never empty: insert a visible placeholder if needed
     let safeSource = (u.sourceBody || '').toString().trim() ? u.sourceBody : '(no source content)';
-    // Last-resort server-side attempt: read the local docs file by unit id
-    if (safeSource === '(no source content)' && typeof window === 'undefined') {
-      try {
-        const fs = require('fs');
-        const path = require('path');
-        const tryPaths = [path.join('docs', `${u.id}.mdx`), path.join('docs', `${u.id}.md`)];
-        for (const p of tryPaths) {
-          const abs = path.resolve(process.cwd(), p);
-          if (fs.existsSync(abs)) {
-            const raw = fs.readFileSync(abs, 'utf8');
-            const parsed = extractFrontmatter(raw);
-            safeSource = parsed.body || safeSource;
-            break;
-          }
-        }
-      } catch (e) {
-        // ignore
-      }
-    }
+    // Cloud-only export: do not attempt to read local docs files by unit id.
+    // If GraphQL did not provide content, leave the placeholder rather than
+    // trying to access disk in cloud environments.
     // Annotate JSX props/children so prop string values appear in the exported
     // source text (they are appended as visible annotations and will be
     // escaped into the XML target). This ensures translators can translate
@@ -717,9 +655,11 @@ export async function exportOutOfDateAsXliff(client, language) {
       // are also converted to marker form. Do not unescape &amp; here to avoid
       // mangling other entities.
       let conv = String(safeSource).replace(/&lt;/g, '<').replace(/&gt;/g, '>');
+      // Convert angle-bracket JSX to marker form for CAT tools; do not
+      // append parenthetical annotations here to avoid duplicate prop
+      // annotations in the exported XLIFF. Translators will see props
+      // inside the marker form itself.
       conv = angleToMarker(conv);
-      conv = annotateJsxPropsAndChildren(conv);
-      conv = annotateMarkerProps(conv);
       safeSource = conv;
     } catch (e) {
       // ignore and fall back to raw source
