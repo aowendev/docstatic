@@ -313,7 +313,7 @@ const TranslationDashboard = () => {
 
   const getStatusColor = (status) => {
     switch (status) {
-      case 'outdated': return '#ff4757';
+      case 'outdated': return '#f59e0b';
       case 'missing': return '#ff6b6b';
       case 'upToDate': return '#2ed573';
       case 'orphaned': return '#9c88ff';

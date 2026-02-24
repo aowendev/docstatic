@@ -48,6 +48,23 @@ function escapeXmlPreserveNewlines(unsafe) {
     .replace(/'/g, '&apos;');
 }
 
+// Remove control characters that may be embedded in AST serializations
+// (keep tab, LF, CR). This prevents NULs and other controls from
+// corrupting XLIFF consumers or terminal output.
+function stripControlChars(s) {
+  if (s === null || s === undefined) return '';
+  try {
+    // Remove BOM and all Unicode C0/C1 control characters (U+0000..U+001F, U+007F..U+009F)
+    // This avoids leaving high-bit control bytes that show up as M-^@ sequences
+    // in some terminals or when processed by CAT tools.
+    return String(s)
+      .replace(/\uFEFF/g, '')
+      .replace(/[\x00-\x1F\x7F-\x9F]/g, '');
+  } catch (e) {
+    return String(s);
+  }
+}
+
 // Annotate JSX component occurrences inside raw MDX/markdown strings so that
 // stringy prop values and simple children are included in the exported
 // source text (translators need to see prop text even when it's inside an
@@ -445,6 +462,246 @@ function serializeRichTextToMarkdown(node) {
   }
 }
 
+// Convert HTML anchor tags (including entity-escaped ones) into Markdown
+// links so hrefs are preserved in XLIFF text exports. This is a best-effort
+// conversion for stringy bodies that may contain raw HTML.
+function htmlAnchorsToMarkdown(s) {
+  if (!s || typeof s !== 'string') return s;
+  try {
+    // Unescape common &lt; &gt; entities so regex can match tags
+    let work = String(s).replace(/&lt;/g, '<').replace(/&gt;/g, '>');
+    // Replace anchor tags with Markdown links; capture href in single/double/no-quotes
+    work = work.replace(/<a\b[^>]*href=(?:"([^"]*)"|'([^']*)'|([^\s>]+))[^>]*>([\s\S]*?)<\/a>/gi, (m, g1, g2, g3, inner) => {
+      const href = g1 || g2 || g3 || '';
+      // strip any nested tags inside link text
+      const innerStr = inner.replace(/<[^>]+>/g, '').trim();
+      // If inner already contains a markdown-style link like [text](url),
+      // avoid producing nested markdown. Prefer an inline form: "text <href>".
+      const mdMatch = innerStr.match(/\[([^\]]+)\]\(([^)]+)\)/);
+      if (mdMatch) {
+        const display = mdMatch[1] || innerStr;
+        const u = href || (mdMatch[2] || '').trim();
+        return u ? `${display} <${u}>` : display;
+      }
+      return href ? `[${innerStr}](${href})` : innerStr;
+    });
+    // Convert bare URLs into Markdown links: https://example.com -> [example.com](https://example.com)
+    // Avoid autolinking URLs that are already part of a markdown link or
+    // are inside angle brackets/parentheses to prevent nested links.
+    work = work.replace(/(?<![\]\(<])\bhttps?:\/\/[^\s)<>]+/gi, (m) => {
+      try {
+        const url = m;
+        // use hostname or full url for link text
+        let text;
+        try { text = (new URL(url)).hostname; } catch (e) { text = url; }
+        return `[${text}](${url})`;
+      } catch (e) {
+        return m;
+      }
+    });
+    // Autolink www. and common TLDs without scheme (e.g. www.example.com or example.com)
+    // Avoid cases already wrapped in markdown or angle brackets.
+    work = work.replace(/(?<![\]\(<])\bwww\.[^\s)<>]+/gi, (m) => {
+      const url = m.startsWith('http') ? m : `https://${m}`;
+      let text;
+      try { text = (new URL(url)).hostname; } catch (e) { text = url; }
+      return `[${text}](${url})`;
+    });
+    work = work.replace(/(?<![\]\(<])\b[A-Za-z0-9.-]+\.(com|org|net|io|dev|ai|tech|app|gov|edu)(?:\/[^(\s)]*)?/gi, (m) => {
+      // Avoid converting markdown-wrapped links or already-handled anchors
+      if (/^\[.*\]\(.*\)$/.test(m)) return m;
+      const url = m.startsWith('http') ? m : `https://${m}`;
+      let text;
+      try { text = (new URL(url)).hostname; } catch (e) { text = url; }
+      return `[${text}](${url})`;
+    });
+    return work;
+  } catch (e) {
+    return s;
+  }
+}
+
+function escapeRegExpFor(text) {
+  return String(text).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+// Walk an AST-like object (various shapes from Tina) and gather link
+// nodes as {text, href} pairs. This is a best-effort extractor that
+// recognizes common shapes used by serializeRichTextToMarkdown.
+function gatherLinkPairsFromAst(node, out) {
+  out = out || [];
+  if (!node) return out;
+  if (typeof node === 'string') return out;
+  if (Array.isArray(node)) {
+    for (const c of node) gatherLinkPairsFromAst(c, out);
+    return out;
+  }
+  if (typeof node === 'object') {
+    const type = node.type || node._type || node.name || node.tagName;
+    if (type && String(type).toLowerCase() === 'link') {
+      const text = (node.children || []).map(n => (typeof n === 'string' ? n : (n.text || n.value || ''))).join('') || node.title || node.text || '';
+      const href = node.url || node.href || node.destination || '';
+      if (text && href) out.push({ text: String(text).trim(), href: String(href).trim() });
+    }
+    // also inspect known prop shapes that may contain links
+    if (node.url && (node.title || node.text)) {
+      out.push({ text: String(node.title || node.text).trim(), href: String(node.url).trim() });
+    }
+    // recursively inspect properties
+    for (const k of Object.keys(node)) {
+      try { gatherLinkPairsFromAst(node[k], out); } catch (e) {}
+    }
+  }
+  return out;
+}
+
+// If serialized text lost hrefs, use the source AST to re-insert inline
+// URLs for known link texts. This attempts to avoid replacing when the
+// href is already present in the conv text.
+function repairLinksFromAst(conv, srcNode) {
+  try {
+    if (!conv || typeof conv !== 'string') return conv;
+    if (!srcNode) return conv;
+    // if conv already contains an explicit url, skip repair
+    if (/https?:\/\//.test(conv) || /<https?:\/\//.test(conv)) return conv;
+    const pairs = gatherLinkPairsFromAst(srcNode, []);
+    if (!pairs || !pairs.length) return conv;
+    let out = String(conv);
+    for (const p of pairs) {
+      if (!p.text || !p.href) continue;
+      if (out.includes(p.href)) continue;
+      const re = new RegExp('\\b' + escapeRegExpFor(p.text) + '\\b');
+      if (re.test(out)) {
+        out = out.replace(re, `${p.text} <${p.href}>`);
+      }
+    }
+    return out;
+  } catch (e) {
+    return conv;
+  }
+}
+
+// Extract any URLs present anywhere in a source object by stringifying
+// and matching common URL patterns. Returns array of urls in appearance order.
+function findUrlsInObject(obj) {
+  try {
+    const txt = JSON.stringify(obj || {}, null, 0);
+    const re = /https?:\/\/[^"'\\\s,<>]*/gi;
+    const out = [];
+    let m;
+    while ((m = re.exec(txt)) !== null) {
+      out.push(m[0]);
+    }
+    return out;
+  } catch (e) {
+    return [];
+  }
+}
+
+// Append extracted URLs to plain list items when link pairs aren't available.
+function appendUrlsToListItems(conv, urls) {
+  if (!conv || !urls || !urls.length) return conv;
+  const lines = String(conv).split(/\r?\n/);
+  let i = 0;
+  for (let li = 0; li < lines.length && i < urls.length; li++) {
+    const line = lines[li];
+    if (/^\s*-\s+/.test(line) && !/https?:\/\//.test(line) && !/<https?:\/\//.test(line)) {
+      lines[li] = line + ' <' + urls[i] + '>';
+      i++;
+    }
+  }
+  return lines.join('\n');
+}
+
+// Convert Markdown inline links [text](url) into a safer inline form
+// "text <url>" so CAT tools won't strip parentheses and hrefs are preserved
+// for round-tripping. This is a best-effort conversion; reference-style
+// links are not expanded here.
+function markdownLinksToInlineUrl(s) {
+  if (!s || typeof s !== 'string') return s;
+  try {
+    return String(s).replace(/\[([^\]]+)\]\(([^)]+)\)/g, (m, text, url) => {
+      // trim surrounding whitespace and remove surrounding angle brackets
+      const u = String(url).trim().replace(/^<|>$/g, '');
+      return `${text} <${u}>`;
+    });
+  } catch (e) {
+    return s;
+  }
+}
+
+// Collapse nested markdown links like [[text](url1)](url2) to a single
+// markdown link using the inner URL (url1). This avoids producing
+// malformed or duplicated links during subsequent conversions.
+function normalizeNestedMarkdownLinks(s) {
+  if (!s || typeof s !== 'string') return s;
+  try {
+    return String(s).replace(/\[\[([^\]]+)\]\(([^)]+)\)\]\(([^)]+)\)/g, (m, innerText, innerUrl, outerUrl) => {
+      // prefer the inner URL as it is usually the intended target
+      return `[${innerText}](${innerUrl})`;
+    });
+  } catch (e) {
+    return s;
+  }
+}
+
+// Convert JSX/marker forms that include link-like props (href, url, to, link)
+// into explicit Markdown links so hrefs survive export. Handles both
+// angle-bracket JSX and marker-form `(jsx:...)` forms.
+function convertJsxPropLinksToMarkdown(s) {
+  if (!s || typeof s !== 'string') return s;
+  let out = String(s);
+  try {
+    // 1) Handle marker-form paired elements: (jsx:Name props...)children(/jsx:Name)
+    out = out.replace(/\(jsx:([A-Z][\w-]*)([^\)]*)\)([\s\S]*?)\(\/jsx:\1\)/g, (m, name, props, children) => {
+      const hrefMatch = String(props).match(/(?:href|url|to|link)=(?:"([^"]*)"|'([^']*)'|([^\s)]+))/i);
+      if (hrefMatch) {
+        const href = hrefMatch[1] || hrefMatch[2] || hrefMatch[3] || '';
+        const text = (children && String(children).trim()) ? String(children).trim() : (String(props).match(/(?:title|caption|alt)=?(?:"([^"]*)"|'([^']*)'|([^\s)]+))/i) || [])[1] || href;
+        if (href) return `[${text}](${href})`;
+      }
+      return m;
+    });
+
+    // 2) Handle angle-bracket paired JSX: <Name ... href="...">children</Name>
+    out = out.replace(/<([A-Z][\w-]*)\b([^>]*)>([\s\S]*?)<\/\1>/g, (m, name, props, children) => {
+      const hrefMatch = String(props).match(/(?:href|url|to|link)=(?:"([^"]*)"|'([^']*)'|([^\s>]+))/i);
+      if (hrefMatch) {
+        const href = hrefMatch[1] || hrefMatch[2] || hrefMatch[3] || '';
+        const text = (children && String(children).trim()) ? String(children).trim() : (String(props).match(/(?:title|caption|alt)=?(?:"([^"]*)"|'([^']*)'|([^\s>]+))/i) || [])[1] || href;
+        if (href) return `[${text}](${href})`;
+      }
+      return m;
+    });
+
+    // 3) Handle self-closing marker or angle forms with href prop: (jsx:Name href="...") or <Name href="..." />
+    out = out.replace(/\(jsx:([A-Z][\w-]*)([^\)]*)\/\)/g, (m, name, props) => {
+      const hrefMatch = String(props).match(/(?:href|url|to|link)=(?:"([^"]*)"|'([^']*)'|([^\s)]+))/i);
+      if (hrefMatch) {
+        const href = hrefMatch[1] || hrefMatch[2] || hrefMatch[3] || '';
+        const textMatch = String(props).match(/(?:title|caption|alt)=?(?:"([^"]*)"|'([^']*)'|([^\s)]+))/i);
+        const text = (textMatch && (textMatch[1]||textMatch[2]||textMatch[3])) ? (textMatch[1]||textMatch[2]||textMatch[3]) : href;
+        if (href) return `[${text}](${href})`;
+      }
+      return m;
+    });
+    out = out.replace(/<([A-Z][\w-]*)\b([^>]*)\/\>/g, (m, name, props) => {
+      const hrefMatch = String(props).match(/(?:href|url|to|link)=(?:"([^"]*)"|'([^']*)'|([^\s>]+))/i);
+      if (hrefMatch) {
+        const href = hrefMatch[1] || hrefMatch[2] || hrefMatch[3] || '';
+        const textMatch = String(props).match(/(?:title|caption|alt)=?(?:"([^"]*)"|'([^']*)'|([^\s>]+))/i);
+        const text = (textMatch && (textMatch[1]||textMatch[2]||textMatch[3])) ? (textMatch[1]||textMatch[2]||textMatch[3]) : href;
+        if (href) return `[${text}](${href})`;
+      }
+      return m;
+    });
+
+  } catch (e) {
+    return s;
+  }
+  return out;
+}
+
 export async function exportOutOfDateAsXliff(client, language) {
   // Fetch docs and i18n similar to scanTranslations and build units for outdated
   const canonicalize = (p) => {
@@ -651,10 +908,43 @@ export async function exportOutOfDateAsXliff(client, language) {
     // escaped into the XML target). This ensures translators can translate
     // values stored inside component props.
     try {
-      // Normalize encoded angle brackets so stored entities like &lt;Details&gt;
-      // are also converted to marker form. Do not unescape &amp; here to avoid
-      // mangling other entities.
-      let conv = String(safeSource).replace(/&lt;/g, '<').replace(/&gt;/g, '>');
+      // First convert any HTML anchors to Markdown so hrefs are preserved
+      // in the exported XLIFF text. Then normalize encoded angle brackets so
+      // stored entities like &lt;Details&gt; are also converted to marker
+      // form. Do not unescape &amp; here to avoid mangling other entities.
+      // Normalize nested markdown links, convert to inline form so hrefs
+      // survive CAT-tool round-trips, then convert HTML anchors and JSX prop
+      // links.
+      let conv = normalizeNestedMarkdownLinks(String(safeSource));
+      conv = markdownLinksToInlineUrl(conv);
+      conv = htmlAnchorsToMarkdown(conv);
+      // Extra debug output for specific problematic document
+      try {
+        if (DEBUG && u && String(u.id) === 'Getting-started---working-in-the-cloud') {
+          console.error('[xliff-debug-unit] id=' + u.id + ' serializedSourceLen=' + String((safeSource||'').length));
+          console.error('[xliff-debug-unit] after normalizeNestedMarkdownLinks:\n' + normalizeNestedMarkdownLinks(String(safeSource)).slice(0,2000));
+          console.error('[xliff-debug-unit] after markdownLinksToInlineUrl:\n' + markdownLinksToInlineUrl(normalizeNestedMarkdownLinks(String(safeSource))).slice(0,2000));
+          console.error('[xliff-debug-unit] after htmlAnchorsToMarkdown:\n' + htmlAnchorsToMarkdown(markdownLinksToInlineUrl(normalizeNestedMarkdownLinks(String(safeSource)))).slice(0,2000));
+        }
+      } catch (e) {}
+      // If conversion appears to have lost hrefs, attempt AST-based repair
+      try {
+        if ((!/https?:\/\//.test(conv) || /\[.*\]\(/.test(safeSource)) && src && src._values) {
+          conv = repairLinksFromAst(conv, src._values.body || src._values);
+          // If repair didn't find pairs, try extracting raw URLs from the
+          // source object and append them to list items in order.
+          if ((!/https?:\/\//.test(conv) || !/</.test(conv)) ) {
+            try {
+              const urls = findUrlsInObject(src._values);
+              if (urls && urls.length) conv = appendUrlsToListItems(conv, urls);
+            } catch (e) {}
+          }
+        }
+      } catch (e) {}
+      // Convert JSX/marker props that look like links into explicit markdown
+      // prior to angle->marker conversion so hrefs are visible to translators.
+      conv = convertJsxPropLinksToMarkdown(conv);
+      conv = conv.replace(/&lt;/g, '<').replace(/&gt;/g, '>');
       // Convert angle-bracket JSX to marker form for CAT tools; do not
       // append parenthetical annotations here to avoid duplicate prop
       // annotations in the exported XLIFF. Translators will see props
@@ -664,8 +954,18 @@ export async function exportOutOfDateAsXliff(client, language) {
     } catch (e) {
       // ignore and fall back to raw source
     }
-    body += `        <source xml:space="preserve">${escapeXmlPreserveNewlines(safeSource)}</source>\n`;
-    body += `        <target xml:space="preserve">${escapeXmlPreserveNewlines(u.targetBody)}</target>\n`;
+    // sanitize control chars before emitting
+    const sanitizedSource = stripControlChars(safeSource);
+    body += `        <source xml:space="preserve">${escapeXmlPreserveNewlines(sanitizedSource)}</source>\n`;
+    // Ensure target text also preserves anchor hrefs and markdown links.
+    // Convert markdown links to inline form and convert any HTML anchors
+    // or JSX-prop links so hrefs are visible in the exported XLIFF target.
+    let safeTarget = normalizeNestedMarkdownLinks(String(u.targetBody || ''));
+    safeTarget = markdownLinksToInlineUrl(safeTarget);
+    safeTarget = htmlAnchorsToMarkdown(safeTarget);
+    safeTarget = convertJsxPropLinksToMarkdown(safeTarget);
+    const sanitizedTarget = stripControlChars(safeTarget);
+    body += `        <target xml:space="preserve">${escapeXmlPreserveNewlines(sanitizedTarget)}</target>\n`;
     body += `      </segment>\n`;
     body += `    </unit>\n`;
   }
@@ -784,19 +1084,44 @@ export async function importXliffBundle(client, xliffText, language, onProgress)
       let out = '';
       const nodes = Array.from(el.childNodes || []);
       for (const n of nodes) {
-        if (n.nodeType === 3) out += n.nodeValue || '';
-        else if (n.nodeType === 1) {
+        if (n.nodeType === 3) {
+          out += n.nodeValue || '';
+        } else if (n.nodeType === 1) {
           const tag = (n.tagName || '').toLowerCase();
-          if (tag === 'lb') out += '\n';
-          else out += extractVisible(n);
+          if (tag === 'lb' || tag === 'br') {
+            out += '\n';
+          } else if (tag === 'a') {
+            // preserve links as Markdown [text](href)
+            const href = n.getAttribute && (n.getAttribute('href') || n.getAttribute('xlink:href') || n.getAttribute('data-href')) || '';
+            const inner = extractVisible(n) || '';
+            if (href) out += `[${inner}](${href})`;
+            else out += inner;
+          } else {
+            out += extractVisible(n);
+          }
         }
       }
       return out;
     };
 
-    const rawTarget = targetEl ? extractVisible(targetEl) : '';
+    let rawTarget = targetEl ? extractVisible(targetEl) : '';
     // If XML target contains JSON (export previously stored JSON), parse it;
     // otherwise treat as markdown/plain text and send through as-is.
+    // Quick normalization: undo some remaining escape sequences that CAT
+    // tools leave behind and normalize bullet characters. This helps when
+    // translators escape list markers ("\\- item") or the export wrapped
+    // links in anchor tags which we just reconstructed above.
+    try {
+      // Remove stray backslashes before common markdown markers anywhere in text
+      rawTarget = rawTarget.replace(/\\([\-\*\+\[\]\(\)])/g, '$1');
+      // Also remove backslash before heading/list markers at line starts
+      rawTarget = rawTarget.replace(/(^|\n)\\([#\-\*\+])/g, '$1$2');
+      // Convert dash bullets to asterisk bullets for consistency
+      rawTarget = rawTarget.replace(/(^|\n)\s*-\s+/g, '$1* ');
+      // Trim accidental leading/trailing whitespace per-line
+      rawTarget = rawTarget.split('\n').map(l => l.replace(/\s+$/,'')).join('\n');
+    } catch (e) {}
+
     // Targets exported by older flows may be JSON blobs; try to parse
     // JSON when it looks like a JSON object, otherwise keep string.
     let parsedBody = rawTarget;
@@ -840,22 +1165,44 @@ export async function importXliffBundle(client, xliffText, language, onProgress)
           updateI18n(relativePath: $relativePath, params: $params) { id }
         }
       `;
-      // Build variables matching the UpdateI18n mutation: `params` must be
-      // an `I18nMutation` object (not wrapped under `i18n`).
-      // Ensure body is a JSON object as expected by the I18nMutation schema.
-      // If parsedBody is a plain string (markdown), wrap it into a minimal
-      // AST-like object so the GraphQL server can accept it.
-      let bodyPayload = parsedBody;
-      if (typeof parsedBody === 'string') {
-        // Split into paragraphs on blank lines and create simple MDAST-like nodes
-        const parts = parsedBody.split(/\n\s*\n/).map(p => p.trim()).filter(Boolean);
-        const children = parts.map(p => ({ type: 'p', children: [{ type: 'text', text: p.replace(/\n/g, ' ') }] }));
-        if (children.length === 0) {
-          bodyPayload = { type: 'root', children: [] };
-        } else {
-          bodyPayload = { type: 'root', children };
+        // Build variables matching the UpdateI18n mutation: `params` must be
+        // an `I18nMutation` object (not wrapped under `i18n`).
+        // Ensure body is a JSON object as expected by the I18nMutation schema.
+        // If parsedBody is a plain string (markdown/plain text), preserve
+        // its newlines and common Markdown constructs rather than collapsing
+        // them to single-line paragraphs. Also attempt to undo some CAT-tool
+        // escapes and normalize empty paired JSX tags into self-closing form.
+        let bodyPayload = parsedBody;
+        if (typeof parsedBody === 'string') {
+          try {
+            // Collapse empty paired JSX tags like `<Comp ...></Comp>` -> `<Comp ... />`
+            parsedBody = parsedBody.replace(/<([A-Z][\\w-]*)([^>]*)>\s*<\/\1>/g, '<$1$2 />');
+          } catch (e) {
+            /* ignore */
+          }
+          try {
+            // Undo common backslash-escaping that some CAT tools insert before
+            // Markdown control characters at line starts: e.g. "\\# Heading" -> "# Heading"
+            // Also handle list markers (+, *, -, >) and ordered list escapes like "1\. item" -> "1. item".
+            parsedBody = parsedBody.replace(/(^|\n)\\([#\-\*\+>`])/g, '$1$2');
+            // Undo escaped ordered-list dot: "1\. " -> "1. "
+            parsedBody = parsedBody.replace(/(^|\n)(\d+)\\\./g, '$1$2.');
+            // Undo escaped backticks
+            parsedBody = parsedBody.replace(/\\`/g, '`');
+            // Some CAT tools encode '#' as HTML entity; unescape common ones
+            parsedBody = parsedBody.replace(/&#35;|&num;/g, '#');
+          } catch (e) {}
+
+          // Preserve full markdown text by wrapping into paragraph blocks.
+          // Split on double-newlines to keep paragraphs separate rather than
+          // storing a single bare text node which some GraphQL schemas reject
+          // (error: "BlockElement: text is not yet supported"). Create a
+          // `root` node whose children are `p` blocks containing `text` nodes.
+          const paragraphs = String(parsedBody || '').split(/\n{2,}/g).map(p => p.replace(/^\n+|\n+$/g, ''));
+          const pChildren = paragraphs.map(p => ({ type: 'p', children: [{ type: 'text', text: p }] }));
+          // If the body was empty, keep a minimal empty paragraph
+          bodyPayload = { type: 'root', children: pChildren.length ? pChildren : [{ type: 'p', children: [{ type: 'text', text: '' }] }] };
         }
-      }
 
       // Seed metadata from <note> entries as a fallback when the source
       // doc cannot be fetched (TinaCloud may reject doc queries).
@@ -904,13 +1251,17 @@ export async function importXliffBundle(client, xliffText, language, onProgress)
       try {
         let sourceDocRel = null;
         if (rawPathFromNote) {
-          let rp = rawPathFromNote.replace(/^\/?/, '');
+          let rp = String(rawPathFromNote || '').replace(/^\/?/, '');
+          // Normalize several common shapes and map them to the plugin-relative
+          // path used by the GraphQL `doc` query: `docusaurus-plugin-content-docs/current/...`.
           if (rp.startsWith('docusaurus-plugin-content-docs/current/')) {
             sourceDocRel = rp;
           } else if (rp.startsWith('docs/')) {
-            sourceDocRel = `docusaurus-plugin-content-docs/current/${rp.replace(/^docs\//, '')}`;
+            const stripped = rp.replace(/^docs\//, '');
+            sourceDocRel = `docusaurus-plugin-content-docs/current/${stripped}`;
           } else if (rp.indexOf('docusaurus-plugin-content-docs/current/') !== -1) {
-            sourceDocRel = rp.replace(/^.*?(docusaurus-plugin-content-docs\/current\/)/, '$1');
+            const extracted = rp.replace(/^.*?(docusaurus-plugin-content-docs\/current\/)/, '$1');
+            sourceDocRel = extracted;
           } else {
             sourceDocRel = `docusaurus-plugin-content-docs/current/${rp}`;
           }
@@ -919,6 +1270,12 @@ export async function importXliffBundle(client, xliffText, language, onProgress)
           sourceDocRel = `docusaurus-plugin-content-docs/current/${cleaned}.mdx`;
         }
         if (sourceDocRel) {
+          // Normalize accidental double-prefixes like "docs/docs/..." and
+          // strip leading slashes so queries target the expected relativePath.
+          try {
+            sourceDocRel = String(sourceDocRel || '').replace(/^\//, '').replace(/^docs\/+/, 'docs/');
+          } catch (e) {}
+          try { console.debug && console.debug('[xliff] sourceDocRel normalized to', sourceDocRel); } catch (e) {}
           try {
             const docQuery = await client.queries.doc({ relativePath: sourceDocRel });
             const sdoc = docQuery && docQuery.data && docQuery.data.doc ? docQuery.data.doc : null;
@@ -945,9 +1302,52 @@ export async function importXliffBundle(client, xliffText, language, onProgress)
         try { console.warn && console.warn('[xliff] metadata clone failed', metaErr && metaErr.message); } catch (e) {}
       }
 
-      // Build final params, prefer explicit titleNote then cloned metadata.
-      let paramsObj = Object.assign({}, sourceMetaParams);
-      if (titleNote) paramsObj.title = titleNote;
+      // Build final params.
+      // Prefer preserving an existing translation's frontmatter (except lastmod).
+      // If a translation doc exists at `rel`, clone its metadata and replace
+      // the `body` with the imported content. If no translation exists,
+      // fall back to source-cloned metadata (or notes) and the title note.
+      let paramsObj = {};
+      try {
+        let existingTranslation = null;
+        try {
+          const trQuery = await client.queries.doc({ relativePath: rel });
+          existingTranslation = trQuery && trQuery.data && trQuery.data.doc ? trQuery.data.doc : null;
+        } catch (e) {
+          // If fetching the existing translation fails (cloud permissions),
+          // we'll fall back to source metadata parsed from notes or cloned source.
+          existingTranslation = null;
+        }
+
+        if (existingTranslation) {
+          // Copy translation-side frontmatter fields but do NOT carry over
+          // its lastmod (we'll update it below). Normalize arrays where needed.
+          if (existingTranslation.title) paramsObj.title = existingTranslation.title;
+          if (existingTranslation.modifiedBy) paramsObj.modifiedBy = existingTranslation.modifiedBy;
+          if (existingTranslation.help !== undefined) paramsObj.help = existingTranslation.help;
+          if (existingTranslation.slug) paramsObj.slug = existingTranslation.slug;
+          if (existingTranslation.description) paramsObj.description = existingTranslation.description;
+          if (existingTranslation.tags) paramsObj.tags = Array.isArray(existingTranslation.tags) ? existingTranslation.tags.slice() : [String(existingTranslation.tags)];
+          if (existingTranslation.conditions) paramsObj.conditions = Array.isArray(existingTranslation.conditions) ? existingTranslation.conditions.slice() : [String(existingTranslation.conditions)];
+          if (existingTranslation.draft !== undefined) paramsObj.draft = existingTranslation.draft;
+          if (existingTranslation.review !== undefined) paramsObj.review = existingTranslation.review;
+          if (existingTranslation.translate !== undefined) paramsObj.translate = existingTranslation.translate;
+          if (existingTranslation.approved !== undefined) paramsObj.approved = existingTranslation.approved;
+          if (existingTranslation.published !== undefined) paramsObj.published = existingTranslation.published;
+          if (existingTranslation.unlisted !== undefined) paramsObj.unlisted = existingTranslation.unlisted;
+        } else {
+          // No existing translation: use cloned source metadata (from notes or
+          // source doc) as a starting point.
+          paramsObj = Object.assign({}, sourceMetaParams || {});
+          if (titleNote) paramsObj.title = titleNote;
+        }
+      } catch (buildErr) {
+        // Fallback to source-cloned metadata if anything unexpected fails.
+        paramsObj = Object.assign({}, sourceMetaParams || {});
+        if (titleNote) paramsObj.title = titleNote;
+      }
+
+      // Always replace the body with the imported payload and set new lastmod
       paramsObj.body = bodyPayload;
       paramsObj.lastmod = (new Date()).toISOString();
       // Sanitize params: only include keys present in I18nMutation
@@ -959,11 +1359,46 @@ export async function importXliffBundle(client, xliffText, language, onProgress)
       const variables = { relativePath: rel, params: sanitized };
       // client.request in the dashboard expects an object with query/variables
       try { console.debug && console.debug('[xliff] sending update for', rel); } catch (e) {}
-      await client.request({ query: mutation, variables });
-      try { console.debug && console.debug('[xliff] update successful for', rel); } catch (e) {}
+      // Send request and inspect response for GraphQL errors. Some client
+      // implementations return a response object rather than throwing on
+      // GraphQL errors, so we must explicitly check `errors` to avoid
+      // reporting success when nothing changed.
+      let resp;
+      try {
+        resp = await client.request({ query: mutation, variables });
+      } catch (requestErr) {
+        const emsg = requestErr && requestErr.message ? requestErr.message : String(requestErr);
+        try { console.warn && console.warn('[xliff] request threw for', rel, emsg); } catch (e) {}
+        results.push({ id, status: 'error', error: emsg });
+        if (onProgress) onProgress({ id, status: 'error', error: emsg });
+        continue;
+      }
 
-      results.push({ id, status: 'updated' });
-      if (onProgress) onProgress({ id, status: 'updated' });
+      // The generated Tina requester may return { data, errors } or the raw
+      // GraphQL data. Inspect both shapes and ensure updateI18n succeeded.
+      const respErrors = resp && (resp.errors || (resp.data && resp.data.errors)) || null;
+      if (respErrors && respErrors.length) {
+        const msg = (respErrors.map && respErrors.map(e => (e && e.message) ? e.message : String(e)).join('; ')) || 'GraphQL errors';
+        try { console.warn && console.warn('[xliff] update failed for', rel, msg, resp); } catch (e) {}
+        results.push({ id, status: 'error', error: msg, response: resp });
+        if (onProgress) onProgress({ id, status: 'error', error: msg, response: resp });
+        continue;
+      }
+
+      // If no explicit errors, ensure the mutation returned a valid payload.
+      const data = resp && (resp.data || resp);
+      const updated = data && (data.updateI18n || (data.updateI18n === null ? null : (Object.values(data).find(v => v && v.id))));
+      if (!updated) {
+        // If updateI18n is absent or null, surface the whole response for diagnosis
+        const msg = 'No update returned from server';
+        try { console.warn && console.warn('[xliff] no update for', rel, resp); } catch (e) {}
+        results.push({ id, status: 'error', error: msg, response: resp });
+        if (onProgress) onProgress({ id, status: 'error', error: msg, response: resp });
+      } else {
+        try { console.debug && console.debug('[xliff] update successful for', rel, updated); } catch (e) {}
+        results.push({ id, status: 'updated' });
+        if (onProgress) onProgress({ id, status: 'updated' });
+      }
     } catch (err) {
       const errMsg = err && err.message ? err.message : String(err);
       results.push({ id, status: 'error', error: errMsg });
