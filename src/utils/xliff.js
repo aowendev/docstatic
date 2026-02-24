@@ -749,7 +749,15 @@ export async function importXliffBundle(client, xliffText, language, onProgress)
     const sourceEl = unit.getElementsByTagName ? (unit.getElementsByTagName('source')[0] || null) : null;
     const targetEl = unit.getElementsByTagName ? (unit.getElementsByTagName('target')[0] || null) : null;
     const notes = unit.getElementsByTagName ? Array.from(unit.getElementsByTagName('note')) : [];
-    const titleNote = notes && notes[0] ? readElementTextPreservingLineBreaks(notes[0]).replace(/^title:/, '') : null;
+    // Find a note that starts with 'title:' (robust to ordering and whitespace)
+    let titleNote = null;
+    if (notes && notes.length) {
+      for (const n of notes) {
+        const t = readElementTextPreservingLineBreaks(n) || '';
+        const m = t.match(/^\s*title:\s*(.*)$/i);
+        if (m && m[1]) { titleNote = m[1].trim(); break; }
+      }
+    }
     // if no id yet, look for a note that begins with 'path:' which our exporter
     // includes and derive id/relative path from it. Prefer preserving the
     // original filename (including extension) for GraphQL relativePath so we
@@ -848,10 +856,107 @@ export async function importXliffBundle(client, xliffText, language, onProgress)
           bodyPayload = { type: 'root', children };
         }
       }
-      const variables = {
-        relativePath: rel,
-        params: { title: titleNote || undefined, body: bodyPayload, lastmod: (new Date()).toISOString() }
-      };
+
+      // Seed metadata from <note> entries as a fallback when the source
+      // doc cannot be fetched (TinaCloud may reject doc queries).
+      let sourceMetaParams = {};
+      try {
+        const noteMeta = {};
+        if (notes && notes.length) {
+          for (const n of notes) {
+            const t = readElementTextPreservingLineBreaks(n) || '';
+            const m = t.match(/^\s*([^:]+):\s*([\s\S]*)$/);
+            if (!m) continue;
+            const k = String(m[1] || '').trim();
+            const vRaw = (m[2] || '').trim();
+            if (!k) continue;
+            const lk = k.toLowerCase();
+            if (lk === 'path') { noteMeta.path = vRaw; continue; }
+            if (lk === 'title') { noteMeta.title = vRaw; continue; }
+            if (lk === 'description') { noteMeta.description = vRaw; continue; }
+            if (lk === 'tags') {
+              let vals = null;
+              try { if (/^[\[\{]/.test(vRaw)) vals = JSON.parse(vRaw); } catch (e) { vals = null; }
+              if (!vals) vals = vRaw.split(/\s*,\s*/).filter(Boolean);
+              noteMeta.tags = Array.isArray(vals) ? vals : [String(vals)];
+              continue;
+            }
+            if (['draft','review','translate','approved','published','unlisted'].includes(lk)) {
+              noteMeta[lk] = (/^(true|1|yes)$/i).test(vRaw);
+              continue;
+            }
+            if (lk === 'conditions') {
+              let vals = null;
+              try { if (/^[\[]/.test(vRaw)) vals = JSON.parse(vRaw); } catch (e) { vals = null; }
+              if (!vals) vals = vRaw.split(/\s*,\s*/).filter(Boolean);
+              noteMeta.conditions = Array.isArray(vals) ? vals : [String(vals)];
+              continue;
+            }
+            noteMeta[k] = vRaw;
+          }
+        }
+        sourceMetaParams = Object.assign({}, noteMeta);
+      } catch (e) {
+        /* ignore note parsing errors */
+      }
+
+      // Try to clone metadata from the source doc via GraphQL if available.
+      try {
+        let sourceDocRel = null;
+        if (rawPathFromNote) {
+          let rp = rawPathFromNote.replace(/^\/?/, '');
+          if (rp.startsWith('docusaurus-plugin-content-docs/current/')) {
+            sourceDocRel = rp;
+          } else if (rp.startsWith('docs/')) {
+            sourceDocRel = `docusaurus-plugin-content-docs/current/${rp.replace(/^docs\//, '')}`;
+          } else if (rp.indexOf('docusaurus-plugin-content-docs/current/') !== -1) {
+            sourceDocRel = rp.replace(/^.*?(docusaurus-plugin-content-docs\/current\/)/, '$1');
+          } else {
+            sourceDocRel = `docusaurus-plugin-content-docs/current/${rp}`;
+          }
+        } else if (id) {
+          const cleaned = String(id).replace(/^\//, '').replace(/\.mdx?$|\.md$/i, '');
+          sourceDocRel = `docusaurus-plugin-content-docs/current/${cleaned}.mdx`;
+        }
+        if (sourceDocRel) {
+          try {
+            const docQuery = await client.queries.doc({ relativePath: sourceDocRel });
+            const sdoc = docQuery && docQuery.data && docQuery.data.doc ? docQuery.data.doc : null;
+            if (sdoc) {
+              if (sdoc.title) sourceMetaParams.title = sdoc.title;
+              if (sdoc.modifiedBy) sourceMetaParams.modifiedBy = sdoc.modifiedBy;
+              if (sdoc.help !== undefined) sourceMetaParams.help = sdoc.help;
+              if (sdoc.slug) sourceMetaParams.slug = sdoc.slug;
+              if (sdoc.description) sourceMetaParams.description = sdoc.description;
+              if (sdoc.tags) sourceMetaParams.tags = Array.isArray(sdoc.tags) ? sdoc.tags.slice() : [String(sdoc.tags)];
+              if (sdoc.conditions) sourceMetaParams.conditions = Array.isArray(sdoc.conditions) ? sdoc.conditions.slice() : [String(sdoc.conditions)];
+              if (sdoc.draft !== undefined) sourceMetaParams.draft = sdoc.draft;
+              if (sdoc.review !== undefined) sourceMetaParams.review = sdoc.review;
+              if (sdoc.translate !== undefined) sourceMetaParams.translate = sdoc.translate;
+              if (sdoc.approved !== undefined) sourceMetaParams.approved = sdoc.approved;
+              if (sdoc.published !== undefined) sourceMetaParams.published = sdoc.published;
+              if (sdoc.unlisted !== undefined) sourceMetaParams.unlisted = sdoc.unlisted;
+            }
+          } catch (dqErr) {
+            try { console.warn && console.warn('[xliff] source doc query failed for', sourceDocRel, dqErr && dqErr.message); } catch (e) {}
+          }
+        }
+      } catch (metaErr) {
+        try { console.warn && console.warn('[xliff] metadata clone failed', metaErr && metaErr.message); } catch (e) {}
+      }
+
+      // Build final params, prefer explicit titleNote then cloned metadata.
+      let paramsObj = Object.assign({}, sourceMetaParams);
+      if (titleNote) paramsObj.title = titleNote;
+      paramsObj.body = bodyPayload;
+      paramsObj.lastmod = (new Date()).toISOString();
+      // Sanitize params: only include keys present in I18nMutation
+      const allowedKeys = ['help','lastmod','modifiedBy','title','body','conditions','description','slug','tags','draft','review','translate','approved','published','unlisted'];
+      const sanitized = {};
+      for (const k of allowedKeys) {
+        if (paramsObj[k] !== undefined) sanitized[k] = paramsObj[k];
+      }
+      const variables = { relativePath: rel, params: sanitized };
       // client.request in the dashboard expects an object with query/variables
       try { console.debug && console.debug('[xliff] sending update for', rel); } catch (e) {}
       await client.request({ query: mutation, variables });

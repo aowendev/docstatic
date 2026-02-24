@@ -103,29 +103,40 @@ const TranslationDashboard = () => {
   const [error, setError] = useState(null);
   const [selectedLanguage, setSelectedLanguage] = useState('fr');
 
-  useEffect(() => {
-    const input = document.getElementById('xliff-upload');
-    if (!input) return;
-    const handler = async (e) => {
-      const file = e.target.files && e.target.files[0];
-      if (!file) return;
-      setStatus('Importing XLIFF...');
-      try {
-        const text = await file.text();
-        const { client } = await import('../../../tina/__generated__/client');
-        await xliffUtils.importXliffBundle(client, text, selectedLanguage, (p) => {
-          if (p && p.id) setStatus(`Import ${p.id}: ${p.status}${p.error ? ' - ' + p.error : ''}`);
-        });
-        setStatus('Import complete');
-        await scanTranslations();
-      } catch (err) {
-        setStatus(`Import error: ${err.message}`);
-      }
+  // Handle Import button: open file picker and run verbose GraphQL import
+  const handleImportClick = async () => {
+    try {
+      const input = document.getElementById('xliff-upload');
+      if (!input) return;
       input.value = '';
-    };
-    input.addEventListener('change', handler);
-    return () => input.removeEventListener('change', handler);
-  }, [selectedLanguage]);
+      input.click();
+      const file = await new Promise((resolve) => {
+        const onChange = () => {
+          input.removeEventListener('change', onChange);
+          const f = input.files && input.files[0];
+          resolve(f);
+        };
+        input.addEventListener('change', onChange);
+      });
+      if (!file) return;
+      setStatus(`Importing: ${file.name}`);
+      const text = await file.text();
+      const { client } = await import('../../../tina/__generated__/client');
+      console.log('[debug-import] reading file', file.name, file.size);
+      const results = await xliffUtils.importXliffBundle(client, text, selectedLanguage, (p) => {
+        console.log('[debug-import] progress', p);
+        if (p && p.id) setStatus(`Import ${p.id}: ${p.status}${p.error ? ' - ' + p.error : ''}`);
+      });
+      console.log('[debug-import] results', results);
+      setStatus('Import complete');
+      await scanTranslations();
+    } catch (err) {
+      console.error('[import] error', err);
+      setStatus(`Import error: ${err && err.message ? err.message : String(err)}`);
+    }
+  };
+
+  // (removed separate debug-upload handler) single Import button handles import
 
   const scanTranslations = async () => {
       setLoading(true);
@@ -579,7 +590,7 @@ const TranslationDashboard = () => {
           </button>
           <input type="file" accept=".xlf,.xliff,application/xml,text/xml" id="xliff-upload" style={{ display: 'none' }} />
           <button
-            onClick={() => document.getElementById('xliff-upload')?.click()}
+            onClick={handleImportClick}
             style={{
               padding: '5px 10px',
               backgroundColor: '#2ecc71',
@@ -593,6 +604,7 @@ const TranslationDashboard = () => {
           >
             Import XLIFF
           </button>
+          {/* Debug import now runs immediately when a file is selected via Import XLIFF */}
           
         </div>
       </div>
