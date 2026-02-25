@@ -55,14 +55,36 @@ function stripControlChars(s) {
   if (s === null || s === undefined) return '';
   try {
     // Remove BOM and all Unicode C0/C1 control characters (U+0000..U+001F, U+007F..U+009F)
+    // but keep tab (\x09), LF (\x0A), and CR (\x0D) so line breaks are preserved.
     // This avoids leaving high-bit control bytes that show up as M-^@ sequences
     // in some terminals or when processed by CAT tools.
     return String(s)
       .replace(/\uFEFF/g, '')
-      .replace(/[\x00-\x1F\x7F-\x9F]/g, '');
+      .replace(/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F-\x9F]/g, '');
   } catch (e) {
     return String(s);
   }
+}
+
+// Apply a text-processing function only to content OUTSIDE fenced code
+// blocks (``` or ~~~). This prevents link conversion, JSX marker conversion,
+// and other transformations from modifying code examples.
+function outsideCodeFences(fn) {
+  return function (s) {
+    if (!s || typeof s !== 'string') return fn(s);
+    // Split on fenced code blocks (``` or ~~~). The regex captures the
+    // complete fenced block (including opening/closing fences) so that
+    // odd-numbered parts are code blocks and even-numbered parts are prose.
+    const parts = s.split(/(^`{3,}[^\n]*\n[\s\S]*?^`{3,}\s*$|^~{3,}[^\n]*\n[\s\S]*?^~{3,}\s*$)/m);
+    for (let i = 0; i < parts.length; i++) {
+      if (i % 2 === 0) {
+        // Outside code fence – apply the transformation
+        parts[i] = fn(parts[i]);
+      }
+      // Odd indices are fenced code blocks – leave them untouched
+    }
+    return parts.join('');
+  };
 }
 
 // Annotate JSX component occurrences inside raw MDX/markdown strings so that
@@ -208,6 +230,508 @@ function angleToMarker(source) {
   return source;
 }
 
+// ---------------------------------------------------------------------------
+// parseMarkdownToTinaAst – lightweight Markdown → Tina-compatible AST parser.
+// Converts a Markdown string into the rich-text AST shape that TinaCMS
+// expects for the `body` field so that headings, lists, code blocks,
+// links, bold/italic/inline-code etc. are represented as proper nodes
+// instead of being stuffed into raw text nodes (which Tina would then
+// backslash-escape, destroying all formatting).
+// ---------------------------------------------------------------------------
+function parseMarkdownToTinaAst(md) {
+  if (!md || typeof md !== 'string') {
+    return { type: 'root', children: [{ type: 'p', children: [{ type: 'text', text: '' }] }] };
+  }
+
+  // ---- inline parser ----
+  function parseInline(text) {
+    if (!text) return [{ type: 'text', text: '' }];
+    const nodes = [];
+    let remaining = text;
+
+    while (remaining.length > 0) {
+      // Find the earliest inline pattern
+      let earliest = null;
+      let earliestIdx = remaining.length;
+
+      // Inline JSX marker (paired): (jsx:Name props)content(/jsx:Name)
+      const jsxInlinePairedRe = /\(jsx:([A-Z][\w-]*)\b([^)]*)\)([\s\S]*?)\(\/jsx:\1\)/;
+      const jsxInlinePairedM = jsxInlinePairedRe.exec(remaining);
+      if (jsxInlinePairedM && jsxInlinePairedM.index < earliestIdx) {
+        earliest = { type: 'jsxPaired', match: jsxInlinePairedM };
+        earliestIdx = jsxInlinePairedM.index;
+      }
+
+      // Inline JSX marker (self-closing): (jsx:Name props/)
+      const jsxInlineSelfRe = /\(jsx:([A-Z][\w-]*)\b([^)]*)\/\)/;
+      const jsxInlineSelfM = jsxInlineSelfRe.exec(remaining);
+      if (jsxInlineSelfM && jsxInlineSelfM.index < earliestIdx) {
+        earliest = { type: 'jsxSelf', match: jsxInlineSelfM };
+        earliestIdx = jsxInlineSelfM.index;
+      }
+
+      // Markdown link: [text](url)
+      const linkRe = /\[([^\]]*)\]\(([^)]*)\)/;
+      const linkM = linkRe.exec(remaining);
+      if (linkM && linkM.index < earliestIdx) {
+        earliest = { type: 'link', match: linkM };
+        earliestIdx = linkM.index;
+      }
+
+      // Inline code: `code`
+      const codeRe = /`([^`]+)`/;
+      const codeM = codeRe.exec(remaining);
+      if (codeM && codeM.index < earliestIdx) {
+        earliest = { type: 'code', match: codeM };
+        earliestIdx = codeM.index;
+      }
+
+      // Bold: **text** or __text__
+      const boldRe = /\*\*([^*]+)\*\*|__([^_]+)__/;
+      const boldM = boldRe.exec(remaining);
+      if (boldM && boldM.index < earliestIdx) {
+        earliest = { type: 'bold', match: boldM };
+        earliestIdx = boldM.index;
+      }
+
+      // Italic: *text* or _text_ (but not ** or __)
+      const italicRe = /(?<!\*)\*(?!\*)([^*]+)(?<!\*)\*(?!\*)|(?<!_)_(?!_)([^_]+)(?<!_)_(?!_)/;
+      const italicM = italicRe.exec(remaining);
+      if (italicM && italicM.index < earliestIdx) {
+        earliest = { type: 'italic', match: italicM };
+        earliestIdx = italicM.index;
+      }
+
+      // Strikethrough: ~~text~~
+      const strikeRe = /~~([^~]+)~~/;
+      const strikeM = strikeRe.exec(remaining);
+      if (strikeM && strikeM.index < earliestIdx) {
+        earliest = { type: 'strikethrough', match: strikeM };
+        earliestIdx = strikeM.index;
+      }
+
+      // Inline image: ![alt](url)
+      const imgRe = /!\[([^\]]*)\]\(([^)]+)\)/;
+      const imgM = imgRe.exec(remaining);
+      if (imgM && imgM.index < earliestIdx) {
+        earliest = { type: 'image', match: imgM };
+        earliestIdx = imgM.index;
+      }
+
+      if (!earliest) {
+        // No more inline patterns – rest is plain text
+        if (remaining) nodes.push({ type: 'text', text: remaining });
+        break;
+      }
+
+      // Push any text before the match
+      if (earliestIdx > 0) {
+        nodes.push({ type: 'text', text: remaining.slice(0, earliestIdx) });
+      }
+
+      const m = earliest.match;
+      switch (earliest.type) {
+        case 'jsxPaired':
+        case 'jsxSelf': {
+          const compName = m[1];
+          let rawProps = (m[2] || '').trim();
+          const innerText = earliest.type === 'jsxPaired' ? (m[3] || '') : '';
+
+          // Unescape HTML entities in prop values that CAT tools may have introduced
+          rawProps = rawProps.replace(/&quot;/g, '"').replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>');
+
+          // Parse simple props: key="value" or key='value' or key={value}
+          // Also handle bare boolean props (e.g. `initcap` without =value)
+          const props = {};
+          const propRe = /([a-zA-Z][\w-]*)(?:=(?:"([^"]*)"|'([^']*)'|\{([^}]*)\}))?/g;
+          let pm;
+          while ((pm = propRe.exec(rawProps)) !== null) {
+            const key = pm[1];
+            // If no =value was matched, this is a bare boolean prop
+            if (pm[2] === undefined && pm[3] === undefined && pm[4] === undefined) {
+              props[key] = true;
+              continue;
+            }
+            let val = pm[2] !== undefined ? pm[2] : pm[3] !== undefined ? pm[3] : pm[4];
+            if (val !== undefined && /^[\[{]/.test(val)) {
+              try { val = JSON.parse(val); } catch (e) { /* keep string */ }
+            } else if (val === 'true') { val = true; }
+            else if (val === 'false') { val = false; }
+            // Unescape JSON string escapes (\n → newline, \t → tab, etc.)
+            // that were introduced by JSON.stringify during export.
+            if (typeof val === 'string' && val.includes('\\')) {
+              try { val = JSON.parse('"' + val.replace(/"/g, '\\"') + '"'); } catch (e) { /* keep as-is */ }
+            }
+            props[key] = val;
+          }
+
+          // Build children prop as a Tina AST root node for paired elements
+          if (innerText) {
+            props.children = parseMarkdownToTinaAst(innerText);
+          }
+
+          nodes.push({
+            type: 'mdxJsxTextElement',
+            name: compName,
+            children: [{ type: 'text', text: '' }],
+            props
+          });
+          break;
+        }
+        case 'link': {
+          const linkText = m[1] || '';
+          const href = m[2] || '';
+          const linkChildren = linkText ? [{ type: 'text', text: linkText }] : [];
+          nodes.push({ type: 'a', url: href, title: null, children: linkChildren });
+          break;
+        }
+        case 'code':
+          nodes.push({ type: 'text', text: m[1], code: true });
+          break;
+        case 'bold':
+          nodes.push({ type: 'text', text: m[1] || m[2], bold: true });
+          break;
+        case 'italic':
+          nodes.push({ type: 'text', text: m[1] || m[2], italic: true });
+          break;
+        case 'strikethrough':
+          nodes.push({ type: 'text', text: m[1], strikethrough: true });
+          break;
+        case 'image': {
+          const imgAlt = m[1] || '';
+          const imgSrc = m[2] || '';
+          nodes.push({ type: 'image', alt: imgAlt, url: imgSrc });
+          break;
+        }
+      }
+      remaining = remaining.slice(earliestIdx + m[0].length);
+    }
+    return nodes.length ? nodes : [{ type: 'text', text: '' }];
+  }
+
+  // ---- block parser ----
+  const lines = md.replace(/\r\n?/g, '\n').split('\n');
+  const rootChildren = [];
+  let i = 0;
+
+  // Consume consecutive list items of the same kind starting from line i.
+  // Returns [listNode, nextIndex].
+  // `sourceLines` allows recursive calls with de-indented sub-lists.
+  function consumeList(startIdx, ordered, sourceLines) {
+    const src = sourceLines || lines;
+    const items = [];
+    const marker = ordered ? /^(\d+)\.\s+(.*)$/ : /^[\*\-\+]\s+(.*)$/;
+    let idx = startIdx;
+    while (idx < src.length) {
+      const line = src[idx];
+      const m = marker.exec(line);
+      if (!m) break;
+      const content = ordered ? m[2] : m[1];
+      const currentItem = {
+        type: 'li',
+        children: [{ type: 'lic', children: parseInline(content) }]
+      };
+      items.push(currentItem);
+      idx++;
+      // Absorb continuation lines (indented or non-blank, non-block-start)
+      while (idx < src.length) {
+        const next = src[idx];
+        if (next === '') break;
+        if (marker.test(next)) break; // next list item at same level
+
+        // Detect indented nested list (2+ spaces followed by a list marker)
+        const nestedOlMatch = next.match(/^\s{2,}(\d+)\.\s+(.*)$/);
+        const nestedUlMatch = !nestedOlMatch ? next.match(/^\s{2,}[\*\-\+]\s+(.*)$/) : null;
+        if (nestedOlMatch || nestedUlMatch) {
+          // Gather all indented lines for the nested list, then strip
+          // their leading whitespace and parse recursively.
+          const nestedLines = [];
+          const baseIndent = next.match(/^(\s+)/)[1].length;
+          while (idx < src.length) {
+            const nl = src[idx];
+            if (nl === '') break;
+            const indentMatch = nl.match(/^(\s+)/);
+            if (!indentMatch || indentMatch[1].length < baseIndent) break;
+            nestedLines.push(nl.slice(baseIndent));
+            idx++;
+          }
+          const nestedIsOrdered = !!nestedOlMatch;
+          const [nestedNode] = consumeList(0, nestedIsOrdered, nestedLines);
+          currentItem.children.push(nestedNode);
+          continue;
+        }
+
+        if (/^#{1,6}\s/.test(next)) break;
+        if (/^```/.test(next)) break;
+        if (/^---\s*$|^\*\*\*\s*$|^___\s*$/.test(next)) break;
+        if (/^>\s/.test(next)) break;
+        // Continuation of previous item – append to last lic's text
+        const lastLic = currentItem.children[0];
+        const lastChild = lastLic.children[lastLic.children.length - 1];
+        if (lastChild && lastChild.type === 'text') {
+          lastChild.text += '\n' + next.replace(/^\s+/, '');
+        }
+        idx++;
+      }
+    }
+    return [{ type: ordered ? 'ol' : 'ul', children: items }, idx];
+  }
+
+  while (i < lines.length) {
+    const line = lines[i];
+
+    // Blank line – skip
+    if (line.trim() === '') { i++; continue; }
+
+    // Fenced code block: ``` or ~~~
+    const fenceMatch = line.match(/^(`{3,}|~{3,})\s*(\S*)\s*$/);
+    if (fenceMatch) {
+      const fence = fenceMatch[1];
+      const lang = fenceMatch[2] || '';
+      const codeLines = [];
+      i++;
+      while (i < lines.length && !lines[i].startsWith(fence)) {
+        codeLines.push(lines[i]);
+        i++;
+      }
+      if (i < lines.length) i++; // skip closing fence
+      const value = codeLines.join('\n');
+      rootChildren.push({
+        type: 'code_block',
+        lang: lang || undefined,
+        value,
+        children: codeLines.map(cl => ({
+          type: 'code_line',
+          children: [{ text: cl }]
+        }))
+      });
+      continue;
+    }
+
+    // Heading: # … through ###### …
+    const headingMatch = line.match(/^(#{1,6})\s+(.*)$/);
+    if (headingMatch) {
+      const depth = headingMatch[1].length;
+      rootChildren.push({
+        type: 'h' + depth,
+        children: parseInline(headingMatch[2])
+      });
+      i++;
+      continue;
+    }
+
+    // Horizontal rule: ---, ***, ___
+    if (/^(---|\*\*\*|___)\s*$/.test(line)) {
+      rootChildren.push({ type: 'hr', children: [{ type: 'text', text: '' }] });
+      i++;
+      continue;
+    }
+
+    // Unordered list item: * , - , +
+    if (/^[\*\-\+]\s+/.test(line)) {
+      const [listNode, nextIdx] = consumeList(i, false);
+      rootChildren.push(listNode);
+      i = nextIdx;
+      continue;
+    }
+
+    // Ordered list item: 1. , 2. , etc.
+    if (/^\d+\.\s+/.test(line)) {
+      const [listNode, nextIdx] = consumeList(i, true);
+      rootChildren.push(listNode);
+      i = nextIdx;
+      continue;
+    }
+
+    // Blockquote: > text
+    if (/^>\s?/.test(line)) {
+      const bqLines = [];
+      while (i < lines.length && /^>\s?/.test(lines[i])) {
+        bqLines.push(lines[i].replace(/^>\s?/, ''));
+        i++;
+      }
+      // Recursively parse blockquote content
+      const inner = parseMarkdownToTinaAst(bqLines.join('\n'));
+      // Tina expects blockquote children to be inline (text, a, etc.),
+      // not block-level (p). Unwrap any p nodes produced by the recursive parse.
+      const bqChildren = [];
+      for (const child of (inner.children || [])) {
+        if (child.type === 'p' && child.children) {
+          bqChildren.push(...child.children);
+        } else {
+          bqChildren.push(child);
+        }
+      }
+      rootChildren.push({
+        type: 'blockquote',
+        children: bqChildren.length ? bqChildren : [{ type: 'text', text: '' }]
+      });
+      continue;
+    }
+
+    // JSX/MDX marker-form flow element: (jsx:Name props)content(/jsx:Name)
+    // or self-closing: (jsx:Name props/)
+    // Detect on the current line and produce a proper mdxJsxFlowElement node.
+    // Supports both single-line and multi-line paired elements.
+    const jsxPairedRe = /^\(jsx:([A-Z][\w-]*)\b([^\)]*)\)([\s\S]*?)\(\/jsx:\1\)$/;
+    const jsxSelfRe = /^\(jsx:([A-Z][\w-]*)\b([^\)]*)\/\)$/;
+    const jsxPairedM = jsxPairedRe.exec(line);
+    const jsxSelfM = !jsxPairedM ? jsxSelfRe.exec(line) : null;
+
+    // Also detect multi-line paired JSX: opening tag on this line, closing
+    // on a subsequent line.  (jsx:Name props) ... lines ... (/jsx:Name)
+    const jsxOpenRe = /^\(jsx:([A-Z][\w-]*)\b([^\)]*)\)(.*)$/;
+    const jsxOpenM = (!jsxPairedM && !jsxSelfM) ? jsxOpenRe.exec(line) : null;
+
+    if (jsxPairedM || jsxSelfM) {
+      // Single-line paired or self-closing
+      const m = jsxPairedM || jsxSelfM;
+      const compName = m[1];
+      let rawProps = (m[2] || '').trim();
+      const innerText = jsxPairedM ? (m[3] || '') : '';
+
+      rawProps = rawProps.replace(/&quot;/g, '"').replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>');
+
+      // Parse simple props: key="value" or key={value} or bare boolean
+      const props = {};
+      const propRe = /([a-zA-Z][\w-]*)(?:=(?:"([^"]*)"|'([^']*)'|\{([^}]*)\}))?/g;
+      let pm;
+      while ((pm = propRe.exec(rawProps)) !== null) {
+        const key = pm[1];
+        // If no =value was matched, this is a bare boolean prop
+        if (pm[2] === undefined && pm[3] === undefined && pm[4] === undefined) {
+          props[key] = true;
+          continue;
+        }
+        let val = pm[2] !== undefined ? pm[2] : pm[3] !== undefined ? pm[3] : pm[4];
+        // Try to parse JSON-like values (arrays, bools, numbers)
+        if (val !== undefined && /^[\[{]/.test(val)) {
+          try { val = JSON.parse(val); } catch (e) { /* keep string */ }
+        } else if (val === 'true') { val = true; }
+        else if (val === 'false') { val = false; }
+        // Unescape JSON string escapes (\n → newline, \t → tab, etc.)
+        if (typeof val === 'string' && val.includes('\\')) {
+          try { val = JSON.parse('"' + val.replace(/"/g, '\\"') + '"'); } catch (e) { /* keep as-is */ }
+        }
+        props[key] = val;
+      }
+
+      // Build children prop as a Tina AST root node
+      if (innerText) {
+        props.children = parseMarkdownToTinaAst(innerText);
+      }
+
+      rootChildren.push({
+        type: 'mdxJsxFlowElement',
+        name: compName,
+        children: [{ type: 'text', text: '' }],
+        props
+      });
+      i++;
+      continue;
+    }
+
+    if (jsxOpenM) {
+      // Multi-line paired JSX: opening tag on this line, gather content
+      // until we find the matching closing tag (/jsx:Name).
+      const compName = jsxOpenM[1];
+      let rawProps = (jsxOpenM[2] || '').trim();
+      const firstLineContent = jsxOpenM[3] || '';
+      const closingTag = `(/jsx:${compName})`;
+      const contentLines = [];
+      if (firstLineContent) contentLines.push(firstLineContent);
+      i++;
+      while (i < lines.length) {
+        const cur = lines[i];
+        const closeIdx = cur.indexOf(closingTag);
+        if (closeIdx !== -1) {
+          // Found the closing tag – grab any text before it
+          const before = cur.slice(0, closeIdx);
+          if (before) contentLines.push(before);
+          i++;
+          break;
+        }
+        contentLines.push(cur);
+        i++;
+      }
+      const innerText = contentLines.join('\n');
+
+      rawProps = rawProps.replace(/&quot;/g, '"').replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>');
+
+      const props = {};
+      const propRe = /([a-zA-Z][\w-]*)(?:=(?:"([^"]*)"|'([^']*)'|\{([^}]*)\}))?/g;
+      let pm;
+      while ((pm = propRe.exec(rawProps)) !== null) {
+        const key = pm[1];
+        // If no =value was matched, this is a bare boolean prop
+        if (pm[2] === undefined && pm[3] === undefined && pm[4] === undefined) {
+          props[key] = true;
+          continue;
+        }
+        let val = pm[2] !== undefined ? pm[2] : pm[3] !== undefined ? pm[3] : pm[4];
+        if (val !== undefined && /^[\[{]/.test(val)) {
+          try { val = JSON.parse(val); } catch (e) { /* keep string */ }
+        } else if (val === 'true') { val = true; }
+        else if (val === 'false') { val = false; }
+        // Unescape JSON string escapes (\n → newline, \t → tab, etc.)
+        if (typeof val === 'string' && val.includes('\\')) {
+          try { val = JSON.parse('"' + val.replace(/"/g, '\\"') + '"'); } catch (e) { /* keep as-is */ }
+        }
+        props[key] = val;
+      }
+
+      if (innerText) {
+        props.children = parseMarkdownToTinaAst(innerText);
+      }
+
+      rootChildren.push({
+        type: 'mdxJsxFlowElement',
+        name: compName,
+        children: [{ type: 'text', text: '' }],
+        props
+      });
+      continue;
+    }
+
+    // Default: paragraph. Accumulate non-blank, non-block-start lines.
+    const paraLines = [];
+    while (i < lines.length) {
+      const cur = lines[i];
+      if (cur.trim() === '') break;
+      if (/^#{1,6}\s/.test(cur)) break;
+      if (/^(`{3,}|~{3,})/.test(cur)) break;
+      if (/^(---|\*\*\*|___)\s*$/.test(cur)) break;
+      if (/^[\*\-\+]\s+/.test(cur)) break;
+      if (/^\d+\.\s+/.test(cur)) break;
+      if (/^>\s/.test(cur)) break;
+      if (/^\(jsx:[A-Z]/.test(cur)) break;
+      paraLines.push(cur);
+      i++;
+    }
+    // Safety: if no lines were collected (e.g. unrecognised block-start
+    // pattern) advance past the current line to prevent an infinite loop.
+    if (paraLines.length === 0) {
+      rootChildren.push({
+        type: 'p',
+        children: parseInline(lines[i] || '')
+      });
+      i++;
+    } else {
+      rootChildren.push({
+        type: 'p',
+        children: parseInline(paraLines.join('\n'))
+      });
+    }
+  }
+
+  return {
+    type: 'root',
+    children: rootChildren.length
+      ? rootChildren
+      : [{ type: 'p', children: [{ type: 'text', text: '' }] }]
+  };
+}
+
 // Convert marker form back to angle-bracket JSX/MDX
 function markerToAngle(source) {
   if (!source || typeof source !== 'string') return source;
@@ -267,6 +791,11 @@ function serializeRichTextToMarkdown(node) {
   if (!node) return '';
   if (typeof node === 'string') return node;
   if (Array.isArray(node)) return node.map(serializeRichTextToMarkdown).join('');
+  // Tina AST sometimes uses typeless leaf objects like { text: "..." }
+  // (e.g. inside code_line children). Handle them before the switch.
+  if (!node.type && (node.text != null || node.value != null)) {
+    return String(node.text ?? node.value ?? '');
+  }
   const type = node.type;
   switch (type) {
     case 'root':
@@ -290,10 +819,18 @@ function serializeRichTextToMarkdown(node) {
       const content = (node.children || []).map(serializeRichTextToMarkdown).join('');
       return `${prefix} ${content}`;
     }
-    case 'code': {
+    case 'code':
+    case 'code_block': {
       const lang = node.lang || '';
-      const content = node.value || (node.children || []).map(serializeRichTextToMarkdown).join('');
+      // Prefer the flat `value` string when available; otherwise join
+      // code_line children with newlines to reconstruct the block content.
+      const content = node.value
+        || (node.children || []).map(c => serializeRichTextToMarkdown(c)).join('\n');
       return '\n\n```' + (lang ? ' ' + lang : '') + '\n' + content + '\n```\n\n';
+    }
+    case 'code_line': {
+      // Individual line inside a code_block – return its raw text content.
+      return (node.children || []).map(serializeRichTextToMarkdown).join('');
     }
     case 'hr':
       return '\n\n---\n\n';
@@ -306,32 +843,69 @@ function serializeRichTextToMarkdown(node) {
     }
     case 'text': {
       let txt = node.text || node.value || '';
+      if (node.code) txt = `\`${txt}\``;
       if (node.bold) txt = `**${txt}**`;
       if (node.italic) txt = `_${txt}_`;
+      if (node.strikethrough) txt = `~~${txt}~~`;
       return txt;
     }
     case 'inlineCode':
       return `\`${(node.value || node.text || node.literal || '')}\``;
     case 'ol': {
+      const indent = node._indent || '';
       return (node.children || []).map((li, idx) => {
-        const content = (li.children || []).map(serializeRichTextToMarkdown).join('');
-        return `${idx + 1}. ${content}`;
+        // Separate lic (inline content) from nested list children
+        const licParts = [];
+        const nestedLists = [];
+        for (const child of (li.children || [])) {
+          if (child.type === 'ol' || child.type === 'ul') {
+            nestedLists.push(child);
+          } else {
+            licParts.push(child);
+          }
+        }
+        const content = licParts.map(serializeRichTextToMarkdown).join('');
+        let result = `${indent}${idx + 1}. ${content}`;
+        // Render nested lists indented under the parent item
+        for (const nested of nestedLists) {
+          // 3-char indent to align under ordered list content ("1. ")
+          const nestedCopy = Object.assign({}, nested, { _indent: indent + '   ' });
+          result += '\n' + serializeRichTextToMarkdown(nestedCopy);
+        }
+        return result;
       }).join('\n');
     }
     case 'ul': {
+      const indent = node._indent || '';
       return (node.children || []).map((li) => {
-        const content = (li.children || []).map(serializeRichTextToMarkdown).join('');
-        return `- ${content}`;
+        const licParts = [];
+        const nestedLists = [];
+        for (const child of (li.children || [])) {
+          if (child.type === 'ol' || child.type === 'ul') {
+            nestedLists.push(child);
+          } else {
+            licParts.push(child);
+          }
+        }
+        const content = licParts.map(serializeRichTextToMarkdown).join('');
+        let result = `${indent}- ${content}`;
+        for (const nested of nestedLists) {
+          const nestedCopy = Object.assign({}, nested, { _indent: indent + '  ' });
+          result += '\n' + serializeRichTextToMarkdown(nestedCopy);
+        }
+        return result;
       }).join('\n');
     }
     case 'li':
     case 'lic':
       return (node.children || []).map(serializeRichTextToMarkdown).join('');
-    case 'link': {
+    case 'link':
+    case 'a': {
       const text = (node.children || []).map(serializeRichTextToMarkdown).join('') || node.title || '';
       const href = node.url || node.href || '';
       return href ? `[${text}](${href})` : text;
     }
+    case 'img':
     case 'image': {
       const alt = node.alt || node.title || '';
       const src = node.url || node.src || '';
@@ -487,8 +1061,30 @@ function htmlAnchorsToMarkdown(s) {
     });
     // Convert bare URLs into Markdown links: https://example.com -> [example.com](https://example.com)
     // Avoid autolinking URLs that are already part of a markdown link or
-    // are inside angle brackets/parentheses to prevent nested links.
-    work = work.replace(/(?<![\]\(<])\bhttps?:\/\/[^\s)<>]+/gi, (m) => {
+    // are inside angle brackets/parentheses/brackets to prevent nested links.
+    //
+    // Strategy: temporarily replace existing markdown links with placeholders
+    // so the autolink regexes cannot match text inside them, then restore.
+    // Re-protect after each pass so newly created links are also shielded.
+    // Also protect angle-bracket URLs (<https://...>) from inner matching.
+    const _mdLinkSlots = [];
+    const _protect = (s) => {
+      // protect markdown links [text](url)
+      s = s.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (m) => {
+        const idx = _mdLinkSlots.length;
+        _mdLinkSlots.push(m);
+        return `___MDLINK_${idx}___`;
+      });
+      // protect angle-bracket URLs <https://...>
+      s = s.replace(/<(https?:\/\/[^>]+)>/gi, (m) => {
+        const idx = _mdLinkSlots.length;
+        _mdLinkSlots.push(m);
+        return `___MDLINK_${idx}___`;
+      });
+      return s;
+    };
+    work = _protect(work);
+    work = work.replace(/(?<![\]\(<\[])\bhttps?:\/\/[^\s)<>]+/gi, (m) => {
       try {
         const url = m;
         // use hostname or full url for link text
@@ -499,15 +1095,18 @@ function htmlAnchorsToMarkdown(s) {
         return m;
       }
     });
+    // Re-protect newly created markdown links before next pass
+    work = _protect(work);
     // Autolink www. and common TLDs without scheme (e.g. www.example.com or example.com)
     // Avoid cases already wrapped in markdown or angle brackets.
-    work = work.replace(/(?<![\]\(<])\bwww\.[^\s)<>]+/gi, (m) => {
+    work = work.replace(/(?<![\]\(<\[])(?<!:\/\/)\bwww\.[^\s)<>]+/gi, (m) => {
       const url = m.startsWith('http') ? m : `https://${m}`;
       let text;
       try { text = (new URL(url)).hostname; } catch (e) { text = url; }
       return `[${text}](${url})`;
     });
-    work = work.replace(/(?<![\]\(<])\b[A-Za-z0-9.-]+\.(com|org|net|io|dev|ai|tech|app|gov|edu)(?:\/[^(\s)]*)?/gi, (m) => {
+    work = _protect(work);
+    work = work.replace(/(?<![\]\(<\[])(?<!:\/\/)\b[A-Za-z0-9.-]+\.(com|org|net|io|dev|ai|tech|app|gov|edu)(?:\/[^(\s)]*)?/gi, (m) => {
       // Avoid converting markdown-wrapped links or already-handled anchors
       if (/^\[.*\]\(.*\)$/.test(m)) return m;
       const url = m.startsWith('http') ? m : `https://${m}`;
@@ -515,6 +1114,8 @@ function htmlAnchorsToMarkdown(s) {
       try { text = (new URL(url)).hostname; } catch (e) { text = url; }
       return `[${text}](${url})`;
     });
+    // Restore all protected markdown links
+    work = work.replace(/___MDLINK_(\d+)___/g, (m, idx) => _mdLinkSlots[parseInt(idx, 10)] || m);
     return work;
   } catch (e) {
     return s;
@@ -613,21 +1214,15 @@ function appendUrlsToListItems(conv, urls) {
   return lines.join('\n');
 }
 
-// Convert Markdown inline links [text](url) into a safer inline form
-// "text <url>" so CAT tools won't strip parentheses and hrefs are preserved
-// for round-tripping. This is a best-effort conversion; reference-style
-// links are not expanded here.
+// Preserve Markdown inline links [text](url) as-is. Previously this function
+// converted them to "text <url>" inline form for CAT tools, but the angle
+// brackets get XML-escaped in the XLIFF output and are not reliably
+// round-tripped — CAT tools and the import path have no inverse conversion,
+// causing URLs to be silently lost. Keeping standard Markdown link syntax
+// is more robust; the placeholder protection in htmlAnchorsToMarkdown
+// prevents downstream autolinking from mangling them.
 function markdownLinksToInlineUrl(s) {
-  if (!s || typeof s !== 'string') return s;
-  try {
-    return String(s).replace(/\[([^\]]+)\]\(([^)]+)\)/g, (m, text, url) => {
-      // trim surrounding whitespace and remove surrounding angle brackets
-      const u = String(url).trim().replace(/^<|>$/g, '');
-      return `${text} <${u}>`;
-    });
-  } catch (e) {
-    return s;
-  }
+  return s;
 }
 
 // Collapse nested markdown links like [[text](url1)](url2) to a single
@@ -915,9 +1510,9 @@ export async function exportOutOfDateAsXliff(client, language) {
       // Normalize nested markdown links, convert to inline form so hrefs
       // survive CAT-tool round-trips, then convert HTML anchors and JSX prop
       // links.
-      let conv = normalizeNestedMarkdownLinks(String(safeSource));
-      conv = markdownLinksToInlineUrl(conv);
-      conv = htmlAnchorsToMarkdown(conv);
+      let conv = outsideCodeFences(normalizeNestedMarkdownLinks)(String(safeSource));
+      conv = outsideCodeFences(markdownLinksToInlineUrl)(conv);
+      conv = outsideCodeFences(htmlAnchorsToMarkdown)(conv);
       // Extra debug output for specific problematic document
       try {
         if (DEBUG && u && String(u.id) === 'Getting-started---working-in-the-cloud') {
@@ -943,13 +1538,13 @@ export async function exportOutOfDateAsXliff(client, language) {
       } catch (e) {}
       // Convert JSX/marker props that look like links into explicit markdown
       // prior to angle->marker conversion so hrefs are visible to translators.
-      conv = convertJsxPropLinksToMarkdown(conv);
-      conv = conv.replace(/&lt;/g, '<').replace(/&gt;/g, '>');
+      conv = outsideCodeFences(convertJsxPropLinksToMarkdown)(conv);
+      conv = outsideCodeFences(s => s.replace(/&lt;/g, '<').replace(/&gt;/g, '>'))(conv);
       // Convert angle-bracket JSX to marker form for CAT tools; do not
       // append parenthetical annotations here to avoid duplicate prop
       // annotations in the exported XLIFF. Translators will see props
       // inside the marker form itself.
-      conv = angleToMarker(conv);
+      conv = outsideCodeFences(angleToMarker)(conv);
       safeSource = conv;
     } catch (e) {
       // ignore and fall back to raw source
@@ -960,10 +1555,10 @@ export async function exportOutOfDateAsXliff(client, language) {
     // Ensure target text also preserves anchor hrefs and markdown links.
     // Convert markdown links to inline form and convert any HTML anchors
     // or JSX-prop links so hrefs are visible in the exported XLIFF target.
-    let safeTarget = normalizeNestedMarkdownLinks(String(u.targetBody || ''));
-    safeTarget = markdownLinksToInlineUrl(safeTarget);
-    safeTarget = htmlAnchorsToMarkdown(safeTarget);
-    safeTarget = convertJsxPropLinksToMarkdown(safeTarget);
+    let safeTarget = outsideCodeFences(normalizeNestedMarkdownLinks)(String(u.targetBody || ''));
+    safeTarget = outsideCodeFences(markdownLinksToInlineUrl)(safeTarget);
+    safeTarget = outsideCodeFences(htmlAnchorsToMarkdown)(safeTarget);
+    safeTarget = outsideCodeFences(convertJsxPropLinksToMarkdown)(safeTarget);
     const sanitizedTarget = stripControlChars(safeTarget);
     body += `        <target xml:space="preserve">${escapeXmlPreserveNewlines(sanitizedTarget)}</target>\n`;
     body += `      </segment>\n`;
@@ -1112,13 +1707,21 @@ export async function importXliffBundle(client, xliffText, language, onProgress)
     // translators escape list markers ("\\- item") or the export wrapped
     // links in anchor tags which we just reconstructed above.
     try {
-      // Remove stray backslashes before common markdown markers anywhere in text
-      rawTarget = rawTarget.replace(/\\([\-\*\+\[\]\(\)])/g, '$1');
-      // Also remove backslash before heading/list markers at line starts
-      rawTarget = rawTarget.replace(/(^|\n)\\([#\-\*\+])/g, '$1$2');
-      // Convert dash bullets to asterisk bullets for consistency
-      rawTarget = rawTarget.replace(/(^|\n)\s*-\s+/g, '$1* ');
-      // Trim accidental leading/trailing whitespace per-line
+      // Remove backslashes that CAT tools (e.g. Swordfish) insert before
+      // markdown-significant characters. This must be done before we parse
+      // the markdown into a Tina AST. The pattern covers:
+      //   \# \* \- \+ \[ \] \( \) \> \` \_ \! \| \~ \. \: \\
+      // Note: \\n is left as-is (actual escaped newline) so we only strip
+      // backslash when followed by a non-alphanumeric, non-space character
+      // commonly used as a markdown control character.
+      rawTarget = rawTarget.replace(/\\([#\*\-\+\[\]\(\)>`_~!|:\.\\])/g, '$1');
+      // Undo escaped ordered-list dot: "1\. " -> "1. " (already covered by
+      // the general pattern above, but keep for clarity)
+      // Convert dash bullets to asterisk bullets for consistency with Tina
+      // Preserve leading whitespace (indentation) for nested lists.
+      // Only convert outside fenced code blocks so YAML/shell dashes are kept.
+      rawTarget = outsideCodeFences(s => s.replace(/(^|\n)(\s*)-\s+/g, '$1$2* '))(rawTarget);
+      // Trim accidental trailing whitespace per-line
       rawTarget = rawTarget.split('\n').map(l => l.replace(/\s+$/,'')).join('\n');
     } catch (e) {}
 
@@ -1128,12 +1731,29 @@ export async function importXliffBundle(client, xliffText, language, onProgress)
     if (rawTarget && typeof rawTarget === 'string' && rawTarget.trim().startsWith('{')) {
       try { parsedBody = JSON.parse(rawTarget); } catch (e) { parsedBody = rawTarget; }
     }
-    // If translators used the marker form, convert it back to JSX angle
-    // brackets before storing. Only do this for string payloads.
-    // Convert CAT-friendly marker form back to JSX/MDX angle form
-    if (typeof parsedBody === 'string') {
-      try { parsedBody = markerToAngle(parsedBody); } catch (e) { /* ignore */ }
-    }
+    // Convert angle-bracket JSX (e.g. <Footnote summary="1">...</Footnote>
+    // or <Footnote ... />) to marker form so the parser handles them
+    // uniformly. CAT tools like Swordfish may convert marker-form JSX to
+    // HTML-entity angle brackets which extractVisible decodes back to real
+    // angle brackets. We must NOT touch JSX inside fenced code blocks.
+    try {
+      // Split on fenced code block boundaries, convert only outside fences
+      const fenceParts = rawTarget.split(/(^```[\s\S]*?^```)/m);
+      for (let fp = 0; fp < fenceParts.length; fp++) {
+        if (fp % 2 === 0) {
+          // Outside fenced code – convert angle-bracket JSX to marker form
+          // Paired: <Name props>content</Name>
+          fenceParts[fp] = fenceParts[fp].replace(/<([A-Z][\w-]*)\b([^>]*)>([\s\S]*?)<\/\1>/g, '(jsx:$1$2)$3(/jsx:$1)');
+          // Self-closing: <Name props />
+          fenceParts[fp] = fenceParts[fp].replace(/<([A-Z][\w-]*)\b([^>]*)\s*\/>/g, '(jsx:$1$2/)');
+        }
+      }
+      rawTarget = fenceParts.join('');
+    } catch (e) {}
+    // The parseMarkdownToTinaAst parser handles marker-form JSX directly
+    // and creates proper mdxJsxFlowElement/mdxJsxTextElement nodes,
+    // avoiding the problem where angle-bracket JSX in text nodes gets
+    // backslash-escaped by Tina.
 
     // Build relativePath used by Tina
     // compute relativePath used by Tina update mutation. Prefer the raw path
@@ -1181,27 +1801,22 @@ export async function importXliffBundle(client, xliffText, language, onProgress)
             /* ignore */
           }
           try {
-            // Undo common backslash-escaping that some CAT tools insert before
-            // Markdown control characters at line starts: e.g. "\\# Heading" -> "# Heading"
-            // Also handle list markers (+, *, -, >) and ordered list escapes like "1\. item" -> "1. item".
-            parsedBody = parsedBody.replace(/(^|\n)\\([#\-\*\+>`])/g, '$1$2');
-            // Undo escaped ordered-list dot: "1\. " -> "1. "
-            parsedBody = parsedBody.replace(/(^|\n)(\d+)\\\./g, '$1$2.');
-            // Undo escaped backticks
-            parsedBody = parsedBody.replace(/\\`/g, '`');
+            // Comprehensive backslash-unescape for markdown control characters
+            // that CAT tools may have inserted. The first rawTarget cleanup
+            // handles the bulk, but if parsedBody went through JSON-parse or
+            // markerToAngle it may have re-introduced some escapes.
+            parsedBody = parsedBody.replace(/\\([#\*\-\+\[\]\(\)>`_~!|:\.\\])/g, '$1');
             // Some CAT tools encode '#' as HTML entity; unescape common ones
             parsedBody = parsedBody.replace(/&#35;|&num;/g, '#');
           } catch (e) {}
 
-          // Preserve full markdown text by wrapping into paragraph blocks.
-          // Split on double-newlines to keep paragraphs separate rather than
-          // storing a single bare text node which some GraphQL schemas reject
-          // (error: "BlockElement: text is not yet supported"). Create a
-          // `root` node whose children are `p` blocks containing `text` nodes.
-          const paragraphs = String(parsedBody || '').split(/\n{2,}/g).map(p => p.replace(/^\n+|\n+$/g, ''));
-          const pChildren = paragraphs.map(p => ({ type: 'p', children: [{ type: 'text', text: p }] }));
-          // If the body was empty, keep a minimal empty paragraph
-          bodyPayload = { type: 'root', children: pChildren.length ? pChildren : [{ type: 'p', children: [{ type: 'text', text: '' }] }] };
+          // Preserve full markdown text by parsing it into the structured
+          // Tina AST that TinaCMS expects for the `body` field. Previously
+          // the code split on double-newlines and wrapped each chunk in a
+          // bare { type: 'p', children: [{ type: 'text', text: ... }] } node
+          // which caused Tina's serializer to backslash-escape every Markdown
+          // control character (headings, list markers, backticks, etc.).
+          bodyPayload = parseMarkdownToTinaAst(String(parsedBody || ''));
         }
 
       // Seed metadata from <note> entries as a fallback when the source
@@ -1280,19 +1895,15 @@ export async function importXliffBundle(client, xliffText, language, onProgress)
             const docQuery = await client.queries.doc({ relativePath: sourceDocRel });
             const sdoc = docQuery && docQuery.data && docQuery.data.doc ? docQuery.data.doc : null;
             if (sdoc) {
-              if (sdoc.title) sourceMetaParams.title = sdoc.title;
-              if (sdoc.modifiedBy) sourceMetaParams.modifiedBy = sdoc.modifiedBy;
-              if (sdoc.help !== undefined) sourceMetaParams.help = sdoc.help;
-              if (sdoc.slug) sourceMetaParams.slug = sdoc.slug;
-              if (sdoc.description) sourceMetaParams.description = sdoc.description;
-              if (sdoc.tags) sourceMetaParams.tags = Array.isArray(sdoc.tags) ? sdoc.tags.slice() : [String(sdoc.tags)];
-              if (sdoc.conditions) sourceMetaParams.conditions = Array.isArray(sdoc.conditions) ? sdoc.conditions.slice() : [String(sdoc.conditions)];
-              if (sdoc.draft !== undefined) sourceMetaParams.draft = sdoc.draft;
-              if (sdoc.review !== undefined) sourceMetaParams.review = sdoc.review;
-              if (sdoc.translate !== undefined) sourceMetaParams.translate = sdoc.translate;
-              if (sdoc.approved !== undefined) sourceMetaParams.approved = sdoc.approved;
-              if (sdoc.published !== undefined) sourceMetaParams.published = sdoc.published;
-              if (sdoc.unlisted !== undefined) sourceMetaParams.unlisted = sdoc.unlisted;
+              // Dynamically copy all non-null fields from the source doc,
+              // skipping internal/GraphQL fields and body/lastmod.
+              const skipKeys = new Set(['__typename', '_sys', '_values', 'id', 'body', 'lastmod']);
+              for (const k of Object.keys(sdoc)) {
+                if (skipKeys.has(k)) continue;
+                if (sdoc[k] != null) {
+                  sourceMetaParams[k] = Array.isArray(sdoc[k]) ? sdoc[k].slice() : sdoc[k];
+                }
+              }
             }
           } catch (dqErr) {
             try { console.warn && console.warn('[xliff] source doc query failed for', sourceDocRel, dqErr && dqErr.message); } catch (e) {}
@@ -1311,8 +1922,8 @@ export async function importXliffBundle(client, xliffText, language, onProgress)
       try {
         let existingTranslation = null;
         try {
-          const trQuery = await client.queries.doc({ relativePath: rel });
-          existingTranslation = trQuery && trQuery.data && trQuery.data.doc ? trQuery.data.doc : null;
+          const trQuery = await client.queries.i18n({ relativePath: rel });
+          existingTranslation = trQuery && trQuery.data && trQuery.data.i18n ? trQuery.data.i18n : null;
         } catch (e) {
           // If fetching the existing translation fails (cloud permissions),
           // we'll fall back to source metadata parsed from notes or cloned source.
@@ -1320,41 +1931,41 @@ export async function importXliffBundle(client, xliffText, language, onProgress)
         }
 
         if (existingTranslation) {
-          // Copy translation-side frontmatter fields but do NOT carry over
-          // its lastmod (we'll update it below). Normalize arrays where needed.
-          if (existingTranslation.title) paramsObj.title = existingTranslation.title;
-          if (existingTranslation.modifiedBy) paramsObj.modifiedBy = existingTranslation.modifiedBy;
-          if (existingTranslation.help !== undefined) paramsObj.help = existingTranslation.help;
-          if (existingTranslation.slug) paramsObj.slug = existingTranslation.slug;
-          if (existingTranslation.description) paramsObj.description = existingTranslation.description;
-          if (existingTranslation.tags) paramsObj.tags = Array.isArray(existingTranslation.tags) ? existingTranslation.tags.slice() : [String(existingTranslation.tags)];
-          if (existingTranslation.conditions) paramsObj.conditions = Array.isArray(existingTranslation.conditions) ? existingTranslation.conditions.slice() : [String(existingTranslation.conditions)];
-          if (existingTranslation.draft !== undefined) paramsObj.draft = existingTranslation.draft;
-          if (existingTranslation.review !== undefined) paramsObj.review = existingTranslation.review;
-          if (existingTranslation.translate !== undefined) paramsObj.translate = existingTranslation.translate;
-          if (existingTranslation.approved !== undefined) paramsObj.approved = existingTranslation.approved;
-          if (existingTranslation.published !== undefined) paramsObj.published = existingTranslation.published;
-          if (existingTranslation.unlisted !== undefined) paramsObj.unlisted = existingTranslation.unlisted;
+          // Retain whatever metadata is present in the existing translation.
+          // Skip internal/GraphQL fields and lastmod/body (we set those below).
+          const skipKeys = new Set(['__typename', '_sys', '_values', 'id', 'body', 'lastmod']);
+          for (const k of Object.keys(existingTranslation)) {
+            if (skipKeys.has(k)) continue;
+            if (existingTranslation[k] != null) {
+              paramsObj[k] = Array.isArray(existingTranslation[k]) ? existingTranslation[k].slice() : existingTranslation[k];
+            }
+          }
         } else {
           // No existing translation: use cloned source metadata (from notes or
-          // source doc) as a starting point.
-          paramsObj = Object.assign({}, sourceMetaParams || {});
+          // source doc) as a starting point. Only include keys with meaningful values.
+          for (const k of Object.keys(sourceMetaParams || {})) {
+            if (sourceMetaParams[k] != null) paramsObj[k] = sourceMetaParams[k];
+          }
           if (titleNote) paramsObj.title = titleNote;
         }
       } catch (buildErr) {
         // Fallback to source-cloned metadata if anything unexpected fails.
-        paramsObj = Object.assign({}, sourceMetaParams || {});
+        // Only include keys with meaningful values.
+        for (const k of Object.keys(sourceMetaParams || {})) {
+          if (sourceMetaParams[k] != null) paramsObj[k] = sourceMetaParams[k];
+        }
         if (titleNote) paramsObj.title = titleNote;
       }
 
       // Always replace the body with the imported payload and set new lastmod
       paramsObj.body = bodyPayload;
       paramsObj.lastmod = (new Date()).toISOString();
-      // Sanitize params: only include keys present in I18nMutation
-      const allowedKeys = ['help','lastmod','modifiedBy','title','body','conditions','description','slug','tags','draft','review','translate','approved','published','unlisted'];
+      // Sanitize params: strip internal/GraphQL keys and null/undefined values
+      const internalKeys = new Set(['__typename', '_sys', '_values', 'id']);
       const sanitized = {};
-      for (const k of allowedKeys) {
-        if (paramsObj[k] !== undefined) sanitized[k] = paramsObj[k];
+      for (const k of Object.keys(paramsObj)) {
+        if (internalKeys.has(k)) continue;
+        if (paramsObj[k] != null) sanitized[k] = paramsObj[k];
       }
       const variables = { relativePath: rel, params: sanitized };
       // client.request in the dashboard expects an object with query/variables
