@@ -48,10 +48,18 @@ const TranslationDashboard = () => {
         const { client } = await import('../../../tina/__generated__/client');
         const lang = selectedLanguage;
         const missing = translationData && translationData[lang] ? translationData[lang].missing : [];
-        for (const item of missing) {
+        if (!missing || missing.length === 0) {
+          setStatus('No missing topics to add');
+          return;
+        }
+        setAdding(true);
+        setAddProgress(0);
+        for (const [idx, item] of missing.entries()) {
           // copy full metadata and body from sourceNode when available
           const sourceNode = item.sourceNode || null;
-          const relPath = `${lang}/docusaurus-plugin-content-docs/current/${item.file.replace(/^docs\//, '')}`;
+          const baseFile = item.file.replace(/^docs\//, '');
+          const hasExt = /\.(mdx?|MDX?)$/.test(baseFile);
+          const relPath = `${lang}/docusaurus-plugin-content-docs/current/${baseFile}${hasExt ? '' : '.mdx'}`;
           const paramsBody = {};
           if (sourceNode) {
             // copy known i18n fields from source node
@@ -73,7 +81,17 @@ const TranslationDashboard = () => {
           // ensure created translations start as drafts
           paramsBody.draft = true;
           // set lastmod to one day earlier than source (or yesterday)
-          const lastmodSource = sourceNode && sourceNode.lastmod ? new Date(sourceNode.lastmod) : null;
+          let lastmodSource = null;
+          if (sourceNode && sourceNode.lastmod) {
+            lastmodSource = new Date(sourceNode.lastmod);
+          } else if (item.sourceLastMod && item.sourceLastMod !== 'No date') {
+            try {
+              const parsed = new Date(item.sourceLastMod);
+              if (!isNaN(parsed.getTime())) lastmodSource = parsed;
+            } catch (e) {
+              // ignore parse errors
+            }
+          }
           paramsBody.lastmod = lastmodSource ? new Date(lastmodSource.getTime() - 86400000).toISOString() : new Date(Date.now() - 86400000).toISOString();
 
           await client.request({
@@ -92,11 +110,25 @@ const TranslationDashboard = () => {
               params: { i18n: paramsBody }
             }
           });
+
+          // update progress
+          try {
+            const pct = missing.length > 0 ? Math.round(((idx + 1) / missing.length) * 100) : 100;
+            setAddProgress(pct);
+            setStatus(`Adding ${idx + 1}/${missing.length} translations (${pct}%)`);
+          } catch (e) {
+            // ignore progress errors
+          }
         }
         setStatus(`Added ${missing.length} missing topics for ${lang}`);
         await scanTranslations();
+        setAddProgress(100);
+        setTimeout(() => setAddProgress(null), 800);
+        setAdding(false);
       } catch (err) {
         setStatus(`Error: ${err.message}`);
+        setAdding(false);
+        setAddProgress(null);
       }
     };
 
@@ -108,11 +140,17 @@ const TranslationDashboard = () => {
   const [translationData, setTranslationData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [importing, setImporting] = useState(false);
+  const [importProgress, setImportProgress] = useState(null);
+  const [adding, setAdding] = useState(false);
+  const [addProgress, setAddProgress] = useState(null);
   const [selectedLanguage, setSelectedLanguage] = useState('fr');
 
   // Handle Import button: open file picker and run verbose GraphQL import
   const handleImportClick = async () => {
     try {
+      setImporting(true);
+      setImportProgress(null);
       const input = document.getElementById('xliff-upload');
       if (!input) return;
       input.value = '';
@@ -133,13 +171,19 @@ const TranslationDashboard = () => {
       const results = await xliffUtils.importXliffBundle(client, text, selectedLanguage, (p) => {
         console.log('[debug-import] progress', p);
         if (p && p.id) setStatus(`Import ${p.id}: ${p.status}${p.error ? ' - ' + p.error : ''}`);
+        if (p && p.progress !== undefined) setImportProgress(p.progress);
       });
       console.log('[debug-import] results', results);
       setStatus('Import complete');
+      setImportProgress(100);
+      setTimeout(() => setImportProgress(null), 800);
+      setImporting(false);
       await scanTranslations();
     } catch (err) {
       console.error('[import] error', err);
       setStatus(`Import error: ${err && err.message ? err.message : String(err)}`);
+      setImporting(false);
+      setImportProgress(null);
     }
   };
 
@@ -201,41 +245,39 @@ const TranslationDashboard = () => {
         if (!pageInfo || !pageInfo.hasNextPage) break;
         i18nAfter = pageInfo.endCursor;
       }
-      const translationsMap = {}; // canonical -> { node, originalPath }
+      // Build translation maps grouped by language
+      const translationsByLang = {}; // lang -> { canonical -> { node, originalPath } }
       for (const edge of i18nEdges) {
         const node = edge.node;
         const relPath = node._sys?.relativePath || node._sys?.filename || '';
         const m = relPath.match(/^([a-zA-Z0-9_-]+)\/(.*)$/);
         if (!m) continue;
         const lang = m[1];
-        if (lang !== selectedLanguage) continue;
         const after = m[2];
         const prefix = 'docusaurus-plugin-content-docs/current/';
         if (!after.startsWith(prefix)) continue;
         const cleanAfter = after.replace(new RegExp(`^${prefix}`), '');
-        // skip generated or excluded doc areas (api, wiki)
         if (cleanAfter.startsWith('api/') || cleanAfter.startsWith('wiki/')) continue;
         const canonical = canonicalize(cleanAfter);
-        // handle duplicate canonical keys (e.g., index/readme variants)
+
+        translationsByLang[lang] = translationsByLang[lang] || {};
+        const translationsMap = translationsByLang[lang];
+
         if (translationsMap[canonical]) {
           const existing = translationsMap[canonical];
           const isExistingIndex = /(?:^|\/)index$|(?:^|\/)readme$/i.test(existing.originalPath || '');
           const isNewIndex = /(?:^|\/)index$|(?:^|\/)readme$/i.test(cleanAfter);
-          // prefer non-index/readme over index/readme
           if (isExistingIndex && !isNewIndex) {
             translationsMap[canonical] = { node, originalPath: cleanAfter };
           } else {
-            // otherwise, keep the one with the latest lastmod
             try {
               const existingDate = existing.node?.lastmod ? new Date(existing.node.lastmod) : null;
               const newDate = node?.lastmod ? new Date(node.lastmod) : null;
               if (newDate && (!existingDate || newDate > existingDate)) {
                 translationsMap[canonical] = { node, originalPath: cleanAfter };
-              } else {
-                // keep existing
               }
             } catch (e) {
-              // fallback: keep existing
+              // keep existing on errors
             }
           }
         } else {
@@ -243,57 +285,163 @@ const TranslationDashboard = () => {
         }
       }
 
-      // Compare sets
+      // For each language, compare with source map and build results
       const sourceKeys = new Set(Object.keys(sourceMap));
-      const translationKeys = new Set(Object.keys(translationsMap));
-
-      const missing = [];
-      const outdated = [];
-      const upToDate = [];
-      const orphaned = [];
-
+      // Pre-build a 'missing all' list so empty languages can be shown
+      const missingAll = [];
       for (const key of sourceKeys) {
         const src = sourceMap[key];
-        const srcDate = src.lastmod ? new Date(src.lastmod) : null;
         const title = src.title || key;
-        if (!translationKeys.has(key)) {
-          missing.push({ file: `docs/${key}`, sourceLastMod: src.lastmod || 'No date', title });
-          continue;
-        }
-        const tr = translationsMap[key].node;
-        const trDate = tr.lastmod ? new Date(tr.lastmod) : null;
-        if (!srcDate && !trDate) {
-          upToDate.push({ file: `docs/${key}`, sourceLastMod: 'No date', translationLastMod: 'No date', title });
-        } else if (srcDate && !trDate) {
-          outdated.push({ file: `docs/${key}`, sourceLastMod: src.lastmod, translationLastMod: 'No date', title });
-        } else if (!srcDate && trDate) {
-          upToDate.push({ file: `docs/${key}`, sourceLastMod: 'No date', translationLastMod: tr.lastmod, title });
-        } else {
-          if (trDate >= srcDate) {
-            upToDate.push({ file: `docs/${key}`, sourceLastMod: src.lastmod, translationLastMod: tr.lastmod, title });
+        missingAll.push({ file: `docs/${key}`, sourceLastMod: src.lastmod || 'No date', title, sourceNode: src });
+      }
+      for (const lang of Object.keys(translationsByLang)) {
+        const translationsMap = translationsByLang[lang] || {};
+        const translationKeys = new Set(Object.keys(translationsMap));
+
+        const missing = [];
+        const outdated = [];
+        const upToDate = [];
+        const orphaned = [];
+
+        for (const key of sourceKeys) {
+          const src = sourceMap[key];
+          const srcDate = src.lastmod ? new Date(src.lastmod) : null;
+          const title = src.title || key;
+          if (!translationKeys.has(key)) {
+            missing.push({ file: `docs/${key}`, sourceLastMod: src.lastmod || 'No date', title, sourceNode: src });
+            continue;
+          }
+          const tr = translationsMap[key].node;
+          const trDate = tr.lastmod ? new Date(tr.lastmod) : null;
+          if (!srcDate && !trDate) {
+            upToDate.push({ file: `docs/${key}`, sourceLastMod: 'No date', translationLastMod: 'No date', title });
+          } else if (srcDate && !trDate) {
+            outdated.push({ file: `docs/${key}`, sourceLastMod: src.lastmod, translationLastMod: 'No date', title });
+          } else if (!srcDate && trDate) {
+            upToDate.push({ file: `docs/${key}`, sourceLastMod: 'No date', translationLastMod: tr.lastmod, title });
           } else {
-            outdated.push({ file: `docs/${key}`, sourceLastMod: src.lastmod, translationLastMod: tr.lastmod, title, daysBehind: Math.ceil((srcDate - trDate) / (1000*60*60*24)) });
+            if (trDate >= srcDate) {
+              upToDate.push({ file: `docs/${key}`, sourceLastMod: src.lastmod, translationLastMod: tr.lastmod, title });
+            } else {
+              outdated.push({ file: `docs/${key}`, sourceLastMod: src.lastmod, translationLastMod: tr.lastmod, title, daysBehind: Math.ceil((srcDate - trDate) / (1000*60*60*24)) });
+            }
           }
         }
+
+        for (const key of translationKeys) {
+          if (!sourceKeys.has(key)) {
+            const entry = translationsMap[key];
+            const node = entry.node;
+            const orig = entry.originalPath || key;
+            orphaned.push({ file: `${lang}/docusaurus-plugin-content-docs/current/${orig}`, translationLastMod: node.lastmod || 'No date', title: node.title || orig });
+          }
+        }
+
+        results[lang] = {
+          missing,
+          outdated,
+          upToDate,
+          orphaned,
+          errors: [],
+          total: Object.keys(sourceMap).length
+        };
       }
 
-      for (const key of translationKeys) {
-        if (!sourceKeys.has(key)) {
-          const entry = translationsMap[key];
-          const node = entry.node;
-          const orig = entry.originalPath || key;
-          orphaned.push({ file: `${selectedLanguage}/docusaurus-plugin-content-docs/current/${orig}`, translationLastMod: node.lastmod || 'No date', title: node.title || orig });
+      // Try to include languages from Tina settings (preferred), then fall back to
+      // static config file or the optional /i18n/locales.json. Exclude default locale.
+      let langsFromTina = [];
+      try {
+        const { client } = await import('../../../tina/__generated__/client');
+        const query = `
+          query GetSettings($collection: String!, $relativePath: String!) {
+            getDocument(collection: $collection, relativePath: $relativePath) {
+              ... on Settings {
+                languages
+              }
+            }
+          }
+        `;
+        // Try to fetch the global settings document (config/docusaurus/index.json)
+        const variables = { collection: 'settings', relativePath: 'index.json' };
+        try {
+          const resp = await client.request({ query, variables });
+          const settings = resp && resp.data && resp.data.getDocument ? resp.data.getDocument : null;
+          if (settings && settings.languages) {
+            // Expecting either { supported: [...], default: 'en' } or an object we can read
+            const langObj = settings.languages;
+            if (Array.isArray(langObj.supported)) {
+              const def = langObj.default || (langObj.supported.find(l => l.default) && langObj.supported.find(l => l.default).code) || null;
+              langsFromTina = langObj.supported.map(s => ({ code: s.code, label: s.label })).filter(l => l.code !== def);
+            }
+          }
+        } catch (e) {
+          // ignore GraphQL fetch errors and fall back to static file below
+        }
+      } catch (e) {
+        // client import failed or not available — fall back
+      }
+
+      // If Tina didn't provide languages, try static config file served as JSON
+      if (langsFromTina.length === 0) {
+        try {
+          const resp = await fetch('/config/docusaurus/index.json');
+          if (resp.ok) {
+            const cfg = await resp.json();
+            const supported = cfg.languages?.supported || [];
+            const def = cfg.languages?.default || cfg.languages?.defaultLocale || null;
+            langsFromTina = supported.map(s => ({ code: s.code, label: s.label })).filter(l => l.code !== def);
+          }
+        } catch (e) {
+          // ignore
         }
       }
 
-      results[selectedLanguage] = {
-        missing,
-        outdated,
-        upToDate,
-        orphaned,
-        errors: [],
-        total: Object.keys(sourceMap).length
-      };
+      // If still empty, fallback to optional /i18n/locales.json array
+      if (langsFromTina.length === 0) {
+        try {
+          const resp = await fetch('/i18n/locales.json');
+          if (resp.ok) {
+            const data = await resp.json();
+            if (Array.isArray(data)) {
+              langsFromTina = data.map(code => ({ code, label: code }));
+            }
+          }
+        } catch (e) {
+          // ignore
+        }
+      }
+
+      for (const langEntry of langsFromTina) {
+        const fsLang = langEntry.code;
+        if (!results[fsLang]) {
+          results[fsLang] = {
+            missing: missingAll.slice(),
+            outdated: [],
+            upToDate: [],
+            orphaned: [],
+            errors: [],
+            total: Object.keys(sourceMap).length
+          };
+        }
+      }
+
+      // If no translations found at all, ensure we still populate selectedLanguage key so UI remains consistent
+      if (Object.keys(results).length === 0) {
+        results[selectedLanguage] = {
+          missing: [],
+          outdated: [],
+          upToDate: [],
+          orphaned: [],
+          errors: [],
+          total: Object.keys(sourceMap).length
+        };
+      }
+
+      // Ensure selectedLanguage is present in results (pick first available if not)
+      const langsFound = Object.keys(results);
+      if (langsFound.length > 0 && !results[selectedLanguage]) {
+        setSelectedLanguage(langsFound[0]);
+      }
 
       setTranslationData(results);
     } catch (error) {
@@ -555,12 +703,23 @@ const TranslationDashboard = () => {
               color: 'white',
               border: 'none',
               borderRadius: '4px',
-              cursor: 'pointer',
-              fontSize: '12px'
+              cursor: adding ? 'default' : 'pointer',
+              fontSize: '12px',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '8px'
             }}
-            disabled={loading}
+            disabled={loading || adding}
           >
-            Add Missing Topics
+            {adding && (
+              <svg width="14" height="14" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden>
+                <g>
+                  <animateTransform attributeName="transform" type="rotate" from="0 12 12" to="360 12 12" dur="1s" repeatCount="indefinite" />
+                  <circle cx="12" cy="12" r="8" stroke="white" strokeWidth="2" fill="none" strokeLinecap="round" strokeDasharray="39 25" />
+                </g>
+              </svg>
+            )}
+            {adding ? (addProgress !== null ? `Adding (${addProgress}%)` : 'Adding...') : 'Add Missing Topics'}
           </button>
           <button
             onClick={async () => {
@@ -604,12 +763,23 @@ const TranslationDashboard = () => {
               color: 'white',
               border: 'none',
               borderRadius: '4px',
-              cursor: 'pointer',
-              fontSize: '12px'
+              cursor: importing ? 'default' : 'pointer',
+              fontSize: '12px',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '8px'
             }}
-            disabled={loading}
+            disabled={loading || importing}
           >
-            Import XLIFF
+            {importing && (
+              <svg width="16" height="16" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden>
+                <g>
+                  <animateTransform attributeName="transform" type="rotate" from="0 12 12" to="360 12 12" dur="1s" repeatCount="indefinite" />
+                  <circle cx="12" cy="12" r="8" stroke="white" strokeWidth="2" fill="none" strokeLinecap="round" strokeDasharray="39 25" />
+                </g>
+              </svg>
+            )}
+            {importing ? (importProgress !== null ? `Importing (${importProgress}%)` : 'Importing...') : 'Import XLIFF'}
           </button>
           {/* Debug import now runs immediately when a file is selected via Import XLIFF */}
           

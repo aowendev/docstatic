@@ -47,7 +47,7 @@
     "lint:fix": "biome check apis/ config/ reuse/ scripts/ src/ static/ tina/ --fix"
   },
   "dependencies": {
-    "@algolia/client-search": "^5.49.0",
+    "@algolia/client-search": "^5.49.1",
     "@codemirror/language": "6.0.0",
     "@docusaurus/core": "^3.9.2",
     "@docusaurus/plugin-content-docs": "^3.9.2",
@@ -83,7 +83,7 @@
     "slate": "^0.118.1",
     "slate-dom": "^0.118.1",
     "sucrase": "^3.35.0",
-    "tinacms": "^3.5.0",
+    "tinacms": "^3.5.1",
     "title": "^4.0.1",
     "typescript": "5.6.3",
     "webpack": "^5.105.2",
@@ -105,10 +105,10 @@
     ]
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.4.3",
-    "@tinacms/cli": "^2.1.6"
+    "@biomejs/biome": "^2.4.4",
+    "@tinacms/cli": "^2.1.7"
   },
   "engines": {
-    "node": ">=24.11.1"
+    "node": ">=22.0.0"
   }
 }

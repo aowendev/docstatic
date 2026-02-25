@@ -120,6 +120,10 @@
       {
         "code": "fr",
         "label": "Français"
+      },
+      {
+        "code": "es",
+        "label": "Español"
       }
     ],
     "default": "en"
