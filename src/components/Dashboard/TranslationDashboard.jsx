@@ -78,8 +78,13 @@ const TranslationDashboard = () => {
           } else {
             paramsBody.title = item.title;
           }
-          // ensure created translations start as drafts
+          // ensure created translations start with required workflow metadata
           paramsBody.draft = true;
+          paramsBody.review = true;
+          paramsBody.translate = false;
+          paramsBody.approved = false;
+          paramsBody.published = false;
+          paramsBody.unlisted = false;
           // set lastmod to one day earlier than source (or yesterday)
           let lastmodSource = null;
           if (sourceNode && sourceNode.lastmod) {
