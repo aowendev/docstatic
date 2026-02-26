@@ -1,0 +1,49 @@
+---
+lastmod: '2026-02-25T23:59:25.577Z'
+title: Code blocks and snippets
+tags:
+  - elements
+  - elements_code-blocks
+  - reuse
+  - reuse_snippets
+draft: true
+review: false
+translate: false
+approved: false
+published: true
+unlisted: false
+---
+
+# Bloques de código y fragmentos
+
+DocStatic ofrece dos formas de incluir código en tu documentación. Ambas admiten el resaltado de sintaxis.
+
+## Bloques de código
+
+1. Haz clic en el icono **Bloque de código** del editor de texto enriquecido.
+2. Haz clic en la lista de idiomas y selecciona o busca un idioma.
+3. Introduce tu código en el cuadro.
+
+#### Ejemplo:
+
+\`\`\` texto sin formato
+
+Esto es texto sin formato.
+
+```
+
+
+
+## Fragmentos de código
+
+1. Seleccione **Fragmento de código** en la lista **Incrustar**.
+2. Asigne un **Título**.
+3. Seleccione un **Lenguaje**.
+4. Elija un archivo de la lista. La lista se rellena con todos los archivos de la carpeta `reuse/code/` cada vez que se ejecuta el servidor de desarrollo o se realiza una compilación.
+
+#### Ejemplo:
+
+(jsx:CodeSnippet title="Título de ejemplo" language="xml" filepath="example.xml")Título de ejemplo(/jsx:CodeSnippet)
+
+La ventaja de utilizar fragmentos de código es que hay un archivo físico que se puede someter a pruebas unitarias.
+```

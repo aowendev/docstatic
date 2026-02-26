@@ -1,0 +1,57 @@
+---
+lastmod: '2026-02-25T23:59:33.516Z'
+title: Taxonomies
+tags:
+  - metadata
+  - metadata_taxonomies
+draft: true
+review: false
+translate: false
+approved: false
+published: true
+unlisted: false
+---
+
+# Taxonomías
+
+Cuanta más información tienes, más difícil es encontrar cosas. Markdown te permite etiquetar contenido, pero sin comprobar la coherencia. DocStatic te permite aplicar una [arquitectura de la información](https://en.wikipedia.org/wiki/Information_architecture) a tu contenido con taxonomías.
+
+## Diseñar una arquitectura de la información
+
+Excedería el alcance de este documento tratar la arquitectura de la información en profundidad, pero aquí tienes algunas sugerencias:
+
+* Limita tu jerarquía a tres niveles. Esto se ajusta bien a la [indexación](/docs/tags) tradicional.
+* Normaliza tus términos. Prefiere los plurales a los singulares o los verbos. Prefiere las palabras sueltas a las frases.
+* Escribe las siglas y abreviaturas completas.
+* Intente limitar el nivel superior a diez categorías.
+* Intente limitar el nivel intermedio a siete categorías.
+* Utilice tantas categorías de nivel inferior como sea necesario.
+
+## Aplicación de una jerarquía a los sistemas de etiquetas planos
+
+Lo ideal es aplicar la arquitectura de la información a todas sus plataformas de información (sistemas de seguimiento de errores, wikis, etc.). Esto significa que las etiquetas deben cumplir los criterios más restrictivos:
+
+* Las etiquetas deben contener sus propias categorías principales, separadas por un guión bajo ( \_ ).
+* Solo letras minúsculas. Sin números, espacios (utilice un guión en su lugar) ni caracteres especiales.
+
+Para evitar que las etiquetas se vuelvan excesivamente largas, el anidamiento se limita a una profundidad máxima de tres niveles. En algunos casos, esto requiere aplanar la estructura. Por ejemplo, aunque «regions*europe*uk*scotland» es lógico, tiene cuatro niveles, por lo que debe estructurarse como «regions*uk\_scotland».
+
+## Gestión de etiquetas taxonómicas
+
+Al etiquetar contenido en el CMS, estás limitado al conjunto de etiquetas que definas.
+
+1. Seleccione Taxonomías en las colecciones y añada una taxonomía.
+2. Añada cualquier etiqueta secundaria de nivel medio. Estas deben incluir la etiqueta principal (parent\_child).
+3. Añada cualquier etiqueta secundaria de nivel inferior. Estas deben incluir la etiqueta principal (top*mid*leaf).
+
+<Admonition type="note" title="Nota">
+  No es necesario incluir la etiqueta principal y un guión bajo en una etiqueta secundaria, pero si los omite, se le presentará una lista plana de etiquetas cuando añada una etiqueta a un tema. 
+</Admonition>
+
+## Etiquetado de contenido
+
+En el CMS, al editar un tema, puede utilizar el modo de búsqueda para buscar un término o seleccionarlo en la vista de árbol. Al añadir una etiqueta, todas las etiquetas principales se añaden automáticamente. Sin embargo, solo se añade una instancia de cada etiqueta.
+
+<Admonition type="tip" title="Consejo">
+  Evite etiquetar contenido fuera del CMS. De este modo, sus etiquetas serán coherentes y le resultará más fácil buscar contenido.
+</Admonition>

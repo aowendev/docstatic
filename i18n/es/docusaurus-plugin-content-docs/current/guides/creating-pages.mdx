@@ -1,0 +1,41 @@
+---
+lastmod: '2026-02-25T23:59:26.896Z'
+title: Creating pages
+tags:
+  - computer-languages
+  - computer-languages_javascript
+  - computer-languages_javascript_react
+draft: true
+review: false
+translate: false
+approved: false
+published: true
+unlisted: false
+---
+
+# Creación de páginas
+
+Las páginas se diferencian de otros tipos de contenido en que están pensadas como contenido único e independiente, como una página de presentación, un espacio de pruebas o una página de asistencia. Pueden contener componentes React y Markdown. Ten en cuenta que las páginas no tienen barras laterales.
+
+<Admonition type="info" title="Info">
+  Consulte la [Referencia de la API del complemento Pages](http://localhost:3000/docs/api/plugins/plugin-content-pages.mdx) en la documentación de Docusaurus para obtener una lista exhaustiva de opciones.
+</Admonition>
+
+## Añadir una página
+
+1. En la colección **Páginas** del CMS, haz clic en **Añadir archivo**.
+2. Dale un **Título** y una **Descripción**.
+3. Añade tu contenido en el editor de texto enriquecido.
+4. Haz clic en **Guardar**.
+
+## Añadir componentes React a una página
+
+Los componentes React de DocStatic están disponibles globalmente. Pero si solo utilizas un componente en una página, no tiene sentido hacerlo. En su lugar, puedes importar el componente directamente a la página. Sin embargo, para asegurarte de que puedes editar la página en el CMS, debes envolver la directiva de importación en un componente [Passthrough](/docs/guides/markdown-features/react#passthrough-component). La página de ejemplo del sitio DocStatic importa el componente ColorGenerator de la siguiente manera:
+
+```markdown
+<Passthrough type="jsx" string="import ColorGenerator from '@site/src/components/ColorGenerator';" summary="Import Statement" />
+
+<Passthrough type="jsx" string="<ColorGenerator />" summary="JSX Component" />
+```
+
+Para obtener más información, consulta [Creación de páginas](https://docusaurus.io/docs/creating-pages) en la documentación de Docusaurus.

@@ -1,0 +1,152 @@
+---
+lastmod: '2026-02-25T23:59:28.862Z'
+title: Getting started - working in the cloud
+draft: true
+review: false
+translate: false
+approved: false
+published: false
+unlisted: false
+---
+
+# Introducción: Trabajar con DocStatic en la nube
+
+¡Bienvenido! Esta guía le guiará a través de la configuración inicial de DocStatic.
+
+Si nunca ha trabajado con GitHub o docs-as-code, no se preocupe: le explicaremos qué se necesita, por qué y dónde encontrar más detalles.
+
+## Requisitos previos
+
+Puede ejecutar DocStatic localmente (en su ordenador) o alojarlo en la nube. En este artículo, explicamos cómo alojarlo en la nube.
+
+Para una configuración más sencilla en la nube, cree cuentas gratuitas en estos servicios:
+
+* [GitHub](https://github.com/): almacena su contenido y realiza un seguimiento de los cambios.
+* [TinaCMS](https://tina.io/): permite la edición basada en navegador.
+* [LanguageTool](https://languagetool.org/): proporciona comprobación opcional de gramática y estilo.
+
+***
+
+## Bifurca el repositorio de DocStatic
+
+El código fuente de DocStatic se encuentra en GitHub. Para empezar, tendrás que bifurcarlo. Esto te proporcionará una copia personal que podrás utilizar en tu propio repositorio, sin afectar a la versión original.
+
+1. Inicia sesión en tu cuenta de GitHub.
+2. Visita [https://github.com/aowendev/docstatic](https://github.com/aowendev/docstatic).
+3. Haz clic en **Fork** (normalmente se encuentra en la parte superior derecha).
+4. Deja el **nombre del repositorio** predeterminado.
+5. Introduce una descripción de tu proyecto.
+6. Asegúrate de que la opción **Copiar solo la rama principal** esté marcada.
+7. Haz clic en **Crear bifurcación**.
+
+***
+
+## Estructura del proyecto
+
+Después de bifurcar y clonar el repositorio, verás varios archivos en tu carpeta `docstatic/`. A continuación, hemos incluido **algunos** de los archivos y carpetas de la estructura del proyecto que debes tener en cuenta. **No es una lista completa de todo lo que hay en el proyecto**.
+
+```
+docstatic
+├── apis
+│   └── petstore.yaml
+├── blog
+│   └── hybrid.mdx
+├── config
+│   ├── docusaurus
+│   │   └── index.json
+│   ├── homepage
+│   │   └── index.json
+│   └── sidebar
+│       └── index.json
+│
+├── docs
+│   └── introduction.mdx
+├── i18n
+│   └── fr
+├── reuse
+│   ├── code
+│   │   └── example.xml
+│   ├── conditions
+│   │   └── index.json
+│   ├── glossaryTerms
+│   │   └── index.json
+│   ├── snippets
+│   │   └── example.mdx
+│   ├── taxonomy
+│   │   └── index.json
+│   ├── variableSets
+│   │   └── index.json
+│   ├── code-files.json
+│   └── snippets-files.json
+├── src
+│   ├── css
+│   │   └── custom.css
+│   └── páginas
+│       ├── página-de-ejemplo.mdx
+│       ├── index.js
+│       └── index.module.css
+├── estático
+│   └── img
+├── docusaurus.config.ts
+├── package.json
+├── README.md
+├── sidebars.ts
+└── yarn.lock
+```
+
+### Resumen de la estructura del proyecto
+
+* `/apis/`: archivos YAML de OpenAPI.
+* `/blog/`: archivos MDX del blog.
+* `/config/`: archivos JSON utilizados por TinaCMS para configurar DocStatic.
+* `/docs/`: archivos MDX de documentación.
+* `/i18n/`: archivos de traducción.
+* `/reuse/`: contenido reutilizable.
+* `/src/`: archivos que no son de documentación, como páginas o componentes React personalizados.
+  * `/src/pages`: cualquier archivo JSX/TSX/MDX dentro de este directorio se convierte en una página web.
+* `/static/`: carpeta estática. Cualquier contenido que se encuentre aquí se copia en la raíz de la carpeta de compilación final.
+* `/docusaurus.config.ts`: archivo de configuración que contiene la configuración del sitio.
+* `/package.json`: un sitio web DocStatic es una aplicación React. Puedes instalar y utilizar cualquier paquete npm que desees.
+* `/sidebars.ts`: especifica el orden de los documentos en la barra lateral. Úsalo para tu estructura de «índice».
+
+A continuación, veamos dónde debes crear y almacenar tus archivos de documentación.
+
+***
+
+## Borra la carpeta Docs
+
+La carpeta Docs contiene una copia de la documentación de DocStatic. La idea es que borres la documentación de DocStatic. Cuando crees tu propia documentación, debes guardarla en la carpeta Docs.
+
+***
+
+## Monorepos
+
+DocStatic permite el uso de un único repositorio que contiene tanto el código del proyecto como la documentación del proyecto. En la terminología de Docusaurus, este concepto se denomina «monorepo».
+
+Para obtener más información, consulta [Monorepos](https://docusaurus.io/docs/installation#monorepos) en la documentación de Docusaurus.
+
+***
+
+## Vista previa de los cambios
+
+Para obtener una vista previa de los cambios a medida que edita los archivos, puede ejecutar un **servidor de desarrollo local** que alojará su sitio web y reflejará los últimos cambios.
+
+Abra un terminal o un símbolo del sistema e introduzca:
+
+```shell
+yarn dev
+```
+
+De forma predeterminada, se abrirá una ventana del navegador en [http://localhost:3000](http://localhost:3000).
+
+***
+
+## Compilación
+
+DocStatic utiliza un generador de sitios estáticos para compilar el sitio web en una carpeta de contenido estático y colocarlo en un servidor web donde se pueda ver. Para compilar el sitio web, utilice:
+
+```shell
+yarn build-local
+```
+
+El contenido se genera en la carpeta `/build`, que puede copiar a cualquier servicio de alojamiento de archivos estáticos, como GitHub Pages, Netlify o Vercel. Para obtener más información, consulte [Implementación](https://docusaurus.io/docs/deployment) en la documentación de Docusaurus.

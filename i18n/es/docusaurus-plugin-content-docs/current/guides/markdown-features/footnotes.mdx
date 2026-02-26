@@ -1,0 +1,48 @@
+---
+lastmod: '2026-02-25T23:59:28.309Z'
+title: Footnotes
+tags:
+  - elements
+  - elements_footnotes
+draft: true
+review: false
+translate: false
+approved: false
+published: true
+unlisted: false
+---
+
+# Notas al pie
+
+Existe una extensión de Markdown que proporciona notas al pie, pero su implementación no es consistente y separa el contenido del número. Por ejemplo:
+
+```markdown
+Markdown es un lenguaje de marcado ligero[^1] creado por John Gruber[^2], ahora ampliamente utilizado en la escritura[^3].
+
+[^1]: Markdown utiliza una sintaxis sencilla para lograr el formato del texto.
+[^2]: John Gruber creó Markdown en 2004.
+[^3]: Muchas plataformas, como GitHub, Stack Overflow y plataformas de blogs, son compatibles con Markdown.
+```
+
+En DocStatic, esto se representaría así:
+
+```markdown
+Markdown es un lenguaje de marcado ligero<Footnote summary="1"> Markdown utiliza una sintaxis sencilla para dar formato al texto.</Footnote>
+creado por John Gruber<Footnote summary="2">John Gruber creó Markdown en 2004.</Footnote>,
+ahora ampliamente utilizado en la escritura<Footnote summary="3">Muchas plataformas, como GitHub, Stack Overflow y plataformas de blogs, son compatibles con Markdown.</Footnote>.
+```
+
+El componente **Notas al pie** te permite añadir notas al pie en línea a tu texto.
+
+1. Seleccione **Notas al pie** en la lista **Incrustar**.
+2. Edite el componente.
+3. Asígnele un **Resumen**.
+4. Introduzca la **Nota al pie**.
+
+#### Ejemplo
+
+Markdown es un lenguaje de marcado ligero <Footnote summary="1"> Markdown utiliza una sintaxis sencilla para dar formato al texto.</Footnote> creado por John Gruber<Footnote summary="2">John Gruber creó Markdown en 2004.</Footnote>, ahora ampliamente utilizado en la escritura<Footnote summary="3">Muchas plataformas, como GitHub, Stack Overflow y plataformas de blogs, son compatibles con Markdown.</Footnote>.
+
+<Admonition type="note" title="Nota">
+  Si dos notas al pie tienen el mismo contenido, solo aparecerán una vez en el pie de página y compartirán un número.
+</Admonition>

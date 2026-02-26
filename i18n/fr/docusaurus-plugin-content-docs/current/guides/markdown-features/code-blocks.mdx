@@ -1,6 +1,6 @@
 ---
+lastmod: '2026-02-25T23:51:54.793Z'
 title: Blocs de code et extraits
-lastmod: '2025-10-19T13:10:09.774Z'
 description: Gestion des blocs de code dans DocStatic.
 tags:
   - elements
@@ -17,29 +17,34 @@ unlisted: false
 
 # Blocs de code et extraits
 
-DocStatic propose deux façons d'inclure du code dans votre documentation. Toutes deux prennent en charge la mise en évidence de la syntaxe.
+DocStatic propose deux méthodes pour inclure du code dans votre documentation. Les deux prennent en charge la coloration syntaxique.
 
 ## Blocs de code
 
-1. Cliquez sur l'icône **Code Block** dans l'éditeur de texte riche.
-2. Cliquez sur la liste des langues et sélectionnez ou recherchez une langue.
-3. Saisissez votre code dans la boîte.
+1. Cliquez sur l'icône **Bloc de code** dans l'éditeur de texte enrichi.
+2. Cliquez sur la liste des langages et sélectionnez ou recherchez un langage.
+3. Saisissez votre code dans la zone.
 
 #### Exemple :
 
-```plaintext
-Voici du texte en clair.
+\`\`\` texte brut
+
+Ceci est du texte brut.
+
 ```
+
+
 
 ## Extraits de code
 
-1. Sélectionnez **Code Snippet** dans la liste **Embed**.
-2. Donnez-lui un **Title**.
-3. Sélectionnez une **Language**.
-4. Choisissez un fichier dans la liste. La liste est remplie avec tous les fichiers du dossier `reuse/code/` chaque fois que vous lancez le serveur de développement ou que vous faites une compilation.
+1. Sélectionnez **Extrait de code** dans la liste **Intégrer**.
+2. Donnez-lui un **Titre**.
+3. Sélectionnez un **Langage**.
+4. Choisissez un fichier dans la liste. La liste est remplie avec tous les fichiers du dossier `reuse/code/` chaque fois que vous exécutez le serveur de développement ou effectuez une compilation.
 
 #### Exemple :
 
-<CodeSnippet title="Titre de l'exemple" language="xml" filepath="example.xml" />
+(jsx:CodeSnippet title="Exemple de titre" language="xml" filepath="example.xml")Exemple de titre(/jsx:CodeSnippet)
 
-L'avantage d'utiliser des extraits de code est qu'il existe un fichier physique qui peut être testé de manière unitaire.
+L'avantage d'utiliser des extraits de code est qu'il existe un fichier physique qui peut être testé individuellement.
+```

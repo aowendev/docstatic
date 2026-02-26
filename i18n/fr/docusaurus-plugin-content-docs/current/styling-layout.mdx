@@ -1,9 +1,7 @@
 ---
+lastmod: '2026-02-25T23:52:03.142Z'
 title: Style et mise en page
-lastmod: '2025-10-19T12:27:42.586Z'
-description: >-
-  Un site Docstatic est une application React pré-rendue d'une seule page. Vous
-  pouvez le styliser de la même manière que les applications React.
+description: Un site Docstatic est une application React pré-rendue d'une seule page. Vous pouvez le styliser de la même manière que les applications React.
 tags:
   - computer-languages
   - computer-languages_css
@@ -15,47 +13,47 @@ published: true
 unlisted: false
 ---
 
-Un site DocStatic est une application React à page unique. Vous pouvez le styliser de la même manière que les applications React.
+Un site DocStatic est une application React à page unique. Vous pouvez le styliser de la même manière que vous stylisez les applications React.
 
 ## Styles globaux
 
-DocStatic utilise le thème @docusaurus/preset-classic avec des surcharges CSS dans le fichier /src/css/custom.css. Toute CSS que vous écrivez dans ce fichier est disponible globalement et peut être référencée directement à l'aide de chaînes de caractères.
+DocStatic utilise le thème @docusaurus/preset-classic avec des remplacements CSS dans le fichier /src/css/custom.css. Tout CSS que vous écrivez dans ce fichier est disponible globalement et peut être référencé directement à l'aide de littéraux de chaîne.
 
 ## Styliser votre site avec Infima
 
-DocStatic utilise [Infima](https://infima.dev/) comme cadre de style sous-jacent. Infima fournit une mise en page flexible et des composants d'interface utilisateur communs adaptés aux sites web centrés sur le contenu (blogs, documentation, pages d'atterrissage). Pour plus de détails, consultez le [site web Infima](https://infima.dev/).
+DocStatic utilise [Infima](https://infima.dev/) comme framework de stylisation sous-jacent. Infima fournit une mise en page flexible et des composants d'interface utilisateur courants adaptés aux sites web centrés sur le contenu (blogs, documentation, pages d'accueil). Pour plus de détails, consultez le [site web d'Infima](https://infima.dev/).
 
-Infima utilise sept nuances de chaque couleur. Nous vous recommandons d'utiliser ColorBox pour trouver les différentes nuances de couleurs pour la couleur primaire que vous avez choisie. Vous pouvez utiliser l'outil de la [Page d'exemple](https://docstatic.com/fr/example-page) pour générer les différentes nuances pour votre site web et copier les variables dans `/src/css/custom.css`.
+Infima utilise sept nuances de chaque couleur. Nous vous recommandons d'utiliser ColorBox pour trouver les différentes nuances de couleurs correspondant à la couleur principale que vous avez choisie. Vous pouvez utiliser l'outil sur la [page d'exemple](https://docstatic.com/example-page) pour générer les différentes nuances pour votre site web et copier les variables dans `/src/css/custom.css`.
 
 ## Mode sombre
 
-En mode clair, l'élément `<html>` a un attribut `data-theme="light"` ; en mode sombre, il est `data-theme="dark"`. Par conséquent, vous pouvez adapter votre CSS au mode sombre uniquement en ciblant l'élément html avec un attribut spécifique.
+En mode clair, l'élément \<html> possède un attribut data-theme="light" ; en mode sombre, il possède un attribut data-theme="dark". Vous pouvez donc limiter votre CSS au mode sombre uniquement en ciblant html avec un attribut spécifique.
 
 ```css
-/* Surcharge des variables racines d'Infima */
+/* Remplacement des variables racines Infima */
 [data-theme='dark'] {
-  --ifm-color-primary : #4e89e8 ;
+  --ifm-color-primary: #4e89e8;
 }
-/* Styliser une classe spécialement en mode sombre */
+/* Stylisation d'une classe spécifique en mode sombre */
 [data-theme='dark'] .purple-text {
-  color : plum ;
+  color: plum;
 }
 ```
 
-## Vue mobile
+## Affichage mobile
 
-Docstatic utilise 996px comme limite entre la largeur de l'écran mobile et celle de l'écran de bureau. Si vous voulez que votre mise en page soit différente dans l'affichage mobile, vous pouvez utiliser des requêtes de média.
+Docstatic utilise 996px comme limite entre la largeur d'écran mobile et celle d'un ordinateur de bureau. Si vous souhaitez que votre mise en page soit différente dans l'affichage mobile, vous pouvez utiliser des requêtes média.
 
 ```css
 .banner {
-  padding : 4rem ;
+  padding: 4rem;
 }
-/** Dans la vue mobile, réduire le padding */
-@media screen and (max-width : 996px) {
+/** Dans l'affichage mobile, réduisez le padding */
+@media screen and (max-width: 996px) {
   .heroBanner {
-    padding : 2rem ;
+    padding: 2rem;
   }
 }
 ```
 
-Pour plus d'informations, voir [Style et mise en page](https://docusaurus.io/fr/docs/styling-layout) dans la documentation de Docusaurus.
+Pour plus d'informations, consultez la section [Styling and Layout](https://docusaurus.io/docs/styling-layout) dans la documentation Docusaurus.

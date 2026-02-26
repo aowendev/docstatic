@@ -1,0 +1,149 @@
+---
+lastmod: '2026-02-25T23:59:31.093Z'
+title: MDX and React
+tags:
+  - computer-languages
+  - computer-languages_markdown
+  - computer-languages_markdown_mdx
+  - computer-languages_javascript
+  - computer-languages_javascript_react
+draft: true
+review: false
+translate: false
+approved: false
+published: true
+unlisted: false
+---
+
+# MDX y React
+
+DocStatic tiene soporte integrado para [MDX](https://mdxjs.com/), lo que te permite escribir JSX dentro de tus archivos Markdown y renderizarlos como componentes React. Sin embargo, si añades JSX directamente en tus temas, el CMS no podrá mostrarlos en el editor de texto enriquecido.
+
+## Ámbito de los componentes MDX
+
+La forma preferida de utilizar componentes en MDX en DocStatic es registrarlos en el ámbito global, lo que los hace automáticamente disponibles en todos los archivos MDX, sin necesidad de declaraciones de importación. También es necesario añadir una definición de plantilla al componente e importarla para que el CMS la reconozca. Para ver ejemplos de cómo se hace esto, puede explorar los propios componentes de DocStatic, como `CodeSnippet`. Es importante asegurarse de que los componentes globales se renderizan de forma estática, ya que de lo contrario pueden añadir retrasos al renderizado de la página.
+
+Por ejemplo, este es el contenido de `src/themes/MDXComponents.jsx`:
+
+```javascript
+import CodeBlock from "@theme-original/CodeBlock";
+import DocCardList from "@theme-original/DocCardList";
+import MDXComponents from "@theme-original/MDXComponents";
+import TabItem from "@theme-original/TabItem";
+import Tabs from "@theme-original/Tabs";
+import Details from "@theme/Details";
+import React from "react";
+
+import CodeSnippet from "@site/src/components/CodeSnippet";
+import ConditionalText from "@site/src/components/ConditionalText";
+import Figure from "@site/src/components/Figure";
+importar Footnote desde «@site/src/components/Footnote»;
+importar GlossaryTerm desde «@site/src/components/GlossaryTerm»;
+importar Passthrough desde «@site/src/components/Passthrough»;
+importar Snippet desde «@site/src/components/Snippet»;
+importar VariableSet desde "@site/src/components/VariableSet";
+
+exportar por defecto {
+  ...MDXComponents,
+  Admonition: MDXComponents.admonition,
+  CodeBlock: CodeBlock,
+  CodeSnippet: CodeSnippet,
+  ConditionalText: ConditionalText,
+  Details: Details,
+  DocCardList: DocCardList,
+  Figure: Figure,
+  Footnote: Footnote,
+  GlossaryTerm: GlossaryTerm,
+  Passthrough: Passthrough,
+  Snippet: Snippet,
+  TabItem: TabItem,
+  Tabs: Tabs,
+  VariableSet: VariableSet,
+};
+```
+
+Las importaciones que comienzan con `@site/src/components`/ son los componentes personalizados que se pueden representar en los temas. También hay componentes personalizados que utiliza el CMS, como StatusField, que no es necesario importar.
+
+El archivo `src/themes/tempate.jsx` comienza así:
+
+```javascript
+import React from "react";
+import codeFiles from "../../reuse/code-files.json";
+import { slugify } from "../../util";
+import { CodeSnippetBlockTemplate } from "../components/CodeSnippet/template";
+import { ConditionalTextBlockTemplate } from "../components/ConditionalText/template";
+import { FigureBlockTemplate } from "../components/Figure/template";
+import { FootnoteBlockTemplate } from "../components/Footnote/template";
+import { GlossaryTermBlockTemplate } from "../components/GlossaryTerm/template";
+import { PassthroughBlockTemplate } from "../components/Passthrough/template";
+import { SnippetBlockTemplate } from "../components/Snippet/template";
+import { VariableSetBlockTemplate } from "../components/VariableSet/template";
+```
+
+Las plantillas para componentes nativos, como `Details`, deben definirse directamente en el archivo. Por ejemplo:
+
+```javascript
+const DetailsTemplate = {
+  name: "Details",
+  fields: [
+    {
+      name: "summary",
+      label: "Summary",
+      type: "string",
+      isTitle: true,
+      required: true,
+    },
+    {
+      name: "children",
+      label: "Details",
+      type: "rich-text",
+    },
+  ],
+};
+```
+
+El archivo termina exportando todas las plantillas:
+
+```javascript
+
+export const MDXTemplates = [
+  AdmonitionTemplate,
+  CodeSnippetBlockTemplate,
+  CommentBlockTemplate,
+  ConditionalTextBlockTemplate,
+  ContextHelpTemplate,
+  DetailsTemplate,
+  DocCardListTemplate,
+  FigureBlockTemplate,
+  FootnoteBlockTemplate,
+  GlossaryTermBlockTemplate,
+  SnippetBlockTemplate,
+  PassthroughBlockTemplate,
+  TabsTemplate,
+  TruncateTemplate,
+  VariableSetBlockTemplate,
+];
+```
+
+Ahora estos componentes se pueden utilizar en cualquier archivo MDX.
+
+<Admonition type="caution" title="Precaución">
+  Utilice nombres de etiquetas en mayúsculas.
+
+  A partir de MDX v3+, los nombres de etiquetas en minúsculas siempre se representan como elementos HTML nativos y no utilizarán ninguna asignación de componentes que usted proporcione.
+</Admonition>
+
+Para obtener más información, consulte [MDX y React](https://docusaurus.io/docs/markdown-features/react) en la documentación de Docusaurus.
+
+## Componente Passthrough
+
+A veces será necesario incluir algo de HTML, JSX o Markdown en un tema que el CMS no puede mostrar en el editor de texto enriquecido. Para garantizar que el editor pueda seguir utilizándose para otros contenidos, se proporciona el componente `Passthrough`. Esto le permite envolver el contenido para que el editor de texto enriquecido lo ignore efectivamente.
+
+1. Seleccione **Passthrough** en la lista **Embed**.
+2. Asigne un **Resumen**.
+3. Introduzca el **Contenido** como texto sin formato.
+4. Seleccione el **Tipo de contenido** (**Markdown**, **HTML** o **JSX**).
+
+El contenido se añade directamente a la página cuando se crea el sitio, sin el envoltorio.
+
+Para ver ejemplos, consulte la [página de ejemplo](/example-page) y las [ecuaciones matemáticas](/docs/guides/markdown-features/math-equations).

@@ -1,10 +1,7 @@
 ---
+lastmod: '2026-02-25T23:52:02.817Z'
 title: Actifs statiques
-lastmod: '2025-10-19T12:20:51.585Z'
-description: >-
-  Les ressources statiques sont les fichiers non codés qui sont directement
-  copiés dans la sortie de la compilation. Découvrez comment ils sont gérés et
-  quelles sont les meilleures pratiques pour utiliser les ressources statiques.
+description: Les ressources statiques sont les fichiers non codés qui sont directement copiés dans la sortie de la compilation. Découvrez comment ils sont gérés et quelles sont les meilleures pratiques pour utiliser les ressources statiques.
 tags:
   - software
   - software_static-site-generators
@@ -16,29 +13,29 @@ published: true
 unlisted: false
 ---
 
-Les ressources statiques sont les fichiers non codés qui sont directement copiés dans la sortie de la compilation. Ils comprennent les images, les feuilles de style, les favicons, les polices de caractères, etc.
+Les ressources statiques sont les fichiers non codés qui sont directement copiés dans le résultat de la compilation. Elles comprennent les images, les feuilles de style, les favicons, les polices, etc.
 
-Vous devez placer ces ressources dans le dossier `static`. Chaque fichier que vous placez dans ce dossier est copié à la racine du dossier de compilation généré, en conservant la hiérarchie des dossiers. Par exemple, si vous ajoutez un fichier nommé `sun.jpg` dans le dossier statique, il sera copié dans `build/sun.jpg`.
+Vous devez placer ces ressources dans le dossier « static ». Chaque fichier que vous placez dans ce dossier est copié à la racine du dossier de compilation généré, en conservant la hiérarchie des dossiers. Par exemple, si vous ajoutez un fichier nommé « sun.jpg » au dossier static, il sera copié dans « build/sun.jpg ».
 
 Cela signifie que :
 
-* Pour le site `baseUrl : '/'`, l'image `/static/img/sun.jpg` sera servie à `/img/sun.jpg`.
-* Pour le site `baseUrl : '/subpath/'`, l'image `/static/img/sun.jpg` sera servie à `/subpath/img/sun.jpg`.
+* Pour le site `baseUrl: '/'`, l'image `/static/img/sun.jpg` sera servie à l'adresse `/img/sun.jpg`.
+* Pour le site `baseUrl: '/subpath/'`, l'image `/static/img/sun.jpg` sera servie à l'adresse `/subpath/img/sun.jpg`.
 
-## Référencement de votre ressource statique
+## Référencer votre ressource statique
 
 ### Dans le CMS
 
 1. Insérez un lien.
-2. Saisissez le chemin absolu, par exemple `/files/note.docx`.
-3. Saisissez le texte à afficher.
+2. Entrez le chemin absolu, par exemple /files/note.docx.
+3. Entrez le texte à afficher.
 
-### En Markdown
+### Dans Markdown
 
 ```markdown
-Vous écrivez un lien comme celui-ci : [Télécharger ce document](/files/note.docx)
+Vous écrivez un lien comme ceci : [Télécharger ce document](/files/note.docx)
 
-Docusaurus le remplace par : <a href={require('static/files/note.docx')}>Télécharger ce document</a>
+Docusaurus le transforme en : <a href={require('static/files/note.docx')}>Télécharger ce document</a>
 ```
 
-Pour plus d'informations, voir [Ressources statiques](https://docusaurus.io/fr/docs/static-assets) dans la documentation de Docusaurus.
+Pour plus d'informations, consultez la section [Ressources statiques](https://docusaurus.io/docs/static-assets) dans la documentation Docusaurus.

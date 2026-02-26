@@ -1,9 +1,7 @@
 ---
+lastmod: '2026-02-25T23:51:56.290Z'
 title: Aide contextuelle
-lastmod: '2025-10-19T13:07:51.297Z'
-description: >-
-  Utilisation de balises d'ancrage pour fournir une aide conditionnelle
-  sensible.
+description: Utilisation de balises d'ancrage pour fournir une aide conditionnelle sensible.
 slug: /context-help
 tags:
   - elements
@@ -18,26 +16,29 @@ unlisted: false
 
 # Aide contextuelle
 
-> "L'aide contextuelle est un type d'[aide en ligne](https://fr.wikipedia.org/wiki/Aide_en_ligne) qui est obtenu à partir d'un point spécifique de l'état du logiciel, fournissant de l'aide pour la situation qui est associée à cet état. L'aide contextuelle, contrairement à l'aide en ligne générale ou aux manuels en ligne, n'a pas besoin d'être accessible à la lecture dans son ensemble. Chaque rubrique est censée décrire de manière exhaustive un état, une situation ou une fonctionnalité du logiciel." - [Wikipedia](https://en.wikipedia.org/wiki/Context-sensitive_help)
+> « L'aide contextuelle est un type d'
+> [aide en ligne](https://en.wikipedia.org/wiki/Online_help)
+>  qui s'affiche à partir d'un point spécifique dans l'état du logiciel, fournissant une aide pour la situation associée à cet état. Contrairement à l'aide en ligne générale ou aux manuels en ligne, l'aide contextuelle n'a pas besoin d'être accessible pour être lue dans son intégralité. Chaque rubrique est censée décrire de manière exhaustive un état, une situation ou une fonctionnalité du logiciel. » —
+> [Wikipedia](https://en.wikipedia.org/wiki/Context-sensitive_help)
 
-En règle générale, l'aide contextuelle est mise en œuvre au moyen d'une icône d'aide sur laquelle l'utilisateur peut cliquer et qui l'amène à la partie de la documentation correspondant à la partie du logiciel qu'il utilise. Cela implique la création d'une carte des URL contextuelles.
+En général, l'aide contextuelle est mise en œuvre à l'aide d'une icône d'aide sur laquelle les utilisateurs peuvent cliquer pour accéder à la partie appropriée de la documentation correspondant à la partie du logiciel qu'ils utilisent. Cela implique la création d'une carte des URL contextuelles.
 
-Le générateur de site statique génère automatiquement des liens vers les titres. Cependant, si vous modifiez le titre, le lien changera. C'est pourquoi DocStatic fournit l'élément Aide contextuelle. Il vous permet d'ajouter une balise d'ancrage n'importe où dans un sujet. À condition qu'une balise soit définie pour le sujet dans les métadonnées, le lien ne sera pas rompu.
+Le générateur de site statique génère automatiquement des liens vers les en-têtes. Cependant, si vous modifiez l'en-tête, le lien changera. C'est pourquoi DocStatic fournit l'élément Context Help. Il vous permet d'ajouter une balise d'ancrage n'importe où dans un sujet. À condition qu'un slug soit défini pour le sujet dans les métadonnées, le lien ne sera pas rompu.
 
-1. Sélectionnez **Context Helpe** dans la liste **Embed**.
-2. Saisissez un identifiant unique.
+1. Sélectionnez **Context Help** dans la liste Embed.
+2. Entrez un identifiant unique.
 
-Le lien se présentera sous la forme suivante : `<URL>/docs/<slug>#<id>` : `<URL>/docs/<slug>#<id>`.
+Le lien se présentera sous la forme suivante : `<URL>/docs/<slug>#<id>`.
 
 #### Exemple
 
-[https://docstatic.com/docs/fr/context-help#help-example](/docs/fr/context-help#help-example)
+[https://docstatic.com/docs/context-help#help-example](/docs/context-help#help-example)
 
-<a id="help-example" />
+(jsx\:a id="help-example")(id\:help-example)(/jsx\:a)
 
 ## Développeurs
 
-Pour un exemple de la façon d'inclure des liens d'aide contextuelle dans votre code, examinez le composant React HelpButton dans le code source de ce site. DocStatic n'ayant pas d'accès direct au code du CMS, il implémente le bouton en l'appliquant en tant qu'élément d'interface utilisateur sur un champ inutilisé dans une collection du CMS. Le composant HelpButton attache le bouton à l'élément nav de la page et le lie à l'URL passée dans le modèle :
+Pour obtenir un exemple d'intégration de liens d'aide contextuelle dans votre code, examinez le composant HelpButton React dans le code source de ce site. Comme DocStatic n'a pas d'accès direct au code CMS, il implémente le bouton en l'appliquant comme élément d'interface utilisateur sur un champ inutilisé dans une collection CMS. Le composant HelpButton attache le bouton à l'élément de navigation de la page et le lie à l'URL transmise dans le modèle :
 
 ```javascript
 const ExampleCollection = {

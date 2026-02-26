@@ -1,0 +1,58 @@
+---
+lastmod: '2026-02-25T23:59:33.227Z'
+title: Styling and layout
+tags:
+  - computer-languages
+  - computer-languages_css
+draft: true
+review: false
+translate: false
+approved: false
+published: true
+unlisted: false
+---
+
+Un sitio DocStatic es una aplicación React de una sola página. Puedes darle estilo de la misma manera que a las aplicaciones React.
+
+## Estilos globales
+
+DocStatic utiliza el tema @docusaurus/preset-classic con sustituciones CSS en el archivo /src/css/custom.css. Cualquier CSS que escribas en ese archivo estará disponible globalmente y se podrá referenciar directamente utilizando literales de cadena.
+
+## Diseñar tu sitio con Infima
+
+DocStatic utiliza [Infima](https://infima.dev/) como marco de diseño subyacente. Infima proporciona un diseño flexible y componentes de interfaz de usuario comunes adecuados para sitios web centrados en el contenido (blogs, documentación, páginas de inicio). Para obtener más detalles, consulta el [sitio web de Infima](https://infima.dev/).
+
+Infima utiliza siete tonos de cada color. Recomendamos utilizar ColorBox para encontrar los diferentes tonos de colores para el color principal elegido. Puede utilizar la herramienta de la [página de ejemplos](https://docstatic.com/example-page) para generar los diferentes tonos para su sitio web y copiar las variables en `/src/css/custom.css`.
+
+## Modo oscuro
+
+En el modo claro, el elemento \<html> tiene un atributo data-theme="light"; en el modo oscuro, es data-theme="dark". Por lo tanto, puede limitar su CSS solo al modo oscuro seleccionando html con un atributo específico.
+
+```css
+/* Anular las variables raíz de Infima */
+[data-theme='dark'] {
+  --ifm-color-primary: #4e89e8;
+}
+/* Estilizar una clase especialmente en modo oscuro */
+[data-theme='dark'] .purple-text {
+  color: plum;
+}
+```
+
+## Vista móvil
+
+Docstatic utiliza 996 píxeles como límite entre el ancho de la pantalla móvil y el de escritorio. Si desea que su diseño sea diferente en la vista móvil, puede utilizar consultas de medios.
+
+```css
+.banner {
+  padding: 4rem;
+}
+/** En la vista móvil, reduce el relleno */
+@media screen and (max-width: 996px) {
+  .heroBanner {
+    padding: 2rem;
+  }
+}
+```
+
+Para obtener más información, consulta [Estilo y diseño](https://docusaurus.io/docs/styling-layout) en la documentación de Docusaurus.

@@ -1,0 +1,43 @@
+---
+lastmod: '2026-02-25T23:59:26.781Z'
+title: Create a doc
+tags:
+  - content
+  - content_topics
+draft: true
+review: false
+translate: false
+approved: false
+published: true
+unlisted: false
+---
+
+# Crear un documento
+
+En DocStatic, escribes tu contenido como Markdown en archivos llamados «Temas». Normalmente, crearás cada tema tú mismo, aunque ciertos tipos de documentos pueden tener temas generados automáticamente.
+
+<Admonition type="note" title="Nota">
+  Los documentos GraphQL y OpenAPI se generan automáticamente desde un servidor o esquema.
+</Admonition>
+
+Para crear un tema:
+
+1. En la colección **Temas**, haz clic en **Añadir archivo**.
+2. Dale un **Título** al tema.
+3. (Opcional) Si desea utilizar el tema en la [ayuda contextual](https://docstatic.com/docs/context-help), asígnele un **Slug**. Se trata de una ruta fija desde `/docs/`.
+4. Asigne una **Descripción** al tema. Esta se muestra en la Lista de tarjetas de documentos.
+5. (Opcional) Añada las **Etiquetas** de [taxonomía](taxonomías) necesarias.
+6. (Opcional) Establezca las **Condiciones**.
+7. Asegúrese de que el estado del flujo de trabajo está establecido en **Borrador**.
+8. Introduzca su contenido.
+9. Haga clic en **Guardar**.
+
+## Parte inicial del documento
+
+Al comienzo de cada tema hay una sección de YAML contenida entre dos conjuntos de tres guiones (---). DocStatic utiliza esto para cosas como:
+
+* Texto condicional
+* Taxonomías (etiquetas de documento)
+* Flujos de trabajo
+
+Para obtener más información, consulta [Crear un documento](https://docusaurus.io/docs/create-doc) en la documentación de Docusaurus.

@@ -1,6 +1,6 @@
 ---
+lastmod: '2026-02-25T23:51:55.809Z'
 title: Texte conditionnel
-lastmod: '2025-10-19T13:59:00.213Z'
 description: Filtrer le contenu avec des paramètres de texte conditionnels.
 tags:
   - metadata
@@ -17,36 +17,44 @@ unlisted: false
 
 # Texte conditionnel
 
-Le composant **Conditions** vous permet d'envelopper du texte dans un ensemble de conditions qui déterminent quand il doit être affiché.
-Les conditions peuvent être n'importe quelle combinaison de langues ou de conditions définies par l'utilisateur.
-Le texte peut être affiché si une ou plusieurs conditions sont remplies (OR) ou seulement si toutes les conditions sont remplies (AND).
-Vous pouvez également spécifier un texte de remplacement à afficher si aucune condition n'est remplie.
+Le composant **Texte conditionnel** vous permet d'encadrer le contenu dans un ensemble de conditions qui déterminent quand il doit être affiché :
+
+* Les conditions peuvent être n'importe quelle combinaison de langues ou de conditions définies par l'utilisateur.
+* Le contenu peut être affiché ou masqué si une ou plusieurs conditions sont remplies (OU) ou uniquement si toutes les conditions sont remplies (ET).
+  Vous pouvez également spécifier un texte de remplacement à afficher si aucune condition n'est remplie.
 
 ## Créer des catégories et des conditions
 
 1. Dans le CMS, cliquez sur la collection **Conditions**.
-2. Cliquez sur l'icône **Add** pour ajouter une nouvelle **Category**
-3. Donnez-lui un **Name** et une **Description**.
+2. Cliquez sur l'icône **Ajouter** pour ajouter une nouvelle **Catégorie**.
+3. Donnez-lui un **Nom** et une **Description**.
 4. Pour chaque **Condition** que vous souhaitez ajouter :
-   1. Cliquez sur l'icône **Add**.
+   1. Cliquez sur l'icône **Ajouter**.
    2. Nommez la **Condition** et donnez-lui une **Description**.
-   3. Faites basculer le statut **Active** de la condition si nécessaire.
+   3. Activez ou désactivez le statut **Actif** de la condition selon vos besoins.
 
-## Ajouter des conditions à une rubrique
+## Ajouter des conditions à un sujet
 
-Les conditions sont définies au niveau de la rubrique. La langue est déterminée par la langue de la page. Les autres conditions sont définies sous forme de tableau dans les métadonnées au début du sujet.
+Les conditions sont définies au niveau du sujet. La langue est déterminée par la langue de la page. Les autres conditions sont définies sous forme de tableau dans les métadonnées au début du sujet.
 
-1. Créez ou modifiez une rubrique.
-2. Dans la zone **Conditions**, développez les **Categories** et cochez la case des **Conditions** que vous souhaitez appliquer au sujet.
+1. Créez ou modifiez un sujet.
+2. Dans la zone **Conditions**, développez les **Catégories** et cochez les cases des **Conditions** que vous souhaitez appliquer au sujet.
 
-## Ajouter un texte conditionnel
+## Ajouter du texte conditionnel
 
-1. Sélectionnez **Conditional Text** dans la liste **Embed**.
+1. Sélectionnez **Texte conditionnel** dans la liste **Intégrer**.
 2. Modifiez le composant.
-3. Saisissez le **Text Content**.
-4. Ajoutez les **Required Conditions**.
-5. Ajoutez les **Required Languages**.
-6. Définissez la **Condition Logic**.
-7. Définissez la **Language Logic**.
-8. Sélectionnez si les deux conditions et les deux langues sont requises.
-9. (Facultatif) Saisissez le **Fallback Text**.
+3. Saisissez le **Contenu**.
+4. Définissez l'**Action** (afficher ou masquer).
+5. Ajoutez les **Conditions requises**.
+6. Ajoutez les **Langues requises**.
+7. Définissez la **Logique de condition**.
+8. Définissez la **Logique de langue**.
+9. Indiquez si les conditions et les langues sont toutes deux requises.
+10. (Facultatif) Saisissez le **Texte de secours**.
+
+### Exemple
+
+<ConditionalText action="show" conditions={["production"]} languages={[]} logic="any" languageLogic="any" requireBothConditions={false} fallback="">
+  La condition `production` est définie sur cette page.
+</ConditionalText>

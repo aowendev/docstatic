@@ -1,0 +1,85 @@
+---
+lastmod: '2026-02-25T23:59:27.060Z'
+modifiedBy: aowendev <aowen@translationcommons.org>
+title: Dashboards
+tags:
+  - content-management-systems
+  - content-management-systems_tinacms
+  - content-management-systems_media-management
+draft: true
+review: false
+translate: false
+approved: false
+published: true
+unlisted: false
+---
+
+DocStatic añade la funcionalidad de panel de control a TinaCMS. Tina genera una API GraphQL utilizando el sistema de archivos del repositorio Git como base de datos. Los paneles de control consultan la API (localmente o en la nube) y presentan informes procesables directamente en el CMS. La funcionalidad del panel de control se considera actualmente en fase beta. La funcionalidad se ha probado completamente, pero la interfaz de usuario es provisional y requiere mejoras. Los paneles de control se actualizan cuando se actualiza la página. Si otro usuario ha realizado cambios desde que usted vio un panel de control, puede hacer clic en **Actualizar** para actualizar el panel.
+
+<Admonition type="note" title="Nota">
+  Dependiendo de la cantidad de contenido del sistema, algunos paneles de control pueden tardar un poco en cargarse. Estos paneles suelen actualizarse un poco más rápido cuando se ejecutan localmente.
+</Admonition>
+
+## Visualización de los paneles de control
+
+Desde el CMS, navegue hasta la colección Dashboards (Paneles de control). En la parte superior de la página hay una barra de estado que muestra la conexión GraphQL. Indica si está conectado a la nube o al host local. Si el host local está disponible, siempre se conectará al host local. Para utilizar la nube, asegúrese de que el servidor de desarrollo local esté detenido. La barra de estado también muestra el entorno y comprueba que todos los ajustes sean válidos.
+
+## Visualización del estado del flujo de trabajo
+
+El panel de control «Descripción general del contenido» muestra el número total de temas en la ruta /docs y los temas en cada estado del flujo de trabajo:
+
+* Borrador
+* Revisión
+* Traducción
+* Aprobado
+* Publicado
+* No listado
+
+Haga clic en el enlace de estado para mostrar todos los temas en ese estado.
+
+Haga clic en Editar para abrir el tema y editarlo.
+
+Haga clic en el icono Cerrar para cerrar la lista de temas.
+
+### Visualización de la actividad reciente
+
+La sección Actividad reciente muestra los temas modificados recientemente. Puede filtrar el intervalo de tiempo (Todo el tiempo, Última semana o Último mes) y establecer el número de resultados entre 5 y 50.
+
+## Visualización del estado de la traducción
+
+El panel de control Traducciones muestra el estado de cada tema para el idioma seleccionado en la lista:
+
+* Actualizado: la fecha de la última modificación de la traducción es posterior a la del original.
+* Desactualizado: la fecha de la última modificación del original es posterior a la de la traducción.
+* Falta: hay un archivo original sin archivo de traducción equivalente.
+
+## Visualización de la reutilización de medios
+
+El panel Biblioteca de medios muestra dónde se utiliza el contenido de la ruta /static/img. Muestra el número total de archivos e imágenes, el tamaño de los archivos, las rutas de las imágenes y el tamaño de las imágenes.
+
+Puede filtrar por:
+
+* Todo el contenido.
+* Solo imágenes.
+* Recientes (7 días).
+* Utilizados.
+* No utilizados.
+
+Para el contenido utilizado, haga clic en Utilizado en n documentos para mostrar los temas en los que se utiliza el contenido. A continuación, puede hacer clic en Editar para editar esos temas.
+
+## Comprobación de enlaces rotos
+
+El panel de control Enlaces rotos valida todos los hipervínculos de los temas. El informe incluye el número de:
+
+* Enlaces totales.
+* Enlaces válidos en los que se pudo establecer una conexión.
+* Enlaces rotos en los que no se pudo establecer ninguna conexión.
+* Enlaces de advertencia en los que se rechazó la conexión, pero el enlace aún podría ser válido.
+
+Puede ignorar con seguridad las advertencias sobre [localhost](http://localhost) si está describiendo software que se ejecuta localmente. Pero los enlaces de los documentos deben ser relativos.
+
+Las advertencias suelen ser el resultado de políticas CORS/CORP agresivas que no respetan la configuración no-cors. Debe validar manualmente estos sitios haciendo clic en el hipervínculo.
+
+El panel muestra una lista de archivos con enlaces problemáticos. Puede abrirlos haciendo clic en Editar en cualquiera de las listas.
+
+El panel también proporciona un resumen con la fecha en la que se ejecutó el informe.

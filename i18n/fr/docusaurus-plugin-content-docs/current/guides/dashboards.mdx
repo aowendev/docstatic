@@ -1,6 +1,5 @@
 ---
-help: null
-lastmod: '2026-01-24T13:32:07.634Z'
+lastmod: '2026-02-25T23:51:56.668Z'
 modifiedBy: aowendev <aowen@translationcommons.org>
 title: Dashboards
 tags:
@@ -15,72 +14,72 @@ published: true
 unlisted: false
 ---
 
-DocStatic adds dashboard functionality to TinaCMS. Tina generates a GraphQL API using the filesystem in the Git repository as the database. Dashboards query the API (locally or in the cloud) and present actionable reports directly in the CMS. Dashboard functionality is currently considered beta. The functionality is fully tested, but the user interface is provisional and requires refinement. Dashboards update when the page is updated. If another user has made changes since you viewed a dashboard, you can click **Refresh** to update the dashboard.
+DocStatic ajoute une fonctionnalité de tableau de bord à TinaCMS. Tina génère une API GraphQL en utilisant le système de fichiers du dépôt Git comme base de données. Les tableaux de bord interrogent l'API (localement ou dans le cloud) et présentent des rapports exploitables directement dans le CMS. La fonctionnalité de tableau de bord est actuellement considérée comme bêta. La fonctionnalité a été entièrement testée, mais l'interface utilisateur est provisoire et doit être affinée. Les tableaux de bord sont mis à jour lorsque la page est actualisée. Si un autre utilisateur a apporté des modifications depuis que vous avez consulté un tableau de bord, vous pouvez cliquer sur **Actualiser** pour mettre à jour le tableau de bord.
 
-<Admonition type="note" title="Note">
-  Depending on the amount of content in the system, some dashboards may take some time to load. These dashboards will typically update slightly faster when running locally.
+<Admonition type="note" title="Remarque">
+  En fonction de la quantité de contenu dans le système, certains tableaux de bord peuvent prendre un certain temps à se charger. Ces tableaux de bord s'actualisent généralement un peu plus rapidement lorsqu'ils sont exécutés localement.
 </Admonition>
 
-## Viewing the dashboards
+## Affichage des tableaux de bord
 
-From the CMS, navigate to the Dashboards collection. At the top of the page is a status bar that shows the GraphQL connection. It indicates if you are connected to the cloud or localhost. If the localhost is available, it will always connect to the localhost. To use the cloud, ensure the local dev server is stopped. The status bar also displays the environment and checks all settings are valid.
+Dans le CMS, accédez à la collection Dashboards. En haut de la page se trouve une barre d'état qui affiche la connexion GraphQL. Elle indique si vous êtes connecté au cloud ou à l'hôte local. Si l'hôte local est disponible, il se connectera toujours à l'hôte local. Pour utiliser le cloud, assurez-vous que le serveur de développement local est arrêté. La barre d'état affiche également l'environnement et vérifie que tous les paramètres sont valides.
 
-## Viewing workflow status
+## Affichage de l'état du flux de travail
 
-The Content Overview dashboard show the total number of topics in the /docs path and the topics in each workflow status:
+Le tableau de bord Aperçu du contenu affiche le nombre total de rubriques dans le chemin /docs et les rubriques dans chaque état du flux de travail :
 
-* Draft
-* Review
-* Translate
-* Approved
-* Published
-* Unlisted
+* Brouillon
+* Révision
+* Traduction
+* Approuvé
+* Publié
+* Non répertorié
 
-Click the status link to display all topics in that status.
+Cliquez sur le lien d'état pour afficher toutes les rubriques dans cet état.
 
-Click Edit to open the topic for editing.
+Cliquez sur Modifier pour ouvrir la rubrique à modifier.
 
-Click the Close icon to close the list of topics.
+Cliquez sur l'icône Fermer pour fermer la liste des rubriques.
 
-### Viewing recent activity
+### Affichage de l'activité récente
 
-The Recent Activity section shows recently changed topics. You can filter the time range (All time, Last week or Last month) and set the number of results from 5 to 50.
+La section Activité récente affiche les rubriques récemment modifiées. Vous pouvez filtrer la période (Toutes les périodes, Semaine dernière ou Mois dernier) et définir le nombre de résultats de 5 à 50.
 
-## Viewing translation status
+## Affichage de l'état de la traduction
 
-The Translations dashboard shows the status of each topic for the language selected from the list:
+Le tableau de bord Traductions affiche l'état de chaque rubrique pour la langue sélectionnée dans la liste :
 
-* Up to date: The last modified date of the translation is later than the source.
-* Outdated: The last modified date of the source is later than the translation.
-* Missing: There is a source file with no equivalent translation file.
+* À jour : la date de dernière modification de la traduction est postérieure à celle de la source.
+* Obsolète : la date de dernière modification de la source est postérieure à celle de la traduction.
+* Manquant : il existe un fichier source sans fichier de traduction équivalent.
 
-## Viewing media reuse
+## Affichage de la réutilisation des médias
 
-The Media Library dashboard shows where content in the /static/img path is used. It shows the total number of files and images, file size, image paths and image sizes.
+Le tableau de bord Bibliothèque multimédia affiche où le contenu du chemin /static/img est utilisé. Il affiche le nombre total de fichiers et d'images, la taille des fichiers, les chemins d'accès aux images et la taille des images.
 
-You can filter by:
+Vous pouvez filtrer par :
 
-* All content.
-* Images only.
-* Recent (7 days).
-* Used.
-* Unused.
+* Tout le contenu.
+* Images uniquement.
+* Récents (7 jours).
+* Utilisés.
+* Inutilisés.
 
-For used content, click Used in n docs to display the topics where the content is used. You can then click Edit to edit those topics.
+Pour le contenu utilisé, cliquez sur Utilisé dans n documents pour afficher les rubriques dans lesquelles le contenu est utilisé. Vous pouvez ensuite cliquer sur Modifier pour modifier ces rubriques.
 
-## Checking broken links
+## Vérification des liens rompus
 
-The Broken Links dashboard validates all the hyperlinks in the topics. The report includes number for:
+Le tableau de bord Liens rompus valide tous les hyperliens dans les rubriques. Le rapport comprend le nombre de :
 
-* Total links.
-* Valid links where a connection could be established.
-* Broken links where no connection could be established.
-* Warning links where the connecton was rejected but the link could still be valid.
+* Liens totaux.
+* Liens valides pour lesquels une connexion a pu être établie.
+* Liens rompus pour lesquels aucune connexion n'a pu être établie.
+* Liens d'avertissement pour lesquels la connexion a été rejetée, mais le lien peut encore être valide.
 
-You can safely ignore warnings about http\://localhost if you are describing software running locally. But document links should be relative.
+Vous pouvez ignorer en toute sécurité les avertissements concernant [localhost](http://localhost) si vous décrivez un logiciel fonctionnant localement. Mais les liens vers les documents doivent être relatifs.
 
-Warnings are typically the results of aggressive CORS/CORP policies that do not respect no-cors settings. You must manually validate these sites by clicking the hyperlink.
+Les avertissements sont généralement le résultat de politiques CORS/CORP agressives qui ne respectent pas les paramètres no-cors. Vous devez valider manuellement ces sites en cliquant sur le lien hypertexte.
 
-The dashboard lists files with problem links. You can open them by clicking Edit in either list.
+Le tableau de bord répertorie les fichiers contenant des liens problématiques. Vous pouvez les ouvrir en cliquant sur Modifier dans l'une ou l'autre des listes.
 
-The dashboard also provides a summary with the date when the report was run.
+Le tableau de bord fournit également un résumé avec la date à laquelle le rapport a été généré.

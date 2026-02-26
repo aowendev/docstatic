@@ -1,0 +1,36 @@
+---
+lastmod: '2026-02-25T23:59:29.515Z'
+title: Headings and table of contents
+tags:
+  - formatting
+  - formatting_headings
+draft: true
+review: false
+translate: false
+approved: false
+published: true
+unlisted: false
+---
+
+# Encabezados y tabla de contenido
+
+En el CMS, puede seleccionar el nivel **Párrafo** o **Encabezado** (del 1 al 6).
+
+(jsx\:a id="anchor-example")(id\:anchor-example)(/jsx\:a)
+
+## ID de encabezados
+
+Los ID de encabezados se generan automáticamente. Por ejemplo, `heading-ids`. Puede utilizarlos para enlazar directamente con los encabezados de los temas. Sin embargo, si cambia el título del encabezado, el enlace se romperá. Por este motivo, DocStatic proporciona el componente **Ayuda contextual**. Este incrusta una etiqueta de anclaje en cualquier lugar de una página, no solo en un encabezado.
+
+1. Seleccione **Ayuda contextual** en la lista **Incrustar**.
+2. Edite el componente y asígnele un **ID de ayuda contextual**.
+
+Para enlazar con el ancla, utilice la ruta: `<URL>/docs/<slug>#<ID>.`
+
+Por ejemplo: [https://docstatic.com/docs/guides/markdown-features/toc#anchor-example](https://docstatic.com/docs/guides/markdown-features/toc#anchor-example)
+
+## Nivel de encabezado de la tabla de contenido
+
+Cada documento Markdown muestra un índice en la esquina superior derecha. Por defecto, este índice solo muestra los encabezados `h2` y `h3`, lo que debería ser suficiente para obtener una visión general de la estructura de la página. En caso de que necesites cambiar el rango de encabezados que se muestran, puedes personalizar el nivel mínimo y máximo de los encabezados, ya sea por página o de forma global.
+
+Para obtener más información, consulta [Encabezados y tabla de contenido](https://docusaurus.io/docs/markdown-features/toc) en la documentación de Docusaurus.

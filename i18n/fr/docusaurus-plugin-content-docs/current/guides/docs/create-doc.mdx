@@ -1,6 +1,6 @@
 ---
+lastmod: '2026-02-25T23:51:56.510Z'
 title: Créer un document
-lastmod: '2025-10-19T12:54:39.453Z'
 description: Créer un document Markdown.
 tags:
   - content
@@ -15,30 +15,30 @@ unlisted: false
 
 # Créer un document
 
-Dans DocStatic, vous écrivez votre contenu en Markdown dans des fichiers appelés "Topics". En règle générale, vous créez vous-même chaque sujet, bien que certains types de documents puissent avoir des sujets autogénérés.
+Dans DocStatic, vous rédigez votre contenu au format Markdown dans des fichiers appelés « Topics » (sujets). En règle générale, vous créez vous-même chaque sujet, bien que certains types de documents puissent comporter des sujets générés automatiquement.
 
-<Admonition type="note" title="Note">
-  Les documents GraphQL et OpenAPI sont autogénérés à partir d'un serveur ou d'un schéma.
+<Admonition type="note" title="Remarque">
+  Les documents GraphQL et OpenAPI sont générés automatiquement à partir d'un serveur ou d'un schéma.
 </Admonition>
 
 Pour créer un sujet :
 
 1. Dans la collection **Topics**, cliquez sur **Add File**.
-2. Donnez un **Title** à la rubrique.
-3. (Facultatif) Si vous souhaitez utiliser la rubrique dans [l'aide contextuelle](https://docstatic.com/docs/context-help), offrez-lui un **Slug**. Il s'agit d'un chemin fixe à partir de `/docs/`.
-4. Offrez à la rubrique une **Description**. Celle-ci est affichée dans la liste des cartes de documents.
-5. (Facultatif) Ajoutez les **Tags** de la [taxonomie](taxonomies).
-6. (Facultatif) Définir les **Conditions**.
-7. Assurez-vous que le statut du flux de travail est défini sur **Draft**.
+2. Donnez un **Title** au sujet.
+3. (Facultatif) Si vous souhaitez utiliser le sujet dans l'[aide contextuelle](https://docstatic.com/docs/context-help), donnez-lui un **Slug**. Il s'agit d'un chemin d'accès fixe à partir de `/docs/`.
+4. Donnez une **Description** au sujet. Celle-ci s'affiche dans la liste des fiches de documentation.
+5. (Facultatif) Ajoutez les **balises** [taxonomiques](taxonomies) requises.
+6. (Facultatif) Définissez les **conditions**.
+7. Assurez-vous que le statut du workflow est défini sur **Brouillon**.
 8. Saisissez votre contenu.
-9. Cliquez sur **Save**.
+9. Cliquez sur **Enregistrer**.
 
-## Document recto
+## Avant-propos
 
-Au début de chaque sujet se trouve une section de YAML contenue entre deux séries de trois traits d'union (---). DocStatic l'utilise pour des choses telles que :
+Au début de chaque rubrique se trouve une section YAML contenue entre deux séries de trois tirets (---). DocStatic l'utilise pour des éléments tels que :
 
 * Texte conditionnel
-* Taxonomies (étiquettes de documents)
-* les flux de travail
+* Taxonomies (balises de document)
+* Workflows
 
-Pour plus d'informations, voir [Créer un doc](https://docusaurus.io/fr/docs/create-doc) dans la documentation de Docusaurus.
+Pour plus d'informations, consultez [Créer un document](https://docusaurus.io/docs/create-doc) dans la documentation Docusaurus.

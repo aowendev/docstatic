@@ -1,0 +1,40 @@
+---
+lastmod: '2026-02-25T23:59:32.892Z'
+title: Static assets
+tags:
+  - software
+  - software_static-site-generators
+draft: true
+review: false
+translate: false
+approved: false
+published: true
+unlisted: false
+---
+
+Los activos estáticos son los archivos que no contienen código y que se copian directamente en el resultado de la compilación. Incluyen imágenes, hojas de estilo, favicons, fuentes, etc.
+
+Debes colocar estos activos en la carpeta «static». Todos los archivos que coloques en esa carpeta se copiarán en la raíz de la carpeta de compilación generada, conservando la jerarquía de carpetas. Por ejemplo, si añades un archivo llamado «sun.jpg» a la carpeta «static», se copiará en «build/sun.jpg».
+
+Esto significa que:
+
+* Para el sitio `baseUrl: '/'`, la imagen `/static/img/sun.jpg` se servirá en `/img/sun.jpg`.
+* Para el sitio `baseUrl: '/subpath/'`, la imagen `/static/img/sun.jpg` se servirá en `/subpath/img/sun.jpg`.
+
+## Referenciar su activo estático
+
+### En el CMS
+
+1. Inserte un enlace.
+2. Introduzca la ruta absoluta, por ejemplo, /files/note.docx.
+3. Introduzca el texto que desea mostrar.
+
+### En Markdown
+
+```markdown
+Escriba un enlace como este: [Descargar este documento](/files/note.docx)
+
+Docusaurus lo cambia por: <a href={require('static/files/note.docx')}>Descargar este documento</a>
+```
+
+Para obtener más información, consulta [Recursos estáticos](https://docusaurus.io/docs/static-assets) en la documentación de Docusaurus.

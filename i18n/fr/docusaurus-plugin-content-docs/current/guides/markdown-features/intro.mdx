@@ -1,9 +1,7 @@
 ---
+lastmod: '2026-02-25T23:52:01.183Z'
 title: Fonctionnalités de Markdown
-lastmod: '2025-10-19T13:35:13.680Z'
-description: >-
-  DocStatic utilise MDX. En savoir plus sur les fonctionnalités spécifiques à
-  DocStatic lors de l'écriture de Markdown.
+description: DocStatic utilise MDX. En savoir plus sur les fonctionnalités spécifiques à DocStatic lors de l'écriture de Markdown.
 tags:
   - computer-languages
   - computer-languages_markdown
@@ -27,91 +25,91 @@ published: true
 unlisted: false
 ---
 
-# Fonctionnalités de Markdown
+# Fonctionnalités Markdown
 
-DocStatic utilise [Markdown](https://commonmark.org/) comme principal format de création de contenu. Vous pouvez [l'apprendre en dix minutes](https://commonmark.org/help/). Mais vous n'avez pas à le faire car le CMS fournit un environnement d'édition de texte riche complet pour les métadonnées, Markdown et les composants React.
+DocStatic utilise [Markdown](https://commonmark.org/) comme format principal de création de contenu. Vous pouvez [l'apprendre en dix minutes](https://commonmark.org/help/). Mais ce n'est pas obligatoire, car le CMS fournit un environnement d'édition de texte enrichi complet pour les métadonnées, Markdown et les composants React.
 
-## Rédaction structurée simple
+## Création structurée simple
 
-Les sujets dans DocStatic ont trois parties :
+Les rubriques dans DocStatic comportent trois parties :
 
 * Métadonnées (au format [YAML](https://yaml.org/spec/1.2.2/))
 * Contenu (en Markdown)
 * Composants React prédéfinis.
 
-Le CMS s'assure que les métadonnées et le format Markdown sont utilisés de manière cohérente, tandis que les composants React fournissent un style uniforme et prennent en charge les fonctions de réutilisation du contenu. Vous n'avez pas besoin d'ajouter du code JSX vous-même car les composants sont déjà disponibles globalement.
+Le CMS veille à ce que les métadonnées et Markdown soient utilisés de manière cohérente, tandis que les composants React fournissent un style uniforme et prennent en charge les fonctionnalités de réutilisation du contenu. Vous n'avez pas besoin d'ajouter vous-même de code JSX, car les composants sont déjà disponibles globalement.
 
 ## Fonctionnalités standard
 
-Les fonctionnalités Markdown incluent :
+Les fonctionnalités Markdown comprennent :
 
 * Styles de caractères gras, code, italique et barré.
-* Listes numérotées et à puces.
+* Listes à puces et numérotées.
 * Blocs de code.
-* Niveaux de titres (1 à 6).
+* Niveaux de titre (1 à 6).
 * Règles horizontales.
 * Images.
 * Liens.
 * Citations.
 * Tableaux simples.
 
-Tous ces éléments peuvent être sélectionnés directement à partir de la barre d'outils "texte riche" du CMS.
+Toutes ces fonctionnalités peuvent être sélectionnées directement à partir de la barre d'outils de texte enrichi dans le CMS.
 
-A cela, Docusaurus ajoute :
+À celles-ci, Docusaurus ajoute :
 
-* Admonitions
-* Détails (expansion du contenu)
-* Listes de fiches doc
+* Avertissements
+* Détails (contenu extensible)
+* Listes de cartes de documentation
 * Onglets
 
-DocStatic étend encore ce système avec :
+DocStatic étend encore ces fonctionnalités avec :
 
-* Extraits de code (depuis fichiers)
+* Extraits de code (à partir de fichiers)
 * Commentaires
 * Texte conditionnel
 * Liens d'aide contextuelle
 * Diagrammes
 * Figures
 * Notes de bas de page
-* Glossaire
+* Termes du glossaire
 * Équations mathématiques
-* Bribes d'information
+* Extraits
 * Variables
 
-## Première page
+## Front matter
 
-La page de garde est utilisée pour ajouter des métadonnées à votre fichier Markdown. Il est fourni tout en haut du fichier, entouré de trois tirets ---. Les plugins de contenu peuvent avoir leur propre schéma de contenu. DocStatic utilise la matière première pour :
+Le front matter sert à ajouter des métadonnées à votre fichier Markdown. Il se trouve tout en haut du fichier, entre trois tirets ---. Les plugins de contenu peuvent avoir leur propre schéma de front matter. DocStatic utilise le front matter pour :
 
-* Les conditions (pour le texte conditionnel)
-* Les descriptions
-* Slugs (chemins d'accès fixes)
+* Conditions (pour le texte conditionnel)
+* Descriptions
+* Slugs (chemins fixes)
 * Balises de taxonomie
 * Titres
 * Statut du flux de travail
 
 ## Détails
 
-1. Sélectionnez **Details** dans la liste **Embed**.
+1. Sélectionnez **Détails** dans la liste **Intégrer**.
 2. Modifiez le composant.
-3. Donnez-lui un **Summary**.
-4. Saisissez les **Details**.
+3. Donnez-lui un **Résumé**.
+4. Saisissez les **Détails**.
 
 #### Exemple :
 
 <Details summary="Toggle me.">
-  Il s'agit du contenu détaillé.
+  Voici le contenu détaillé.
 
-  Vous pouvez utiliser Markdown ici, y compris le texte en **gras** et *italique*, et les \[liens] en ligne ([https://docusaurus.io/](https://docusaurus.io/)).
+  Vous pouvez utiliser Markdown ici, y compris le texte **en gras** et *en italique*, ainsi que les [liens](https://docusaurus.io/) en ligne.
 </Details>
 
-## Listes de cartes document
+## Listes de fiches documentaires
 
-Les listes de fiches sont générées automatiquement pour les catégories de la table des matières. Toutefois, vous pouvez également les ajouter manuellement à une rubrique.
+Les listes de fiches documentaires sont générées automatiquement pour les catégories de la table des matières. Cependant, vous pouvez également les ajouter manuellement à un sujet.
 
-1. Sélectionnez **Doc Card List** dans la liste **Embed**.
-2. Offrez-lui un **Title**.
+1. Sélectionnez **Liste de fiches documentaires** dans la liste **Intégrer**.
+2. Donnez-lui un **Titre**.
 
-Pour plus d'informations, voir [Fonctionnalités Markdown](https://docusaurus.io/fr/docs/markdown-features) dans la documentation de Docusarus.
+Pour plus d'informations, consultez la section [Fonctionnalités Markdown](https://docusaurus.io/docs/markdown-features) dans la documentation Docusarus.
 
 #### Exemple :
 

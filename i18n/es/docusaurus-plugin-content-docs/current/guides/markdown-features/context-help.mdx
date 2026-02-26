@@ -1,0 +1,58 @@
+---
+lastmod: '2026-02-25T23:59:26.592Z'
+title: Context-sensitive help
+slug: /context-help
+tags:
+  - elements
+  - elements_context-sensitive-help
+draft: true
+review: false
+translate: false
+approved: false
+published: true
+unlisted: false
+---
+
+# Ayuda contextual
+
+> «La ayuda contextual es un tipo de
+> [ayuda en línea](https://en.wikipedia.org/wiki/Online_help)
+>  que se obtiene desde un punto específico del estado del software y proporciona ayuda para la situación asociada a ese estado. A diferencia de la ayuda en línea general o los manuales en línea, la ayuda contextual no necesita ser accesible para su lectura en su totalidad. Se supone que cada tema describe exhaustivamente un estado, una situación o una característica del software».—
+> [Wikipedia](https://en.wikipedia.org/wiki/Context-sensitive_help)
+
+Normalmente, la ayuda contextual se implementa mediante un icono de ayuda en el que los usuarios pueden hacer clic y que les lleva a la parte adecuada de la documentación correspondiente a la parte del software que están utilizando. Esto implica la creación de un mapa de URL contextuales.
+
+El generador de sitios estáticos genera automáticamente enlaces a los encabezados. Sin embargo, si se cambia el encabezado, el enlace también cambiará. Por este motivo, DocStatic proporciona el elemento Ayuda contextual. Este elemento permite añadir una etiqueta de anclaje en cualquier parte de un tema. Siempre que se defina un slug para el tema en los metadatos, el enlace no se romperá.
+
+1. Seleccione **Ayuda contextual** en la lista Insertar.
+2. Introduzca un ID único.
+
+El enlace tendrá el siguiente formato: `<URL>/docs/<slug>#<id>`.
+
+#### Ejemplo
+
+[https://docstatic.com/docs/context-help#help-example](/docs/context-help#help-example)
+
+(jsx\:a id="help-example")(id\:help-example)(/jsx\:a)
+
+## Desarrolladores
+
+Para ver un ejemplo de cómo incluir enlaces de ayuda contextual en tu código, examina el componente HelpButton React en el código fuente de este sitio. Dado que DocStatic no tiene acceso directo al código CMS, implementa el botón aplicándolo como un elemento de interfaz de usuario en un campo no utilizado de una colección CMS. El componente HelpButton adjunta el botón al elemento de navegación de la página y lo vincula a la URL pasada en la plantilla:
+
+```javascript
+const ExampleCollection = {
+  name: "example",
+  label: "Example",
+  path: "docs/example",
+  format: "mdx",
+  fields: [
+    {
+      type: "boolean",
+      name: "help",
+      label: "Help",
+      required: false,
+      ui: {
+        component: (props) => <HelpButton url="https://example.com/" {...props} />,
+      },
+    },
+```

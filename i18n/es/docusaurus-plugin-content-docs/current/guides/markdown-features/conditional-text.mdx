@@ -1,0 +1,60 @@
+---
+lastmod: '2026-02-25T23:59:26.151Z'
+modifiedBy: aowendev <aowen@translationcommons.org>
+title: Conditional text
+tags:
+  - metadata
+  - metadata_conditions
+  - reuse
+  - reuse_conditional-text
+draft: true
+review: false
+translate: false
+approved: false
+published: true
+unlisted: false
+---
+
+# Texto condicional
+
+El componente **Texto condicional** le permite envolver el contenido en un conjunto de condiciones que determinan cuándo debe mostrarse:
+
+* Las condiciones pueden ser cualquier combinación de idiomas o condiciones definidas por el usuario.
+* El contenido puede mostrarse u ocultarse si se cumplen una o más condiciones (O) o solo si se cumplen todas las condiciones (Y).
+  También puede especificar un texto alternativo para mostrar si no se cumple ninguna condición.
+
+## Crear categorías y condiciones
+
+1. En el CMS, haga clic en la colección **Condiciones**.
+2. Haga clic en el icono **Añadir** para añadir una nueva **Categoría**.
+3. Asígnele un **Nombre** y una **Descripción**.
+4. Para cada **Condición** que desee añadir:
+   1. Haga clic en el icono **Añadir**.
+   2. Asigne un nombre a la **Condición** y añada una **Descripción**.
+   3. Active o desactive el estado **Activo** de la condición según sea necesario.
+
+## Añadir condiciones a un tema
+
+Las condiciones se establecen a nivel de tema. El idioma viene determinado por el idioma de la página. Otras condiciones se definen como una matriz en los metadatos al principio del tema.
+
+1. Cree o edite un tema.
+2. En el área **Condiciones**, expanda las **Categorías** y seleccione la casilla de cualquier **Condición** que desee aplicar al tema.
+
+## Añadir texto condicional
+
+1. Seleccione **Texto condicional** en la lista **Incrustar**.
+2. Edite el componente.
+3. Introduzca el **Contenido**.
+4. Establezca la **Acción** (mostrar u ocultar).
+5. Añada las **Condiciones requeridas**.
+6. Añada los **Idiomas requeridos**.
+7. Establezca la **Lógica de condición**.
+8. Establezca la **Lógica de idioma**.
+9. Seleccione si se requieren tanto las condiciones como los idiomas.
+10. (Opcional) Introduzca el **Texto alternativo**.
+
+### Ejemplo
+
+<ConditionalText action="show" conditions={["production"]} languages={[]} logic="any" languageLogic="any" requireBothConditions={false} fallback="">
+  La condición `production` está establecida en esta página.
+</ConditionalText>

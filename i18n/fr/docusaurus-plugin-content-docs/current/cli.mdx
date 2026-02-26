@@ -1,6 +1,6 @@
 ---
+lastmod: '2026-02-25T23:51:54.409Z'
 title: CLI
-lastmod: '2025-10-19T12:04:19.743Z'
 description: Scripts de ligne de commande DocStatic.
 tags:
   - software
@@ -26,29 +26,29 @@ DocStatic fournit un ensemble de scripts pour vous aider à générer, servir et
     "prebuild": "yarn generate-files",
     "predev": "yarn generate-files",
     "build": "tinacms build && docusaurus build",
-    "build-local": "tinacms build --local --skip-indexing --skip-cloud-checks && docusaurus build",
-    "swizzle": "docusaurus swizzle",
-    "deploy": "docusaurus deploy",
-    "clear": "docusaurus clear",
-    "serve": "docusaurus serve",
-    "write-translations": "docusaurus write-translations",
-    "write-heading-ids": "docusaurus write-heading-ids",
-    "gen-api-docs": "docusaurus gen-api-docs",
-    "clean-api-docs": "docusaurus clean-api-docs",
-    "gen-graphql": "docusaurus docs:generate:graphql",
-    "gen-api-docs:version": "docusaurus gen-api-docs:version",
-    "clean-api-docs:version": "docusaurus clean-api-docs:version",
-    "lint": "biome check apis/ config/ reuse/ scripts/ src/ static/ tina/",
-    "lint:fix": "biome check apis/ config/ reuse/ scripts/ src/ static/ tina/ --fix"
+    « build-local » : « tinacms build --local --skip-indexing --skip-cloud-checks && docusaurus build »,
+    « swizzle » : « docusaurus swizzle »,
+    « deploy » : « docusaurus deploy »,
+    « clear » : « docusaurus clear »,
+    « serve » : « docusaurus serve »,
+    « write-translations » : « docusaurus write-translations »,
+    « write-heading-ids » : « docusaurus write-heading-ids »,
+    « gen-api-docs » : « docusaurus gen-api-docs »,
+    « clean-api-docs » : « docusaurus clean-api-docs »,
+    « gen-graphql » : « docusaurus docs:generate:graphql »,
+    « gen-api-docs:version » : « docusaurus gen-api-docs:version »,
+    « clean-api-docs:version » : « docusaurus clean-api-docs:version »,
+    « lint » : « biome check apis/ config/ reuse/ scripts/ src/ static/ tina/ »,
+    « lint:fix » : « biome check apis/ config/ reuse/ scripts/ src/ static/ tina/ --fix »
   }
 }
 ```
 
-## Commandes CLI de DocStatic
+## Commandes CLI DocStatic
 
 Pour invoquer les commandes, utilisez yarn. Par exemple, yarn dev.
 
-Ces commandes sont décrites dans [CLI](https://docusaurus.io/docs/cli) dans la documentation de Docusaurus :
+Ces commandes sont décrites dans [CLI](https://docusaurus.io/docs/cli) dans la documentation Docusaurus :
 
 * docusaurus
 * start
@@ -62,7 +62,7 @@ Ces commandes sont décrites dans [CLI](https://docusaurus.io/docs/cli) dans la 
 
 ### Commandes automatisées
 
-Ces commandes sont exécutées automatiquement au moment de la construction ou lors du démarrage du serveur de développement :
+Ces commandes sont exécutées automatiquement au moment de la compilation ou au démarrage du serveur de développement :
 
 * generate-files
 * prebuild
@@ -74,10 +74,10 @@ Ces commandes sont exécutées automatiquement au moment de la construction ou l
 * gen-api-docs
 * gen-graphql
 
-Pour plus d'informations sur les commandes OpenAPI, reportez-vous à [CLI Usage](https://github.com/PaloAltoNetworks/docusaurus-openapi-docs?tab=readme-ov-file#cli-usage)) dans la documentation Docusaurus OpenAPI Plugin.
+Pour plus d'informations sur les commandes OpenAPI, consultez la section [Utilisation de la CLI](https://github.com/PaloAltoNetworks/docusaurus-openapi-docs?tab=readme-ov-file#cli-usage) dans la documentation du plugin OpenAPI de Docusaurus.
 
-Pour plus d'informations sur la commande GraphQL, voir [Usage](https://github.com/Zhouzi/docusaurus-graphql-plugin?tab=readme-ov-file#usage) dans la documentation du plugin GraphQL de Docusaurus.
+Pour plus d'informations sur la commande GraphQL, consultez la section [Utilisation](https://github.com/Zhouzi/docusaurus-graphql-plugin?tab=readme-ov-file#usage) dans la documentation du plugin Docusaurus GraphQL.
 
-### Commandes d'archivage
+### Commandes de linting
 
-Pour plus d'informations sur les commandes de classement, voir [CLI](https://biomejs.dev/reference/cli/) dans la documentation de Biome.
+Pour plus d'informations sur les commandes de linting, consultez la section [CLI](https://biomejs.dev/reference/cli/) de la documentation Biome.

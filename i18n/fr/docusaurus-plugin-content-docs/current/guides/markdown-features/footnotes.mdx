@@ -1,9 +1,7 @@
 ---
+lastmod: '2026-02-25T23:51:57.675Z'
 title: Notes de bas de page
-lastmod: '2025-10-19T13:48:16.828Z'
-description: >-
-  Les notes de bas de page sont automatiquement numérotées et reliées entre
-  elles.
+description: Les notes de bas de page sont automatiquement numérotées et reliées entre elles.
 tags:
   - elements
   - elements_footnotes
@@ -17,35 +15,35 @@ unlisted: false
 
 # Notes de bas de page
 
-Il existe une extension de Markdown qui fournit des notes de bas de page, mais sa mise en œuvre n'est pas cohérente et elle sépare le contenu du numéro. Par exemple :
+Il existe une extension à Markdown qui permet d'ajouter des notes de bas de page, mais son implémentation n'est pas cohérente et sépare le contenu du numéro. Par exemple :
 
 ```markdown
-Markdown est un langage de balisage léger[^1] créé par John Gruber[^2], aujourd'hui largement utilisé dans l'écriture[^3].
+Markdown est un langage de balisage léger[^1] créé par John Gruber[^2], désormais largement utilisé dans la rédaction[^3].
 
-[^1] : Markdown utilise une syntaxe simple pour réaliser la mise en forme du texte.
+[^1] : Markdown utilise une syntaxe simple pour formater le texte.
 [^2] : John Gruber a créé Markdown en 2004.
-[^3] : De nombreuses plateformes telles que GitHub, Stack Overflow et les plateformes de blogs supportent Markdown.
+[^3] : De nombreuses plateformes telles que GitHub, Stack Overflow et les plateformes de blogs prennent en charge Markdown.
 ```
 
-Dans DocStatic, cela serait représenté par :
+Dans DocStatic, cela serait représenté comme suit :
 
 ```markdown
-Markdown est un langage de balisage léger<Footnote summary="1"> Markdown utilise une syntaxe simple pour réaliser le formatage du texte.</Footnote>
+Markdown est un langage de balisage léger<Footnote summary="1"> Markdown utilise une syntaxe simple pour formater le texte.</Footnote>
 créé par John Gruber<Footnote summary="2">John Gruber a créé Markdown en 2004.</Footnote>,
-aujourd'hui largement utilisé dans la rédaction<Footnote summary="3">De nombreuses plateformes telles que GitHub, Stack Overflow, et des plateformes de blogs supportent Markdown.</Footnote>.
+aujourd'hui largement utilisé dans la rédaction<Footnote summary="3">De nombreuses plateformes telles que GitHub, Stack Overflow et les plateformes de blogs prennent en charge Markdown.</Footnote>.
 ```
 
 Le composant **Footnotes** vous permet d'ajouter des notes de bas de page en ligne à votre texte.
 
 1. Sélectionnez **Footnotes** dans la liste **Embed**.
 2. Modifiez le composant.
-3. Donnez-lui un **Summary**.
-4. Saisissez la **Footnote**.
+3. Donnez-lui un **Résumé**.
+4. Entrez la **Note de bas de page**.
 
 #### Exemple
 
-Markdown est un langage de balisage léger<Footnote summary="1"> Markdown utilise une syntaxe simple pour réaliser le formatage du texte.</Footnote> créé par John Gruber<Footnote summary="2">John Gruber a créé Markdown en 2004.</Footnote>, aujourd'hui largement utilisé dans la rédaction<Footnote summary="3">De nombreuses plateformes telles que GitHub, Stack Overflow, et des plateformes de blogs prennent en charge Markdown.</Footnote>.
+Markdown est un langage de balisage léger<Footnote summary="1"> Markdown utilise une syntaxe simple pour formater le texte.</Footnote> créé par John Gruber<Footnote summary="2">John Gruber a créé Markdown en 2004.</Footnote>, désormais largement utilisé dans la rédaction<Footnote summary="3">De nombreuses plateformes telles que GitHub, Stack Overflow et les plateformes de blogs prennent en charge Markdown.</Footnote>.
 
-<Admonition type="note" title="Note">
-  Si deux notes de bas de page ont le même contenu, elles n'apparaîtront qu'une seule fois dans le pied de page et partageront un numéro.
+<Admonition type="note" title="Remarque">
+  Si deux notes de bas de page ont le même contenu, elles n'apparaîtront qu'une seule fois dans le pied de page et partageront le même numéro.
 </Admonition>
