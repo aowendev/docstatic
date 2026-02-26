@@ -1,0 +1,142 @@
+{
+  "version.label": {
+    "message": "Next",
+    "description": "The label for version current"
+  },
+  "sidebar.docSidebar.category.Getting started": {
+    "message": "Getting started",
+    "description": "The label for category 'Getting started' in sidebar 'docSidebar'"
+  },
+  "sidebar.docSidebar.category.Guides": {
+    "message": "Guides",
+    "description": "The label for category 'Guides' in sidebar 'docSidebar'"
+  },
+  "sidebar.docSidebar.category.Docs": {
+    "message": "Docs",
+    "description": "The label for category 'Docs' in sidebar 'docSidebar'"
+  },
+  "sidebar.docSidebar.category.Markdown features": {
+    "message": "Markdown features",
+    "description": "The label for category 'Markdown features' in sidebar 'docSidebar'"
+  },
+  "sidebar.docSidebar.category.Advanced guides": {
+    "message": "Advanced guides",
+    "description": "The label for category 'Advanced guides' in sidebar 'docSidebar'"
+  },
+  "sidebar.docSidebar.category.Hosted CMS": {
+    "message": "Hosted CMS",
+    "description": "The label for category 'Hosted CMS' in sidebar 'docSidebar'"
+  },
+  "sidebar.openApiSidebar.category.Petstore": {
+    "message": "Petstore",
+    "description": "The label for category 'Petstore' in sidebar 'openApiSidebar'"
+  },
+  "sidebar.openApiSidebar.category.Petstore.link.generated-index.title": {
+    "message": "Petstore API",
+    "description": "The generated-index page title for category 'Petstore' in sidebar 'openApiSidebar'"
+  },
+  "sidebar.openApiSidebar.category.Pets": {
+    "message": "Pets",
+    "description": "The label for category 'Pets' in sidebar 'openApiSidebar'"
+  },
+  "sidebar.openApiSidebar.category.Petstore Orders": {
+    "message": "Petstore Orders",
+    "description": "The label for category 'Petstore Orders' in sidebar 'openApiSidebar'"
+  },
+  "sidebar.openApiSidebar.category.Users": {
+    "message": "Users",
+    "description": "The label for category 'Users' in sidebar 'openApiSidebar'"
+  },
+  "sidebar.openApiSidebar.doc.Cat": {
+    "message": "Cat",
+    "description": "The label for the doc item 'Cat' in sidebar 'openApiSidebar', linking to the doc api/petstore/schemas/cat"
+  },
+  "sidebar.openApiSidebar.doc.Add a new pet to the store": {
+    "message": "Add a new pet to the store",
+    "description": "The label for the doc item 'Add a new pet to the store' in sidebar 'openApiSidebar', linking to the doc api/petstore/add-pet"
+  },
+  "sidebar.openApiSidebar.doc.Update an existing pet": {
+    "message": "Update an existing pet",
+    "description": "The label for the doc item 'Update an existing pet' in sidebar 'openApiSidebar', linking to the doc api/petstore/update-pet"
+  },
+  "sidebar.openApiSidebar.doc.Find pet by ID": {
+    "message": "Find pet by ID",
+    "description": "The label for the doc item 'Find pet by ID' in sidebar 'openApiSidebar', linking to the doc api/petstore/get-pet-by-id"
+  },
+  "sidebar.openApiSidebar.doc.Updates a pet in the store with form data": {
+    "message": "Updates a pet in the store with form data",
+    "description": "The label for the doc item 'Updates a pet in the store with form data' in sidebar 'openApiSidebar', linking to the doc api/petstore/update-pet-with-form"
+  },
+  "sidebar.openApiSidebar.doc.Deletes a pet": {
+    "message": "Deletes a pet",
+    "description": "The label for the doc item 'Deletes a pet' in sidebar 'openApiSidebar', linking to the doc api/petstore/delete-pet"
+  },
+  "sidebar.openApiSidebar.doc.uploads an image": {
+    "message": "uploads an image",
+    "description": "The label for the doc item 'uploads an image' in sidebar 'openApiSidebar', linking to the doc api/petstore/upload-file"
+  },
+  "sidebar.openApiSidebar.doc.Finds Pets by status": {
+    "message": "Finds Pets by status",
+    "description": "The label for the doc item 'Finds Pets by status' in sidebar 'openApiSidebar', linking to the doc api/petstore/find-pets-by-status"
+  },
+  "sidebar.openApiSidebar.doc.Finds Pets by tags": {
+    "message": "Finds Pets by tags",
+    "description": "The label for the doc item 'Finds Pets by tags' in sidebar 'openApiSidebar', linking to the doc api/petstore/find-pets-by-tags"
+  },
+  "sidebar.openApiSidebar.doc.New pet": {
+    "message": "New pet",
+    "description": "The label for the doc item 'New pet' in sidebar 'openApiSidebar', linking to the doc api/petstore/new-pet"
+  },
+  "sidebar.openApiSidebar.doc.Returns pet inventories by status": {
+    "message": "Returns pet inventories by status",
+    "description": "The label for the doc item 'Returns pet inventories by status' in sidebar 'openApiSidebar', linking to the doc api/petstore/get-inventory"
+  },
+  "sidebar.openApiSidebar.doc.Place an order for a pet": {
+    "message": "Place an order for a pet",
+    "description": "The label for the doc item 'Place an order for a pet' in sidebar 'openApiSidebar', linking to the doc api/petstore/place-order"
+  },
+  "sidebar.openApiSidebar.doc.Find purchase order by ID": {
+    "message": "Find purchase order by ID",
+    "description": "The label for the doc item 'Find purchase order by ID' in sidebar 'openApiSidebar', linking to the doc api/petstore/get-order-by-id"
+  },
+  "sidebar.openApiSidebar.doc.Delete purchase order by ID": {
+    "message": "Delete purchase order by ID",
+    "description": "The label for the doc item 'Delete purchase order by ID' in sidebar 'openApiSidebar', linking to the doc api/petstore/delete-order"
+  },
+  "sidebar.openApiSidebar.doc.Subscribe to the Store events": {
+    "message": "Subscribe to the Store events",
+    "description": "The label for the doc item 'Subscribe to the Store events' in sidebar 'openApiSidebar', linking to the doc api/petstore/subscribe-to-the-store-events"
+  },
+  "sidebar.openApiSidebar.doc.Create user": {
+    "message": "Create user",
+    "description": "The label for the doc item 'Create user' in sidebar 'openApiSidebar', linking to the doc api/petstore/create-user"
+  },
+  "sidebar.openApiSidebar.doc.Get user by user name": {
+    "message": "Get user by user name",
+    "description": "The label for the doc item 'Get user by user name' in sidebar 'openApiSidebar', linking to the doc api/petstore/get-user-by-name"
+  },
+  "sidebar.openApiSidebar.doc.Updated user": {
+    "message": "Updated user",
+    "description": "The label for the doc item 'Updated user' in sidebar 'openApiSidebar', linking to the doc api/petstore/update-user"
+  },
+  "sidebar.openApiSidebar.doc.Delete user": {
+    "message": "Delete user",
+    "description": "The label for the doc item 'Delete user' in sidebar 'openApiSidebar', linking to the doc api/petstore/delete-user"
+  },
+  "sidebar.openApiSidebar.doc.Creates list of users with given input array": {
+    "message": "Creates list of users with given input array",
+    "description": "The label for the doc item 'Creates list of users with given input array' in sidebar 'openApiSidebar', linking to the doc api/petstore/create-users-with-array-input"
+  },
+  "sidebar.openApiSidebar.doc.Creates list of users with given input list": {
+    "message": "Creates list of users with given input list",
+    "description": "The label for the doc item 'Creates list of users with given input list' in sidebar 'openApiSidebar', linking to the doc api/petstore/create-users-with-list-input"
+  },
+  "sidebar.openApiSidebar.doc.Logs user into the system": {
+    "message": "Logs user into the system",
+    "description": "The label for the doc item 'Logs user into the system' in sidebar 'openApiSidebar', linking to the doc api/petstore/login-user"
+  },
+  "sidebar.openApiSidebar.doc.Logs out current logged in user session": {
+    "message": "Logs out current logged in user session",
+    "description": "The label for the doc item 'Logs out current logged in user session' in sidebar 'openApiSidebar', linking to the doc api/petstore/logout-user"
+  }
+}

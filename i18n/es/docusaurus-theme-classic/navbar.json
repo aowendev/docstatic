@@ -1,0 +1,38 @@
+{
+  "title": {
+    "message": "docStatic",
+    "description": "The title in the navbar"
+  },
+  "logo.alt": {
+    "message": "docStatic",
+    "description": "The alt text of navbar logo"
+  },
+  "item.label.Docs": {
+    "message": "Docs",
+    "description": "Navbar item with label Docs"
+  },
+  "item.label.Blog": {
+    "message": "Blog",
+    "description": "Navbar item with label Blog"
+  },
+  "item.label.Page": {
+    "message": "Page",
+    "description": "Navbar item with label Page"
+  },
+  "item.label.GraphQL": {
+    "message": "GraphQL",
+    "description": "Navbar item with label GraphQL"
+  },
+  "item.label.OpenAPI": {
+    "message": "OpenAPI",
+    "description": "Navbar item with label OpenAPI"
+  },
+  "item.label.Wiki": {
+    "message": "Wiki",
+    "description": "Navbar item with label Wiki"
+  },
+  "item.label.Dashboard": {
+    "message": "Dashboard",
+    "description": "Navbar item with label Dashboard"
+  }
+}
