@@ -1,0 +1,82 @@
+---
+lastmod: '2026-02-27T23:11:25.784Z'
+title: CLI
+tags:
+  - software
+  - software_command-line-interface
+draft: false
+review: false
+translate: false
+approved: false
+published: true
+unlisted: false
+---
+
+DocStatic bietet eine Reihe von Skripten, die Ihnen beim Erstellen, Bereitstellen und Veröffentlichen Ihrer Website helfen.
+
+```json
+{
+  // ...
+  "scripts": {
+    "docusaurus": "docusaurus",
+    "dev": "tinacms dev -c \"docusaurus start\" ",
+    "start": "docusaurus start",
+    "generate-files": "node scripts/generate-file-list.js",
+    "prebuild": "yarn generate-files",
+    "predev": "yarn generate-files",
+    "build": "tinacms build && docusaurus build",
+    „build-local”: „tinacms build --local --skip-indexing --skip-cloud-checks && docusaurus build”,
+    „swizzle”: „docusaurus swizzle”,
+    „deploy”: „docusaurus deploy”,
+    „clear”: „docusaurus clear”,
+    „serve”: „docusaurus serve”,
+    „write-translations”: „docusaurus write-translations”,
+    „write-heading-ids”: „docusaurus write-heading-ids”,
+    „gen-api-docs”: „docusaurus gen-api-docs”,
+    „clean-api-docs”: „docusaurus clean-api-docs”,
+    „gen-graphql”: „docusaurus docs:generate:graphql”,
+    „gen-api-docs:version”: „docusaurus gen-api-docs:version”,
+    „clean-api-docs:version”: „docusaurus clean-api-docs:version”,
+    „lint”: „biome check apis/ config/ reuse/ scripts/ src/ static/ tina/”,
+    „lint:fix”: „biome check apis/ config/ reuse/ scripts/ src/ static/ tina/ --fix”
+  }
+}
+```
+
+## DocStatic-CLI-Befehle
+
+Um die Befehle aufzurufen, verwenden Sie yarn. Zum Beispiel yarn dev.
+
+Diese Befehle werden in [CLI](https://docusaurus.io/docs/cli) in der Docusaurus-Dokumentation beschrieben:
+
+* docusaurus
+* start
+* build
+* swizzle
+* deploy
+* clear
+* serve
+* write-translations
+* write-heading-ids
+
+### Automatisierte Befehle
+
+Diese Befehle werden automatisch beim Erstellen oder beim Starten des Entwicklungsservers ausgeführt:
+
+* generate-files
+* prebuild
+* predev
+
+### API-Befehle
+
+* clean-api-docs
+* gen-api-docs
+* gen-graphql
+
+Weitere Informationen zu den OpenAPI-Befehlen finden Sie unter [CLI-Verwendung](https://github.com/PaloAltoNetworks/docusaurus-openapi-docs?tab=readme-ov-file#cli-usage) in der Dokumentation zum Docusaurus OpenAPI-Plugin.
+
+Weitere Informationen zum GraphQL-Befehl finden Sie unter [Verwendung](https://github.com/Zhouzi/docusaurus-graphql-plugin?tab=readme-ov-file#usage) in der Dokumentation zum Docusaurus GraphQL-Plugin.
+
+### Linting-Befehle
+
+Weitere Informationen zu den Linting-Befehlen finden Sie unter [CLI](https://biomejs.dev/reference/cli/) in der Biome-Dokumentation.

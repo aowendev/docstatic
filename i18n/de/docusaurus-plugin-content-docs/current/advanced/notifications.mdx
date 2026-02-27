@@ -1,0 +1,77 @@
+---
+lastmod: '2026-02-27T23:11:42.278Z'
+title: Notifications
+tags:
+  - software
+  - software_notifications
+  - software_notifications_email
+  - software_notifications_teams
+  - software_notifications_slack
+draft: false
+review: false
+translate: false
+approved: false
+published: true
+unlisted: false
+---
+
+# Benachrichtigungen
+
+DocStatic verwendet [GitHub Actions](https://docs.github.com/en/actions), um Workflow-Benachrichtigungen zu versenden. Beispiele für Überprüfungs- und Übersetzungsbenachrichtigungen finden Sie im Ordner „.github/workflows/“. Um diese zu aktivieren, sind einige Konfigurationen in GitHub erforderlich. Sie können sie auch als Ausgangspunkt für die Entwicklung Ihrer eigenen benutzerdefinierten Benachrichtigungen verwenden.
+
+## E-Mail
+
+Die Aktionen `email-review.yml `und `email-translate.yml` werden ausgelöst, wenn entweder die Tags „review“ oder „translate“ in einer Markdown-Datei im Hauptzweig gesetzt sind. Um sie zu verwenden, fügen Sie diese [Geheimnisse](https://docs.github.com/en/actions/how-tos/write-workflows/choose-what-workflows-do/use-secrets) zu Ihrem Repository hinzu:
+
+* `SMTP_SERVER`
+* `SMTP_PORT`
+* `SMTP_USERNAME`
+* `SMTP_PASSWORD`
+* `NOTIFY_EMAIL_TO`
+* `NOTIFY_EMAIL_FROM`
+
+Diese Informationen erhalten Sie von Ihrem E-Mail-Anbieter. Zum Beispiel:
+
+* [iCloud](https://support.apple.com/en-us/102525) (erfordert ein [app-spezifisches Passwort)](https://support.apple.com/en-us/102654).
+* [Outlook](https://support.microsoft.com/en-us/office/pop-imap-and-smtp-settings-for-outlook-com-d088b986-291d-42b8-9564-9c414e2aa040)
+
+## Slack
+
+Die Aktionen „slack-review\.yml“ und „slack-translate.yml“ verwenden dieselben Auslöser wie die E-Mail-Versionen. Um sie zu verwenden, fügen Sie Ihre Slack-Webhook-URL als Geheimnis mit dem Namen „SLACK*WEBHOOK*URL“ hinzu. Weitere Informationen finden Sie unter [Senden von Nachrichten mit eingehenden Webhooks](https://docs.slack.dev/messaging/sending-messages-using-incoming-webhooks/) in der Slack-Dokumentation.
+
+## Teams
+
+Die Aktionen „teams-review\.yml“ und „teams-translate.yml“ funktionieren wie die Slack-Versionen. Microsoft wird die App „Incoming Webhooks“ für Teams ab Dezember 2025 einstellen, aber derzeit gibt es keine öffentlich verfügbare GitHub-Methode zum Senden von Adaptive Cards an Workflows. Die Problemumgehung besteht darin, curl zu verwenden:
+
+```yaml
+- name: Teams-Testbenachrichtigung senden
+  run: |
+    curl --ssl-no-revoke -X POST \
+    --location ${{ secrets.MS_TEAMS_HTTP_POST_URL }} \
+    --header 'Content-Type: application/json' \
+    --data '{ \
+      "type": "message", \
+      „attachments”: [{ \
+        „contentType”: „application/vnd.microsoft.card.adaptive”, \
+        „content”: { \
+          „$schema”: „http://adaptivecards.io/schemas/adaptive-card.json”, \
+          „type”: „AdaptiveCard”, \
+          „version”: „1.3”, \
+          „body”: [ { \
+            „type”: „TextBlock”, \
+            „text”: „Dies ist eine Testbenachrichtigung von GitHub Actions (Teams).”, \
+            „wrap”: true }]}}]}'
+```
+
+1. Gehen Sie in Teams zu dem Kanal, an den Sie Nachrichten senden möchten, klicken Sie auf die Auslassungspunkte (**…**) und wählen Sie **Workflows** aus.
+2. Klicken Sie auf **Verwalten**.
+3. Klicken Sie auf **Neuer Flow**.
+4. Suchen Sie nach Vorlagen für Webhooks und klicken Sie auf **Webhook-Benachrichtigungen an einen Kanal senden**.
+5. (Optional) Bearbeiten Sie den **Flow-Namen**.
+6. Melden Sie sich an und klicken Sie auf **Weiter**.
+7. Wählen Sie ein **Team** und einen **Kanal** aus den Listen aus und klicken Sie auf **Flow erstellen**.
+8. Kopieren Sie die `MS_TEAMS_HTTP_POST_URL`, speichern Sie sie als Geheimnis in GitHub und klicken Sie auf **Fertig**.
+
+<Admonition type="tip" title="Tipp">
+  Sie können die GitHub-Aktion „Benachrichtigungen testen“ verwenden, um Ihre Verbindungen zu testen.
+</Admonition>

@@ -1,0 +1,66 @@
+---
+help: null
+lastmod: '2026-02-27T23:13:42.778Z'
+modifiedBy: aowendev <aowen@translationcommons.org>
+title: Assets
+tags:
+  - content
+  - content_images
+draft: false
+review: false
+translate: false
+approved: false
+published: true
+unlisted: false
+---
+
+# Assets
+
+Manchmal möchten Sie direkt aus Themen heraus auf Assets (z. B. DOCX-Dateien, Bilder usw.) verlinken. DocStatic verwaltet dies über den Ordner „static/“.
+
+Alle Inhalte, die in diesem Ordner abgelegt werden, sind über das Stammverzeichnis der veröffentlichten Website verfügbar. Beispiel:
+
+```
+# Ihr Dokument
+/website/docs/myFeature.mdx
+
+# Einige Assets, die Sie verwenden möchten
+/website/assets/docstatic-asset-example.docx
+/website/img/docstastic-asset-example-banner.png
+```
+
+## Bilder
+
+DocStatic bietet zwei Möglichkeiten, Bilder zu Themen hinzuzufügen. Für Inline-Bilder können Sie auf das Symbol **Bild** klicken, um ein Bild in ein Thema einzufügen. Dies eignet sich am besten für Symbole (![](/img/docs/example.svg)) und kleine Bilder. Symbole sollten als vorab skalierte SVG-Dateien gespeichert werden. Diese werden im Dunkelmodus invertiert und ihr Farbraum wird um 180° gedreht.
+
+<Admonition type="tip" title="Tipp">
+  Sie können [Librsvg](https://wiki.gnome.org/Projects/LibRsvg) verwenden, um SVGs zu skalieren. Beispielsweise legt `rsvg-convert example.svg -h 12 -f svg -o example.svg` eine Höhe von 12 Punkten fest.
+</Admonition>
+
+Für größere Bilder empfiehlt sich die Verwendung der Komponente „Abbildung“.
+
+1. Wählen Sie **Abbildung** aus der Liste **Einbetten**.
+2. Bearbeiten Sie die Komponente.
+3. Klicken Sie auf den Bereich **Bild**, um den **Medien-Manager** zu öffnen.
+4. Laden Sie ein Bild hoch oder wählen Sie eines aus.
+5. Geben Sie eine **Bildunterschrift** ein.
+
+#### Beispiel
+
+<Abbildung img="/img/docStaticDemo.jpg" caption="Beispielabbildung" />
+
+Die Abbildung passt sich der Größe des Anzeigefensters an. Durch Anklicken wird sie in maximaler Größe in einem Leuchtkasten geöffnet.
+
+Weitere Informationen zum Medienmanager finden Sie unter [Medienübersicht](https://tina.io/docs/reference/media/overview) in der TinaCMS-Dokumentation.
+
+## Dateien
+
+Auf die gleiche Weise können Sie auf vorhandene Assets verlinken, indem Sie den Pfad aus dem Ordner static/ in der URL verwenden. Beispiel:
+
+```
+./assets/docstatic-asset-example.docx
+```
+
+Weitere Informationen finden Sie unter [Statische Assets](https://docusaurus.io/docs/markdown-features/assets) in der Docusaurus-Dokumentation.
+
+Übersetzt mit DeepL.com (kostenlose Version)

@@ -1,0 +1,44 @@
+---
+lastmod: '2026-02-27T23:11:34.927Z'
+title: Diagrams
+tags:
+  - content
+  - content_diagrams
+draft: false
+review: false
+translate: false
+approved: false
+published: true
+unlisted: false
+---
+
+# Diagramme
+
+Diagramme können mit [Mermaid](https://mermaid.js.org/) in einem Code-Block gerendert werden.
+
+## Verwendung
+
+Das CMS unterstützt direkt die Bearbeitung von Mermaid-Diagrammen.
+
+1. Klicken Sie auf das Symbol **Mermaid**.
+2. Geben Sie den Markdown-Code in das Feld ein.
+
+Klicken Sie auf **Vorschau**, um Ihr Diagramm anzuzeigen.
+
+#### Beispiel:
+
+```mermaid
+graph TD;
+    A-->B;
+    A-->C;
+    B-->D;
+    C-->D;
+```
+
+<Admonition type="note" title="Hinweis">
+  Derzeit werden zenUML-Diagramme nicht unterstützt und Mindmap-Diagramme können zu ungewöhnlichem Verhalten führen. Nicht alle Diagrammtypen können im CMS in der Vorschau angezeigt werden.
+</Admonition>
+
+Weitere Informationen finden Sie unter [Mermaid](https://tina.io/docs/reference/rich-text-usage/mermaid) in der TinaCMS-Dokumentation.
+
+Informationen zum Thema Mermaid finden Sie unter [Diagramme](https://docusaurus.io/docs/markdown-features/diagrams) in der Docusaurus-Dokumentation.

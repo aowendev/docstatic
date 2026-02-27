@@ -1,0 +1,258 @@
+---
+lastmod: '2026-02-27T23:11:39.157Z'
+title: Installation
+tags:
+  - software
+  - software_integrated-development-environments
+  - software_integrated-development-environments_eclipse
+  - software_integrated-development-environments_vscodium
+  - software_package-managers
+  - software_package-managers_yarn
+  - software_source-control
+  - software_source-control_github
+  - software_content-management-systems
+  - software_content-management-systems_tinacms
+  - software_grammar-spelling-style
+  - software_grammar-spelling-style_languagetool
+draft: false
+review: false
+translate: false
+approved: false
+published: true
+unlisted: false
+---
+
+# Installation
+
+Willkommen! Diese Anleitung führt Sie durch die erstmalige Einrichtung von DocStatic.
+
+Wenn Sie noch nie mit GitHub oder Docs-as-Code gearbeitet haben, machen Sie sich keine Sorgen – wir erklären Ihnen, was Sie benötigen, warum und wo Sie weitere Informationen finden.
+
+## Voraussetzungen
+
+Sie können DocStatic lokal (auf Ihrem Computer) ausführen oder in der Cloud hosten.
+
+Für die einfachste Cloud-Einrichtung erstellen Sie kostenlose Konten bei diesen Diensten:
+
+* [GitHub ](https://github.com/) – speichert Ihre Inhalte und verfolgt Änderungen
+* [TinaCMS](https://tina.io/) – ermöglicht browserbasierte Bearbeitung
+* [LanguageTool](https://languagetool.org/) – bietet optionale Grammatik- und Stilprüfung
+
+Wenn Sie DocStatic stattdessen lokal (auf Ihrem Computer) ausführen möchten, lesen Sie die Anforderungen für die lokale Entwicklung.
+
+***
+
+## Anforderungen für die lokale Entwicklung
+
+Dieser Abschnitt gilt nur, wenn Sie lokal arbeiten möchten.
+
+Sie benötigen eine integrierte Entwicklungsumgebung (IDE) oder einen Texteditor. Zwei Open-Source-Optionen sind:
+
+* [Eclipse](https://eclipseide.org)
+* [VSCodium](https://vscodium.com/)
+
+Außerdem müssen Sie Node.js für die Build-Tools und Yarn für die Paketverwaltung installieren.
+
+### Node.js installieren
+
+Sie müssen [Node.js](https://nodejs.org/) Version 18.0 oder höher installieren.
+
+Überprüfen Sie, ob Node.js bereits installiert ist. Öffnen Sie ein Terminal (Eingabeaufforderung oder Terminal-App) und führen Sie folgenden Befehl aus:
+
+```
+node -v
+```
+
+Wenn Sie eine Versionsnummer sehen, die mit v18 oder höher beginnt, können Sie loslegen.
+
+Wenn Node.js nicht installiert ist oder Sie eine ältere Version haben:
+
+1. Gehen Sie zur [offiziellen Node.js-Downloadseite](https://nodejs.org/en/download/prebuilt-installer).
+2. Wählen Sie die LTS-Version (Long-Term Support) für Ihr Betriebssystem. Das Installationsprogramm enthält npm, den Node Package Manager, den Sie in späteren Schritten benötigen. Während der Installation:\* Behalten Sie die ausgewählten Standardoptionen bei (diese enthalten erforderliche Abhängigkeiten).
+   \* Schließen Sie nach Abschluss der Installation Ihr Terminal und öffnen Sie es erneut.
+3. (Optional) Wenn Sie an verschiedenen Projekten arbeiten, die unterschiedliche Node-Versionen erfordern, installieren Sie nvm ([Node Version Manager](https://github.com/nvm-sh/nvm)). Mit nvm können Sie zwischen verschiedenen Versionen von Node wechseln, ohne Ihre Einrichtung zu beeinträchtigen.
+
+### Yarn installieren
+
+DocStatic verwendet Yarn für die Paketverwaltung.
+
+Überprüfen Sie, ob Yarn bereits installiert ist. Öffnen Sie Ihr Terminal oder Ihre Eingabeaufforderung und geben Sie Folgendes ein:
+
+```
+yarn -v
+```
+
+Wenn eine Versionsnummer angezeigt wird, ist Yarn bereits installiert.
+
+Wenn Sie die Meldung „Befehl nicht gefunden“ oder einen ähnlichen Fehler erhalten, öffnen Sie ein Terminal (Eingabeaufforderung oder Terminal-App) und führen Sie Folgendes aus:
+
+```
+npm install -g yarn
+```
+
+<Admonition type="note" title="Hinweis">
+  Unter macOS oder Linux müssen Sie dem Befehl möglicherweise „sudo” voranstellen, um die Berechtigung zu erteilen:
+
+  ```
+  sudo npm install -g yarn
+  ```
+</Admonition>
+
+<Admonition type="note" title="Hinweis">
+  Unter Windows verwenden Sie sudo nicht. Öffnen Sie einfach Ihr Terminal als Administrator und führen Sie den Befehl aus.
+</Admonition>
+
+***
+
+## Das DocStatic-Repository abrufen
+
+Der Quellcode von DocStatic befindet sich auf GitHub. Um zu beginnen, müssen Sie eine eigene Kopie erstellen, indem Sie:
+
+1. **Erstellen Sie einen Fork** des DocStatic-Repositorys.
+   Durch das Forken wird eine Kopie erstellt, mit der Sie unabhängig an Ihrem eigenen Projekt arbeiten können.
+2. **Erstellen Sie einen Klon** Ihres Forks.
+   Durch das Klonen wird eine Kopie erstellt, die mit dem von Ihnen erstellten Original-Fork verknüpft ist. Dies kann nützlich sein, um später eventuell auftretende Schemaprobleme zu beheben.
+
+### Forken Sie das DocStatic-Repository
+
+1. Melden Sie sich bei Ihrem Konto bei GitHub an.
+2. Besuchen Sie [https://github.com/aowendev/docstatic](https://github.com/aowendev/docstatic).
+3. Klicken Sie auf „Fork“ (normalerweise oben rechts).
+4. Behalten Sie den Standardnamen für das Repository bei.
+5. Geben Sie eine Beschreibung Ihres Projekts ein.
+6. Stellen Sie sicher, dass „Nur Hauptzweig kopieren“ aktiviert ist.
+7. Klicken Sie auf „Fork erstellen“.
+
+GitHub erstellt einen neuen Zweig des Repositorys in Ihrem GitHub-Konto.
+
+### Klonen Sie Ihren Fork des DocStatic-Repositorys
+
+So erstellen Sie einen Klon:
+
+1. Melden Sie sich bei Ihrem GitHub-Konto an.
+2. Navigieren Sie zum Repository für den Fork.
+3. Klicken Sie auf das Repository, um es zu öffnen.
+4. Klicken Sie auf **\<> Code** und kopieren Sie dann die URL.
+5. Öffnen Sie Ihr Terminal oder Ihre Eingabeaufforderung und navigieren Sie mit `cd` zu dem Speicherort, an dem Sie den Klon speichern möchten. Zum Beispiel `cd Documents/Projects/`.
+6. Geben Sie `git clone` gefolgt von der URL Ihres Klons ein.
+
+```shell
+git clone https://github.com/acme-projects/docstatic.git
+```
+
+***
+
+## Installieren Sie die Projektabhängigkeiten
+
+Wenn Sie lokal arbeiten möchten, müssen Sie auch die Projektabhängigkeiten installieren. Navigieren Sie mit `cd` zum Stammordner Ihres geklonten oder geforkten DocStatic-Repositorys und installieren Sie die Pakete:
+
+```
+cd docstatic
+yarn install
+```
+
+Yarn lädt alle in package.json aufgeführten Elemente herunter. Dies kann einige Minuten dauern.
+
+***
+
+## Projektstruktur
+
+Nach dem Forken oder Klonen des Repositorys sehen Sie verschiedene Dateien in Ihrem Ordner „docstatic/“. Nachfolgend finden Sie **einige** der Dateien und Ordner der Projektstruktur, die Sie kennen sollten. **Es handelt sich hierbei nicht um eine vollständige Liste aller Elemente des Projekts**.
+
+```
+docstatic
+├── apis
+│   └── petstore.yaml
+├── blog
+│   └── hybrid.mdx
+├── config
+│   ├── docusaurus
+│   │   └── index.json
+│   ├── homepage
+│   │   └── index.json
+│   └── sidebar
+│       └── index.json
+│
+├── docs
+│   └── introduction.mdx
+├── i18n
+│   └── fr
+├── reuse
+│   ├── code
+│   │   └── example.xml
+│   ├── conditions
+│   │   └── index.json
+│   ├── glossaryTerms
+│   │   └── index.json
+│   ├── snippets
+│   │   └── example.mdx
+│   ├── taxonomy
+│   │   └── index.json
+│   ├── variableSets
+│   │   └── index.json
+│   ├── code-files.json
+│   └── snippets-files.json
+├── src
+│   ├── css
+│   │   └── custom.css
+│   └── pages
+│       ├── example-page.mdx
+│       ├── index.js
+│       └── index.module.css
+├── static
+│   └── img
+├── docusaurus.config.ts
+├── package.json
+├── README.md
+├── sidebars.ts
+└── yarn.lock
+```
+
+### Überblick über die Projektstruktur
+
+* `/apis/` – OpenAPI-YAML-Dateien.
+* `/blog/` – Blog-MDX-Dateien.
+* `/config/` – JSON-Dateien, die von TinaCMS zur Konfiguration von DocStatic verwendet werden.
+* `/docs/` – MDX-Dateien für die Dokumentation.
+* `/i18n/` – Übersetzungsdateien.
+* `/reuse/` – Wiederverwendbare Inhalte.
+* `/src/` – Nicht zur Dokumentation gehörende Dateien wie Seiten oder benutzerdefinierte React-Komponenten.
+  * `/src/pages` – Alle JSX/TSX/MDX-Dateien in diesem Verzeichnis werden in eine Website-Seite konvertiert.
+* `/static/` – Statischer Ordner. Alle Inhalte in diesem Ordner werden in das Stammverzeichnis des endgültigen Build-Ordners kopiert.
+* `/docusaurus.config.ts` – Eine Konfigurationsdatei mit der Website-Konfiguration.
+* `/package.json` – Eine DocStatic-Website ist eine React-App. Sie können beliebige npm-Pakete installieren und verwenden.
+* `/sidebars.ts` – Legt die Reihenfolge der Dokumente in der Seitenleiste fest. Verwenden Sie dies für Ihre „Inhaltsverzeichnis“-Struktur.
+
+***
+
+### Monorepos
+
+DocStatic ermöglicht die Verwendung eines einzigen Repositorys, das sowohl den Projektcode als auch die Projektdokumentation enthält. In der Docusaurus-Terminologie wird dieses Konzept als „Monorepo“ bezeichnet.
+
+Weitere Informationen finden Sie unter [Monorepos](https://docusaurus.io/docs/installation#monorepos) in der Docusaurus-Dokumentation.
+
+***
+
+### Änderungen in der Vorschau anzeigen
+
+Um Ihre Änderungen während der Bearbeitung der Dateien in der Vorschau anzuzeigen, können Sie einen **lokalen Entwicklungsserver** ausführen, der Ihre Website bereitstellt und die neuesten Änderungen widerspiegelt.
+
+Öffnen Sie ein Terminal oder eine Eingabeaufforderung und geben Sie Folgendes ein:
+
+```shell
+yarn dev
+```
+
+Standardmäßig wird ein Browserfenster unter [http://localhost:3000](http://localhost:3000) geöffnet.
+
+***
+
+### Erstellen
+
+DocStatic verwendet einen statischen Website-Generator, um die Website in einem Ordner mit statischen Inhalten zu erstellen und sie auf einem Webserver zu speichern, wo sie angezeigt werden kann. Um die Website zu erstellen, verwenden Sie:
+
+```shell
+yarn build-local
+```
+
+Die Inhalte werden im Ordner `/build` generiert, den Sie in einen beliebigen Hosting-Dienst für statische Dateien wie GitHub Pages, Netlify oder Vercel kopieren können. Weitere Informationen finden Sie unter [Bereitstellung](https://docusaurus.io/docs/deployment) in der Docusaurus-Dokumentation.

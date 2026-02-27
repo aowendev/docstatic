@@ -1,0 +1,57 @@
+---
+lastmod: '2026-02-27T23:11:46.032Z'
+title: Taxonomies
+tags:
+  - metadata
+  - metadata_taxonomies
+draft: false
+review: false
+translate: false
+approved: false
+published: true
+unlisted: false
+---
+
+# Taxonomien
+
+Je mehr Informationen Sie haben, desto schwieriger ist es, Dinge zu finden. Mit Markdown können Sie Inhalte mit Tags versehen, jedoch ohne Überprüfung der Konsistenz. Mit DocStatic können Sie Ihren Inhalten mithilfe von Taxonomien eine [Informationsarchitektur](https://en.wikipedia.org/wiki/Information_architecture) zuweisen.
+
+## Entwerfen einer Informationsarchitektur
+
+Es würde den Rahmen dieses Dokuments sprengen, sich eingehend mit Informationsarchitekturen zu befassen, aber hier sind einige Vorschläge:
+
+* Beschränken Sie Ihre Hierarchie auf drei Ebenen. Dies entspricht gut der traditionellen [Indizierung](/docs/tags).
+* Normalisieren Sie Ihre Begriffe. Bevorzugen Sie Pluralformen gegenüber Singularformen oder Verben. Bevorzugen Sie einzelne Wörter gegenüber Phrasen.
+* Schreiben Sie Akronyme und Abkürzungen aus.
+* Versuchen Sie, die oberste Ebene auf zehn Kategorien zu beschränken.
+* Versuchen Sie, die mittlere Ebene auf sieben Kategorien zu beschränken.
+* Verwenden Sie so viele Kategorien auf der untersten Ebene wie erforderlich.
+
+## Anwenden einer Hierarchie auf flache Tag-Systeme
+
+Idealerweise sollten Sie die Informationsarchitektur auf alle Ihre Informationsplattformen (Bug-Tracking-Systeme, Wikis usw.) anwenden. Das bedeutet, dass Tags die strengsten Kriterien erfüllen müssen:
+
+* Tags müssen ihre eigenen übergeordneten Kategorien enthalten, die durch einen Unterstrich ( \_ ) getrennt sind.
+* Nur Kleinbuchstaben. Keine Zahlen, Leerzeichen (verwenden Sie stattdessen einen Bindestrich) oder Sonderzeichen.
+
+Um zu verhindern, dass die Tags unangemessen lang werden, ist die Verschachtelung auf maximal drei Ebenen begrenzt. In einigen Fällen erfordert dies eine Vereinfachung der Struktur. Beispielsweise ist „regions*europe*uk*scotland“ zwar logisch, hat jedoch vier Ebenen und muss daher als „regions*uk\_scotland“ strukturiert werden.
+
+## Verwalten von Taxonomie-Tags
+
+Beim Taggen von Inhalten im CMS sind Sie auf die von Ihnen definierten Tags beschränkt.
+
+1. Wählen Sie „Taxonomien” aus den Sammlungen aus und fügen Sie eine Taxonomie hinzu.
+2. Fügen Sie alle untergeordneten Tags der mittleren Ebene hinzu. Diese sollten das übergeordnete Tag (parent\_child) enthalten.
+3. Fügen Sie alle untergeordneten Tags der untersten Ebene hinzu. Diese sollten das übergeordnete Tag (top*mid*leaf) enthalten.
+
+<Admonition type="note" title="Hinweis">
+  Sie müssen das übergeordnete Tag und den Unterstrich nicht in ein untergeordnetes Tag aufnehmen, aber wenn Sie sie weglassen, wird Ihnen beim Hinzufügen eines Tags zu einem Thema eine flache Liste von Tags angezeigt. 
+</Admonition>
+
+## Inhalte mit Tags versehen
+
+Wenn Sie im CMS ein Thema bearbeiten, können Sie entweder den Suchmodus verwenden, um nach einem Begriff zu suchen, oder ihn aus der Baumansicht auswählen. Wenn Sie ein Tag hinzufügen, werden alle übergeordneten Tags automatisch hinzugefügt. Es wird jedoch nur eine Instanz jedes Tags hinzugefügt.
+
+<Admonition type="tip" title="Tip">
+  Vermeiden Sie es, Inhalte außerhalb des CMS zu taggen. So bleiben Ihre Tags konsistent und die Suche nach Inhalten wird vereinfacht.
+</Admonition>

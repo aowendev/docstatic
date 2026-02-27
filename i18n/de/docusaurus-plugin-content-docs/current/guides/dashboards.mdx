@@ -1,0 +1,85 @@
+---
+lastmod: '2026-02-27T23:11:34.116Z'
+modifiedBy: aowendev <aowen@translationcommons.org>
+title: Dashboards
+tags:
+  - content-management-systems
+  - content-management-systems_tinacms
+  - content-management-systems_media-management
+draft: false
+review: false
+translate: false
+approved: false
+published: true
+unlisted: false
+---
+
+DocStatic erweitert TinaCMS um Dashboard-Funktionen. Tina generiert eine GraphQL-API, wobei das Dateisystem im Git-Repository als Datenbank dient. Dashboards fragen die API (lokal oder in der Cloud) ab und präsentieren direkt im CMS umsetzbare Berichte. Die Dashboard-Funktionalität befindet sich derzeit in der Beta-Phase. Die Funktionalität ist vollständig getestet, aber die Benutzeroberfläche ist vorläufig und muss noch verfeinert werden. Dashboards werden aktualisiert, wenn die Seite aktualisiert wird. Wenn ein anderer Benutzer seit dem Aufrufen eines Dashboards Änderungen vorgenommen hat, können Sie auf **Aktualisieren** klicken, um das Dashboard zu aktualisieren.
+
+<Admonition type="note" title="Hinweis">
+  Je nach Umfang der Inhalte im System kann das Laden einiger Dashboards einige Zeit dauern. Diese Dashboards werden in der Regel etwas schneller aktualisiert, wenn sie lokal ausgeführt werden. 
+</Admonition>
+
+## Anzeigen der Dashboards
+
+Navigieren Sie im CMS zur Dashboard-Sammlung. Am oberen Rand der Seite befindet sich eine Statusleiste, die die GraphQL-Verbindung anzeigt. Sie gibt an, ob Sie mit der Cloud oder dem lokalen Host verbunden sind. Wenn der lokale Host verfügbar ist, wird immer eine Verbindung zum lokalen Host hergestellt. Um die Cloud zu verwenden, stellen Sie sicher, dass der lokale Entwicklungsserver angehalten ist. Die Statusleiste zeigt auch die Umgebung an und überprüft, ob alle Einstellungen gültig sind.
+
+## Anzeigen des Workflow-Status
+
+Das Dashboard „Inhaltsübersicht“ zeigt die Gesamtzahl der Themen im Pfad /docs und die Themen in jedem Workflow-Status an:
+
+* Entwurf
+* Überprüfung
+* Übersetzung
+* Genehmigt
+* Veröffentlicht
+* Nicht gelistet
+
+Klicken Sie auf den Status-Link, um alle Themen in diesem Status anzuzeigen.
+
+Klicken Sie auf „Bearbeiten“, um das Thema zur Bearbeitung zu öffnen.
+
+Klicken Sie auf das Symbol „Schließen“, um die Liste der Themen zu schließen.
+
+### Anzeigen der letzten Aktivitäten
+
+Im Abschnitt „Letzte Aktivitäten“ werden kürzlich geänderte Themen angezeigt. Sie können den Zeitbereich filtern (Alle Zeiten, Letzte Woche oder Letzter Monat) und die Anzahl der Ergebnisse von 5 bis 50 festlegen.
+
+## Anzeigen des Übersetzungsstatus
+
+Das Dashboard „Übersetzungen“ zeigt den Status jedes Themas für die aus der Liste ausgewählte Sprache an:
+
+* Aktuell: Das Datum der letzten Änderung der Übersetzung ist später als das der Quelle.
+* Veraltet: Das Datum der letzten Änderung der Quelle liegt nach dem der Übersetzung.
+* Fehlt: Es gibt eine Quelldatei ohne entsprechende Übersetzungsdatei.
+
+## Medienwiederverwendung anzeigen
+
+Das Medienbibliothek-Dashboard zeigt, wo Inhalte im Pfad /static/img verwendet werden. Es zeigt die Gesamtzahl der Dateien und Bilder, die Dateigröße, die Bildpfade und die Bildgrößen an.
+
+Sie können nach folgenden Kriterien filtern:
+
+* Alle Inhalte.
+* Nur Bilder.
+* Aktuell (7 Tage).
+* Verwendet.
+* Nicht verwendet.
+
+Klicken Sie für verwendete Inhalte auf „In n Dokumenten verwendet“, um die Themen anzuzeigen, in denen der Inhalt verwendet wird. Sie können dann auf „Bearbeiten“ klicken, um diese Themen zu bearbeiten.
+
+## Überprüfen von defekten Links
+
+Das Dashboard „Defekte Links“ überprüft alle Hyperlinks in den Themen. Der Bericht enthält Zahlen für:
+
+* Gesamtzahl der Links.
+* Gültige Links, bei denen eine Verbindung hergestellt werden konnte.
+* Defekte Links, bei denen keine Verbindung hergestellt werden konnte.
+* Warnlinks, bei denen die Verbindung abgelehnt wurde, der Link aber möglicherweise dennoch gültig ist.
+
+Sie können Warnungen zu [localhost](http://localhost) ignorieren, wenn Sie lokal ausgeführte Software beschreiben. Dokumentlinks sollten jedoch relativ sein.
+
+Warnungen sind in der Regel das Ergebnis aggressiver CORS/CORP-Richtlinien, die die No-CORS-Einstellungen nicht berücksichtigen. Sie müssen diese Websites manuell überprüfen, indem Sie auf den Hyperlink klicken.
+
+Das Dashboard listet Dateien mit problematischen Links auf. Sie können sie öffnen, indem Sie in einer der beiden Listen auf „Bearbeiten“ klicken.
+
+Das Dashboard enthält auch eine Zusammenfassung mit dem Datum, an dem der Bericht erstellt wurde.

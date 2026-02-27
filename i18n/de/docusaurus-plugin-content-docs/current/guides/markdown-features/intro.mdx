@@ -1,0 +1,115 @@
+---
+lastmod: '2026-02-27T23:11:41.163Z'
+title: Markdown features
+tags:
+  - computer-languages
+  - computer-languages_markdown
+  - elements
+  - elements_tabs
+  - elements_footnotes
+  - elements_figures
+  - elements_doc-card-lists
+  - elements_admonitions
+  - elements_comments
+  - elements_code-blocks
+  - elements_horizontal-rules
+  - elements_links
+  - elements_tables
+  - elements_quotes
+draft: false
+review: false
+translate: false
+approved: false
+published: true
+unlisted: false
+---
+
+# Markdown-Funktionen
+
+DocStatic verwendet [Markdown](https://commonmark.org/) als Hauptformat für die Erstellung von Inhalten. Sie können es [in zehn Minuten lernen](https://commonmark.org/help/). Das ist jedoch nicht notwendig, da das CMS eine vollständige Rich-Text-Bearbeitungsumgebung für Metadaten, Markdown und React-Komponenten bietet.
+
+## Einfaches strukturiertes Erstellen
+
+Themen in DocStatic bestehen aus drei Teilen:
+
+* Metadaten (im [YAML](https://yaml.org/spec/1.2.2/)-Format)
+* Inhalt (in Markdown)
+* Vordefinierte React-Komponenten.
+
+Das CMS sorgt dafür, dass Metadaten und Markdown konsistent verwendet werden, während die React-Komponenten einen einheitlichen Stil und Unterstützung für Funktionen zur Wiederverwendung von Inhalten bieten. Sie müssen selbst keinen JSX-Code hinzufügen, da die Komponenten bereits global verfügbar sind.
+
+## Standardfunktionen
+
+Zu den Markdown-Funktionen gehören:
+
+* Fett-, Code-, Kursiv- und Durchstreichungszeichen.
+* Aufzählungslisten und nummerierte Listen.
+* Code-Blöcke.
+* Überschriftenebenen (1 bis 6).
+* Horizontale Linien.
+* Bilder.
+* Links.
+* Zitate.
+* Einfache Tabellen.
+
+All diese Funktionen können direkt über die Rich-Text-Symbolleiste im CMS ausgewählt werden.
+
+Dazu fügt Docusaurus noch Folgendes hinzu:
+
+* Hinweise
+* Details (erweiterbare Inhalte)
+* Doc-Card-Listen
+* Registerkarten
+
+DocStatic erweitert dies noch um:
+
+* Code-Schnipsel (aus Dateien)
+* Kommentare
+* Bedingter Text
+* Kontext-Hilfe-Links
+* Diagramme
+* Abbildungen
+* Fußnoten
+* Glossarbegriffe
+* Mathematische Gleichungen
+* Snippets
+* Variablen
+
+## Front Matter
+
+Front Matter wird verwendet, um Metadaten zu Ihrer Markdown-Datei hinzuzufügen. Es befindet sich ganz oben in der Datei, umgeben von drei Bindestrichen ---. Inhalts-Plugins können ihr eigenes Front-Matter-Schema haben. DocStatic verwendet Front Matter für:
+
+* Bedingungen (für bedingten Text)
+* Beschreibungen
+* Slugs (feste Pfade)
+* Taxonomie-Tags
+* Titel
+* Workflow-Status
+
+## Details
+
+1. Wählen Sie **Details** aus der Liste **Einbetten**.
+2. Bearbeiten Sie die Komponente.
+3. Geben Sie ihr eine **Zusammenfassung**.
+4. Geben Sie die **Details** ein.
+
+#### Beispiel:
+
+<Details summary="Toggle me.">
+  Dies ist der detaillierte Inhalt.
+
+  Sie können hier Markdown verwenden, einschließlich **fettgedrucktem** und *kursivem* Text sowie Inline-[Links](https://docusaurus.io/).
+</Details>
+
+## Dokumentenkartenlisten
+
+Dokumentenkartenlisten werden automatisch für Kategorien im Inhaltsverzeichnis generiert. Sie können sie jedoch auch manuell zu einem Thema hinzufügen.
+
+1. Wählen Sie **Dokumentenkartenliste** aus der Liste **Einbetten** aus.
+2. Geben Sie einen **Titel** ein.
+
+Weitere Informationen finden Sie unter [Markdown-Funktionen](https://docusaurus.io/docs/markdown-features) in der Docusarus-Dokumentation.
+
+#### Beispiel:
+
+<DocCardList title="Markdown-Funktionen" />

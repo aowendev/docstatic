@@ -1,0 +1,48 @@
+---
+lastmod: '2026-02-27T23:11:35.814Z'
+title: Footnotes
+tags:
+  - elements
+  - elements_footnotes
+draft: false
+review: false
+translate: false
+approved: false
+published: true
+unlisted: false
+---
+
+# Fußnoten
+
+Es gibt eine Erweiterung zu Markdown, die Fußnoten bereitstellt, aber ihre Implementierung ist nicht konsistent und trennt den Inhalt von der Nummer. Zum Beispiel:
+
+```markdown
+Markdown ist eine leichtgewichtige Auszeichnungssprache[^1], die von John Gruber[^2] entwickelt wurde und heute beim Schreiben weit verbreitet ist[^3].
+
+[^1]: Markdown verwendet eine einfache Syntax, um Textformatierungen zu erzielen.
+[^2]: John Gruber hat Markdown 2004 entwickelt.
+[^3]: Viele Plattformen wie GitHub, Stack Overflow und Blog-Plattformen unterstützen Markdown.
+```
+
+In DocStatic würde dies wie folgt dargestellt werden:
+
+```markdown
+Markdown ist eine leichtgewichtige Auszeichnungssprache<Fußnote summary="1"> Markdown verwendet eine einfache Syntax, um Textformatierungen zu erzielen.</Fußnote>
+Erstellt von John Gruber<Fußnote summary="2">John Gruber hat Markdown im Jahr 2004 entwickelt.</Fußnote>,
+heute weit verbreitet beim Schreiben<Fußnote summary="3">Viele Plattformen wie GitHub, Stack Overflow und Blog-Plattformen unterstützen Markdown.</Fußnote>.
+```
+
+Mit der Komponente **Fußnoten** können Sie Ihrem Text Inline-Fußnoten hinzufügen.
+
+1. Wählen Sie **Fußnoten** aus der Liste **Einbetten** aus.
+2. Bearbeiten Sie die Komponente.
+3. Geben Sie eine **Zusammenfassung** ein.
+4. Geben Sie die **Fußnote** ein.
+
+#### Beispiel
+
+Markdown ist eine leichtgewichtige Auszeichnungssprache(jsx\:Fußnote Zusammenfassung="1") Markdown verwendet eine einfache Syntax, um Textformatierungen vorzunehmen.(/jsx\:Footnote) erstellt von John Gruber<Footnote summary="2">John Gruber hat Markdown im Jahr 2004 entwickelt.</Footnote>, heute weit verbreitet beim Schreiben<Footnote summary="3">Viele Plattformen wie GitHub, Stack Overflow und Blog-Plattformen unterstützen Markdown.</Footnote>.
+
+<Admonition type="note" title="Hinweis">
+  Wenn zwei Fußnoten denselben Inhalt haben, werden sie nur einmal in der Fußzeile angezeigt und teilen sich eine Nummer.
+</Admonition>

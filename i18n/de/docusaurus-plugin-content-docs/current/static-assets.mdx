@@ -1,0 +1,40 @@
+---
+lastmod: '2026-02-27T23:11:44.490Z'
+title: Static assets
+tags:
+  - software
+  - software_static-site-generators
+draft: false
+review: false
+translate: false
+approved: false
+published: true
+unlisted: false
+---
+
+Statische Assets sind Nicht-Code-Dateien, die direkt in die Build-Ausgabe kopiert werden. Dazu gehören Bilder, Stylesheets, Favicons, Schriftarten usw.
+
+Sie sollten diese Assets im Ordner „static” ablegen. Jede Datei, die Sie in diesen Ordner legen, wird unter Beibehaltung der Ordnerhierarchie in das Stammverzeichnis des generierten Build-Ordners kopiert. Wenn Sie beispielsweise eine Datei namens „sun.jpg” zum Ordner „static” hinzufügen, wird sie nach „build/sun.jpg” kopiert.
+
+Das bedeutet:
+
+* Für die Website „baseUrl: '/'“ wird das Bild „/static/img/sun.jpg“ unter „/img/sun.jpg“ bereitgestellt.
+* Für die Website „baseUrl: '/subpath/'“ wird das Bild „/static/img/sun.jpg“ unter „/subpath/img/sun.jpg“ bereitgestellt.
+
+## Verweisen auf Ihre statischen Assets
+
+### Im CMS
+
+1. Fügen Sie einen Link ein.
+2. Geben Sie den absoluten Pfad ein, zum Beispiel /files/note.docx.
+3. Geben Sie den anzuzeigenden Text ein.
+
+### In Markdown
+
+```markdown
+Sie schreiben einen Link wie diesen: [Dieses Dokument herunterladen](/files/note.docx)
+
+Docusaurus ändert dies in: <a href={require('static/files/note.docx')}>Dieses Dokument herunterladen</a>
+```
+
+Weitere Informationen finden Sie unter [Statische Assets](https://docusaurus.io/docs/static-assets) in der Docusaurus-Dokumentation.

@@ -1,0 +1,41 @@
+---
+lastmod: '2026-02-27T23:11:33.663Z'
+title: Creating pages
+tags:
+  - computer-languages
+  - computer-languages_javascript
+  - computer-languages_javascript_react
+draft: false
+review: false
+translate: false
+approved: false
+published: true
+unlisted: false
+---
+
+# Seiten erstellen
+
+Seiten unterscheiden sich von anderen Inhaltstypen dadurch, dass sie als einmalige, eigenständige Inhalte gedacht sind, z. B. als Showcase, Spielplatz oder Support-Seite. Sie können React-Komponenten und Markdown enthalten. Beachten Sie, dass Seiten keine Seitenleisten haben.
+
+<Admonition type="info" title="Info">
+  Eine vollständige Liste der Optionen finden Sie in der [Pages Plugin API Reference](http://localhost:3000/docs/api/plugins/plugin-content-pages.mdx) in der Docusaurus-Dokumentation.
+</Admonition>
+
+## Eine Seite hinzufügen
+
+1. Klicken Sie in der **Pages**-Sammlung im CMS auf **Add File**.
+2. Geben Sie einen **Title** und eine **Description** ein.
+3. Fügen Sie Ihren Inhalt im Rich-Text-Editor hinzu.
+4. Klicken Sie auf **Save**.
+
+## React-Komponenten zu einer Seite hinzufügen
+
+Die React-Komponenten von DocStatic sind global verfügbar. Wenn Sie eine Komponente jedoch nur auf einer Seite verwenden, ist dies nicht sinnvoll. Stattdessen können Sie die Komponente direkt in die Seite importieren. Um jedoch sicherzustellen, dass Sie die Seite im CMS bearbeiten können, müssen Sie die Importanweisung in eine [Passthrough](/docs/guides/markdown-features/react#passthrough-component)-Komponente einbinden. Die Beispielseite auf der DocStatic-Website importiert die ColorGenerator-Komponente wie folgt:
+
+```markdown
+<Passthrough type="jsx" string="import ColorGenerator from '@site/src/components/ColorGenerator';" summary="Import Statement" />
+
+<Passthrough type="jsx" string="<ColorGenerator />" summary="JSX Component" />
+```
+
+Weitere Informationen finden Sie unter [Erstellen von Seiten](https://docusaurus.io/docs/creating-pages) in der Docusaurus-Dokumentation.

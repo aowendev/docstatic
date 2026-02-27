@@ -114,16 +114,20 @@
   "languages": {
     "supported": [
       {
+        "code": "de",
+        "label": "Deutsch"
+      },
+      {
         "code": "en",
         "label": "English"
       },
       {
-        "code": "fr",
-        "label": "Français"
-      },
-      {
         "code": "es",
         "label": "Español"
+      },
+      {
+        "code": "fr",
+        "label": "Français"
       }
     ],
     "default": "en"

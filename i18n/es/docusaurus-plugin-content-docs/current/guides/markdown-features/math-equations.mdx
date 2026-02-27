@@ -1,0 +1,95 @@
+---
+help: null
+lastmod: '2026-02-27T23:21:32.939Z'
+modifiedBy: aowendev <aowen@translationcommons.org>
+title: Math equations
+tags:
+  - content
+  - content_equations
+  - computer-languages
+  - computer-languages_
+  - computer-languages_latex
+  - computer-languages_latex_katex
+draft: false
+review: false
+translate: false
+approved: false
+published: true
+unlisted: false
+---
+
+# Ecuaciones matemáticas
+
+Las ecuaciones matemáticas se pueden representar utilizando [KaTeX](https://katex.org).
+
+## Uso
+
+Para utilizar KaTeX desde el CMS, incruste la cadena en un componente **Passthrough**. Puede incluir un **Resumen** que aparecerá en línea al editar el tema.
+
+### En línea
+
+Escriba ecuaciones matemáticas en línea envolviendo las ecuaciones LaTeX entre `$`:
+
+# Ecuaciones matemáticas
+
+Las ecuaciones matemáticas se pueden representar utilizando [KaTeX](https://katex.org).
+
+## Uso
+
+Para utilizar KaTeX desde el CMS, incruste la cadena en un componente **Passthrough**. Puede incluir un **Resumen** que aparecerá en línea al editar el tema.
+
+### En línea
+
+Escriba ecuaciones matemáticas en línea envolviendo las ecuaciones LaTeX entre `$`:
+
+```latex
+Let $f\colon[a,b]\to\R$ be Riemann integrable. Let $F\colon[a,b]\to\R$ be
+$F(x)=\int_{a}^{x} f(t)\,dt$. Then $F$ is continuous, and at all $x$ such that
+$f$ is continuous at $x$, $F$ is differentiable at $x$ with $F'(x)=f(x)$.
+```
+
+<Passthrough type="markdown" string="Let $f\colon[a,b] \to \R$ be Riemann integrable. Let $F\colon[a,b]\to\R$ be $F(x)=\int_{a}^{x} f(t)\,dt$. Then $F$ is continuous, and at all $x$ such that $f$ is continuous at $x$, $F$ is differentiable at $x$ with $F'(x)=f(x)$." summary="inline equation" />
+
+### Bloques
+
+Para el bloque de ecuaciones o el modo de visualización, utilice saltos de línea y `$$`:
+
+```latex
+$$
+I = \int_0^{2\pi} \sin(x)\,dx
+$$
+```
+
+<Passthrough
+  type="markdown"
+  string="
+  $$
+  I = \int_0^{2\pi} \sin(x)\,dx
+  $$
+  "
+  summary="block equation"
+/>
+
+Para obtener más información, consulte la documentación de [KaTeX](https://katex.org).
+
+### Bloques
+
+Para el bloque de ecuaciones o el modo de visualización, utilice saltos de línea y `$$`:
+
+```latex
+$$
+I = \int_0^{2\pi} \sin(x)\,dx
+$$
+```
+
+<Passthrough
+  type="markdown"
+  string="
+  $$
+  I = \int_0^{2\pi} \sin(x)\,dx
+  $$
+  "
+  summary="block equation"
+/>
+
+Para obtener más información, consulte la documentación de [KaTeX](https://katex.org).

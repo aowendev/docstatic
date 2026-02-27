@@ -1,0 +1,152 @@
+---
+lastmod: '2026-02-27T23:11:36.663Z'
+title: Getting started - working in the cloud
+draft: true
+review: true
+translate: false
+approved: false
+published: false
+unlisted: false
+---
+
+# Erste Schritte: Arbeiten mit DocStatic in der Cloud
+
+Willkommen! Dieser Leitfaden führt Sie durch die erstmalige Einrichtung von DocStatic.
+
+Wenn Sie noch nie mit GitHub oder Docs-as-Code gearbeitet haben, machen Sie sich keine Sorgen – wir erklären Ihnen, was Sie benötigen, warum und wo Sie weitere Informationen finden.
+
+## Voraussetzungen
+
+Sie können DocStatic lokal (auf Ihrem Computer) ausführen oder in der Cloud hosten. In diesem Artikel erklären wir Ihnen, wie Sie es in der Cloud hosten können.
+
+Für die einfachste Cloud-Einrichtung erstellen Sie kostenlose Konten bei diesen Diensten:
+
+* [GitHub](https://github.com/) – speichert Ihre Inhalte und verfolgt Änderungen
+* [TinaCMS](https://tina.io/) – ermöglicht die browserbasierte Bearbeitung
+* [LanguageTool](https://languagetool.org/) – bietet optionale Grammatik- und Stilprüfung
+
+***
+
+## Forken Sie das DocStatic-Repository
+
+Der Quellcode von DocStatic befindet sich auf GitHub. Um zu beginnen, müssen Sie ihn forken. Dadurch erhalten Sie eine persönliche Kopie, die Sie in Ihrem eigenen Repository verwenden können, ohne die Originalversion zu beeinflussen.
+
+1. Melden Sie sich bei Ihrem Konto bei GitHub an.
+2. Besuchen Sie [https://github.com/aowendev/docstatic](https://github.com/aowendev/docstatic).
+3. Klicken Sie auf **Fork** (normalerweise oben rechts).
+4. Behalten Sie den Standardnamen **Repository name** bei.
+5. Geben Sie eine Beschreibung Ihres Projekts ein.
+6. Stellen Sie sicher, dass **Copy the main branch only** aktiviert ist.
+7. Klicken Sie auf **Create fork**.
+
+***
+
+## Projektstruktur
+
+Nach dem Forken und Klonen des Repositorys sehen Sie verschiedene Dateien in Ihrem Ordner `docstatic/`. Im Folgenden haben wir **einige** der Dateien und Ordner der Projektstruktur aufgeführt, die Sie kennen sollten. **Es handelt sich dabei nicht um eine vollständige Liste aller Elemente des Projekts**.
+
+```
+docstatic
+├── apis
+│   └── petstore.yaml
+├── blog
+│   └── hybrid.mdx
+├── config
+│   ├── docusaurus
+│   │   └── index.json
+│   ├── homepage
+│   │   └── index.json
+│   └── sidebar
+│       └── index.json
+│
+├── docs
+│   └── introduction.mdx
+├── i18n
+│   └── fr
+├── reuse
+│   ├── code
+│   │   └── example.xml
+│   ├── conditions
+│   │   └── index.json
+│   ├── glossaryTerms
+│   │   └── index.json
+│   ├── snippets
+│   │   └── example.mdx
+│   ├── taxonomy
+│   │   └── index.json
+│   ├── variableSets
+│   │   └── index.json
+│   ├── code-files.json
+│   └── snippets-files.json
+├── src
+│   ├── css
+│   │   └── custom.css
+│   └── pages
+│       ├── example-page.mdx
+│       ├── index.js
+│       └── index.module.css
+├── static
+│   └── img
+├── docusaurus.config.ts
+├── package.json
+├── README.md
+├── sidebars.ts
+└── yarn.lock
+```
+
+### Übersicht über die Projektstruktur
+
+* `/apis/` – OpenAPI-YAML-Dateien.
+* `/blog/` – Blog-MDX-Dateien.
+* `/config/` – JSON-Dateien, die von TinaCMS zur Konfiguration von DocStatic verwendet werden.
+* `/docs/` – MDX-Dateien für die Dokumentation.
+* `/i18n/` – Übersetzungsdateien.
+* `/reuse/` – Wiederverwendbare Inhalte.
+* `/src/` – Nicht zur Dokumentation gehörende Dateien wie Seiten oder benutzerdefinierte React-Komponenten.
+  * `/src/pages` – Alle JSX-/TSX-/MDX-Dateien in diesem Verzeichnis werden in eine Website-Seite konvertiert.
+* `/static/` – Statischer Ordner. Alle Inhalte in diesem Ordner werden in das Stammverzeichnis des endgültigen Build-Ordners kopiert.
+* `/docusaurus.config.ts` – Eine Konfigurationsdatei mit der Website-Konfiguration.
+* `/package.json` – Eine DocStatic-Website ist eine React-App. Sie können beliebige npm-Pakete installieren und verwenden.
+* `/sidebars.ts` – Legt die Reihenfolge der Dokumente in der Seitenleiste fest. Verwenden Sie dies für Ihre „Inhaltsverzeichnis“-Struktur.
+
+Als Nächstes sehen wir uns an, wo Sie Ihre Dokumentationsdateien erstellen und speichern müssen.
+
+***
+
+## Leeren Sie den Ordner „Docs“
+
+Der Ordner „Docs“ enthält eine Kopie der DocStatic-Dokumentation. Die Idee ist, dass Sie die DocStatic-Dokumentation löschen. Wenn Sie Ihre eigene Dokumentation erstellen, sollten Sie diese im Ordner „Docs“ speichern.
+
+***
+
+## Monorepos
+
+DocStatic ermöglicht die Verwendung eines einzigen Repositorys, das sowohl den Projektcode als auch die Projektdokumentation enthält. In der Docusaurus-Terminologie wird dieses Konzept als „Monorepo“ bezeichnet.
+
+Weitere Informationen finden Sie unter [Monorepos](https://docusaurus.io/docs/installation#monorepos) in der Docusaurus-Dokumentation.
+
+***
+
+## Änderungen in der Vorschau anzeigen
+
+Um Ihre Änderungen während der Bearbeitung der Dateien in der Vorschau anzuzeigen, können Sie einen **lokalen Entwicklungsserver** ausführen, der Ihre Website bereitstellt und die neuesten Änderungen widerspiegelt.
+
+Öffnen Sie ein Terminal oder eine Eingabeaufforderung und geben Sie Folgendes ein:
+
+```shell
+yarn dev
+```
+
+Standardmäßig wird ein Browserfenster unter [http://localhost:3000](http://localhost:3000) geöffnet.
+
+***
+
+## Erstellen
+
+DocStatic verwendet einen statischen Website-Generator, um die Website in einem Ordner mit statischen Inhalten zu erstellen und sie auf einem Webserver zu speichern, wo sie angezeigt werden kann. Um die Website zu erstellen, verwenden Sie:
+
+```shell
+yarn build-local
+```
+
+Die Inhalte werden im Ordner `/build` generiert, den Sie in einen beliebigen Hosting-Dienst für statische Dateien wie GitHub Pages, Netlify oder Vercel kopieren können. Weitere Informationen finden Sie unter [Bereitstellung](https://docusaurus.io/docs/deployment) in der Docusaurus-Dokumentation.

@@ -1,0 +1,64 @@
+---
+help: null
+lastmod: '2026-02-27T23:23:13.742Z'
+modifiedBy: aowendev <aowen@translationcommons.org>
+title: Assets
+tags:
+  - content
+  - content_images
+draft: false
+review: false
+translate: false
+approved: false
+published: true
+unlisted: false
+---
+
+# Activos
+
+A veces es posible que desee vincular activos (por ejemplo, archivos docx, imágenes, etc.) directamente desde los temas. DocStatic gestiona esto a través de la carpeta static/.
+
+Cualquier contenido colocado en la carpeta estará disponible desde la raíz del sitio publicado. Por ejemplo:
+
+```
+# Su documento
+/website/docs/myFeature.mdx
+
+# Algunos activos que desea utilizar
+/website/assets/docstatic-asset-example.docx
+/website/img/docstastic-asset-example-banner.png
+```
+
+## Imágenes
+
+DocStatic ofrece dos formas de añadir imágenes a los temas. Para las imágenes en línea, puede hacer clic en el icono **Imagen** para colocar una imagen en un tema. Esto funciona mejor con iconos (![](/img/docs/example.svg)) e imágenes pequeñas. Los iconos deben almacenarse como archivos SVG preescalados. Estos se invertirán y su espacio de color girará 180° en el modo oscuro.
+
+<Admonition type="tip" title="Consejo">
+  Puede utilizar [Librsvg](https://wiki.gnome.org/Projects/LibRsvg) para escalar SVG. Por ejemplo, `rsvg-convert example.svg -h 12 -f svg -o example.svg` establece una altura de 12 puntos.
+</Admonition>
+
+Para imágenes más grandes, es mejor utilizar el componente Figura.
+
+1. Seleccione **Figura** en la lista **Incrustar**.
+2. Edite el componente.
+3. Haga clic en el área **Imagen** para abrir el **Administrador de medios**.
+4. Cargue o seleccione una imagen.
+5. Asígnele un **Título**.
+
+#### Ejemplo
+
+<Figura img="/img/docStaticDemo.jpg" caption="Figura de ejemplo" />
+
+La figura cambia de tamaño en función de la ventana de visualización. Al hacer clic en ella, se abrirá en tamaño máximo en un cuadro de luz.
+
+Para obtener más información sobre el Administrador de medios, consulte [Descripción general de los medios](https://tina.io/docs/reference/media/overview) en la documentación de TinaCMS.
+
+## Archivos
+
+Del mismo modo, puede enlazar a activos existentes utilizando la ruta de la carpeta static/ en la URL. Por ejemplo:
+
+```
+./assets/docstatic-asset-example.docx
+```
+
+Para obtener más información, consulte [Activos estáticos](https://docusaurus.io/docs/markdown-features/assets) en la documentación de Docusaurus.

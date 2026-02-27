@@ -352,72 +352,9 @@ const TranslationDashboard = () => {
         };
       }
 
-      // Try to include languages from Tina settings (preferred), then fall back to
-      // static config file or the optional /i18n/locales.json. Exclude default locale.
-      let langsFromTina = [];
-      try {
-        const { client } = await import('../../../tina/__generated__/client');
-        const query = `
-          query GetSettings($collection: String!, $relativePath: String!) {
-            getDocument(collection: $collection, relativePath: $relativePath) {
-              ... on Settings {
-                languages
-              }
-            }
-          }
-        `;
-        // Try to fetch the global settings document (config/docusaurus/index.json)
-        const variables = { collection: 'settings', relativePath: 'index.json' };
-        try {
-          const resp = await client.request({ query, variables });
-          const settings = resp && resp.data && resp.data.getDocument ? resp.data.getDocument : null;
-          if (settings && settings.languages) {
-            // Expecting either { supported: [...], default: 'en' } or an object we can read
-            const langObj = settings.languages;
-            if (Array.isArray(langObj.supported)) {
-              const def = langObj.default || (langObj.supported.find(l => l.default) && langObj.supported.find(l => l.default).code) || null;
-              langsFromTina = langObj.supported.map(s => ({ code: s.code, label: s.label })).filter(l => l.code !== def);
-            }
-          }
-        } catch (e) {
-          // ignore GraphQL fetch errors and fall back to static file below
-        }
-      } catch (e) {
-        // client import failed or not available — fall back
-      }
-
-      // If Tina didn't provide languages, try static config file served as JSON
-      if (langsFromTina.length === 0) {
-        try {
-          const resp = await fetch('/config/docusaurus/index.json');
-          if (resp.ok) {
-            const cfg = await resp.json();
-            const supported = cfg.languages?.supported || [];
-            const def = cfg.languages?.default || cfg.languages?.defaultLocale || null;
-            langsFromTina = supported.map(s => ({ code: s.code, label: s.label })).filter(l => l.code !== def);
-          }
-        } catch (e) {
-          // ignore
-        }
-      }
-
-      // If still empty, fallback to optional /i18n/locales.json array
-      if (langsFromTina.length === 0) {
-        try {
-          const resp = await fetch('/i18n/locales.json');
-          if (resp.ok) {
-            const data = await resp.json();
-            if (Array.isArray(data)) {
-              langsFromTina = data.map(code => ({ code, label: code }));
-            }
-          }
-        } catch (e) {
-          // ignore
-        }
-      }
-
-      for (const langEntry of langsFromTina) {
-        const fsLang = langEntry.code;
+      // Determine available languages purely from GraphQL i18n documents
+      const langsFromI18n = Object.keys(translationsByLang);
+      for (const fsLang of langsFromI18n) {
         if (!results[fsLang]) {
           results[fsLang] = {
             missing: missingAll.slice(),

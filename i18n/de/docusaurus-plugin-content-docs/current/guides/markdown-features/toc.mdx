@@ -1,0 +1,36 @@
+---
+lastmod: '2026-02-27T23:11:38.313Z'
+title: Headings and table of contents
+tags:
+  - formatting
+  - formatting_headings
+draft: false
+review: false
+translate: false
+approved: false
+published: true
+unlisted: false
+---
+
+# Überschriften und Inhaltsverzeichnis
+
+Im CMS können Sie die Ebene **Absatz** oder **Überschrift** (von 1 bis 6) auswählen.
+
+(jsx\:a id="anchor-example")(id\:anchor-example)(/jsx\:a)
+
+## Überschriften-IDs
+
+Überschriften-IDs werden automatisch generiert. Zum Beispiel `heading-ids`. Sie können diese verwenden, um direkt auf Themenüberschriften zu verlinken. Wenn Sie jedoch den Titel der Überschrift ändern, wird der Link ungültig. Aus diesem Grund bietet DocStatic die Komponente **Kontext-Hilfe**. Diese bettet einen Anker-Tag an einer beliebigen Stelle auf einer Seite ein, nicht nur an einer Überschrift.
+
+1. Wählen Sie **Kontext-Hilfe** aus der Liste **Einbetten** aus.
+2. Bearbeiten Sie die Komponente und geben Sie ihr eine **Kontext-Hilfe-ID**.
+
+Um einen Link zum Anker zu erstellen, verwenden Sie den Pfad: `<URL>/docs/<slug>#<ID>.`
+
+Beispiel: [https://docstatic.com/docs/guides/markdown-features/toc#anchor-example](https://docstatic.com/docs/guides/markdown-features/toc#anchor-example)
+
+## Überschriftenebene im Inhaltsverzeichnis
+
+Jedes Markdown-Dokument zeigt oben rechts ein Inhaltsverzeichnis an. Standardmäßig werden in diesem Verzeichnis nur Überschriften der Ebenen `h2` und `h3` angezeigt, was für einen Überblick über die Seitenstruktur ausreichend sein sollte. Wenn Sie den Bereich der angezeigten Überschriften ändern möchten, können Sie die minimale und maximale Überschriftenebene entweder pro Seite oder global anpassen.
+
+Weitere Informationen finden Sie unter [Überschriften und Inhaltsverzeichnis](https://docusaurus.io/docs/markdown-features/toc) in der Docusaurus-Dokumentation.

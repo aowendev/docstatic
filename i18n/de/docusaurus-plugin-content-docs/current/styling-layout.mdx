@@ -1,0 +1,58 @@
+---
+lastmod: '2026-02-27T23:11:45.236Z'
+title: Styling and layout
+tags:
+  - computer-languages
+  - computer-languages_css
+draft: false
+review: false
+translate: false
+approved: false
+published: true
+unlisted: false
+---
+
+Eine DocStatic-Website ist eine einseitige React-Anwendung. Sie können sie genauso gestalten wie React-Apps.
+
+## Globale Stile
+
+DocStatic verwendet das Theme @docusaurus/preset-classic mit CSS-Überschreibungen in der Datei /src/css/custom.css. Alle CSS-Anweisungen, die Sie in dieser Datei schreiben, sind global verfügbar und können direkt über String-Literale referenziert werden.
+
+## Gestalten Sie Ihre Website mit Infima
+
+DocStatic verwendet [Infima](https://infima.dev/) als zugrunde liegendes Styling-Framework. Infima bietet ein flexibles Layout und gängige UI-Komponenten, die sich für inhaltsorientierte Websites (Blogs, Dokumentationen, Homepages) eignen. Weitere Informationen finden Sie auf der [Infima-Website](https://infima.dev/).
+
+Infima verwendet sieben Farbtöne für jede Farbe. Wir empfehlen die Verwendung von ColorBox, um die verschiedenen Farbtöne für die von Ihnen gewählte Primärfarbe zu finden. Sie können das Tool auf der [Beispielseite](https://docstatic.com/example-page) verwenden, um die verschiedenen Farbtöne für Ihre Website zu generieren, und die Variablen in `/src/css/custom.css` kopieren.
+
+## Dunkler Modus
+
+Im hellen Modus hat das \<html>-Element das Attribut data-theme="light", im dunklen Modus ist es data-theme="dark". Daher können Sie Ihr CSS auf den dunklen Modus beschränken, indem Sie HTML mit einem bestimmten Attribut ansprechen.
+
+```css
+/* Überschreiben der Infima-Variablen */
+[data-theme='dark'] {
+  --ifm-color-primary: #4e89e8;
+}
+/* Spezielle Gestaltung einer Klasse im Dunkelmodus */
+[data-theme='dark'] .purple-text {
+  color: plum;
+}
+```
+
+## Mobile Ansicht
+
+Docstatic verwendet 996px als Grenze zwischen der Bildschirmbreite von Mobilgeräten und Desktop-Computern. Wenn Sie möchten, dass Ihr Layout in der mobilen Ansicht anders aussieht, können Sie Medienabfragen verwenden.
+
+```css
+.banner {
+  padding: 4rem;
+}
+/** In der mobilen Ansicht den Abstand reduzieren */
+@media screen and (max-width: 996px) {
+  .heroBanner {
+    padding: 2rem;
+  }
+}
+```
+
+Weitere Informationen finden Sie unter [Styling und Layout](https://docusaurus.io/docs/styling-layout) in der Docusaurus-Dokumentation.

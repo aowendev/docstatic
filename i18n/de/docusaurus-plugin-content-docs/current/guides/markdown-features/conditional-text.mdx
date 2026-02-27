@@ -1,0 +1,60 @@
+---
+lastmod: '2026-02-27T23:11:28.705Z'
+modifiedBy: aowendev <aowen@translationcommons.org>
+title: Conditional text
+tags:
+  - metadata
+  - metadata_conditions
+  - reuse
+  - reuse_conditional-text
+draft: false
+review: false
+translate: false
+approved: false
+published: true
+unlisted: false
+---
+
+# Bedingter Text
+
+Mit der Komponente **Bedingter Text** können Sie Inhalte in eine Reihe von Bedingungen einbinden, die festlegen, wann sie angezeigt werden sollen:
+
+* Bedingungen können eine beliebige Kombination aus Sprachen oder benutzerdefinierten Bedingungen sein.
+* Der Inhalt kann angezeigt oder ausgeblendet werden, wenn eine oder mehrere Bedingungen erfüllt sind (ODER) oder nur, wenn alle Bedingungen erfüllt sind (UND).
+  Sie können auch einen Fallback-Text festlegen, der angezeigt wird, wenn keine Bedingungen erfüllt sind.
+
+## Kategorien und Bedingungen erstellen
+
+1. Klicken Sie im CMS auf die Sammlung **Bedingungen**.
+2. Klicken Sie auf das Symbol **Hinzufügen**, um eine neue **Kategorie** hinzuzufügen.
+3. Geben Sie einen **Namen** und eine **Beschreibung** ein.
+4. Für jede **Bedingung**, die Sie hinzufügen möchten:
+   1. Klicken Sie auf das Symbol **Hinzufügen**.
+   2. Benennen Sie die **Bedingung** und geben Sie ihr eine **Beschreibung**.
+   3. Schalten Sie den Status **Aktiv** der Bedingung nach Bedarf um.
+
+## Bedingungen zu einem Thema hinzufügen
+
+Bedingungen werden auf Themenebene festgelegt. Die Sprache wird durch die Seitensprache bestimmt. Andere Bedingungen werden als Array in den Metadaten am Anfang des Themas definiert.
+
+1. Erstellen oder bearbeiten Sie ein Thema.
+2. Erweitern Sie im Bereich **Bedingungen** die **Kategorien** und aktivieren Sie das Kontrollkästchen aller **Bedingungen**, die Sie auf das Thema anwenden möchten.
+
+## Bedingten Text hinzufügen
+
+1. Wählen Sie **Bedingter Text** aus der Liste **Einbetten**.
+2. Bearbeiten Sie die Komponente.
+3. Geben Sie den **Inhalt** ein.
+4. Legen Sie die **Aktion** fest (anzeigen oder ausblenden).
+5. Fügen Sie alle **erforderlichen Bedingungen** hinzu.
+6. Fügen Sie alle **erforderlichen Sprachen** hinzu.
+7. Legen Sie die **Bedingungslogik** fest.
+8. Legen Sie die **Sprachlogik** fest.
+9. Wählen Sie aus, ob sowohl Bedingungen als auch Sprachen erforderlich sind.
+10. (Optional) Geben Sie den **Fallback-Text** ein.
+
+### Beispiel
+
+<ConditionalText action="show" conditions={["production"]} languages={[]} logic="any" languageLogic="any" requireBothConditions={false} fallback="">
+  Die Bedingung `production` ist auf dieser Seite festgelegt.
+</ConditionalText>

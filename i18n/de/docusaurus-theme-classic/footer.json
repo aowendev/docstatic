@@ -1,0 +1,38 @@
+{
+  "link.title.Docs": {
+    "message": "Docs",
+    "description": "The title of the footer links column with title=Docs in the footer"
+  },
+  "link.title.Community": {
+    "message": "Community",
+    "description": "The title of the footer links column with title=Community in the footer"
+  },
+  "link.title.Blog": {
+    "message": "Blog",
+    "description": "The title of the footer links column with title=Blog in the footer"
+  },
+  "link.title.GitHub": {
+    "message": "GitHub",
+    "description": "The title of the footer links column with title=GitHub in the footer"
+  },
+  "link.item.label.docStatic": {
+    "message": "docStatic",
+    "description": "The label of footer link with label=docStatic linking to https://github.com/aowendev/docstatic"
+  },
+  "link.item.label.Docusaurus": {
+    "message": "Docusaurus",
+    "description": "The label of footer link with label=Docusaurus linking to https://discordapp.com/invite/docusaurus"
+  },
+  "link.item.label.TinaCMS": {
+    "message": "TinaCMS",
+    "description": "The label of footer link with label=TinaCMS linking to https://github.com/tinacms/tinacms"
+  },
+  "link.item.label.Docusarus": {
+    "message": "Docusarus",
+    "description": "The label of footer link with label=Docusarus linking to https://github.com/facebook/docusaurus"
+  },
+  "copyright": {
+    "message": "Copyright © 2026 Source Solutions, Inc. Built with docStatic.",
+    "description": "The footer copyright"
+  }
+}

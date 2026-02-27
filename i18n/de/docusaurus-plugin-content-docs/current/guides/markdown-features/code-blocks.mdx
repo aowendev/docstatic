@@ -1,0 +1,44 @@
+---
+lastmod: '2026-02-27T23:11:27.139Z'
+title: Code blocks and snippets
+tags:
+  - elements
+  - elements_code-blocks
+  - reuse
+  - reuse_snippets
+draft: false
+review: false
+translate: false
+approved: false
+published: true
+unlisted: false
+---
+
+# Code-Blöcke und Snippets
+
+DocStatic bietet zwei Möglichkeiten, Code in Ihre Dokumentation einzufügen. Beide unterstützen Syntaxhervorhebung.
+
+## Code-Blöcke
+
+1. Klicken Sie im Rich-Text-Editor auf das Symbol **Code-Block**.
+2. Klicken Sie auf die Sprachliste und wählen Sie eine Sprache aus oder suchen Sie nach einer Sprache.
+3. Geben Sie Ihren Code in das Feld ein.
+
+#### Beispiel:
+
+```plaintext
+Dies ist einfacher Text.
+```
+
+## Code-Snippets
+
+1. Wählen Sie **Code-Snippet** aus der Liste **Einbetten**.
+2. Geben Sie einen **Titel** ein.
+3. Wählen Sie eine **Sprache** aus.
+4. Wählen Sie eine Datei aus der Liste aus. Die Liste wird jedes Mal, wenn Sie den Dev-Server ausführen oder einen Build durchführen, mit allen Dateien im Ordner `reuse/code/` gefüllt.
+
+#### Beispiel:
+
+<CodeSnippet title="Beispiel-Titel" language="xml" filepath="example.xml" />
+
+Der Vorteil der Verwendung von Code-Schnipseln besteht darin, dass es eine physische Datei gibt, die einer Unit-Testung unterzogen werden kann.

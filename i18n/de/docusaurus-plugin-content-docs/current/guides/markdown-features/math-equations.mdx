@@ -1,8 +1,8 @@
 ---
-lastmod: '2026-02-27T23:18:45.016Z'
+help: null
+lastmod: '2026-02-27T23:17:18.305Z'
 modifiedBy: aowendev <aowen@translationcommons.org>
-title: Équations mathématiques
-description: Écrire des équations mathématiques en LaTeX.
+title: Math equations
 tags:
   - content
   - content_equations
@@ -18,17 +18,17 @@ published: true
 unlisted: false
 ---
 
-# Équations mathématiques
+# Mathematische Gleichungen
 
-Les équations mathématiques peuvent être rendues avec [KaTeX](https://katex.org).
+Mathematische Gleichungen können mit [KaTeX](https://katex.org) dargestellt werden.
 
-## Utiliser
+## Verwendung
 
-Pour utiliser KaTeX à partir du CMS, intégrez la chaîne dans un composant **Passthrough**. Vous pouvez inclure un **Summary** qui apparaîtra en ligne lors de l'édition du sujet.
+Um KaTeX aus dem CMS zu verwenden, binden Sie die Zeichenfolge in eine **Passthrough**-Komponente ein. Sie können eine **Zusammenfassung** hinzufügen, die beim Bearbeiten des Themas inline angezeigt wird.
 
-### Incliné
+### Inline
 
-Écrire des équations mathématiques en ligne en enveloppant les équations LaTeX entre `$` :
+Schreiben Sie Inline-Mathematikgleichungen, indem Sie LaTeX-Gleichungen zwischen `$` einschließen:
 
 ```latex
 Let $f\colon[a,b]\to\R$ be Riemann integrable. Let $F\colon[a,b]\to\R$ be
@@ -38,9 +38,9 @@ $f$ is continuous at $x$, $F$ is differentiable at $x$ with $F'(x)=f(x)$.
 
 <Passthrough type="markdown" string="Let $f\colon[a,b] \to \R$ be Riemann integrable. Let $F\colon[a,b]\to\R$ be $F(x)=\int_{a}^{x} f(t)\,dt$. Then $F$ is continuous, and at all $x$ such that $f$ is continuous at $x$, $F$ is differentiable at $x$ with $F'(x)=f(x)$." summary="inline equation" />
 
-### Blocs
+### Blöcke
 
-Pour le bloc d'équation ou le mode d'affichage, utilisez les sauts de ligne et `$$` :
+Für Gleichungsblöcke oder den Anzeigemodus verwenden Sie Zeilenumbrüche und `$$`:
 
 ```latex
 $$
@@ -58,4 +58,4 @@ $$
   summary="block equation"
 />
 
-Pour plus d'informations, consultez la documentation [KaTeX](https://katex.org).
+Weitere Informationen finden Sie in der Dokumentation zu [KaTeX](https://katex.org).
