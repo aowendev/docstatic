@@ -1918,6 +1918,10 @@ export async function importXliffBundle(client, xliffText, language, onProgress)
       // If a translation doc exists at `rel`, clone its metadata and replace
       // the `body` with the imported content. If no translation exists,
       // fall back to source-cloned metadata (or notes) and the title note.
+      // To avoid introducing new metadata keys (for example `help: null`),
+      // only include keys that were present in the original translation
+      // (when it exists) or present in the source metadata/notes. This
+      // preserves original data exactly (except `lastmod` which we update).
       let paramsObj = {};
       try {
         let existingTranslation = null;
@@ -1930,12 +1934,16 @@ export async function importXliffBundle(client, xliffText, language, onProgress)
           existingTranslation = null;
         }
 
+        // Determine the set of keys that were present originally so we
+        // don't introduce any new metadata keys during the import.
+        let originalKeys = new Set();
         if (existingTranslation) {
           // Retain whatever metadata is present in the existing translation.
           // Skip internal/GraphQL fields and lastmod/body (we set those below).
           const skipKeys = new Set(['__typename', '_sys', '_values', 'id', 'body', 'lastmod']);
           for (const k of Object.keys(existingTranslation)) {
             if (skipKeys.has(k)) continue;
+            originalKeys.add(k);
             if (existingTranslation[k] != null) {
               paramsObj[k] = Array.isArray(existingTranslation[k]) ? existingTranslation[k].slice() : existingTranslation[k];
             }
@@ -1944,9 +1952,13 @@ export async function importXliffBundle(client, xliffText, language, onProgress)
           // No existing translation: use cloned source metadata (from notes or
           // source doc) as a starting point. Only include keys with meaningful values.
           for (const k of Object.keys(sourceMetaParams || {})) {
+            originalKeys.add(k);
             if (sourceMetaParams[k] != null) paramsObj[k] = sourceMetaParams[k];
           }
-          if (titleNote) paramsObj.title = titleNote;
+          if (titleNote) {
+            originalKeys.add('title');
+            paramsObj.title = titleNote;
+          }
         }
       } catch (buildErr) {
         // Fallback to source-cloned metadata if anything unexpected fails.
@@ -1960,11 +1972,17 @@ export async function importXliffBundle(client, xliffText, language, onProgress)
       // Always replace the body with the imported payload and set new lastmod
       paramsObj.body = bodyPayload;
       paramsObj.lastmod = (new Date()).toISOString();
-      // Sanitize params: strip internal/GraphQL keys and null/undefined values
+      // Sanitize params: only include keys that were present originally
+      // (to avoid adding new metadata keys), strip internal/GraphQL keys,
+      // and omit null/undefined values.
       const internalKeys = new Set(['__typename', '_sys', '_values', 'id']);
       const sanitized = {};
       for (const k of Object.keys(paramsObj)) {
         if (internalKeys.has(k)) continue;
+        // Only include keys that were in the original key set (from the
+        // existing translation or source metadata/notes). This prevents
+        // adding keys that weren't present before.
+        if (originalKeys.size && !originalKeys.has(k)) continue;
         if (paramsObj[k] != null) sanitized[k] = paramsObj[k];
       }
       const variables = { relativePath: rel, params: sanitized };
