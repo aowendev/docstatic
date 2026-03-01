@@ -44,7 +44,13 @@
     "gen-api-docs:version": "docusaurus gen-api-docs:version",
     "clean-api-docs:version": "docusaurus clean-api-docs:version",
     "lint": "biome check apis/ config/ reuse/ scripts/ src/ static/ tina/",
-    "lint:fix": "biome check apis/ config/ reuse/ scripts/ src/ static/ tina/ --fix"
+    "lint:fix": "biome check apis/ config/ reuse/ scripts/ src/ static/ tina/ --fix",
+    "mcp:install": "cd mcp-server && npm install",
+    "mcp:build": "cd mcp-server && npm run build",
+    "mcp:dev": "cd mcp-server && npm run dev",
+    "mcp:start": "cd mcp-server && npm start",
+    "mcp:test": "node mcp-server/test.js",
+    "postinstall": "npm run mcp:install"
   },
   "dependencies": {
     "@algolia/client-search": "^5.49.1",

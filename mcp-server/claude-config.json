@@ -1,0 +1,24 @@
+{
+  "mcpServers": {
+    "docstatic": {
+      "command": "node",
+      "args": ["mcp-server/dist/server.js"],
+      "cwd": "/Volumes/External HD/Development/docstatic"
+    }
+  }
+}
+
+// Instructions for use:
+//
+// 1. Update the "cwd" path above to match your docstatic project location
+// 
+// 2. For Claude Desktop, add this to your MCP settings file:
+//    macOS: ~/Library/Application Support/Claude/claude_desktop_config.json
+//    Windows: %APPDATA%/Claude/claude_desktop_config.json
+//
+// 3. Make sure to:
+//    - Build the MCP server first: npm run mcp:build
+//    - Have your docStatic dev server running: npm run dev
+//    - Start the MCP server: npm run mcp:start (in a separate terminal)
+//
+// 4. Restart Claude Desktop after adding this configuration
