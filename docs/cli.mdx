@@ -10,7 +10,7 @@ translate: false
 approved: false
 published: true
 unlisted: false
-lastmod: "2026-01-25T00:20:06.644Z"
+lastmod: "2026-03-01T20:54:29.720Z"
 ---
 DocStatic provides a set of scripts to help you generate, serve, and deploy your website.
 
@@ -19,15 +19,19 @@ DocStatic provides a set of scripts to help you generate, serve, and deploy your
   // ...
   "scripts": {
     "docusaurus": "docusaurus",
-    "dev": "tinacms dev -c \"docusaurus start\" ",
+    "dev": "tinacms dev -c \"docusaurus start\"",
     "start": "docusaurus start",
+    "generate-media-index": "node scripts/generate-media-index.js",
+    "generate-git-identity": "node scripts/generate-git-identity.js",
     "generate-files": "node scripts/generate-file-list.js",
-    "prebuild": "yarn generate-files",
-    "predev": "yarn generate-files",
+    "update-theme-css": "node scripts/update-theme-css.js",
+    "prebuild": "yarn generate-media-index && yarn generate-files && yarn update-theme-css && yarn generate-git-identity",
+    "predev": "yarn generate-media-index && yarn generate-files && yarn update-theme-css && yarn generate-git-identity",
     "build": "tinacms build && docusaurus build",
     "build-local": "tinacms build --local --skip-indexing --skip-cloud-checks && docusaurus build",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
+    "setup-git-hooks": "git config core.hooksPath .githooks && chmod +x .githooks/pre-commit",
     "clear": "docusaurus clear",
     "serve": "docusaurus serve",
     "write-translations": "docusaurus write-translations",
@@ -38,16 +42,36 @@ DocStatic provides a set of scripts to help you generate, serve, and deploy your
     "gen-api-docs:version": "docusaurus gen-api-docs:version",
     "clean-api-docs:version": "docusaurus clean-api-docs:version",
     "lint": "biome check apis/ config/ reuse/ scripts/ src/ static/ tina/",
-    "lint:fix": "biome check apis/ config/ reuse/ scripts/ src/ static/ tina/ --fix"
+    "lint:fix": "biome check apis/ config/ reuse/ scripts/ src/ static/ tina/ --fix",
+    "mcp:install": "cd mcp-server && npm install",
+    "mcp:build": "cd mcp-server && npm run build",
+    "mcp:dev": "cd mcp-server && npm run dev",
+    "mcp:start": "cd mcp-server && npm start"
   }
 }
 ```
 
 ## DocStatic CLI commands
 
-To invoke the commands, use yarn. For example, yarn dev.
+To invoke the commands, use yarn. For example, `yarn dev`.
 
-These commands are described in [CLI](https://docusaurus.io/docs/cli) in the Docusaurus documentation:
+### Key DocStatic scripts:
+
+- **`dev`**: Start development server with TinaCMS integration
+- **`build`**: Build for production (runs TinaCMS build then Docusaurus build)
+- **`build-local`**: Build locally without cloud features
+- **`generate-media-index`**: Generate index of media files
+- **`generate-git-identity`**: Generate git identity information
+- **`generate-files`**: Generate file lists for the application
+- **`update-theme-css`**: Update theme CSS files
+- **`mcp:install`**: Install Model Context Protocol server dependencies
+- **`mcp:build`**: Build the MCP server from TypeScript
+- **`mcp:dev`**: Start MCP server in development mode with auto-restart
+- **`mcp:start`**: Start the compiled MCP server for AI assistant integration
+
+For more information about the MCP server, see [MCP Server Integration](mcp-server.mdx).
+
+These commands are built on top of standard Docusaurus commands described in [CLI](https://docusaurus.io/docs/cli) in the Docusaurus documentation:
 
 * docusaurus
 * start

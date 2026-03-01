@@ -31,6 +31,9 @@
         },
         {
           "feature": "Integrated GraphQL & OpenAPI Documentation"
+        },
+        {
+          "feature": "Local MCP server for AI integration."
         }
       ],
       "_template": "hero"

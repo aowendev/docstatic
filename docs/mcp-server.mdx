@@ -1,0 +1,202 @@
+---
+title: MCP Server Integration
+description: Using docStatic with AI assistants through the Model Context Protocol (MCP) server
+tags:
+    - "software"
+    - "software_artificial-intelligence"
+    - "software_automation"
+    - "software_integrations"
+    - "development"
+    - "development_ai-tools"
+draft: false
+review: false
+translate: false
+approved: false
+published: true
+unlisted: false
+lastmod: "2026-03-01T20:54:15.146Z"
+---
+
+# MCP Server Integration
+
+DocStatic includes an integrated Model Context Protocol (MCP) server that enables AI assistants to access and understand your documentation. This provides intelligent assistance for content editing, searching, and analysis.
+
+## Overview
+
+The MCP server connects AI assistants directly to your docStatic documentation through the TinaCMS GraphQL endpoint, allowing them to:
+
+- **Search documentation content** using natural language queries
+- **Retrieve specific documents** by path or criteria  
+- **Analyze MDX component usage** patterns
+- **Understand document structure** and metadata
+- **Provide contextual assistance** based on your actual content
+
+## Prerequisites
+
+- Node.js 18.0 or higher
+- A running docStatic development server (`npm run dev`)
+- TinaCMS GraphQL endpoint available at `http://localhost:4001/graphql`
+
+## Setup
+
+### 1. Install MCP Server Dependencies
+
+From the main docStatic directory:
+
+```bash
+npm run mcp:install
+```
+
+This installs the necessary MCP server dependencies in the `mcp-server` subdirectory.
+
+### 2. Build the MCP Server
+
+```bash
+npm run mcp:build
+```
+
+This compiles the TypeScript MCP server code to JavaScript.
+
+### 3. Start docStatic Development Server
+
+The MCP server requires your docStatic site to be running:
+
+```bash
+npm run dev
+```
+
+This starts:
+- Docusaurus at `http://localhost:3000`
+- TinaCMS admin at `http://localhost:3000/admin`  
+- GraphQL endpoint at `http://localhost:4001/graphql`
+
+### 4. Run the MCP Server
+
+In a separate terminal:
+
+```bash
+npm run mcp:start
+```
+
+For development with auto-restart on changes:
+
+```bash
+npm run mcp:dev
+```
+
+## Available Tools
+
+The MCP server provides several tools that AI assistants can use:
+
+### Document Search
+- **`search_documents`**: Find documents using keyword search
+- **`get_document`**: Retrieve a specific document by path
+- **`list_all_documents`**: Get metadata for all documents
+
+### Content Analysis
+- **`get_documents_by_tag`**: Filter documents by taxonomy tags
+- **`analyze_mdx_components`**: Identify MDX components used in documents
+- **`check_server_status`**: Verify GraphQL connectivity
+
+## Configuration with Claude Desktop
+
+To use the MCP server with Claude Desktop, add this configuration to your Claude Desktop MCP settings:
+
+```json
+{
+  "mcpServers": {
+    "docstatic": {
+      "command": "node",
+      "args": ["/absolute/path/to/docstatic/mcp-server/dist/server.js"],
+      "cwd": "/absolute/path/to/docstatic"
+    }
+  }
+}
+```
+
+<Admonition type="tip" title="Path Requirements">
+  Replace `/absolute/path/to/docstatic` with the full path to your docStatic project directory. Both the `args` path and `cwd` path must be absolute paths.
+</Admonition>
+
+## Development Commands
+
+| Command | Description |
+|---------|-------------|
+| `npm run mcp:install` | Install MCP server dependencies |
+| `npm run mcp:build` | Build TypeScript to JavaScript |
+| `npm run mcp:start` | Start the compiled MCP server |
+| `npm run mcp:dev` | Build and start in development mode |
+
+## Troubleshooting
+
+### Common Issues
+
+**"GraphQL server is not running"**
+- Ensure `npm run dev` is running in the main directory
+- Verify `http://localhost:4001/graphql` is accessible
+- Check that TinaCMS has started completely
+
+**"Connection refused"**
+- Confirm the development server is running
+- Check if port 4001 is available
+- Verify firewall settings aren't blocking the connection
+
+**"Document not found"**
+- Use relative paths like `installation.mdx`, not `/docs/installation.mdx`
+- Ensure the document exists in the `docs/` directory
+- Check that the file has proper MDX frontmatter
+
+### Testing Connectivity
+
+Test the GraphQL endpoint directly:
+
+```bash
+curl -X POST http://localhost:4001/graphql \
+  -H "Content-Type: application/json" \
+  -d '{"query":"{ __typename }"}'
+```
+
+Expected response:
+```json
+{"data":{"__typename":"Query"}}
+```
+
+### Checking MCP Server Logs
+
+The MCP server logs to stderr. If using Claude Desktop, check the Claude Desktop logs for error messages from the MCP server.
+
+## Benefits for Documentation Workflow
+
+With MCP integration, AI assistants can:
+
+1. **Understand your content structure** - Access the full taxonomy and document hierarchy
+2. **Provide accurate suggestions** - Base recommendations on your actual documentation patterns  
+3. **Help with consistency** - Identify where similar content or components should be used
+4. **Speed up editing** - Quickly find related content and suggest improvements
+5. **Analyze patterns** - Identify frequently used components and content gaps
+
+## Architecture
+
+```
+docStatic Project
+├── docs/               # Your MDX documentation files  
+├── mcp-server/         # MCP server implementation
+│   ├── src/server.ts   # Main server logic
+│   ├── package.json    # MCP-specific dependencies
+│   └── dist/           # Compiled JavaScript
+└── tina/               # TinaCMS configuration
+    └── config.jsx      # GraphQL schema definition
+```
+
+The MCP server acts as a bridge between AI assistants and your docStatic content, providing structured access to documentation through the existing TinaCMS GraphQL API.
+
+## Next Steps
+
+After setting up the MCP server:
+
+1. **Test the integration** with your AI assistant
+2. **Explore documentation search** capabilities  
+3. **Use content analysis tools** to understand your documentation patterns
+4. **Leverage AI assistance** for content creation and editing workflows
+
+For detailed MCP server implementation details, see the [`mcp-server/README.md`](../mcp-server/README.md) file in your project.
