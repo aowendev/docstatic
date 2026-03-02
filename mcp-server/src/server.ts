@@ -106,11 +106,14 @@ class DocStaticMCPServer {
 
     // Filter documents by search query
     const searchTerm = query.toLowerCase();
-    return documents.filter((doc: Document) => 
-      doc.title.toLowerCase().includes(searchTerm) ||
-      doc.body.toLowerCase().includes(searchTerm) ||
-      (doc._values && JSON.stringify(doc._values).toLowerCase().includes(searchTerm))
-    );
+    return documents.filter((doc: Document) => {
+      const bodyText = typeof doc.body === 'string' ? doc.body : JSON.stringify(doc.body);
+      return (
+        doc.title.toLowerCase().includes(searchTerm) ||
+        bodyText.toLowerCase().includes(searchTerm) ||
+        (doc._values && JSON.stringify(doc._values).toLowerCase().includes(searchTerm))
+      );
+    });
   }
 
   private async getDocument(relativePath: string): Promise<Document | null> {
@@ -288,7 +291,7 @@ class DocStaticMCPServer {
                       path: doc._sys.relativePath,
                       title: doc.title,
                       lastModified: doc.lastmod,
-                      preview: doc.body.substring(0, 200) + '...',
+                      preview: (typeof doc.body === 'string' ? doc.body : JSON.stringify(doc.body)).substring(0, 200) + '...',
                     })),
                   }, null, 2),
                 },
@@ -340,7 +343,7 @@ class DocStaticMCPServer {
                       path: doc._sys.relativePath,
                       title: doc.title,
                       lastModified: doc.lastmod,
-                      wordCount: doc.body.split(' ').length,
+                      wordCount: (typeof doc.body === 'string' ? doc.body : JSON.stringify(doc.body)).split(' ').length,
                     })),
                   }, null, 2),
                 },
