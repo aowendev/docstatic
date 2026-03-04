@@ -15,6 +15,7 @@ import { FigureBlockTemplate } from "../components/Figure/template";
 import { FootnoteBlockTemplate } from "../components/Footnote/template";
 import { GlossaryTermBlockTemplate } from "../components/GlossaryTerm/template";
 import { PassthroughBlockTemplate } from "../components/Passthrough/template";
+import { RelatedTopicsBlockTemplate } from "../components/RelatedTopics/template";
 import { SnippetBlockTemplate } from "../components/Snippet/template";
 import { VariableSetBlockTemplate } from "../components/VariableSet/template";
 
@@ -249,8 +250,9 @@ export const MDXTemplates = [
   FigureBlockTemplate,
   FootnoteBlockTemplate,
   GlossaryTermBlockTemplate,
-  SnippetBlockTemplate,
   PassthroughBlockTemplate,
+  RelatedTopicsBlockTemplate,
+  SnippetBlockTemplate,
   TabsTemplate,
   TruncateTemplate,
   VariableSetBlockTemplate,

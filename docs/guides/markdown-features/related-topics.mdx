@@ -1,0 +1,47 @@
+---
+title: Related Topics
+description: Automatically generate links to related content based on shared taxonomy tags.
+tags:
+    - "elements"
+    - "elements_links"
+    - "computer-languages"
+    - "computer-languages_markdown"
+    - "software"
+    - "software_content-management-systems"
+    - "software_content-management-systems_tinacms"
+    - "metadata"
+    - "metadata_taxonomies"
+draft: false
+review: false
+translate: false
+approved: false
+published: true
+unlisted: false
+lastmod: "2026-03-04T22:51:31.213Z"
+---
+# Related Topics
+
+The **Related Topics** component automatically suggests related content based on shared taxonomy tags. It analyzes the current page's tags and finds other documents with similar tags, then displays them as a curated list of recommendations.
+
+## Adding Related Topics
+
+1. Select **Related Topics** from the **Embed** list.
+2. Edit the component.
+3. (Optional) Set the **Maximum Results** to control how many related topics are displayed (defaults to 5).
+4. **Save** your changes.
+
+## Configuration Options
+
+- **Maximum Results**: Controls the number of related topics displayed (1-20)
+
+## How It Works
+
+The component uses the Jaccard similarity algorithm to compare taxonomy tags between the current page and all other published pages. Pages with more shared tags will appear higher in the list. The component only appears on pages that have taxonomy tags and when related content is found.
+
+## Best Practices
+
+* **Use consistent tagging**: The more consistently you apply taxonomy tags across your content, the better the related topic suggestions will be.
+* **Optimal placement**: Place the Related Topics component at the end of your content to encourage further reading.
+* **Reasonable limits**: Use 3-7 related topics for best user experience. Too many suggestions can be overwhelming.
+
+<RelatedTopics maxResults={7} />

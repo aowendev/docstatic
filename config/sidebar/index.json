@@ -127,6 +127,10 @@
               "_template": "doc"
             },
             {
+              "document": "docs/guides/markdown-features/related-topics.mdx",
+              "_template": "doc"
+            },
+            {
               "document": "docs/guides/markdown-features/snippets.mdx",
               "_template": "doc"
             },

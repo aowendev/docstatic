@@ -26,9 +26,10 @@
     "generate-media-index": "node scripts/generate-media-index.js",
     "generate-git-identity": "node scripts/generate-git-identity.js",
     "generate-files": "node scripts/generate-file-list.js",
+    "generate-docs-metadata": "node scripts/generate-docs-metadata.js",
     "update-theme-css": "node scripts/update-theme-css.js",
-    "prebuild": "yarn generate-media-index && yarn generate-files && yarn update-theme-css && yarn generate-git-identity",
-    "predev": "yarn generate-media-index && yarn generate-files && yarn update-theme-css && yarn generate-git-identity",
+    "prebuild": "yarn generate-media-index && yarn generate-files && yarn generate-docs-metadata && yarn update-theme-css && yarn generate-git-identity",
+    "predev": "yarn generate-media-index && yarn generate-files && yarn generate-docs-metadata && yarn update-theme-css && yarn generate-git-identity",
     "build": "tinacms build && docusaurus build",
     "build-local": "tinacms build --local --skip-indexing --skip-cloud-checks && docusaurus build",
     "swizzle": "docusaurus swizzle",
@@ -112,7 +113,8 @@
   },
   "devDependencies": {
     "@biomejs/biome": "^2.4.5",
-    "@tinacms/cli": "^2.1.9"
+    "@tinacms/cli": "^2.1.9",
+    "gray-matter": "^4.0.3"
   },
   "engines": {
     "node": ">=22.0.0"

@@ -1,0 +1,713 @@
+[
+  {
+    "title": "Adding the CMS to an iPad home screen",
+    "description": "Adding the CMS to an iPad home screen",
+    "tags": [
+      "content-management-systems",
+      "content-management-systems_tinacms",
+      "software",
+      "software_browsers",
+      "software_browsers_safari"
+    ],
+    "path": "/advanced/adding-the-cms-to-an-ipad-home-screen",
+    "filePath": "advanced/adding-the-cms-to-an-ipad-home-screen.mdx",
+    "lastmod": "2026-03-04T22:47:53.569Z"
+  },
+  {
+    "title": "Admonitions",
+    "description": "Handling admonitions/callouts in DocStatic.",
+    "tags": [
+      "elements",
+      "elements_admonitions"
+    ],
+    "path": "/guides/markdown-features/admonitions",
+    "filePath": "guides/markdown-features/admonitions.mdx",
+    "lastmod": "2026-03-04T22:51:37.080Z"
+  },
+  {
+    "title": "Advanced guides",
+    "description": "Advanced DocStatic guides.",
+    "tags": [
+      "content",
+      "content_topics"
+    ],
+    "path": "/advanced",
+    "filePath": "advanced/index.mdx",
+    "lastmod": "2026-03-04T22:48:03.031Z"
+  },
+  {
+    "title": "Assets",
+    "description": "Handling assets in DocStatic.",
+    "tags": [
+      "content",
+      "content_images"
+    ],
+    "path": "/guides/markdown-features/assets",
+    "filePath": "guides/markdown-features/assets.mdx",
+    "lastmod": "2026-03-04T22:51:36.684Z"
+  },
+  {
+    "title": "Blog",
+    "description": "Blogging with DocStatic.",
+    "tags": [
+      "content",
+      "content_blog-articles",
+      "software",
+      "software_static-site-generators",
+      "software_static-site-generators_docusaurus"
+    ],
+    "path": "/blog",
+    "filePath": "blog.mdx",
+    "lastmod": "2026-03-04T22:51:27.032Z"
+  },
+  {
+    "title": "Browser support",
+    "description": "How to keep a reasonable bundle size while ensuring sufficient browser support.",
+    "tags": [
+      "software",
+      "software_browsers",
+      "software_browsers_safari",
+      "software_browsers_firefox",
+      "software_browsers_edge",
+      "software_browsers_chrome",
+      "software_content-management-systems",
+      "software_content-management-systems_tinacms"
+    ],
+    "path": "/browser-support",
+    "filePath": "browser-support.mdx",
+    "lastmod": "2026-03-04T22:51:26.689Z"
+  },
+  {
+    "title": "CLI",
+    "description": "DocStatic command line scripts.",
+    "tags": [
+      "software",
+      "software_command-line-interface",
+      "development",
+      "software_static-site-generators",
+      "software_static-site-generators_docusaurus",
+      "software_content-management-systems",
+      "software_content-management-systems_tinacms",
+      "software_package-managers",
+      "software_package-managers_yarn"
+    ],
+    "path": "/cli",
+    "filePath": "cli.mdx",
+    "lastmod": "2026-03-04T22:51:26.357Z"
+  },
+  {
+    "title": "Code blocks and snippets",
+    "description": "Handling code blocks in DocStatic.",
+    "tags": [
+      "elements",
+      "elements_code-blocks",
+      "reuse",
+      "reuse_snippets"
+    ],
+    "path": "/guides/markdown-features/code-blocks",
+    "filePath": "guides/markdown-features/code-blocks.mdx",
+    "lastmod": "2026-03-04T22:51:36.284Z"
+  },
+  {
+    "title": "Comments",
+    "description": "Add invisible comments to Markdown files.",
+    "tags": [
+      "elements",
+      "elements_comments"
+    ],
+    "path": "/guides/markdown-features/comments",
+    "filePath": "guides/markdown-features/comments.mdx",
+    "lastmod": "2026-03-04T22:51:35.869Z"
+  },
+  {
+    "title": "Conditional text",
+    "description": "Filtering content with conditional text settings.",
+    "tags": [
+      "metadata",
+      "metadata_conditions",
+      "reuse",
+      "reuse_conditional-text"
+    ],
+    "path": "/guides/markdown-features/conditional-text",
+    "filePath": "guides/markdown-features/conditional-text.mdx",
+    "lastmod": "2026-03-04T22:51:35.496Z"
+  },
+  {
+    "title": "Configuration",
+    "description": "Configuring your site's behavior through docusaurus.config.ts and more.",
+    "tags": [
+      "configuration",
+      "configuration_docusaurus",
+      "software",
+      "software_static-site-generators",
+      "software_static-site-generators_docusaurus",
+      "software_content-management-systems",
+      "software_content-management-systems_tinacms"
+    ],
+    "path": "/configuration",
+    "filePath": "configuration.mdx",
+    "lastmod": "2026-03-04T22:51:26.036Z"
+  },
+  {
+    "title": "Context-sensitive help",
+    "description": "Using anchor tags to provide conditional sensitive help.",
+    "tags": [
+      "elements",
+      "elements_context-sensitive-help"
+    ],
+    "path": "/guides/markdown-features/context-help",
+    "filePath": "guides/markdown-features/context-help.mdx",
+    "lastmod": "2026-03-04T22:51:35.094Z"
+  },
+  {
+    "title": "Create a doc",
+    "description": "Create a Markdown document.",
+    "tags": [
+      "content",
+      "content_topics",
+      "computer-languages",
+      "computer-languages_markdown",
+      "software",
+      "software_content-management-systems",
+      "software_content-management-systems_tinacms"
+    ],
+    "path": "/guides/docs/create-doc",
+    "filePath": "guides/docs/create-doc.mdx",
+    "lastmod": "2026-03-04T22:51:37.921Z"
+  },
+  {
+    "title": "Creating pages",
+    "description": "Creating pages in the CMS.",
+    "tags": [
+      "computer-languages",
+      "computer-languages_javascript",
+      "computer-languages_javascript_react",
+      "computer-languages_markdown",
+      "software",
+      "software_static-site-generators",
+      "software_static-site-generators_docusaurus",
+      "software_content-management-systems",
+      "software_content-management-systems_tinacms"
+    ],
+    "path": "/guides/creating-pages",
+    "filePath": "guides/creating-pages.mdx",
+    "lastmod": "2026-03-04T22:51:29.069Z"
+  },
+  {
+    "title": "Dashboards",
+    "description": "Viewing dashboards in TinaCMS",
+    "tags": [
+      "content-management-systems",
+      "content-management-systems_tinacms",
+      "content-management-systems_media-management"
+    ],
+    "path": "/guides/dashboards",
+    "filePath": "guides/dashboards.mdx",
+    "lastmod": "2026-03-04T22:51:28.725Z"
+  },
+  {
+    "title": "Deployment",
+    "description": "Deploying your DocStatic site.",
+    "tags": [
+      "configuration",
+      "configuration_github-pages",
+      "software",
+      "software_automation",
+      "software_automation_github-actions",
+      "development",
+      "development_deployment"
+    ],
+    "path": "/deployment",
+    "filePath": "deployment.mdx",
+    "lastmod": "2026-03-04T22:51:25.712Z"
+  },
+  {
+    "title": "Diagrams",
+    "description": "Writing diagrams with Mermaid.",
+    "tags": [
+      "content",
+      "content_diagrams"
+    ],
+    "path": "/guides/markdown-features/diagrams",
+    "filePath": "guides/markdown-features/diagrams.mdx",
+    "lastmod": "2026-03-04T22:51:34.727Z"
+  },
+  {
+    "title": "Docs introduction",
+    "description": "An introduction to DocStatic docs.",
+    "tags": [
+      "computer-languages",
+      "computer-languages_markdown",
+      "software",
+      "software_static-site-generators",
+      "software_static-site-generators_docusaurus",
+      "content",
+      "content_topics"
+    ],
+    "path": "/guides/docs/introduction",
+    "filePath": "guides/docs/introduction.mdx",
+    "lastmod": "2026-03-04T22:24:22.526Z"
+  },
+  {
+    "title": "Figures",
+    "description": "Images with captions and lightbox zoom.",
+    "tags": [
+      "elements",
+      "elements_figures",
+      "content",
+      "content_images",
+      "software",
+      "software_content-management-systems",
+      "software_content-management-systems_tinacms"
+    ],
+    "path": "/guides/markdown-features/figures",
+    "filePath": "guides/markdown-features/figures.mdx",
+    "lastmod": "2026-03-04T22:51:34.363Z"
+  },
+  {
+    "title": "Footnotes",
+    "description": "Automatically numbered and back-linked footnotes.",
+    "tags": [
+      "elements",
+      "elements_footnotes",
+      "computer-languages",
+      "computer-languages_markdown",
+      "software",
+      "software_content-management-systems",
+      "software_content-management-systems_tinacms"
+    ],
+    "path": "/guides/markdown-features/footnotes",
+    "filePath": "guides/markdown-features/footnotes.mdx",
+    "lastmod": "2026-03-04T22:51:33.960Z"
+  },
+  {
+    "title": "Glossary terms",
+    "description": "Localizable glossary terms with touch screen support.",
+    "tags": [
+      "reuse",
+      "reuse_glossary-terms",
+      "internationalization",
+      "internationalization_localization"
+    ],
+    "path": "/guides/markdown-features/glossary",
+    "filePath": "guides/markdown-features/glossary.mdx",
+    "lastmod": "2026-03-04T22:51:33.561Z"
+  },
+  {
+    "title": "Guides",
+    "description": "DocStatic guides.",
+    "tags": [
+      "content",
+      "content_topics"
+    ],
+    "path": "/guides",
+    "filePath": "guides/index.mdx",
+    "lastmod": "2026-03-04T22:24:22.422Z"
+  },
+  {
+    "title": "Head metadata",
+    "description": "Declaring page-specific head metadata through MDX.",
+    "tags": [
+      "metadata",
+      "elements",
+      "elements_passthroughs"
+    ],
+    "path": "/guides/markdown-features/metadata",
+    "filePath": "guides/markdown-features/metadata.mdx",
+    "lastmod": "2026-03-04T22:51:32.384Z"
+  },
+  {
+    "title": "Headings and table of contents",
+    "description": "Using headings and table-of-contents in DocStatic.",
+    "tags": [
+      "formatting",
+      "formatting_headings"
+    ],
+    "path": "/guides/markdown-features/toc",
+    "filePath": "guides/markdown-features/toc.mdx",
+    "lastmod": "2026-03-04T22:51:29.796Z"
+  },
+  {
+    "title": "Hosted CMS",
+    "description": "Using DocStatic with cloud-hosted or self-hosted TinaCMS.",
+    "tags": [
+      "software",
+      "software_content-management-systems",
+      "software_content-management-systems_tinacms"
+    ],
+    "path": "/advanced/hosted-cms",
+    "filePath": "advanced/hosted-cms.mdx",
+    "lastmod": "2026-03-04T22:48:00.529Z"
+  },
+  {
+    "title": "Installation",
+    "description": "How to install DocStatic locally, and start a DocStatic site in no time.",
+    "tags": [
+      "software",
+      "software_integrated-development-environments",
+      "software_integrated-development-environments_eclipse",
+      "software_integrated-development-environments_vscodium",
+      "software_package-managers",
+      "software_package-managers_yarn",
+      "software_source-control",
+      "software_source-control_github",
+      "software_content-management-systems",
+      "software_content-management-systems_tinacms",
+      "software_grammar-spelling-style",
+      "software_grammar-spelling-style_languagetool",
+      "development",
+      "development_installation",
+      "development_getting-started",
+      "computer-languages",
+      "computer-languages_javascript"
+    ],
+    "path": "/installation",
+    "filePath": "installation.mdx",
+    "lastmod": "2026-03-04T22:51:24.773Z"
+  },
+  {
+    "title": "Internationalization",
+    "description": "Translating documents with DocStatic.",
+    "tags": [
+      "internationalization",
+      "internationalization_translation",
+      "software",
+      "software_static-site-generators",
+      "software_static-site-generators_docusaurus",
+      "software_content-management-systems",
+      "software_content-management-systems_tinacms"
+    ],
+    "path": "/i18n/introduction",
+    "filePath": "i18n/introduction.mdx",
+    "lastmod": "2026-03-04T22:51:28.060Z"
+  },
+  {
+    "title": "Introduction",
+    "description": "DocStatic was designed from the ground up to be easily installed and used to get your website up and running quickly.",
+    "tags": [
+      "software",
+      "software_source-control",
+      "software_source-control_git",
+      "computer-languages",
+      "computer-languages_javascript",
+      "software_static-site-generators",
+      "software_static-site-generators_docusaurus",
+      "software_content-management-systems",
+      "software_content-management-systems_tinacms",
+      "development",
+      "development_getting-started"
+    ],
+    "path": "/introduction",
+    "filePath": "introduction.mdx",
+    "lastmod": "2026-03-04T22:51:24.361Z"
+  },
+  {
+    "title": "Introduction",
+    "description": "Wiki sidebar generation and category index document conventions.",
+    "tags": [
+      "software",
+      "software_static-site-generators",
+      "software_static-site-generators_docusaurus",
+      "content",
+      "content_topics",
+      "content_wikis"
+    ],
+    "path": "/wiki/readme",
+    "filePath": "wiki/readme.mdx",
+    "lastmod": "2026-03-04T22:51:27.353Z"
+  },
+  {
+    "title": "Markdown features",
+    "description": "DocStatic uses MDX. Find out more about DocStatic-specific features when writing Markdown.",
+    "tags": [
+      "computer-languages",
+      "computer-languages_markdown",
+      "computer-languages_markdown_mdx",
+      "elements",
+      "elements_tabs",
+      "elements_footnotes",
+      "elements_figures",
+      "elements_doc-card-lists",
+      "elements_admonitions",
+      "elements_comments",
+      "elements_code-blocks",
+      "elements_horizontal-rules",
+      "elements_links",
+      "elements_tables",
+      "elements_quotes",
+      "software",
+      "software_content-management-systems",
+      "software_content-management-systems_tinacms"
+    ],
+    "path": "/guides/markdown-features/intro",
+    "filePath": "guides/markdown-features/intro.mdx",
+    "lastmod": "2026-03-04T22:24:22.532Z"
+  },
+  {
+    "title": "Markdown links",
+    "description": "Links to other pages in Markdown.",
+    "tags": [
+      "elements",
+      "elements_links"
+    ],
+    "path": "/guides/markdown-features/links",
+    "filePath": "guides/markdown-features/links.mdx",
+    "lastmod": "2026-03-04T22:51:33.159Z"
+  },
+  {
+    "title": "Math equations",
+    "description": "Writing LaTeX math equations.",
+    "tags": [
+      "content",
+      "content_equations",
+      "computer-languages",
+      "computer-languages_",
+      "computer-languages_latex",
+      "computer-languages_latex_katex"
+    ],
+    "path": "/guides/markdown-features/math-equations",
+    "filePath": "guides/markdown-features/math-equations.mdx",
+    "lastmod": "2026-03-04T22:51:32.786Z"
+  },
+  {
+    "title": "MCP Server Integration",
+    "description": "Using docStatic with AI assistants through the Model Context Protocol (MCP) server",
+    "tags": [
+      "software",
+      "software_artificial-intelligence",
+      "software_automation",
+      "software_integrations",
+      "development",
+      "development_ai-tools"
+    ],
+    "path": "/mcp-server",
+    "filePath": "mcp-server.mdx",
+    "lastmod": "2026-03-04T22:51:21.596Z"
+  },
+  {
+    "title": "MDX and React",
+    "description": "Using React in DocStatic Markdown documents with MDX.",
+    "tags": [
+      "computer-languages",
+      "computer-languages_markdown",
+      "computer-languages_markdown_mdx",
+      "computer-languages_javascript",
+      "computer-languages_javascript_react"
+    ],
+    "path": "/guides/markdown-features/react",
+    "filePath": "guides/markdown-features/react.mdx",
+    "lastmod": "2026-03-04T22:51:31.589Z"
+  },
+  {
+    "title": "MDX plugins",
+    "description": "Using MDX plugins to expand Markdown functionality.",
+    "tags": [
+      "computer-languages",
+      "computer-languages_markdown",
+      "computer-languages_markdown_mdx"
+    ],
+    "path": "/guides/markdown-features/plugins",
+    "filePath": "guides/markdown-features/plugins.mdx",
+    "lastmod": "2026-03-04T22:51:31.998Z"
+  },
+  {
+    "title": "Notifications",
+    "description": "Sending workflow notifications to email, Slack or Teams.",
+    "tags": [
+      "software",
+      "software_notifications",
+      "software_notifications_email",
+      "software_notifications_teams",
+      "software_notifications_slack"
+    ],
+    "path": "/advanced/notifications",
+    "filePath": "advanced/notifications.mdx",
+    "lastmod": "2026-03-04T22:48:08.345Z"
+  },
+  {
+    "title": "Related Topics",
+    "description": "Automatically generate links to related content based on shared taxonomy tags.",
+    "tags": [
+      "elements",
+      "elements_links",
+      "computer-languages",
+      "computer-languages_markdown",
+      "software",
+      "software_content-management-systems",
+      "software_content-management-systems_tinacms",
+      "metadata",
+      "metadata_taxonomies"
+    ],
+    "path": "/guides/markdown-features/related-topics",
+    "filePath": "guides/markdown-features/related-topics.mdx",
+    "lastmod": "2026-03-04T22:51:31.213Z"
+  },
+  {
+    "title": "Search",
+    "description": "Search providers.",
+    "tags": [
+      "software",
+      "software_search",
+      "software_search_lunr",
+      "software_search_algolia"
+    ],
+    "path": "/search",
+    "filePath": "search.mdx",
+    "lastmod": "2026-03-04T22:51:45.931Z"
+  },
+  {
+    "title": "Search engine optimization (SEO)",
+    "description": "How to make your DocStatic site maximally search-engine-friendly.",
+    "tags": [
+      "software",
+      "software_search",
+      "software_search_search-engine-optimization"
+    ],
+    "path": "/seo",
+    "filePath": "seo.mdx",
+    "lastmod": "2026-03-04T22:51:48.470Z"
+  },
+  {
+    "title": "Snippets",
+    "description": "Reusable topics.",
+    "tags": [
+      "reuse",
+      "reuse_snippets"
+    ],
+    "path": "/guides/markdown-features/snippets",
+    "filePath": "guides/markdown-features/snippets.mdx",
+    "lastmod": "2026-03-04T22:51:30.877Z"
+  },
+  {
+    "title": "Static assets",
+    "description": "Static assets are the non-code files that are directly copied to the build output. Learn about how they are handled and the best practices for using static assets.",
+    "tags": [
+      "software",
+      "software_static-site-generators",
+      "software_static-site-generators_docusaurus",
+      "content",
+      "content_images",
+      "development"
+    ],
+    "path": "/static-assets",
+    "filePath": "static-assets.mdx",
+    "lastmod": "2026-03-04T22:51:51.437Z"
+  },
+  {
+    "title": "Style checking",
+    "description": "Spelling, grammar and style checking in DocStatic.",
+    "tags": [
+      "software",
+      "software_grammar-spelling-style",
+      "software_grammar-spelling-style_languagetool"
+    ],
+    "path": "/advanced/style",
+    "filePath": "advanced/style.mdx",
+    "lastmod": "2026-03-04T22:51:38.317Z"
+  },
+  {
+    "title": "Styling and layout",
+    "description": "A Docstatic site is a pre-rendered single-page React application. You can style it the way you style React apps.",
+    "tags": [
+      "computer-languages",
+      "computer-languages_css",
+      "computer-languages_javascript",
+      "computer-languages_javascript_react",
+      "software",
+      "software_static-site-generators",
+      "software_static-site-generators_docusaurus"
+    ],
+    "path": "/styling-layout",
+    "filePath": "styling-layout.mdx",
+    "lastmod": "2026-03-04T22:51:54.509Z"
+  },
+  {
+    "title": "Tabs",
+    "description": "Using tabs in DocStatic.",
+    "tags": [
+      "elements",
+      "elements_tabs",
+      "computer-languages",
+      "computer-languages_markdown",
+      "software",
+      "software_content-management-systems",
+      "software_content-management-systems_tinacms"
+    ],
+    "path": "/guides/markdown-features/tabs",
+    "filePath": "guides/markdown-features/tabs.mdx",
+    "lastmod": "2026-03-04T22:51:30.511Z"
+  },
+  {
+    "title": "Taxonomies",
+    "description": "Creating and applying an information architecture in DocStatic.",
+    "tags": [
+      "metadata",
+      "metadata_taxonomies"
+    ],
+    "path": "/guides/docs/taxonomies",
+    "filePath": "guides/docs/taxonomies.mdx",
+    "lastmod": "2026-03-04T22:51:37.510Z"
+  },
+  {
+    "title": "Taxonomy tags",
+    "description": "Using taxonomy tags in DocStaric",
+    "tags": [
+      "metadata",
+      "metadata_taxonomies"
+    ],
+    "path": "/guides/markdown-features/taxonomies",
+    "filePath": "guides/markdown-features/taxonomies.mdx",
+    "lastmod": "2026-03-04T22:51:30.150Z"
+  },
+  {
+    "title": "Upgrading",
+    "description": "Upgrading Node.js modules.",
+    "tags": [
+      "software",
+      "software_upgrading",
+      "software_package-managers",
+      "software_package-managers_yarn",
+      "development",
+      "computer-languages",
+      "computer-languages_javascript"
+    ],
+    "path": "/migration",
+    "filePath": "migration/index.mdx",
+    "lastmod": "2026-03-04T22:51:27.718Z"
+  },
+  {
+    "title": "Using plugins",
+    "description": "Extending the functionality of the static site generator with plugins.",
+    "tags": [
+      "software",
+      "software_plugins"
+    ],
+    "path": "/using-plugins",
+    "filePath": "using-plugins.mdx",
+    "lastmod": "2026-03-04T22:51:59.007Z"
+  },
+  {
+    "title": "Variable sets",
+    "description": "Localizable variables.",
+    "tags": [
+      "reuse",
+      "reuse_variable-sets",
+      "internationalization",
+      "internationalization_localization"
+    ],
+    "path": "/guides/markdown-features/variables",
+    "filePath": "guides/markdown-features/variables.mdx",
+    "lastmod": "2026-03-04T22:51:29.440Z"
+  },
+  {
+    "title": "Wikis",
+    "description": "Creating wikis in DocStatic",
+    "tags": [
+      "content",
+      "content_wikis"
+    ],
+    "path": "/guides/wikis",
+    "filePath": "guides/wikis.mdx",
+    "lastmod": "2026-03-04T22:51:28.384Z"
+  }
+]
