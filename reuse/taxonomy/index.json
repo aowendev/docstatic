@@ -104,6 +104,29 @@
       ]
     },
     {
+      "tag": "development",
+      "children": [
+        {
+          "tag": "development_ai-tools"
+        },
+        {
+          "tag": "development_deployment"
+        },
+        {
+          "tag": "development_getting-started"
+        },
+        {
+          "tag": "development_installation"
+        },
+        {
+          "tag": "development_local-development"
+        },
+        {
+          "tag": "development_cloud-development"
+        }
+      ]
+    },
+    {
       "tag": "elements",
       "children": [
         {
@@ -175,8 +198,7 @@
         },
         {
           "tag": "internationalization_translation"
-        },
-        {}
+        }
       ]
     },
     {
@@ -229,6 +251,9 @@
       "tag": "software",
       "children": [
         {
+          "tag": "software_artificial-intelligence"
+        },
+        {
           "tag": "software_automation",
           "children": [
             {
@@ -260,10 +285,10 @@
           "tag": "software_content-management-systems",
           "children": [
             {
-              "tag": "content-management-systems_tinacms"
+              "tag": "software_content-management-systems_tinacms"
             },
             {
-              "tag": "content-management-systems_media-management"
+              "tag": "software_content-management-systems_media-management"
             }
           ]
         },
@@ -285,6 +310,9 @@
               "tag": "software_integrated-development-environments_vscodium"
             }
           ]
+        },
+        {
+          "tag": "software_integrations"
         },
         {
           "tag": "software_notifications",
