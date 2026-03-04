@@ -110,23 +110,23 @@ const RelatedTopics = ({ maxResults = 5 }) => {
   }
 
   return (
-    <div className="related-topics">
+    <>
       <h2>Related topics</h2>
       <ul>
         {relatedTopics.map((topic, index) => (
           <li key={index}>
             <Link to={`/docs${topic.path}`}>
-              <strong>{topic.title}</strong>
+              {topic.title}
             </Link>
             {topic.description && (
-              <span className="related-topic-description">
+              <span>
                 {" – "}{topic.description}
               </span>
             )}
           </li>
         ))}
       </ul>
-    </div>
+    </>
   );
 };
 
