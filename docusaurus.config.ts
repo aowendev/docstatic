@@ -5,6 +5,10 @@ import { themes } from 'prism-react-renderer';
 import PrismLight from './src/utils/prismLight';
 import PrismDark from './src/utils/prismDark';
 
+// Import the blog date filter utility
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const { getFutureDatedBlogFiles } = require('./src/plugins/blog-date-filter');
+
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = createConfig;
 const docusaurusData = require("./config/docusaurus/index.json");
@@ -195,6 +199,11 @@ const config = {
           docItemComponent: "@theme/ApiItem", // Derived from docusaurus-theme-openapi
         },
         blog: {
+          exclude: (() => {
+            // Get the absolute path to the blog directory
+            const blogDir = require('path').resolve(__dirname, 'blog');
+            return getFutureDatedBlogFiles(blogDir);
+          })(),
           showReadingTime: docusaurusData.showReadingTime,
           // Truncate blog previews with manual markers or excerpt
           truncateMarker: /<!--\s*(truncate)\s*-->/,

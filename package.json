@@ -54,7 +54,7 @@
     "postinstall": "npm run mcp:install"
   },
   "dependencies": {
-    "@algolia/client-search": "^5.49.1",
+    "@algolia/client-search": "^5.49.2",
     "@codemirror/language": "6.0.0",
     "@docusaurus/core": "^3.9.2",
     "@docusaurus/plugin-content-docs": "^3.9.2",
@@ -112,7 +112,7 @@
     ]
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.4.5",
+    "@biomejs/biome": "^2.4.6",
     "@tinacms/cli": "^2.1.9",
     "gray-matter": "^4.0.3"
   },
