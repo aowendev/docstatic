@@ -1,5 +1,5 @@
 ---
-lastmod: '2026-02-25T23:51:58.140Z'
+lastmod: "2026-03-10T23:01:09.034Z"
 title: Getting started - working locally
 draft: true
 review: false
@@ -9,15 +9,15 @@ published: false
 unlisted: false
 ---
 
-# Premiers pas pour travailler avec DocStatic en local
+# Premiers pas pour travailler avec docStatic en local
 
-Bienvenue ! Ce guide vous explique comment configurer DocStatic pour la première fois.
+Bienvenue ! Ce guide vous explique comment configurer docStatic pour la première fois.
 
 Si vous n'avez jamais utilisé GitHub ou docs-as-code auparavant, ne vous inquiétez pas : nous vous expliquerons ce dont vous avez besoin, pourquoi et où trouver plus d'informations.
 
 ## Prérequis
 
-Vous pouvez exécuter DocStatic localement (sur votre ordinateur) ou l'héberger dans le cloud. Nous vous expliquons ici comment le configurer pour qu'il fonctionne localement.
+Vous pouvez exécuter docStatic localement (sur votre ordinateur) ou l'héberger dans le cloud. Nous vous expliquons ici comment le configurer pour qu'il fonctionne localement.
 
 Avant de commencer, vous aurez besoin de :
 
@@ -32,7 +32,7 @@ Une fois que vous disposez de ces éléments, vous pouvez commencer l'installati
 
 ## Installer Node.js
 
-Vous devez installer la version 18.0 ou supérieure de [Node.js](https://nodejs.org/), car DocStatic utilise ses outils de compilation.
+Vous devez installer la version 18.0 ou supérieure de [Node.js](https://nodejs.org/), car docStatic utilise ses outils de compilation.
 
 Commencez par vérifier si Node.js est déjà installé :
 
@@ -95,15 +95,15 @@ npm install -g yarn
   Sous Windows, vous n'utilisez pas sudo. Il vous suffit d'ouvrir votre terminal en tant qu'administrateur et d'exécuter la commande.
 </Admonition>
 
-Suivant : Forker le dépôt DocStatic
+Suivant : Forker le dépôt docStatic
 
 ***
 
-## Dupliquez le dépôt DocStatic
+## Dupliquez le dépôt docStatic
 
-Le code source de DocStatic se trouve sur GitHub. Pour commencer, vous devez dupliquer le dépôt.
+Le code source de docStatic se trouve sur GitHub. Pour commencer, vous devez dupliquer le dépôt.
 
-Lorsque vous dupliquez un dépôt, vous créez votre propre copie personnelle de celui-ci dans GitHub. Comme il s'agit de votre propre copie, vous disposez des droits de gestion et pouvez y ajouter du contenu. C'est ainsi que vous pouvez travailler sur un dépôt sans affecter le dépôt DocStatic d'origine.
+Lorsque vous dupliquez un dépôt, vous créez votre propre copie personnelle de celui-ci dans GitHub. Comme il s'agit de votre propre copie, vous disposez des droits de gestion et pouvez y ajouter du contenu. C'est ainsi que vous pouvez travailler sur un dépôt sans affecter le dépôt docStatic d'origine.
 
 1. Connectez-vous à votre compte GitHub.
 2. Rendez-vous sur [https://github.com/aowendev/docstatic](https://github.com/aowendev/docstatic).
@@ -119,7 +119,7 @@ GitHub crée une nouvelle branche du référentiel dans votre compte GitHub.
 
 ***
 
-## Cloner votre fourche du référentiel DocStatic
+## Cloner votre fourche du référentiel docStatic
 
 Le clonage vous permet de travailler localement sur le contenu que vous allez pousser vers votre fourche sur GitHub.
 
@@ -149,7 +149,7 @@ Suivant : Installez les dépendances du projet.
 Pour travailler localement, vous devez également installer les dépendances du projet.
 
 1. Ouvrez votre terminal ou votre invite de commande.
-2. Utilisez `cd` pour naviguer jusqu'au dossier racine de votre dépôt DocStatic cloné ou forké et installez les paquets :
+2. Utilisez `cd` pour naviguer jusqu'au dossier racine de votre dépôt docStatic cloné ou forké et installez les paquets :
 
 ```
 cd docstatic
@@ -219,7 +219,7 @@ docstatic
 
 * `/apis/` - Fichiers YAML OpenAPI.
 * `/blog/` - Fichiers MDX du blog.
-* `/config/` - Fichiers JSON utilisés par TinaCMS pour configurer DocStatic.
+* `/config/` - Fichiers JSON utilisés par TinaCMS pour configurer docStatic.
 * `/docs/` - Fichiers MDX de la documentation.
 * `/i18n/` - Fichiers de traduction.
 * `/reuse/` - Contenu réutilisable.
@@ -227,7 +227,7 @@ docstatic
   * `/src/pages` - Tous les fichiers JSX/TSX/MDX contenus dans ce répertoire sont convertis en pages web.
 * `/static/` - Dossier statique. Tout contenu présent ici est copié à la racine du dossier de compilation final.
 * `/docusaurus.config.ts` - Fichier de configuration contenant la configuration du site.
-* `/package.json` - Un site web DocStatic est une application React. Vous pouvez installer et utiliser tous les paquets npm que vous souhaitez.
+* `/package.json` - Un site web docStatic est une application React. Vous pouvez installer et utiliser tous les paquets npm que vous souhaitez.
 * `/sidebars.ts` - Spécifie l'ordre des documents dans la barre latérale. Utilisez-le pour votre structure de « table des matières ».
 
 Ensuite, voyons où vous devrez créer et stocker vos fichiers de documentation.
@@ -236,7 +236,7 @@ Ensuite, voyons où vous devrez créer et stocker vos fichiers de documentation.
 
 ## Effacer le dossier Docs
 
-Le dossier Docs contient une copie de la documentation DocStatic. L'idée est d'effacer la documentation DocStatic. Lorsque vous créez votre propre documentation, vous devez l'enregistrer dans le dossier Docs.
+Le dossier Docs contient une copie de la documentation docStatic. L'idée est d'effacer la documentation docStatic. Lorsque vous créez votre propre documentation, vous devez l'enregistrer dans le dossier Docs.
 
 ***
 

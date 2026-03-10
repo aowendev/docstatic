@@ -1,11 +1,11 @@
 ---
-lastmod: '2026-02-25T23:51:56.290Z'
+lastmod: "2026-03-10T23:01:17.566Z"
 title: Aide contextuelle
 description: Utilisation de balises d'ancrage pour fournir une aide conditionnelle sensible.
-slug: /context-help
+slug: "/context-help"
 tags:
-  - elements
-  - elements_context-sensitive-help
+  - "elements"
+  - "elements_context-sensitive-help"
 draft: false
 review: false
 translate: false
@@ -23,7 +23,7 @@ unlisted: false
 
 En général, l'aide contextuelle est mise en œuvre à l'aide d'une icône d'aide sur laquelle les utilisateurs peuvent cliquer pour accéder à la partie appropriée de la documentation correspondant à la partie du logiciel qu'ils utilisent. Cela implique la création d'une carte des URL contextuelles.
 
-Le générateur de site statique génère automatiquement des liens vers les en-têtes. Cependant, si vous modifiez l'en-tête, le lien changera. C'est pourquoi DocStatic fournit l'élément Context Help. Il vous permet d'ajouter une balise d'ancrage n'importe où dans un sujet. À condition qu'un slug soit défini pour le sujet dans les métadonnées, le lien ne sera pas rompu.
+Le générateur de site statique génère automatiquement des liens vers les en-têtes. Cependant, si vous modifiez l'en-tête, le lien changera. C'est pourquoi docStatic fournit l'élément Context Help. Il vous permet d'ajouter une balise d'ancrage n'importe où dans un sujet. À condition qu'un slug soit défini pour le sujet dans les métadonnées, le lien ne sera pas rompu.
 
 1. Sélectionnez **Context Help** dans la liste Embed.
 2. Entrez un identifiant unique.
@@ -38,7 +38,7 @@ Le lien se présentera sous la forme suivante : `<URL>/docs/<slug>#<id>`.
 
 ## Développeurs
 
-Pour obtenir un exemple d'intégration de liens d'aide contextuelle dans votre code, examinez le composant HelpButton React dans le code source de ce site. Comme DocStatic n'a pas d'accès direct au code CMS, il implémente le bouton en l'appliquant comme élément d'interface utilisateur sur un champ inutilisé dans une collection CMS. Le composant HelpButton attache le bouton à l'élément de navigation de la page et le lie à l'URL transmise dans le modèle :
+Pour obtenir un exemple d'intégration de liens d'aide contextuelle dans votre code, examinez le composant HelpButton React dans le code source de ce site. Comme docStatic n'a pas d'accès direct au code CMS, il implémente le bouton en l'appliquant comme élément d'interface utilisateur sur un champ inutilisé dans une collection CMS. Le composant HelpButton attache le bouton à l'élément de navigation de la page et le lie à l'URL transmise dans le modèle :
 
 ```javascript
 const ExampleCollection = {

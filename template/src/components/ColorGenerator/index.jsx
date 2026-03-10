@@ -84,7 +84,7 @@ export default function ColorGenerator() {
             }}
           >
             {
-              "To ensure readability, aim for at least {wcagLink} for the primary color. Use the DocStatic website itself to preview how your color palette will appear. You can use alternative palettes in dark mode because one color doesn't usually work in both light and dark mode."
+              "To ensure readability, aim for at least {wcagLink} for the primary color. Use the docStatic website itself to preview how your color palette will appear. You can use alternative palettes in dark mode because one color doesn't usually work in both light and dark mode."
             }
           </Translate>
         </p>

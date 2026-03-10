@@ -1,5 +1,5 @@
 ---
-lastmod: "2026-02-26T20:12:34.750Z"
+lastmod: "2026-03-10T23:00:52.406Z"
 title: MDX and React
 tags:
   - "computer-languages"
@@ -21,7 +21,7 @@ DocStatic tiene soporte integrado para [MDX](https://mdxjs.com/), lo que te perm
 
 ## Ámbito de los componentes MDX
 
-La forma preferida de utilizar componentes en MDX en DocStatic es registrarlos en el ámbito global, lo que los hace automáticamente disponibles en todos los archivos MDX, sin necesidad de declaraciones de importación. También es necesario añadir una definición de plantilla al componente e importarla para que el CMS la reconozca. Para ver ejemplos de cómo se hace esto, puede explorar los propios componentes de DocStatic, como `CodeSnippet`. Es importante asegurarse de que los componentes globales se renderizan de forma estática, ya que de lo contrario pueden añadir retrasos al renderizado de la página.
+La forma preferida de utilizar componentes en MDX en docStatic es registrarlos en el ámbito global, lo que los hace automáticamente disponibles en todos los archivos MDX, sin necesidad de declaraciones de importación. También es necesario añadir una definición de plantilla al componente e importarla para que el CMS la reconozca. Para ver ejemplos de cómo se hace esto, puede explorar los propios componentes de docStatic, como `CodeSnippet`. Es importante asegurarse de que los componentes globales se renderizan de forma estática, ya que de lo contrario pueden añadir retrasos al renderizado de la página.
 
 Por ejemplo, este es el contenido de `src/themes/MDXComponents.jsx`:
 

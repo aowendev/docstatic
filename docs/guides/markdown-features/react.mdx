@@ -1,6 +1,6 @@
 ---
 title: MDX and React
-description: Using React in DocStatic Markdown documents with MDX.
+description: Using React in docStatic Markdown documents with MDX.
 tags:
   - "computer-languages"
   - "computer-languages_markdown"
@@ -13,7 +13,7 @@ translate: false
 approved: false
 published: true
 unlisted: false
-lastmod: "2026-03-04T22:51:31.589Z"
+lastmod: "2026-03-10T22:59:20.481Z"
 ---
 
 # MDX and React
@@ -22,7 +22,7 @@ DocStatic has built-in support for [MDX](https://mdxjs.com/), which enables you 
 
 ## MDX component scope
 
-The preferred way to use components in MDX in DocStatic is by registering them in the global scope, which makes them automatically available in every MDX file, without any import statements. You also need to add a template definition to the component and import it so that the CMS knows about it. For examples of how this is done you can explore DocStatic's own components, such as `CodeSnippet`. It's important to ensure that global components are statically rendered, or they may add delays to page rendering.
+The preferred way to use components in MDX in docStatic is by registering them in the global scope, which makes them automatically available in every MDX file, without any import statements. You also need to add a template definition to the component and import it so that the CMS knows about it. For examples of how this is done you can explore docStatic's own components, such as `CodeSnippet`. It's important to ensure that global components are statically rendered, or they may add delays to page rendering.
 
 For example, here's the contents of `src/themes/MDXComponents.jsx`:
 

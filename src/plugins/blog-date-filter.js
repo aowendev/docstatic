@@ -10,6 +10,15 @@ const matter = require('gray-matter');
 function getFutureDatedBlogFiles(blogDir) {
   const futureDatedFiles = [];
   
+  // Only exclude future-dated files in production builds
+  // Allow them in development for preview purposes
+  const isProduction = process.env.NODE_ENV === 'production';
+  
+  if (!isProduction) {
+    console.log('🚀 Development mode: Including future-dated blog posts for preview');
+    return []; // Return empty array in development - include all posts
+  }
+  
   try {
     if (!fs.existsSync(blogDir)) {
       console.warn(`Blog directory ${blogDir} does not exist`);

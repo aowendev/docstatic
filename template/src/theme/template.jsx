@@ -104,7 +104,7 @@ const DocCardListTemplate = {
   ],
 };
 
-// Custom DocStatic components
+// Custom docStatic components
 
 // const CommentsTemplate = {
 //  name: "hidden",

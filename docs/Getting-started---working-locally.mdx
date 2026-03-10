@@ -1,7 +1,7 @@
 ---
-lastmod: "2026-03-04T22:51:25.073Z"
+lastmod: "2026-03-10T22:56:17.293Z"
 title: Getting started - working locally
-description: Learn how to set up DocStatic so that you can work locally on your computer instead of in the Cloud.
+description: Learn how to set up docStatic so that you can work locally on your computer instead of in the Cloud.
 tags:
   - "development"
   - "development_getting-started"
@@ -25,15 +25,15 @@ published: false
 unlisted: false
 ---
 
-# Getting started for working with DocStatic locally
+# Getting started for working with docStatic locally
 
-Welcome! This guide walks you through setting up DocStatic for the first time.
+Welcome! This guide walks you through setting up docStatic for the first time.
 
 If you’ve never worked with GitHub or docs-as-code before, don’t worry — we’ll explain what’s needed, why, and where to find more detail.
 
 ## Prerequisites
 
-You can run DocStatic locally (on your computer) or host it in the cloud. Here, we explain how to set it up to work locally.
+You can run docStatic locally (on your computer) or host it in the cloud. Here, we explain how to set it up to work locally.
 
 Before you begin, you'll need:
 
@@ -48,7 +48,7 @@ When you have those in place, you can begin the installation (as described in th
 
 ## Install Node.js
 
-You need to install [Node.js](https://nodejs.org/) version 18.0 or above as DocStatic uses its build tools.
+You need to install [Node.js](https://nodejs.org/) version 18.0 or above as docStatic uses its build tools.
 
 First, check if you have Node.js installed already:
 
@@ -111,15 +111,15 @@ npm install -g yarn
   On Windows, you don’t use sudo. Just open your terminal as Administrator and run the command.
 </Admonition>
 
-Next: Fork the DocStatic repository
+Next: Fork the docStatic repository
 
 ***
 
-## Fork the DocStatic repository
+## Fork the docStatic repository
 
 DocStatic’s source code lives on GitHub. To start, you’ll need to fork the repository.
 
-When you fork a repository, you create your own personal copy of it in GitHub. As it is your own copy, you have management rights for it and can to push content into it. This is how you work on a repository without affecting the original DocStatic repository.
+When you fork a repository, you create your own personal copy of it in GitHub. As it is your own copy, you have management rights for it and can to push content into it. This is how you work on a repository without affecting the original docStatic repository.
 
 1. Log in to your account in GitHub.
 2. Visit [https://github.com/aowendev/docstatic](https://github.com/aowendev/docstatic).
@@ -135,7 +135,7 @@ Next: Clone your fork.
 
 ***
 
-## Clone your fork of the DocStatic repository
+## Clone your fork of the docStatic repository
 
 Cloning allows you to work locally on content that you will push to your fork on GitHub.
 
@@ -165,7 +165,7 @@ Next: Install the project dependencies.
 To work locally, you also need to install the project dependencies.
 
 1. Open your terminal or command prompt.
-2. Use `cd` to navigate to the root folder of your cloned or forked DocStatic repository and install the packages:
+2. Use `cd` to navigate to the root folder of your cloned or forked docStatic repository and install the packages:
 
 ```
 cd docstatic
@@ -235,7 +235,7 @@ docstatic
 
 * `/apis/` - OpenAPI YAML files.
 * `/blog/` - Blog MDX files.
-* `/config/` - JSON files used by TinaCMS to configure DocStatic.
+* `/config/` - JSON files used by TinaCMS to configure docStatic.
 * `/docs/` - Docs MDX files.
 * `/i18n/` - Translation files.
 * `/reuse/` - Reusable content.
@@ -243,7 +243,7 @@ docstatic
   * `/src/pages` - Any JSX/TSX/MDX file within this directory are converted into a website page.
 * `/static/` - Static folder. Any content inside here is copied into the root of the final build folder.
 * `/docusaurus.config.ts` - A config file containing the site configuration.
-* `/package.json` - A DocStatic website is a React app. You can install and use any npm packages you want.
+* `/package.json` - A docStatic website is a React app. You can install and use any npm packages you want.
 * `/sidebars.ts` - Specifies the order of documents in the sidebar. Use this for your “table of contents” structure.
 
 Next, let's look at where you'll need to create and store your documentation files.
@@ -252,7 +252,7 @@ Next, let's look at where you'll need to create and store your documentation fil
 
 ## Clear the Docs folder
 
-The Docs folder contains a copy of the DocStatic documentation. The idea is that you clear out the DocStatic documentation. When you create your own documentation, you should save it to the Docs folder.
+The Docs folder contains a copy of the docStatic documentation. The idea is that you clear out the docStatic documentation. When you create your own documentation, you should save it to the Docs folder.
 
 ***
 

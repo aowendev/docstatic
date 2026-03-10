@@ -1,6 +1,6 @@
 {
   "colorGenerator.tip.body": {
-    "message": "Pour garantir la lisibilité, essayez d'utiliser au moins {wcagLink} pour la couleur primaire. Utilisez le site web DocStatic lui-même pour prévisualiser l'apparence de votre palette de couleurs. Vous pouvez utiliser d'autres palettes en mode sombre, car une même couleur ne fonctionne généralement pas à la fois en mode clair et en mode sombre."
+    "message": "Pour garantir la lisibilité, essayez d'utiliser au moins {wcagLink} pour la couleur primaire. Utilisez le site web docStatic lui-même pour prévisualiser l'apparence de votre palette de couleurs. Vous pouvez utiliser d'autres palettes en mode sombre, car une même couleur ne fonctionne généralement pas à la fois en mode clair et en mode sombre."
   },
   "colorGenerator.tip.body.wcagLink.label": {
     "message": "Rapport de contraste WCAG-AA"

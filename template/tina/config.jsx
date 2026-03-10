@@ -1057,7 +1057,7 @@ const PagesCollection = {
   },
 };
 
-// DocStatic Collections
+// docStatic Collections
 
 // conditions
 const ConditionsCollection = {

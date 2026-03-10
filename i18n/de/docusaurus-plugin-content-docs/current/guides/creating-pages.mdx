@@ -1,10 +1,10 @@
 ---
-lastmod: '2026-02-27T23:11:33.663Z'
+lastmod: "2026-03-10T23:00:26.964Z"
 title: Creating pages
 tags:
-  - computer-languages
-  - computer-languages_javascript
-  - computer-languages_javascript_react
+  - "computer-languages"
+  - "computer-languages_javascript"
+  - "computer-languages_javascript_react"
 draft: false
 review: false
 translate: false
@@ -30,7 +30,7 @@ Seiten unterscheiden sich von anderen Inhaltstypen dadurch, dass sie als einmali
 
 ## React-Komponenten zu einer Seite hinzufügen
 
-Die React-Komponenten von DocStatic sind global verfügbar. Wenn Sie eine Komponente jedoch nur auf einer Seite verwenden, ist dies nicht sinnvoll. Stattdessen können Sie die Komponente direkt in die Seite importieren. Um jedoch sicherzustellen, dass Sie die Seite im CMS bearbeiten können, müssen Sie die Importanweisung in eine [Passthrough](/docs/guides/markdown-features/react#passthrough-component)-Komponente einbinden. Die Beispielseite auf der DocStatic-Website importiert die ColorGenerator-Komponente wie folgt:
+Die React-Komponenten von docStatic sind global verfügbar. Wenn Sie eine Komponente jedoch nur auf einer Seite verwenden, ist dies nicht sinnvoll. Stattdessen können Sie die Komponente direkt in die Seite importieren. Um jedoch sicherzustellen, dass Sie die Seite im CMS bearbeiten können, müssen Sie die Importanweisung in eine [Passthrough](/docs/guides/markdown-features/react#passthrough-component)-Komponente einbinden. Die Beispielseite auf der docStatic-Website importiert die ColorGenerator-Komponente wie folgt:
 
 ```markdown
 <Passthrough type="jsx" string="import ColorGenerator from '@site/src/components/ColorGenerator';" summary="Import Statement" />

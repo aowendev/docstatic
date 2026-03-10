@@ -1,5 +1,5 @@
 ---
-lastmod: "2026-02-26T20:12:34.736Z"
+lastmod: "2026-03-10T23:00:46.730Z"
 title: Installation
 tags:
   - "software"
@@ -24,13 +24,13 @@ unlisted: false
 
 # Instalación
 
-¡Bienvenido! Esta guía le guiará a través de la configuración inicial de DocStatic.
+¡Bienvenido! Esta guía le guiará a través de la configuración inicial de docStatic.
 
 Si nunca ha trabajado con GitHub o docs-as-code, no se preocupe: le explicaremos qué se necesita, por qué y dónde encontrar más detalles.
 
 ## Requisitos previos
 
-Puede ejecutar DocStatic localmente (en su ordenador) o alojarlo en la nube.
+Puede ejecutar docStatic localmente (en su ordenador) o alojarlo en la nube.
 
 Para una configuración en la nube más sencilla, crea cuentas gratuitas en estos servicios:
 
@@ -38,7 +38,7 @@ Para una configuración en la nube más sencilla, crea cuentas gratuitas en esto
 * [TinaCMS](https://tina.io/): permite la edición basada en navegador.
 * [LanguageTool](https://languagetool.org/): proporciona una revisión gramatical y estilística opcional.
 
-Si, por el contrario, tiene previsto ejecutar DocStatic localmente (en su ordenador), consulte los requisitos para el desarrollo local.
+Si, por el contrario, tiene previsto ejecutar docStatic localmente (en su ordenador), consulte los requisitos para el desarrollo local.
 
 ***
 
@@ -104,16 +104,16 @@ npm install -g yarn
 
 ***
 
-## Obtener el repositorio de DocStatic
+## Obtener el repositorio de docStatic
 
-El código fuente de DocStatic se encuentra en GitHub. Para empezar, tendrás que hacer tu propia copia:
+El código fuente de docStatic se encuentra en GitHub. Para empezar, tendrás que hacer tu propia copia:
 
-1. **Crear una bifurcación** del repositorio DocStatic
+1. **Crear una bifurcación** del repositorio docStatic
    La bifurcación crea una copia que puede utilizar para trabajar de forma independiente en su propio proyecto.
 2. **Crear un clon** de su bifurcación.
    La clonación crea una copia asociada a la bifurcación original que ha creado. Esto puede ser útil para solucionar problemas de esquema, en caso de que surjan más adelante.
 
-### Bifurcar el repositorio DocStatic
+### Bifurcar el repositorio docStatic
 
 1. Inicie sesión en su cuenta de GitHub.
 2. Visita [https://github.com/aowendev/docstatic](https://github.com/aowendev/docstatic).
@@ -125,7 +125,7 @@ El código fuente de DocStatic se encuentra en GitHub. Para empezar, tendrás qu
 
 GitHub crea una nueva rama del repositorio en tu cuenta de GitHub.
 
-### Clona tu bifurcación del repositorio DocStatic
+### Clona tu bifurcación del repositorio docStatic
 
 Para crear un clon:
 
@@ -144,7 +144,7 @@ git clone https://github.com/acme-projects/docstatic.git
 
 ## Instalar las dependencias del proyecto
 
-Si vas a trabajar localmente, también necesitas instalar las dependencias del proyecto. Usa `cd` para navegar hasta la carpeta raíz de tu repositorio DocStatic clonado o bifurcado e instala los paquetes:
+Si vas a trabajar localmente, también necesitas instalar las dependencias del proyecto. Usa `cd` para navegar hasta la carpeta raíz de tu repositorio docStatic clonado o bifurcado e instala los paquetes:
 
 ```
 cd docstatic
@@ -212,7 +212,7 @@ docstatic
 
 * `/apis/` - Archivos YAML de OpenAPI.
 * `/blog/` - Archivos MDX del blog.
-* `/config/` - Archivos JSON utilizados por TinaCMS para configurar DocStatic.
+* `/config/` - Archivos JSON utilizados por TinaCMS para configurar docStatic.
 * `/docs/` - Archivos MDX de la documentación.
 * `/i18n/` - Archivos de traducción.
 * `/reuse/`: contenido reutilizable.
@@ -220,7 +220,7 @@ docstatic
   * `/src/pages`: cualquier archivo JSX/TSX/MDX dentro de este directorio se convierte en una página web.
 * `/static/`: carpeta estática. Cualquier contenido que se encuentre aquí se copia en la raíz de la carpeta de compilación final.
 * `/docusaurus.config.ts`: archivo de configuración que contiene la configuración del sitio.
-* `/package.json`: un sitio web DocStatic es una aplicación React. Puedes instalar y utilizar cualquier paquete npm que desees.
+* `/package.json`: un sitio web docStatic es una aplicación React. Puedes instalar y utilizar cualquier paquete npm que desees.
 * `/sidebars.ts`: especifica el orden de los documentos en la barra lateral. Utilízalo para tu estructura de «índice».
 
 ***

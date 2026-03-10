@@ -1,19 +1,19 @@
 ---
-lastmod: '2026-02-27T23:11:39.157Z'
+lastmod: "2026-03-10T23:00:24.095Z"
 title: Installation
 tags:
-  - software
-  - software_integrated-development-environments
-  - software_integrated-development-environments_eclipse
-  - software_integrated-development-environments_vscodium
-  - software_package-managers
-  - software_package-managers_yarn
-  - software_source-control
-  - software_source-control_github
-  - software_content-management-systems
-  - software_content-management-systems_tinacms
-  - software_grammar-spelling-style
-  - software_grammar-spelling-style_languagetool
+  - "software"
+  - "software_integrated-development-environments"
+  - "software_integrated-development-environments_eclipse"
+  - "software_integrated-development-environments_vscodium"
+  - "software_package-managers"
+  - "software_package-managers_yarn"
+  - "software_source-control"
+  - "software_source-control_github"
+  - "software_content-management-systems"
+  - "software_content-management-systems_tinacms"
+  - "software_grammar-spelling-style"
+  - "software_grammar-spelling-style_languagetool"
 draft: false
 review: false
 translate: false
@@ -24,13 +24,13 @@ unlisted: false
 
 # Installation
 
-Willkommen! Diese Anleitung führt Sie durch die erstmalige Einrichtung von DocStatic.
+Willkommen! Diese Anleitung führt Sie durch die erstmalige Einrichtung von docStatic.
 
 Wenn Sie noch nie mit GitHub oder Docs-as-Code gearbeitet haben, machen Sie sich keine Sorgen – wir erklären Ihnen, was Sie benötigen, warum und wo Sie weitere Informationen finden.
 
 ## Voraussetzungen
 
-Sie können DocStatic lokal (auf Ihrem Computer) ausführen oder in der Cloud hosten.
+Sie können docStatic lokal (auf Ihrem Computer) ausführen oder in der Cloud hosten.
 
 Für die einfachste Cloud-Einrichtung erstellen Sie kostenlose Konten bei diesen Diensten:
 
@@ -38,7 +38,7 @@ Für die einfachste Cloud-Einrichtung erstellen Sie kostenlose Konten bei diesen
 * [TinaCMS](https://tina.io/) – ermöglicht browserbasierte Bearbeitung
 * [LanguageTool](https://languagetool.org/) – bietet optionale Grammatik- und Stilprüfung
 
-Wenn Sie DocStatic stattdessen lokal (auf Ihrem Computer) ausführen möchten, lesen Sie die Anforderungen für die lokale Entwicklung.
+Wenn Sie docStatic stattdessen lokal (auf Ihrem Computer) ausführen möchten, lesen Sie die Anforderungen für die lokale Entwicklung.
 
 ***
 
@@ -104,16 +104,16 @@ npm install -g yarn
 
 ***
 
-## Das DocStatic-Repository abrufen
+## Das docStatic-Repository abrufen
 
-Der Quellcode von DocStatic befindet sich auf GitHub. Um zu beginnen, müssen Sie eine eigene Kopie erstellen, indem Sie:
+Der Quellcode von docStatic befindet sich auf GitHub. Um zu beginnen, müssen Sie eine eigene Kopie erstellen, indem Sie:
 
-1. **Erstellen Sie einen Fork** des DocStatic-Repositorys.
+1. **Erstellen Sie einen Fork** des docStatic-Repositorys.
    Durch das Forken wird eine Kopie erstellt, mit der Sie unabhängig an Ihrem eigenen Projekt arbeiten können.
 2. **Erstellen Sie einen Klon** Ihres Forks.
    Durch das Klonen wird eine Kopie erstellt, die mit dem von Ihnen erstellten Original-Fork verknüpft ist. Dies kann nützlich sein, um später eventuell auftretende Schemaprobleme zu beheben.
 
-### Forken Sie das DocStatic-Repository
+### Forken Sie das docStatic-Repository
 
 1. Melden Sie sich bei Ihrem Konto bei GitHub an.
 2. Besuchen Sie [https://github.com/aowendev/docstatic](https://github.com/aowendev/docstatic).
@@ -125,7 +125,7 @@ Der Quellcode von DocStatic befindet sich auf GitHub. Um zu beginnen, müssen Si
 
 GitHub erstellt einen neuen Zweig des Repositorys in Ihrem GitHub-Konto.
 
-### Klonen Sie Ihren Fork des DocStatic-Repositorys
+### Klonen Sie Ihren Fork des docStatic-Repositorys
 
 So erstellen Sie einen Klon:
 
@@ -144,7 +144,7 @@ git clone https://github.com/acme-projects/docstatic.git
 
 ## Installieren Sie die Projektabhängigkeiten
 
-Wenn Sie lokal arbeiten möchten, müssen Sie auch die Projektabhängigkeiten installieren. Navigieren Sie mit `cd` zum Stammordner Ihres geklonten oder geforkten DocStatic-Repositorys und installieren Sie die Pakete:
+Wenn Sie lokal arbeiten möchten, müssen Sie auch die Projektabhängigkeiten installieren. Navigieren Sie mit `cd` zum Stammordner Ihres geklonten oder geforkten docStatic-Repositorys und installieren Sie die Pakete:
 
 ```
 cd docstatic
@@ -212,7 +212,7 @@ docstatic
 
 * `/apis/` – OpenAPI-YAML-Dateien.
 * `/blog/` – Blog-MDX-Dateien.
-* `/config/` – JSON-Dateien, die von TinaCMS zur Konfiguration von DocStatic verwendet werden.
+* `/config/` – JSON-Dateien, die von TinaCMS zur Konfiguration von docStatic verwendet werden.
 * `/docs/` – MDX-Dateien für die Dokumentation.
 * `/i18n/` – Übersetzungsdateien.
 * `/reuse/` – Wiederverwendbare Inhalte.
@@ -220,7 +220,7 @@ docstatic
   * `/src/pages` – Alle JSX/TSX/MDX-Dateien in diesem Verzeichnis werden in eine Website-Seite konvertiert.
 * `/static/` – Statischer Ordner. Alle Inhalte in diesem Ordner werden in das Stammverzeichnis des endgültigen Build-Ordners kopiert.
 * `/docusaurus.config.ts` – Eine Konfigurationsdatei mit der Website-Konfiguration.
-* `/package.json` – Eine DocStatic-Website ist eine React-App. Sie können beliebige npm-Pakete installieren und verwenden.
+* `/package.json` – Eine docStatic-Website ist eine React-App. Sie können beliebige npm-Pakete installieren und verwenden.
 * `/sidebars.ts` – Legt die Reihenfolge der Dokumente in der Seitenleiste fest. Verwenden Sie dies für Ihre „Inhaltsverzeichnis“-Struktur.
 
 ***

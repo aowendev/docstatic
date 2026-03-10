@@ -1,10 +1,10 @@
 ---
-lastmod: '2026-02-27T23:11:29.553Z'
+lastmod: "2026-03-10T23:00:28.936Z"
 title: Context-sensitive help
-slug: /context-help
+slug: "/context-help"
 tags:
-  - elements
-  - elements_context-sensitive-help
+  - "elements"
+  - "elements_context-sensitive-help"
 draft: false
 review: false
 translate: false
@@ -22,7 +22,7 @@ unlisted: false
 
 In der Regel wird kontextsensitive Hilfe durch ein Hilfe-Symbol implementiert, auf das Benutzer klicken können, um zum entsprechenden Teil der Dokumentation für den Teil der Software zu gelangen, den sie gerade verwenden. Dazu muss eine Karte mit Kontext-URLs erstellt werden.
 
-Der statische Website-Generator erstellt automatisch Links zu Überschriften. Wenn Sie jedoch die Überschrift ändern, ändert sich auch der Link. Aus diesem Grund bietet DocStatic das Element „Kontextbezogene Hilfe“ an. Damit können Sie an beliebiger Stelle innerhalb eines Themas einen Anker-Tag hinzufügen. Sofern für das Thema in den Metadaten ein Slug definiert ist, bleibt der Link bestehen.
+Der statische Website-Generator erstellt automatisch Links zu Überschriften. Wenn Sie jedoch die Überschrift ändern, ändert sich auch der Link. Aus diesem Grund bietet docStatic das Element „Kontextbezogene Hilfe“ an. Damit können Sie an beliebiger Stelle innerhalb eines Themas einen Anker-Tag hinzufügen. Sofern für das Thema in den Metadaten ein Slug definiert ist, bleibt der Link bestehen.
 
 1. Wählen Sie **Kontextbezogene Hilfe** aus der Liste „Einbetten“ aus.
 2. Geben Sie eine eindeutige ID ein.
@@ -37,7 +37,7 @@ Der Link hat das folgende Format: `<URL>/docs/<Slug>#<ID>`.
 
 ## Entwickler
 
-Ein Beispiel dafür, wie Sie Kontext-Hilfe-Links in Ihren Code einfügen können, finden Sie in der HelpButton React-Komponente im Quellcode dieser Website. Da DocStatic keinen direkten Zugriff auf den CMS-Code hat, implementiert es die Schaltfläche, indem es sie als UI-Element auf ein ungenutztes Feld in einer CMS-Sammlung anwendet. Die HelpButton-Komponente fügt die Schaltfläche zum Nav-Element auf der Seite hinzu und verlinkt sie mit der in der Vorlage übergebenen URL:
+Ein Beispiel dafür, wie Sie Kontext-Hilfe-Links in Ihren Code einfügen können, finden Sie in der HelpButton React-Komponente im Quellcode dieser Website. Da docStatic keinen direkten Zugriff auf den CMS-Code hat, implementiert es die Schaltfläche, indem es sie als UI-Element auf ein ungenutztes Feld in einer CMS-Sammlung anwendet. Die HelpButton-Komponente fügt die Schaltfläche zum Nav-Element auf der Seite hinzu und verlinkt sie mit der in der Vorlage übergebenen URL:
 
 ```javascript
 const ExampleCollection = {

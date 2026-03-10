@@ -15,7 +15,7 @@
   },
   {
     "title": "Admonitions",
-    "description": "Handling admonitions/callouts in DocStatic.",
+    "description": "Handling admonitions/callouts in docStatic.",
     "tags": [
       "elements",
       "elements_admonitions"
@@ -26,7 +26,7 @@
   },
   {
     "title": "Advanced guides",
-    "description": "Advanced DocStatic guides.",
+    "description": "Advanced docStatic guides.",
     "tags": [
       "content",
       "content_topics"
@@ -37,7 +37,7 @@
   },
   {
     "title": "Assets",
-    "description": "Handling assets in DocStatic.",
+    "description": "Handling assets in docStatic.",
     "tags": [
       "content",
       "content_images"
@@ -48,7 +48,7 @@
   },
   {
     "title": "Blog",
-    "description": "Blogging with DocStatic.",
+    "description": "Blogging with docStatic.",
     "tags": [
       "content",
       "content_blog-articles",
@@ -97,7 +97,7 @@
   },
   {
     "title": "Code blocks and snippets",
-    "description": "Handling code blocks in DocStatic.",
+    "description": "Handling code blocks in docStatic.",
     "tags": [
       "elements",
       "elements_code-blocks",
@@ -207,7 +207,7 @@
   },
   {
     "title": "Deployment",
-    "description": "Deploying your DocStatic site.",
+    "description": "Deploying your docStatic site.",
     "tags": [
       "configuration",
       "configuration_github-pages",
@@ -234,7 +234,7 @@
   },
   {
     "title": "Docs introduction",
-    "description": "An introduction to DocStatic docs.",
+    "description": "An introduction to docStatic docs.",
     "tags": [
       "computer-languages",
       "computer-languages_markdown",
@@ -318,7 +318,7 @@
   },
   {
     "title": "Headings and table of contents",
-    "description": "Using headings and table-of-contents in DocStatic.",
+    "description": "Using headings and table-of-contents in docStatic.",
     "tags": [
       "formatting",
       "formatting_headings"
@@ -329,7 +329,7 @@
   },
   {
     "title": "Hosted CMS",
-    "description": "Using DocStatic with cloud-hosted or self-hosted TinaCMS.",
+    "description": "Using docStatic with cloud-hosted or self-hosted TinaCMS.",
     "tags": [
       "software",
       "software_content-management-systems",
@@ -341,7 +341,7 @@
   },
   {
     "title": "Installation",
-    "description": "How to install DocStatic locally, and start a DocStatic site in no time.",
+    "description": "How to install docStatic locally, and start a docStatic site in no time.",
     "tags": [
       "software",
       "software_integrated-development-environments",
@@ -367,7 +367,7 @@
   },
   {
     "title": "Internationalization",
-    "description": "Translating documents with DocStatic.",
+    "description": "Translating documents with docStatic.",
     "tags": [
       "internationalization",
       "internationalization_translation",
@@ -418,7 +418,7 @@
   },
   {
     "title": "Markdown features",
-    "description": "DocStatic uses MDX. Find out more about DocStatic-specific features when writing Markdown.",
+    "description": "DocStatic uses MDX. Find out more about docStatic-specific features when writing Markdown.",
     "tags": [
       "computer-languages",
       "computer-languages_markdown",
@@ -486,7 +486,7 @@
   },
   {
     "title": "MDX and React",
-    "description": "Using React in DocStatic Markdown documents with MDX.",
+    "description": "Using React in docStatic Markdown documents with MDX.",
     "tags": [
       "computer-languages",
       "computer-languages_markdown",
@@ -557,7 +557,7 @@
   },
   {
     "title": "Search engine optimization (SEO)",
-    "description": "How to make your DocStatic site maximally search-engine-friendly.",
+    "description": "How to make your docStatic site maximally search-engine-friendly.",
     "tags": [
       "software",
       "software_search",
@@ -595,7 +595,7 @@
   },
   {
     "title": "Style checking",
-    "description": "Spelling, grammar and style checking in DocStatic.",
+    "description": "Spelling, grammar and style checking in docStatic.",
     "tags": [
       "software",
       "software_grammar-spelling-style",
@@ -623,7 +623,7 @@
   },
   {
     "title": "Tabs",
-    "description": "Using tabs in DocStatic.",
+    "description": "Using tabs in docStatic.",
     "tags": [
       "elements",
       "elements_tabs",
@@ -639,7 +639,7 @@
   },
   {
     "title": "Taxonomies",
-    "description": "Creating and applying an information architecture in DocStatic.",
+    "description": "Creating and applying an information architecture in docStatic.",
     "tags": [
       "metadata",
       "metadata_taxonomies"
@@ -701,7 +701,7 @@
   },
   {
     "title": "Wikis",
-    "description": "Creating wikis in DocStatic",
+    "description": "Creating wikis in docStatic",
     "tags": [
       "content",
       "content_wikis"

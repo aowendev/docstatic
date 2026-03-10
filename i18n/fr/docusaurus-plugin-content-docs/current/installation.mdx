@@ -1,20 +1,20 @@
 ---
-lastmod: '2026-02-25T23:52:00.274Z'
+lastmod: "2026-03-10T23:01:09.936Z"
 title: Installation
-description: Comment installer DocStatic localement et démarrer un site DocStatic en un rien de temps.
+description: Comment installer docStatic localement et démarrer un site docStatic en un rien de temps.
 tags:
-  - software
-  - software_integrated-development-environments
-  - software_integrated-development-environments_eclipse
-  - software_integrated-development-environments_vscodium
-  - software_package-managers
-  - software_package-managers_yarn
-  - software_source-control
-  - software_source-control_github
-  - software_content-management-systems
-  - software_content-management-systems_tinacms
-  - software_grammar-spelling-style
-  - software_grammar-spelling-style_languagetool
+  - "software"
+  - "software_integrated-development-environments"
+  - "software_integrated-development-environments_eclipse"
+  - "software_integrated-development-environments_vscodium"
+  - "software_package-managers"
+  - "software_package-managers_yarn"
+  - "software_source-control"
+  - "software_source-control_github"
+  - "software_content-management-systems"
+  - "software_content-management-systems_tinacms"
+  - "software_grammar-spelling-style"
+  - "software_grammar-spelling-style_languagetool"
 draft: false
 review: false
 translate: false
@@ -25,13 +25,13 @@ unlisted: false
 
 # Installation
 
-Bienvenue ! Ce guide vous explique comment configurer DocStatic pour la première fois.
+Bienvenue ! Ce guide vous explique comment configurer docStatic pour la première fois.
 
 Si vous n'avez jamais utilisé GitHub ou docs-as-code auparavant, ne vous inquiétez pas : nous vous expliquerons ce dont vous avez besoin, pourquoi et où trouver plus de détails.
 
 ## Prérequis
 
-Vous pouvez exécuter DocStatic localement (sur votre ordinateur) ou l'héberger dans le cloud.
+Vous pouvez exécuter docStatic localement (sur votre ordinateur) ou l'héberger dans le cloud.
 
 Pour une configuration cloud simplifiée, créez des comptes gratuits auprès des services suivants :
 
@@ -39,7 +39,7 @@ Pour une configuration cloud simplifiée, créez des comptes gratuits auprès de
 * [TinaCMS](https://tina.io/) — permet l'édition via un navigateur
 * [LanguageTool](https://languagetool.org/) — fournit une vérification facultative de la grammaire et du style
 
-Si vous prévoyez plutôt d'exécuter DocStatic localement (sur votre ordinateur), consultez la section Conditions requises pour le développement local.
+Si vous prévoyez plutôt d'exécuter docStatic localement (sur votre ordinateur), consultez la section Conditions requises pour le développement local.
 
 ***
 
@@ -105,16 +105,16 @@ npm install -g yarn
 
 ***
 
-## Obtenir le référentiel DocStatic
+## Obtenir le référentiel docStatic
 
-Le code source de DocStatic se trouve sur GitHub. Pour commencer, vous devez créer votre propre copie en :
+Le code source de docStatic se trouve sur GitHub. Pour commencer, vous devez créer votre propre copie en :
 
-1. **Créer une fourche** du dépôt DocStatic
+1. **Créer une fourche** du dépôt docStatic
    La fourche crée une copie que vous pouvez utiliser pour travailler indépendamment sur votre propre projet.
 2. **Créer un clone** de votre fourche.
    Le clonage crée une copie associée à la fourche originale que vous avez créée. Cela peut être utile pour corriger des problèmes de schéma, s'ils surviennent ultérieurement.
 
-### Fourcher le dépôt DocStatic
+### Fourcher le dépôt docStatic
 
 1. Connectez-vous à votre compte GitHub.
 2. Rendez-vous sur [https://github.com/aowendev/docstatic](https://github.com/aowendev/docstatic).
@@ -126,7 +126,7 @@ Le code source de DocStatic se trouve sur GitHub. Pour commencer, vous devez cr�
 
 GitHub crée une nouvelle branche du référentiel dans votre compte GitHub.
 
-### Clonez votre fourche du référentiel DocStatic
+### Clonez votre fourche du référentiel docStatic
 
 Pour créer un clone :
 
@@ -145,7 +145,7 @@ git clone https://github.com/acme-projects/docstatic.git
 
 ## Installer les dépendances du projet
 
-Si vous comptez travailler localement, vous devez également installer les dépendances du projet. Utilisez `cd` pour naviguer jusqu'au dossier racine de votre dépôt DocStatic cloné ou forké et installez les paquets :
+Si vous comptez travailler localement, vous devez également installer les dépendances du projet. Utilisez `cd` pour naviguer jusqu'au dossier racine de votre dépôt docStatic cloné ou forké et installez les paquets :
 
 ```
 cd docstatic
@@ -213,7 +213,7 @@ docstatic
 
 * `/apis/` - Fichiers YAML OpenAPI.
 * `/blog/` - Fichiers MDX du blog.
-* `/config/` - Fichiers JSON utilisés par TinaCMS pour configurer DocStatic.
+* `/config/` - Fichiers JSON utilisés par TinaCMS pour configurer docStatic.
 * `/docs/` - Fichiers MDX de la documentation.
 * `/i18n/` - Fichiers de traduction.
 * `/reuse/` - Contenu réutilisable.
@@ -221,7 +221,7 @@ docstatic
   * `/src/pages` - Tous les fichiers JSX/TSX/MDX de ce répertoire sont convertis en pages web.
 * `/static/` - Dossier statique. Tout le contenu de ce dossier est copié à la racine du dossier de compilation final.
 * `/docusaurus.config.ts` - Fichier de configuration contenant la configuration du site.
-* `/package.json` - Un site web DocStatic est une application React. Vous pouvez installer et utiliser tous les paquets npm que vous souhaitez.
+* `/package.json` - Un site web docStatic est une application React. Vous pouvez installer et utiliser tous les paquets npm que vous souhaitez.
 * `/sidebars.ts` - Spécifie l'ordre des documents dans la barre latérale. Utilisez-le pour votre structure de « table des matières ».
 
 ***

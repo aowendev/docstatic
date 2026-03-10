@@ -1,5 +1,5 @@
 ---
-lastmod: "2026-02-26T20:12:34.760Z"
+lastmod: "2026-03-10T23:00:50.934Z"
 title: Context-sensitive help
 slug: "/context-help"
 tags:
@@ -22,7 +22,7 @@ unlisted: false
 
 Normalmente, la ayuda contextual se implementa mediante un icono de ayuda en el que los usuarios pueden hacer clic y que les lleva a la parte adecuada de la documentación correspondiente a la parte del software que están utilizando. Esto implica la creación de un mapa de URL contextuales.
 
-El generador de sitios estáticos genera automáticamente enlaces a los encabezados. Sin embargo, si se cambia el encabezado, el enlace también cambiará. Por este motivo, DocStatic proporciona el elemento Ayuda contextual. Este elemento permite añadir una etiqueta de anclaje en cualquier parte de un tema. Siempre que se defina un slug para el tema en los metadatos, el enlace no se romperá.
+El generador de sitios estáticos genera automáticamente enlaces a los encabezados. Sin embargo, si se cambia el encabezado, el enlace también cambiará. Por este motivo, docStatic proporciona el elemento Ayuda contextual. Este elemento permite añadir una etiqueta de anclaje en cualquier parte de un tema. Siempre que se defina un slug para el tema en los metadatos, el enlace no se romperá.
 
 1. Seleccione **Ayuda contextual** en la lista Insertar.
 2. Introduzca un ID único.
@@ -37,7 +37,7 @@ El enlace tendrá el siguiente formato: `<URL>/docs/<slug>#<id>`.
 
 ## Desarrolladores
 
-Para ver un ejemplo de cómo incluir enlaces de ayuda contextual en tu código, examina el componente HelpButton React en el código fuente de este sitio. Dado que DocStatic no tiene acceso directo al código CMS, implementa el botón aplicándolo como un elemento de interfaz de usuario en un campo no utilizado de una colección CMS. El componente HelpButton adjunta el botón al elemento de navegación de la página y lo vincula a la URL pasada en la plantilla:
+Para ver un ejemplo de cómo incluir enlaces de ayuda contextual en tu código, examina el componente HelpButton React en el código fuente de este sitio. Dado que docStatic no tiene acceso directo al código CMS, implementa el botón aplicándolo como un elemento de interfaz de usuario en un campo no utilizado de una colección CMS. El componente HelpButton adjunta el botón al elemento de navegación de la página y lo vincula a la URL pasada en la plantilla:
 
 ```javascript
 const ExampleCollection = {
