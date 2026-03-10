@@ -9,7 +9,7 @@ docStatic MDX files are enhanced Markdown files that:
 - Support standard Markdown syntax for text content
 - Use React components instead of traditional Markdown features like admonitions and footnotes
 - Are designed to work with the Tina headless CMS editor
-- Should NOT contain code blocks (use CodeSnippet component instead)
+- Should NOT contain code blocks for embedded source files (use CodeSnippet component with filename instead)
 
 ## File Structure
 
@@ -158,17 +158,19 @@ Create expandable sections with Details components:
 </Details>
 ```
 
-### Code Snippets
+### Code Snippets (File Embedding)
 
-For code examples, use CodeSnippet components instead of Markdown code blocks:
+Use CodeSnippet components to embed source files from your project:
 
 ```jsx
 <CodeSnippet 
-  code="console.log('Hello, world!');" 
+  filename="src/components/MyComponent.jsx"
   language="javascript"
-  title="Basic JavaScript Example"
+  title="Component Implementation"
 />
 ```
+
+**Note**: CodeSnippet is for embedding actual source files, not inline code examples. For inline code examples, use standard Markdown code blocks.
 
 ### Conditional Text
 
@@ -248,7 +250,7 @@ Include raw HTML or JSX for specialized needs:
 
 - **Standard admonitions**: `:::note` or `> **Note:**` (use `<Admonition>` component)
 - **Markdown footnotes**: `[^1]` syntax (use `<Footnote>` component)  
-- **Code blocks for code samples**: Use `<CodeSnippet>` component for actual code examples that may need testing
+- **Code blocks for embedded files**: Use `<CodeSnippet>` component only for embedding source files from your project
 - **Standard images**: `![alt](src)` for documentation images with captions (use `<Figure>` component instead)
 
 **Note**: Standard Markdown images are still appropriate for:
@@ -256,10 +258,12 @@ Include raw HTML or JSX for specialized needs:
 - Pre-scaled images used within text flow
 - Simple decorative elements that don't need captions or special styling
 
-**Note**: Standard code blocks are still appropriate for:
-- Longer chunks of pre-formatted text that don't need unit testing
+**Note**: Standard code blocks are appropriate for:
+- Code examples and snippets
 - Configuration files, output examples, or non-executable content
 - YAML frontmatter examples or documentation formatting
+- Command line examples
+- JSON examples and API responses
 
 ### ✅ Component Best Practices
 
@@ -330,11 +334,9 @@ Welcome to our comprehensive getting started guide. This will help you understan
 
 First, you'll need to install the required dependencies:
 
-<CodeSnippet 
-  code="npm install @docstatic/core" 
-  language="bash"
-  title="Install docStatic"
-/>
+```bash
+npm install @docstatic/core
+```
 
 <Figure 
   img="/img/installation-success.png" 
