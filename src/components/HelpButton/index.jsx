@@ -65,7 +65,7 @@ export default function HelpButton({ url }) {
       const elements = Array.from(document.querySelectorAll("nav"));
       // Pick the one nearest the top of the page
       let target = null;
-      let minTop = Infinity;
+      let minTop = Number.POSITIVE_INFINITY;
       for (const el of elements) {
         const top = el.getBoundingClientRect().top;
         if (top < minTop) {
@@ -93,13 +93,14 @@ export default function HelpButton({ url }) {
       }
     };
 
-
     // Hide unwanted Tina menu items
     const hideUnwantedMenuItems = () => {
       // Hide by href
-      const unwantedLinks = document.querySelectorAll('a[href="#/collections/generated/~"], a[href="#/collections/media/~"]');
-      unwantedLinks.forEach(link => {
-        const li = link.closest('li');
+      const unwantedLinks = document.querySelectorAll(
+        'a[href="#/collections/generated/~"], a[href="#/collections/media/~"]'
+      );
+      unwantedLinks.forEach((link) => {
+        const li = link.closest("li");
         if (li) {
           li.remove();
         } else {
@@ -123,7 +124,7 @@ export default function HelpButton({ url }) {
     const timeout = setTimeout(() => {
       injectIcon();
       modifyStrikeThroughButton(); // Try again after delay in case UI loads late
-      hideUnwantedMenuItems();     // Try again after delay
+      hideUnwantedMenuItems(); // Try again after delay
     }, 500);
 
     // Also try again after a longer delay for slower loading
@@ -132,9 +133,117 @@ export default function HelpButton({ url }) {
       hideUnwantedMenuItems();
     }, 2000);
 
+    // Auto-save: click the Tina Save button every 5 minutes (localhost only)
+    // Skips new document pages to prevent the first-save redirect issue
+    // where the editor navigates away from the form to the file path.
+    let autoSaveInterval = null;
+    let lastAutoSaveAt = 0;
+    const isNewDocumentPage = () => {
+      const hash = window.location.hash || "";
+      const path = window.location.pathname || "";
+      const full = path + hash;
+      return (
+        /\/new(\/|$|\?)/.test(full) ||
+        /~new/.test(hash) ||
+        /\/create(\/|$|\?)/.test(full)
+      );
+    };
+    // Warn before closing/navigating away with unsaved changes (local + cloud)
+    // Detects unsaved state by checking if Tina's Save button is enabled.
+    // Grace period after auto-save: TinaCMS re-enables the Save button briefly
+    // while the async save completes, so suppress the guard for 3s after a save.
+    const AUTO_SAVE_GRACE_MS = 3000;
+    const hasUnsavedChanges = () => {
+      if (Date.now() - lastAutoSaveAt < AUTO_SAVE_GRACE_MS) return false;
+      return !!Array.from(document.querySelectorAll("button")).find(
+        (b) =>
+          b.textContent?.trim() === "Save" &&
+          !b.disabled &&
+          b.offsetParent !== null
+      );
+    };
+
+    const handleBeforeUnload = (e) => {
+      if (hasUnsavedChanges()) {
+        e.preventDefault();
+        e.returnValue = "";
+      }
+    };
+    window.addEventListener("beforeunload", handleBeforeUnload);
+
+    // Track manual Save button clicks so the grace period applies to them too.
+    const handleSaveClick = (e) => {
+      const btn = e.target.closest("button");
+      if (
+        btn &&
+        btn.textContent?.trim() === "Save" &&
+        !btn.disabled &&
+        btn.offsetParent !== null
+      ) {
+        lastAutoSaveAt = Date.now();
+      }
+    };
+    document.addEventListener("click", handleSaveClick, true);
+
+    // Also intercept SPA (client-side) navigation via history API,
+    // which bypasses beforeunload (e.g. TinaCMS left nav links).
+    const originalPushState = history.pushState.bind(history);
+    const originalReplaceState = history.replaceState.bind(history);
+    const guardNavigation = (original) =>
+      function (...args) {
+        if (hasUnsavedChanges()) {
+          const confirmed = window.confirm(
+            "You have unsaved changes. Leave without saving?"
+          );
+          if (!confirmed) return;
+        }
+        return original(...args);
+      };
+    history.pushState = guardNavigation(originalPushState);
+    history.replaceState = guardNavigation(originalReplaceState);
+
+    if (
+      window.location.hostname === "localhost" ||
+      window.location.hostname === "127.0.0.1"
+    ) {
+      const autoSaveTimeout = setTimeout(() => {
+        autoSaveInterval = setInterval(() => {
+          if (isNewDocumentPage()) return;
+          const saveBtn = Array.from(document.querySelectorAll("button")).find(
+            (b) =>
+              b.textContent?.trim() === "Save" &&
+              !b.disabled &&
+              b.offsetParent !== null
+          );
+          if (saveBtn) {
+            saveBtn.click();
+            lastAutoSaveAt = Date.now();
+            console.log(
+              `[TinaCMS Auto-Save] Saved at ${new Date().toLocaleTimeString()}`
+            );
+          }
+        }, 5 * 60 * 1000);
+        console.log("[TinaCMS Auto-Save] Active — checking every 5m (local only, skips new documents)");
+      }, 3000);
+
+      return () => {
+        clearTimeout(timeout);
+        clearTimeout(longerTimeout);
+        clearTimeout(autoSaveTimeout);
+        if (autoSaveInterval) clearInterval(autoSaveInterval);
+        window.removeEventListener("beforeunload", handleBeforeUnload);
+        document.removeEventListener("click", handleSaveClick, true);
+        history.pushState = originalPushState;
+        history.replaceState = originalReplaceState;
+      };
+    }
+
     return () => {
       clearTimeout(timeout);
       clearTimeout(longerTimeout);
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+      history.pushState = originalPushState;
+      history.replaceState = originalReplaceState;
     };
   }, []);
 
