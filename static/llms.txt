@@ -1,0 +1,113 @@
+# docStatic Documentation Site
+
+This is the documentation website for docStatic, a modern documentation platform that bridges the gap between writers and developers.
+
+## About docStatic
+
+docStatic is a curated, opinionated integration of Docusaurus (static site generator) and TinaCMS (headless content management system) that provides:
+
+- Component-based content management with Git-backed storage
+- Rich text editing for non-technical users
+- Developer-friendly docs-as-code workflow
+- OpenAPI and GraphQL documentation generation
+- Model Context Protocol (MCP) server for AI assistant integration
+- Content reuse features (snippets, conditional text, variable sets)
+- Taxonomies and glossary management
+
+Version: 0.3.92
+License: MIT
+Author: aowendev
+Repository: https://github.com/aowendev/docstatic
+
+## Site Structure
+
+### Main Documentation (/docs/)
+- **Introduction**: Overview of docStatic features and capabilities
+- **Getting Started**: Setup guides for local and cloud development
+- **Installation**: Detailed installation instructions
+- **Configuration**: Platform configuration options
+- **CLI**: Command line interface documentation
+- **MCP Server**: Model Context Protocol integration for AI assistants
+- **API Documentation**: OpenAPI and GraphQL integration guides
+- **Advanced Features**: Plugin system, customization, migrations
+- **Deployment**: Hosting and CI/CD configuration
+- **Guides**: Step-by-step tutorials and best practices
+
+### Blog (/blog/)
+Contains announcements, technical evaluations, and updates about docStatic development.
+
+### Key Features Documented
+
+1. **Content Management**
+   - MDX (Markdown + React) as primary content format
+   - TinaCMS browser-based rich text editor
+   - Git integration and version control
+   - Component-based authoring (admonitions, figures, tabs, etc.)
+
+2. **Developer Workflow**
+   - Local development with instant rebuilds
+   - CI/CD pipeline integration
+   - docs-as-code compatible
+   - Repository structure follows Docusaurus conventions
+
+3. **Content Reuse & Organization**
+   - Reusable snippets and variable sets
+   - Conditional text rendering
+   - Taxonomies for content categorization
+   - Glossary term management
+   - Media management with third-party provider support
+
+4. **Technical Integrations**
+   - OpenAPI specification rendering
+   - GraphQL schema documentation
+   - Mermaid diagram support
+   - KaTeX math rendering
+   - Lunr-based search functionality
+   - Internationalization (i18n) support
+
+5. **AI Integration**
+   - Model Context Protocol (MCP) server
+   - AI assistant integration for content analysis
+   - Natural language search capabilities
+   - Contextual assistance based on documentation content
+
+## Content Organization
+
+Content is organized using a hierarchical taxonomy system with tags like:
+- `software` > `software_static-site-generators` > `software_static-site-generators_docusaurus`
+- `development` > `development_getting-started`
+- `computer-languages` > `computer-languages_javascript`
+
+## File Formats
+
+- **MDX files**: Primary content format combining Markdown with React components
+- **YAML frontmatter**: Metadata including title, description, tags, publication status
+- **JSON configuration**: Site configuration, API specifications, reusable content
+- **TypeScript/JavaScript**: Custom components and configuration
+
+## Navigation Context
+
+When helping users with docStatic:
+
+1. **For beginners**: Direct to Getting Started guides and Installation documentation
+2. **For developers**: Focus on CLI, configuration, and advanced features
+3. **For content creators**: Emphasize TinaCMS editor and component authoring
+4. **For AI integration**: Reference MCP server documentation and setup
+5. **For customization**: Point to advanced guides, plugin system, and theming
+
+## Technical Requirements
+
+- Node.js 18.0 or higher
+- Git for version control
+- Optional: GitHub account for cloud hosting
+- Compatible with modern web browsers
+- Supports deployment to various static hosting platforms
+
+## Support and Community
+
+- GitHub repository: https://github.com/aowendev/docstatic
+- Issues and enhancements tracked on GitHub
+- MIT licensed open source project
+- Active development with regular updates
+
+This site serves as both product documentation and a living example of docStatic's capabilities, demonstrating the platform's ability to create rich, interactive documentation with seamless editing workflows for both technical and non-technical contributors.
