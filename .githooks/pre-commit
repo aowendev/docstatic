@@ -2,6 +2,15 @@
 set -euo pipefail
 echo "[pre-commit] hook running" 1>&2
 
+# Regenerate tina-lock.json and stage it if changed
+root_dir=$(git rev-parse --show-toplevel)
+echo "[pre-commit] regenerating tina-lock.json" 1>&2
+(cd "$root_dir" && yarn tinacms build --skip-cloud-checks 2>/dev/null) || true
+if [ -n "$(git diff --name-only "$root_dir/tina/tina-lock.json" 2>/dev/null)" ]; then
+  echo "[pre-commit] tina-lock.json changed — staging updated version" 1>&2
+  git add "$root_dir/tina/tina-lock.json"
+fi
+
 # Stamp modifiedBy and lastmod on staged Markdown/MDX files
 raw=$(git diff --cached --name-only --diff-filter=AM || true)
 echo "[pre-commit] staged files: $(printf '%s' "$raw" | tr '\n' ' ')" 1>&2
