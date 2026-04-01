@@ -134,7 +134,7 @@ function annotateMarkerProps(text) {
   if (!text || typeof text !== 'string') return text;
   const propStringRe = /([a-zA-Z0-9_:-]+)=?(?:"([^"]*)"|'([^']*)'|\{`([^`]*)`\}|\{\s*"([^"}]*)"\s*\}|\{\s*'([^'}]*)'\s*\})/g;
   // self-closing marker: (jsx:Name prop="x"/)
-  text = text.replace(/\(jsx:([A-Z][\w-]*)\b([^\)]*)\/\)/g, (m, name, propsPart) => {
+  text = text.replace(/\(jsx:([A-Z][\w-]*)\b((?:[^)"'{}]|"[^"]*"|'[^']*'|\{[^}]*\})*)\/\)/g, (m, name, propsPart) => {
     const vals = [];
     let p;
     while ((p = propStringRe.exec(propsPart)) !== null) {
@@ -145,7 +145,7 @@ function annotateMarkerProps(text) {
     return m;
   });
   // open marker: (jsx:Name prop="x") -> append annotation after marker
-  text = text.replace(/\(jsx:([A-Z][\w-]*)\b([^\)]*)\)/g, (m, name, propsPart) => {
+  text = text.replace(/\(jsx:([A-Z][\w-]*)\b((?:[^)"'{}]|"[^"]*"|'[^']*'|\{[^}]*\})*)\)/g, (m, name, propsPart) => {
     // skip closing markers which look like (/jsx:Name)
     if (/^\(\/jsx:/.test(m)) return m;
     const vals = [];
@@ -255,7 +255,7 @@ function parseMarkdownToTinaAst(md) {
       let earliestIdx = remaining.length;
 
       // Inline JSX marker (paired): (jsx:Name props)content(/jsx:Name)
-      const jsxInlinePairedRe = /\(jsx:([A-Z][\w-]*)\b([^)]*)\)([\s\S]*?)\(\/jsx:\1\)/;
+      const jsxInlinePairedRe = /\(jsx:([A-Z][\w-]*)\b((?:[^)"'{}]|"[^"]*"|'[^']*'|\{[^}]*\})*)\)([\s\S]*?)\(\/jsx:\1\)/;
       const jsxInlinePairedM = jsxInlinePairedRe.exec(remaining);
       if (jsxInlinePairedM && jsxInlinePairedM.index < earliestIdx) {
         earliest = { type: 'jsxPaired', match: jsxInlinePairedM };
@@ -263,7 +263,7 @@ function parseMarkdownToTinaAst(md) {
       }
 
       // Inline JSX marker (self-closing): (jsx:Name props/)
-      const jsxInlineSelfRe = /\(jsx:([A-Z][\w-]*)\b([^)]*)\/\)/;
+      const jsxInlineSelfRe = /\(jsx:([A-Z][\w-]*)\b((?:[^)"'{}]|"[^"]*"|'[^']*'|\{[^}]*\})*)\/\)/;
       const jsxInlineSelfM = jsxInlineSelfRe.exec(remaining);
       if (jsxInlineSelfM && jsxInlineSelfM.index < earliestIdx) {
         earliest = { type: 'jsxSelf', match: jsxInlineSelfM };
@@ -400,7 +400,7 @@ function parseMarkdownToTinaAst(md) {
         case 'image': {
           const imgAlt = m[1] || '';
           const imgSrc = m[2] || '';
-          nodes.push({ type: 'image', alt: imgAlt, url: imgSrc });
+          nodes.push({ type: 'img', url: imgSrc, caption: imgAlt || null, alt: imgAlt || '', children: [{ type: 'text', text: '' }] });
           break;
         }
       }
@@ -573,14 +573,14 @@ function parseMarkdownToTinaAst(md) {
     // or self-closing: (jsx:Name props/)
     // Detect on the current line and produce a proper mdxJsxFlowElement node.
     // Supports both single-line and multi-line paired elements.
-    const jsxPairedRe = /^\(jsx:([A-Z][\w-]*)\b([^\)]*)\)([\s\S]*?)\(\/jsx:\1\)$/;
-    const jsxSelfRe = /^\(jsx:([A-Z][\w-]*)\b([^\)]*)\/\)$/;
+    const jsxPairedRe = /^\(jsx:([A-Z][\w-]*)\b((?:[^)"'{}]|"[^"]*"|'[^']*'|\{[^}]*\})*)\)([\s\S]*?)\(\/jsx:\1\)$/;
+    const jsxSelfRe = /^\(jsx:([A-Z][\w-]*)\b((?:[^)"'{}]|"[^"]*"|'[^']*'|\{[^}]*\})*)\/\)$/;
     const jsxPairedM = jsxPairedRe.exec(line);
     const jsxSelfM = !jsxPairedM ? jsxSelfRe.exec(line) : null;
 
     // Also detect multi-line paired JSX: opening tag on this line, closing
     // on a subsequent line.  (jsx:Name props) ... lines ... (/jsx:Name)
-    const jsxOpenRe = /^\(jsx:([A-Z][\w-]*)\b([^\)]*)\)(.*)$/;
+    const jsxOpenRe = /^\(jsx:([A-Z][\w-]*)\b((?:[^)"'{}]|"[^"]*"|'[^']*'|\{[^}]*\})*)\)(.*)$/;
     const jsxOpenM = (!jsxPairedM && !jsxSelfM) ? jsxOpenRe.exec(line) : null;
 
     if (jsxPairedM || jsxSelfM) {
@@ -736,18 +736,12 @@ function parseMarkdownToTinaAst(md) {
 function markerToAngle(source) {
   if (!source || typeof source !== 'string') return source;
   // paired tags first
-  source = source.replace(/\(jsx:([A-Z][\w-]*)\b([^\)]*)\)([\s\S]*?)\(\/jsx:\1\)/g, (_m, name, props, children) => {
+  source = source.replace(/\(jsx:([A-Z][\w-]*)\b((?:[^)"'{}]|"[^"]*"|'[^']*'|\{[^}]*\})*)\)([\s\S]*?)\(\/jsx:\1\)/g, (_m, name, props, children) => {
     const p = props.trim();
     return `<${name}${p ? ' ' + p : ''}>${children}</${name}>`;
   });
   // self-closing marker
-  // self-closing marker
-  source = source.replace(/\(jsx:([A-Z][\w-]*)\b([^\)]*)\/\)/g, (_m, name, props) => {
-    const p = props.trim();
-    return `<${name}${p ? ' ' + p : ''} />`;
-  });
-  // alternate self-closing without extra paren (from earlier replacement)
-  source = source.replace(/\(jsx:([A-Z][\w-]*)\b([^\)]*)\/\)/g, (_m, name, props) => {
+  source = source.replace(/\(jsx:([A-Z][\w-]*)\b((?:[^)"'{}]|"[^"]*"|'[^']*'|\{[^}]*\})*)\/\)/g, (_m, name, props) => {
     const p = props.trim();
     return `<${name}${p ? ' ' + p : ''} />`;
   });
@@ -1248,7 +1242,7 @@ function convertJsxPropLinksToMarkdown(s) {
   let out = String(s);
   try {
     // 1) Handle marker-form paired elements: (jsx:Name props...)children(/jsx:Name)
-    out = out.replace(/\(jsx:([A-Z][\w-]*)([^\)]*)\)([\s\S]*?)\(\/jsx:\1\)/g, (m, name, props, children) => {
+    out = out.replace(/\(jsx:([A-Z][\w-]*)((?:[^)"'{}]|"[^"]*"|'[^']*'|\{[^}]*\})*)\)([\s\S]*?)\(\/jsx:\1\)/g, (m, name, props, children) => {
       const hrefMatch = String(props).match(/(?:href|url|to|link)=(?:"([^"]*)"|'([^']*)'|([^\s)]+))/i);
       if (hrefMatch) {
         const href = hrefMatch[1] || hrefMatch[2] || hrefMatch[3] || '';
@@ -1270,7 +1264,7 @@ function convertJsxPropLinksToMarkdown(s) {
     });
 
     // 3) Handle self-closing marker or angle forms with href prop: (jsx:Name href="...") or <Name href="..." />
-    out = out.replace(/\(jsx:([A-Z][\w-]*)([^\)]*)\/\)/g, (m, name, props) => {
+    out = out.replace(/\(jsx:([A-Z][\w-]*)((?:[^)"'{}]|"[^"]*"|'[^']*'|\{[^}]*\})*)\/\)/g, (m, name, props) => {
       const hrefMatch = String(props).match(/(?:href|url|to|link)=(?:"([^"]*)"|'([^']*)'|([^\s)]+))/i);
       if (hrefMatch) {
         const href = hrefMatch[1] || hrefMatch[2] || hrefMatch[3] || '';
@@ -1461,8 +1455,8 @@ export async function exportOutOfDateAsXliff(client, language) {
     units.push({ id: key, sourceTitle, targetTitle, sourceBody, targetBody, sourceMeta, targetMeta, sourcePath });
   }
 
-  // build XLIFF 2.2 document
-  const header = `<?xml version="1.0" encoding="utf-8"?>\n<xliff version="2.2" xmlns="urn:oasis:names:tc:xliff:document:2.2">\n`;
+  // build XLIFF 2.1 document (Swordfish and most CAT tools prefer 2.0/2.1 over 2.2)
+  const header = `<?xml version="1.0" encoding="utf-8"?>\n<xliff version="2.1" srcLang="en" trgLang="${escapeXml(language)}" xmlns="urn:oasis:names:tc:xliff:document:2.0">\n`;
   let body = '';
   // group by file attribute (we'll use language as file id)
   body += `  <file id="${escapeXml(language)}" original="docstatic-export">\n`;
@@ -1487,11 +1481,11 @@ export async function exportOutOfDateAsXliff(client, language) {
         notes.push(`t.${k}:${u.targetMeta[k]}`);
       }
     }
-    body += `      <notes>`;
-    for (const n of notes) {
-      body += `<note>${escapeXmlPreserveNewlines(n)}</note>`;
+    body += `      <notes>\n`;
+    for (let ni = 0; ni < notes.length; ni++) {
+      body += `        <note id="n${ni + 1}">${escapeXmlPreserveNewlines(notes[ni])}</note>\n`;
     }
-    body += `</notes>\n`;
+    body += `      </notes>\n`;
     body += `      <segment>\n`;
     // Ensure source is never empty: insert a visible placeholder if needed
     let safeSource = (u.sourceBody || '').toString().trim() ? u.sourceBody : '(no source content)';
@@ -1545,6 +1539,16 @@ export async function exportOutOfDateAsXliff(client, language) {
       // annotations in the exported XLIFF. Translators will see props
       // inside the marker form itself.
       conv = outsideCodeFences(angleToMarker)(conv);
+      // Strip prop-annotation parentheticals that serialization may have added
+      // (e.g. "(variableSelection:..., initcap:false)") so CAT tools see only
+      // the marker-form JSX. Translators can inspect props in the markers.
+      // Uses a single robust regex: match any ')' followed by a parenthetical
+      // containing key:value pairs (but not jsx: or /jsx: markers). This avoids
+      // the previous [^)]* approach which failed when JSX props contained ')'.
+      conv = conv.replace(
+        /\)\s*\((?!jsx:|\/?jsx:)([a-zA-Z][\w-]*:[^()]*)\)/g,
+        ')'
+      );
       safeSource = conv;
     } catch (e) {
       // ignore and fall back to raw source
@@ -1559,6 +1563,15 @@ export async function exportOutOfDateAsXliff(client, language) {
     safeTarget = outsideCodeFences(markdownLinksToInlineUrl)(safeTarget);
     safeTarget = outsideCodeFences(htmlAnchorsToMarkdown)(safeTarget);
     safeTarget = outsideCodeFences(convertJsxPropLinksToMarkdown)(safeTarget);
+    // Convert JSX to marker form and strip annotations (same pipeline as source)
+    try {
+      safeTarget = outsideCodeFences(s => s.replace(/&lt;/g, '<').replace(/&gt;/g, '>'))(safeTarget);
+      safeTarget = outsideCodeFences(angleToMarker)(safeTarget);
+      safeTarget = safeTarget.replace(
+        /\)\s*\((?!jsx:|\/?jsx:)([a-zA-Z][\w-]*:[^()]*)\)/g,
+        ')'
+      );
+    } catch (e) { /* keep as-is on error */ }
     const sanitizedTarget = stripControlChars(safeTarget);
     body += `        <target xml:space="preserve">${escapeXmlPreserveNewlines(sanitizedTarget)}</target>\n`;
     body += `      </segment>\n`;
@@ -1620,8 +1633,12 @@ export async function importXliffBundle(client, xliffText, language, onProgress)
     const canonicalize = (p) => {
       if (!p) return p;
       let s = String(p);
-      // if path contains language + plugin prefix, strip language and prefix
-      const m = s.match(/^[a-zA-Z0-9_-]+\/(.*)$/);
+      // Strip a leading docs/ prefix if present
+      s = s.replace(/^docs\//, '');
+      // if path starts with a language code (2-3 letter code, optionally with
+      // region e.g. "fr/", "nl/", "en-IE/") followed by the plugin prefix,
+      // strip the language segment and plugin prefix together.
+      const m = s.match(/^[a-z]{2,3}(?:-[a-zA-Z]{2,4})?\/(.*)$/i);
       if (m) s = m[1];
       s = s.replace(/^docusaurus-plugin-content-docs\/current\//, '');
       s = s.replace(/\.mdx?$|\.md$/i, '');
@@ -1640,9 +1657,50 @@ export async function importXliffBundle(client, xliffText, language, onProgress)
         p = p.parentNode;
       }
     }
-    // Try to find source/target elements in this unit (tolerant of extra wrapper tags)
-    const sourceEl = unit.getElementsByTagName ? (unit.getElementsByTagName('source')[0] || null) : null;
-    const targetEl = unit.getElementsByTagName ? (unit.getElementsByTagName('target')[0] || null) : null;
+    // Try to find source/target elements in this unit (tolerant of extra wrapper tags).
+    // Swordfish (and other CAT tools) may insert <mtc:matches> sections with their
+    // own <source>/<target> children (translation memory matches) before the
+    // <segment>. Using getElementsByTagName('source')[0] would pick up the TM
+    // match instead of the actual translated segment. Prefer the <segment>
+    // child's source/target when present.
+    let sourceEl = null;
+    let targetEl = null;
+    if (unit.getElementsByTagName) {
+      // Look for a <segment> element first
+      const segments = Array.from(unit.getElementsByTagName('segment'));
+      const seg = segments.length ? segments[0] : null;
+      if (seg) {
+        sourceEl = seg.getElementsByTagName('source')[0] || null;
+        targetEl = seg.getElementsByTagName('target')[0] || null;
+      }
+      // If the segment target's text is identical to the segment source,
+      // the translator may not have actually translated this segment (XLIFF
+      // CAT tools may copy source to target as a starting point). In that
+      // case fall back to the first target in the entire unit which may be a
+      // <mtc:match> target that has actual translation content (e.g. from
+      // DeepL or TM).
+      if (sourceEl && targetEl) {
+        try {
+          const srcText = (sourceEl.textContent || '').trim();
+          const tgtText = (targetEl.textContent || '').trim();
+          if (srcText && tgtText && srcText === tgtText) {
+            // Target equals source — look for a different target in mtc:matches
+            const allTargets = Array.from(unit.getElementsByTagName('target'));
+            for (const t of allTargets) {
+              if (t === targetEl) continue;
+              const altText = (t.textContent || '').trim();
+              if (altText && altText !== srcText) {
+                targetEl = t;
+                break;
+              }
+            }
+          }
+        } catch (e) { /* keep segment target on error */ }
+      }
+      // Fallback: pick the first source/target anywhere in the unit
+      if (!sourceEl) sourceEl = unit.getElementsByTagName('source')[0] || null;
+      if (!targetEl) targetEl = unit.getElementsByTagName('target')[0] || null;
+    }
     const notes = unit.getElementsByTagName ? Array.from(unit.getElementsByTagName('note')) : [];
     // Find a note that starts with 'title:' (robust to ordering and whitespace)
     let titleNote = null;
@@ -1664,9 +1722,13 @@ export async function importXliffBundle(client, xliffText, language, onProgress)
         const m = t.match(/^path:\s*(.*)$/i);
         if (m && m[1]) {
           rawPathFromNote = m[1].trim();
-          // use canonicalized id (without extensions) for unit id if id missing
+          // use canonicalized id (without extensions) for unit id.
+          // Always prefer the path-derived id over the existing id when the
+          // existing one looks like a bare number (Swordfish replaces
+          // semantic ids like 'user-guides/a3/getting-started' with numeric
+          // placeholders '0', '1', '2' etc.).
           const cand = canonicalize(rawPathFromNote);
-          if (!id && cand) id = cand;
+          if (cand && (!id || /^\d+$/.test(id))) id = cand;
           break;
         }
       }
@@ -1707,6 +1769,20 @@ export async function importXliffBundle(client, xliffText, language, onProgress)
     // translators escape list markers ("\\- item") or the export wrapped
     // links in anchor tags which we just reconstructed above.
     try {
+      // Strip prop-annotation parentheticals that were injected during
+      // export for translator visibility. These follow the closing ')' of
+      // a marker-form tag and contain key:value pairs like
+      // '(variableSelection:translation-glossary|pick-up, initcap:false)'.
+      // They must be removed before parsing to prevent them from becoming
+      // spurious JSX children in the Tina AST.
+      // Single robust regex: match ')' followed by a parenthetical containing
+      // key:value pairs (excluding jsx:/​/jsx: markers). Uses [^()]* for values
+      // so props containing ')' in the preceding marker don't break matching.
+      rawTarget = rawTarget.replace(
+        /\)\s*\((?!jsx:|\/?jsx:)([a-zA-Z][\w-]*:[^()]*)\)/g,
+        ')'
+      );
+
       // Remove backslashes that CAT tools (e.g. Swordfish) insert before
       // markdown-significant characters. This must be done before we parse
       // the markdown into a Tina AST. The pattern covers:
@@ -1833,7 +1909,7 @@ export async function importXliffBundle(client, xliffText, language, onProgress)
             const vRaw = (m[2] || '').trim();
             if (!k) continue;
             const lk = k.toLowerCase();
-            if (lk === 'path') { noteMeta.path = vRaw; continue; }
+            if (lk === 'path') { continue; } // path is used for ID resolution, not a mutation field
             if (lk === 'title') { noteMeta.title = vRaw; continue; }
             if (lk === 'description') { noteMeta.description = vRaw; continue; }
             if (lk === 'tags') {
@@ -1867,28 +1943,22 @@ export async function importXliffBundle(client, xliffText, language, onProgress)
         let sourceDocRel = null;
         if (rawPathFromNote) {
           let rp = String(rawPathFromNote || '').replace(/^\/?/, '');
-          // Normalize several common shapes and map them to the plugin-relative
-          // path used by the GraphQL `doc` query: `docusaurus-plugin-content-docs/current/...`.
-          if (rp.startsWith('docusaurus-plugin-content-docs/current/')) {
-            sourceDocRel = rp;
-          } else if (rp.startsWith('docs/')) {
-            const stripped = rp.replace(/^docs\//, '');
-            sourceDocRel = `docusaurus-plugin-content-docs/current/${stripped}`;
-          } else if (rp.indexOf('docusaurus-plugin-content-docs/current/') !== -1) {
-            const extracted = rp.replace(/^.*?(docusaurus-plugin-content-docs\/current\/)/, '$1');
-            sourceDocRel = extracted;
-          } else {
-            sourceDocRel = `docusaurus-plugin-content-docs/current/${rp}`;
-          }
+          // The `doc` collection resolves relative to its configured content
+          // directory (typically `docs/`). Strip any prefix that doesn't
+          // belong: `docs/`, `docusaurus-plugin-content-docs/current/`, or
+          // language prefixes like `fr/...`.
+          rp = rp.replace(/^docs\//, '');
+          rp = rp.replace(/^docusaurus-plugin-content-docs\/current\//, '');
+          rp = rp.replace(/^[a-z]{2,3}(?:-[a-zA-Z]{2,4})?\/(?:docusaurus-plugin-content-docs\/current\/)?/, '');
+          sourceDocRel = rp;
         } else if (id) {
           const cleaned = String(id).replace(/^\//, '').replace(/\.mdx?$|\.md$/i, '');
-          sourceDocRel = `docusaurus-plugin-content-docs/current/${cleaned}.mdx`;
+          sourceDocRel = `${cleaned}.mdx`;
         }
         if (sourceDocRel) {
-          // Normalize accidental double-prefixes like "docs/docs/..." and
-          // strip leading slashes so queries target the expected relativePath.
+          // Strip leading slashes.
           try {
-            sourceDocRel = String(sourceDocRel || '').replace(/^\//, '').replace(/^docs\/+/, 'docs/');
+            sourceDocRel = String(sourceDocRel || '').replace(/^\//, '');
           } catch (e) {}
           try { console.debug && console.debug('[xliff] sourceDocRel normalized to', sourceDocRel); } catch (e) {}
           try {
@@ -1918,10 +1988,6 @@ export async function importXliffBundle(client, xliffText, language, onProgress)
       // If a translation doc exists at `rel`, clone its metadata and replace
       // the `body` with the imported content. If no translation exists,
       // fall back to source-cloned metadata (or notes) and the title note.
-      // To avoid introducing new metadata keys (for example `help: null`),
-      // only include keys that were present in the original translation
-      // (when it exists) or present in the source metadata/notes. This
-      // preserves original data exactly (except `lastmod` which we update).
       let paramsObj = {};
       try {
         let existingTranslation = null;
@@ -1934,16 +2000,12 @@ export async function importXliffBundle(client, xliffText, language, onProgress)
           existingTranslation = null;
         }
 
-        // Determine the set of keys that were present originally so we
-        // don't introduce any new metadata keys during the import.
-        let originalKeys = new Set();
         if (existingTranslation) {
           // Retain whatever metadata is present in the existing translation.
           // Skip internal/GraphQL fields and lastmod/body (we set those below).
           const skipKeys = new Set(['__typename', '_sys', '_values', 'id', 'body', 'lastmod']);
           for (const k of Object.keys(existingTranslation)) {
             if (skipKeys.has(k)) continue;
-            originalKeys.add(k);
             if (existingTranslation[k] != null) {
               paramsObj[k] = Array.isArray(existingTranslation[k]) ? existingTranslation[k].slice() : existingTranslation[k];
             }
@@ -1952,13 +2014,9 @@ export async function importXliffBundle(client, xliffText, language, onProgress)
           // No existing translation: use cloned source metadata (from notes or
           // source doc) as a starting point. Only include keys with meaningful values.
           for (const k of Object.keys(sourceMetaParams || {})) {
-            originalKeys.add(k);
             if (sourceMetaParams[k] != null) paramsObj[k] = sourceMetaParams[k];
           }
-          if (titleNote) {
-            originalKeys.add('title');
-            paramsObj.title = titleNote;
-          }
+          if (titleNote) paramsObj.title = titleNote;
         }
       } catch (buildErr) {
         // Fallback to source-cloned metadata if anything unexpected fails.
@@ -1972,17 +2030,17 @@ export async function importXliffBundle(client, xliffText, language, onProgress)
       // Always replace the body with the imported payload and set new lastmod
       paramsObj.body = bodyPayload;
       paramsObj.lastmod = (new Date()).toISOString();
-      // Sanitize params: only include keys that were present originally
-      // (to avoid adding new metadata keys), strip internal/GraphQL keys,
-      // and omit null/undefined values.
-      const internalKeys = new Set(['__typename', '_sys', '_values', 'id']);
+      // Sanitize params: only include fields defined by I18nMutation and strip
+      // null/undefined values. This prevents unexpected fields (e.g. 'path' from
+      // XLIFF notes, or 'priority' from source docs) from causing GraphQL errors.
+      const validI18nFields = new Set([
+        'help', 'lastmod', 'modifiedBy', 'title', 'body', 'conditions',
+        'description', 'slug', 'tags', 'draft', 'review', 'translate',
+        'approved', 'published', 'unlisted'
+      ]);
       const sanitized = {};
       for (const k of Object.keys(paramsObj)) {
-        if (internalKeys.has(k)) continue;
-        // Only include keys that were in the original key set (from the
-        // existing translation or source metadata/notes). This prevents
-        // adding keys that weren't present before.
-        if (originalKeys.size && !originalKeys.has(k)) continue;
+        if (!validI18nFields.has(k)) continue;
         if (paramsObj[k] != null) sanitized[k] = paramsObj[k];
       }
       const variables = { relativePath: rel, params: sanitized };
@@ -2030,6 +2088,7 @@ export async function importXliffBundle(client, xliffText, language, onProgress)
       }
     } catch (err) {
       const errMsg = err && err.message ? err.message : String(err);
+      try { console.warn && console.warn('[xliff] import error for', id, errMsg); } catch (e) {}
       results.push({ id, status: 'error', error: errMsg });
       if (onProgress) onProgress({ id, status: 'error', error: errMsg });
     }
