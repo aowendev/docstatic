@@ -284,42 +284,61 @@ const BrokenLinksDashboard = () => {
   if (!linkData && !loading && !error) {
     return (
       <div style={{
-        padding: '20px',
-        border: '1px solid #ddd',
-        borderRadius: '8px',
-        backgroundColor: '#fafafa',
-        marginTop: 0,
-        marginBottom: '32px',
-        marginLeft: '16px',
-        marginRight: '16px',
-        boxSizing: 'border-box'
+        padding: '24px',
+        borderBottom: '2px solid #d1d9e0',
+        marginBottom: '32px'
       }}>
         <div style={{
           display: 'flex',
           justifyContent: 'space-between',
-          alignItems: 'flex-start',
-          marginBottom: '20px',
-          borderBottom: '2px solid #e9ecef',
-          paddingBottom: '10px',
-          gap: '16px' // Restore original gap between title and button
+          alignItems: 'center',
+          marginBottom: '16px'
         }}>
-          <h3 className="font-sans text-2xl text-tina-orange" style={{ margin: 0 }}>
-            🔗 Broken Links
-          </h3>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+          <span className="text-3xl text-tina-orange">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+              <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+              <line x1="2" x2="22" y1="2" y2="22"></line>
+            </svg>
+          </span>
+            <h2 className="m-0 text-2xl font-bold text-gray-800">
+            Broken Links Dashboard
+          </h2>
+        </div>
           <button
             onClick={scanDocsForLinks}
             style={{
-              padding: '5px 10px',
-              backgroundColor: '#2563eb',
-              color: 'white',
-              border: 'none',
-              borderRadius: '4px',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '8px',
+              padding: '8px 16px',
+              borderRadius: '6px',
+              border: '1px solid #d1d5db',
+              backgroundColor: '#ffffff',
+              color: '#374151',
               cursor: 'pointer',
-              fontSize: '12px',
-              marginLeft: '8px' // Extra gap for safety
+              fontSize: '14px',
+              fontWeight: '500',
+              boxShadow: '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
+              transition: 'all 0.2s ease'
+            }}
+            onMouseEnter={(e) => {
+              e.target.style.backgroundColor = '#f3f4f6';
+              e.target.style.color = '#1f2937';
+            }}
+            onMouseLeave={(e) => {
+              e.target.style.backgroundColor = '#ffffff';
+              e.target.style.color = '#374151';
             }}
             disabled={loading}
           >
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"></path>
+              <path d="M21 3v5h-5"></path>
+              <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"></path>
+              <path d="M8 16H3v5"></path>
+            </svg>
             {loading ? 'Loading...' : 'Load'}
           </button>
         </div>
@@ -330,35 +349,45 @@ const BrokenLinksDashboard = () => {
   if (loading) {
     return (
       <div style={{
-        padding: '20px',
-        border: '1px solid #ddd',
-        borderRadius: '8px',
-        backgroundColor: '#f9f9f9',
+        padding: '24px',
+        borderBottom: '2px solid #d1d9e0',
+        marginBottom: '32px',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
         minHeight: '120px'
       }}>
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-          <div style={{
-            width: '36px',
-            height: '36px',
-            border: '4px solid #e0e0e0',
-            borderTop: '4px solid #2563eb',
-            borderRadius: '50%',
-            animation: 'spin 1s linear infinite',
-            marginBottom: '12px'
-          }} />
-          <div style={{ fontWeight: 500, color: '#2563eb', fontSize: '16px', marginBottom: '2px' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%', maxWidth: '400px' }}>
+          <div className="font-bold text-gray-800 text-xl mb-2">
+            Loading Dashboard
+          </div>
+          <div className="font-medium text-gray-600 text-base mb-4">
             Scanning docs for links and validating...
           </div>
-          <div style={{ fontSize: '13px', color: '#666' }}>This may take a moment</div>
+          
+          {/* Progress Bar for Loading */}
+          <div style={{
+            width: '100%',
+            height: '6px',
+            backgroundColor: '#e5e7eb',
+            borderRadius: '3px',
+            overflow: 'hidden'
+          }}>
+            <div style={{
+              width: '100%',
+              height: '100%',
+              background: 'linear-gradient(45deg, #f59e0b, #d97706)',
+              borderRadius: '3px',
+              animation: 'indeterminate 2s ease-in-out infinite'
+            }}></div>
+          </div>
         </div>
         <style>{`
-          @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+          @keyframes indeterminate {
+            0% { transform: translateX(-100%); }
+            50% { transform: translateX(0%); }
+            100% { transform: translateX(100%); }
           }
         `}</style>
       </div>
@@ -367,25 +396,43 @@ const BrokenLinksDashboard = () => {
 
   if (error) {
     return (
-      <div style={{ padding: '20px', textAlign: 'center', color: '#d73a49' }}>
-        <div style={{ fontSize: '18px', marginBottom: '10px' }}>
-          ⚠️ Error
+      <div style={{ 
+        padding: '24px',
+        borderBottom: '2px solid #d1d9e0',
+        marginBottom: '32px'
+      }}>
+        <div style={{
+          padding: '16px',
+          backgroundColor: '#ffebee',
+          borderLeft: '4px solid #d32f2f',
+          borderRadius: '6px',
+          color: '#d32f2f'
+        }}>
+          <div style={{ fontSize: '18px', marginBottom: '10px', fontWeight: '600', display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"></path>
+              <path d="M12 9v4"></path>
+              <path d="m12 17 .01 0"></path>
+            </svg>
+            Error
+          </div>
+          <div style={{ marginBottom: '16px', fontSize: '14px' }}>{error}</div>
+          <button 
+            onClick={scanDocsForLinks}
+            style={{
+              padding: '8px 16px',
+              backgroundColor: '#f59e0b',
+              color: 'white',
+              border: 'none',
+              borderRadius: '6px',
+              cursor: 'pointer',
+              fontSize: '14px',
+              fontWeight: '500'
+            }}
+          >
+            Retry
+          </button>
         </div>
-        <div>{error}</div>
-        <button 
-          onClick={scanDocsForLinks}
-          style={{
-            marginTop: '15px',
-            padding: '8px 16px',
-            backgroundColor: '#0066cc',
-            color: 'white',
-            border: 'none',
-            borderRadius: '4px',
-            cursor: 'pointer'
-          }}
-        >
-          Retry
-        </button>
       </div>
     );
   }
@@ -403,113 +450,128 @@ const BrokenLinksDashboard = () => {
 
   return (
     <div style={{
-      padding: '20px',
-      border: '1px solid #ddd',
-      borderRadius: '8px',
-      backgroundColor: '#fafafa',
-      margin: '20px 0'
+      padding: '24px',
+      borderBottom: '2px solid #d1d9e0',
+      marginBottom: '32px'
     }}>
       <div style={{
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'center',
-        marginBottom: '20px',
-        borderBottom: '2px solid #e9ecef',
-        paddingBottom: '10px'
+        marginBottom: '24px'
       }}>
-        <h3 class="font-sans text-2xl text-tina-orange">
-          🔗 Broken Links
-        </h3>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+          <span className="text-3xl text-tina-orange">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+              <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+              <line x1="2" x2="22" y1="2" y2="22"></line>
+            </svg>
+          </span>
+          <h2 style={{ margin: 0, fontSize: '24px', fontWeight: 'bold', color: '#1f2937' }}>
+            Broken Links Dashboard
+          </h2>
+        </div>
         <button 
           onClick={scanDocsForLinks}
           style={{
-            padding: '5px 10px',
-            backgroundColor: '#2563eb',
-            color: 'white',
-            border: 'none',
-            borderRadius: '4px',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '8px',
+            padding: '8px 16px',
+            borderRadius: '6px',
+            border: '1px solid #d1d5db',
+            backgroundColor: '#ffffff',
+            color: '#374151',
             cursor: 'pointer',
-            fontSize: '12px'
+            fontSize: '14px',
+            fontWeight: '500',
+            boxShadow: '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
+            transition: 'all 0.2s ease'
+          }}
+          onMouseEnter={(e) => {
+            e.target.style.backgroundColor = '#f3f4f6';
+            e.target.style.color = '#1f2937';
+          }}
+          onMouseLeave={(e) => {
+            e.target.style.backgroundColor = '#ffffff';
+            e.target.style.color = '#374151';
           }}
         >
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"></path>
+            <path d="M21 3v5h-5"></path>
+            <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"></path>
+            <path d="M8 16H3v5"></path>
+          </svg>
           {loading ? 'Refreshing...' : 'Refresh'}
         </button>
       </div>
 
       {/* Statistics Cards */}
-      <div style={{ 
-        display: 'grid', 
-        gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', 
-        gap: '15px',
-        marginBottom: '25px'
-      }}>
-        <div style={{
-          padding: '15px',
-          backgroundColor: '#f6f8fa',
-          borderRadius: '6px',
-          textAlign: 'center'
-        }}>
-          <div style={{ fontSize: '24px', fontWeight: '600', color: '#0366d6' }}>
-            {stats.total}
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6 mb-8">
+        <div className="bg-white rounded-xl border border-gray-200 shadow-sm flex items-center gap-4 p-6">
+          <div className="bg-blue-100 p-3 rounded-lg flex-shrink-0">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-2xl text-blue-600">
+              <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+              <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+            </svg>
           </div>
-          <div style={{ fontSize: '12px', color: '#666', textTransform: 'uppercase' }}>
-            Total Links
+          <div className="min-w-0">
+            <p className="text-sm text-gray-500 font-medium">Total Links</p>
+            <p className="text-3xl font-bold text-gray-800">{stats.total}</p>
           </div>
         </div>
 
-        <div style={{
-          padding: '15px',
-          backgroundColor: '#f6f8fa',
-          borderRadius: '6px',
-          textAlign: 'center'
-        }}>
-          <div style={{ fontSize: '24px', fontWeight: '600', color: '#28a745' }}>
-            {stats.valid}
+        <div className="bg-white rounded-xl border border-gray-200 shadow-sm flex items-center gap-4 p-6">
+          <div className="bg-green-100 p-3 rounded-lg flex-shrink-0">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-2xl text-green-600">
+              <path d="M20 6 9 17l-5-5"></path>
+            </svg>
           </div>
-          <div style={{ fontSize: '12px', color: '#666', textTransform: 'uppercase' }}>
-            Valid Links
+          <div className="min-w-0">
+            <p className="text-sm text-gray-500 font-medium">Valid Links</p>
+            <p className="text-3xl font-bold text-gray-800">{stats.valid}</p>
           </div>
         </div>
 
-        <div style={{
-          padding: '15px',
-          backgroundColor: '#f6f8fa',
-          borderRadius: '6px',
-          textAlign: 'center'
-        }}>
-          <div style={{ fontSize: '24px', fontWeight: '600', color: '#d73a49' }}>
-            {stats.broken}
+        <div className="bg-white rounded-xl border border-gray-200 shadow-sm flex items-center gap-4 p-6">
+          <div className="bg-red-100 p-3 rounded-lg flex-shrink-0">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-2xl text-red-600">
+              <circle cx="12" cy="12" r="10"></circle>
+              <path d="m4.9 4.9 14.2 14.2"></path>
+            </svg>
           </div>
-          <div style={{ fontSize: '12px', color: '#666', textTransform: 'uppercase' }}>
-            Broken Links
-          </div>
-        </div>
-
-        <div style={{
-          padding: '15px',
-          backgroundColor: '#f6f8fa',
-          borderRadius: '6px',
-          textAlign: 'center'
-        }}>
-          <div style={{ fontSize: '24px', fontWeight: '600', color: '#fb8500' }}>
-            {stats.warning || 0}
-          </div>
-          <div style={{ fontSize: '12px', color: '#666', textTransform: 'uppercase' }}>
-            Warning Links
+          <div className="min-w-0">
+            <p className="text-sm text-gray-500 font-medium">Broken Links</p>
+            <p className="text-3xl font-bold text-red-600">{stats.broken}</p>
           </div>
         </div>
 
-        <div style={{
-          padding: '15px',
-          backgroundColor: '#f6f8fa',
-          borderRadius: '6px',
-          textAlign: 'center'
-        }}>
-          <div style={{ fontSize: '24px', fontWeight: '600', color: '#6f42c1' }}>
-            {Object.keys(fileStats).length}
+        <div className="bg-white rounded-xl border border-gray-200 shadow-sm flex items-center gap-4 p-6">
+          <div className="bg-orange-100 p-3 rounded-lg flex-shrink-0">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-2xl text-orange-600">
+              <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"></path>
+              <path d="M12 9v4"></path>
+              <path d="m12 17 .01 0"></path>
+            </svg>
           </div>
-          <div style={{ fontSize: '12px', color: '#666', textTransform: 'uppercase' }}>
-            Files Scanned
+          <div className="min-w-0">
+            <p className="text-sm text-gray-500 font-medium">Warning Links</p>
+            <p className="text-3xl font-bold text-orange-600">{stats.warning || 0}</p>
+          </div>
+        </div>
+
+        <div className="bg-white rounded-xl border border-gray-200 shadow-sm flex items-center gap-4 p-6">
+          <div className="bg-purple-100 p-3 rounded-lg flex-shrink-0">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-2xl text-purple-600">
+              <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path>
+              <polyline points="14,2 14,8 20,8"></polyline>
+            </svg>
+          </div>
+          <div className="min-w-0">
+            <p className="text-sm text-gray-500 font-medium">Files Scanned</p>
+            <p className="text-3xl font-bold text-gray-800">{Object.keys(fileStats).length}</p>
           </div>
         </div>
       </div>
@@ -549,7 +611,21 @@ const BrokenLinksDashboard = () => {
                     marginBottom: '4px',
                     color: '#24292e'
                   }}>
-                    {link.status === 'broken' ? '🚫' : '⚠️'} {link.text || 'No text'}
+                    <span style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
+                      {link.status === 'broken' ? 
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <circle cx="12" cy="12" r="10"></circle>
+                          <path d="m4.9 4.9 14.2 14.2"></path>
+                        </svg>
+                        : 
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"></path>
+                          <path d="M12 9v4"></path>
+                          <path d="m12 17 .01 0"></path>
+                        </svg>
+                      }
+                      {link.text || 'No text'}
+                    </span>
                   </div>
                   <div style={{ 
                     fontSize: '12px',
@@ -628,13 +704,20 @@ const BrokenLinksDashboard = () => {
               alignItems: 'center',
               marginBottom: '15px'
             }}>
-              <h3 style={{ 
+              <h3 style={{
                 fontSize: '16px', 
                 fontWeight: '600',
                 color: '#24292e',
-                margin: 0
+                margin: 0,
+                display: 'flex',
+                alignItems: 'center',
+                gap: '8px'
               }}>
-                📄 Files with Problem Links ({filesWithProblemLinks.length})
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path>
+                  <polyline points="14,2 14,8 20,8"></polyline>
+                </svg>
+                Files with Problem Links ({filesWithProblemLinks.length})
               </h3>
               <button 
                 onClick={() => setShowDetails(!showDetails)}
@@ -754,9 +837,33 @@ const BrokenLinksDashboard = () => {
                  (stats.broken === 0) ? '#fb8500' : '#d73a49',
           marginBottom: '5px'
         }}>
-          {(stats.broken === 0 && (stats.warning || 0) === 0) ? '✅ All Links Valid!' : 
-           stats.broken === 0 ? `⚠️ ${stats.warning} Warning Links` : 
-           `❌ ${stats.broken} Broken Links${(stats.warning || 0) > 0 ? ` and ${stats.warning} Warnings` : ''}`}
+          <span style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
+            {(stats.broken === 0 && (stats.warning || 0) === 0) ? (
+              <>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M20 6 9 17l-5-5"></path>
+                </svg>
+                All Links Valid!
+              </>
+            ) : stats.broken === 0 ? (
+              <>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"></path>
+                  <path d="M12 9v4"></path>
+                  <path d="m12 17 .01 0"></path>
+                </svg>
+                {stats.warning} Warning Links
+              </>
+            ) : (
+              <>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M18 6 6 18"></path>
+                  <path d="m6 6 12 12"></path>
+                </svg>
+                {stats.broken} Broken Links{(stats.warning || 0) > 0 ? ` and ${stats.warning} Warnings` : ''}
+              </>
+            )}
+          </span>
         </div>
         <div style={{ 
           fontSize: '12px',

@@ -119,7 +119,12 @@ const StatusBar = () => {
       case 'success': return '✓';
       case 'warning': return '⚠';
       case 'error': return '✗';
-      case 'localhost': return '🏠';
+      case 'localhost': return (
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+          <polyline points="9,22 9,12 15,12 15,22"></polyline>
+        </svg>
+      );
       case 'tinacloud': return '☁';
       case 'loading': return '⟳';
       default: return '?';
@@ -128,6 +133,20 @@ const StatusBar = () => {
 
   // Inject status into existing element if it exists
   useEffect(() => {
+    // Hide Reset and Save buttons on this dashboard page
+    const hideButtonsStyle = document.createElement('style');
+    hideButtonsStyle.id = 'statusbar-hide-buttons';
+    hideButtonsStyle.textContent = `
+      .relative.flex-none.w-full.h-16.px-6.bg-white.border-t.border-gray-100.flex.items-center.justify-end button.icon-parent.items-center.font-medium.focus\\:outline-none.focus\\:ring-2.focus\\:shadow-outline.text-center.inline-flex.justify-center.transition-all.duration-150.ease-out.shadow {
+        display: none !important;
+      }
+    `;
+    
+    // Add the style if it doesn't exist
+    if (!document.getElementById('statusbar-hide-buttons')) {
+      document.head.appendChild(hideButtonsStyle);
+    }
+
     const targetElement = document.querySelector('.relative.flex-none.w-full.h-16.px-6.bg-white.border-t.border-gray-100.flex.items-center.justify-end');
     if (targetElement) {
       const statusContainer = targetElement.querySelector('.status-bar-injected');
@@ -174,6 +193,14 @@ const StatusBar = () => {
         `;
       }
     }
+    
+    // Cleanup function to remove the style when component unmounts
+    return () => {
+      const existingStyle = document.getElementById('statusbar-hide-buttons');
+      if (existingStyle) {
+        existingStyle.remove();
+      }
+    };
   }, [status]);
 
   return null; // Only inject into existing element, don't render standalone

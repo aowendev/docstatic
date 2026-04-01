@@ -28,14 +28,10 @@ function getMediaFiles(dir, baseDir = IMG_DIR) {
         try {
           const buffer = fs.readFileSync(filePath);
           const size = imageSize(buffer);
-          console.log(`image-size for ${filePath}:`, size);
           if (size.width && size.height) {
             dimensions = `${size.width}x${size.height}`;
-          } else {
-            console.warn(`No dimensions found for ${filePath}`);
           }
         } catch (e) {
-          console.error(`Error reading dimensions for ${filePath}:`, e.message || e);
           // Skip dimensions for this file, continue processing others
         }
       }

@@ -148,7 +148,7 @@ const Dashboard3 = () => {
             const isLocalDev = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
             const clientId = process.env.NEXT_PUBLIC_TINA_CLIENT_ID;
             const dataSource = isLocalDev 
-              ? '📍 Local files (localhost GraphQL server)' 
+              ? 'Local files (localhost GraphQL server)' 
               : clientId 
                 ? '☁️ TinaCloud (live site via content.tinajs.io)'
                 : '❓ Unknown source';
@@ -156,7 +156,7 @@ const Dashboard3 = () => {
             tests.push({
               name: 'Tina Admin Data Access',
               status: 'SUCCESS',
-              details: `✅ Retrieved ${docs.length} documents. Source: ${dataSource}. Sample: ${sampleDocs || 'No titles available'}`,
+              details: `Retrieved ${docs.length} documents. Source: ${dataSource}. Sample: ${sampleDocs || 'No titles available'}`,
               color: '#059669'
             });
 
@@ -171,14 +171,14 @@ const Dashboard3 = () => {
                 tests.push({
                   name: 'Tina Document Query',
                   status: 'SUCCESS',
-                  details: `📄 Successfully fetched full document: "${docQuery.data.doc.title || docQuery.data.doc._sys.filename}"`,
+                  details: `Successfully fetched full document: "${docQuery.data.doc.title || docQuery.data.doc._sys.filename}"`,
                   color: '#059669'
                 });
               } catch (docErr) {
                 tests.push({
                   name: 'Tina Document Query',
                   status: 'PARTIAL',
-                  details: `⚠️  Document list works but single doc query failed: ${docErr.message}`,
+                  details: `Document list works but single doc query failed: ${docErr.message}`,
                   color: '#f59e0b'
                 });
               }
@@ -187,7 +187,7 @@ const Dashboard3 = () => {
             tests.push({
               name: 'Tina Admin Data Access',
               status: 'ERROR',
-              details: `❌ Failed to fetch documents from admin context: ${dataErr.message}`,
+              details: `Failed to fetch documents from admin context: ${dataErr.message}`,
               color: '#dc2626'
             });
           }
@@ -209,7 +209,7 @@ const Dashboard3 = () => {
       tests.push({
         name: 'Environment Detection',
         status: 'INFO',
-        details: `${isLocalDev ? '🏠 Local Development' : '☁️ Cloud/Production'} | Node ENV: ${process.env.NODE_ENV} | Client ID: ${clientId ? 'Set' : 'Not Set'}`,
+        details: `${isLocalDev ? 'Local Development' : 'Cloud/Production'} | Node ENV: ${process.env.NODE_ENV} | Client ID: ${clientId ? 'Set' : 'Not Set'}`,
         color: '#2563eb'
       });
 

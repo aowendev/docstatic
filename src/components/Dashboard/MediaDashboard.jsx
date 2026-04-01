@@ -222,42 +222,61 @@ const MediaDashboard = () => {
   if (!mediaData && !loading && !error) {
     return (
       <div style={{
-        padding: '20px',
-        border: '1px solid #ddd',
-        borderRadius: '8px',
-        backgroundColor: '#fafafa',
-        marginTop: 0,
-        marginBottom: '32px',
-        marginLeft: '16px',
-        marginRight: '16px',
-        boxSizing: 'border-box'
+        padding: '24px',
+        borderBottom: '2px solid #d1d9e0',
+        marginBottom: '32px'
       }}>
         <div style={{
           display: 'flex',
           justifyContent: 'space-between',
-          alignItems: 'flex-start',
-          marginBottom: '20px',
-          borderBottom: '2px solid #e9ecef',
-          paddingBottom: '10px',
-          gap: '16px' // Restore original gap between title and button
+          alignItems: 'center',
+          marginBottom: '16px'
         }}>
-          <h3 className="font-sans text-2xl text-tina-orange" style={{ margin: 0 }}>
-            🏞️ Media Reuse
-          </h3>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+          <span className="text-3xl text-tina-orange">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <rect width="18" height="18" x="3" y="3" rx="2" ry="2"></rect>
+                <circle cx="9" cy="9" r="2"></circle>
+                <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"></path>
+              </svg>
+            </span>
+            <h2 className="m-0 text-2xl font-bold text-gray-800">
+              Media Usage Dashboard
+            </h2>
+          </div>
           <button
             onClick={fetchMediaFiles}
             style={{
-              padding: '5px 10px',
-              backgroundColor: '#2563eb',
-              color: 'white',
-              border: 'none',
-              borderRadius: '4px',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '8px',
+              padding: '8px 16px',
+              borderRadius: '6px',
+              border: '1px solid #d1d5db',
+              backgroundColor: '#ffffff',
+              color: '#374151',
               cursor: 'pointer',
-              fontSize: '12px',
-              marginLeft: '8px' // Extra gap for safety
+              fontSize: '14px',
+              fontWeight: '500',
+              boxShadow: '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
+              transition: 'all 0.2s ease'
+            }}
+            onMouseEnter={(e) => {
+              e.target.style.backgroundColor = '#f3f4f6';
+              e.target.style.color = '#1f2937';
+            }}
+            onMouseLeave={(e) => {
+              e.target.style.backgroundColor = '#ffffff';
+              e.target.style.color = '#374151';
             }}
             disabled={loading}
           >
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"></path>
+              <path d="M21 3v5h-5"></path>
+              <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"></path>
+              <path d="M8 16H3v5"></path>
+            </svg>
             {loading ? 'Loading...' : 'Load'}
           </button>
         </div>
@@ -268,35 +287,45 @@ const MediaDashboard = () => {
   if (loading) {
     return (
       <div style={{
-        padding: '20px',
-        border: '1px solid #ddd',
-        borderRadius: '8px',
-        backgroundColor: '#f9f9f9',
+        padding: '24px',
+        borderBottom: '2px solid #d1d9e0',
+        marginBottom: '32px',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
         minHeight: '120px'
       }}>
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-          <div style={{
-            width: '36px',
-            height: '36px',
-            border: '4px solid #e0e0e0',
-            borderTop: '4px solid #2563eb',
-            borderRadius: '50%',
-            animation: 'spin 1s linear infinite',
-            marginBottom: '12px'
-          }} />
-          <div style={{ fontWeight: 500, color: '#2563eb', fontSize: '16px', marginBottom: '2px' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%', maxWidth: '400px' }}>
+          <div className="font-bold text-gray-800 text-xl mb-2">
+            Loading Dashboard
+          </div>
+          <div className="font-medium text-gray-600 text-base mb-4">
             Loading media files...
           </div>
-          <div style={{ fontSize: '13px', color: '#666' }}>This may take a moment</div>
+          
+          {/* Progress Bar for Loading */}
+          <div style={{
+            width: '100%',
+            height: '6px',
+            backgroundColor: '#e5e7eb',
+            borderRadius: '3px',
+            overflow: 'hidden'
+          }}>
+            <div style={{
+              width: '100%',
+              height: '100%',
+              background: 'linear-gradient(45deg, #f59e0b, #d97706)',
+              borderRadius: '3px',
+              animation: 'indeterminate 2s ease-in-out infinite'
+            }}></div>
+          </div>
         </div>
         <style>{`
-          @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+          @keyframes indeterminate {
+            0% { transform: translateX(-100%); }
+            50% { transform: translateX(0%); }
+            100% { transform: translateX(100%); }
           }
         `}</style>
       </div>
@@ -305,16 +334,20 @@ const MediaDashboard = () => {
 
   if (error) {
     return (
-      <div style={{ padding: '20px' }}>
+      <div style={{ 
+        padding: '24px',
+        borderBottom: '2px solid #d1d9e0',
+        marginBottom: '32px'
+      }}>
         <div style={{ 
-          border: '2px solid #ffebee', 
-          borderRadius: '8px', 
-          padding: '20px',
-          backgroundColor: '#fafafa',
+          padding: '16px',
+          backgroundColor: '#ffebee',
+          borderLeft: '4px solid #d32f2f',
+          borderRadius: '6px',
           color: '#d32f2f'
         }}>
-          <h3 style={{ margin: '0 0 10px 0', color: '#d32f2f' }}>Error</h3>
-          <p style={{ margin: 0 }}>{error}</p>
+          <h3 style={{ margin: '0 0 8px 0', color: '#d32f2f', fontSize: '16px' }}>Error</h3>
+          <p style={{ margin: 0, fontSize: '14px' }}>{error}</p>
         </div>
       </div>
     );
@@ -327,91 +360,153 @@ const MediaDashboard = () => {
   const filteredFiles = getFilteredFiles();
 
   return (
-    <div style={{ paddingLeft: '20px', paddingRight: '20px' }}>
-      <div style={{ 
-      border: '1px solid #ddd',
-      borderRadius: '8px',
-      backgroundColor: '#fafafa',
-
-      }}>
+    <div style={{ 
+      padding: '24px',
+      borderBottom: '2px solid #d1d9e0',
+      marginBottom: '32px'
+    }}>
         {/* Header */}
-        <div style={{ 
-          padding: '20px', 
-          borderBottom: '1px solid #f0f0f0',
-          backgroundColor: '#f8f9fa',
-          borderRadius: '12px 12px 0 0'
-        }}>
+        <div className="mb-6">
           <div style={{
             display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'center',
-            marginBottom: '10px'
+            marginBottom: '16px'
           }}>
-            <h3 class="font-sans text-2xl text-tina-orange" style={{ margin: 0 }}>
-              🏞️ Media Reuse
-            </h3>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+              <span className="text-3xl text-tina-orange">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <rect width="18" height="18" x="3" y="3" rx="2" ry="2"></rect>
+                  <circle cx="9" cy="9" r="2"></circle>
+                  <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"></path>
+                </svg>
+              </span>
+              <h2 className="m-0 text-2xl font-bold text-gray-800">
+                Media Usage Dashboard
+              </h2>
+            </div>
             <button
               onClick={fetchMediaFiles}
               style={{
-                padding: '5px 10px',
-                backgroundColor: '#2563eb',
-                color: 'white',
-                border: 'none',
-                borderRadius: '4px',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '8px',
+                padding: '8px 16px',
+                borderRadius: '6px',
+                border: '1px solid #d1d5db',
+                backgroundColor: '#ffffff',
+                color: '#374151',
                 cursor: 'pointer',
-                fontSize: '12px',
-                marginLeft: '10px'
+                fontSize: '14px',
+                fontWeight: '500',
+                boxShadow: '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
+                transition: 'all 0.2s ease'
+              }}
+              onMouseEnter={(e) => {
+                e.target.style.backgroundColor = '#f3f4f6';
+                e.target.style.color = '#1f2937';
+              }}
+              onMouseLeave={(e) => {
+                e.target.style.backgroundColor = '#ffffff';
+                e.target.style.color = '#374151';
               }}
               disabled={loading}
             >
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"></path>
+                <path d="M21 3v5h-5"></path>
+                <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"></path>
+                <path d="M8 16H3v5"></path>
+              </svg>
               {loading ? 'Refreshing...' : 'Refresh'}
             </button>
           </div>
-          <hr style={{ border: 'none', borderTop: '1px solid #e1e4e8', margin: '10px 0 20px 0' }} />
-          {/* Stats */}
-          <div style={{ 
-            display: 'flex', 
-            gap: '30px', 
-            marginBottom: '15px',
-            flexWrap: 'wrap'
-          }}>
-            <div style={{ fontSize: '14px', color: '#666' }}>
-              <strong style={{ color: '#2c3e50' }}>{mediaData.stats.total}</strong> total files
+          
+          {/* Media Statistics Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 mb-6">
+            <div className="bg-white rounded-xl border border-gray-200 shadow-sm flex items-center gap-4 p-6">
+              <div className="bg-blue-100 p-3 rounded-lg flex-shrink-0">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-blue-600">
+                  <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/>
+                  <polyline points="14,2 14,8 20,8"/>
+                </svg>
+              </div>
+              <div className="min-w-0">
+                <p className="text-sm text-gray-500 font-medium">Total Files</p>
+                <p className="text-3xl font-bold text-blue-600">{mediaData.stats.total}</p>
+              </div>
             </div>
-            <div style={{ fontSize: '14px', color: '#666' }}>
-              <strong style={{ color: '#2c3e50' }}>{mediaData.stats.images}</strong> images
+
+            <div className="bg-white rounded-xl border border-gray-200 shadow-sm flex items-center gap-4 p-6">
+              <div className="bg-purple-100 p-3 rounded-lg flex-shrink-0">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-purple-600">
+                  <rect width="18" height="18" x="3" y="3" rx="2" ry="2"/>
+                  <circle cx="9" cy="9" r="2"/>
+                  <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/>
+                </svg>
+              </div>
+              <div className="min-w-0">
+                <p className="text-sm text-gray-500 font-medium">Images</p>
+                <p className="text-3xl font-bold text-purple-600">{mediaData.stats.images}</p>
+              </div>
             </div>
-            <div style={{ fontSize: '14px', color: '#666' }}>
-              <strong style={{ color: '#28a745' }}>
-                {Object.values(imageUsages).filter(usages => usages.length > 0).length}
-              </strong> used
+
+            <div className="bg-white rounded-xl border border-gray-200 shadow-sm flex items-center gap-4 p-6">
+              <div className="bg-green-100 p-3 rounded-lg flex-shrink-0">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-green-600">
+                  <path d="M20 6 9 17l-5-5"/>
+                </svg>
+              </div>
+              <div className="min-w-0">
+                <p className="text-sm text-gray-500 font-medium">Used</p>
+                <p className="text-3xl font-bold text-green-600">{Object.values(imageUsages).filter(usages => usages.length > 0).length}</p>
+              </div>
             </div>
-            <div style={{ fontSize: '14px', color: '#666' }}>
-              <strong style={{ color: '#dc3545' }}>
-                {Object.values(imageUsages).filter(usages => usages.length === 0).length}
-              </strong> unused
+
+            <div className="bg-white rounded-xl border border-gray-200 shadow-sm flex items-center gap-4 p-6">
+              <div className="bg-red-100 p-3 rounded-lg flex-shrink-0">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-red-600">
+                  <circle cx="12" cy="12" r="10"/>
+                  <path d="m4.9 4.9 14.2 14.2"/>
+                </svg>
+              </div>
+              <div className="min-w-0">
+                <p className="text-sm text-gray-500 font-medium">Unused</p>
+                <p className="text-3xl font-bold text-red-600">{Object.values(imageUsages).filter(usages => usages.length === 0).length}</p>
+              </div>
             </div>
-            <div style={{ fontSize: '14px', color: '#666' }}>
-              <strong style={{ color: '#2c3e50' }}>{mediaData.stats.totalSize.toFixed(1)} KB</strong> total size
+
+            <div className="bg-white rounded-xl border border-gray-200 shadow-sm flex items-center gap-4 p-6">
+              <div className="bg-orange-100 p-3 rounded-lg flex-shrink-0">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-orange-600">
+                  <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+                  <circle cx="12" cy="12" r="4"/>
+                </svg>
+              </div>
+              <div className="min-w-0">
+                <p className="text-sm text-gray-500 font-medium">Total Size</p>
+                <p className="text-sm font-medium text-orange-600">{mediaData.stats.totalSize.toFixed(1)} KB</p>
+              </div>
             </div>
           </div>
 
           {/* Filter Controls */}
-          <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
-            <span style={{ fontSize: '14px', color: '#666', marginRight: '10px' }}>Filter:</span>
+          <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+            <span style={{ fontSize: '14px', color: '#586069', marginRight: '12px' }}>Filter:</span>
             {['all', 'images', 'recent', 'used', 'unused'].map((filter) => (
               <button
                 key={filter}
                 onClick={() => setFilterType(filter)}
                 style={{
                   padding: '6px 12px',
-                  border: '1px solid #ddd',
+                  border: '1px solid #d1d9e0',
                   borderRadius: '6px',
-                  backgroundColor: filterType === filter ? '#007bff' : '#ffffff',
-                  color: filterType === filter ? '#ffffff' : '#333',
-                  fontSize: '12px',
+                  backgroundColor: filterType === filter ? '#2563eb' : '#ffffff',
+                  color: filterType === filter ? '#ffffff' : '#24292f',
+                  fontSize: '13px',
                   cursor: 'pointer',
-                  textTransform: 'capitalize'
+                  textTransform: 'capitalize',
+                  fontWeight: filterType === filter ? '500' : '400'
                 }}
               >
                 {filter === 'recent' ? 'Recent (7 days)' : filter}
@@ -421,19 +516,19 @@ const MediaDashboard = () => {
         </div>
 
         {/* Media Files List */}
-        <div style={{ padding: '20px' }}>
+        <div>
           {filteredFiles.length === 0 ? (
             <div style={{ 
               textAlign: 'center', 
-              color: '#666', 
+              color: '#586069', 
               padding: '40px 20px',
-              backgroundColor: '#f8f9fa',
-              borderRadius: '8px'
+              backgroundColor: '#f6f8fa',
+              borderRadius: '6px'
             }}>
               <p style={{ margin: 0, fontSize: '16px' }}>No media files found for the current filter.</p>
             </div>
           ) : (
-            <div style={{ display: 'grid', gap: '15px' }}>
+            <div style={{ display: 'grid', gap: '12px' }}>
               {filteredFiles.map((file, index) => (
                 <div 
                   key={index}
@@ -441,15 +536,19 @@ const MediaDashboard = () => {
                     position: 'relative',
                     display: 'flex',
                     alignItems: 'center',
-                    padding: '15px',
-                    border: '1px solid #e9ecef',
-                    borderRadius: '8px',
-                    backgroundColor: '#fdfdfd',
-                    transition: 'all 0.2s ease',
-                    ':hover': {
-                      backgroundColor: '#f8f9fa',
-                      borderColor: '#dee2e6'
-                    }
+                    padding: '16px',
+                    border: '1px solid #d1d9e0',
+                    borderRadius: '6px',
+                    backgroundColor: '#ffffff',
+                    transition: 'all 0.2s ease'
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.backgroundColor = '#f6f8fa';
+                    e.currentTarget.style.borderColor = '#8c959f';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.backgroundColor = '#ffffff';
+                    e.currentTarget.style.borderColor = '#d1d9e0';
                   }}
                 >
                   {/* File preview */}
@@ -482,15 +581,16 @@ const MediaDashboard = () => {
                     <div style={{
                       width: '60px',
                       height: '60px',
-                      backgroundColor: '#e9ecef',
+                      backgroundColor: '#f6f8fa',
                       borderRadius: '6px',
-                      border: '1px solid #dee2e6',
+                      border: '1px solid #d1d9e0',
                       display: file.type === 'image' ? 'none' : 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
-                      color: '#6c757d',
+                      color: '#656d76',
                       fontSize: '12px',
-                      textAlign: 'center'
+                      textAlign: 'center',
+                      fontWeight: '600'
                     }}>
                       {file.extension ? file.extension.toUpperCase() : ''}
                     </div>
@@ -500,24 +600,24 @@ const MediaDashboard = () => {
                   <div style={{ flex: 1 }}>
                     <div style={{ 
                       fontSize: '16px', 
-                      fontWeight: '500', 
-                      color: '#2c3e50',
+                      fontWeight: '600', 
+                      color: '#24292f',
                       marginBottom: '4px'
                     }}>
                       {file.filename}
                     </div>
                     <div style={{ 
                       fontSize: '13px', 
-                      color: '#6c757d',
+                      color: '#656d76',
                       marginBottom: '8px'
                     }}>
                       {file.path}
                     </div>
                     <div style={{ 
                       display: 'flex', 
-                      gap: '15px', 
+                      gap: '16px', 
                       fontSize: '12px', 
-                      color: '#868e96'
+                      color: '#656d76'
                     }}>
                       <span>{formatFileSize(file.size)}</span>
                       {file.extension === 'svg' ? (
@@ -539,13 +639,14 @@ const MediaDashboard = () => {
                       onClick={() => setExpandedFile(expandedFile === file.path ? null : file.path)}
                       style={{
                         padding: '6px 12px',
-                        backgroundColor: (imageUsages[file.path] || []).length > 0 ? '#28a745' : '#dc3545',
+                        backgroundColor: (imageUsages[file.path] || []).length > 0 ? '#28a745' : '#d1242f',
                         color: '#ffffff',
                         border: 'none',
-                        borderRadius: '4px',
+                        borderRadius: '6px',
                         fontSize: '12px',
                         cursor: 'pointer',
-                        transition: 'background-color 0.2s'
+                        fontWeight: '500',
+                        transition: 'all 0.2s ease'
                       }}
                     >
                       {(imageUsages[file.path] || []).length > 0 
@@ -561,18 +662,18 @@ const MediaDashboard = () => {
                       top: '100%',
                       left: 0,
                       right: 0,
-                      marginTop: '10px',
-                      padding: '15px',
-                      backgroundColor: '#f8f9fa',
-                      borderRadius: '8px',
-                      border: '1px solid #e9ecef',
+                      marginTop: '12px',
+                      padding: '16px',
+                      backgroundColor: '#f6f8fa',
+                      borderRadius: '6px',
+                      border: '1px solid #d1d9e0',
                       zIndex: 10,
-                      boxShadow: '0 4px 12px rgba(0,0,0,0.1)'
+                      boxShadow: '0 8px 24px rgba(140,149,159,0.2)'
                     }}>
                       <h4 style={{
                         margin: '0 0 12px 0',
                         fontSize: '14px',
-                        color: '#495057',
+                        color: '#24292f',
                         fontWeight: '600'
                       }}>
                         Used in {(imageUsages[file.path] || []).length} document{(imageUsages[file.path] || []).length !== 1 ? 's' : ''}:
@@ -582,7 +683,7 @@ const MediaDashboard = () => {
                         <p style={{
                           margin: 0,
                           fontSize: '13px',
-                          color: '#6c757d',
+                          color: '#656d76',
                           fontStyle: 'italic'
                         }}>
                           This image is not currently used in any documents.
@@ -596,24 +697,24 @@ const MediaDashboard = () => {
                                 display: 'flex',
                                 justifyContent: 'space-between',
                                 alignItems: 'center',
-                                padding: '8px 12px',
+                                padding: '12px',
                                 backgroundColor: '#ffffff',
                                 borderRadius: '6px',
-                                border: '1px solid #dee2e6'
+                                border: '1px solid #d1d9e0'
                               }}
                             >
                               <div style={{ flex: 1 }}>
                                 <div style={{
-                                  fontSize: '13px',
-                                  fontWeight: '500',
-                                  color: '#2c3e50',
-                                  marginBottom: '2px'
+                                  fontSize: '14px',
+                                  fontWeight: '600',
+                                  color: '#24292f',
+                                  marginBottom: '4px'
                                 }}>
                                   {usage.title}
                                 </div>
                                 <div style={{
-                                  fontSize: '11px',
-                                  color: '#6c757d'
+                                  fontSize: '12px',
+                                  color: '#656d76'
                                 }}>
                                   {usage.relativePath}
                                   {usage.lastModified && (
@@ -626,17 +727,17 @@ const MediaDashboard = () => {
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 style={{
-                                  padding: '4px 8px',
-                                backgroundColor: '#007bff',
+                                  padding: '6px 12px',
+                                backgroundColor: '#f59e0b',
                                 color: '#ffffff',
                                 textDecoration: 'none',
-                                borderRadius: '4px',
-                                fontSize: '11px',
+                                borderRadius: '6px',
+                                fontSize: '12px',
                                 fontWeight: '500',
-                                transition: 'background-color 0.2s'
+                                transition: 'all 0.2s ease'
                               }}
-                              onMouseOver={(e) => e.target.style.backgroundColor = '#0056b3'}
-                              onMouseOut={(e) => e.target.style.backgroundColor = '#007bff'}
+                              onMouseOver={(e) => e.target.style.backgroundColor = '#d97706'}
+                              onMouseOut={(e) => e.target.style.backgroundColor = '#f59e0b'}
                               >
                                 Edit
                               </a>
@@ -651,7 +752,6 @@ const MediaDashboard = () => {
             </div>
           )}
         </div>
-      </div>
 
       {/* Lightbox */}
       {lightboxImage && (

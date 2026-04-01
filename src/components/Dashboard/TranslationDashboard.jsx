@@ -454,42 +454,61 @@ const TranslationDashboard = () => {
   if (!translationData && !loading && !error) {
     return (
       <div style={{
-        padding: '20px',
-        border: '1px solid #ddd',
-        borderRadius: '8px',
-        backgroundColor: '#fafafa',
-        marginTop: 0,
-        marginBottom: '32px',
-        marginLeft: '16px',
-        marginRight: '16px',
-        boxSizing: 'border-box'
+        padding: '24px',
+        borderBottom: '2px solid #d1d9e0',
+        marginBottom: '32px'
       }}>
         <div style={{
           display: 'flex',
           justifyContent: 'space-between',
-          alignItems: 'flex-start',
-          marginBottom: '20px',
-          borderBottom: '2px solid #e9ecef',
-          paddingBottom: '10px',
-          gap: '16px' // Restore original gap between title and button
+          alignItems: 'center',
+          marginBottom: '24px'
         }}>
-          <h3 className="font-sans text-2xl text-tina-orange" style={{ margin: 0 }}>
-            🌍 Translations
-          </h3>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <span className="text-3xl text-tina-orange">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="2" x2="22" y1="12" y2="12"></line>
+                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+              </svg>
+            </span>
+            <h2 className="m-0 text-2xl font-bold text-gray-800">
+              Translation Dashboard
+            </h2>
+          </div>
           <button
             onClick={scanTranslations}
             style={{
-              padding: '5px 10px',
-              backgroundColor: '#2563eb',
-              color: 'white',
-              border: 'none',
-              borderRadius: '4px',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '8px',
+              padding: '8px 16px',
+              borderRadius: '6px',
+              border: '1px solid #d1d5db',
+              backgroundColor: '#ffffff',
+              color: '#374151',
               cursor: 'pointer',
-              fontSize: '12px',
-              marginLeft: '8px' // Extra gap for safety
+              fontSize: '14px',
+              fontWeight: '500',
+              boxShadow: '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
+              transition: 'all 0.2s ease'
+            }}
+            onMouseEnter={(e) => {
+              e.target.style.backgroundColor = '#f3f4f6';
+              e.target.style.color = '#1f2937';
+            }}
+            onMouseLeave={(e) => {
+              e.target.style.backgroundColor = '#ffffff';
+              e.target.style.color = '#374151';
             }}
             disabled={loading}
           >
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"></path>
+              <path d="M21 3v5h-5"></path>
+              <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"></path>
+              <path d="M8 16H3v5"></path>
+            </svg>
             {loading ? 'Loading...' : 'Load'}
           </button>
         </div>
@@ -500,35 +519,45 @@ const TranslationDashboard = () => {
   if (loading) {
     return (
       <div style={{
-        padding: '20px',
-        border: '1px solid #ddd',
-        borderRadius: '8px',
-        backgroundColor: '#f9f9f9',
+        padding: '24px',
+        borderBottom: '2px solid #d1d9e0',
+        marginBottom: '32px',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
         minHeight: '120px'
       }}>
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-          <div style={{
-            width: '36px',
-            height: '36px',
-            border: '4px solid #e0e0e0',
-            borderTop: '4px solid #2563eb',
-            borderRadius: '50%',
-            animation: 'spin 1s linear infinite',
-            marginBottom: '12px'
-          }} />
-          <div style={{ fontWeight: 500, color: '#2563eb', fontSize: '16px', marginBottom: '2px' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%', maxWidth: '400px' }}>
+          <div className="font-bold text-gray-800 text-xl mb-2">
+            Loading Dashboard
+          </div>
+          <div className="font-medium text-gray-600 text-base mb-4">
             Scanning translations...
           </div>
-          <div style={{ fontSize: '13px', color: '#666' }}>This may take a moment</div>
+          
+          {/* Progress Bar for Loading */}
+          <div style={{
+            width: '100%',
+            height: '6px',
+            backgroundColor: '#e5e7eb',
+            borderRadius: '3px',
+            overflow: 'hidden'
+          }}>
+            <div style={{
+              width: '100%',
+              height: '100%',
+              background: 'linear-gradient(45deg, #f59e0b, #d97706)',
+              borderRadius: '3px',
+              animation: 'indeterminate 2s ease-in-out infinite'
+            }}></div>
+          </div>
         </div>
         <style>{`
-          @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+          @keyframes indeterminate {
+            0% { transform: translateX(-100%); }
+            50% { transform: translateX(0%); }
+            100% { transform: translateX(100%); }
           }
         `}</style>
       </div>
@@ -537,28 +566,37 @@ const TranslationDashboard = () => {
 
   if (error) {
     return (
-      <div style={{
-        padding: '20px',
-        border: '1px solid #ff4757',
-        borderRadius: '8px',
-        backgroundColor: '#ffe0e0',
-        color: '#d63031'
+      <div style={{ 
+        padding: '24px',
+        borderBottom: '2px solid #d1d9e0',
+        marginBottom: '32px'
       }}>
-        <strong>Error:</strong> {error}
-        <button
-          onClick={scanTranslations}
-          style={{
-            marginLeft: '10px',
-            padding: '5px 10px',
-            fontSize: '12px',
-            border: '1px solid #d63031',
-            borderRadius: '4px',
-            backgroundColor: 'white',
-            cursor: 'pointer'
-          }}
-        >
-          Retry
-        </button>
+        <div style={{
+          padding: '16px',
+          backgroundColor: '#ffebee',
+          borderLeft: '4px solid #d32f2f',
+          borderRadius: '6px',
+          color: '#d32f2f'
+        }}>
+          <div style={{ marginBottom: '12px', fontSize: '16px', fontWeight: '600' }}>
+            <strong>Error:</strong> {error}
+          </div>
+          <button
+            onClick={scanTranslations}
+            style={{
+              padding: '8px 16px',
+              fontSize: '14px',
+              border: 'none',
+              borderRadius: '6px',
+              backgroundColor: '#f59e0b',
+              color: 'white',
+              cursor: 'pointer',
+              fontWeight: '500'
+            }}
+          >
+            Retry
+          </button>
+        </div>
       </div>
     );
   }
@@ -566,13 +604,11 @@ const TranslationDashboard = () => {
   if (!translationData) {
     return (
       <div style={{
-        padding: '20px',
-        border: '1px solid #ddd',
-        borderRadius: '8px',
-        backgroundColor: '#f9f9f9',
-        margin: '20px 0'
+        padding: '24px',
+        borderBottom: '2px solid #d1d9e0',
+        marginBottom: '32px'
       }}>
-        <div style={{ textAlign: 'center', color: '#666' }}>
+        <div style={{ textAlign: 'center', color: '#656d76', fontSize: '16px' }}>
           No translation data available
         </div>
       </div>
@@ -584,58 +620,62 @@ const TranslationDashboard = () => {
 
   return (
     <div style={{
-      padding: '20px',
-      border: '1px solid #ddd',
-      borderRadius: '8px',
-      backgroundColor: '#fafafa',
-      marginTop: 0,
-      marginBottom: '32px',
-      marginLeft: '16px',
-      marginRight: '16px',
-      boxSizing: 'border-box'
+      padding: '24px',
+      borderBottom: '2px solid #d1d9e0',
+      marginBottom: '32px'
     }}>
       <div style={{
         display: 'flex',
         justifyContent: 'space-between',
-        alignItems: 'flex-start',
-        marginBottom: '20px',
-        borderBottom: '2px solid #e9ecef',
-        paddingBottom: '10px',
-        gap: '16px'
+        alignItems: 'center',
+        marginBottom: '24px'
       }}>
-        <h3 className="font-sans text-2xl text-tina-orange">
-          🌍 Translations
-        </h3>
-        <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
-          <select
-            value={selectedLanguage}
-            onChange={(e) => setSelectedLanguage(e.target.value)}
-            style={{
-              padding: '8px 12px',
-              border: '1px solid #ddd',
-              borderRadius: '4px',
-              fontSize: '14px'
-            }}
-          >
-            {languages.map(lang => {
-              const configEntry = (docusaurusData.languages?.supported || []).find(l => l.code === lang);
-              const label = configEntry ? `${lang.toUpperCase()} - ${configEntry.label}` : lang.toUpperCase();
-              return <option key={lang} value={lang}>{label}</option>;
-            })}
-          </select>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+          <span className="text-3xl text-tina-orange">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="2" x2="22" y1="12" y2="12"></line>
+              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+            </svg>
+          </span>
+          <h2 style={{ margin: 0, fontSize: '24px', fontWeight: 'bold', color: '#1f2937' }}>
+            Translation Dashboard
+          </h2>
+        </div>
+        <div className="flex gap-4 items-center">
           <button
             onClick={scanTranslations}
             style={{
-              padding: '5px 10px',
-              backgroundColor: '#2563eb',
-              color: 'white',
-              border: 'none',
-              borderRadius: '4px',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '8px',
+              padding: '8px 16px',
+              borderRadius: '6px',
+              border: '1px solid #d1d5db',
+              backgroundColor: '#ffffff',
+              color: '#374151',
               cursor: 'pointer',
-              fontSize: '12px'
+              fontSize: '14px',
+              fontWeight: '500',
+              boxShadow: '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
+              transition: 'all 0.2s ease'
+            }}
+            onMouseEnter={(e) => {
+              e.target.style.backgroundColor = '#f3f4f6';
+              e.target.style.color = '#1f2937';
+            }}
+            onMouseLeave={(e) => {
+              e.target.style.backgroundColor = '#ffffff';
+              e.target.style.color = '#374151';
             }}
             disabled={loading}
           >
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"></path>
+              <path d="M21 3v5h-5"></path>
+              <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"></path>
+              <path d="M8 16H3v5"></path>
+            </svg>
             {loading ? 'Refreshing...' : 'Refresh'}
           </button>
           <button
@@ -745,54 +785,173 @@ const TranslationDashboard = () => {
       </div>
   {status && <div style={{ color: 'green', marginBottom: '1rem' }}>{status}</div>}
 
-      {/* Summary Cards */}
-      <div style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-        gap: '15px',
-        marginBottom: '30px'
-      }}>
+      {/* Progress Bars for Async Operations */}
+      {addProgress !== null && (
+        <div style={{ marginBottom: '1rem' }}>
+          <div style={{ fontSize: '14px', marginBottom: '8px', color: '#374151' }}>
+            Adding Missing Topics: {addProgress}%
+          </div>
+          <div style={{
+            width: '100%',
+            height: '6px',
+            backgroundColor: '#e5e7eb',
+            borderRadius: '3px',
+            overflow: 'hidden'
+          }}>
+            <div style={{
+              width: `${addProgress}%`,
+              height: '100%',
+              background: 'linear-gradient(45deg, #f59e0b, #d97706)',
+              borderRadius: '3px',
+              transition: 'width 0.3s ease'
+            }}></div>
+          </div>
+        </div>
+      )}
+
+      {importProgress !== null && (
+        <div style={{ marginBottom: '1rem' }}>
+          <div style={{ fontSize: '14px', marginBottom: '8px', color: '#374151' }}>
+            Importing XLIFF: {importProgress}%
+          </div>
+          <div style={{
+            width: '100%',
+            height: '6px',
+            backgroundColor: '#e5e7eb',
+            borderRadius: '3px',
+            overflow: 'hidden'
+          }}>
+            <div style={{
+              width: `${importProgress}%`,
+              height: '100%',
+              background: 'linear-gradient(45deg, #f59e0b, #d97706)',
+              borderRadius: '3px',
+              transition: 'width 0.3s ease'
+            }}></div>
+          </div>
+        </div>
+      )}
+
+      {loading && (
+        <div style={{ marginBottom: '1rem' }}>
+          <div style={{ fontSize: '14px', marginBottom: '8px', color: '#374151' }}>
+            Scanning translations...
+          </div>
+          <div style={{
+            width: '100%',
+            height: '6px',
+            backgroundColor: '#e5e7eb',
+            borderRadius: '3px',
+            overflow: 'hidden'
+          }}>
+            <div style={{
+              width: '100%',
+              height: '100%',
+              background: 'linear-gradient(45deg, #f59e0b, #d97706)',
+              borderRadius: '3px',
+              animation: 'indeterminate 1.5s ease-in-out infinite'
+            }}></div>
+          </div>
+        </div>
+      )}
+
+      <style>{`
+        @keyframes indeterminate {
+          0% { transform: translateX(-100%); }
+          50% { transform: translateX(0%); }
+          100% { transform: translateX(100%); }
+        }
+      `}</style>
+
+      {/* Translation Statistics Cards */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
         {(() => {
           const counts = totalCounts[selectedLanguage];
           if (!counts) return null;
 
-          return (
-            <div style={{
-              padding: '15px',
-              backgroundColor: 'white',
-              border: '1px solid #e9ecef',
-              borderRadius: '6px',
-              boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
-            }}>
-              <h3 style={{ 
-                margin: '0 0 10px 0', 
-                color: '#2c3e50',
-                fontSize: '16px',
-                textTransform: 'uppercase',
-                letterSpacing: '1px'
-              }}>
-                {selectedLanguage}
-              </h3>
-              <div style={{ fontSize: '14px', lineHeight: '1.5' }}>
-                <div style={{ color: getStatusColor('upToDate') }}>
-                  ✅ Up to date: <strong>{counts.upToDate}</strong>
-                </div>
-                <div style={{ color: getStatusColor('outdated') }}>
-                  ⏰ Outdated: <strong>{counts.outdated}</strong>
-                </div>
-                <div style={{ color: getStatusColor('missing') }}>
-                  ❌ Missing: <strong>{counts.missing}</strong>
-                </div>
-                <div style={{ color: getStatusColor('orphaned') }}>
-                  🔗 Orphan topics: <strong>{counts.orphaned}</strong>
-                </div>
-                <div style={{ marginTop: '8px', paddingTop: '8px', borderTop: '1px solid #eee' }}>
-                  📊 Total: <strong>{counts.total}</strong> files
-                </div>
+          return [
+            {
+              label: 'Up to Date',
+              value: counts.upToDate,
+              icon: (
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M20 6 9 17l-5-5"></path>
+                </svg>
+              ),
+              bgColor: 'bg-green-100',
+              iconColor: 'text-green-600',
+              textColor: 'text-green-600'
+            },
+            {
+              label: 'Outdated',
+              value: counts.outdated,
+              icon: (
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <polyline points="12,6 12,12 16,14"></polyline>
+                </svg>
+              ),
+              bgColor: 'bg-orange-100',
+              iconColor: 'text-orange-600',
+              textColor: 'text-orange-600'
+            },
+            {
+              label: 'Missing',
+              value: counts.missing,
+              icon: (
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <circle cx="12" cy="12" r="10"/>
+                  <line x1="15" x2="9" y1="9" y2="15"/>
+                  <line x1="9" x2="15" y1="9" y2="15"/>
+                </svg>
+              ),
+              bgColor: 'bg-red-100',
+              iconColor: 'text-red-600',
+              textColor: 'text-red-600'
+            },
+            {
+              label: 'Orphaned',
+              value: counts.orphaned,
+              icon: (
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+                  <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+                </svg>
+              ),
+              bgColor: 'bg-purple-100',
+              iconColor: 'text-purple-600', 
+              textColor: 'text-purple-600'
+            }
+          ].map((stat, index) => (
+            <div key={index} className="bg-white rounded-xl border border-gray-200 shadow-sm flex items-center gap-4 p-6">
+              <div className={`${stat.bgColor} p-3 rounded-lg flex-shrink-0`}>
+                <div className={`${stat.iconColor}`}>{stat.icon}</div>
+              </div>
+              <div className="min-w-0">
+                <p className="text-sm text-gray-500 font-medium">{stat.label}</p>
+                <p className={`text-3xl font-bold ${stat.textColor}`}>{stat.value}</p>
               </div>
             </div>
-          );
+          ));
         })()}
+      </div>
+
+      {/* Language Selection */}
+      <div className="mb-6">
+        <div className="flex items-center gap-4">
+          <label className="text-sm font-medium text-gray-700">Language:</label>
+          <select
+            value={selectedLanguage}
+            onChange={(e) => setSelectedLanguage(e.target.value)}
+            className="px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
+          >
+            {languages.map(lang => {
+              const configEntry = (docusaurusData.languages?.supported || []).find(l => l.code === lang);
+              const label = configEntry ? `${lang.toUpperCase()} - ${configEntry.label}` : lang.toUpperCase();
+              return <option key={lang} value={lang}>{label}</option>;
+            })}
+          </select>
+        </div>
       </div>
 
       {/* Detailed View */}
@@ -806,8 +965,12 @@ const TranslationDashboard = () => {
             {/* Missing Files */}
             {data.missing.length > 0 && (
               <div style={{ marginBottom: '25px' }}>
-                <h4 style={{ color: '#e74c3c', marginBottom: '10px' }}>
-                  ❌ Missing Translations ({data.missing.length})
+                <h4 style={{ color: '#e74c3c', marginBottom: '10px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M18 6 6 18"></path>
+                    <path d="m6 6 12 12"></path>
+                  </svg>
+                  Missing Translations ({data.missing.length})
                 </h4>
                 <div style={{
                   backgroundColor: '#ffebee',
@@ -841,8 +1004,12 @@ const TranslationDashboard = () => {
             {/* Outdated Files */}
             {data.outdated.length > 0 && (
               <div style={{ marginBottom: '25px' }}>
-                <h4 style={{ color: '#f39c12', marginBottom: '10px' }}>
-                  ⏰ Outdated Translations ({data.outdated.length})
+                <h4 style={{ color: '#f39c12', marginBottom: '10px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <polyline points="12,6 12,12 16,14"></polyline>
+                  </svg>
+                  Outdated Translations ({data.outdated.length})
                 </h4>
                 <div style={{
                   backgroundColor: '#fff3e0',
@@ -863,7 +1030,7 @@ const TranslationDashboard = () => {
                           onClick={() => handleEditOutOfDateDoc(item.file)}
                           style={{
                             padding: '3px 8px',
-                            backgroundColor: '#2563eb',
+                            backgroundColor: '#f59e0b',
                             color: 'white',
                             border: 'none',
                             borderRadius: '4px',
@@ -891,8 +1058,11 @@ const TranslationDashboard = () => {
             {/* Up to Date Files */}
             {data.upToDate.length > 0 && selectedLanguage !== 'all' && (
               <div style={{ marginBottom: '25px' }}>
-                <h4 style={{ color: '#27ae60', marginBottom: '10px' }}>
-                  ✅ Up to Date Translations ({data.upToDate.length})
+                <h4 style={{ color: '#27ae60', marginBottom: '10px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M20 6 9 17l-5-5"></path>
+                  </svg>
+                  Up to Date Translations ({data.upToDate.length})
                 </h4>
                 <div style={{
                   backgroundColor: '#e8f5e8',
@@ -928,8 +1098,12 @@ const TranslationDashboard = () => {
             {/* Orphaned Files */}
             {data.orphaned.length > 0 && (
               <div style={{ marginBottom: '25px' }}>
-                <h4 style={{ color: '#9c88ff', marginBottom: '10px' }}>
-                  🔗 Orphan Topics ({data.orphaned.length})
+                <h4 style={{ color: '#9c88ff', marginBottom: '10px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                    <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+                  </svg>
+                  Orphan Topics ({data.orphaned.length})
                 </h4>
                 <div style={{
                   backgroundColor: '#f4f2ff',
@@ -966,8 +1140,13 @@ const TranslationDashboard = () => {
             {/* Errors */}
             {data.errors.length > 0 && (
               <div style={{ marginBottom: '25px' }}>
-                <h4 style={{ color: '#e74c3c', marginBottom: '10px' }}>
-                  ⚠️ Errors ({data.errors.length})
+                <h4 style={{ color: '#e74c3c', marginBottom: '10px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"></path>
+                    <path d="M12 9v4"></path>
+                    <path d="m12 17 .01 0"></path>
+                  </svg>
+                  Errors ({data.errors.length})
                 </h4>
                 <div style={{
                   backgroundColor: '#ffebee',

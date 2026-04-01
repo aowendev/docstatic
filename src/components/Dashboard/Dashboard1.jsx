@@ -184,8 +184,48 @@ const Dashboard1 = () => {
 
   if (loading) {
     return (
-      <div style={{ padding: '20px', textAlign: 'center' }}>
-        <div>Loading content overview...</div>
+      <div style={{
+        padding: '24px',
+        borderBottom: '2px solid #d1d9e0',
+        marginBottom: '32px',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        minHeight: '120px'
+      }}>
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%', maxWidth: '400px' }}>
+          <div className="font-bold text-gray-800 text-xl mb-2">
+            Loading Dashboard
+          </div>
+          <div className="font-medium text-gray-600 text-base mb-4">
+            Loading content overview...
+          </div>
+          
+          {/* Progress Bar for Loading */}
+          <div style={{
+            width: '100%',
+            height: '6px',
+            backgroundColor: '#e5e7eb',
+            borderRadius: '3px',
+            overflow: 'hidden'
+          }}>
+            <div style={{
+              width: '100%',
+              height: '100%',
+              background: 'linear-gradient(45deg, #f59e0b, #d97706)',
+              borderRadius: '3px',
+              animation: 'indeterminate 2s ease-in-out infinite'
+            }}></div>
+          </div>
+        </div>
+        <style>{`
+          @keyframes indeterminate {
+            0% { transform: translateX(-100%); }
+            50% { transform: translateX(0%); }
+            100% { transform: translateX(100%); }
+          }
+        `}</style>
       </div>
     );
   }
@@ -203,97 +243,153 @@ const Dashboard1 = () => {
     );
   }
 
-  const StatCard = ({ title, count, total, color, percentage, onClick }) => (
-    <div 
-      onClick={() => count > 0 && onClick && onClick(title)}
-      style={{
-        background: 'white',
-        border: '1px solid #e1e4e8',
-        borderRadius: '6px',
-        padding: '16px',
-        textAlign: 'center',
-        position: 'relative',
-        overflow: 'hidden',
-        cursor: count > 0 ? 'pointer' : 'default',
-        transition: 'transform 0.1s ease, box-shadow 0.1s ease',
-        ':hover': count > 0 ? {
-          transform: 'translateY(-1px)',
-          boxShadow: '0 4px 8px rgba(0,0,0,0.1)'
-        } : {}
-      }}
-      onMouseEnter={(e) => {
-        if (count > 0) {
-          e.target.style.transform = 'translateY(-1px)';
-          e.target.style.boxShadow = '0 4px 8px rgba(0,0,0,0.1)';
-        }
-      }}
-      onMouseLeave={(e) => {
-        if (count > 0) {
-          e.target.style.transform = 'translateY(0)';
-          e.target.style.boxShadow = 'none';
-        }
-      }}
-    >
-      <div style={{
-        position: 'absolute',
-        bottom: 0,
-        left: 0,
-        height: '3px',
-        width: `${isNaN(percentage) ? 0 : percentage}%`,
-        background: color,
-        transition: 'width 0.3s ease'
-      }}></div>
-      <div style={{ fontSize: '24px', fontWeight: '600', color: color, marginBottom: '4px' }}>
-        {count || 0}
+  const StatCard = ({ title, count, total, color, percentage, onClick }) => {
+    const getStatusIcon = (status) => {
+      const icons = {
+        'Draft': (
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/>
+            <polyline points="14,2 14,8 20,8"/>
+            <line x1="9" x2="15" y1="15" y2="15"/>
+            <line x1="9" x2="12" y1="18" y2="18"/>
+          </svg>
+        ),
+        'Review': (
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/>
+            <circle cx="12" cy="12" r="3"/>
+          </svg>
+        ), 
+        'Translate': (
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <circle cx="12" cy="12" r="10"/>
+            <line x1="2" x2="22" y1="12" y2="12"/>
+            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+          </svg>
+        ),
+        'Approved': (
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M9 12l2 2 4-4"/>
+            <path d="M21 12c-1 0-3-1-3-3s2-3 3-3 3 1 3 3-2 3-3 3"/>
+            <path d="M3 12c1 0 3-1 3-3s-2-3-3-3-3 1-3 3 2 3 3 3"/>
+            <path d="M12 3c0 1 1 3 3 3s3-2 3-3-1-3-3-3-3 2-3 3"/>
+            <path d="M12 21c0-1-1-3-3-3s-3 2-3 3 1 3 3 3 3-2 3-3"/>
+          </svg>
+        ),
+        'Published': (
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/>
+            <path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/>
+            <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/>
+            <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/>
+          </svg>
+        ),
+        'Unlisted': (
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <rect width="18" height="11" x="3" y="11" rx="2" ry="2"/>
+            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+          </svg>
+        )
+      };
+      return icons[status] || icons['Draft'];
+    };
+
+    const getBackgroundColor = (status) => {
+      const backgrounds = {
+        'Draft': 'bg-orange-100',
+        'Review': 'bg-blue-100',
+        'Translate': 'bg-purple-100',
+        'Approved': 'bg-green-100',
+        'Published': 'bg-emerald-100',
+        'Unlisted': 'bg-gray-100'
+      };
+      return backgrounds[status] || 'bg-gray-100';
+    };
+
+    return (
+      <div 
+        onClick={() => count > 0 && onClick && onClick(title)}
+        className={`bg-white rounded-xl border border-gray-200 shadow-sm flex items-center gap-4 p-6 transition-all duration-200 ${
+          count > 0 ? 'cursor-pointer hover:shadow-md' : 'cursor-default opacity-60'
+        }`}
+      >
+        <div className={`${getBackgroundColor(title)} p-3 rounded-lg flex-shrink-0`}>
+          <div style={{ color }}>{getStatusIcon(title)}</div>
+        </div>
+        <div className="min-w-0">
+          <p className="text-sm text-gray-500 font-medium">{title}</p>
+          <p className="text-3xl font-bold" style={{ color }}>{count || 0}</p>
+          <p className="text-xs text-gray-400">
+            {isNaN(percentage) ? '0' : percentage.toFixed(0)}% of {total}
+          </p>
+        </div>
       </div>
-      <div style={{ fontSize: '12px', color: '#586069', marginBottom: '2px' }}>{title}</div>
-      <div style={{ fontSize: '10px', color: '#959da5' }}>
-        {isNaN(percentage) ? '0' : percentage.toFixed(0)}% of {total}
-        {count > 0 && <span style={{ display: 'block', marginTop: '2px', color: '#0969da' }}>Click to view</span>}
-      </div>
-    </div>
-  );
+    );
+  };
 
   return (
     <div style={{
-      padding: '20px',
-      border: '1px solid #ddd',
-      borderRadius: '8px',
-      backgroundColor: '#fafafa',
-      marginTop: 0,
-      marginBottom: '32px',
-      marginLeft: '16px',
-      marginRight: '16px',
-      boxSizing: 'border-box'
+      padding: '24px',
+      borderBottom: '2px solid #d1d9e0',
+      marginBottom: '32px'
     }}>
       <div style={{ 
         display: 'flex', 
         justifyContent: 'space-between', 
         alignItems: 'center',
-        marginBottom: '20px',
-        paddingBottom: '12px',
-        borderBottom: '1px solid #e1e4e8'
+        marginBottom: '24px'
       }}>
-        <h3 class="font-sans text-2xl text-tina-orange">
-          📊 Content Overview
-        </h3>
         <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-          <div style={{ fontSize: '14px', color: '#586069' }}>
-            Overall Progress: <strong>{contentData.totalProgress}%</strong>
+          <span className="text-3xl text-tina-orange">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <rect x="3" y="3" width="18" height="18" rx="2"></rect>
+              <path d="M9 9h6v6H9z"></path>
+              <path d="m16 3-4 4-4-4"></path>
+              <path d="M21 16.5c0-.8-.7-1.5-1.5-1.5s-1.5.7-1.5 1.5.7 1.5 1.5 1.5 1.5-.7 1.5-1.5z"></path>
+              <path d="M3 7.5C3 6.7 3.7 6 4.5 6S6 6.7 6 7.5 5.3 9 4.5 9 3 8.3 3 7.5z"></path>
+            </svg>
+          </span>
+          <h2 className="m-0 text-2xl font-bold text-gray-800">
+            Content Overview Dashboard
+          </h2>
+        </div>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+          <div style={{ fontSize: '14px', color: '#656d76' }}>
+            Overall Progress: <strong style={{ color: '#24292f' }}>{contentData.totalProgress}%</strong>
           </div>
           <button 
             onClick={fetchContentOverview}
             style={{
-              padding: '5px 10px',
-              backgroundColor: '#2563eb',
-              color: 'white',
-              border: 'none',
-              borderRadius: '4px',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '8px',
+              padding: '8px 16px',
+              borderRadius: '6px',
+              border: '1px solid #d1d5db',
+              backgroundColor: '#ffffff',
+              color: '#374151',
               cursor: 'pointer',
-              fontSize: '12px'
+              fontSize: '14px',
+              fontWeight: '500',
+              boxShadow: '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
+              transition: 'all 0.2s ease'
+            }}
+            onMouseEnter={(e) => {
+              e.target.style.backgroundColor = '#f3f4f6';
+              e.target.style.color = '#1f2937';
+            }}
+            onMouseLeave={(e) => {
+              e.target.style.backgroundColor = '#ffffff';
+              e.target.style.color = '#374151';
             }}
             disabled={loading}
           >
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"></path>
+              <path d="M21 3v5h-5"></path>
+              <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"></path>
+              <path d="M8 16H3v5"></path>
+            </svg>
             {loading ? 'Refreshing...' : 'Refresh'}
           </button>
         </div>
@@ -301,15 +397,16 @@ const Dashboard1 = () => {
 
       {/* Documentation Workflow */}
       <div style={{ marginBottom: '24px' }}>
-        <h3 style={{ margin: '0 0 12px 0', fontSize: '16px', color: '#24292e' }}>
-          📝 Documentation ({contentData.docs.total} topics)
+        <h3 style={{ margin: '0 0 12px 0', fontSize: '16px', color: '#24292e', display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path>
+            <polyline points="14,2 14,8 20,8"></polyline>
+            <line x1="9" x2="15" y1="15" y2="15"></line>
+            <line x1="9" x2="12" y1="18" y2="18"></line>
+          </svg>
+          Documentation ({contentData.docs.total} topics)
         </h3>       
-        <div style={{ 
-          display: 'grid', 
-          gridTemplateColumns: 'repeat(auto-fit, minmax(120px, 1fr))', 
-          gap: '12px',
-          marginBottom: '12px'
-        }}>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
           <StatCard title="Draft" count={contentData.docs.draft || 0} total={contentData.docs.total} 
                    color="#f59e0b" percentage={((contentData.docs.draft || 0) / contentData.docs.total) * 100 || 0} 
                    onClick={filterDocumentsByStatus} />
@@ -348,8 +445,12 @@ const Dashboard1 = () => {
               borderBottom: '1px solid #e1e4e8',
               backgroundColor: '#f6f8fa'
             }}>
-              <h4 style={{ margin: 0, fontSize: '14px', color: '#24292e' }}>
-                📄 {showDocuments} Documents ({filteredDocs.length})
+              <h4 style={{ margin: 0, fontSize: '14px', color: '#24292e', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path>
+                  <polyline points="14,2 14,8 20,8"></polyline>
+                </svg>
+                {showDocuments} Documents ({filteredDocs.length})
               </h4>
               <button
                 onClick={() => {
@@ -449,8 +550,11 @@ const Dashboard1 = () => {
           alignItems: 'center',
           marginBottom: '12px'
         }}>
-          <h3 style={{ margin: 0, fontSize: '16px', color: '#24292e' }}>
-            ⚡ Recent Activity
+          <h3 style={{ margin: 0, fontSize: '16px', color: '#24292e', display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+            </svg>
+            Recent Activity
           </h3>
           <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
             <select
@@ -574,7 +678,14 @@ const Dashboard1 = () => {
           color: '#c53030',
           fontSize: '14px'
         }}>
-          ⚠️ Some data may be simulated due to connection issues: {error}
+          <span style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"></path>
+              <path d="M12 9v4"></path>
+              <path d="m12 17 .01 0"></path>
+            </svg>
+            Some data may be simulated due to connection issues: {error}
+          </span>
         </div>
       )}
     </div>

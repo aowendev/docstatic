@@ -68,7 +68,9 @@ export const DashboardsCollection = {
 	  required: false,
 	  ui: {
 		component: (props) => (
-		  <Dashboard1/>
+		  <div style={{ display: 'block', width: '100%', clear: 'both' }}>
+			<Dashboard1/>
+		  </div>
 		),
 	  },
 	},
@@ -90,7 +92,9 @@ export const DashboardsCollection = {
 	  required: false,
 	  ui: {
 		component: (props) => (
-		  <MediaDashboard/>
+		  <div style={{ display: 'block', width: '100%', clear: 'both' }}>
+			<MediaDashboard/>
+		  </div>
 		),
 	  },
 	},
@@ -101,7 +105,9 @@ export const DashboardsCollection = {
 	  required: false,
 	  ui: {
 		component: (props) => (
-		  <TranslationDashboard/>
+		  <div style={{ display: 'block', width: '100%', clear: 'both' }}>
+			<TranslationDashboard/>
+		  </div>
 		),
 	  },
 	},
@@ -112,7 +118,9 @@ export const DashboardsCollection = {
 	  required: false,
 	  ui: {
 		component: (props) => (
-		  <BrokenLinksDashboard/>
+		  <div style={{ display: 'block', width: '100%', clear: 'both' }}>
+			<BrokenLinksDashboard/>
+		  </div>
 		),
 	  },
 	},
