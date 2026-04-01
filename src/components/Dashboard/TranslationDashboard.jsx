@@ -7,6 +7,7 @@
 
 import React, { useState, useEffect } from 'react';
 import * as xliffUtils from '../../utils/xliff';
+import docusaurusData from '../../../config/docusaurus/index.json';
 
 const TranslationDashboard = () => {
   const [status, setStatus] = useState('');
@@ -79,12 +80,12 @@ const TranslationDashboard = () => {
             paramsBody.title = item.title;
           }
           // ensure created translations start with required workflow metadata
-          paramsBody.draft = true;
-          paramsBody.review = true;
-          paramsBody.translate = false;
+          paramsBody.draft = false;
+          paramsBody.review = false;
+          paramsBody.translate = true;
           paramsBody.approved = false;
           paramsBody.published = false;
-          paramsBody.unlisted = false;
+          paramsBody.unlisted = true;
           // set lastmod to one day earlier than source (or yesterday)
           let lastmodSource = null;
           if (sourceNode && sourceNode.lastmod) {
@@ -251,7 +252,7 @@ const TranslationDashboard = () => {
         i18nAfter = pageInfo.endCursor;
       }
       // Build translation maps grouped by language
-      const translationsByLang = {}; // lang -> { canonical -> { node, originalPath } }
+      const translationsByLang = {}; // lang -> { canonical -> { node, originalPath, rawPath } }
       for (const edge of i18nEdges) {
         const node = edge.node;
         const relPath = node._sys?.relativePath || node._sys?.filename || '';
@@ -261,7 +262,13 @@ const TranslationDashboard = () => {
         const after = m[2];
         const prefix = 'docusaurus-plugin-content-docs/current/';
         if (!after.startsWith(prefix)) continue;
-        const cleanAfter = after.replace(new RegExp(`^${prefix}`), '');
+        let cleanAfter = after.replace(new RegExp(`^${prefix}`), '');
+        // Keep the raw path (before stripping docs/) for Tina API operations
+        const rawPath = cleanAfter;
+        // Strip leading 'docs/' to match source doc paths
+        if (cleanAfter.startsWith('docs/')) {
+          cleanAfter = cleanAfter.replace(/^docs\//, '');
+        }
         if (cleanAfter.startsWith('api/') || cleanAfter.startsWith('wiki/')) continue;
         const canonical = canonicalize(cleanAfter);
 
@@ -273,20 +280,20 @@ const TranslationDashboard = () => {
           const isExistingIndex = /(?:^|\/)index$|(?:^|\/)readme$/i.test(existing.originalPath || '');
           const isNewIndex = /(?:^|\/)index$|(?:^|\/)readme$/i.test(cleanAfter);
           if (isExistingIndex && !isNewIndex) {
-            translationsMap[canonical] = { node, originalPath: cleanAfter };
+            translationsMap[canonical] = { node, originalPath: cleanAfter, rawPath };
           } else {
             try {
               const existingDate = existing.node?.lastmod ? new Date(existing.node.lastmod) : null;
               const newDate = node?.lastmod ? new Date(node.lastmod) : null;
               if (newDate && (!existingDate || newDate > existingDate)) {
-                translationsMap[canonical] = { node, originalPath: cleanAfter };
+                translationsMap[canonical] = { node, originalPath: cleanAfter, rawPath };
               }
             } catch (e) {
               // keep existing on errors
             }
           }
         } else {
-          translationsMap[canonical] = { node, originalPath: cleanAfter };
+          translationsMap[canonical] = { node, originalPath: cleanAfter, rawPath };
         }
       }
 
@@ -337,7 +344,7 @@ const TranslationDashboard = () => {
           if (!sourceKeys.has(key)) {
             const entry = translationsMap[key];
             const node = entry.node;
-            const orig = entry.originalPath || key;
+            const orig = entry.rawPath || entry.originalPath || key;
             orphaned.push({ file: `${lang}/docusaurus-plugin-content-docs/current/${orig}`, translationLastMod: node.lastmod || 'No date', title: node.title || orig });
           }
         }
@@ -352,9 +359,16 @@ const TranslationDashboard = () => {
         };
       }
 
-      // Determine available languages purely from GraphQL i18n documents
-      const langsFromI18n = Object.keys(translationsByLang);
-      for (const fsLang of langsFromI18n) {
+      // Get supported languages from the imported docusaurus config, excluding
+      // the default locale and any English variants (en-*).
+      const supported = docusaurusData.languages?.supported || [];
+      const defaultLocale = docusaurusData.languages?.default || 'en';
+      const langsFromConfig = supported
+        .filter(l => l.code !== defaultLocale && !l.code.startsWith('en'))
+        .map(l => ({ code: l.code, label: l.label }));
+
+      for (const langEntry of langsFromConfig) {
+        const fsLang = langEntry.code;
         if (!results[fsLang]) {
           results[fsLang] = {
             missing: missingAll.slice(),
@@ -424,7 +438,7 @@ const TranslationDashboard = () => {
     return Object.keys(translationData).reduce((acc, lang) => {
       const data = translationData[lang];
       acc[lang] = {
-        total: data.missing.length + data.outdated.length + data.upToDate.length,
+        total: data.total || (data.missing.length + data.outdated.length + data.upToDate.length),
         missing: data.missing.length,
         outdated: data.outdated.length,
         upToDate: data.upToDate.length,
@@ -603,9 +617,11 @@ const TranslationDashboard = () => {
               fontSize: '14px'
             }}
           >
-            {languages.map(lang => (
-              <option key={lang} value={lang}>{lang.toUpperCase()}</option>
-            ))}
+            {languages.map(lang => {
+              const configEntry = (docusaurusData.languages?.supported || []).find(l => l.code === lang);
+              const label = configEntry ? `${lang.toUpperCase()} - ${configEntry.label}` : lang.toUpperCase();
+              return <option key={lang} value={lang}>{label}</option>;
+            })}
           </select>
           <button
             onClick={scanTranslations}
