@@ -22,6 +22,9 @@ import TabItem from "@theme-original/TabItem";
 import Tabs from "@theme-original/Tabs";
 import React from "react";
 
+// <Truncate /> is converted to {/* truncate */} by the Markdown preprocessor at build time.
+const Truncate = () => null;
+
 export default {
   ...MDXComponents,
   Admonition: MDXComponents.admonition,
@@ -38,5 +41,6 @@ export default {
   Snippet: Snippet,
   TabItem: TabItem,
   Tabs: Tabs,
+  Truncate: Truncate,
   VariableSet: VariableSet,
 };

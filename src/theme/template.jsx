@@ -132,12 +132,8 @@ const DocCardListTemplate = {
 //};
 
 const TruncateTemplate = {
-  name: "truncate",
+  name: "Truncate",
   label: "Truncate",
-  match: {
-    start: "<!--",
-    end: "-->",
-  },
   fields: [
     {
       name: "deactivate",
