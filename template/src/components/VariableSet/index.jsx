@@ -17,7 +17,7 @@ const VariableSet = ({ variableSelection, lang, initcap, bold }) => {
   const { i18n } = useDocusaurusContext();
 
   // Parse composite value
-  const [finalSetKey, finalVariableKey] = variableSelection?.split("|") || [];
+  const [finalSetKey, finalVariableKey] = variableSelection?.split("_") || [];
 
   // Determine the current language
   const getCurrentLanguage = () => {

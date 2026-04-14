@@ -1,5 +1,6 @@
 import React from "react";
 import { defineConfig, ReferenceField, TextField } from "tinacms";
+import { getEditorIdentity } from "../src/utils/editorIdentity";
 // docusaurus config for language settings
 import docusaurusData from "../config/docusaurus/index.json";
 // conditions from the conditions JSON file

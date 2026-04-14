@@ -24,6 +24,11 @@
           "isPublishDate": true
         },
         {
+          "title": "Modified By",
+          "name": "modifiedBy",
+          "type": "string"
+        },
+        {
           "title": "Content preview",
           "name": "preview",
           "type": "image"
@@ -52,6 +57,10 @@
     {
       "title": "blog",
       "path": "[[workspace]]/blog"
+    },
+    {
+      "title": "i18n",
+      "path": "[[workspace]]/i18n"
     }
   ],
   "frontMatter.content.autoUpdateDate": true,

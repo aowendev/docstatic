@@ -12,6 +12,7 @@ import Figure from "@site/src/components/Figure";
 import Footnote from "@site/src/components/Footnote";
 import GlossaryTerm from "@site/src/components/GlossaryTerm";
 import Passthrough from "@site/src/components/Passthrough";
+import RelatedTopics from "@site/src/components/RelatedTopics";
 import Snippet from "@site/src/components/Snippet";
 import VariableSet from "@site/src/components/VariableSet";
 import Details from "@theme/Details";
@@ -38,6 +39,7 @@ export default {
   Footnote: Footnote,
   GlossaryTerm: GlossaryTerm,
   Passthrough: Passthrough,
+  RelatedTopics: RelatedTopics,
   Snippet: Snippet,
   TabItem: TabItem,
   Tabs: Tabs,

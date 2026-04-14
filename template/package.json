@@ -1,7 +1,7 @@
 {
   "name": "my-site",
   "version": "0.1.0",
-  "description": "A Docusaurus + TinaCMS documentation site created with docstatic.",
+  "description": "A Docusaurus + TinaCMS documentation site created with docStatic.",
   "private": true,
   "scripts": {
     "docusaurus": "docusaurus",
