@@ -136,11 +136,22 @@ const formatNavbarItem = (item: any) => {
   }
 };
 const config = {
+  future: {
+    faster: true,
+    v4: true,
+  },
   markdown: {
     mermaid: true,
     hooks: {
       onBrokenMarkdownLinks: "warn",
-    }
+    },
+    preprocessor: ({fileContent, filePath}: {fileContent: string; filePath: string}) => {
+      // Convert <Truncate /> markers to MDX comments before compilation.
+      // Tina CMS writes <Truncate /> but Docusaurus expects {/* truncate */}.
+      // The truncateMarker regex in the blog plugin handles the actual split
+      // for list-view truncation *before* this runs, so removing it here is safe.
+      return fileContent.replace(/<Truncate\s*\/?>/g, '{/* truncate */}');
+    },
   },
   title: docusaurusData.title,
   tagline: docusaurusData.tagline,
@@ -206,7 +217,7 @@ const config = {
           })(),
           showReadingTime: docusaurusData.showReadingTime,
           // Truncate blog previews with manual markers or excerpt
-          truncateMarker: /<!--\s*(truncate)\s*-->/,
+          truncateMarker: /<Truncate\s*\/?>/,
           // Edit URL configuration for blog posts
           editUrl: ({
             blogDirPath,
