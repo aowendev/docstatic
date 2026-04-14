@@ -190,12 +190,12 @@ const FloatingChatBot = () => {
   const flow = {
     start: {
       message: aiStatus.loading 
-        ? `Hello! Loading docStatic AI assistant in ${navigator.gpu ? '🚀 GPU-accelerated' : '💻 CPU-only'} mode... ${Math.round(aiStatus.progress)}% complete` 
+        ? `Hello! Loading docStatic AI assistant with documentation context in ${navigator.gpu ? '🚀 GPU-accelerated' : '💻 CPU-only'} mode... ${Math.round(aiStatus.progress)}% complete` 
         : aiStatus.error
-        ? "Hello! AI had an issue loading, but I'm still here to help with docStatic questions (Docusaurus + TinaCMS workflows)."
+        ? "Hello! AI had an issue loading, but I'm still here to help with docStatic questions using our documentation knowledge base."
         : aiStatus.ready 
-        ? `Hi! I'm your ${navigator.gpu ? 'GPU-accelerated' : 'CPU-powered'} docStatic assistant! I can help with Docusaurus, TinaCMS, MDX components, and documentation workflows. Everything runs locally in your browser!`
-        : "Hello! I'm your docStatic documentation assistant. How can I help with your Docusaurus + TinaCMS setup?",
+        ? `Hi! I'm your ${navigator.gpu ? 'GPU-accelerated' : 'CPU-powered'} docStatic assistant with access to our complete documentation! I can help with Docusaurus, TinaCMS, MDX components, and documentation workflows. Everything runs locally in your browser!`
+        : "Hello! I'm your docStatic documentation assistant with access to our knowledge base. How can I help with your Docusaurus + TinaCMS setup?",
       chatDisabled: false,
       path: async (params) => {
         // First user message - process and move to conversation state

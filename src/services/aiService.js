@@ -1,5 +1,6 @@
 // Background AI service that starts loading immediately when the site loads
 import * as webllm from "@mlc-ai/web-llm";
+import docsService from './docsService.js';
 
 class AIService {
   constructor() {
@@ -22,6 +23,12 @@ class AIService {
     this._progress = 0;
     this.notifyListeners();
     
+    // Initialize documentation service in parallel
+    console.log('📚 Loading documentation knowledge base...');
+    const docsPromise = docsService.initialize().catch(error => {
+      console.warn('📚 Documentation loading failed:', error);
+    });
+
     try {
       // Check WebGPU availability for hardware acceleration
       console.log('🤖 Checking GPU capabilities...');
@@ -138,6 +145,11 @@ class AIService {
       this._progress = 100;
       
       console.log('🤖 AI model ready! Chat can now provide real AI responses.');
+      
+      // Wait for docs to finish loading
+      await docsPromise;
+      console.log('📚 Documentation context ready for enhanced AI responses!');
+      
       this.notifyListeners();
       
     } catch (error) {
@@ -173,8 +185,10 @@ class AIService {
     
     try {
       if (this.engine && !this._error) {
-        const messages = [
-          { role: "system", content: `You are a knowledgeable assistant for docStatic, a modern documentation platform that combines Docusaurus (static site generator) with TinaCMS (headless CMS).
+        // Get relevant documentation context
+        const docsContext = docsService.getContextForQuery(message);
+        
+        let systemPrompt = `You are a knowledgeable assistant for docStatic, a modern documentation platform that combines Docusaurus (static site generator) with TinaCMS (headless CMS).
 
 Key docStatic features:
 - Git-backed documentation with GitHub integration
@@ -185,21 +199,43 @@ Key docStatic features:
 - Media manager with third-party provider support
 - No local setup required for content editing
 - CI/CD workflow integration
-- Support for Markdown, MDX, JSON, and YAML
+- Support for Markdown, MDX, JSON, and YAML`;
 
-When answering:
+        if (docsContext) {
+          systemPrompt += `\n\nRELEVANT DOCUMENTATION CONTEXT:\n${docsContext.context}\n\nUse this context to provide accurate, specific answers. Reference the documentation when relevant.`;
+          console.log('📚 Using documentation context from:', docsContext.sources.join(', '));
+        }
+
+        systemPrompt += `\n\nWhen answering:
 - Focus on docStatic/Docusaurus documentation workflows
 - Mention TinaCMS for content management questions
 - Explain MDX component usage when relevant
 - Be concise but thorough
-- If unsure, suggest checking the docStatic documentation` },
+- If the documentation context doesn't cover the topic, provide general guidance but mention checking the full docStatic documentation`;
+
+        const messages = [
+          { role: "system", content: systemPrompt },
           { role: "user", content: message }
         ];
         
         const reply = await this.engine.chat.completions.create({ messages });
         return reply.choices[0].message.content;
       } else {
-        // Enhanced fallback responses with docStatic knowledge
+        // Enhanced fallback responses with documentation context
+        const docsContext = docsService.getContextForQuery(message);
+        
+        if (docsContext) {
+          const hasWebGPU = navigator.gpu ? "🚀 GPU-accelerated" : "💻 CPU-powered";
+          return `**Based on docStatic documentation:**
+
+${docsContext.context}
+
+*This response uses ${hasWebGPU} local AI with documentation context from: ${docsContext.sources.join(', ')}*
+
+${!navigator.gpu ? '**Performance Tip:** Enable WebGPU for faster AI responses!' : ''}`;
+        }
+        
+        // Fallback to topic-based responses if no docs context
         const docStaticTopics = {
           'install': 'DocStatic combines Docusaurus with TinaCMS. Install with `yarn install` then `yarn start` for development.',
           'cms': 'TinaCMS provides the rich-text editor. Access at `/admin` to edit content without touching code.',
@@ -235,13 +271,36 @@ ${!navigator.gpu ? '**Performance Tip:** Enable WebGPU for faster AI responses!'
 • Git workflows & deployment
 • Content collections & media
 
-*Powered by ${hasWebGPU} local AI - no data leaves your browser!*
+*Powered by ${hasWebGPU} local AI with documentation context - no data leaves your browser!*
 
 ${!navigator.gpu ? 'Enable WebGPU for 5-10x faster responses!' : ''}`;
       }
     } catch (error) {
       console.error('🤖 Chat error:', error);
-      return `I encountered an error, but I can still help with docStatic questions!\n\n**DocStatic** is a documentation platform combining:\n• **Docusaurus** - React-based static site generator\n• **TinaCMS** - Git-backed headless CMS\n• **MDX** - Markdown + React components\n\nTry asking about installation, content editing, components, or deployment!\n\n*This demo shows local AI (${navigator.gpu ? 'GPU-accelerated' : 'CPU-powered'}) with no external dependencies.*`;
+      
+      // Try to provide docs context even on error
+      const docsContext = docsService.getContextForQuery(message);
+      
+      if (docsContext) {
+        return `I encountered an error, but here's what I found in the docStatic documentation:
+
+${docsContext.context}
+
+*Based on documentation: ${docsContext.sources.join(', ')}}*
+
+*This demo shows local AI (${navigator.gpu ? 'GPU-accelerated' : 'CPU-powered'}) with documentation context.*`;
+      }
+      
+      return `I encountered an error, but I can still help with docStatic questions!
+
+**DocStatic** is a documentation platform combining:
+• **Docusaurus** - React-based static site generator
+• **TinaCMS** - Git-backed headless CMS
+• **MDX** - Markdown + React components
+
+Try asking about installation, content editing, components, or deployment!
+
+*This demo shows local AI (${navigator.gpu ? 'GPU-accelerated' : 'CPU-powered'}) with no external dependencies.*`;
     }
   }
   
