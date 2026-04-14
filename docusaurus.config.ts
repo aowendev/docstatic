@@ -1,5 +1,9 @@
 import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
+import * as dotenv from 'dotenv';
+
+// Load environment variables from .env file
+dotenv.config();
 
 import PrismLight from './src/utils/prismLight';
 import PrismDark from './src/utils/prismDark';
@@ -356,6 +360,11 @@ const config = {
     ],
   ],
   themes: ["docusaurus-theme-openapi-docs", "@docusaurus/theme-mermaid"],
+  
+  // Custom fields to expose environment variables to client
+  customFields: {
+    groqApiKey: process.env.GROQ_API_KEY,
+  },
 };
 async function createConfig() {
   return config;

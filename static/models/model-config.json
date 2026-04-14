@@ -1,0 +1,14 @@
+{
+  "model_id": "RedPajama-INCITE-Chat-3B-v1-q4f16_1-MLC-local",
+  "model": "/models/",
+  "model_lib": "/models/",
+  "model_lib_url": "/models/",
+  "vram_required_MB": 2048.0,
+  "low_resource_required": false,
+  "buffer_size_required_bytes": 262144000,
+  "context_window_size": 2048,
+  "sliding_window_size": -1,
+  "attention_sink_size": -1,
+  "prefill_chunk_size": 2048,
+  "tensor_parallel_shards": 1
+}

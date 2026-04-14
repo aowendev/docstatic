@@ -7,8 +7,8 @@
 
 // for settings, see: https://react-chatbotify.com/docs/v2/introduction/quickstart
 
-import LlmConnector, { GeminiProvider } from "@rcb-plugins/llm-connector";
-import React, { useId } from "react";
+import aiService from "../../services/aiService";
+import React, { useId, useState, useRef, useEffect } from "react";
 import ChatBot from "react-chatbotify";
 import { useHistory } from "react-router-dom";
 
@@ -20,19 +20,63 @@ const isDesktop =
 
 const FloatingChatBot = () => {
   const uniqueId = useId();
+  const [debugInfo, setDebugInfo] = useState('');
+  const history = useHistory();
 
-  // gemini api key, required since we're using 'direct' mode for testing
-fetch('https://snazzy-crepe-91991c.netlify.app/.netlify/functions/gemini')
-  .then(res => res.json())
-  .then(data => {
-    const apiKey = data.apiKey;
-    // Use the apiKey as needed
+  // Monitor AI service status
+  const [aiStatus, setAiStatus] = useState({
+    ready: aiService.isReady(),
+    loading: aiService.isLoading(),
+    error: aiService.hasError(),
+    progress: aiService.getProgress(),
   });
 
-  // initialize the plugin
-  const plugins = [LlmConnector()];
+  useEffect(() => {
+    const updateStatus = () => {
+      const newStatus = {
+        ready: aiService.isReady(),
+        loading: aiService.isLoading(), 
+        error: aiService.hasError(),
+        progress: aiService.getProgress(),
+      };
+      console.log('AI Service Status Update:', newStatus);
+      setAiStatus(newStatus);
+    };
 
-  const history = useHistory();
+    // Initial status
+    updateStatus();
+
+    // Listen for status changes
+    const unsubscribe = aiService.onStatusChange(updateStatus);
+    
+    return unsubscribe;
+  }, []);
+
+  // Function to chat with AI using the service
+  const chatWithAI = async (message) => {
+    if (aiStatus.loading) {
+      const gpuStatus = navigator.gpu ? "🚀 GPU-accelerated" : "💻 CPU-only";
+      return `DocStatic AI assistant loading (${Math.round(aiStatus.progress)}%) - ${gpuStatus} mode. ${!navigator.gpu ? 'Enable WebGPU for faster responses!' : 'Almost ready to help with Docusaurus + TinaCMS questions!'}`;
+    }
+    
+    if (aiStatus.error) {
+      return "AI encountered an error during initialization. Using fallback responses for demonstration purposes.";
+    }
+    
+    if (!aiStatus.ready) {
+      return "AI is not available. Please refresh the page to try again.";
+    }
+
+    try {
+      console.log('Sending message to AI service:', message);
+      const response = await aiService.chat(message);
+      return response;
+    } catch (error) {
+      console.error('Chat error:', error);
+      return "Sorry, I encountered an error. This demo shows how local AI would work in a static site.";
+    }
+  };
+
   const navigatePage = (page, params) => {
     if (page.startsWith("https")) {
       if (isDesktop) {
@@ -142,42 +186,47 @@ fetch('https://snazzy-crepe-91991c.netlify.app/.netlify/functions/gemini')
     };
   }, []);
 
-  // example flow for testing
+  // Improved flow - separate states to prevent re-showing welcome message
   const flow = {
     start: {
-      message:
-        "Hello! Make sure you've set your API key before getting started!",
-      options: ["I am ready!"],
-      chatDisabled: true,
+      message: aiStatus.loading 
+        ? `Hello! Loading docStatic AI assistant in ${navigator.gpu ? '🚀 GPU-accelerated' : '💻 CPU-only'} mode... ${Math.round(aiStatus.progress)}% complete` 
+        : aiStatus.error
+        ? "Hello! AI had an issue loading, but I'm still here to help with docStatic questions (Docusaurus + TinaCMS workflows)."
+        : aiStatus.ready 
+        ? `Hi! I'm your ${navigator.gpu ? 'GPU-accelerated' : 'CPU-powered'} docStatic assistant! I can help with Docusaurus, TinaCMS, MDX components, and documentation workflows. Everything runs locally in your browser!`
+        : "Hello! I'm your docStatic documentation assistant. How can I help with your Docusaurus + TinaCMS setup?",
+      chatDisabled: false,
       path: async (params) => {
-        if (!apiKey) {
-          await params.simulateStreamMessage("You have not set your API key!");
-          return "start";
-        }
-        await params.simulateStreamMessage("Ask away!");
-        return "gemini";
-      },
+        // First user message - process and move to conversation state
+        console.log('First user message:', params.userInput);
+        
+        const response = await chatWithAI(params.userInput);
+        await params.streamMessage(response);
+        return "conversation"; // Move to ongoing conversation state
+      }
     },
-    gemini: {
-      llmConnector: {
-        // provider configuration guide:
-        // https://github.com/React-ChatBotify-Plugins/llm-connector/blob/main/docs/providers/Gemini.md
-        provider: new GeminiProvider({
-          mode: "direct",
-          model: "gemini-2.0-flash",
-          responseFormat: "stream",
-          apiKey: apiKey,
-        }),
-        outputType: "character",
-      },
+    conversation: {
+      // No message property - just handle user input
+      chatDisabled: false,
+      path: async (params) => {
+        // Ongoing conversation - no welcome message
+        console.log('User message in conversation:', params.userInput);
+        
+        const response = await chatWithAI(params.userInput);
+        await params.streamMessage(response);
+        return "conversation"; // Stay in conversation state
+      }
     },
   };
 
-  // Use a key based on a hash of the styles object to force re-mount on theme change
-  const stylesKey = JSON.stringify(styles);
+  // Use a key based on AI status to re-render when status changes
+  const chatBotKey = `${uniqueId}-${aiStatus.ready}-${aiStatus.loading}-${aiStatus.error}`;
+  console.log('Rendering ChatBot with AI status:', aiStatus);
+  
   return (
     <ChatBot
-      key={stylesKey}
+      key={chatBotKey}
       id={uniqueId}
       flow={flow}
       styles={styles}
