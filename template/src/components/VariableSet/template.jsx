@@ -29,7 +29,7 @@ export const VariableSetBlockTemplate = {
         .filter((set) => set.name !== "Excluded")
         .flatMap((set) =>
           set.variables.map((variable) => ({
-            value: `${set.name}_${variable.key}`, // Composite value: setKey_variableKey
+            value: `${set.name}_${variable.key}`, // Composite value: setKey_variableKey (using underscore)
             label: `${variable.key} (${set.name})`,
           }))
         ),
