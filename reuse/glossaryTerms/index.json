@@ -10,27 +10,9 @@
           "_template": "translation"
         },
         {
-          "lang": "de",
-          "term": "Single Sourcing",
-          "definition": "Eine Content-Strategie, bei der Inhalte einmalig erstellt und in mehreren Kontexten oder Formaten wiederverwendet werden.",
-          "_template": "translation"
-        },
-        {
-          "lang": "es",
-          "term": "fuente única",
-          "definition": "Una estrategia de contenido en la que el contenido se crea una vez y se reutiliza en múltiples contextos o formatos.",
-          "_template": "translation"
-        },
-        {
           "lang": "fr",
           "term": "approvisionnement unique",
           "definition": "Une stratégie de contenu où le contenu est créé une fois et réutilisé dans plusieurs contextes ou formats.",
-          "_template": "translation"
-        },
-        {
-          "lang": "ja",
-          "term": "シングルソーシング",
-          "definition": "コンテンツを一度作成し、複数のコンテキストや形式で再利用するコンテンツ戦略。",
           "_template": "translation"
         }
       ],

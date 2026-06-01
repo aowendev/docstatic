@@ -115,7 +115,7 @@ const TranslationDashboard = () => {
               // ignore parse errors
             }
           }
-          paramsBody.lastmod = lastmodSource ? new Date(lastmodSource.getTime() - 1000).toISOString() : new Date(Date.now() - 1000).toISOString();
+          paramsBody.lastmod = lastmodSource ? new Date(lastmodSource.getTime() - 86400000).toISOString() : new Date(Date.now() - 86400000).toISOString();
 
           await client.request({
             query: `
@@ -448,7 +448,7 @@ const TranslationDashboard = () => {
       const missingAllSnippets = [];
       for (const key of snippetSourceKeys) {
         const src = snippetSourceMap[key];
-        missingAllSnippets.push({ file: key, sourceLastMod: src.lastmod || 'No date', title: src.title || key, sourceNode: src });
+        missingAllSnippets.push({ file: key, sourceLastMod: 'No date', title: src.title || key, sourceNode: src });
       }
       for (const lang of Object.keys(results)) {
         const snTrMap = snippetTranslationsByLang[lang] || {};
@@ -459,7 +459,7 @@ const TranslationDashboard = () => {
           const srcDate = src.lastmod ? new Date(src.lastmod) : null;
           const title = src.title || key;
           if (!snTrKeys.has(key)) {
-            snMissing.push({ file: key, sourceLastMod: src.lastmod || 'No date', title, sourceNode: src });
+            snMissing.push({ file: key, sourceLastMod: 'No date', title, sourceNode: src });
             continue;
           }
           const tr = snTrMap[key].node;
