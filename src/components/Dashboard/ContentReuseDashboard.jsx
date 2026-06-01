@@ -276,7 +276,7 @@ const SUGGESTION_CATEGORIES = [
   {
     type: 'codeSnippets',
     label: 'Possible Snippets',
-    description: 'Inline code blocks that could become code snippets',
+    description: 'Inline code blocks that could become snippets',
     color: '#3b82f6',
     bgClass: 'bg-blue-100',
     icon: (
@@ -295,7 +295,7 @@ const SUGGESTION_CATEGORIES = [
   {
     type: 'termText',
     label: 'Possible Terms',
-    description: 'Glossary terms appearing as plain text that could use the GlossaryTerm component',
+    description: 'Plain text glossary terms',
     color: '#10b981',
     bgClass: 'bg-green-100',
     icon: (
@@ -312,7 +312,7 @@ const SUGGESTION_CATEGORIES = [
   {
     type: 'duplicateText',
     label: 'Possible Snippets',
-    description: 'Text blocks appearing in two or more topics that could be snippets',
+    description: 'Text blocks appearing in two or more topics',
     color: '#f59e0b',
     bgClass: 'bg-orange-100',
     icon: (
@@ -331,7 +331,7 @@ const SUGGESTION_CATEGORIES = [
   {
     type: 'variables',
     label: 'Possible Variables',
-    description: 'Variable values appearing as plain text that could use the VariableSet component',
+    description: 'Plain text variable values',
     color: '#8b5cf6',
     bgClass: 'bg-purple-100',
     icon: (
