@@ -3,8 +3,8 @@
     "title": "Adding the CMS to an iPad home screen",
     "description": "Adding the CMS to an iPad home screen",
     "tags": [
-      "content-management-systems",
-      "content-management-systems_tinacms",
+      "software_content-management-systems",
+      "software_content-management-systems_tinacms",
       "software",
       "software_browsers",
       "software_browsers_safari"
@@ -93,7 +93,7 @@
     ],
     "path": "/cli",
     "filePath": "cli.mdx",
-    "lastmod": "2026-03-10T22:51:55.051Z"
+    "lastmod": "2026-06-01T00:00:00.000Z"
   },
   {
     "title": "Code blocks and snippets",
@@ -197,9 +197,9 @@
     "title": "Dashboards",
     "description": "Viewing dashboards in TinaCMS",
     "tags": [
-      "content-management-systems",
-      "content-management-systems_tinacms",
-      "content-management-systems_media-management"
+      "software_content-management-systems",
+      "software_content-management-systems_tinacms",
+      "software_content-management-systems_media-management"
     ],
     "path": "/guides/dashboards",
     "filePath": "guides/dashboards.mdx",
@@ -225,6 +225,9 @@
     "title": "Diagrams",
     "description": "Writing diagrams with Mermaid.",
     "tags": [
+      "computer-languages",
+      "computer-languages_javascript",
+      "computer-languages_javascript_mermaid",
       "content",
       "content_diagrams"
     ],
@@ -363,7 +366,7 @@
     ],
     "path": "/installation",
     "filePath": "installation.mdx",
-    "lastmod": "2026-03-10T22:56:48.047Z"
+    "lastmod": "2026-06-01T00:00:00.000Z"
   },
   {
     "title": "Internationalization",
@@ -461,7 +464,6 @@
       "content",
       "content_equations",
       "computer-languages",
-      "computer-languages_",
       "computer-languages_latex",
       "computer-languages_latex_katex"
     ],
@@ -494,6 +496,7 @@
       "software_artificial-intelligence",
       "software_automation",
       "software_integrations",
+      "software_mcp",
       "development",
       "development_ai-tools"
     ],
@@ -560,7 +563,10 @@
     "description": "Use Vale to enforce a consistent writing style across your docStatic documentation.",
     "tags": [
       "content",
-      "software"
+      "development",
+      "software",
+      "software_command-line-interface",
+      "software_grammar-spelling-style"
     ],
     "path": "/guides/vale",
     "filePath": "guides/vale.mdx",
@@ -716,6 +722,19 @@
     "path": "/migration",
     "filePath": "migration/index.mdx",
     "lastmod": "2026-03-10T22:59:35.900Z"
+  },
+  {
+    "title": "Using Claude in this project",
+    "description": "How Claude Code is used in the docStatic project — automation, component development, style tooling, information architecture and content review.",
+    "tags": [
+      "software",
+      "software_artificial-intelligence",
+      "software_automation",
+      "development"
+    ],
+    "path": "/guides/using-claude",
+    "filePath": "guides/using-claude.mdx",
+    "lastmod": "2026-06-01T00:00:00.000Z"
   },
   {
     "title": "Using plugins",

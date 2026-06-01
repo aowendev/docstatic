@@ -10,7 +10,7 @@ import Dashboard1 from './Dashboard1';
 import MediaDashboard from './MediaDashboard';
 import TranslationDashboard from './TranslationDashboard';
 import BrokenLinksDashboard from './BrokenLinksDashboard';
-// import ContentReuseDashboard from './ContentReuseDashboard';
+import ContentReuseDashboard from './ContentReuseDashboard';
 import StatusBar from './StatusBar';
 import HelpButton from '../HelpButton';
 //. import DocumentMutationDashboard from './DocumentMutationDashboard';
@@ -74,17 +74,19 @@ export const DashboardsCollection = {
 		),
 	  },
 	},
-//		{
-//		  type: "boolean",
-//		  name: "contentReuseDashboard",
-//		  label: "Content Reuse Overview",
-//		  required: false,
-//		  ui: {
-//			component: (props) => (
-//			  <ContentReuseDashboard />
-//			),
-//		  },
-//		},
+	{
+	  type: "boolean",
+	  name: "contentReuseDashboard",
+	  label: "Content Reuse Overview",
+	  required: false,
+	  ui: {
+		component: (props) => (
+		  <div style={{ display: 'block', width: '100%', clear: 'both' }}>
+			<ContentReuseDashboard/>
+		  </div>
+		),
+	  },
+	},
 	{
 	  type: "boolean",
 	  name: "mediaDashboard",
