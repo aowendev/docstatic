@@ -35,48 +35,59 @@ async function fetchReuseData() {
   // Fetch all docs (MDX files)
   const docsResult = await client.queries.docConnection({ first: 1000 });
   const docs = docsResult.data?.docConnection?.edges || [];
-  // Extract path and body text for each doc
-  const mdxContents = docs.map((edge) => {
-    const node = edge.node;
-    let content = '';
-    if (node.body && typeof node.body === 'object' && node.body.children) {
-      content = node.body.children.map((c) => (typeof c.text === 'string' ? c.text : '')).join(' ');
-    } else if (typeof node.body === 'string') {
-      content = node.body;
-    }
-    return {
-      path: node._sys?.relativePath || node._sys?.filename,
-      content: content || ''
-    };
-  });
+  const docBodies = docs.map((edge) => ({
+    path: edge.node._sys?.relativePath || edge.node._sys?.filename,
+    body: edge.node.body || null
+  }));
 
-  function findUsageInMdxFiles(matchStr) {
-    return mdxContents.filter((f) => f.content.includes(matchStr)).map((f) => f.path);
+  // Search the AST for a specific component + prop combination rather than doing
+  // free-text search. Free-text matching causes false positives when, for example,
+  // a glossary term key ("single-sourcing") is a substring of a variable set's
+  // variableSelection prop ("writing-terms_single-sourcing").
+  function bodyContainsComponent(node, componentName, propName, matchFn) {
+    if (!node || typeof node !== 'object') return false;
+    if (Array.isArray(node)) return node.some(n => bodyContainsComponent(n, componentName, propName, matchFn));
+    if (node.name === componentName && node.props) {
+      const val = node.props[propName];
+      if (matchFn(val)) return true;
+    }
+    if (Array.isArray(node.children)) {
+      return node.children.some(child => bodyContainsComponent(child, componentName, propName, matchFn));
+    }
+    return false;
+  }
+
+  function findComponentUsage(componentName, propName, matchFn) {
+    return docBodies
+      .filter(({ body }) => bodyContainsComponent(body, componentName, propName, matchFn))
+      .map(({ path }) => path);
   }
 
   return {
     codeSnippets: codeSnippets.map((item) => ({
       ...item,
-      usedIn: findUsageInMdxFiles(item.name)
+      usedIn: findComponentUsage('CodeSnippet', 'filepath', (val) => typeof val === 'string' && val.includes(item.name))
     })),
     glossaryTerms: (glossaryConn.data?.glossaryTermsConnection?.edges || []).map((edge) => {
       const item = edge.node.glossaryTerms?.[0] || edge.node;
       return {
         key: item.key,
         definition: item.translations?.[0]?.definition || '',
-        usedIn: findUsageInMdxFiles(item.key)
+        // Exact match on termKey — avoids substring collisions with variable set names
+        usedIn: findComponentUsage('GlossaryTerm', 'termKey', (val) => val === item.key)
       };
     }),
     snippets: snippets.map((item) => ({
       ...item,
-      usedIn: findUsageInMdxFiles(item.name)
+      usedIn: findComponentUsage('Snippet', 'filepath', (val) => typeof val === 'string' && val.includes(item.name))
     })),
     variableSets: (variableSetsConn.data?.variableSetsConnection?.edges || []).map((edge) => {
       const item = edge.node.variableSets?.[0] || edge.node;
       return {
         name: item.name,
         variables: item.variables?.length || 0,
-        usedIn: findUsageInMdxFiles(item.name)
+        // variableSelection is "setName_varKey" — match any usage of this set
+        usedIn: findComponentUsage('VariableSet', 'variableSelection', (val) => typeof val === 'string' && (val === item.name || val.startsWith(item.name + '_')))
       };
     })
   };
