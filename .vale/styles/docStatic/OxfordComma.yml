@@ -1,0 +1,5 @@
+extends: existence
+message: "Remove the Oxford comma before '%s'."
+level: warning
+raw:
+  - '\w[\w\s]+,\s+\w[\w\s]+,\s+(and|or)\s'
