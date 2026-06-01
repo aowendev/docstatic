@@ -110,6 +110,14 @@
           "tag": "development_ai-tools"
         },
         {
+          "tag": "development_apis",
+          "children": [
+            {
+              "tag": "development_apis_graphql"
+            }
+          ]
+        },
+        {
           "tag": "development_deployment"
         },
         {
@@ -251,6 +259,9 @@
       "tag": "software",
       "children": [
         {
+          "tag": "software_ai-integration"
+        },
+        {
           "tag": "software_artificial-intelligence"
         },
         {
@@ -315,6 +326,9 @@
           "tag": "software_integrations"
         },
         {
+          "tag": "software_mcp"
+        },
+        {
           "tag": "software_notifications",
           "children": [
             {
@@ -349,7 +363,7 @@
               "tag": "software_search_lunr"
             },
             {
-              "tag": "software_search_search-engine-optimization"
+              "tag": "software_search_search-engine-optimisation"
             }
           ]
         },
