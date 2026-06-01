@@ -178,7 +178,7 @@ const CATEGORIES = [
 const ContentReuseDashboard = () => {
   const [reuseData, setReuseData] = useState(null);
   const [detailType, setDetailType] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
   const loadData = () => {
@@ -195,9 +195,55 @@ const ContentReuseDashboard = () => {
       });
   };
 
-  useEffect(() => {
-    loadData();
-  }, []);
+  const headerButtons = (label) => (
+    <button
+      onClick={loadData}
+      style={{
+        display: 'flex', alignItems: 'center', gap: '8px',
+        padding: '8px 16px', borderRadius: '6px',
+        border: '1px solid #d1d5db', backgroundColor: '#ffffff',
+        color: '#374151', cursor: 'pointer', fontSize: '14px',
+        fontWeight: '500', boxShadow: '0 1px 2px 0 rgba(0,0,0,0.05)',
+        transition: 'all 0.2s ease'
+      }}
+      onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = '#f3f4f6'; e.currentTarget.style.color = '#1f2937'; }}
+      onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = '#ffffff'; e.currentTarget.style.color = '#374151'; }}
+      disabled={loading}
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"></path>
+        <path d="M21 3v5h-5"></path>
+        <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"></path>
+        <path d="M8 16H3v5"></path>
+      </svg>
+      {label}
+    </button>
+  );
+
+  const dashboardHeader = (
+    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+        <span className="text-3xl text-tina-orange">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"></path>
+            <path d="M21 3v5h-5"></path>
+            <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"></path>
+            <path d="M8 16H3v5"></path>
+          </svg>
+        </span>
+        <h2 className="m-0 text-2xl font-bold text-gray-800">Content Reuse Dashboard</h2>
+      </div>
+      {headerButtons(loading ? 'Loading...' : reuseData ? 'Refresh' : 'Load')}
+    </div>
+  );
+
+  if (!reuseData && !loading && !error) {
+    return (
+      <div style={{ padding: '24px', borderBottom: '2px solid #d1d9e0', marginBottom: '32px' }}>
+        {dashboardHeader}
+      </div>
+    );
+  }
 
   if (loading) {
     return (
@@ -251,8 +297,6 @@ const ContentReuseDashboard = () => {
       </div>
     );
   }
-
-  if (!reuseData) return null;
 
   const activeCategory = CATEGORIES.find((c) => c.type === detailType);
 
@@ -330,58 +374,7 @@ const ContentReuseDashboard = () => {
 
   return (
     <div style={{ padding: '24px', borderBottom: '2px solid #d1d9e0', marginBottom: '32px' }}>
-
-      {/* Header */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-          <span className="text-3xl text-tina-orange">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"></path>
-              <path d="M21 3v5h-5"></path>
-              <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"></path>
-              <path d="M8 16H3v5"></path>
-            </svg>
-          </span>
-          <h2 className="m-0 text-2xl font-bold text-gray-800">
-            Content Reuse Dashboard
-          </h2>
-        </div>
-        <button
-          onClick={loadData}
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '8px',
-            padding: '8px 16px',
-            borderRadius: '6px',
-            border: '1px solid #d1d5db',
-            backgroundColor: '#ffffff',
-            color: '#374151',
-            cursor: 'pointer',
-            fontSize: '14px',
-            fontWeight: '500',
-            boxShadow: '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
-            transition: 'all 0.2s ease'
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.backgroundColor = '#f3f4f6';
-            e.currentTarget.style.color = '#1f2937';
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.backgroundColor = '#ffffff';
-            e.currentTarget.style.color = '#374151';
-          }}
-          disabled={loading}
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"></path>
-            <path d="M21 3v5h-5"></path>
-            <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"></path>
-            <path d="M8 16H3v5"></path>
-          </svg>
-          {loading ? 'Refreshing...' : 'Refresh'}
-        </button>
-      </div>
+      {dashboardHeader}
 
       {/* Section header */}
       <h3 style={{ margin: '0 0 12px 0', fontSize: '16px', color: '#24292e', display: 'flex', alignItems: 'center', gap: '8px' }}>

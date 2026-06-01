@@ -173,10 +173,6 @@ const Dashboard1 = () => {
   };
 
   useEffect(() => {
-    fetchContentOverview();
-  }, []);
-  
-  useEffect(() => {
     if (contentData) {
       fetchContentOverview(); // Refresh when filters change
     }
@@ -230,12 +226,46 @@ const Dashboard1 = () => {
     );
   }
 
-  if (!contentData) {
+  if (!contentData && !loading) {
     return (
-      <div style={{ padding: '20px', textAlign: 'center' }}>
-        <div style={{ color: '#666' }}>No content data available</div>
+      <div style={{ padding: '24px', borderBottom: '2px solid #d1d9e0', marginBottom: '32px' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <span className="text-3xl text-tina-orange">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="3" y="3" width="18" height="18" rx="2"></rect>
+                <path d="M9 9h6v6H9z"></path>
+                <path d="m16 3-4 4-4-4"></path>
+                <path d="M21 16.5c0-.8-.7-1.5-1.5-1.5s-1.5.7-1.5 1.5.7 1.5 1.5 1.5 1.5-.7 1.5-1.5z"></path>
+                <path d="M3 7.5C3 6.7 3.7 6 4.5 6S6 6.7 6 7.5 5.3 9 4.5 9 3 8.3 3 7.5z"></path>
+              </svg>
+            </span>
+            <h2 className="m-0 text-2xl font-bold text-gray-800">Content Overview Dashboard</h2>
+          </div>
+          <button
+            onClick={fetchContentOverview}
+            style={{
+              display: 'flex', alignItems: 'center', gap: '8px',
+              padding: '8px 16px', borderRadius: '6px',
+              border: '1px solid #d1d5db', backgroundColor: '#ffffff',
+              color: '#374151', cursor: 'pointer', fontSize: '14px',
+              fontWeight: '500', boxShadow: '0 1px 2px 0 rgba(0,0,0,0.05)',
+              transition: 'all 0.2s ease'
+            }}
+            onMouseEnter={(e) => { e.target.style.backgroundColor = '#f3f4f6'; e.target.style.color = '#1f2937'; }}
+            onMouseLeave={(e) => { e.target.style.backgroundColor = '#ffffff'; e.target.style.color = '#374151'; }}
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"></path>
+              <path d="M21 3v5h-5"></path>
+              <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"></path>
+              <path d="M8 16H3v5"></path>
+            </svg>
+            {error ? 'Retry' : 'Load'}
+          </button>
+        </div>
         {error && (
-          <div style={{ color: '#d73a49', marginTop: '10px', fontSize: '14px' }}>
+          <div style={{ padding: '12px', background: '#fff5f5', border: '1px solid #feb2b2', borderRadius: '6px', color: '#c53030', fontSize: '14px' }}>
             Error: {error}
           </div>
         )}
