@@ -1,0 +1,71 @@
+---
+help: null
+lastmod: '2026-05-31T00:00:00.000Z'
+title: OpenAPI reference docs
+tags:
+  - apis
+  - apis_openapi
+  - software
+  - software_static-site-generators
+  - software_static-site-generators_docusaurus
+draft: false
+review: false
+translate: true
+approved: false
+published: false
+unlisted: true
+---
+
+# OpenAPI reference docs
+
+docStatic uses [`docusaurus-plugin-openapi-docs`](https://github.com/PaloAltoNetworks/docusaurus-openapi-docs) to generate API reference documentation from an OpenAPI specification. The plugin reads a spec file and writes a set of MDX files into your `docs/` tree that Docusaurus then builds as normal pages.
+
+## Configuration
+
+API sources are configured in `config/docusaurus/index.json` under the `openapi.apis` array. Each entry specifies a name, the path to the spec file, the output directory, and optional grouping options:
+
+```json
+{
+  "openapi": {
+    "apis": [
+      {
+        "name": "petstore",
+        "specPath": "openapi/petstore.yaml",
+        "outputDir": "docs/api/petstore",
+        "groupPathsBy": "tag",
+        "categoryLinkSource": "tag"
+      }
+    ]
+  }
+}
+```
+
+Run generation with:
+
+```bash
+npm run gen-api-docs
+```
+
+To remove generated files:
+
+```bash
+npm run clean-api-docs
+```
+
+## Tag pages
+
+When `groupPathsBy` and `categoryLinkSource` are both set to `"tag"`, the plugin creates a category index page for each OpenAPI tag (e.g. `store.tag.mdx`). By default these files contain a verbose boilerplate block that imports `DocCardList` and `useCurrentSidebarCategory`—both redundant in docStatic because `DocCardList` is already globally registered as an MDX component, and the component resolves the current category's items automatically when called with no props.
+
+docStatic configures the plugin with a custom tag template that produces the simplified form instead:
+
+```mdx
+<DocCardList />
+```
+
+The template is at `config/docusaurus/openapi-tag-template.md` and is wired in via the `tagTemplate` option in `docusaurus.config.ts`.
+
+## Editing generated tag files
+
+The plugin **only creates a tag file if one does not already exist**—it will never overwrite a file you have edited. This means you can freely customise the description text in a tag page and it will survive subsequent `gen-api-docs` runs. Only newly introduced tags will have a file written for them, and those will use the custom template.
+
+<RelatedTopics maxResults={7} />

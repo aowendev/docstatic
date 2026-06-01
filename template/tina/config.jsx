@@ -264,6 +264,17 @@ const SnippetsCollection = {
   label: "Snippets",
   path: "reuse/snippets",
   format: "mdx",
+  ui: {
+	beforeSubmit: async ({ values }) => {
+	  return {
+		...values,
+		lastmod: new Date().toISOString(),
+	  };
+	},
+	defaultItem: {
+	  lastmod: new Date().toISOString(),
+	},
+  },
   fields: [
 	{
 	  type: "boolean",
@@ -277,6 +288,14 @@ const SnippetsCollection = {
 			{...props}
 		  />
 		),
+	  },
+	},
+	{
+	  label: "Last Modified",
+	  type: "string",
+	  name: "lastmod",
+	  ui: {
+		component: "hidden",
 	  },
 	},
 	{

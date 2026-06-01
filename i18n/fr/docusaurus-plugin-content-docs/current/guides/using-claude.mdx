@@ -1,0 +1,52 @@
+---
+help: null
+lastmod: '2026-05-31T00:00:00.000Z'
+title: Using Claude in this project
+tags:
+  - software
+  - software_artificial-intelligence
+  - software_automation
+  - development
+draft: false
+review: false
+translate: true
+approved: false
+published: false
+unlisted: true
+---
+
+[Claude Code](https://claude.ai/code) is Anthropic's AI-powered CLI. It is used in this project as a development assistant for a specific set of tasks. It was not used to design or develop the architecture of docStatic.
+
+## Automating manual tasks
+
+Claude handles repetitive or scripted work that would otherwise require manual effort—for example, bulk-updating frontmatter fields across many files, reformatting content to match a new structure, or generating boilerplate that follows a known pattern. These are tasks where the shape of the work is clear but execution is tedious.
+
+## Developing React components and dashboards
+
+Claude is used to write and iterate on React components and data dashboards. This includes implementing new UI components, adjusting layout and styling, and wiring up data from the TinaCMS GraphQL API. Claude works within the existing component patterns in the project rather than introducing new abstractions.
+
+## Sanity checking content
+
+Claude reviews documentation for factual consistency, structural gaps, and logical flow. This is a lightweight check—it does not replace a formal editorial review but is useful for catching obvious problems before content reaches reviewers.
+
+## Tracking down bugs
+
+Claude helps narrow down the source of bugs by reading relevant code, checking recent changes, and reasoning about likely causes. It is particularly useful for bugs that span multiple files or require cross-referencing configuration with behaviour.
+
+## Writing style rules
+
+Claude is used to write Vale rules for the docStatic style set. This covers authoring new rules, testing them against sample content and refining patterns to reduce false positives. Rules are committed to `.vale/styles/docStatic/` alongside the documentation.
+
+## Maintaining information architecture
+
+Claude helps maintain the information architecture of the doc set — reviewing taxonomy, tags and page structure to ensure consistent categorisation and logical navigation. This is an ongoing task, typically run alongside content reviews.
+
+## Drafting documentation
+
+Occasionally Claude produces a first draft of a documentation page, which is then reviewed and edited by a human author. Drafts are treated as starting points, not finished content.
+
+<Admonition type="note" title="Scope of AI involvement">
+  Claude was not involved in the design or architecture of docStatic. Its use is limited to the development and content tasks described on this page.
+</Admonition>
+
+<RelatedTopics maxResults={5} />
