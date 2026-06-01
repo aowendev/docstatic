@@ -128,6 +128,10 @@
       {
         "code": "fr",
         "label": "Français"
+      },
+      {
+        "code": "ja",
+        "label": "日本語"
       }
     ],
     "default": "en"
