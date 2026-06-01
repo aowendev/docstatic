@@ -31,7 +31,7 @@
     "prebuild": "yarn generate-media-index && yarn generate-files && yarn generate-docs-metadata && yarn update-theme-css && yarn generate-git-identity",
     "predev": "yarn generate-media-index && yarn generate-files && yarn generate-docs-metadata && yarn update-theme-css && yarn generate-git-identity",
     "build": "tinacms build && docusaurus build",
-    "build-local": "tinacms build --local --skip-indexing --skip-cloud-checks && docusaurus build",
+    "build-local": "NODE_OPTIONS=--max-old-space-size=8192 tinacms build --local --skip-indexing --skip-cloud-checks && docusaurus build",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
     "setup-git-hooks": "git config core.hooksPath .githooks && chmod +x .githooks/pre-commit",
