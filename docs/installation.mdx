@@ -25,7 +25,7 @@ translate: false
 approved: false
 published: true
 unlisted: false
-lastmod: "2026-03-10T22:56:48.047Z"
+lastmod: "2026-06-01T00:00:00.000Z"
 ---
 # Installation
 
@@ -60,7 +60,7 @@ You will also need to install Node.js for its build tools and Yarn for package m
 
 ### Install Node.js
 
-You need to install [Node.js](https://nodejs.org/) version 18.0 or above.
+You need to install [Node.js](https://nodejs.org/) version 22.0 or above.
 
 Check if Node.js is already installed. Open a terminal (Command Prompt or Terminal app) and run:
 
@@ -68,7 +68,7 @@ Check if Node.js is already installed. Open a terminal (Command Prompt or Termin
 node -v
 ```
 
-If you see a version number starting with v18 or higher, you're good to go.
+If you see a version number starting with v22 or higher, you're good to go.
 
 If Node.js is not installed or you have an older version:
 
@@ -188,6 +188,9 @@ docstatic
 │   └── introduction.mdx
 ├── i18n
 │   └── fr
+├── mcp-server
+│   └── src
+│       └── server.ts
 ├── reuse
 │   ├── code
 │   │   └── example.xml
@@ -203,6 +206,8 @@ docstatic
 │   │   └── index.json
 │   ├── code-files.json
 │   └── snippets-files.json
+├── scripts
+│   └── generate-media-index.js
 ├── src
 │   ├── css
 │   │   └── custom.css
@@ -212,6 +217,8 @@ docstatic
 │       └── index.module.css
 ├── static
 │   └── img
+├── tina
+│   └── config.jsx
 ├── docusaurus.config.ts
 ├── package.json
 ├── README.md
@@ -226,10 +233,13 @@ docstatic
 * `/config/` - JSON files used by TinaCMS to configure docStatic.
 * `/docs/` - Docs MDX files.
 * `/i18n/` - Translation files.
+* `/mcp-server/` - The [MCP server](mcp-server.mdx) that gives AI assistants access to your documentation.
 * `/reuse/` - Reusable content.
+* `/scripts/` - Build-time scripts run automatically by `prebuild` and `predev`.
 * `/src/` - Non-documentation files like pages or custom React components.
   * `/src/pages` - Any JSX/TSX/MDX file within this directory are converted into a website page.
 * `/static/` - Static folder. Any content inside here is copied into the root of the final build folder.
+* `/tina/` - TinaCMS configuration and GraphQL schema.
 * `/docusaurus.config.ts` - A config file containing the site configuration.
 * `/package.json` - A docStatic website is a React app. You can install and use any npm packages you want.
 * `/sidebars.ts` - Specifies the order of documents in the sidebar. Use this for your “table of contents” structure.
