@@ -1,0 +1,68 @@
+{
+  "label": "Página de inicio",
+  "title": "docStatic",
+  "description": "Plataforma de documentación moderna",
+  "blocks": [
+    {
+      "title": "docStatic",
+      "subtitle": "Plataforma de documentación moderna",
+      "description": "Tendemos puentes entre escritores y desarrolladores para ayudarle a crear documentación en línea que sus usuarios amarán.",
+      "document": "docs/introduction",
+      "documentLabel": "Comenzar",
+      "secondaryButtonText": "Ver blog",
+      "secondaryButtonLink": "/blog",
+      "showHeroCard": true,
+      "heroCardTitle": "docStatic",
+      "heroCardFeatures": [
+        {
+          "feature": "Reutilización de contenido y fuente única"
+        },
+        {
+          "feature": "Autoría estructurada simple y modelos semánticos"
+        },
+        {
+          "feature": "Gestión del ciclo de vida del contenido y flujos de trabajo"
+        },
+        {
+          "feature": "Soporte de traducción y localización"
+        },
+        {
+          "feature": "Gestión de versiones y variantes"
+        },
+        {
+          "feature": "Documentación integrada de GraphQL y OpenAPI"
+        },
+        {
+          "feature": "Servidor MCP local para integración con IA"
+        }
+      ],
+      "_template": "hero"
+    },
+    {
+      "items": [
+        {
+          "title": "Para escritores",
+          "description": "Funciones intuitivas de CMS con un editor visual que hace que la creación de contenido sea sencilla. Escriba en Markdown o use el editor de texto enriquecido.\n",
+          "image": "./img/writers.jpg"
+        },
+        {
+          "title": "Para desarrolladores",
+          "description": "Flujo de trabajo basado en Git con Markdown, componentes React e integración de OpenAPI. Construya exactamente lo que necesita.\n",
+          "image": "./img/developers.jpg"
+        },
+        {
+          "title": "Para usuarios",
+          "description": "Sitios web de documentación rápidos y responsivos con excelente búsqueda y navegación. Hermosos en cualquier dispositivo.\n",
+          "image": "./img/users.jpg"
+        }
+      ],
+      "_template": "features"
+    },
+    {
+      "title": "Ver la demo",
+      "url": "https://www.youtube.com/watch?v=2bHBwM54UB8",
+      "caption": "Vea cómo Docusaurus y TinaCMS trabajan juntos.",
+      "_template": "youTubeEmbed"
+    }
+  ]
+}

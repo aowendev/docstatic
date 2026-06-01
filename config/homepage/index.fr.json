@@ -1,0 +1,68 @@
+{
+  "label": "Page d'accueil",
+  "title": "docStatic",
+  "description": "Plateforme de documentation moderne",
+  "blocks": [
+    {
+      "title": "docStatic",
+      "subtitle": "Plateforme de documentation moderne",
+      "description": "Nous comblons le fossé entre les rédacteurs et les développeurs pour vous aider à créer une documentation en ligne que vos utilisateurs adoreront.",
+      "document": "docs/introduction",
+      "documentLabel": "Commencer",
+      "secondaryButtonText": "Voir le blog",
+      "secondaryButtonLink": "/blog",
+      "showHeroCard": true,
+      "heroCardTitle": "docStatic",
+      "heroCardFeatures": [
+        {
+          "feature": "Réutilisation de contenu et source unique"
+        },
+        {
+          "feature": "Création structurée simple et modèles sémantiques"
+        },
+        {
+          "feature": "Gestion du cycle de vie du contenu et des flux de travail"
+        },
+        {
+          "feature": "Prise en charge de la traduction et de la localisation"
+        },
+        {
+          "feature": "Gestion des versions et des variantes"
+        },
+        {
+          "feature": "Documentation GraphQL et OpenAPI intégrée"
+        },
+        {
+          "feature": "Serveur MCP local pour l'intégration IA"
+        }
+      ],
+      "_template": "hero"
+    },
+    {
+      "items": [
+        {
+          "title": "Pour les rédacteurs",
+          "description": "Fonctionnalités CMS intuitives avec un éditeur visuel qui rend la création de contenu sans effort. Rédigez en Markdown ou utilisez l'éditeur de texte enrichi.\n",
+          "image": "./img/writers.jpg"
+        },
+        {
+          "title": "Pour les développeurs",
+          "description": "Flux de travail basé sur Git avec Markdown, composants React et intégration OpenAPI. Construisez exactement ce dont vous avez besoin.\n",
+          "image": "./img/developers.jpg"
+        },
+        {
+          "title": "Pour les utilisateurs",
+          "description": "Sites de documentation rapides et réactifs avec une excellente recherche et navigation. Magnifiques sur tous les appareils.\n",
+          "image": "./img/users.jpg"
+        }
+      ],
+      "_template": "features"
+    },
+    {
+      "title": "Voir la démo",
+      "url": "https://www.youtube.com/watch?v=2bHBwM54UB8",
+      "caption": "Découvrez comment Docusaurus et TinaCMS fonctionnent ensemble.",
+      "_template": "youTubeEmbed"
+    }
+  ]
+}

@@ -1,0 +1,68 @@
+{
+  "label": "ホームページ",
+  "title": "docStatic",
+  "description": "モダンなドキュメントプラットフォーム",
+  "blocks": [
+    {
+      "title": "docStatic",
+      "subtitle": "モダンなドキュメントプラットフォーム",
+      "description": "ライターと開発者の橋渡しをして、ユーザーに愛されるオンラインドキュメントの作成をサポートします。",
+      "document": "docs/introduction",
+      "documentLabel": "はじめる",
+      "secondaryButtonText": "ブログを見る",
+      "secondaryButtonLink": "/blog",
+      "showHeroCard": true,
+      "heroCardTitle": "docStatic",
+      "heroCardFeatures": [
+        {
+          "feature": "コンテンツの再利用とシングルソーシング"
+        },
+        {
+          "feature": "シンプルな構造化オーサリングとセマンティックモデル"
+        },
+        {
+          "feature": "コンテンツのライフサイクルとワークフロー管理"
+        },
+        {
+          "feature": "翻訳とローカライゼーションのサポート"
+        },
+        {
+          "feature": "バージョン管理とバリアント管理"
+        },
+        {
+          "feature": "GraphQL と OpenAPI ドキュメントの統合"
+        },
+        {
+          "feature": "AI 統合のためのローカル MCP サーバー"
+        }
+      ],
+      "_template": "hero"
+    },
+    {
+      "items": [
+        {
+          "title": "ライター向け",
+          "description": "ビジュアルエディターを備えた直感的な CMS 機能で、コンテンツ作成を簡単に。Markdown またはリッチテキストエディターで執筆できます。\n",
+          "image": "./img/writers.jpg"
+        },
+        {
+          "title": "開発者向け",
+          "description": "Markdown、React コンポーネント、OpenAPI 統合を備えた Git ベースのワークフロー。必要なものを自由に構築できます。\n",
+          "image": "./img/developers.jpg"
+        },
+        {
+          "title": "ユーザー向け",
+          "description": "優れた検索とナビゲーションを備えた、高速でレスポンシブなドキュメントサイト。どのデバイスでも美しく表示されます。\n",
+          "image": "./img/users.jpg"
+        }
+      ],
+      "_template": "features"
+    },
+    {
+      "title": "デモを見る",
+      "url": "https://www.youtube.com/watch?v=2bHBwM54UB8",
+      "caption": "Docusaurus と TinaCMS がどのように連携するかをご覧ください。",
+      "_template": "youTubeEmbed"
+    }
+  ]
+}

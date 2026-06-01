@@ -1,0 +1,68 @@
+{
+  "label": "Startseite",
+  "title": "docStatic",
+  "description": "Moderne Dokumentationsplattform",
+  "blocks": [
+    {
+      "title": "docStatic",
+      "subtitle": "Moderne Dokumentationsplattform",
+      "description": "Wir überbrücken die Lücke zwischen Autoren und Entwicklern, damit Sie Online-Dokumentation erstellen können, die Ihre Nutzer lieben werden.",
+      "document": "docs/introduction",
+      "documentLabel": "Erste Schritte",
+      "secondaryButtonText": "Blog ansehen",
+      "secondaryButtonLink": "/blog",
+      "showHeroCard": true,
+      "heroCardTitle": "docStatic",
+      "heroCardFeatures": [
+        {
+          "feature": "Wiederverwendung von Inhalten & Single Sourcing"
+        },
+        {
+          "feature": "Einfaches strukturiertes Authoring & semantische Modelle"
+        },
+        {
+          "feature": "Content-Lifecycle- & Workflow-Management"
+        },
+        {
+          "feature": "Übersetzungs- & Lokalisierungsunterstützung"
+        },
+        {
+          "feature": "Versions- & Variantenverwaltung"
+        },
+        {
+          "feature": "Integrierte GraphQL- & OpenAPI-Dokumentation"
+        },
+        {
+          "feature": "Lokaler MCP-Server für KI-Integration"
+        }
+      ],
+      "_template": "hero"
+    },
+    {
+      "items": [
+        {
+          "title": "Für Autoren",
+          "description": "Intuitive CMS-Funktionen mit einem visuellen Editor, der die Inhaltserstellung mühelos macht. Schreiben Sie in Markdown oder nutzen Sie den Rich-Text-Editor.\n",
+          "image": "./img/writers.jpg"
+        },
+        {
+          "title": "Für Entwickler",
+          "description": "Git-basierter Workflow mit Markdown, React-Komponenten und OpenAPI-Integration. Bauen Sie genau das, was Sie brauchen.\n",
+          "image": "./img/developers.jpg"
+        },
+        {
+          "title": "Für Nutzer",
+          "description": "Schnelle, responsive Dokumentationswebsites mit hervorragender Suche und Navigation. Auf jedem Gerät wunderschön.\n",
+          "image": "./img/users.jpg"
+        }
+      ],
+      "_template": "features"
+    },
+    {
+      "title": "Demo ansehen",
+      "url": "https://www.youtube.com/watch?v=2bHBwM54UB8",
+      "caption": "Sehen Sie, wie Docusaurus und TinaCMS zusammenarbeiten.",
+      "_template": "youTubeEmbed"
+    }
+  ]
+}
