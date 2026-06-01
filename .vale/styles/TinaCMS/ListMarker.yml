@@ -1,0 +1,6 @@
+extends: existence
+message: "Use '*' for unordered list items, not '-'. TinaCMS reformats lists to '*', which creates spurious diffs."
+level: warning
+scope: raw
+raw:
+  - '(?m)^[ \t]*- [^"\n]'

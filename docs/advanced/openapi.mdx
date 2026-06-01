@@ -17,7 +17,7 @@ lastmod: "2026-06-01T00:00:00.000Z"
 ---
 # OpenAPI reference docs
 
-DocStatic uses [`docusaurus-plugin-openapi-docs`](https://github.com/PaloAltoNetworks/docusaurus-openapi-docs) to generate API reference documentation from an OpenAPI specification. The plugin reads a spec file and writes a set of MDX files into your `docs/` tree that Docusaurus then builds as normal pages.
+docStatic uses [`docusaurus-plugin-openapi-docs`](https://github.com/PaloAltoNetworks/docusaurus-openapi-docs) to generate API reference documentation from an OpenAPI specification. The plugin reads a spec file and writes a set of MDX files into your `docs/` tree that Docusaurus then builds as normal pages.
 
 ## Configuration
 
@@ -53,9 +53,9 @@ npm run clean-api-docs
 
 ## Tag pages
 
-When `groupPathsBy` and `categoryLinkSource` are both set to `"tag"`, the plugin creates a category index page for each OpenAPI tag (e.g. `store.tag.mdx`). By default these files contain a verbose boilerplate block that imports `DocCardList` and `useCurrentSidebarCategory` — both redundant in docStatic because `DocCardList` is already globally registered as an MDX component, and the component resolves the current category's items automatically when called with no props.
+When `groupPathsBy` and `categoryLinkSource` are both set to `"tag"`, the plugin creates a category index page for each OpenAPI tag (e.g. `store.tag.mdx`). By default these files contain a verbose boilerplate block that imports `DocCardList` and `useCurrentSidebarCategory`—both redundant in docStatic because `DocCardList` is already globally registered as an MDX component, and the component resolves the current category's items automatically when called with no props.
 
-DocStatic configures the plugin with a custom tag template that produces the simplified form instead:
+docStatic configures the plugin with a custom tag template that produces the simplified form instead:
 
 ```mdx
 <DocCardList />
@@ -65,6 +65,6 @@ The template is at `config/docusaurus/openapi-tag-template.md` and is wired in v
 
 ## Editing generated tag files
 
-The plugin **only creates a tag file if one does not already exist** — it will never overwrite a file you have edited. This means you can freely customise the description text in a tag page and it will survive subsequent `gen-api-docs` runs. Only newly introduced tags will have a file written for them, and those will use the custom template.
+The plugin **only creates a tag file if one does not already exist**—it will never overwrite a file you have edited. This means you can freely customise the description text in a tag page and it will survive subsequent `gen-api-docs` runs. Only newly introduced tags will have a file written for them, and those will use the custom template.
 
 <RelatedTopics maxResults={7} />

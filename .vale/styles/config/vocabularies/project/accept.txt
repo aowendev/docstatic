@@ -1,0 +1,14 @@
+docStatic
+Docusaurus
+TinaCMS
+TinaCloud
+VSCodium
+iCloud
+LanguageTool
+GraphQL
+MDX
+Frontmatter
+Netlify
+Vercel
+Cloudflare
+GitHub
