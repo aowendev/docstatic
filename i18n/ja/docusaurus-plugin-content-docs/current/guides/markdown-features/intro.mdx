@@ -1,0 +1,122 @@
+---
+help: null
+lastmod: '2026-03-10T23:10:08.911Z'
+modifiedBy: unknown
+title: Markdown features
+tags:
+  - computer-languages
+  - computer-languages_markdown
+  - computer-languages_markdown_mdx
+  - elements
+  - elements_tabs
+  - elements_footnotes
+  - elements_figures
+  - elements_doc-card-lists
+  - elements_admonitions
+  - elements_comments
+  - elements_code-blocks
+  - elements_horizontal-rules
+  - elements_links
+  - elements_tables
+  - elements_quotes
+  - software
+  - software_content-management-systems
+  - software_content-management-systems_tinacms
+draft: false
+review: false
+translate: true
+approved: false
+published: false
+unlisted: true
+---
+
+# Markdown features
+
+docStatic uses [Markdown](https://commonmark.org/) as its main content authoring format. You can [learn it in ten minutes](https://commonmark.org/help/). But you don't have to because the CMS provides a full rich text editing environment for metadata, Markdown and React components.
+
+## Simple Structured Authoring
+
+Topics in docStatic have three parts:
+
+* Metadata (in [YAML](https://yaml.org/spec/1.2.2/) format)
+* Content (in Markdown)
+* Predefined React components.
+
+The CMS makes sure metadata and Markdown are used consistently, while the React components provide a uniform style and support for content reuse features. You don’t need to add any JSX code yourself as the components are already available globally.
+
+## Standard features
+
+Markdown features include:
+
+* Bold, code, italic and strikethrough character styles.
+* Bulleted and numbered lists.
+* Code blocks.
+* Heading levels (1 to 6).
+* Horizontal rules.
+* Images.
+* Links.
+* Quotes.
+* Simple tables.
+
+These can all be selected directly from the rich text toolbar in the CMS.
+
+To these, Docusaurus adds:
+
+* [Admonitions](admonitions)
+* Details (expanding content)
+* Doc card lists
+* [Tabs](tabs)
+
+docStatic further extends this with:
+
+* [Code snippets](code-blocks) (from files)
+* [Comments](comments)
+* [Conditional text](conditional-text)
+* [Context help links](context-help)
+* [Diagrams](diagrams)
+* [Figures](figures)
+* [Footnotes](footnotes)
+* [Glossary terms](glossary)
+* [Math equations](math-equations)
+* [Related topics](related-topics) (auto-generated)
+* [Snippets](snippets)
+* [Variables](variables)
+
+## Front matter
+
+Front matter is used to add metadata to your Markdown file. It's provided at the very top of the file, enclosed by three dashes ---. Content plugins may have their own front matter schema. docStatic uses the front matter for:
+
+* Conditions (for conditional text)
+* Descriptions
+* Slugs (fixed paths)
+* Taxonomy tags
+* Titles
+* Workflow status
+
+## Details
+
+1. Select **Details** from the **Embed** list.
+2. Edit the component.
+3. Give it a **Summary**.
+4. Enter the **Details**.
+
+#### Example:
+
+<Details summary="Toggle me.">
+  This is the detailed content.
+
+  You can use Markdown here including **bold** and *italic* text, and inline [links](https://docusaurus.io/).
+</Details>
+
+## Doc card lists
+
+Doc card lists are automatically generated for categories in the table of contents. However, you can also manually add them to a topic.
+
+1. Select **Doc Card List** from the **Embed** list.
+2. Give it a **Title**.
+
+For more information, refer to [Markdown Features](https://docusaurus.io/docs/markdown-features) in the Docusaurus documentation.
+
+#### Example:
+
+<DocCardList title="Markdown Features" />

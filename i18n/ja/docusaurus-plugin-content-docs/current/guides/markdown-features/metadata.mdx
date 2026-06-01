@@ -1,0 +1,40 @@
+---
+help: null
+lastmod: '2026-03-04T22:51:31.384Z'
+title: Head metadata
+tags:
+  - metadata
+  - elements
+  - elements_passthroughs
+draft: false
+review: false
+translate: true
+approved: false
+published: false
+unlisted: true
+---
+
+<head>
+  <html className="some-extra-html-class" />
+
+  <body className="other-extra-body-class" />
+
+  <title>Head Metadata customised title!</title>
+
+  <meta charSet="utf-8" />
+
+  <meta name="twitter:card" content="summary" />
+
+  <link rel="canonical" href="https://docstatic.com/docs/markdown-features/metadata" />
+</head>
+
+# Head metadata
+
+docStatic automatically sets useful page metadata in `<html>`, `<head>` and `<body>` for you.
+It is possible to add extra metadata (or override existing ones) with the `<head>` tag in Markdown files.
+
+In the CMS, this must be added in the Markdown editor. It will not be recognised if you wrap it in the **Passthrough** component.
+
+For more information, refer to [Head metadata](https://docusaurus.io/docs/markdown-features/head-metadata) in the Docusaurus documentation.
+
+<RelatedTopics maxResults={7} />

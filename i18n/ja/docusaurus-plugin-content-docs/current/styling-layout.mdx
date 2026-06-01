@@ -1,0 +1,66 @@
+---
+help: null
+lastmod: '2026-03-10T22:57:17.324Z'
+title: Styling and layout
+tags:
+  - computer-languages
+  - computer-languages_css
+  - computer-languages_javascript
+  - computer-languages_javascript_react
+  - software
+  - software_static-site-generators
+  - software_static-site-generators_docusaurus
+draft: false
+review: false
+translate: true
+approved: false
+published: false
+unlisted: true
+---
+
+A docStatic site is a single-page React application. You can style it the way you style React apps.
+
+## Global styles
+
+docStatic uses the @docusaurus/preset-classic theme with CSS overrides in the /src/css/custom.css file. Any CSS you write in that file is available globally and can be referenced directly using string literals.
+
+## Styling your site with Infima
+
+docStatic uses [Infima](https://infima.dev/) as the underlying styling framework. Infima provides a flexible layout and common UI components styling suitable for content-centric websites (blogs, documentation, home pages). For more details, refer to the [Infima website](https://infima.dev/).
+
+Infima uses seven shades of each colour. We recommend using ColorBox to find the different shades of colours for your chosen primary colour. You can use the tool on the [Example page](https://docstatic.com/example-page) to generate the different shades for your website and copy the variables into `/src/css/custom.css`.
+
+## Dark mode
+
+In light mode, the \<html> element has a data-theme="light" attribute; in dark mode, it's data-theme="dark". Therefore, you can scope your CSS to dark-mode-only by targeting html with a specific attribute.
+
+```css
+/* Overriding root Infima variables */
+[data-theme='dark'] {
+  --ifm-color-primary: #4e89e8;
+}
+/* Styling one class specially in dark mode */
+[data-theme='dark'] .purple-text {
+  color: plum;
+}
+```
+
+## Mobile view
+
+Docstatic uses 996px as the cutoff between mobile screen width and desktop. If you want your layout to be different in the mobile view, you can use media queries.
+
+```css
+.banner {
+  padding: 4rem;
+}
+/** In mobile view, reduce the padding */
+@media screen and (max-width: 996px) {
+  .heroBanner {
+    padding: 2rem;
+  }
+}
+```
+
+For more information, refer to [Styling and Layout](https://docusaurus.io/docs/styling-layout) in the Docusaurus documentation.
+
+<RelatedTopics maxResults={7} />

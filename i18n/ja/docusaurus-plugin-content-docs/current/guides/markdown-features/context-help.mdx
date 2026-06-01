@@ -1,0 +1,58 @@
+---
+help: null
+lastmod: '2026-03-10T22:58:36.179Z'
+title: Context-sensitive help
+slug: /context-help
+tags:
+  - elements
+  - elements_context-sensitive-help
+draft: false
+review: false
+translate: true
+approved: false
+published: false
+unlisted: true
+---
+
+# Context-sensitive help
+
+> "Context-sensitive help is a kind of [online help](https://en.wikipedia.org/wiki/Online_help) that is obtained from a specific point in the state of the software, providing help for the situation that is associated with that state. Context-sensitive help, as opposed to general online help or online manuals, does not need to be accessible for reading as a whole. Each topic is supposed to describe extensively one state, situation, or feature of the software."—[Wikipedia](https://en.wikipedia.org/wiki/Context-sensitive_help)
+
+Typically, context-sensitive help is implemented by having a help icon that users can click that will take them to the appropriate part of the documentation for the part of the software they are using. This involves creating a map of context URLs.
+
+The static site generator automatically generates links to headings. However, if you change the heading, the link will change. For this reason, docStatic provides the Context Help element. It enables you to add an anchor tag anywhere within a topic. Providing that a slug is defined for the topic in the metadata, the link will not break.
+
+1. Select **Context Help** from the Embed list.
+2. Enter a unique ID.
+
+The link will be in the form: `<URL>/docs/<slug>#<id>`.
+
+#### Example
+
+[https://docstatic.com/docs/context-help#help-example](/docs/context-help#help-example)
+
+<a id="help-example" />
+
+## Developers
+
+For an example of how to include context help links in your code, examine the HelpButton React component in the source code for this site. Because docStatic doesn't have direct access to the CMS code, it implements the button by applying it as a UI element on an unused field in a CMS collection. The HelpButton component attaches the button to the nav element on the page and links it to the URL passed in the template:
+
+```javascript
+const ExampleCollection = {
+  name: "example",
+  label: "Example",
+  path: "docs/example",
+  format: "mdx",
+  fields: [
+    {
+      type: "boolean",
+      name: "help",
+      label: "Help",
+      required: false,
+      ui: {
+        component: (props) => <HelpButton url="https://example.com/" {...props} />,
+      },
+    },
+```
+
+<RelatedTopics maxResults={7} />

@@ -1,0 +1,61 @@
+---
+help: null
+lastmod: '2026-03-04T22:51:34.496Z'
+modifiedBy: aowendev <aowen@translationcommons.org>
+title: Conditional text
+tags:
+  - metadata
+  - metadata_conditions
+  - reuse
+  - reuse_conditional-text
+draft: false
+review: false
+translate: true
+approved: false
+published: false
+unlisted: true
+---
+
+# Conditional text
+
+The **Conditional Text** component enables you to wrap content in a set of conditions that determine when it should be displayed:
+
+* Conditions can be any combination of languages or user-defined conditions.
+* The content can be displayed or hidden if one or more conditions are met (OR) or only if all conditions are met (AND).
+  You can also specify fallback text to display if no conditions are met.
+
+## Create categories and conditions
+
+1. In the CMS, click  the **Conditions** collection.
+2. Click the **Add** icon to add a new **Category**
+3. Give it a **Name** and **Description**.
+4. For each **Condition** you want to add:
+   1. Click the **Add** icon.
+   2. Name the **Condition** and give it a **Description**.
+   3. Toggle the **Active** status of the condition as required.
+
+## Add conditions to a topic
+
+Conditions are set at the topic level. The language is determined by the page language. Other conditions are defined as an array in the metadata at the start of the topic.
+
+1. Create or edit a topic.
+2. In the **Conditions** area, expand the **Categories** and select the box of any **Conditions** you want to apply to the topic.
+
+## Add conditional text
+
+1. Select **Conditional Text** from the **Embed** list.
+2. Edit the component.
+3. Enter the **Content**.
+4. Set the **Action** (show or hide).
+5. Add any **Required Conditions**.
+6. Add any **Required Languages**.
+7. Set the **Condition Logic**.
+8. Set the **Language Logic**.
+9. Select if both conditions and languages are required.
+10. (Optional) Enter the **Fallback Text**.
+
+### Example
+
+<ConditionalText action="show" conditions={["production"]} languages={[]} logic="any" languageLogic="any" requireBothConditions={false} fallback="">The `production` condition is set on this page.</ConditionalText>
+
+<RelatedTopics maxResults={7} />
