@@ -70,3 +70,13 @@ unlisted: false
 - Use `<CodeSnippet>` only to embed actual project source files; use fenced code blocks for inline examples
 - Capitalize component names, close self-closing tags, quote all attribute values
 - File locations: `/docs/`, `/blog/`, `/src/pages/`, `/i18n/{locale}/`
+
+## After writing or editing
+
+Run Vale on the file from the project root and apply every fix it reports before finishing:
+
+```
+vale <file>
+```
+
+Fix all errors, warnings, and suggestions. Re-run until the output is clean. Vale is the source of truth for style — do not skip or override its findings.
