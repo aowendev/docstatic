@@ -54,6 +54,28 @@ The Translations dashboard shows the status of each topic for the language selec
 * Outdated: The last modified date of the source is later than the translation.
 * Missing: There is a source file with no equivalent translation file.
 
+## Viewing content reuse
+
+The Content Reuse dashboard shows the reusable content in the system and where it is used. It reports on four categories:
+
+* Code Snippets: code files referenced by the CodeSnippet component.
+* Glossary Terms: terms defined in the glossary terms collection.
+* Snippets: MDX content files referenced by the Snippet component.
+* Variable Sets: variable sets referenced by the VariableSet component.
+
+Click a category card to see a list of items in that category with the topics where each item is used.
+
+### Viewing reuse suggestions
+
+The Suggestions section of the Content Reuse dashboard identifies content that could be converted to reusable components:
+
+* Possible Snippets (code): Inline code blocks in topics that could be extracted into code snippet files.
+* Possible Terms: Glossary term text appearing as plain text in topics that could use the GlossaryTerm component instead.
+* Possible Snippets (duplicate text): Blocks of text appearing in two or more topics that could be extracted into snippet files.
+* Possible Variables: Variable values appearing as plain text in topics that could use the VariableSet component instead.
+
+Click a suggestion card to see the items found and the topics where they appear.
+
 ## Viewing media reuse
 
 The Media Library dashboard shows where content in the /static/img path is used. It shows the total number of files and images, file size, image paths and image sizes.
