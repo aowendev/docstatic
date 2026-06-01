@@ -542,6 +542,20 @@
     "lastmod": "2026-03-04T22:48:08.345Z"
   },
   {
+    "title": "OpenAPI reference docs",
+    "description": "Generating API reference documentation from an OpenAPI specification in docStatic.",
+    "tags": [
+      "apis",
+      "apis_openapi",
+      "software",
+      "software_static-site-generators",
+      "software_static-site-generators_docusaurus"
+    ],
+    "path": "/advanced/openapi",
+    "filePath": "advanced/openapi.mdx",
+    "lastmod": "2026-06-01T00:00:00.000Z"
+  },
+  {
     "title": "Related Topics",
     "description": "Automatically generate links to related content based on shared taxonomy tags.",
     "tags": [

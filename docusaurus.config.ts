@@ -399,14 +399,15 @@ const config = {
         id: "openapi",
         docsPluginId: "classic",
         config: (() => {
-          const config: { [key: string]: { specPath: string; outputDir: string; downloadUrl?: string; sidebarOptions: { groupPathsBy: string; categoryLinkSource: string } } } = {};
+          const config: { [key: string]: { specPath: string; outputDir: string; downloadUrl?: string; tagTemplate?: string; sidebarOptions: { groupPathsBy: string; categoryLinkSource: string } } } = {};
           const apis: Array<{ name: string; specPath: string; outputDir: string; downloadUrl?: string; groupPathsBy?: string; categoryLinkSource?: string }> = docusaurusData.openapi?.apis || [];
-          
+
           for (const api of apis) {
             config[api.name] = {
               specPath: api.specPath,
               outputDir: api.outputDir,
               downloadUrl: api.downloadUrl,
+              tagTemplate: "./config/docusaurus/openapi-tag-template.md",
               sidebarOptions: {
                 groupPathsBy: api.groupPathsBy || "tag",
                 categoryLinkSource: api.categoryLinkSource || "tag",

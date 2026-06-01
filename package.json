@@ -54,7 +54,7 @@
     "postinstall": "npm run mcp:install"
   },
   "dependencies": {
-    "@algolia/client-search": "^5.52.1",
+    "@algolia/client-search": "^5.53.0",
     "@codemirror/language": "6.0.0",
     "@docusaurus/core": "^3.10.1",
     "@docusaurus/faster": "^3.10.1",
@@ -92,10 +92,10 @@
     "slate": "^0.118.1",
     "slate-dom": "^0.118.1",
     "sucrase": "^3.35.0",
-    "tinacms": "^3.8.1",
+    "tinacms": "^3.8.4",
     "title": "^4.0.1",
     "typescript": "5.6.3",
-    "webpack": "^5.107.1",
+    "webpack": "^5.107.2",
     "yup": "0.32.11"
   },
   "resolutions": {
@@ -121,8 +121,8 @@
     ]
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.4.15",
-    "@tinacms/cli": "^2.3.1",
+    "@biomejs/biome": "^2.4.16",
+    "@tinacms/cli": "^2.4.2",
     "gray-matter": "^4.0.3"
   },
   "engines": {

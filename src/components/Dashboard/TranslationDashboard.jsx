@@ -17,7 +17,9 @@ const TranslationDashboard = () => {
       try {
         const { client } = await import('../../../tina/__generated__/client');
         const lang = selectedLanguage;
-        const orphaned = translationData && translationData[lang] ? translationData[lang].orphaned : [];
+        const docOrphaned = translationData && translationData[lang] ? translationData[lang].orphaned : [];
+        const snippetOrphaned = translationData && translationData[lang] ? (translationData[lang].snippets?.orphaned || []) : [];
+        const orphaned = [...docOrphaned, ...snippetOrphaned];
         for (const item of orphaned) {
           await client.request({
             query: `
@@ -48,7 +50,12 @@ const TranslationDashboard = () => {
       try {
         const { client } = await import('../../../tina/__generated__/client');
         const lang = selectedLanguage;
-        const missing = translationData && translationData[lang] ? translationData[lang].missing : [];
+        const missingDocs = translationData && translationData[lang] ? translationData[lang].missing : [];
+        const missingSnippets = translationData && translationData[lang] ? (translationData[lang].snippets?.missing || []) : [];
+        const missing = [
+          ...missingDocs.map(item => ({ ...item, _isSnippet: false })),
+          ...missingSnippets.map(item => ({ ...item, _isSnippet: true }))
+        ];
         if (!missing || missing.length === 0) {
           setStatus('No missing topics to add');
           return;
@@ -58,24 +65,34 @@ const TranslationDashboard = () => {
         for (const [idx, item] of missing.entries()) {
           // copy full metadata and body from sourceNode when available
           const sourceNode = item.sourceNode || null;
-          const baseFile = item.file.replace(/^docs\//, '');
-          const hasExt = /\.(mdx?|MDX?)$/.test(baseFile);
-          const relPath = `${lang}/docusaurus-plugin-content-docs/current/${baseFile}${hasExt ? '' : '.mdx'}`;
+          let relPath;
+          if (item._isSnippet) {
+            const baseFile = item.file;
+            const hasExt = /\.(mdx?|MDX?)$/.test(baseFile);
+            relPath = `${lang}/snippets/${baseFile}${hasExt ? '' : '.mdx'}`;
+          } else {
+            const baseFile = item.file.replace(/^docs\//, '');
+            const hasExt = /\.(mdx?|MDX?)$/.test(baseFile);
+            relPath = `${lang}/docusaurus-plugin-content-docs/current/${baseFile}${hasExt ? '' : '.mdx'}`;
+          }
           const paramsBody = {};
           if (sourceNode) {
-            // copy known i18n fields from source node
             paramsBody.title = sourceNode.title || item.title;
             if (sourceNode.body) paramsBody.body = sourceNode.body;
-            if (sourceNode.modifiedBy) paramsBody.modifiedBy = sourceNode.modifiedBy;
-            if (sourceNode.help !== undefined) paramsBody.help = sourceNode.help;
-            if (sourceNode.slug) paramsBody.slug = sourceNode.slug;
-            if (sourceNode.tags) paramsBody.tags = sourceNode.tags;
-            if (sourceNode.draft !== undefined) paramsBody.draft = sourceNode.draft;
-            if (sourceNode.review !== undefined) paramsBody.review = sourceNode.review;
-            if (sourceNode.translate !== undefined) paramsBody.translate = sourceNode.translate;
-            if (sourceNode.approved !== undefined) paramsBody.approved = sourceNode.approved;
-            if (sourceNode.published !== undefined) paramsBody.published = sourceNode.published;
-            if (sourceNode.unlisted !== undefined) paramsBody.unlisted = sourceNode.unlisted;
+            if (item._isSnippet) {
+              if (sourceNode.description) paramsBody.description = sourceNode.description;
+            } else {
+              if (sourceNode.modifiedBy) paramsBody.modifiedBy = sourceNode.modifiedBy;
+              if (sourceNode.help !== undefined) paramsBody.help = sourceNode.help;
+              if (sourceNode.slug) paramsBody.slug = sourceNode.slug;
+              if (sourceNode.tags) paramsBody.tags = sourceNode.tags;
+              if (sourceNode.draft !== undefined) paramsBody.draft = sourceNode.draft;
+              if (sourceNode.review !== undefined) paramsBody.review = sourceNode.review;
+              if (sourceNode.translate !== undefined) paramsBody.translate = sourceNode.translate;
+              if (sourceNode.approved !== undefined) paramsBody.approved = sourceNode.approved;
+              if (sourceNode.published !== undefined) paramsBody.published = sourceNode.published;
+              if (sourceNode.unlisted !== undefined) paramsBody.unlisted = sourceNode.unlisted;
+            }
           } else {
             paramsBody.title = item.title;
           }
@@ -142,6 +159,12 @@ const TranslationDashboard = () => {
     const handleEditOutOfDateDoc = (file) => {
       const cleanFile = file.replace(/^docs\//, '').replace(/\.mdx$/, '').replace(/\.md$/, '');
       window.open(`/admin#/collections/edit/i18n/${selectedLanguage}/docusaurus-plugin-content-docs/current/${cleanFile}`, '_blank');
+    };
+
+    // Edit out-of-date snippet
+    const handleEditOutOfDateSnippet = (file) => {
+      const cleanFile = file.replace(/\.mdx$/, '').replace(/\.md$/, '');
+      window.open(`/admin#/collections/edit/i18n/${selectedLanguage}/snippets/${cleanFile}`, '_blank');
     };
   const [translationData, setTranslationData] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -240,6 +263,25 @@ const TranslationDashboard = () => {
 
       
 
+      // Fetch snippets with pagination
+      let snippetsEdges = [];
+      let snippetsAfter = null;
+      while (true) {
+        const snippetsResult = await client.queries.snippetsConnection({ first: 100, after: snippetsAfter });
+        const chunk = snippetsResult.data?.snippetsConnection?.edges || [];
+        snippetsEdges = snippetsEdges.concat(chunk);
+        const pageInfo = snippetsResult.data?.snippetsConnection?.pageInfo;
+        if (!pageInfo || !pageInfo.hasNextPage) break;
+        snippetsAfter = pageInfo.endCursor;
+      }
+      const snippetSourceMap = {};
+      for (const edge of snippetsEdges) {
+        const node = edge.node;
+        const rel = node._sys?.relativePath || node._sys?.filename || '';
+        const canonical = canonicalize(rel);
+        snippetSourceMap[canonical] = node;
+      }
+
       // Fetch translations and build map for the selected language with pagination
       let i18nEdges = [];
       let i18nAfter = null;
@@ -253,6 +295,7 @@ const TranslationDashboard = () => {
       }
       // Build translation maps grouped by language
       const translationsByLang = {}; // lang -> { canonical -> { node, originalPath, rawPath } }
+      const snippetTranslationsByLang = {}; // lang -> { canonical -> { node, originalPath, rawPath } }
       for (const edge of i18nEdges) {
         const node = edge.node;
         const relPath = node._sys?.relativePath || node._sys?.filename || '';
@@ -261,6 +304,13 @@ const TranslationDashboard = () => {
         const lang = m[1];
         const after = m[2];
         const prefix = 'docusaurus-plugin-content-docs/current/';
+        if (after.startsWith('snippets/')) {
+          const snippetRel = after.replace(/^snippets\//, '');
+          const canonical = canonicalize(snippetRel);
+          snippetTranslationsByLang[lang] = snippetTranslationsByLang[lang] || {};
+          snippetTranslationsByLang[lang][canonical] = { node, originalPath: snippetRel, rawPath: snippetRel };
+          continue;
+        }
         if (!after.startsWith(prefix)) continue;
         let cleanAfter = after.replace(new RegExp(`^${prefix}`), '');
         // Keep the raw path (before stripping docs/) for Tina API operations
@@ -393,6 +443,72 @@ const TranslationDashboard = () => {
         };
       }
 
+      // Build snippet translation results for all languages
+      const snippetSourceKeys = new Set(Object.keys(snippetSourceMap));
+      const missingAllSnippets = [];
+      for (const key of snippetSourceKeys) {
+        const src = snippetSourceMap[key];
+        missingAllSnippets.push({ file: key, sourceLastMod: 'No date', title: src.title || key, sourceNode: src });
+      }
+      for (const lang of Object.keys(results)) {
+        const snTrMap = snippetTranslationsByLang[lang] || {};
+        const snTrKeys = new Set(Object.keys(snTrMap));
+        const snMissing = [], snOutdated = [], snUpToDate = [], snOrphaned = [];
+        for (const key of snippetSourceKeys) {
+          const src = snippetSourceMap[key];
+          const srcDate = src.lastmod ? new Date(src.lastmod) : null;
+          const title = src.title || key;
+          if (!snTrKeys.has(key)) {
+            snMissing.push({ file: key, sourceLastMod: 'No date', title, sourceNode: src });
+            continue;
+          }
+          const tr = snTrMap[key].node;
+          const trDate = tr.lastmod ? new Date(tr.lastmod) : null;
+          if (!srcDate && !trDate) {
+            snUpToDate.push({ file: key, sourceLastMod: 'No date', translationLastMod: 'No date', title });
+          } else if (srcDate && !trDate) {
+            snOutdated.push({ file: key, sourceLastMod: src.lastmod, translationLastMod: 'No date', title });
+          } else if (!srcDate && trDate) {
+            snUpToDate.push({ file: key, sourceLastMod: 'No date', translationLastMod: tr.lastmod, title });
+          } else {
+            if (trDate >= srcDate) {
+              snUpToDate.push({ file: key, sourceLastMod: src.lastmod, translationLastMod: tr.lastmod, title });
+            } else {
+              snOutdated.push({ file: key, sourceLastMod: src.lastmod, translationLastMod: tr.lastmod, title, daysBehind: Math.ceil((srcDate - trDate) / (1000 * 60 * 60 * 24)) });
+            }
+          }
+        }
+        for (const key of snTrKeys) {
+          if (!snippetSourceKeys.has(key)) {
+            const entry = snTrMap[key];
+            const node = entry.node;
+            const orig = entry.rawPath || entry.originalPath || key;
+            snOrphaned.push({ file: `${lang}/snippets/${orig}`, translationLastMod: node.lastmod || 'No date', title: node.title || orig });
+          }
+        }
+        results[lang].snippets = { missing: snMissing, outdated: snOutdated, upToDate: snUpToDate, orphaned: snOrphaned, total: snippetSourceKeys.size };
+      }
+      // Handle any snippet-only languages not yet in results
+      for (const lang of Object.keys(snippetTranslationsByLang)) {
+        if (!results[lang]) {
+          results[lang] = {
+            missing: missingAll.slice(),
+            outdated: [],
+            upToDate: [],
+            orphaned: [],
+            errors: [],
+            total: Object.keys(sourceMap).length,
+            snippets: {
+              missing: missingAllSnippets.slice(),
+              outdated: [],
+              upToDate: [],
+              orphaned: [],
+              total: snippetSourceKeys.size
+            }
+          };
+        }
+      }
+
       // Ensure selectedLanguage is present in results (pick first available if not)
       const langsFound = Object.keys(results);
       if (langsFound.length > 0 && !results[selectedLanguage]) {
@@ -437,12 +553,13 @@ const TranslationDashboard = () => {
     
     return Object.keys(translationData).reduce((acc, lang) => {
       const data = translationData[lang];
+      const sn = data.snippets || { missing: [], outdated: [], upToDate: [], orphaned: [], total: 0 };
       acc[lang] = {
-        total: data.total || (data.missing.length + data.outdated.length + data.upToDate.length),
-        missing: data.missing.length,
-        outdated: data.outdated.length,
-        upToDate: data.upToDate.length,
-        orphaned: data.orphaned.length,
+        total: (data.total || (data.missing.length + data.outdated.length + data.upToDate.length)) + (sn.total || 0),
+        missing: data.missing.length + sn.missing.length,
+        outdated: data.outdated.length + sn.outdated.length,
+        upToDate: data.upToDate.length + sn.upToDate.length,
+        orphaned: data.orphaned.length + sn.orphaned.length,
         errors: data.errors.length
       };
       return acc;
@@ -1164,6 +1281,152 @@ const TranslationDashboard = () => {
                     </div>
                   ))}
                 </div>
+              </div>
+            )}
+
+            {/* Snippets Section */}
+            {data.snippets && data.snippets.total > 0 && (
+              <div style={{ marginTop: '30px', paddingTop: '20px', borderTop: '2px solid #e5e7eb' }}>
+                <h3 style={{ color: '#374151', marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '8px', fontSize: '16px', fontWeight: '600' }}>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path>
+                    <polyline points="14 2 14 8 20 8"></polyline>
+                    <line x1="16" x2="8" y1="13" y2="13"></line>
+                    <line x1="16" x2="8" y1="17" y2="17"></line>
+                    <line x1="10" x2="8" y1="9" y2="9"></line>
+                  </svg>
+                  Snippets
+                </h3>
+
+                {/* Missing Snippets */}
+                {data.snippets.missing.length > 0 && (
+                  <div style={{ marginBottom: '25px' }}>
+                    <h4 style={{ color: '#e74c3c', marginBottom: '10px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M18 6 6 18"></path>
+                        <path d="m6 6 12 12"></path>
+                      </svg>
+                      Missing Snippet Translations ({data.snippets.missing.length})
+                    </h4>
+                    <div style={{ backgroundColor: '#ffebee', border: '1px solid #ffcdd2', borderRadius: '4px', padding: '15px' }}>
+                      {data.snippets.missing.map((item, index) => (
+                        <div key={index} style={{
+                          display: 'flex',
+                          justifyContent: 'space-between',
+                          alignItems: 'center',
+                          padding: '8px 0',
+                          borderBottom: index < data.snippets.missing.length - 1 ? '1px solid #ffcdd2' : 'none'
+                        }}>
+                          <div>
+                            <strong>{item.title}</strong>
+                            <div style={{ fontSize: '12px', color: '#666' }}>{item.file}</div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Outdated Snippets */}
+                {data.snippets.outdated.length > 0 && (
+                  <div style={{ marginBottom: '25px' }}>
+                    <h4 style={{ color: '#f39c12', marginBottom: '10px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <polyline points="12,6 12,12 16,14"></polyline>
+                      </svg>
+                      Outdated Snippet Translations ({data.snippets.outdated.length})
+                    </h4>
+                    <div style={{ backgroundColor: '#fff3e0', border: '1px solid #ffcc02', borderRadius: '4px', padding: '6px' }}>
+                      {data.snippets.outdated.map((item, index) => (
+                        <div key={index} style={{
+                          display: 'flex',
+                          flexDirection: 'column',
+                          borderBottom: index < data.snippets.outdated.length - 1 ? '1px solid #ffcc02' : 'none',
+                          padding: '4px 0'
+                        }}>
+                          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
+                            <span style={{ fontWeight: 'bold' }}>{item.title}</span>
+                            <button
+                              onClick={() => handleEditOutOfDateSnippet(item.file)}
+                              style={{ padding: '3px 8px', backgroundColor: '#f59e0b', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer', fontSize: '11px' }}
+                            >
+                              Edit
+                            </button>
+                          </div>
+                          <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '12px', color: '#666', marginTop: '2px' }}>
+                            <span>{item.file}</span>
+                            <span>Source: {formatDate(item.sourceLastMod)}</span>
+                          </div>
+                          <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '12px', color: '#666', marginTop: '2px' }}>
+                            <span>{item.daysBehind ? `${item.daysBehind} days behind` : ''}</span>
+                            <span>Translation: {formatDate(item.translationLastMod)}</span>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Up to Date Snippets */}
+                {data.snippets.upToDate.length > 0 && (
+                  <div style={{ marginBottom: '25px' }}>
+                    <h4 style={{ color: '#27ae60', marginBottom: '10px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M20 6 9 17l-5-5"></path>
+                      </svg>
+                      Up to Date Snippet Translations ({data.snippets.upToDate.length})
+                    </h4>
+                    <div style={{ backgroundColor: '#e8f5e8', border: '1px solid #c3e6c3', borderRadius: '4px', padding: '15px', maxHeight: '200px', overflowY: 'auto' }}>
+                      {data.snippets.upToDate.map((item, index) => (
+                        <div key={index} style={{
+                          display: 'flex',
+                          justifyContent: 'space-between',
+                          alignItems: 'center',
+                          padding: '6px 0',
+                          borderBottom: index < data.snippets.upToDate.length - 1 ? '1px solid #c3e6c3' : 'none'
+                        }}>
+                          <div>
+                            <strong>{item.title}</strong>
+                            <div style={{ fontSize: '12px', color: '#666' }}>{item.file}</div>
+                          </div>
+                          <div style={{ fontSize: '12px', color: '#666' }}>{formatDate(item.translationLastMod)}</div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Orphaned Snippets */}
+                {data.snippets.orphaned.length > 0 && (
+                  <div style={{ marginBottom: '25px' }}>
+                    <h4 style={{ color: '#9c88ff', marginBottom: '10px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                        <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+                      </svg>
+                      Orphan Snippets ({data.snippets.orphaned.length})
+                    </h4>
+                    <div style={{ backgroundColor: '#f4f2ff', border: '1px solid #d4c5ff', borderRadius: '4px', padding: '15px' }}>
+                      {data.snippets.orphaned.map((item, index) => (
+                        <div key={index} style={{
+                          display: 'flex',
+                          justifyContent: 'space-between',
+                          alignItems: 'center',
+                          padding: '8px 0',
+                          borderBottom: index < data.snippets.orphaned.length - 1 ? '1px solid #d4c5ff' : 'none'
+                        }}>
+                          <div>
+                            <strong>{item.title}</strong>
+                            <div style={{ fontSize: '12px', color: '#666' }}>{item.file}</div>
+                            <div style={{ fontSize: '11px', color: '#8b7dd6' }}>Translation exists but no source snippet found</div>
+                          </div>
+                          <div style={{ fontSize: '12px', color: '#666' }}>Translation: {formatDate(item.translationLastMod)}</div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </div>
             )}
           </div>

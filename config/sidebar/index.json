@@ -218,6 +218,10 @@
           "_template": "category"
         },
         {
+          "document": "docs/advanced/openapi.mdx",
+          "_template": "doc"
+        },
+        {
           "document": "docs/advanced/style.mdx",
           "_template": "doc"
         }
