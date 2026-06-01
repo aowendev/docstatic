@@ -1,0 +1,23 @@
+extends: substitution
+message: "Use '%s' instead of '%s'."
+level: error
+ignorecase: false
+swap:
+  'docstatic\b': 'docStatic'
+  'DOCSTATIC\b': 'docStatic'
+  'Github\b': 'GitHub'
+  'NodeJS\b': 'Node.js'
+  'Node\.JS\b': 'Node.js'
+  'Nodejs\b': 'Node.js'
+  'nodejs\b': 'Node.js'
+  'Javascript\b': 'JavaScript'
+  'javascript\b': 'JavaScript'
+  'Typescript\b': 'TypeScript'
+  'typescript\b': 'TypeScript'
+  'GraphQl\b': 'GraphQL'
+  'graphql\b': 'GraphQL'
+  'Graphql\b': 'GraphQL'
+  'docusaurus\b': 'Docusaurus'
+  'tinacms\b': 'TinaCMS'
+  'TinaCms\b': 'TinaCMS'
+  'Tinacms\b': 'TinaCMS'

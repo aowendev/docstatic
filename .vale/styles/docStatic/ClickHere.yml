@@ -1,0 +1,8 @@
+extends: existence
+message: "Avoid '%s' as link text — use descriptive text that names the destination."
+level: warning
+tokens:
+  - '\bclick here\b'
+  - '\bClick here\b'
+  - '\bthis link\b'
+  - '\bthis page\b'

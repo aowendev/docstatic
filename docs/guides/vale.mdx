@@ -1,0 +1,101 @@
+---
+lastmod: '2026-06-01T00:00:00.000Z'
+title: Prose linting with Vale
+description: >-
+  Use Vale to enforce a consistent writing style across your docStatic documentation.
+tags:
+  - content
+  - software
+draft: false
+review: false
+translate: false
+approved: false
+published: true
+unlisted: false
+---
+
+[Vale](https://vale.sh) is a command-line prose linter that checks your documentation against configurable style rules. It integrates well with Markdown and MDX files, making it a natural fit for docStatic projects.
+
+## Install Vale
+
+See the [Vale installation guide](https://vale.sh/docs/vale-cli/installation/) for instructions for your platform. Vale is available via Homebrew, apt, Chocolatey, and direct binary download.
+
+<Tabs>
+  <TabItem value="mac" label="macOS">
+
+```bash
+brew install vale
+```
+
+  </TabItem>
+  <TabItem value="linux" label="Linux">
+
+```bash
+# Debian / Ubuntu
+sudo apt install vale
+```
+
+  </TabItem>
+  <TabItem value="win" label="Windows">
+
+```powershell
+choco install vale
+```
+
+  </TabItem>
+</Tabs>
+
+## Project configuration
+
+docStatic projects include a `.vale.ini` at the repository root. The key settings are:
+
+| Setting | Value | Purpose |
+|---|---|---|
+| `StylesPath` | `.vale/styles` | Directory for downloaded and custom style packages |
+| `MinAlertLevel` | `suggestion` | Show all findings (suggestion, warning, error) |
+| `[formats]` | `mdx = md` | Treat `.mdx` files as Markdown |
+
+## Sync styles
+
+After cloning the repo, run `vale sync` once to download the style packages listed in `.vale.ini`:
+
+```bash
+vale sync
+```
+
+This populates `.vale/styles/` with the configured packages. Add `.vale/styles/` to `.gitignore` so downloaded packages are not committed.
+
+## Lint your docs
+
+Run Vale against the `docs/` directory:
+
+```bash
+vale docs/
+```
+
+Or lint a single file:
+
+```bash
+vale docs/guides/my-page.mdx
+```
+
+Vale outputs findings grouped by file, with the line number, alert level, and the rule that triggered.
+
+## Adding style packages
+
+Vale has a library of community style packages (Google, Microsoft, write-good, and more). To add one, reference it in `.vale.ini` under `BasedOnStyles`:
+
+```ini
+[*.{md,mdx}]
+BasedOnStyles = Vale, Google
+```
+
+Then run `vale sync` again to download it.
+
+<Admonition type="tip" title="Custom rules">
+You can add project-specific rules as YAML files inside `.vale/styles/`. See the [Vale documentation](https://vale.sh/docs/topics/styles/) for the rule format.
+</Admonition>
+
+## Editor integration
+
+Vale has extensions for VS Code ([Vale VSCode](https://marketplace.visualstudio.com/items?itemName=ChrisChinchilla.vale-vscode)) and other editors that surface findings inline as you write.

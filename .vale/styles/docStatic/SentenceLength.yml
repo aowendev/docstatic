@@ -1,0 +1,6 @@
+extends: metric
+message: "Try to keep sentences under 30 words (found %s words)."
+level: suggestion
+metric: words
+condition: "> 30"
+scope: sentence

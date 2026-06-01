@@ -1,0 +1,5 @@
+extends: existence
+message: "Use an em dash without surrounding spaces (—), not ' — '."
+level: suggestion
+raw:
+  - ' — '

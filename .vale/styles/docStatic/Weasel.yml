@@ -1,0 +1,10 @@
+extends: existence
+message: "Avoid '%s' — be specific about the effort or complexity involved."
+level: warning
+tokens:
+  - '\beasy\b'
+  - '\beasily\b'
+  - '\bsimply\b'
+  - '\bstraightforward\b'
+  - '\btrivially\b'
+  - '\bobviously\b'

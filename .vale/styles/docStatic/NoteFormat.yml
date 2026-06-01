@@ -1,0 +1,10 @@
+extends: existence
+message: "Use an <Admonition> component instead of an inline '%s' prefix."
+level: warning
+tokens:
+  - '^\*?\*?[Nn]ote:\*?\*?'
+  - '^\*?\*?[Ii]mportant:\*?\*?'
+  - '^\*?\*?[Ww]arning:\*?\*?'
+  - '^\*?\*?[Tt]ip:\*?\*?'
+  - '\b[Nn]ote that\b'
+  - '\b[Pp]lease note\b'
