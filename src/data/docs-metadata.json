@@ -33,7 +33,7 @@
     ],
     "path": "/advanced",
     "filePath": "advanced/index.mdx",
-    "lastmod": "2026-03-10T22:57:38.334Z"
+    "lastmod": "2026-06-01T11:36:07.825Z"
   },
   {
     "title": "Assets",
@@ -79,7 +79,7 @@
   },
   {
     "title": "CLI",
-    "description": "DocStatic command line scripts.",
+    "description": "docStatic command line scripts.",
     "tags": [
       "software",
       "software_command-line-interface",
@@ -134,7 +134,7 @@
   },
   {
     "title": "Configuration",
-    "description": "Configuring your site's behavior through docusaurus.config.ts and more.",
+    "description": "Configuring your site's behaviour through docusaurus.config.ts and more.",
     "tags": [
       "configuration",
       "configuration_docusaurus",
@@ -295,7 +295,7 @@
   },
   {
     "title": "Guides",
-    "description": "DocStatic guides.",
+    "description": "docStatic guides.",
     "tags": [
       "content",
       "content_topics"
@@ -383,7 +383,7 @@
   },
   {
     "title": "Introduction",
-    "description": "DocStatic was designed from the ground up to be easily installed and used to get your website up and running quickly.",
+    "description": "docStatic was designed from the ground up to be easily installed and used to get your website up and running quickly.",
     "tags": [
       "software",
       "software_source-control",
@@ -414,11 +414,11 @@
     ],
     "path": "/wiki/readme",
     "filePath": "wiki/readme.mdx",
-    "lastmod": "2026-03-04T22:51:27.353Z"
+    "lastmod": "2026-06-01T11:38:01.455Z"
   },
   {
     "title": "Markdown features",
-    "description": "DocStatic uses MDX. Find out more about docStatic-specific features when writing Markdown.",
+    "description": "docStatic uses MDX. Find out more about docStatic-specific features when writing Markdown.",
     "tags": [
       "computer-languages",
       "computer-languages_markdown",
@@ -484,7 +484,7 @@
     ],
     "path": "/mcp-server-details",
     "filePath": "mcp-server-details.mdx",
-    "lastmod": "2026-03-10T23:22:28.477Z"
+    "lastmod": "2026-06-01T11:36:51.269Z"
   },
   {
     "title": "MCP Server Integration",
@@ -556,6 +556,17 @@
     "lastmod": "2026-06-01T00:00:00.000Z"
   },
   {
+    "title": "Prose linting with Vale",
+    "description": "Use Vale to enforce a consistent writing style across your docStatic documentation.",
+    "tags": [
+      "content",
+      "software"
+    ],
+    "path": "/guides/vale",
+    "filePath": "guides/vale.mdx",
+    "lastmod": "2026-06-01T00:00:00.000Z"
+  },
+  {
     "title": "Related Topics",
     "description": "Automatically generate links to related content based on shared taxonomy tags.",
     "tags": [
@@ -571,7 +582,7 @@
     ],
     "path": "/guides/markdown-features/related-topics",
     "filePath": "guides/markdown-features/related-topics.mdx",
-    "lastmod": "2026-03-04T22:51:31.213Z"
+    "lastmod": "2026-06-01T11:38:53.143Z"
   },
   {
     "title": "Search",
@@ -587,12 +598,12 @@
     "lastmod": "2026-03-10T22:57:13.928Z"
   },
   {
-    "title": "Search engine optimization (SEO)",
+    "title": "Search engine optimisation (SEO)",
     "description": "How to make your docStatic site maximally search-engine-friendly.",
     "tags": [
       "software",
       "software_search",
-      "software_search_search-engine-optimization"
+      "software_search_search-engine-optimisation"
     ],
     "path": "/seo",
     "filePath": "seo.mdx",

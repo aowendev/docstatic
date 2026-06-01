@@ -29,7 +29,7 @@ import { ThemeCollection } from "../src/components/Theme/template";
 import { YouTubeEmbedBlockTemplate } from "../src/components/YouTubeEmbed/template";
 import { DashboardsCollection } from "../src/components/Dashboard/template";
 import { MDXTemplates } from "../src/theme/template";
-import { docusaurusDate, titleFromSlug } from "../util";
+import { docusaurusDate, titleFromSlug } from "../scripts/util";
 
 // Function to extract available locales from Docusaurus config
 function getDocusaurusLocales() {

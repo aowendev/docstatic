@@ -9,7 +9,7 @@ import Link from "@docusaurus/Link";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import clsx from "clsx";
 import React from "react";
-import { getDocPath, titleFromSlug } from "../../../util";
+import { getDocPath, titleFromSlug } from "../../../scripts/util";
 import styles from "./index.module.css";
 
 export const Hero = ({ data, index }) => {

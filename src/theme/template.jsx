@@ -7,7 +7,7 @@
 
 import React from "react";
 import codeFiles from "../../reuse/code-files.json";
-import { slugify } from "../../util";
+import { slugify } from "../../scripts/util";
 import { CodeSnippetBlockTemplate } from "../components/CodeSnippet/template";
 import { CommentBlockTemplate } from "../components/Comment/template";
 import { ConditionalTextBlockTemplate } from "../components/ConditionalText/template";
