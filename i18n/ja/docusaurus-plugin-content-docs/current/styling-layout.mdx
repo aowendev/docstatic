@@ -1,6 +1,6 @@
 ---
 help: null
-lastmod: '2026-03-10T22:57:17.324Z'
+lastmod: '2026-06-01T00:00:00.000Z'
 title: Styling and layout
 tags:
   - computer-languages
@@ -12,27 +12,27 @@ tags:
   - software_static-site-generators_docusaurus
 draft: false
 review: false
-translate: true
+translate: false
 approved: false
 published: false
 unlisted: true
 ---
 
-A docStatic site is a single-page React application. You can style it the way you style React apps.
+docStaticサイトはシングルページのReactアプリケーションです。Reactアプリのスタイリング方法と同じようにスタイルを設定できます。
 
-## Global styles
+## グローバルスタイル
 
-docStatic uses the @docusaurus/preset-classic theme with CSS overrides in the /src/css/custom.css file. Any CSS you write in that file is available globally and can be referenced directly using string literals.
+docStaticは @docusaurus/preset-classic テーマを使用し、/src/css/custom.css ファイルでCSSを上書きしています。そのファイルに記述したCSSはグローバルに利用可能で、文字列リテラルを使用して直接参照できます。
 
-## Styling your site with Infima
+## Infimaを使ったサイトのスタイリング
 
-docStatic uses [Infima](https://infima.dev/) as the underlying styling framework. Infima provides a flexible layout and common UI components styling suitable for content-centric websites (blogs, documentation, home pages). For more details, refer to the [Infima website](https://infima.dev/).
+docStaticは基盤となるスタイリングフレームワークとして[Infima](https://infima.dev/)を使用しています。Infimaは、ブログ、ドキュメント、ホームページなどのコンテンツ中心のウェブサイトに適した柔軟なレイアウトと共通UIコンポーネントのスタイリングを提供します。詳細については、[Infimaのウェブサイト](https://infima.dev/)を参照してください。
 
-Infima uses seven shades of each colour. We recommend using ColorBox to find the different shades of colours for your chosen primary colour. You can use the tool on the [Example page](https://docstatic.com/example-page) to generate the different shades for your website and copy the variables into `/src/css/custom.css`.
+Infimaは各色について7段階のシェードを使用します。選択したプライマリカラーの異なるシェードを見つけるにはColorBoxを使用することをお勧めします。[サンプルページ](https://docstatic.com/example-page)のツールを使用してウェブサイト用の異なるシェードを生成し、変数を `/src/css/custom.css` にコピーできます。
 
-## Dark mode
+## ダークモード
 
-In light mode, the \<html> element has a data-theme="light" attribute; in dark mode, it's data-theme="dark". Therefore, you can scope your CSS to dark-mode-only by targeting html with a specific attribute.
+ライトモードでは、\<html> 要素に data-theme="light" 属性があり、ダークモードでは data-theme="dark" になります。したがって、特定の属性を持つ html をターゲットにすることで、CSSをダークモードのみにスコープ設定できます。
 
 ```css
 /* Overriding root Infima variables */
@@ -45,9 +45,9 @@ In light mode, the \<html> element has a data-theme="light" attribute; in dark m
 }
 ```
 
-## Mobile view
+## モバイルビュー
 
-Docstatic uses 996px as the cutoff between mobile screen width and desktop. If you want your layout to be different in the mobile view, you can use media queries.
+docStaticはモバイル画面幅とデスクトップの境界として996pxを使用しています。モバイルビューで異なるレイアウトにしたい場合は、メディアクエリを使用できます。
 
 ```css
 .banner {
@@ -61,6 +61,6 @@ Docstatic uses 996px as the cutoff between mobile screen width and desktop. If y
 }
 ```
 
-For more information, refer to [Styling and Layout](https://docusaurus.io/docs/styling-layout) in the Docusaurus documentation.
+詳細については、Docusaurusドキュメントの[Styling and Layout](https://docusaurus.io/docs/styling-layout)を参照してください。
 
 <RelatedTopics maxResults={7} />

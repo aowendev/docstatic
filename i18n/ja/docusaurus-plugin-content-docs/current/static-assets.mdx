@@ -1,6 +1,6 @@
 ---
 help: null
-lastmod: '2026-03-04T22:51:50.437Z'
+lastmod: '2026-06-01T00:00:00.000Z'
 title: Static assets
 tags:
   - software
@@ -11,30 +11,30 @@ tags:
   - development
 draft: false
 review: false
-translate: true
+translate: false
 approved: false
 published: false
 unlisted: true
 ---
 
-Static assets are the non-code files that are directly copied to the build output. They include images, stylesheets, favicons, fonts, and so on
+スタティックアセットとは、ビルド出力に直接コピーされるコード以外のファイルです。画像、スタイルシート、ファビコン、フォントなどが含まれます。
 
-You should put these assets in the `static` folder. Every file you put into that folder is copied into the root of the generated build folder with the folder hierarchy preserved. For example, if you add a file named `sun.jpg` to the static folder, it will be copied to `build/sun.jpg`.
+これらのアセットは `static` フォルダーに置いてください。そのフォルダーに入れたすべてのファイルは、フォルダー階層を保持したまま生成されたビルドフォルダーのルートにコピーされます。たとえば、`sun.jpg` というファイルをstaticフォルダーに追加すると、`build/sun.jpg` にコピーされます。
 
-This means that:
+これは以下を意味します。
 
-* For site `baseUrl: '/'`, the image `/static/img/sun.jpg` will be served at `/img/sun.jpg`.
-* For site `baseUrl: '/subpath/'`, the image `/static/img/sun.jpg` will be served at `/subpath/img/sun.jpg`.
+* サイトの `baseUrl: '/'` の場合、画像 `/static/img/sun.jpg` は `/img/sun.jpg` で提供されます。
+* サイトの `baseUrl: '/subpath/'` の場合、画像 `/static/img/sun.jpg` は `/subpath/img/sun.jpg` で提供されます。
 
-## Referencing your static asset
+## スタティックアセットの参照
 
-### In the CMS
+### CMSで
 
-1. Insert a Link.
-2. Enter the absolute path, for example /files/note.docx.
-3. Enter the text to display.
+1. リンクを挿入します。
+2. 絶対パスを入力します（例：/files/note.docx）。
+3. 表示するテキストを入力します。
 
-### In Markdown
+### Markdownで
 
 ```markdown
 You write a link like this: [Download this document](/files/note.docx)
@@ -42,6 +42,6 @@ You write a link like this: [Download this document](/files/note.docx)
 Docusaurus changes that to: <a href={require('static/files/note.docx')}>Download this document</a>
 ```
 
-For more information, refer to [Static Assets](https://docusaurus.io/docs/static-assets) in the Docusaurus documentation.
+詳細については、Docusaurusドキュメントの[Static Assets](https://docusaurus.io/docs/static-assets)を参照してください。
 
 <RelatedTopics maxResults={7} />

@@ -1,6 +1,6 @@
 ---
 help: null
-lastmod: '2026-03-10T23:14:28.772Z'
+lastmod: '2026-06-01T00:00:00.000Z'
 title: MCP Server Integration
 tags:
   - software
@@ -12,7 +12,7 @@ tags:
   - development_ai-tools
 draft: false
 review: false
-translate: true
+translate: false
 approved: false
 published: false
 unlisted: true
@@ -20,91 +20,91 @@ unlisted: true
 
 # MCP Server Integration
 
-docStatic includes an integrated Model Context Protocol (MCP) server that enables AI assistants to access and understand your documentation. This provides intelligent assistance for content editing, searching, and analysis.
+docStaticには統合されたModel Context Protocol（MCP）サーバーが含まれており、AIアシスタントがドキュメントにアクセスして理解できるようにします。コンテンツの編集、検索、分析のためのインテリジェントなサポートを提供します。
 
-## Overview
+## 概要
 
-The MCP server connects AI assistants directly to your docStatic documentation through the TinaCMS GraphQL endpoint, allowing them to:
+MCPサーバーはTinaCMS GraphQLエンドポイントを通じてAIアシスタントをdocStaticドキュメントに直接接続し、以下を可能にします。
 
-* **Search documentation content** using natural language queries
-* **Retrieve specific documents** by path or criteria
-* **Analyse MDX component usage** patterns
-* **Understand document structure** and metadata
-* **Provide contextual assistance** based on your actual content
+* 自然言語クエリを使用した**ドキュメントコンテンツの検索**
+* パスまたは条件による**特定のドキュメントの取得**
+* **MDXコンポーネントの使用**パターンの分析
+* **ドキュメント構造**とメタデータの理解
+* 実際のコンテンツに基づいた**コンテキスト対応のサポートの提供**
 
-## Prerequisites
+## 前提条件
 
-* Node.js 18.0 or higher
-* A running docStatic development server (`npm run dev`)
-* TinaCMS GraphQL endpoint available at `http://localhost:4001/graphql`
+* Node.js 18.0以上
+* 実行中のdocStatic開発サーバー（`npm run dev`）
+* `http://localhost:4001/graphql` で利用可能なTinaCMS GraphQLエンドポイント
 
-## Setup
+## セットアップ
 
-### 1. Install MCP Server Dependencies
+### 1. MCPサーバーの依存関係のインストール
 
-From the main docStatic directory:
+docStaticのメインディレクトリから：
 
 ```bash
 npm run mcp:install
 ```
 
-This installs the necessary MCP server dependencies in the `mcp-server` subdirectory.
+これにより `mcp-server` サブディレクトリに必要なMCPサーバーの依存関係がインストールされます。
 
-### 2. Build the MCP Server
+### 2. MCPサーバーのビルド
 
 ```bash
 npm run mcp:build
 ```
 
-This compiles the TypeScript MCP server code to JavaScript.
+これによりTypeScriptのMCPサーバーコードがJavaScriptにコンパイルされます。
 
-### 3. Start docStatic Development Server
+### 3. docStatic開発サーバーの起動
 
-The MCP server requires your docStatic site to be running:
+MCPサーバーにはdocStaticサイトの実行が必要です。
 
 ```bash
 npm run dev
 ```
 
-This starts:
+これにより以下が起動します。
 
-* Docusaurus at `http://localhost:3000`
-* TinaCMS admin at `http://localhost:3000/admin`
-* GraphQL endpoint at `http://localhost:4001/graphql`
+* Docusaurus：`http://localhost:3000`
+* TinaCMS管理画面：`http://localhost:3000/admin`
+* GraphQLエンドポイント：`http://localhost:4001/graphql`
 
-### 4. Run the MCP Server
+### 4. MCPサーバーの実行
 
-In a separate terminal:
+別のターミナルで：
 
 ```bash
 npm run mcp:start
 ```
 
-For development with auto-restart on changes:
+変更時に自動再起動する開発モードの場合：
 
 ```bash
 npm run mcp:dev
 ```
 
-## Available Tools
+## 利用可能なツール
 
-The MCP server provides several tools that AI assistants can use:
+MCPサーバーはAIアシスタントが使用できるいくつかのツールを提供します。
 
-### Document Search
+### ドキュメント検索
 
-* **`search_documents`**: Find documents using keyword search
-* **`get_document`**: Retrieve a specific document by path
-* **`list_all_documents`**: Get metadata for all documents
+* **`search_documents`**：キーワード検索でドキュメントを検索する
+* **`get_document`**：パスで特定のドキュメントを取得する
+* **`list_all_documents`**：すべてのドキュメントのメタデータを取得する
 
-### Content Analysis
+### コンテンツ分析
 
-* **`get_documents_by_tag`**: Filter documents by taxonomy tags
-* **`analyze_mdx_components`**: Identify MDX components used in documents
-* **`check_server_status`**: Verify GraphQL connectivity
+* **`get_documents_by_tag`**：タクソノミータグでドキュメントをフィルタリングする
+* **`analyze_mdx_components`**：ドキュメントで使用されているMDXコンポーネントを識別する
+* **`check_server_status`**：GraphQLの接続を確認する
 
-## Configuration with Claude Desktop
+## Claude Desktopでの設定
 
-To use the MCP server with Claude Desktop, add this configuration to your Claude Desktop MCP settings:
+MCPサーバーをClaude Desktopで使用するには、Claude DesktopのMCP設定に以下の構成を追加します。
 
 ```json
 {
@@ -118,44 +118,44 @@ To use the MCP server with Claude Desktop, add this configuration to your Claude
 }
 ```
 
-<Admonition type="tip" title="Path Requirements">
-  Replace `/absolute/path/to/docstatic` with the full path to your docStatic project directory. Both the `args` path and `cwd` path must be absolute paths.
+<Admonition type="tip" title="パスの要件">
+  `/absolute/path/to/docstatic` をdocStaticプロジェクトディレクトリの完全なパスに置き換えてください。`args` パスと `cwd` パスの両方が絶対パスである必要があります。
 </Admonition>
 
-## Development Commands
+## 開発コマンド
 
-| Command               | Description                         |
+| コマンド              | 説明                                |
 | --------------------- | ----------------------------------- |
-| `npm run mcp:install` | Install MCP server dependencies     |
-| `npm run mcp:build`   | Build TypeScript to JavaScript      |
-| `npm run mcp:start`   | Start the compiled MCP server       |
-| `npm run mcp:dev`     | Build and start in development mode |
+| `npm run mcp:install` | MCPサーバーの依存関係をインストール |
+| `npm run mcp:build`   | TypeScriptをJavaScriptにビルド      |
+| `npm run mcp:start`   | コンパイル済みMCPサーバーを起動     |
+| `npm run mcp:dev`     | 開発モードでビルドして起動          |
 
-## Troubleshooting
+## トラブルシューティング
 
-### Common Issues
+### よくある問題
 
-**"GraphQL server is not running"**
+**「GraphQLサーバーが実行されていません」**
 
-* Ensure `npm run dev` is running in the main directory
-* Verify `http://localhost:4001/graphql` is accessible
-* Check that TinaCMS has started completely
+* メインディレクトリで `npm run dev` が実行されていることを確認してください
+* `http://localhost:4001/graphql` にアクセスできることを確認してください
+* TinaCMSが完全に起動していることを確認してください
 
-**"Connection refused"**
+**「接続が拒否されました」**
 
-* Confirm the development server is running
-* Check if port 4001 is available
-* Verify firewall settings aren't blocking the connection
+* 開発サーバーが実行されていることを確認してください
+* ポート4001が利用可能かどうか確認してください
+* ファイアウォールの設定で接続がブロックされていないか確認してください
 
-**"Document not found"**
+**「ドキュメントが見つかりません」**
 
-* Use relative paths like `installation.mdx`, not `/docs/installation.mdx`
-* Ensure the document exists in the `docs/` directory
-* Check that the file has proper MDX frontmatter
+* `/docs/installation.mdx` ではなく `installation.mdx` のような相対パスを使用してください
+* `docs/` ディレクトリにドキュメントが存在することを確認してください
+* ファイルに適切なMDXフロントマターがあることを確認してください
 
-### Testing Connectivity
+### 接続のテスト
 
-Test the GraphQL endpoint directly:
+GraphQLエンドポイントを直接テストします。
 
 ```bash
 curl -X POST http://localhost:4001/graphql \
@@ -163,27 +163,27 @@ curl -X POST http://localhost:4001/graphql \
   -d '{"query":"{ __typename }"}'
 ```
 
-Expected response:
+期待されるレスポンス：
 
 ```json
 {"data":{"__typename":"Query"}}
 ```
 
-### Checking MCP Server Logs
+### MCPサーバーログの確認
 
-The MCP server logs to stderr. If using Claude Desktop, check the Claude Desktop logs for error messages from the MCP server.
+MCPサーバーはstderrにログを出力します。Claude Desktopを使用している場合は、Claude Desktopのログでエラーメッセージを確認してください。
 
-## Benefits for Documentation Workflow
+## ドキュメントワークフローの利点
 
-With MCP integration, AI assistants can:
+MCP統合により、AIアシスタントは以下が可能になります。
 
-1. **Understand your content structure** - Access the full taxonomy and document hierarchy
-2. **Provide accurate suggestions** - Base recommendations on your actual documentation patterns
-3. **Help with consistency** - Identify where similar content or components should be used
-4. **Speed up editing** - Quickly find related content and suggest improvements
-5. **Analyse patterns** - Identify frequently used components and content gaps
+1. **コンテンツ構造を理解する** - 完全なタクソノミーとドキュメント階層にアクセスする
+2. **正確な提案を提供する** - 実際のドキュメントパターンに基づいて推奨事項を作成する
+3. **一貫性の維持を支援する** - 類似したコンテンツやコンポーネントを使用すべき箇所を特定する
+4. **編集を高速化する** - 関連コンテンツを素早く見つけて改善を提案する
+5. **パターンを分析する** - 頻繁に使用されるコンポーネントとコンテンツのギャップを特定する
 
-## Architecture
+## アーキテクチャ
 
 ```
 docStatic Project
@@ -196,17 +196,17 @@ docStatic Project
     └── config.jsx      # GraphQL schema definition
 ```
 
-The MCP server acts as a bridge between AI assistants and your docStatic content, providing structured access to documentation through the existing TinaCMS GraphQL API.
+MCPサーバーは、AIアシスタントとdocStaticコンテンツの橋渡し役として機能し、既存のTinaCMS GraphQL APIを通じてドキュメントへの構造化アクセスを提供します。
 
-## Next Steps
+## 次のステップ
 
-After setting up the MCP server:
+MCPサーバーのセットアップ後：
 
-1. **Test the integration** with your AI assistant
-2. **Explore documentation search** capabilities
-3. **Use content analysis tools** to understand your documentation patterns
-4. **Leverage AI assistance** for content creation and editing workflows
+1. AIアシスタントとの**統合をテストする**
+2. **ドキュメント検索機能**を探索する
+3. **コンテンツ分析ツールを使用して**ドキュメントパターンを理解する
+4. コンテンツの作成と編集ワークフローに**AIサポートを活用する**
 
-For detailed MCP server implementation details, see the [MCP Server Implementation Details](mcp-server-details.mdx) page.
+MCPサーバーの実装の詳細については、[MCP Server Implementation Details](mcp-server-details.mdx)ページを参照してください。
 
 <RelatedTopics maxResults={7} />

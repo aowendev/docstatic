@@ -1,6 +1,6 @@
 ---
 help: null
-lastmod: '2026-05-31T23:59:59.000Z'
+lastmod: '2026-06-01T00:00:00.000Z'
 title: Prose linting with Vale
 tags:
   - content
@@ -10,17 +10,17 @@ tags:
   - software_grammar-spelling-style
 draft: false
 review: false
-translate: true
+translate: false
 approved: false
 published: false
 unlisted: true
 ---
 
-[Vale](https://vale.sh) is a command-line prose linter that checks your documentation against configurable style rules. It integrates well with Markdown and MDX files, making it a natural fit for docStatic projects.
+[Vale](https://vale.sh)は、設定可能なスタイルルールに照らしてドキュメントをチェックするコマンドラインの文章リンターです。MarkdownおよびMDXファイルとの統合性が高く、docStaticプロジェクトに自然に適合します。
 
-## Install Vale
+## Valeのインストール
 
-See the [Vale installation guide](https://vale.sh/docs/vale-cli/installation/) for instructions for your platform. Vale is available via Homebrew, apt, Chocolatey, and direct binary download.
+お使いのプラットフォームへのインストール手順については、[Valeインストールガイド](https://vale.sh/docs/vale-cli/installation/)を参照してください。ValeはHomebrew、apt、Chocolatey、および直接バイナリダウンロードで利用可能です。
 
 <Tabs>
   <TabItem value="mac" label="macOS">
@@ -43,57 +43,57 @@ See the [Vale installation guide](https://vale.sh/docs/vale-cli/installation/) f
   </TabItem>
 </Tabs>
 
-## Project configuration
+## プロジェクト設定
 
-docStatic projects include a `.vale.ini` at the repository root. The key settings are:
+docStaticプロジェクトには、リポジトリのルートに `.vale.ini` が含まれています。主な設定は次のとおりです。
 
-| Setting         | Value          | Purpose                                            |
+| 設定            | 値             | 目的                                               |
 | --------------- | -------------- | -------------------------------------------------- |
-| `StylesPath`    | `.vale/styles` | Directory for downloaded and custom style packages |
-| `MinAlertLevel` | `suggestion`   | Show all findings (suggestion, warning, error)     |
-| `[formats]`     | `mdx = md`     | Treat `.mdx` files as Markdown                     |
+| `StylesPath`    | `.vale/styles` | ダウンロード済みおよびカスタムスタイルパッケージのディレクトリ |
+| `MinAlertLevel` | `suggestion`   | すべての結果を表示（suggestion、warning、error）  |
+| `[formats]`     | `mdx = md`     | `.mdx` ファイルをMarkdownとして処理               |
 
-## Sync styles
+## スタイルの同期
 
-After cloning the repo, run `vale sync` once to download the style packages listed in `.vale.ini`:
+リポジトリのクローン後、`vale sync` を一度実行して `.vale.ini` に記載されたスタイルパッケージをダウンロードします。
 
 ```bash
 vale sync
 ```
 
-This populates `.vale/styles/` with the configured packages. Add `.vale/styles/` to `.gitignore` so downloaded packages are not committed.
+これにより `.vale/styles/` に設定済みパッケージが展開されます。ダウンロードしたパッケージがコミットされないよう、`.vale/styles/` を `.gitignore` に追加してください。
 
-## Lint your docs
+## ドキュメントのリント
 
-Run Vale against the `docs/` directory:
+`docs/` ディレクトリに対してValeを実行します。
 
 ```bash
 vale docs/
 ```
 
-Or lint a single file:
+または単一ファイルをリントします。
 
 ```bash
 vale docs/guides/my-page.mdx
 ```
 
-Vale outputs findings grouped by file, with the line number, alert level, and the rule that triggered.
+Valeはファイルごとにグループ化された結果を出力し、行番号、アラートレベル、トリガーされたルールを表示します。
 
-## Adding style packages
+## スタイルパッケージの追加
 
-Vale has a library of community style packages (Google, Microsoft, write-good, and more). To add one, reference it in `.vale.ini` under `BasedOnStyles`:
+Valeにはコミュニティスタイルパッケージのライブラリがあります（Google、Microsoft、write-goodなど）。追加するには、`.vale.ini` の `BasedOnStyles` で参照します。
 
 ```ini
 [*.{md,mdx}]
 BasedOnStyles = Vale, Google
 ```
 
-Then run `vale sync` again to download it.
+その後、`vale sync` を再度実行してダウンロードします。
 
-<Admonition type="tip" title="Custom rules">
-  You can add project-specific rules as YAML files inside `.vale/styles/`. See the [Vale documentation](https://vale.sh/docs/topics/styles/) for the rule format.
+<Admonition type="tip" title="カスタムルール">
+  プロジェクト固有のルールを `.vale/styles/` 内のYAMLファイルとして追加できます。ルールの形式については[Valeドキュメント](https://vale.sh/docs/topics/styles/)を参照してください。
 </Admonition>
 
-## Editor integration
+## エディター統合
 
-Vale has extensions for VS Code ([Vale VSCode](https://marketplace.visualstudio.com/items?itemName=ChrisChinchilla.vale-vscode)) and other editors that surface findings inline as you write.
+Valeには、VS Code（[Vale VSCode](https://marketplace.visualstudio.com/items?itemName=ChrisChinchilla.vale-vscode)）やその他のエディター向けの拡張機能があり、作業中にインラインで結果を表示します。

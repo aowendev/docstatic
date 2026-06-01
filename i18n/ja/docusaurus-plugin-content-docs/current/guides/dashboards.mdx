@@ -1,6 +1,6 @@
 ---
 help: null
-lastmod: '2026-03-04T22:51:27.725Z'
+lastmod: '2026-06-01T00:00:00.000Z'
 modifiedBy: aowendev <aowen@translationcommons.org>
 title: Dashboards
 tags:
@@ -9,102 +9,102 @@ tags:
   - software_content-management-systems_media-management
 draft: false
 review: false
-translate: true
+translate: false
 approved: false
 published: false
 unlisted: true
 ---
 
-docStatic adds dashboard functionality to TinaCMS. Tina generates a GraphQL API using the filesystem in the Git repository as the database. Dashboards query the API (locally or in the cloud) and present actionable reports directly in the CMS. Dashboard functionality is currently considered beta. The functionality is fully tested, but the user interface is provisional and requires refinement. Dashboards update when the page is updated. If another user has made changes since you viewed a dashboard, you can click **Refresh** to update the dashboard.
+docStatic は TinaCMS にダッシュボード機能を追加します。Tina は Git リポジトリのファイルシステムをデータベースとして使用して GraphQL API を生成します。ダッシュボードは API に（ローカルまたはクラウドで）クエリを実行し、実用的なレポートを CMS 内に直接表示します。ダッシュボード機能は現在ベータ版として位置づけられています。機能は完全にテスト済みですが、ユーザーインターフェースは暫定的なものであり、改善が必要です。ダッシュボードはページが更新されると更新されます。ダッシュボードを閲覧した後に別のユーザーが変更を加えた場合は、**Refresh** をクリックしてダッシュボードを更新できます。
 
-<Admonition type="note" title="Note">
-  Depending on the amount of content in the system, some dashboards may take some time to load. These dashboards will typically update slightly faster when running locally.
+<Admonition type="note" title="注意">
+  システム内のコンテンツ量によっては、一部のダッシュボードの読み込みに時間がかかる場合があります。これらのダッシュボードは通常、ローカルで実行する場合にやや速く更新されます。
 </Admonition>
 
-## Viewing the dashboards
+## ダッシュボードを表示する
 
-From the CMS, navigate to the Dashboards collection. At the top of the page is a status bar that shows the GraphQL connection. It indicates if you are connected to the cloud or localhost. If the localhost is available, it will always connect to the localhost. To use the cloud, ensure the local dev server is stopped. The status bar also displays the environment and checks all settings are valid.
+CMS から Dashboards コレクションに移動します。ページの上部には GraphQL の接続状態を示すステータスバーがあります。クラウドに接続されているか、ローカルホストに接続されているかが表示されます。ローカルホストが利用可能な場合は、常にローカルホストに接続されます。クラウドを使用するには、ローカル開発サーバーが停止していることを確認してください。ステータスバーには環境も表示され、すべての設定が有効かどうかを確認します。
 
-## Viewing workflow status
+## ワークフローステータスを表示する
 
-The Content Overview dashboard show the total number of topics in the /docs path and the topics in each workflow status:
+Content Overview ダッシュボードには、/docs パス内のトピックの総数と、各ワークフローステータスのトピックが表示されます：
 
-* Draft
-* Review
-* Translate
-* Approved
-* Published
-* Unlisted
+* Draft（下書き）
+* Review（レビュー）
+* Translate（翻訳）
+* Approved（承認済み）
+* Published（公開済み）
+* Unlisted（非公開）
 
-Click the status link to display all topics in that status.
+ステータスリンクをクリックすると、そのステータスのすべてのトピックが表示されます。
 
-Click Edit to open the topic for editing.
+Edit をクリックすると、そのトピックが編集用に開きます。
 
-Click the Close icon to close the list of topics.
+閉じるアイコンをクリックすると、トピックのリストが閉じます。
 
-### Viewing recent activity
+### 最近のアクティビティを表示する
 
-The Recent Activity section shows recently changed topics. You can filter the time range (All time, Last week or Last month) and set the number of results from 5 to 50.
+Recent Activity セクションには、最近変更されたトピックが表示されます。時間範囲（全期間、先週、先月）でフィルタリングでき、結果の件数を 5 件から 50 件の範囲で設定できます。
 
-## Viewing translation status
+## 翻訳ステータスを表示する
 
-The Translations dashboard shows the status of each topic for the language selected from the list:
+Translations ダッシュボードには、リストから選択した言語について各トピックのステータスが表示されます：
 
-* Up to date: The last modified date of the translation is later than the source.
-* Outdated: The last modified date of the source is later than the translation.
-* Missing: There is a source file with no equivalent translation file.
+* Up to date（最新）：翻訳の最終更新日がソースよりも新しい状態。
+* Outdated（古い）：ソースの最終更新日が翻訳よりも新しい状態。
+* Missing（不足）：対応する翻訳ファイルのないソースファイルが存在する状態。
 
-## Viewing content reuse
+## コンテンツの再利用状況を表示する
 
-The Content Reuse dashboard shows the reusable content in the system and where it is used. It reports on four categories:
+Content Reuse ダッシュボードには、システム内の再利用可能なコンテンツとその使用場所が表示されます。4つのカテゴリについてレポートします：
 
-* Code Snippets: code files referenced by the CodeSnippet component.
-* Glossary Terms: terms defined in the glossary terms collection.
-* Snippets: MDX content files referenced by the Snippet component.
-* Variable Sets: variable sets referenced by the VariableSet component.
+* Code Snippets：CodeSnippet コンポーネントで参照されているコードファイル。
+* Glossary Terms：用語集コレクションで定義された用語。
+* Snippets：Snippet コンポーネントで参照されている MDX コンテンツファイル。
+* Variable Sets：VariableSet コンポーネントで参照されている変数セット。
 
-Click a category card to see a list of items in that category with the topics where each item is used.
+カテゴリカードをクリックすると、そのカテゴリのアイテム一覧と各アイテムが使用されているトピックが表示されます。
 
-### Viewing reuse suggestions
+### 再利用候補の提案を表示する
 
-The Suggestions section of the Content Reuse dashboard identifies content that could be converted to reusable components:
+Content Reuse ダッシュボードの Suggestions セクションには、再利用可能なコンポーネントに変換できるコンテンツが識別されます：
 
-* Possible Snippets (code): Inline code blocks in topics that could be extracted into code snippet files.
-* Possible Terms: Glossary term text appearing as plain text in topics that could use the GlossaryTerm component instead.
-* Possible Snippets (duplicate text): Blocks of text appearing in two or more topics that could be extracted into snippet files.
-* Possible Variables: Variable values appearing as plain text in topics that could use the VariableSet component instead.
+* Possible Snippets（コード）：トピック内のインラインコードブロックで、コードスニペットファイルに抽出できるもの。
+* Possible Terms：トピック内にプレーンテキストとして表示されている用語集の用語で、代わりに GlossaryTerm コンポーネントを使用できるもの。
+* Possible Snippets（重複テキスト）：2つ以上のトピックに現れるテキストブロックで、スニペットファイルに抽出できるもの。
+* Possible Variables：トピック内にプレーンテキストとして表示されている変数値で、代わりに VariableSet コンポーネントを使用できるもの。
 
-Click a suggestion card to see the items found and the topics where they appear.
+提案カードをクリックすると、見つかったアイテムとそれらが現れるトピックが表示されます。
 
-## Viewing media reuse
+## メディアの再利用状況を表示する
 
-The Media Library dashboard shows where content in the /static/img path is used. It shows the total number of files and images, file size, image paths and image sizes.
+Media Library ダッシュボードには、/static/img パス内のコンテンツの使用場所が表示されます。ファイルと画像の総数、ファイルサイズ、画像パス、画像サイズが表示されます。
 
-You can filter by:
+以下でフィルタリングできます：
 
-* All content.
-* Images only.
-* Recent (7 days).
-* Used.
-* Unused.
+* すべてのコンテンツ。
+* 画像のみ。
+* 最近（7日以内）。
+* 使用中。
+* 未使用。
 
-For used content, click Used in n docs to display the topics where the content is used. You can then click Edit to edit those topics.
+使用中のコンテンツについては、「n 件のドキュメントで使用中」をクリックして、そのコンテンツが使用されているトピックを表示できます。その後、Edit をクリックしてそれらのトピックを編集できます。
 
-## Checking broken links
+## リンク切れを確認する
 
-The Broken Links dashboard validates all the hyperlinks in the topics. The report includes number for:
+Broken Links ダッシュボードは、トピック内のすべてのハイパーリンクを検証します。レポートには以下の数が含まれます：
 
-* Total links.
-* Valid links where a connection could be established.
-* Broken links where no connection could be established.
-* Warning links where the connection was rejected but the link could still be valid.
+* 総リンク数。
+* 接続が確立できた有効なリンク。
+* 接続が確立できなかったリンク切れのリンク。
+* 接続が拒否されたが、リンク自体は有効である可能性のある警告リンク。
 
-You can safely ignore warnings about http\://localhost if you are describing software running locally. But document links should be relative.
+ローカルで実行しているソフトウェアについて説明している場合は、http\://localhost に関する警告は無視して問題ありません。ただし、ドキュメントのリンクは相対パスにする必要があります。
 
-Warnings are typically the results of aggressive CORS/CORP policies that do not respect no-cors settings. You must manually validate these sites by clicking the hyperlink.
+警告は通常、no-cors 設定を尊重しない積極的な CORS/CORP ポリシーの結果です。ハイパーリンクをクリックして、これらのサイトを手動で検証する必要があります。
 
-The dashboard lists files with problem links. You can open them by clicking Edit in either list.
+ダッシュボードには問題のあるリンクを持つファイルが一覧表示されます。いずれかのリストの Edit をクリックして開くことができます。
 
-The dashboard also provides a summary with the date when the report was run.
+ダッシュボードには、レポートが実行された日付とともにサマリーも表示されます。
 
 <RelatedTopics maxResults={7} />

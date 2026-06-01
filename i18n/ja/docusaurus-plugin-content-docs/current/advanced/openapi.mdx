@@ -1,6 +1,6 @@
 ---
 help: null
-lastmod: '2026-05-31T23:59:59.000Z'
+lastmod: '2026-06-01T00:00:00.000Z'
 title: OpenAPI reference docs
 tags:
   - apis
@@ -10,19 +10,19 @@ tags:
   - software_static-site-generators_docusaurus
 draft: false
 review: false
-translate: true
+translate: false
 approved: false
 published: false
 unlisted: true
 ---
 
-# OpenAPI reference docs
+# OpenAPI リファレンスドキュメント
 
-docStatic uses [`docusaurus-plugin-openapi-docs`](https://github.com/PaloAltoNetworks/docusaurus-openapi-docs) to generate API reference documentation from an OpenAPI specification. The plugin reads a spec file and writes a set of MDX files into your `docs/` tree that Docusaurus then builds as normal pages.
+docStatic は [`docusaurus-plugin-openapi-docs`](https://github.com/PaloAltoNetworks/docusaurus-openapi-docs) を使用して、OpenAPI 仕様から API リファレンスドキュメントを生成します。このプラグインは仕様ファイルを読み込み、`docs/` ツリー内に一連の MDX ファイルを書き込みます。Docusaurus はそれらを通常のページとしてビルドします。
 
-## Configuration
+## 設定
 
-API sources are configured in `config/docusaurus/index.json` under the `openapi.apis` array. Each entry specifies a name, the path to the spec file, the output directory, and optional grouping options:
+API ソースは `config/docusaurus/index.json` の `openapi.apis` 配列で設定されます。各エントリには、名前、仕様ファイルへのパス、出力ディレクトリ、およびオプションのグループ化オプションを指定します：
 
 ```json
 {
@@ -40,32 +40,32 @@ API sources are configured in `config/docusaurus/index.json` under the `openapi.
 }
 ```
 
-Run generation with:
+次のコマンドで生成を実行します：
 
 ```bash
 npm run gen-api-docs
 ```
 
-To remove generated files:
+生成されたファイルを削除するには：
 
 ```bash
 npm run clean-api-docs
 ```
 
-## Tag pages
+## タグページ
 
-When `groupPathsBy` and `categoryLinkSource` are both set to `"tag"`, the plugin creates a category index page for each OpenAPI tag (e.g. `store.tag.mdx`). By default these files contain a verbose boilerplate block that imports `DocCardList` and `useCurrentSidebarCategory`—both redundant in docStatic because `DocCardList` is already globally registered as an MDX component, and the component resolves the current category's items automatically when called with no props.
+`groupPathsBy` と `categoryLinkSource` の両方が `"tag"` に設定されている場合、プラグインは各 OpenAPI タグに対してカテゴリインデックスページ（例：`store.tag.mdx`）を作成します。デフォルトでは、これらのファイルには `DocCardList` と `useCurrentSidebarCategory` をインポートする冗長なボイラープレートブロックが含まれています。docStatic では `DocCardList` がすでに MDX コンポーネントとしてグローバルに登録されており、プロパティなしで呼び出された場合に現在のカテゴリのアイテムを自動的に解決するため、どちらも冗長です。
 
-docStatic configures the plugin with a custom tag template that produces the simplified form instead:
+docStatic はカスタムタグテンプレートを使用してプラグインを設定し、代わりに簡略化された形式を生成します：
 
 ```mdx
 <DocCardList />
 ```
 
-The template is at `config/docusaurus/openapi-tag-template.md` and is wired in via the `tagTemplate` option in `docusaurus.config.ts`.
+テンプレートは `config/docusaurus/openapi-tag-template.md` にあり、`docusaurus.config.ts` の `tagTemplate` オプションで接続されています。
 
-## Editing generated tag files
+## 生成されたタグファイルの編集
 
-The plugin **only creates a tag file if one does not already exist**—it will never overwrite a file you have edited. This means you can freely customise the description text in a tag page and it will survive subsequent `gen-api-docs` runs. Only newly introduced tags will have a file written for them, and those will use the custom template.
+プラグインは**ファイルが存在しない場合にのみタグファイルを作成します**。編集済みのファイルを上書きすることは決してありません。つまり、タグページの説明テキストを自由にカスタマイズでき、その変更は以降の `gen-api-docs` 実行後も保持されます。新たに追加されたタグのみファイルが作成され、それらにはカスタムテンプレートが使用されます。
 
 <RelatedTopics maxResults={7} />

@@ -1,6 +1,6 @@
 ---
 help: null
-lastmod: '2026-03-10T22:58:36.179Z'
+lastmod: '2026-06-01T00:00:00.000Z'
 title: Context-sensitive help
 slug: /context-help
 tags:
@@ -8,34 +8,34 @@ tags:
   - elements_context-sensitive-help
 draft: false
 review: false
-translate: true
+translate: false
 approved: false
 published: false
 unlisted: true
 ---
 
-# Context-sensitive help
+# コンテキストセンシティブヘルプ
 
-> "Context-sensitive help is a kind of [online help](https://en.wikipedia.org/wiki/Online_help) that is obtained from a specific point in the state of the software, providing help for the situation that is associated with that state. Context-sensitive help, as opposed to general online help or online manuals, does not need to be accessible for reading as a whole. Each topic is supposed to describe extensively one state, situation, or feature of the software."—[Wikipedia](https://en.wikipedia.org/wiki/Context-sensitive_help)
+> 「コンテキストセンシティブヘルプとは、ソフトウェアの特定の状態から取得する[オンラインヘルプ](https://en.wikipedia.org/wiki/Online_help)の一種で、その状態に関連する状況のヘルプを提供するものです。コンテキストセンシティブヘルプは、一般的なオンラインヘルプやオンラインマニュアルとは異なり、全体を通して読めるようにする必要はありません。各トピックは、ソフトウェアの1つの状態、状況、または機能を詳細に説明することを目的としています。」—[Wikipedia](https://en.wikipedia.org/wiki/Context-sensitive_help)
 
-Typically, context-sensitive help is implemented by having a help icon that users can click that will take them to the appropriate part of the documentation for the part of the software they are using. This involves creating a map of context URLs.
+通常、コンテキストセンシティブヘルプは、ユーザーがクリックすると使用中のソフトウェアの部分に対応するドキュメントの適切な箇所に案内するヘルプアイコンとして実装されます。これにはコンテキスト URL のマップを作成する必要があります。
 
-The static site generator automatically generates links to headings. However, if you change the heading, the link will change. For this reason, docStatic provides the Context Help element. It enables you to add an anchor tag anywhere within a topic. Providing that a slug is defined for the topic in the metadata, the link will not break.
+静的サイトジェネレーターは見出しへのリンクを自動的に生成します。ただし、見出しを変更するとリンクも変わってしまいます。このため、docStatic ではコンテキストヘルプ要素を提供しています。これにより、トピック内の任意の場所にアンカータグを追加できます。メタデータにトピックのスラッグが定義されている限り、リンクが壊れることはありません。
 
-1. Select **Context Help** from the Embed list.
-2. Enter a unique ID.
+1. Embed リストから **Context Help** を選択します。
+2. 一意の ID を入力します。
 
-The link will be in the form: `<URL>/docs/<slug>#<id>`.
+リンクは次の形式になります：`<URL>/docs/<slug>#<id>`
 
-#### Example
+#### 例
 
 [https://docstatic.com/docs/context-help#help-example](/docs/context-help#help-example)
 
 <a id="help-example" />
 
-## Developers
+## 開発者向け
 
-For an example of how to include context help links in your code, examine the HelpButton React component in the source code for this site. Because docStatic doesn't have direct access to the CMS code, it implements the button by applying it as a UI element on an unused field in a CMS collection. The HelpButton component attaches the button to the nav element on the page and links it to the URL passed in the template:
+コードにコンテキストヘルプリンクを含める方法の例については、このサイトのソースコードにある HelpButton React コンポーネントを参照してください。docStatic は CMS コードに直接アクセスできないため、CMS コレクション内の未使用フィールドに UI 要素として適用することでボタンを実装しています。HelpButton コンポーネントはボタンをページの nav 要素に接続し、テンプレートで渡された URL にリンクします：
 
 ```javascript
 const ExampleCollection = {

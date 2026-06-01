@@ -1,6 +1,6 @@
 ---
 help: null
-lastmod: '2026-03-10T23:10:08.911Z'
+lastmod: ‘2026-06-01T00:00:00.000Z’
 modifiedBy: unknown
 title: Markdown features
 tags:
@@ -24,7 +24,7 @@ tags:
   - software_content-management-systems_tinacms
 draft: false
 review: false
-translate: true
+translate: false
 approved: false
 published: false
 unlisted: true
@@ -32,91 +32,91 @@ unlisted: true
 
 # Markdown features
 
-docStatic uses [Markdown](https://commonmark.org/) as its main content authoring format. You can [learn it in ten minutes](https://commonmark.org/help/). But you don't have to because the CMS provides a full rich text editing environment for metadata, Markdown and React components.
+docStaticは、コンテンツ作成のメインフォーマットとして[Markdown](https://commonmark.org/)を使用しています。[10分で学ぶ](https://commonmark.org/help/)こともできます。ただし、CMSがメタデータ、Markdown、Reactコンポーネントのための完全なリッチテキスト編集環境を提供しているため、必ずしも習得する必要はありません。
 
-## Simple Structured Authoring
+## シンプルな構造化オーサリング
 
-Topics in docStatic have three parts:
+docStaticのトピックは3つの部分で構成されています。
 
-* Metadata (in [YAML](https://yaml.org/spec/1.2.2/) format)
-* Content (in Markdown)
-* Predefined React components.
+* メタデータ（[YAML](https://yaml.org/spec/1.2.2/)形式）
+* コンテンツ（Markdown形式）
+* 事前定義されたReactコンポーネント
 
-The CMS makes sure metadata and Markdown are used consistently, while the React components provide a uniform style and support for content reuse features. You don’t need to add any JSX code yourself as the components are already available globally.
+CMSはメタデータとMarkdownが一貫して使用されるよう管理し、Reactコンポーネントは統一されたスタイルとコンテンツ再利用機能のサポートを提供します。コンポーネントはすでにグローバルに利用可能なため、JSXコードを自分で追加する必要はありません。
 
-## Standard features
+## 標準機能
 
-Markdown features include:
+Markdownの機能には以下が含まれます。
 
-* Bold, code, italic and strikethrough character styles.
-* Bulleted and numbered lists.
-* Code blocks.
-* Heading levels (1 to 6).
-* Horizontal rules.
-* Images.
-* Links.
-* Quotes.
-* Simple tables.
+* 太字、コード、斜体、取り消し線の文字スタイル
+* 箇条書きリストと番号付きリスト
+* コードブロック
+* 見出しレベル（1〜6）
+* 水平線
+* 画像
+* リンク
+* 引用
+* シンプルなテーブル
 
-These can all be selected directly from the rich text toolbar in the CMS.
+これらはすべてCMSのリッチテキストツールバーから直接選択できます。
 
-To these, Docusaurus adds:
+これらに加えて、Docusaurusは以下を追加しています。
 
-* [Admonitions](admonitions)
-* Details (expanding content)
-* Doc card lists
-* [Tabs](tabs)
+* [注記（Admonitions）](admonitions)
+* 詳細（展開可能なコンテンツ）
+* ドキュメントカードリスト
+* [タブ](tabs)
 
-docStatic further extends this with:
+docStaticはさらに以下で拡張しています。
 
-* [Code snippets](code-blocks) (from files)
-* [Comments](comments)
-* [Conditional text](conditional-text)
-* [Context help links](context-help)
-* [Diagrams](diagrams)
-* [Figures](figures)
-* [Footnotes](footnotes)
-* [Glossary terms](glossary)
-* [Math equations](math-equations)
-* [Related topics](related-topics) (auto-generated)
-* [Snippets](snippets)
-* [Variables](variables)
+* [コードスニペット](code-blocks)（ファイルから）
+* [コメント](comments)
+* [条件付きテキスト](conditional-text)
+* [コンテキストヘルプリンク](context-help)
+* [ダイアグラム](diagrams)
+* [図](figures)
+* [脚注](footnotes)
+* [用語集の用語](glossary)
+* [数式](math-equations)
+* [関連トピック](related-topics)（自動生成）
+* [スニペット](snippets)
+* [変数](variables)
 
-## Front matter
+## フロントマター
 
-Front matter is used to add metadata to your Markdown file. It's provided at the very top of the file, enclosed by three dashes ---. Content plugins may have their own front matter schema. docStatic uses the front matter for:
+フロントマターは、Markdownファイルにメタデータを追加するために使用されます。ファイルの先頭に、3つのダッシュ（---）で囲んで記述します。コンテンツプラグインには独自のフロントマタースキーマがある場合があります。docStaticでは、フロントマターを以下の目的に使用します。
 
-* Conditions (for conditional text)
-* Descriptions
-* Slugs (fixed paths)
-* Taxonomy tags
-* Titles
-* Workflow status
+* 条件（条件付きテキスト用）
+* 説明
+* スラッグ（固定パス）
+* タクソノミータグ
+* タイトル
+* ワークフローステータス
 
-## Details
+## 詳細（Details）
 
-1. Select **Details** from the **Embed** list.
-2. Edit the component.
-3. Give it a **Summary**.
-4. Enter the **Details**.
+1. **埋め込み** リストから **Details** を選択します。
+2. コンポーネントを編集します。
+3. **概要（Summary）** を設定します。
+4. **詳細内容** を入力します。
 
-#### Example:
+#### 例:
 
-<Details summary="Toggle me.">
-  This is the detailed content.
+<Details summary="クリックして展開">
+  これは詳細コンテンツです。
 
-  You can use Markdown here including **bold** and *italic* text, and inline [links](https://docusaurus.io/).
+  ここではMarkdownを使用できます。**太字** や *斜体* テキスト、インライン[リンク](https://docusaurus.io/)なども使用できます。
 </Details>
 
-## Doc card lists
+## ドキュメントカードリスト
 
-Doc card lists are automatically generated for categories in the table of contents. However, you can also manually add them to a topic.
+ドキュメントカードリストは、目次のカテゴリに対して自動的に生成されます。ただし、手動でトピックに追加することもできます。
 
-1. Select **Doc Card List** from the **Embed** list.
-2. Give it a **Title**.
+1. **埋め込み** リストから **Doc Card List** を選択します。
+2. **タイトル** を設定します。
 
-For more information, refer to [Markdown Features](https://docusaurus.io/docs/markdown-features) in the Docusaurus documentation.
+詳細については、Docusaurusドキュメントの[Markdown Features](https://docusaurus.io/docs/markdown-features)を参照してください。
 
-#### Example:
+#### 例:
 
 <DocCardList title="Markdown Features" />

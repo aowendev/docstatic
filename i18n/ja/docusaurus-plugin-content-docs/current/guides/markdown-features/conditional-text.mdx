@@ -1,6 +1,6 @@
 ---
 help: null
-lastmod: '2026-03-04T22:51:34.496Z'
+lastmod: '2026-06-01T00:00:00.000Z'
 modifiedBy: aowendev <aowen@translationcommons.org>
 title: Conditional text
 tags:
@@ -10,51 +10,51 @@ tags:
   - reuse_conditional-text
 draft: false
 review: false
-translate: true
+translate: false
 approved: false
 published: false
 unlisted: true
 ---
 
-# Conditional text
+# 条件付きテキスト
 
-The **Conditional Text** component enables you to wrap content in a set of conditions that determine when it should be displayed:
+**Conditional Text** コンポーネントを使用すると、コンテンツをいつ表示するかを決定する条件のセットでラップできます：
 
-* Conditions can be any combination of languages or user-defined conditions.
-* The content can be displayed or hidden if one or more conditions are met (OR) or only if all conditions are met (AND).
-  You can also specify fallback text to display if no conditions are met.
+* 条件には、言語またはユーザー定義条件の任意の組み合わせを指定できます。
+* 1つ以上の条件が満たされた場合（OR）、またはすべての条件が満たされた場合のみ（AND）、コンテンツを表示または非表示にできます。
+  条件が満たされない場合に表示するフォールバックテキストも指定できます。
 
-## Create categories and conditions
+## カテゴリと条件を作成する
 
-1. In the CMS, click  the **Conditions** collection.
-2. Click the **Add** icon to add a new **Category**
-3. Give it a **Name** and **Description**.
-4. For each **Condition** you want to add:
-   1. Click the **Add** icon.
-   2. Name the **Condition** and give it a **Description**.
-   3. Toggle the **Active** status of the condition as required.
+1. CMS で **Conditions** コレクションをクリックします。
+2. **Add** アイコンをクリックして新しい **Category**（カテゴリ）を追加します。
+3. **Name**（名前）と **Description**（説明）を入力します。
+4. 追加する各 **Condition**（条件）について：
+   1. **Add** アイコンをクリックします。
+   2. **Condition** に名前を付けて **Description** を入力します。
+   3. 必要に応じて条件の **Active**（アクティブ）状態を切り替えます。
 
-## Add conditions to a topic
+## トピックに条件を追加する
 
-Conditions are set at the topic level. The language is determined by the page language. Other conditions are defined as an array in the metadata at the start of the topic.
+条件はトピックレベルで設定されます。言語はページの言語によって決まります。その他の条件は、トピックの先頭のメタデータに配列として定義されます。
 
-1. Create or edit a topic.
-2. In the **Conditions** area, expand the **Categories** and select the box of any **Conditions** you want to apply to the topic.
+1. トピックを作成または編集します。
+2. **Conditions** エリアで **Categories** を展開し、トピックに適用したい **Conditions** のボックスを選択します。
 
-## Add conditional text
+## 条件付きテキストを追加する
 
-1. Select **Conditional Text** from the **Embed** list.
-2. Edit the component.
-3. Enter the **Content**.
-4. Set the **Action** (show or hide).
-5. Add any **Required Conditions**.
-6. Add any **Required Languages**.
-7. Set the **Condition Logic**.
-8. Set the **Language Logic**.
-9. Select if both conditions and languages are required.
-10. (Optional) Enter the **Fallback Text**.
+1. **Embed** リストから **Conditional Text** を選択します。
+2. コンポーネントを編集します。
+3. **Content**（コンテンツ）を入力します。
+4. **Action**（アクション）を設定します（表示または非表示）。
+5. **Required Conditions**（必要な条件）を追加します。
+6. **Required Languages**（必要な言語）を追加します。
+7. **Condition Logic**（条件のロジック）を設定します。
+8. **Language Logic**（言語のロジック）を設定します。
+9. 条件と言語の両方が必要かどうかを選択します。
+10. （オプション）**Fallback Text**（フォールバックテキスト）を入力します。
 
-### Example
+### 例
 
 <ConditionalText action="show" conditions={["production"]} languages={[]} logic="any" languageLogic="any" requireBothConditions={false} fallback="">The `production` condition is set on this page.</ConditionalText>
 

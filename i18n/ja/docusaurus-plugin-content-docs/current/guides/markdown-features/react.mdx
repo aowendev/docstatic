@@ -1,6 +1,6 @@
 ---
 help: null
-lastmod: '2026-03-10T22:59:19.481Z'
+lastmod: '2026-06-01T00:00:00.000Z'
 title: MDX and React
 tags:
   - computer-languages
@@ -10,7 +10,7 @@ tags:
   - computer-languages_javascript_react
 draft: false
 review: false
-translate: true
+translate: false
 approved: false
 published: false
 unlisted: true
@@ -18,13 +18,13 @@ unlisted: true
 
 # MDX and React
 
-docStatic has built-in support for [MDX](https://mdxjs.com/), which enables you to write JSX within your Markdown files and render them as React components. However, if you add JSX directly in your topics, the CMS won't be able to display them in the rich text editor.
+docStaticは[MDX](https://mdxjs.com/)の組み込みサポートを提供しており、MarkdownファイルにJSXを記述してReactコンポーネントとしてレンダリングできます。ただし、JSXをトピックに直接追加した場合、CMSはリッチテキストエディターでそれらを表示できません。
 
-## MDX component scope
+## MDXコンポーネントのスコープ
 
-The preferred way to use components in MDX in docStatic is by registering them in the global scope, which makes them automatically available in every MDX file, without any import statements. You also need to add a template definition to the component and import it so that the CMS knows about it. For examples of how this is done you can explore docStatic's own components, such as `CodeSnippet`. It's important to ensure that global components are statically rendered, or they may add delays to page rendering.
+docStaticでMDXのコンポーネントを使用する方法として推奨されるのは、グローバルスコープに登録することです。これにより、インポート文なしですべてのMDXファイルで自動的に利用可能になります。また、CMSがコンポーネントを認識できるように、テンプレート定義をコンポーネントに追加してインポートする必要があります。この方法の例については、`CodeSnippet` などのdocStatic独自のコンポーネントを参照してください。グローバルコンポーネントは静的にレンダリングされることを確認することが重要です。そうしないと、ページのレンダリングに遅延が発生する可能性があります。
 
-For example, here's the contents of `src/themes/MDXComponents.jsx`:
+たとえば、`src/themes/MDXComponents.jsx` の内容は次のとおりです。
 
 ```javascript
 import CodeBlock from "@theme-original/CodeBlock";
@@ -63,9 +63,9 @@ export default {
 };
 ```
 
-The imports that begin with `@site/src/components`/ are the custom components that can be rendered in topics. There are also custom components that are used by the CMS such as StatusField that do not need to be imported.
+`@site/src/components`/ で始まるインポートは、トピックでレンダリングできるカスタムコンポーネントです。StatusFieldなど、CMSが使用するカスタムコンポーネントもありますが、それらはインポートする必要はありません。
 
-The `src/themes/tempate.jsx` file begins:
+`src/themes/tempate.jsx` ファイルの冒頭は次のとおりです。
 
 ```javascript
 import React from "react";
@@ -81,7 +81,7 @@ import { SnippetBlockTemplate } from "../components/Snippet/template";
 import { VariableSetBlockTemplate } from "../components/VariableSet/template";
 ```
 
-Templates for native components, such as `Details`, must be defined directly in the file. For example:
+`Details` などのネイティブコンポーネントのテンプレートは、ファイル内に直接定義する必要があります。例えば：
 
 ```javascript
 const DetailsTemplate = {
@@ -103,7 +103,7 @@ const DetailsTemplate = {
 };
 ```
 
-The file ends by exporting all the templates:
+ファイルの末尾では、すべてのテンプレートをエクスポートします。
 
 ```javascript
 
@@ -126,27 +126,27 @@ export const MDXTemplates = [
 ];
 ```
 
-Now these components can be used in any MDX file.
+これで、これらのコンポーネントをあらゆるMDXファイルで使用できるようになります。
 
-<Admonition type="caution" title="Caution">
-  Use upper-case tag names.
+<Admonition type="caution" title="注意">
+  タグ名は大文字で始めてください。
 
-  From MDX v3+ onward, lower-case tag names are always rendered as native HTML elements and will not use any component mapping you provide.
+  MDX v3以降、小文字のタグ名は常にネイティブHTML要素としてレンダリングされ、指定したコンポーネントのマッピングは使用されません。
 </Admonition>
 
-For more information, refer to [MDX and React](https://docusaurus.io/docs/markdown-features/react) in the Docusaurus documentation.
+詳細については、Docusaurusドキュメントの[MDX and React](https://docusaurus.io/docs/markdown-features/react)を参照してください。
 
-## Passthrough component
+## Passthroughコンポーネント
 
-Sometimes it will be necessary to include some HTML, JSX or Markdown in a topic that the CMS cannot display in the rich text editor. To ensure that the editor can still be used for other content, the `Passthrough` component is provided. This enables you to wrap content so that the rich text editor will effectively ignore it.
+CMSのリッチテキストエディターで表示できないHTML、JSX、またはMarkdownをトピックに含める必要がある場合があります。他のコンテンツに対してエディターを引き続き使用できるよう、`Passthrough` コンポーネントが提供されています。これにより、リッチテキストエディターが実質的に無視するようにコンテンツをラップできます。
 
-1. Select **Passthrough** from the **Embed** list.
-2. Give it a **Summary**.
-3. Enter the **Content** as plain text.
-4. Select the **Content Type** (**Markdown**, **HTML** or **JSX**).
+1. **埋め込み** リストから **Passthrough** を選択します。
+2. **概要（Summary）** を設定します。
+3. **コンテンツ** をプレーンテキストで入力します。
+4. **コンテンツタイプ**（**Markdown**、**HTML**、または **JSX**）を選択します。
 
-The content is added directly to the page when the site is built, without the wrapper.
+コンテンツは、サイトのビルド時にラッパーなしでページに直接追加されます。
 
-For examples, see the [example page](/example-page) and [math equations](/docs/guides/markdown-features/math-equations).
+例については、[サンプルページ](/example-page)と[数式](/docs/guides/markdown-features/math-equations)を参照してください。
 
 <RelatedTopics maxResults={7} />

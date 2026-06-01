@@ -1,13 +1,13 @@
 ---
 help: null
-lastmod: '2026-03-04T22:51:29.150Z'
+lastmod: '2026-06-01T00:00:00.000Z'
 title: Taxonomy tags
 tags:
   - metadata
   - metadata_taxonomies
 draft: false
 review: false
-translate: true
+translate: false
 approved: false
 published: false
 unlisted: true
@@ -15,21 +15,21 @@ unlisted: true
 
 # Taxonomy tags
 
-Taxonomy tags enable you to apply an [information architecture](https://en.wikipedia.org/wiki/Information_architecture) to your site content. It should be applied to any documentation platforms you use, such as bug-tracking systems and wikis. The most restrictive tag requirements that you're likely to encounter are flat (non-hierarchical) systems that support only lower-case letters and underscores (`_`) without spaces.
+タクソノミータグを使用すると、サイトコンテンツに[情報アーキテクチャ](https://en.wikipedia.org/wiki/Information_architecture)を適用できます。バグ追跡システムやウィキなど、使用するすべてのドキュメントプラットフォームに適用する必要があります。最も制約の厳しいタグ要件として、スペースなしで小文字とアンダースコア（`_`）のみをサポートするフラット（非階層型）システムがあります。
 
-docStatic applies a three-tier hierarchy to taxonomy tags. To prevent the tags becoming unreasonably long, nesting is limited to a maximum depth of three. In some cases, this requires flattening the structure (for example, while `regions_europe_uk_scotland` is logical, it has four levels and so must be structured as `regions_uk_scotland`).
+docStaticはタクソノミータグに3階層の階層構造を適用します。タグが不合理に長くなるのを防ぐため、ネストは最大3階層に制限されています。場合によっては、構造をフラット化する必要があります（たとえば、`regions_europe_uk_scotland` は論理的ですが4階層になるため、`regions_uk_scotland` と構造化する必要があります）。
 
-When designing a three-tier information architecture, it's recommended that you aim to have around ten top-level categories, seven mid-level categories and as many leaf-level categories as you need. You should spell out acronyms and abbreviations, and aim to avoid redundancy.
+3階層の情報アーキテクチャを設計する場合、トップレベルカテゴリを約10個、中間レベルカテゴリを約7個、必要なだけのリーフレベルカテゴリを持つことが推奨されます。頭字語や略語は省略せずに記述し、冗長性を避けることを目指してください。
 
-## Editing taxonomy tags
+## タクソノミータグの編集
 
-1. From the **Taxonomies** collection, **Add** a taxonomy.
-2. Give it a **Tag** using only lower-case letters.
-3. Add any **Children**, and give them a tag, starting with the parent tag followed by an underscore.
-4. For each child, add any Children.
+1. **Taxonomies** コレクションから、タクソノミーを **追加** します。
+2. 小文字のみを使用して **タグ** を設定します。
+3. **子要素** を追加し、親タグの後にアンダースコアを付けてタグを設定します。
+4. 各子要素について、さらに子要素を追加します。
 
-<Admonition type="note" title="Note">
-  You can enter tags without the preceding tag name and an underscore, but if you do when adding them to a topic, they will be presented as a flat list.
+<Admonition type="note" title="注意">
+  前のタグ名とアンダースコアなしでタグを入力することもできますが、その場合にトピックに追加すると、フラットリストとして表示されます。
 </Admonition>
 
 <RelatedTopics maxResults={7} />

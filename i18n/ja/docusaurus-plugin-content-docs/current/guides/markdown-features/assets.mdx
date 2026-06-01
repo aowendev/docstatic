@@ -1,6 +1,6 @@
 ---
 help: null
-lastmod: '2026-03-10T22:58:14.042Z'
+lastmod: '2026-06-01T00:00:00.000Z'
 modifiedBy: aowendev <aowen@translationcommons.org>
 title: Assets
 tags:
@@ -8,59 +8,59 @@ tags:
   - content_images
 draft: false
 review: false
-translate: true
+translate: false
 approved: false
 published: false
 unlisted: true
 ---
 
-# Assets
+# アセット
 
-Sometimes you want to link to assets (for example, docx files, images and so on) directly from topics. docStatic manages this through the static/ folder.
+トピックからアセット（docx ファイルや画像など）に直接リンクしたい場合があります。docStatic では static/ フォルダを通じてこれを管理します。
 
-Any content placed in the folder will be available from the root of the published site. For example:
+フォルダに配置されたコンテンツはすべて、公開サイトのルートから利用可能になります。たとえば：
 
 ```
-# Your doc
+# ドキュメント
 /website/docs/myFeature.mdx
 
-# Some assets you want to use
+# 使用したいアセット
 /website/assets/docstatic-asset-example.docx
 /website/img/docstastic-asset-example-banner.png
 ```
 
-## Images
+## 画像
 
-docStatic provides two ways to add images to topics. For inline images you can click the **Image** icon to place an image in a topic. This works best for icons (![](/img/docs/example.svg)) and small images. Icons should be stored as pre-scaled SVG files. These will be inverted and have their colour space rotated by 180° in dark mode.
+docStatic には、トピックに画像を追加する2つの方法があります。インライン画像の場合は、**Image** アイコンをクリックしてトピックに画像を配置できます。これはアイコン（![](/img/docs/example.svg)）や小さな画像に最適です。アイコンは事前にスケーリングされた SVG ファイルとして保存してください。これらはダークモードでは反転され、色空間が 180° 回転されます。
 
-<Admonition type="tip" title="Tip">
-  You can use [Librsvg](https://wiki.gnome.org/Projects/LibRsvg) to scale SVGs. For example, `rsvg-convert example.svg -h 12 -f svg -o example.svg` sets a height of 12 points.
+<Admonition type="tip" title="ヒント">
+  SVG のスケーリングには [Librsvg](https://wiki.gnome.org/Projects/LibRsvg) を使用できます。たとえば、`rsvg-convert example.svg -h 12 -f svg -o example.svg` は高さを 12 ポイントに設定します。
 </Admonition>
 
-For larger images, it's better to use the Figure component.
+大きな画像の場合は、Figure コンポーネントを使用することをお勧めします。
 
-1. Select **Figure** from the **Embed** list.
-2. Edit the component.
-3. Click the **Image** area to open the **Media Manager**.
-4. Upload or select an image.
-5. Give it a **Caption**.
+1. **Embed** リストから **Figure** を選択します。
+2. コンポーネントを編集します。
+3. **Image** エリアをクリックして **Media Manager** を開きます。
+4. 画像をアップロードまたは選択します。
+5. **Caption**（キャプション）を付けます。
 
-#### Example
+#### 例
 
-<Figure img="/img/docStaticDemo.jpg" caption="Example Figure" />
+<Figure img="/img/docStaticDemo.jpg" caption="図の例" />
 
-The figure resizes based on the view window. Clicking it will open it at maximum size in a light box.
+図はビューウィンドウに基づいてサイズが変更されます。クリックすると、ライトボックス内で最大サイズで表示されます。
 
-For more information about the Media Manager, refer to [Media Overview](https://tina.io/docs/reference/media/overview) in the TinaCMS documentation.
+Media Manager の詳細については、TinaCMS ドキュメントの [Media Overview](https://tina.io/docs/reference/media/overview) を参照してください。
 
-## Files
+## ファイル
 
-In the same way you can link to existing assets by using the path from the static/ folder in the URL. For example:
+同様に、URL 内で static/ フォルダからのパスを使用することで、既存のアセットにリンクできます。たとえば：
 
 ```
 ./assets/docstatic-asset-example.docx
 ```
 
-For more information, refer to [Static assets](https://docusaurus.io/docs/markdown-features/assets) in the Docusaurus documentation.
+詳細については、Docusaurus ドキュメントの [Static assets](https://docusaurus.io/docs/markdown-features/assets) を参照してください。
 
 <RelatedTopics maxResults={7} />

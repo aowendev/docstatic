@@ -1,6 +1,6 @@
 ---
 help: null
-lastmod: '2026-06-01T11:38:52.143Z'
+lastmod: '2026-06-01T00:00:00.000Z'
 title: Related Topics
 tags:
   - elements
@@ -14,35 +14,35 @@ tags:
   - metadata_taxonomies
 draft: false
 review: false
-translate: true
+translate: false
 approved: false
 published: false
 unlisted: true
 ---
 
-# Related Topics
+# Verwandte Themen
 
-The **Related Topics** component automatically suggests related content based on shared taxonomy tags. It analyses the current page's tags and finds other documents with similar tags, then displays them as a curated list of recommendations.
+Die Komponente **Verwandte Themen** schlägt automatisch verwandte Inhalte basierend auf gemeinsamen Taxonomie-Tags vor. Sie analysiert die Tags der aktuellen Seite und findet andere Dokumente mit ähnlichen Tags, die dann als kuratierte Empfehlungsliste angezeigt werden.
 
-## Adding Related Topics
+## Verwandte Themen hinzufügen
 
-1. Select **Related Topics** from the **Embed** list.
-2. Edit the component.
-3. (Optional) Set the **Maximum Results** to control how many related topics are displayed (defaults to 5).
-4. **Save** your changes.
+1. Wählen Sie **Verwandte Themen** aus der Liste **Einbetten** aus.
+2. Bearbeiten Sie die Komponente.
+3. (Optional) Legen Sie die **Maximale Anzahl an Ergebnissen** fest, um zu steuern, wie viele verwandte Themen angezeigt werden (Standard: 5).
+4. **Speichern** Sie Ihre Änderungen.
 
-## Configuration Options
+## Konfigurationsoptionen
 
-* **Maximum Results**: Controls the number of related topics displayed (1-20)
+* **Maximale Anzahl an Ergebnissen**: Steuert die Anzahl der angezeigten verwandten Themen (1–20)
 
-## How It Works
+## Funktionsweise
 
-The component uses the Jaccard similarity algorithm to compare taxonomy tags between the current page and all other published pages. Pages with more shared tags will appear higher in the list. The component only appears on pages that have taxonomy tags and when related content is found.
+Die Komponente verwendet den Jaccard-Ähnlichkeitsalgorithmus, um Taxonomie-Tags zwischen der aktuellen Seite und allen anderen veröffentlichten Seiten zu vergleichen. Seiten mit mehr gemeinsamen Tags erscheinen höher in der Liste. Die Komponente erscheint nur auf Seiten, die Taxonomie-Tags haben und wenn verwandte Inhalte gefunden werden.
 
-## Best Practices
+## Empfehlungen
 
-* **Use consistent tagging**: The more consistently you apply taxonomy tags across your content, the better the related topic suggestions will be.
-* **Optimal placement**: Place the Related Topics component at the end of your content to encourage further reading.
-* **Reasonable limits**: Use 3-7 related topics for best user experience. Too many suggestions can be overwhelming.
+* **Verwenden Sie konsistente Tags**: Je konsequenter Sie Taxonomie-Tags in Ihren Inhalten anwenden, desto besser werden die Vorschläge für verwandte Themen sein.
+* **Optimale Platzierung**: Platzieren Sie die Komponente Verwandte Themen am Ende Ihres Inhalts, um zum Weiterlesen zu animieren.
+* **Vernünftige Grenzen**: Verwenden Sie 3–7 verwandte Themen für die beste Benutzererfahrung. Zu viele Vorschläge können überwältigend sein.
 
 <RelatedTopics maxResults={7} />

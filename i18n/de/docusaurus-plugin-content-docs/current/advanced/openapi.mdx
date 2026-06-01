@@ -1,6 +1,6 @@
 ---
 help: null
-lastmod: '2026-05-31T23:59:59.000Z'
+lastmod: '2026-06-01T00:00:00.000Z'
 title: OpenAPI reference docs
 tags:
   - apis
@@ -10,19 +10,19 @@ tags:
   - software_static-site-generators_docusaurus
 draft: false
 review: false
-translate: true
+translate: false
 approved: false
 published: false
 unlisted: true
 ---
 
-# OpenAPI reference docs
+# OpenAPI-Referenzdokumentation
 
-docStatic uses [`docusaurus-plugin-openapi-docs`](https://github.com/PaloAltoNetworks/docusaurus-openapi-docs) to generate API reference documentation from an OpenAPI specification. The plugin reads a spec file and writes a set of MDX files into your `docs/` tree that Docusaurus then builds as normal pages.
+docStatic verwendet [`docusaurus-plugin-openapi-docs`](https://github.com/PaloAltoNetworks/docusaurus-openapi-docs), um API-Referenzdokumentation aus einer OpenAPI-Spezifikation zu generieren. Das Plugin liest eine Spezifikationsdatei und schreibt eine Reihe von MDX-Dateien in Ihren `docs/`-Baum, die Docusaurus dann als normale Seiten erstellt.
 
-## Configuration
+## Konfiguration
 
-API sources are configured in `config/docusaurus/index.json` under the `openapi.apis` array. Each entry specifies a name, the path to the spec file, the output directory, and optional grouping options:
+API-Quellen werden in `config/docusaurus/index.json` unter dem Array `openapi.apis` konfiguriert. Jeder Eintrag gibt einen Namen, den Pfad zur Spezifikationsdatei, das Ausgabeverzeichnis und optionale Gruppierungsoptionen an:
 
 ```json
 {
@@ -40,32 +40,32 @@ API sources are configured in `config/docusaurus/index.json` under the `openapi.
 }
 ```
 
-Run generation with:
+Generierung starten mit:
 
 ```bash
 npm run gen-api-docs
 ```
 
-To remove generated files:
+Generierte Dateien entfernen:
 
 ```bash
 npm run clean-api-docs
 ```
 
-## Tag pages
+## Tag-Seiten
 
-When `groupPathsBy` and `categoryLinkSource` are both set to `"tag"`, the plugin creates a category index page for each OpenAPI tag (e.g. `store.tag.mdx`). By default these files contain a verbose boilerplate block that imports `DocCardList` and `useCurrentSidebarCategory`—both redundant in docStatic because `DocCardList` is already globally registered as an MDX component, and the component resolves the current category's items automatically when called with no props.
+Wenn `groupPathsBy` und `categoryLinkSource` beide auf `"tag"` gesetzt sind, erstellt das Plugin für jeden OpenAPI-Tag eine Kategorie-Indexseite (z. B. `store.tag.mdx`). Standardmäßig enthalten diese Dateien einen ausführlichen Boilerplate-Block, der `DocCardList` und `useCurrentSidebarCategory` importiert – beide redundant in docStatic, da `DocCardList` bereits global als MDX-Komponente registriert ist und die Komponente die Elemente der aktuellen Kategorie automatisch auflöst, wenn sie ohne Props aufgerufen wird.
 
-docStatic configures the plugin with a custom tag template that produces the simplified form instead:
+docStatic konfiguriert das Plugin mit einer benutzerdefinierten Tag-Vorlage, die stattdessen die vereinfachte Form erzeugt:
 
 ```mdx
 <DocCardList />
 ```
 
-The template is at `config/docusaurus/openapi-tag-template.md` and is wired in via the `tagTemplate` option in `docusaurus.config.ts`.
+Die Vorlage befindet sich in `config/docusaurus/openapi-tag-template.md` und wird über die Option `tagTemplate` in `docusaurus.config.ts` eingebunden.
 
-## Editing generated tag files
+## Bearbeitung generierter Tag-Dateien
 
-The plugin **only creates a tag file if one does not already exist**—it will never overwrite a file you have edited. This means you can freely customise the description text in a tag page and it will survive subsequent `gen-api-docs` runs. Only newly introduced tags will have a file written for them, and those will use the custom template.
+Das Plugin **erstellt eine Tag-Datei nur, wenn noch keine vorhanden ist** – es wird niemals eine von Ihnen bearbeitete Datei überschreiben. Das bedeutet, dass Sie den Beschreibungstext in einer Tag-Seite frei anpassen können und er nachfolgende `gen-api-docs`-Läufe übersteht. Nur neu eingeführte Tags erhalten eine Datei, und diese verwenden die benutzerdefinierte Vorlage.
 
 <RelatedTopics maxResults={7} />

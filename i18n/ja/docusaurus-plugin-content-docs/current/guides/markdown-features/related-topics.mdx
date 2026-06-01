@@ -1,6 +1,6 @@
 ---
 help: null
-lastmod: '2026-06-01T11:38:52.143Z'
+lastmod: '2026-06-01T00:00:00.000Z'
 title: Related Topics
 tags:
   - elements
@@ -14,7 +14,7 @@ tags:
   - metadata_taxonomies
 draft: false
 review: false
-translate: true
+translate: false
 approved: false
 published: false
 unlisted: true
@@ -22,27 +22,27 @@ unlisted: true
 
 # Related Topics
 
-The **Related Topics** component automatically suggests related content based on shared taxonomy tags. It analyses the current page's tags and finds other documents with similar tags, then displays them as a curated list of recommendations.
+**Related Topics** コンポーネントは、共通のタクソノミータグに基づいて関連コンテンツを自動的に提案します。現在のページのタグを分析し、類似したタグを持つ他のドキュメントを検索して、推奨リストとして表示します。
 
-## Adding Related Topics
+## 関連トピックの追加
 
-1. Select **Related Topics** from the **Embed** list.
-2. Edit the component.
-3. (Optional) Set the **Maximum Results** to control how many related topics are displayed (defaults to 5).
-4. **Save** your changes.
+1. **埋め込み** リストから **Related Topics** を選択します。
+2. コンポーネントを編集します。
+3. （オプション）**最大結果数** を設定して、表示する関連トピックの数を制御します（デフォルトは5件）。
+4. 変更を **保存** します。
 
-## Configuration Options
+## 設定オプション
 
-* **Maximum Results**: Controls the number of related topics displayed (1-20)
+* **最大結果数**：表示される関連トピックの数を制御します（1〜20）
 
-## How It Works
+## 仕組み
 
-The component uses the Jaccard similarity algorithm to compare taxonomy tags between the current page and all other published pages. Pages with more shared tags will appear higher in the list. The component only appears on pages that have taxonomy tags and when related content is found.
+このコンポーネントは、Jaccard類似度アルゴリズムを使用して、現在のページと他のすべての公開ページ間のタクソノミータグを比較します。共通タグが多いページほどリストの上位に表示されます。コンポーネントは、タクソノミータグが設定されているページで関連コンテンツが見つかった場合にのみ表示されます。
 
-## Best Practices
+## ベストプラクティス
 
-* **Use consistent tagging**: The more consistently you apply taxonomy tags across your content, the better the related topic suggestions will be.
-* **Optimal placement**: Place the Related Topics component at the end of your content to encourage further reading.
-* **Reasonable limits**: Use 3-7 related topics for best user experience. Too many suggestions can be overwhelming.
+* **一貫したタグ付けを使用する**：コンテンツ全体にタクソノミータグを一貫して適用するほど、関連トピックの提案精度が向上します。
+* **最適な配置**：Related Topicsコンポーネントはコンテンツの末尾に配置して、読者のさらなる閲覧を促しましょう。
+* **適切な件数**：ユーザーエクスペリエンスを最適化するために、関連トピックは3〜7件に設定してください。提案が多すぎると圧倒感を与えることがあります。
 
 <RelatedTopics maxResults={7} />

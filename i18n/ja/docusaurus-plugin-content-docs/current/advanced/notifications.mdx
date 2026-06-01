@@ -1,6 +1,6 @@
 ---
 help: null
-lastmod: '2026-03-04T22:48:07.345Z'
+lastmod: '2026-06-01T00:00:00.000Z'
 title: Notifications
 tags:
   - software
@@ -10,19 +10,19 @@ tags:
   - software_notifications_slack
 draft: false
 review: false
-translate: true
+translate: false
 approved: false
 published: false
 unlisted: true
 ---
 
-# Notifications
+# 通知
 
-docStatic uses [GitHub Actions](https://docs.github.com/en/actions) to send workflow notifications. Example review and translate notifications are included in the `.github/workflows/` folder. Some configuration in GitHub is required to enable them. You can also use them as the starting point to develop your own custom notifications.
+docStatic はワークフロー通知の送信に [GitHub Actions](https://docs.github.com/en/actions) を使用しています。レビューと翻訳の通知例は `.github/workflows/` フォルダに含まれています。これらを有効にするには、GitHub での設定が必要です。また、独自のカスタム通知を開発するための出発点としても使用できます。
 
-## Email
+## メール
 
-The `email-review.yml `and `email-translate.yml` actions are triggered when either the review or translate tags are set on a markdown file in the main branch. To use them, add these [secrets](https://docs.github.com/en/actions/how-tos/write-workflows/choose-what-workflows-do/use-secrets) to your repository:
+`email-review.yml` と `email-translate.yml` アクションは、メインブランチの Markdown ファイルにレビューまたは翻訳タグが設定されたときにトリガーされます。使用するには、以下の[シークレット](https://docs.github.com/en/actions/how-tos/write-workflows/choose-what-workflows-do/use-secrets)をリポジトリに追加してください：
 
 * `SMTP_SERVER`
 * `SMTP_PORT`
@@ -31,18 +31,18 @@ The `email-review.yml `and `email-translate.yml` actions are triggered when eith
 * `NOTIFY_EMAIL_TO`
 * `NOTIFY_EMAIL_FROM`
 
-You can get this information from your email provider. For example:
+この情報はメールプロバイダーから取得できます。たとえば：
 
-* [iCloud](https://support.apple.com/en-us/102525) (requires an [app-specific-password)](https://support.apple.com/en-us/102654).
+* [iCloud](https://support.apple.com/en-us/102525)（[アプリ専用パスワード](https://support.apple.com/en-us/102654)が必要です）。
 * [Outlook](https://support.microsoft.com/en-us/office/pop-imap-and-smtp-settings-for-outlook-com-d088b986-291d-42b8-9564-9c414e2aa040)
 
 ## Slack
 
-The `slack-review.yml `and `slack-translate.yml` actions use the same triggers as the email versions. To use them, add your Slack webhook URL as a secret named `SLACK_WEBHOOK_URL`. For more information, refer to [Sending messages using incoming webhooks](https://docs.slack.dev/messaging/sending-messages-using-incoming-webhooks/) in the Slack documentation.
+`slack-review.yml` と `slack-translate.yml` アクションはメールバージョンと同じトリガーを使用します。使用するには、Slack の Webhook URL を `SLACK_WEBHOOK_URL` という名前のシークレットとして追加してください。詳細については、Slack ドキュメントの [Sending messages using incoming webhooks](https://docs.slack.dev/messaging/sending-messages-using-incoming-webhooks/) を参照してください。
 
 ## Teams
 
-The `teams-review.yml `and `teams-translate.yml` actions work like the Slack versions. Microsoft is deprecating the **Incoming Webhooks** app for Teams from December 2025, but currently there isn't a publicly available GitHub method for sending Adaptive Cards to workflows. The workaround is to use curl:
+`teams-review.yml` と `teams-translate.yml` アクションは Slack バージョンと同様に動作します。Microsoft は 2025年12月から Teams の **Incoming Webhooks** アプリを廃止しますが、現在のところ Adaptive Cards をワークフローに送信するための公開された GitHub メソッドは存在しません。回避策として curl を使用します：
 
 ```yaml
 - name: Send Teams test notification
@@ -64,17 +64,17 @@ The `teams-review.yml `and `teams-translate.yml` actions work like the Slack ver
             "wrap": true }]}}]}'
 ```
 
-1. In Teams, go to the channel you want to send messages, click the ellipsis (**…**) and select **Workflows**.
-2. Click **Manage**.
-3. Click **New Flow**.
-4. Search templates for webhooks and click **Send webhook alerts to a channel**.
-5. (Optional) Edit the **Flow name**.
-6. Sign in and click **Next**.
-7. Select a **Team** and **Channel** from the lists and click **Create Flow**.
-8. Copy the `MS_TEAMS_HTTP_POST_URL` and store it as a secret in GitHub and click **Done**.
+1. Teams で、メッセージを送信したいチャンネルに移動し、省略記号（**…**）をクリックして **Workflows** を選択します。
+2. **Manage** をクリックします。
+3. **New Flow** をクリックします。
+4. Webhook のテンプレートを検索して **Send webhook alerts to a channel** をクリックします。
+5. （オプション）**Flow name** を編集します。
+6. サインインして **Next** をクリックします。
+7. リストから **Team** と **Channel** を選択して **Create Flow** をクリックします。
+8. `MS_TEAMS_HTTP_POST_URL` をコピーして GitHub のシークレットとして保存し、**Done** をクリックします。
 
-<Admonition type="tip" title="Tip">
-  You can use the Test notifications GitHub action to test your connections.
+<Admonition type="tip" title="ヒント">
+  テスト通知の GitHub Action を使用して接続をテストできます。
 </Admonition>
 
 <RelatedTopics maxResults={7} />

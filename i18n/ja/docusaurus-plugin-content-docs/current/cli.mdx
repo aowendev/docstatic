@@ -1,6 +1,6 @@
 ---
 help: null
-lastmod: '2026-05-31T23:59:59.000Z'
+lastmod: '2026-06-01T00:00:00.000Z'
 title: CLI
 tags:
   - software
@@ -14,13 +14,13 @@ tags:
   - software_package-managers_yarn
 draft: false
 review: false
-translate: true
+translate: false
 approved: false
 published: false
 unlisted: true
 ---
 
-docStatic provides a set of scripts to help you generate, serve, and deploy your website.
+docStatic は、ウェブサイトの生成、提供、デプロイを支援する一連のスクリプトを提供しています。
 
 ```json
 {
@@ -62,29 +62,29 @@ docStatic provides a set of scripts to help you generate, serve, and deploy your
 }
 ```
 
-## docStatic CLI commands
+## docStatic CLI コマンド
 
-To invoke the commands, use npm or yarn. For example, `npm run dev` or `yarn dev`.
+コマンドを実行するには、npm または yarn を使用します。たとえば、`npm run dev` または `yarn dev` のように入力します。
 
-### Key docStatic scripts:
+### 主な docStatic スクリプト：
 
-* **`dev`**: Start development server with TinaCMS integration
-* **`build`**: Build for production (runs TinaCMS build then Docusaurus build)
-* **`build-local`**: Build locally without cloud features
-* **`generate-media-index`**: Generate index of media files
-* **`generate-git-identity`**: Generate git identity information
-* **`generate-files`**: Generate file lists for the application
-* **`generate-docs-metadata`**: Generate metadata index used by dashboards and search
-* **`update-theme-css`**: Update theme CSS files
-* **`mcp:install`**: Install Model Context Protocol server dependencies
-* **`mcp:build`**: Build the MCP server from TypeScript
-* **`mcp:dev`**: Start MCP server in development mode with auto-restart
-* **`mcp:start`**: Start the compiled MCP server for AI assistant integration
-* **`mcp:test`**: Run MCP server connectivity tests
+* **`dev`**: TinaCMS インテグレーションを含む開発サーバーを起動します
+* **`build`**: 本番用にビルドします（TinaCMS のビルドを実行した後、Docusaurus のビルドを実行します）
+* **`build-local`**: クラウド機能なしでローカルにビルドします
+* **`generate-media-index`**: メディアファイルのインデックスを生成します
+* **`generate-git-identity`**: Git のアイデンティティ情報を生成します
+* **`generate-files`**: アプリケーション用のファイルリストを生成します
+* **`generate-docs-metadata`**: ダッシュボードと検索で使用されるメタデータインデックスを生成します
+* **`update-theme-css`**: テーマ CSS ファイルを更新します
+* **`mcp:install`**: Model Context Protocol サーバーの依存関係をインストールします
+* **`mcp:build`**: TypeScript から MCP サーバーをビルドします
+* **`mcp:dev`**: 自動再起動付きで開発モードで MCP サーバーを起動します
+* **`mcp:start`**: AI アシスタントインテグレーション用にコンパイル済みの MCP サーバーを起動します
+* **`mcp:test`**: MCP サーバーの接続テストを実行します
 
-For more information about the MCP server, see [MCP Server Integration](mcp-server.mdx).
+MCP サーバーの詳細については、[MCP Server Integration](mcp-server.mdx) を参照してください。
 
-These commands are built on top of standard Docusaurus commands described in [CLI](https://docusaurus.io/docs/cli) in the Docusaurus documentation:
+これらのコマンドは、Docusaurus ドキュメントの [CLI](https://docusaurus.io/docs/cli) に記載されている標準的な Docusaurus コマンドをベースに構築されています：
 
 * docusaurus
 * start
@@ -96,27 +96,27 @@ These commands are built on top of standard Docusaurus commands described in [CL
 * write-translations
 * write-heading-ids
 
-### Automated commands
+### 自動コマンド
 
-These commands are run automatically at build time or when starting the dev server:
+これらのコマンドはビルド時または開発サーバーの起動時に自動的に実行されます：
 
 * generate-files
 * generate-docs-metadata
 * prebuild
 * predev
 
-### API commands
+### API コマンド
 
 * clean-api-docs
 * gen-api-docs
 * gen-graphql
 
-For more information on the OpenAPI commands, refer to [CLI Usage](https://github.com/PaloAltoNetworks/docusaurus-openapi-docs?tab=readme-ov-file#cli-usage) in the Docusaurus OpenAPI Plugin documentation.
+OpenAPI コマンドの詳細については、Docusaurus OpenAPI Plugin ドキュメントの [CLI Usage](https://github.com/PaloAltoNetworks/docusaurus-openapi-docs?tab=readme-ov-file#cli-usage) を参照してください。
 
-For more information on the GraphQL command, refer to [Usage](https://github.com/Zhouzi/docusaurus-graphql-plugin?tab=readme-ov-file#usage) in the Docusaurus GraphQL Plugin documentation.
+GraphQL コマンドの詳細については、Docusaurus GraphQL Plugin ドキュメントの [Usage](https://github.com/Zhouzi/docusaurus-graphql-plugin?tab=readme-ov-file#usage) を参照してください。
 
-### Linting commands
+### リントコマンド
 
-For more information about the linting commands, refer to [CLI](https://biomejs.dev/reference/cli/) in the Biome documentation.
+リントコマンドの詳細については、Biome ドキュメントの [CLI](https://biomejs.dev/reference/cli/) を参照してください。
 
 <RelatedTopics maxResults={7} />

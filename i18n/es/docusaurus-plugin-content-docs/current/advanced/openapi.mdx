@@ -1,6 +1,6 @@
 ---
 help: null
-lastmod: '2026-05-31T23:59:59.000Z'
+lastmod: '2026-06-01T00:00:00.000Z'
 title: OpenAPI reference docs
 tags:
   - apis
@@ -10,19 +10,19 @@ tags:
   - software_static-site-generators_docusaurus
 draft: false
 review: false
-translate: true
+translate: false
 approved: false
 published: false
 unlisted: true
 ---
 
-# OpenAPI reference docs
+# Documentación de referencia de OpenAPI
 
-docStatic uses [`docusaurus-plugin-openapi-docs`](https://github.com/PaloAltoNetworks/docusaurus-openapi-docs) to generate API reference documentation from an OpenAPI specification. The plugin reads a spec file and writes a set of MDX files into your `docs/` tree that Docusaurus then builds as normal pages.
+docStatic utiliza [`docusaurus-plugin-openapi-docs`](https://github.com/PaloAltoNetworks/docusaurus-openapi-docs) para generar documentación de referencia de API a partir de una especificación OpenAPI. El plugin lee un archivo de especificación y escribe un conjunto de archivos MDX en su árbol `docs/` que Docusaurus construye como páginas normales.
 
-## Configuration
+## Configuración
 
-API sources are configured in `config/docusaurus/index.json` under the `openapi.apis` array. Each entry specifies a name, the path to the spec file, the output directory, and optional grouping options:
+Las fuentes de API se configuran en `config/docusaurus/index.json` bajo el array `openapi.apis`. Cada entrada especifica un nombre, la ruta al archivo de especificación, el directorio de salida y opciones de agrupación opcionales:
 
 ```json
 {
@@ -40,32 +40,32 @@ API sources are configured in `config/docusaurus/index.json` under the `openapi.
 }
 ```
 
-Run generation with:
+Ejecute la generación con:
 
 ```bash
 npm run gen-api-docs
 ```
 
-To remove generated files:
+Para eliminar los archivos generados:
 
 ```bash
 npm run clean-api-docs
 ```
 
-## Tag pages
+## Páginas de etiquetas
 
-When `groupPathsBy` and `categoryLinkSource` are both set to `"tag"`, the plugin creates a category index page for each OpenAPI tag (e.g. `store.tag.mdx`). By default these files contain a verbose boilerplate block that imports `DocCardList` and `useCurrentSidebarCategory`—both redundant in docStatic because `DocCardList` is already globally registered as an MDX component, and the component resolves the current category's items automatically when called with no props.
+Cuando `groupPathsBy` y `categoryLinkSource` están ambos configurados como `"tag"`, el plugin crea una página de índice de categoría para cada etiqueta de OpenAPI (p. ej. `store.tag.mdx`). Por defecto, estos archivos contienen un bloque de texto estándar que importa `DocCardList` y `useCurrentSidebarCategory` — ambos redundantes en docStatic porque `DocCardList` ya está registrado globalmente como componente MDX, y el componente resuelve automáticamente los elementos de la categoría actual cuando se llama sin props.
 
-docStatic configures the plugin with a custom tag template that produces the simplified form instead:
+docStatic configura el plugin con una plantilla de etiqueta personalizada que produce en su lugar la forma simplificada:
 
 ```mdx
 <DocCardList />
 ```
 
-The template is at `config/docusaurus/openapi-tag-template.md` and is wired in via the `tagTemplate` option in `docusaurus.config.ts`.
+La plantilla se encuentra en `config/docusaurus/openapi-tag-template.md` y se conecta mediante la opción `tagTemplate` en `docusaurus.config.ts`.
 
-## Editing generated tag files
+## Edición de archivos de etiquetas generados
 
-The plugin **only creates a tag file if one does not already exist**—it will never overwrite a file you have edited. This means you can freely customise the description text in a tag page and it will survive subsequent `gen-api-docs` runs. Only newly introduced tags will have a file written for them, and those will use the custom template.
+El plugin **solo crea un archivo de etiqueta si no existe uno** — nunca sobreescribirá un archivo que haya editado. Esto significa que puede personalizar libremente el texto de descripción en una página de etiqueta y sobrevivirá a las ejecuciones posteriores de `gen-api-docs`. Solo las etiquetas recién introducidas tendrán un archivo escrito para ellas, y esas usarán la plantilla personalizada.
 
 <RelatedTopics maxResults={7} />

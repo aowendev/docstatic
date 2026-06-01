@@ -1,6 +1,6 @@
 ---
 help: null
-lastmod: '2026-05-31T23:59:59.000Z'
+lastmod: '2026-06-01T00:00:00.000Z'
 title: Installation
 tags:
   - software
@@ -22,7 +22,7 @@ tags:
   - computer-languages_javascript
 draft: false
 review: false
-translate: true
+translate: false
 approved: false
 published: false
 unlisted: true
@@ -30,123 +30,123 @@ unlisted: true
 
 # Installation
 
-Welcome! This guide walks you through setting up docStatic for the first time.
+ようこそ！このガイドでは、docStaticを初めてセットアップする手順を説明します。
 
-If you’ve never worked with GitHub or docs-as-code before, don’t worry—we’ll explain what’s needed, why, and where to find more detail.
+GitHubやdocs-as-codeを使ったことがない方でもご安心ください。必要なもの、その理由、詳細情報の入手先を説明します。
 
-## Prerequisites
+## 前提条件
 
-You can run docStatic locally (on your computer) or host it in the cloud.
+docStaticはローカル（自分のコンピューター）で実行するか、クラウドでホストすることができます。
 
-For the easiest cloud setup, create free accounts with these services:
+最も簡単なクラウドセットアップには、以下のサービスで無料アカウントを作成してください。
 
-* [GitHub](https://github.com/)—stores your content and tracks changes
-* [TinaCMS](https://tina.io/)—enables browser-based editing
-* [LanguageTool](https://languagetool.org/)—provides optional grammar and style checking
+* [GitHub](https://github.com/)—コンテンツを保存して変更を追跡します
+* [TinaCMS](https://tina.io/)—ブラウザベースの編集を可能にします
+* [LanguageTool](https://languagetool.org/)—オプションの文法とスタイルチェックを提供します
 
-If you plan to run docStatic locally (on your computer) instead, see the Requirements for local development.
+代わりにdocStaticをローカルで実行する場合は、ローカル開発の要件を参照してください。
 
 ***
 
-## Requirements for local development
+## ローカル開発の要件
 
-This section only applies if you plan to work locally.
+このセクションは、ローカルで作業する場合にのみ適用されます。
 
-You'll need an Integrated Development Environment (IDE) or a text editor. Two open-source options are:
+統合開発環境（IDE）またはテキストエディターが必要です。オープンソースの選択肢として以下の2つがあります。
 
 * [Eclipse](https://eclipseide.org)
 * [VSCodium](https://vscodium.com/)
 
-You will also need to install Node.js for its build tools and Yarn for package management.
+また、ビルドツールのためにNode.jsを、パッケージ管理のためにYarnをインストールする必要があります。
 
-### Install Node.js
+### Node.jsのインストール
 
-You need to install [Node.js](https://nodejs.org/) version 22.0 or above.
+[Node.js](https://nodejs.org/)バージョン22.0以上をインストールする必要があります。
 
-Check if Node.js is already installed. Open a terminal (Command Prompt or Terminal app) and run:
+Node.jsがすでにインストールされているか確認してください。ターミナル（コマンドプロンプトまたはターミナルアプリ）を開いて実行します。
 
 ```
 node -v
 ```
 
-If you see a version number starting with v22 or higher, you're good to go.
+v22以上のバージョン番号が表示されれば問題ありません。
 
-If Node.js is not installed or you have an older version:
+Node.jsがインストールされていないか古いバージョンの場合：
 
-1. Go to the [official Node.js downloads](https://nodejs.org/en/download/prebuilt-installer) page.
-2. Choose the LTS (Long-Term Support) version for your operating system.
+1. [Node.jsの公式ダウンロード](https://nodejs.org/en/download/prebuilt-installer)ページにアクセスします。
+2. お使いのオペレーティングシステム向けのLTS（長期サポート）バージョンを選択します。
 
-   The installer includes npm, the Node Package Manager, which you'll need in later steps.
+   インストーラーには、後の手順で必要なNode Package Manager（npm）が含まれています。
 
-   During installation:
+   インストール中：
 
-   \* Keep the default options selected (these include required dependencies)
-   \* When the installer finishes, close and reopen your terminal.
-3. (Optional) if you work on different projects that need different Node versions, install nvm ([Node Version Manager](https://github.com/nvm-sh/nvm)). With nvm, you can switch between versions of Node without breaking your setup.
+   \* デフォルトオプションを選択したままにします（必要な依存関係が含まれています）
+   \* インストールが完了したら、ターミナルを閉じて再度開きます。
+3. （オプション）異なるNodeバージョンが必要な複数のプロジェクトで作業する場合は、nvm（[Node Version Manager](https://github.com/nvm-sh/nvm)）をインストールします。nvmを使用すると、セットアップを壊さずにNodeのバージョンを切り替えられます。
 
-### Install Yarn
+### Yarnのインストール
 
-docStatic uses Yarn for package management.
+docStaticはパッケージ管理にYarnを使用しています。
 
-Check if Yarn is already installed. Open your terminal or command prompt and type:
+Yarnがすでにインストールされているか確認してください。ターミナルまたはコマンドプロンプトを開いて入力します。
 
 ```
 yarn -v
 ```
 
-If you see a version number, Yarn is already installed.
+バージョン番号が表示されれば、Yarnはすでにインストールされています。
 
-If you get a “command not found” message or similar error, open a terminal (Command Prompt or Terminal app) and run:
+「command not found」というメッセージまたは類似のエラーが表示された場合は、ターミナル（コマンドプロンプトまたはターミナルアプリ）を開いて実行します。
 
 ```
 npm install -g yarn
 ```
 
-<Admonition type="note" title="Note">
-  On macOS or Linux, you might need to prefix the command with sudo to grant permission:
+<Admonition type=”note” title=”注意”>
+  macOSまたはLinuxでは、権限を付与するためにコマンドの前に sudo を付ける必要がある場合があります。
 
   ```
   sudo npm install -g yarn
   ```
 </Admonition>
 
-<Admonition type="note" title="Note">
-  On Windows, you don’t use sudo. Just open your terminal as Administrator and run the command.
+<Admonition type=”note” title=”注意”>
+  Windowsでは sudo は使用しません。ターミナルを管理者として開き、コマンドを実行してください。
 </Admonition>
 
 ***
 
-## Get the docStatic repository
+## docStaticリポジトリの取得
 
-docStatic’s source code lives on GitHub. To start, you’ll need to make your own copy by:
+docStaticのソースコードはGitHubにあります。始めるには、自分のコピーを作成する必要があります。
 
-1. **Create a fork** of the docStatic repository
-   Forking creates a copy that you can use to work independently on your own project.
-2. **Create a clone** of your fork.
-   Cloning makes a copy that is associated with the original fork that you made. This can be useful for fixing schema issues, should they occur later.
+1. docStaticリポジトリの **フォークを作成する**
+   フォークすることで、自分のプロジェクトで独立して作業できるコピーが作成されます。
+2. フォークの **クローンを作成する**
+   クローンすることで、作成した元のフォークに関連付けられたコピーが作成されます。後でスキーマの問題が発生した場合に修正するのに役立ちます。
 
-### Fork the docStatic repository
+### docStaticリポジトリのフォーク
 
-1. Log in to your account in GitHub.
-2. Visit [https://github.com/aowendev/docstatic](https://github.com/aowendev/docstatic).
-3. Click Fork (it is usually to the top-right).
-4. Leave the default Repository name in place.
-5. Enter a description of your project.
-6. Make sure Copy the main branch only is checked.
-7. Click Create fork.
+1. GitHubのアカウントにログインします。
+2. [https://github.com/aowendev/docstatic](https://github.com/aowendev/docstatic)にアクセスします。
+3. Fork をクリックします（通常は右上にあります）。
+4. デフォルトのリポジトリ名をそのままにします。
+5. プロジェクトの説明を入力します。
+6. 「Copy the main branch only」がチェックされていることを確認します。
+7. Create fork をクリックします。
 
-GitHub makes a new branch of the repository in your GitHub account.
+GitHubがあなたのGitHubアカウントにリポジトリの新しいブランチを作成します。
 
-### Clone your fork of the docStatic repository
+### docStaticリポジトリのフォークをクローン
 
-To create a clone:
+クローンを作成するには：
 
-1. Log in to your GitHub account.
-2. Navigate to the repository for the fork.
-3. Click on the repository to open it.
-4. Click on **\<> Code** and then copy the url.
-5. Open your terminal or command prompt and use `cd` to navigate to the location where you want to store the clone. For example, `cd Documents/Projects/`.
-6. Enter `git clone` followed by the url of your clone.
+1. GitHubアカウントにログインします。
+2. フォークのリポジトリに移動します。
+3. リポジトリをクリックして開きます。
+4. **\<> Code** をクリックしてURLをコピーします。
+5. ターミナルまたはコマンドプロンプトを開き、`cd` を使用してクローンを保存したい場所に移動します。たとえば、`cd Documents/Projects/` のように入力します。
+6. `git clone` に続けてクローンのURLを入力します。
 
 ```shell
 git clone https://github.com/acme-projects/docstatic.git
@@ -154,22 +154,22 @@ git clone https://github.com/acme-projects/docstatic.git
 
 ***
 
-## Install the project dependencies
+## プロジェクトの依存関係のインストール
 
-If you're going to work locally, you also need to install the project dependencies. Use `cd` to navigate to the root folder of your cloned or forked docStatic repository and install the packages:
+ローカルで作業する場合は、プロジェクトの依存関係もインストールする必要があります。`cd` を使用して、クローンまたはフォークしたdocStaticリポジトリのルートフォルダーに移動し、パッケージをインストールします。
 
 ```
 cd docstatic
 yarn install
 ```
 
-Yarn will download everything listed in package.json. This may take a few minutes.
+Yarnがpackage.jsonに記載されているすべてのものをダウンロードします。数分かかる場合があります。
 
 ***
 
-## Project structure
+## プロジェクト構造
 
-After forking or cloning the repository, you will see various files in your in your `docstatic/` folder. Below, we've included **some** of the project structure files and folders that you need to be aware of. **It is not a complete list of everything in the project**.
+リポジトリをフォークまたはクローンすると、`docstatic/` フォルダー内にさまざまなファイルが表示されます。以下に、把握しておく必要があるプロジェクト構造のファイルとフォルダーの **一部** を記載しています。**これはプロジェクト内のすべてのものの完全なリストではありません**。
 
 ```
 docstatic
@@ -227,56 +227,56 @@ docstatic
 └── yarn.lock
 ```
 
-### Project structure rundown
+### プロジェクト構造の概要
 
-* `/apis/` - OpenAPI YAML files.
-* `/blog/` - Blog MDX files.
-* `/config/` - JSON files used by TinaCMS to configure docStatic.
-* `/docs/` - Docs MDX files.
-* `/i18n/` - Translation files.
-* `/mcp-server/` - The [MCP server](mcp-server.mdx) that gives AI assistants access to your documentation.
-* `/reuse/` - Reusable content.
-* `/scripts/` - Build-time scripts run automatically by `prebuild` and `predev`.
-* `/src/` - Non-documentation files like pages or custom React components.
-  * `/src/pages` - Any JSX/TSX/MDX file within this directory are converted into a website page.
-* `/static/` - Static folder. Any content inside here is copied into the root of the final build folder.
-* `/tina/` - TinaCMS configuration and GraphQL schema.
-* `/docusaurus.config.ts` - A config file containing the site configuration.
-* `/package.json` - A docStatic website is a React app. You can install and use any npm packages you want.
-* `/sidebars.ts` - Specifies the order of documents in the sidebar. Use this for your “table of contents” structure.
-
-***
-
-### Monorepos
-
-docStatic allows the use of a single repo that contains both the project code and the project documentation. In Docusaurus terminology, this concept is called a “monorepo”.
-
-For more information, see [Monorepos](https://docusaurus.io/docs/installation#monorepos) in the Docusaurus documentation.
+* `/apis/` - OpenAPI YAMLファイル
+* `/blog/` - ブログのMDXファイル
+* `/config/` - TinaCMSがdocStaticを設定するために使用するJSONファイル
+* `/docs/` - ドキュメントのMDXファイル
+* `/i18n/` - 翻訳ファイル
+* `/mcp-server/` - AIアシスタントがドキュメントにアクセスできるようにする[MCPサーバー](mcp-server.mdx)
+* `/reuse/` - 再利用可能なコンテンツ
+* `/scripts/` - `prebuild` と `predev` によって自動実行されるビルド時スクリプト
+* `/src/` - ページやカスタムReactコンポーネントなどのドキュメント以外のファイル
+  * `/src/pages` - このディレクトリ内のJSX/TSX/MDXファイルはウェブサイトページに変換されます
+* `/static/` - スタティックフォルダー。ここに含まれるコンテンツは最終ビルドフォルダーのルートにコピーされます
+* `/tina/` - TinaCMSの設定とGraphQLスキーマ
+* `/docusaurus.config.ts` - サイト設定を含む設定ファイル
+* `/package.json` - docStaticウェブサイトはReactアプリです。お好みのnpmパッケージをインストールして使用できます
+* `/sidebars.ts` - サイドバー内のドキュメントの順序を指定します。「目次」構造に使用します
 
 ***
 
-### Preview changes
+### モノレポ
 
-To preview your changes as you edit the files, you can run a **local development server** that will serve your website and reflect the latest changes.
+docStaticは、プロジェクトコードとプロジェクトドキュメントの両方を含む単一のリポジトリの使用を許可します。Docusaurusの用語では、この概念を「モノレポ」と呼びます。
 
-Open a terminal or command prompt and enter:
+詳細については、Docusaurusドキュメントの[Monorepos](https://docusaurus.io/docs/installation#monorepos)を参照してください。
+
+***
+
+### 変更のプレビュー
+
+ファイルを編集しながら変更をプレビューするには、ウェブサイトを提供して最新の変更を反映する**ローカル開発サーバー**を実行できます。
+
+ターミナルまたはコマンドプロンプトを開いて入力します。
 
 ```shell
 yarn dev
 ```
 
-By default, a browser window will open at [http://localhost:3000](http://localhost:3000).
+デフォルトでは、[http://localhost:3000](http://localhost:3000)でブラウザウィンドウが開きます。
 
 ***
 
-### Build
+### ビルド
 
-docStatic uses a static site generator to build the website into a folder of static contents and put it on a web server where it can be viewed. To build the website, use:
+docStaticは静的サイトジェネレーターを使用してウェブサイトを静的コンテンツのフォルダーにビルドし、閲覧できるウェブサーバーに配置します。ウェブサイトをビルドするには次を使用します。
 
 ```shell
 yarn build-local
 ```
 
-The contents are generated in the `/build` folder, which you can copy to any static file hosting service such as GitHub pages, Netlify or Vercel. For more information, refer to [Deployment](https://docusaurus.io/docs/deployment) in the Docusaurus documentation.
+コンテンツは `/build` フォルダーに生成され、GitHub Pages、Netlify、Vercelなどの任意の静的ファイルホスティングサービスにコピーできます。詳細については、Docusaurusドキュメントの[Deployment](https://docusaurus.io/docs/deployment)を参照してください。
 
 <RelatedTopics maxResults={7} />

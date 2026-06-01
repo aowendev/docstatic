@@ -1,6 +1,6 @@
 ---
 help: null
-lastmod: '2026-05-31T23:59:59.000Z'
+lastmod: '2026-06-01T00:00:00.000Z'
 title: Using Claude in this project
 tags:
   - software
@@ -9,44 +9,44 @@ tags:
   - development
 draft: false
 review: false
-translate: true
+translate: false
 approved: false
 published: false
 unlisted: true
 ---
 
-[Claude Code](https://claude.ai/code) is Anthropic's AI-powered CLI. It is used in this project as a development assistant for a specific set of tasks. It was not used to design or develop the architecture of docStatic.
+[Claude Code](https://claude.ai/code)はAnthropicのAI搭載CLIです。このプロジェクトでは、特定のタスクの開発アシスタントとして使用されています。docStaticのアーキテクチャの設計や開発には使用されていません。
 
-## Automating manual tasks
+## 手作業の自動化
 
-Claude handles repetitive or scripted work that would otherwise require manual effort—for example, bulk-updating frontmatter fields across many files, reformatting content to match a new structure, or generating boilerplate that follows a known pattern. These are tasks where the shape of the work is clear but execution is tedious.
+Claudeは、手作業が必要となる反復的またはスクリプト化された作業を処理します。たとえば、多数のファイルにわたるフロントマターフィールドの一括更新、新しい構造に合わせたコンテンツの再フォーマット、既知のパターンに従ったボイラープレートの生成などです。これらは、作業の形が明確だが実行が煩雑なタスクです。
 
-## Developing React components and dashboards
+## Reactコンポーネントとダッシュボードの開発
 
-Claude is used to write and iterate on React components and data dashboards. This includes implementing new UI components, adjusting layout and styling, and wiring up data from the TinaCMS GraphQL API. Claude works within the existing component patterns in the project rather than introducing new abstractions.
+ClaudeはReactコンポーネントやデータダッシュボードの作成と改善に使用されています。これには、新しいUIコンポーネントの実装、レイアウトとスタイリングの調整、TinaCMS GraphQL APIからのデータの接続が含まれます。Claudeは新しい抽象化を導入するのではなく、プロジェクト内の既存のコンポーネントパターンに従って作業します。
 
-## Sanity checking content
+## コンテンツの健全性チェック
 
-Claude reviews documentation for factual consistency, structural gaps, and logical flow. This is a lightweight check—it does not replace a formal editorial review but is useful for catching obvious problems before content reaches reviewers.
+Claudeは、事実の一貫性、構造的なギャップ、論理的な流れについてドキュメントをレビューします。これは軽量なチェックであり、正式な編集レビューを置き換えるものではありませんが、コンテンツがレビュアーに届く前に明らかな問題を発見するのに役立ちます。
 
-## Tracking down bugs
+## バグの追跡
 
-Claude helps narrow down the source of bugs by reading relevant code, checking recent changes, and reasoning about likely causes. It is particularly useful for bugs that span multiple files or require cross-referencing configuration with behaviour.
+Claudeは、関連するコードを読み込み、最近の変更を確認し、原因を推論することで、バグの原因を絞り込むのに役立ちます。複数のファイルにまたがるバグや、設定と動作のクロスリファレンスが必要なバグに特に有用です。
 
-## Writing style rules
+## スタイルルールの作成
 
-Claude is used to write Vale rules for the docStatic style set. This covers authoring new rules, testing them against sample content and refining patterns to reduce false positives. Rules are committed to `.vale/styles/docStatic/` alongside the documentation.
+ClaudeはdocStaticスタイルセットのValeルールを作成するために使用されています。これには、新しいルールの作成、サンプルコンテンツへのテスト、誤検出を減らすためのパターンの改善が含まれます。ルールはドキュメントと並んで `.vale/styles/docStatic/` にコミットされます。
 
-## Maintaining information architecture
+## 情報アーキテクチャの維持
 
-Claude helps maintain the information architecture of the doc set — reviewing taxonomy, tags and page structure to ensure consistent categorisation and logical navigation. This is an ongoing task, typically run alongside content reviews.
+Claudeはドキュメントセットの情報アーキテクチャの維持を支援します。タクソノミー、タグ、ページ構造をレビューして、一貫した分類と論理的なナビゲーションを確保します。これはコンテンツレビューと並行して実行される継続的なタスクです。
 
-## Drafting documentation
+## ドキュメントの草稿作成
 
-Occasionally Claude produces a first draft of a documentation page, which is then reviewed and edited by a human author. Drafts are treated as starting points, not finished content.
+Claudeがドキュメントページの初稿を作成し、その後人間の著者がレビューして編集することがあります。草稿は出発点として扱われ、完成したコンテンツとは見なされません。
 
-<Admonition type="note" title="Scope of AI involvement">
-  Claude was not involved in the design or architecture of docStatic. Its use is limited to the development and content tasks described on this page.
+<Admonition type="note" title="AIの関与範囲">
+  ClaudeはdocStaticの設計やアーキテクチャには関与していません。その使用は、このページに記載されている開発およびコンテンツタスクに限定されています。
 </Admonition>
 
 <RelatedTopics maxResults={5} />
