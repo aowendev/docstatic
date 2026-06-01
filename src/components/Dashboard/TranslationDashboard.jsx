@@ -115,7 +115,7 @@ const TranslationDashboard = () => {
               // ignore parse errors
             }
           }
-          paramsBody.lastmod = lastmodSource ? new Date(lastmodSource.getTime() - 86400000).toISOString() : new Date(Date.now() - 86400000).toISOString();
+          paramsBody.lastmod = lastmodSource ? new Date(lastmodSource.getTime() - 1000).toISOString() : new Date(Date.now() - 1000).toISOString();
 
           await client.request({
             query: `
