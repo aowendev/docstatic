@@ -1,0 +1,101 @@
+---
+help: null
+lastmod: "2026-06-01T21:56:58.804Z"
+title: Prose linting with Vale
+tags:
+  - "content"
+  - "development"
+  - "software"
+  - "software_command-line-interface"
+  - "software_grammar-spelling-style"
+draft: false
+review: false
+translate: false
+approved: false
+published: true
+unlisted: false
+---
+
+# Correction de prose avec Vale
+
+[Vale](https://vale.sh) est un linter de prose en ligne de commande qui vérifie votre documentation par rapport à des règles de style configurables. Il s'intègre bien avec les fichiers Markdown et MDX, ce qui en fait un outil naturellement adapté aux projets docStatic.
+
+## Installer Vale
+
+Consultez le [guide d'installation de Vale](https://vale.sh/docs/vale-cli/installation/) pour les instructions spécifiques à votre plateforme. Vale est disponible via Homebrew, apt, Chocolatey et en téléchargement direct de binaire.
+
+<Tabs>
+  <TabItem value="mac" label="macOS">
+    ```bash
+    brew install vale
+    ```
+  </TabItem>
+
+  <TabItem value="linux" label="Linux">
+    ```bash
+    # Debian / Ubuntu
+    sudo apt install vale
+    ```
+  </TabItem>
+
+  <TabItem value="win" label="Windows">
+    ```powershell
+    choco install vale
+    ```
+  </TabItem>
+</Tabs>
+
+## Configuration du projet
+
+Les projets docStatic incluent un fichier `.vale.ini` à la racine du dépôt. Les paramètres clés sont :
+
+| Paramètre       | Valeur         | Objectif                                                          |
+| --------------- | -------------- | ----------------------------------------------------------------- |
+| `StylesPath`    | `.vale/styles` | Répertoire pour les packages de styles téléchargés et personnalisés |
+| `MinAlertLevel` | `suggestion`   | Afficher tous les résultats (suggestion, avertissement, erreur)   |
+| `[formats]`     | `mdx = md`     | Traiter les fichiers `.mdx` comme du Markdown                     |
+
+## Synchroniser les styles
+
+Après avoir cloné le dépôt, exécutez `vale sync` une fois pour télécharger les packages de styles listés dans `.vale.ini` :
+
+```bash
+vale sync
+```
+
+Cela peuple `.vale/styles/` avec les packages configurés. Ajoutez `.vale/styles/` à `.gitignore` afin que les packages téléchargés ne soient pas validés.
+
+## Vérifier vos docs
+
+Exécutez Vale sur le répertoire `docs/` :
+
+```bash
+vale docs/
+```
+
+Ou vérifiez un seul fichier :
+
+```bash
+vale docs/guides/my-page.mdx
+```
+
+Vale affiche les résultats groupés par fichier, avec le numéro de ligne, le niveau d'alerte et la règle déclenchée.
+
+## Ajouter des packages de styles
+
+Vale dispose d'une bibliothèque de packages de styles communautaires (Google, Microsoft, write-good, et d'autres). Pour en ajouter un, référencez-le dans `.vale.ini` sous `BasedOnStyles` :
+
+```ini
+[*.{md,mdx}]
+BasedOnStyles = Vale, Google
+```
+
+Puis exécutez à nouveau `vale sync` pour le télécharger.
+
+<Admonition type="tip" title="Règles personnalisées">
+  Vous pouvez ajouter des règles spécifiques au projet sous forme de fichiers YAML dans `.vale/styles/`. Consultez la [documentation Vale](https://vale.sh/docs/topics/styles/) pour le format des règles.
+</Admonition>
+
+## Intégration dans l'éditeur
+
+Vale dispose d'extensions pour VS Code ([Vale VSCode](https://marketplace.visualstudio.com/items?itemName=ChrisChinchilla.vale-vscode)) et d'autres éditeurs qui affichent les résultats en ligne pendant que vous écrivez.

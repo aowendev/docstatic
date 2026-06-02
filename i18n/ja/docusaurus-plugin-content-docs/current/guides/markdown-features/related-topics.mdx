@@ -1,0 +1,48 @@
+---
+help: null
+lastmod: "2026-06-01T21:56:58.747Z"
+title: Related Topics
+tags:
+  - "elements"
+  - "elements_links"
+  - "computer-languages"
+  - "computer-languages_markdown"
+  - "software"
+  - "software_content-management-systems"
+  - "software_content-management-systems_tinacms"
+  - "metadata"
+  - "metadata_taxonomies"
+draft: false
+review: false
+translate: false
+approved: false
+published: true
+unlisted: false
+---
+
+# Related Topics
+
+**Related Topics** コンポーネントは、共通のタクソノミータグに基づいて関連コンテンツを自動的に提案します。現在のページのタグを分析し、類似したタグを持つ他のドキュメントを検索して、推奨リストとして表示します。
+
+## 関連トピックの追加
+
+1. **埋め込み** リストから **Related Topics** を選択します。
+2. コンポーネントを編集します。
+3. （オプション）**最大結果数** を設定して、表示する関連トピックの数を制御します（デフォルトは5件）。
+4. 変更を **保存** します。
+
+## 設定オプション
+
+* **最大結果数**：表示される関連トピックの数を制御します（1〜20）
+
+## 仕組み
+
+このコンポーネントは、Jaccard類似度アルゴリズムを使用して、現在のページと他のすべての公開ページ間のタクソノミータグを比較します。共通タグが多いページほどリストの上位に表示されます。コンポーネントは、タクソノミータグが設定されているページで関連コンテンツが見つかった場合にのみ表示されます。
+
+## ベストプラクティス
+
+* **一貫したタグ付けを使用する**：コンテンツ全体にタクソノミータグを一貫して適用するほど、関連トピックの提案精度が向上します。
+* **最適な配置**：Related Topicsコンポーネントはコンテンツの末尾に配置して、読者のさらなる閲覧を促しましょう。
+* **適切な件数**：ユーザーエクスペリエンスを最適化するために、関連トピックは3〜7件に設定してください。提案が多すぎると圧倒感を与えることがあります。
+
+<RelatedTopics maxResults={7} />

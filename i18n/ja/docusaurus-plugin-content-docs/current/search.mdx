@@ -1,0 +1,32 @@
+---
+help: null
+lastmod: "2026-06-01T21:56:58.639Z"
+title: Search
+tags:
+  - "software"
+  - "software_search"
+  - "software_search_lunr"
+  - "software_search_algolia"
+draft: false
+review: false
+translate: false
+approved: false
+published: true
+unlisted: false
+---
+
+# 検索
+
+デフォルトでは、docStaticは[Lunr](https://lunrjs.com/)検索を使用するよう設定されています。主な利点はコストゼロのソリューションであることです。主な欠点は、検索インデックス全体がユーザーのブラウザにダウンロードされるため、サイトが大きくなるほど遅くなることです。
+
+Docusaurusプラグインとしてさまざまな代替手段が利用可能です。
+
+* Algolia（事前インストール済み）
+* [Markprompt](https://github.com/typesense/docusaurus-theme-search-typesense)
+* [Meilisearch](https://github.com/tauri-apps/meilisearch-docsearch)
+* [Orama](https://github.com/askorama/orama/tree/main/packages/plugin-docusaurus-v3)
+* [Typesense DocSearch](https://github.com/typesense/docusaurus-theme-search-typesense)
+
+詳細については、Docusaurusドキュメントの[Search](https://docusaurus.io/docs/search#using-algolia-docsearch)を参照してください。
+
+<RelatedTopics maxResults={7} />

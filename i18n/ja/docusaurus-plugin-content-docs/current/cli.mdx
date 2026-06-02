@@ -1,0 +1,124 @@
+---
+help: null
+lastmod: "2026-06-01T21:56:58.680Z"
+title: CLI
+tags:
+  - "software"
+  - "software_command-line-interface"
+  - "development"
+  - "software_static-site-generators"
+  - "software_static-site-generators_docusaurus"
+  - "software_content-management-systems"
+  - "software_content-management-systems_tinacms"
+  - "software_package-managers"
+  - "software_package-managers_yarn"
+draft: false
+review: false
+translate: false
+approved: false
+published: true
+unlisted: false
+---
+
+# CLI
+
+docStatic は、ウェブサイトの生成、提供、デプロイを支援する一連のスクリプトを提供しています。
+
+```json
+{
+  // ...
+  "scripts": {
+    "docusaurus": "docusaurus",
+    "dev": "tinacms dev -c \"docusaurus start\"",
+    "start": "docusaurus start",
+    "generate-media-index": "node scripts/generate-media-index.js",
+    "generate-git-identity": "node scripts/generate-git-identity.js",
+    "generate-files": "node scripts/generate-file-list.js",
+    "generate-docs-metadata": "node scripts/generate-docs-metadata.js",
+    "update-theme-css": "node scripts/update-theme-css.js",
+    "prebuild": "yarn generate-media-index && yarn generate-files && yarn generate-docs-metadata && yarn update-theme-css && yarn generate-git-identity",
+    "predev": "yarn generate-media-index && yarn generate-files && yarn generate-docs-metadata && yarn update-theme-css && yarn generate-git-identity",
+    "build": "tinacms build && docusaurus build",
+    "build-local": "tinacms build --local --skip-indexing --skip-cloud-checks && docusaurus build",
+    "swizzle": "docusaurus swizzle",
+    "deploy": "docusaurus deploy",
+    "setup-git-hooks": "git config core.hooksPath .githooks && chmod +x .githooks/pre-commit",
+    "clear": "docusaurus clear",
+    "serve": "docusaurus serve",
+    "write-translations": "docusaurus write-translations",
+    "write-heading-ids": "docusaurus write-heading-ids",
+    "gen-api-docs": "docusaurus gen-api-docs all",
+    "clean-api-docs": "docusaurus clean-api-docs all",
+    "gen-graphql": "docusaurus docs:generate:graphql",
+    "gen-api-docs:version": "docusaurus gen-api-docs:version",
+    "clean-api-docs:version": "docusaurus clean-api-docs:version",
+    "lint": "biome check config/ reuse/ scripts/ src/ tina/",
+    "lint:fix": "biome check config/ reuse/ scripts/ src/ tina/ --fix",
+    "mcp:install": "cd mcp-server && npm install",
+    "mcp:build": "cd mcp-server && npm run build",
+    "mcp:dev": "cd mcp-server && npm run dev",
+    "mcp:start": "cd mcp-server && npm start",
+    "mcp:test": "node mcp-server/test.js",
+    "postinstall": "npm run mcp:install"
+  }
+}
+```
+
+## docStatic CLI コマンド
+
+コマンドを実行するには、npm または yarn を使用します。たとえば、`npm run dev` または `yarn dev` のように入力します。
+
+### 主な docStatic スクリプト：
+
+* **`dev`**: TinaCMS インテグレーションを含む開発サーバーを起動します
+* **`build`**: 本番用にビルドします（TinaCMS のビルドを実行した後、Docusaurus のビルドを実行します）
+* **`build-local`**: クラウド機能なしでローカルにビルドします
+* **`generate-media-index`**: メディアファイルのインデックスを生成します
+* **`generate-git-identity`**: Git のアイデンティティ情報を生成します
+* **`generate-files`**: アプリケーション用のファイルリストを生成します
+* **`generate-docs-metadata`**: ダッシュボードと検索で使用されるメタデータインデックスを生成します
+* **`update-theme-css`**: テーマ CSS ファイルを更新します
+* **`mcp:install`**: Model Context Protocol サーバーの依存関係をインストールします
+* **`mcp:build`**: TypeScript から MCP サーバーをビルドします
+* **`mcp:dev`**: 自動再起動付きで開発モードで MCP サーバーを起動します
+* **`mcp:start`**: AI アシスタントインテグレーション用にコンパイル済みの MCP サーバーを起動します
+* **`mcp:test`**: MCP サーバーの接続テストを実行します
+
+MCP サーバーの詳細については、[MCP Server Integration](mcp-server.mdx) を参照してください。
+
+これらのコマンドは、Docusaurus ドキュメントの [CLI](https://docusaurus.io/docs/cli) に記載されている標準的な Docusaurus コマンドをベースに構築されています：
+
+* docusaurus
+* start
+* build
+* swizzle
+* deploy
+* clear
+* serve
+* write-translations
+* write-heading-ids
+
+### 自動コマンド
+
+これらのコマンドはビルド時または開発サーバーの起動時に自動的に実行されます：
+
+* generate-files
+* generate-docs-metadata
+* prebuild
+* predev
+
+### API コマンド
+
+* clean-api-docs
+* gen-api-docs
+* gen-graphql
+
+OpenAPI コマンドの詳細については、Docusaurus OpenAPI Plugin ドキュメントの [CLI Usage](https://github.com/PaloAltoNetworks/docusaurus-openapi-docs?tab=readme-ov-file#cli-usage) を参照してください。
+
+GraphQL コマンドの詳細については、Docusaurus GraphQL Plugin ドキュメントの [Usage](https://github.com/Zhouzi/docusaurus-graphql-plugin?tab=readme-ov-file#usage) を参照してください。
+
+### リントコマンド
+
+リントコマンドの詳細については、Biome ドキュメントの [CLI](https://biomejs.dev/reference/cli/) を参照してください。
+
+<RelatedTopics maxResults={7} />

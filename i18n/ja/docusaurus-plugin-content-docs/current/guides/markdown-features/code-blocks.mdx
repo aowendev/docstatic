@@ -1,0 +1,47 @@
+---
+help: null
+lastmod: "2026-06-01T21:56:58.745Z"
+title: Code blocks and snippets
+tags:
+  - "elements"
+  - "elements_code-blocks"
+  - "reuse"
+  - "reuse_snippets"
+draft: false
+review: false
+translate: false
+approved: false
+published: true
+unlisted: false
+---
+
+# コードブロックとスニペット
+
+docStatic には、ドキュメントにコードを含める2つの方法があります。どちらもシンタックスハイライトをサポートしています。
+
+## コードブロック
+
+1. リッチテキストエディタの **Code Block** アイコンをクリックします。
+2. 言語リストをクリックして、言語を選択または検索します。
+3. ボックスにコードを入力します。
+
+#### 例：
+
+```plaintext
+This is some plain text.
+```
+
+## コードスニペット
+
+1. **Embed** リストから **Code Snippet** を選択します。
+2. **Title** を付けます。
+3. **Language** を選択します。
+4. リストからファイルを選択します。リストには、開発サーバーを実行するかビルドを行うたびに `reuse/code/` フォルダ内のすべてのファイルが表示されます。
+
+#### 例：
+
+<CodeSnippet title="Example Title" language="xml" filepath="example.xml" />
+
+コードスニペットを使用する利点は、ユニットテストが可能な物理ファイルが存在することです。
+
+<RelatedTopics maxResults={7} />

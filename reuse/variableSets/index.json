@@ -11,8 +11,20 @@
               "value": "single sourcing"
             },
             {
+              "lang": "de",
+              "value": "Single Sourcing"
+            },
+            {
+              "lang": "es",
+              "value": "fuente única"
+            },
+            {
               "lang": "fr",
               "value": "approvisionnement unique"
+            },
+            {
+              "lang": "ja",
+              "value": "シングルソーシング"
             }
           ]
         }
@@ -26,7 +38,23 @@
           "translations": [
             {
               "lang": "en",
-              "value": "Englsih"
+              "value": "English"
+            },
+            {
+              "lang": "de",
+              "value": "Englisch"
+            },
+            {
+              "lang": "es",
+              "value": "Inglés"
+            },
+            {
+              "lang": "fr",
+              "value": "Anglais"
+            },
+            {
+              "lang": "ja",
+              "value": "英語"
             }
           ]
         },
@@ -38,8 +66,95 @@
               "value": "French"
             },
             {
+              "lang": "de",
+              "value": "Französisch"
+            },
+            {
+              "lang": "es",
+              "value": "Francés"
+            },
+            {
               "lang": "fr",
               "value": "Français"
+            },
+            {
+              "lang": "ja",
+              "value": "フランス語"
+            }
+          ]
+        },
+        {
+          "key": "German",
+          "translations": [
+            {
+              "lang": "en",
+              "value": "German"
+            },
+            {
+              "lang": "de",
+              "value": "Deutsch"
+            },
+            {
+              "lang": "es",
+              "value": "Alemán"
+            },
+            {
+              "lang": "fr",
+              "value": "Allemand"
+            },
+            {
+              "lang": "ja",
+              "value": "ドイツ語"
+            }
+          ]
+        },
+        {
+          "key": "Spanish",
+          "translations": [
+            {
+              "lang": "en",
+              "value": "Spanish"
+            },
+            {
+              "lang": "de",
+              "value": "Spanisch"
+            },
+            {
+              "lang": "es",
+              "value": "Español"
+            },
+            {
+              "lang": "fr",
+              "value": "Espagnol"
+            },
+            {
+              "lang": "ja",
+              "value": "スペイン語"
+            }
+          ]
+        },
+        {
+          "key": "Japanese",
+          "translations": [
+            {
+              "lang": "en",
+              "value": "Japanese"
+            },
+            {
+              "lang": "de",
+              "value": "Japanisch"
+            },
+            {
+              "lang": "es",
+              "value": "Japonés"
+            },
+            {
+              "lang": "fr",
+              "value": "Japonais"
+            },
+            {
+              "lang": "ja",
+              "value": "日本語"
             }
           ]
         }

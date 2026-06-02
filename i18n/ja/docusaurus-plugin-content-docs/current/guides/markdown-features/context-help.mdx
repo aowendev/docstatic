@@ -1,0 +1,58 @@
+---
+help: null
+lastmod: "2026-06-01T21:56:58.764Z"
+title: Context-sensitive help
+slug: "/context-help"
+tags:
+  - "elements"
+  - "elements_context-sensitive-help"
+draft: false
+review: false
+translate: false
+approved: false
+published: true
+unlisted: false
+---
+
+# コンテキストセンシティブヘルプ
+
+> 「コンテキストセンシティブヘルプとは、ソフトウェアの特定の状態から取得する[オンラインヘルプ](https://en.wikipedia.org/wiki/Online_help)の一種で、その状態に関連する状況のヘルプを提供するものです。コンテキストセンシティブヘルプは、一般的なオンラインヘルプやオンラインマニュアルとは異なり、全体を通して読めるようにする必要はありません。各トピックは、ソフトウェアの1つの状態、状況、または機能を詳細に説明することを目的としています。」—[Wikipedia](https://en.wikipedia.org/wiki/Context-sensitive_help)
+
+通常、コンテキストセンシティブヘルプは、ユーザーがクリックすると使用中のソフトウェアの部分に対応するドキュメントの適切な箇所に案内するヘルプアイコンとして実装されます。これにはコンテキスト URL のマップを作成する必要があります。
+
+静的サイトジェネレーターは見出しへのリンクを自動的に生成します。ただし、見出しを変更するとリンクも変わってしまいます。このため、docStatic ではコンテキストヘルプ要素を提供しています。これにより、トピック内の任意の場所にアンカータグを追加できます。メタデータにトピックのスラッグが定義されている限り、リンクが壊れることはありません。
+
+1. Embed リストから **Context Help** を選択します。
+2. 一意の ID を入力します。
+
+リンクは次の形式になります：`<URL>/docs/<slug>#<id>`
+
+#### 例
+
+[https://docstatic.com/docs/context-help#help-example](/docs/context-help#help-example)
+
+<a id="help-example" />
+
+## 開発者向け
+
+コードにコンテキストヘルプリンクを含める方法の例については、このサイトのソースコードにある HelpButton React コンポーネントを参照してください。docStatic は CMS コードに直接アクセスできないため、CMS コレクション内の未使用フィールドに UI 要素として適用することでボタンを実装しています。HelpButton コンポーネントはボタンをページの nav 要素に接続し、テンプレートで渡された URL にリンクします：
+
+```javascript
+const ExampleCollection = {
+  name: "example",
+  label: "Example",
+  path: "docs/example",
+  format: "mdx",
+  fields: [
+    {
+      type: "boolean",
+      name: "help",
+      label: "Help",
+      required: false,
+      ui: {
+        component: (props) => <HelpButton url="https://example.com/" {...props} />,
+      },
+    },
+```
+
+<RelatedTopics maxResults={7} />

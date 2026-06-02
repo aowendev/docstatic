@@ -1,0 +1,54 @@
+---
+help: null
+lastmod: "2026-06-01T21:56:58.791Z"
+title: Using Claude in this project
+tags:
+  - "software"
+  - "software_artificial-intelligence"
+  - "software_automation"
+  - "development"
+draft: false
+review: false
+translate: false
+approved: false
+published: true
+unlisted: false
+---
+
+# Usar Claude en este proyecto
+
+[Claude Code](https://claude.ai/code) es la interfaz de línea de comandos con inteligencia artificial de Anthropic. Se usa en este proyecto como asistente de desarrollo para un conjunto específico de tareas. No se utilizó para diseñar ni desarrollar la arquitectura de docStatic.
+
+## Automatización de tareas manuales
+
+Claude se encarga del trabajo repetitivo o programado que de otro modo requeriría esfuerzo manual — por ejemplo, actualizar masivamente campos de metadatos en muchos archivos, reformatear contenido para adaptarlo a una nueva estructura o generar código repetitivo que sigue un patrón conocido. Son tareas donde la forma del trabajo es clara, pero la ejecución resulta tediosa.
+
+## Desarrollo de componentes React y paneles de datos
+
+Claude se usa para escribir e iterar sobre componentes React y paneles de datos. Esto incluye implementar nuevos componentes de interfaz de usuario, ajustar el diseño y el estilo, y conectar datos desde la API GraphQL de TinaCMS. Claude trabaja dentro de los patrones de componentes existentes del proyecto en lugar de introducir nuevas abstracciones.
+
+## Verificación de coherencia del contenido
+
+Claude revisa la documentación para verificar la coherencia factual, las brechas estructurales y el flujo lógico. Es una verificación liviana — no reemplaza una revisión editorial formal, pero es útil para detectar problemas obvios antes de que el contenido llegue a los revisores.
+
+## Rastreo de errores
+
+Claude ayuda a identificar la fuente de los errores leyendo el código relevante, revisando los cambios recientes y razonando sobre las causas probables. Es particularmente útil para errores que abarcan múltiples archivos o que requieren cruzar la configuración con el comportamiento.
+
+## Escritura de reglas de estilo
+
+Claude se usa para escribir reglas de Vale para el conjunto de estilos de docStatic. Esto incluye la creación de nuevas reglas, su prueba con contenido de muestra y el refinamiento de patrones para reducir los falsos positivos. Las reglas se confirman en `.vale/styles/docStatic/` junto con la documentación.
+
+## Mantenimiento de la arquitectura de la información
+
+Claude ayuda a mantener la arquitectura de la información del conjunto de documentos — revisando la taxonomía, las etiquetas y la estructura de las páginas para garantizar una categorización coherente y una navegación lógica. Es una tarea continua que generalmente se realiza junto con las revisiones de contenido.
+
+## Redacción de documentación
+
+En ocasiones, Claude produce un primer borrador de una página de documentación, que luego es revisado y editado por un autor humano. Los borradores se tratan como puntos de partida, no como contenido terminado.
+
+<Admonition type="note" title="Alcance de la participación de la IA">
+  Claude no participó en el diseño ni la arquitectura de docStatic. Su uso se limita a las tareas de desarrollo y contenido descritas en esta página.
+</Admonition>
+
+<RelatedTopics maxResults={5} />

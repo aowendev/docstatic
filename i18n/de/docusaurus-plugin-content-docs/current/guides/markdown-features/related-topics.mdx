@@ -1,0 +1,48 @@
+---
+help: null
+lastmod: "2026-06-01T21:56:58.612Z"
+title: Related Topics
+tags:
+  - "elements"
+  - "elements_links"
+  - "computer-languages"
+  - "computer-languages_markdown"
+  - "software"
+  - "software_content-management-systems"
+  - "software_content-management-systems_tinacms"
+  - "metadata"
+  - "metadata_taxonomies"
+draft: false
+review: false
+translate: false
+approved: false
+published: true
+unlisted: false
+---
+
+# Verwandte Themen
+
+Die Komponente **Verwandte Themen** schlägt automatisch verwandte Inhalte basierend auf gemeinsamen Taxonomie-Tags vor. Sie analysiert die Tags der aktuellen Seite und findet andere Dokumente mit ähnlichen Tags, die dann als kuratierte Empfehlungsliste angezeigt werden.
+
+## Verwandte Themen hinzufügen
+
+1. Wählen Sie **Verwandte Themen** aus der Liste **Einbetten** aus.
+2. Bearbeiten Sie die Komponente.
+3. (Optional) Legen Sie die **Maximale Anzahl an Ergebnissen** fest, um zu steuern, wie viele verwandte Themen angezeigt werden (Standard: 5).
+4. **Speichern** Sie Ihre Änderungen.
+
+## Konfigurationsoptionen
+
+* **Maximale Anzahl an Ergebnissen**: Steuert die Anzahl der angezeigten verwandten Themen (1–20)
+
+## Funktionsweise
+
+Die Komponente verwendet den Jaccard-Ähnlichkeitsalgorithmus, um Taxonomie-Tags zwischen der aktuellen Seite und allen anderen veröffentlichten Seiten zu vergleichen. Seiten mit mehr gemeinsamen Tags erscheinen höher in der Liste. Die Komponente erscheint nur auf Seiten, die Taxonomie-Tags haben und wenn verwandte Inhalte gefunden werden.
+
+## Empfehlungen
+
+* **Verwenden Sie konsistente Tags**: Je konsequenter Sie Taxonomie-Tags in Ihren Inhalten anwenden, desto besser werden die Vorschläge für verwandte Themen sein.
+* **Optimale Platzierung**: Platzieren Sie die Komponente Verwandte Themen am Ende Ihres Inhalts, um zum Weiterlesen zu animieren.
+* **Vernünftige Grenzen**: Verwenden Sie 3–7 verwandte Themen für die beste Benutzererfahrung. Zu viele Vorschläge können überwältigend sein.
+
+<RelatedTopics maxResults={7} />

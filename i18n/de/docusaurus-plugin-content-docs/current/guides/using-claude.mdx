@@ -1,0 +1,54 @@
+---
+help: null
+lastmod: "2026-06-01T21:56:58.609Z"
+title: Using Claude in this project
+tags:
+  - "software"
+  - "software_artificial-intelligence"
+  - "software_automation"
+  - "development"
+draft: false
+review: false
+translate: false
+approved: false
+published: true
+unlisted: false
+---
+
+# Claude in diesem Projekt verwenden
+
+[Claude Code](https://claude.ai/code) ist die KI-gestützte CLI von Anthropic. In diesem Projekt wird es als Entwicklungsassistent für eine bestimmte Reihe von Aufgaben eingesetzt. Es wurde nicht verwendet, um die Architektur von docStatic zu entwerfen oder zu entwickeln.
+
+## Automatisierung manueller Aufgaben
+
+Claude übernimmt repetitive oder geskriptete Arbeiten, die sonst manuellen Aufwand erfordern würden – zum Beispiel das massenhafte Aktualisieren von Frontmatter-Feldern in vielen Dateien, das Umformatieren von Inhalten für eine neue Struktur oder das Generieren von Boilerplate-Code, der einem bekannten Muster folgt. Dies sind Aufgaben, bei denen die Form der Arbeit klar ist, die Ausführung jedoch mühsam ist.
+
+## Entwicklung von React-Komponenten und Dashboards
+
+Claude wird verwendet, um React-Komponenten und Daten-Dashboards zu schreiben und zu iterieren. Dazu gehören die Implementierung neuer UI-Komponenten, die Anpassung von Layout und Styling sowie die Anbindung von Daten aus der TinaCMS GraphQL-API. Claude arbeitet innerhalb der bestehenden Komponentenmuster des Projekts, anstatt neue Abstraktionen einzuführen.
+
+## Inhaltliche Konsistenzprüfung
+
+Claude überprüft die Dokumentation auf faktische Konsistenz, strukturelle Lücken und logischen Fluss. Dies ist eine leichtgewichtige Überprüfung – sie ersetzt keine formelle redaktionelle Überprüfung, ist aber nützlich, um offensichtliche Probleme zu erkennen, bevor der Inhalt die Überprüfer erreicht.
+
+## Fehlersuche
+
+Claude hilft dabei, die Ursache von Fehlern einzugrenzen, indem es relevanten Code liest, aktuelle Änderungen überprüft und über wahrscheinliche Ursachen nachdenkt. Es ist besonders nützlich bei Fehlern, die sich über mehrere Dateien erstrecken oder bei denen die Konfiguration mit dem Verhalten abgeglichen werden muss.
+
+## Schreiben von Stilregeln
+
+Claude wird verwendet, um Vale-Regeln für das docStatic-Stilset zu schreiben. Dies umfasst das Verfassen neuer Regeln, deren Test gegen Beispielinhalte und die Verfeinerung von Mustern zur Reduzierung falsch positiver Ergebnisse. Die Regeln werden in `.vale/styles/docStatic/` neben der Dokumentation gespeichert.
+
+## Pflege der Informationsarchitektur
+
+Claude hilft bei der Pflege der Informationsarchitektur des Dokumentensatzes – durch Überprüfung von Taxonomie, Tags und Seitenstruktur, um eine konsistente Kategorisierung und logische Navigation zu gewährleisten. Dies ist eine fortlaufende Aufgabe, die typischerweise parallel zu Inhaltsüberprüfungen durchgeführt wird.
+
+## Dokumentationsentwürfe
+
+Gelegentlich erstellt Claude einen ersten Entwurf einer Dokumentationsseite, der dann von einem menschlichen Autor überprüft und bearbeitet wird. Entwürfe werden als Ausgangspunkte behandelt, nicht als fertiger Inhalt.
+
+<Admonition type="note" title="Umfang der KI-Beteiligung">
+  Claude war nicht an der Gestaltung oder Architektur von docStatic beteiligt. Sein Einsatz beschränkt sich auf die auf dieser Seite beschriebenen Entwicklungs- und Inhaltsaufgaben.
+</Admonition>
+
+<RelatedTopics maxResults={5} />

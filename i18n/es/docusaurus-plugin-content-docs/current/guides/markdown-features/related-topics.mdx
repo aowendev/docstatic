@@ -1,0 +1,48 @@
+---
+help: null
+lastmod: "2026-06-01T21:56:58.792Z"
+title: Related Topics
+tags:
+  - "elements"
+  - "elements_links"
+  - "computer-languages"
+  - "computer-languages_markdown"
+  - "software"
+  - "software_content-management-systems"
+  - "software_content-management-systems_tinacms"
+  - "metadata"
+  - "metadata_taxonomies"
+draft: false
+review: false
+translate: false
+approved: false
+published: true
+unlisted: false
+---
+
+# Temas relacionados
+
+El componente **Temas relacionados** sugiere automáticamente contenido relacionado basado en etiquetas de taxonomía compartidas. Analiza las etiquetas de la página actual y encuentra otros documentos con etiquetas similares, luego los muestra como una lista seleccionada de recomendaciones.
+
+## Cómo agregar temas relacionados
+
+1. Seleccione **Temas relacionados** de la lista **Insertar**.
+2. Edite el componente.
+3. (Opcional) Establezca el **Número máximo de resultados** para controlar cuántos temas relacionados se muestran (el valor predeterminado es 5).
+4. **Guarde** sus cambios.
+
+## Opciones de configuración
+
+* **Número máximo de resultados**: Controla el número de temas relacionados que se muestran (1-20)
+
+## Cómo funciona
+
+El componente usa el algoritmo de similitud de Jaccard para comparar las etiquetas de taxonomía entre la página actual y todas las demás páginas publicadas. Las páginas con más etiquetas compartidas aparecerán más arriba en la lista. El componente solo aparece en páginas que tienen etiquetas de taxonomía y cuando se encuentra contenido relacionado.
+
+## Buenas prácticas
+
+* **Use un etiquetado coherente**: Cuanto más consistentemente aplique etiquetas de taxonomía en su contenido, mejores serán las sugerencias de temas relacionados.
+* **Ubicación óptima**: Coloque el componente Temas relacionados al final de su contenido para fomentar la lectura adicional.
+* **Límites razonables**: Use entre 3 y 7 temas relacionados para la mejor experiencia del usuario. Demasiadas sugerencias pueden resultar abrumadoras.
+
+<RelatedTopics maxResults={7} />

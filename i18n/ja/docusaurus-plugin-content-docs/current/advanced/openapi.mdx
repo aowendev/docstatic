@@ -1,0 +1,71 @@
+---
+help: null
+lastmod: "2026-06-01T21:56:58.696Z"
+title: OpenAPI reference docs
+tags:
+  - "apis"
+  - "apis_openapi"
+  - "software"
+  - "software_static-site-generators"
+  - "software_static-site-generators_docusaurus"
+draft: false
+review: false
+translate: false
+approved: false
+published: true
+unlisted: false
+---
+
+# OpenAPI リファレンスドキュメント
+
+docStatic は [`docusaurus-plugin-openapi-docs`](https://github.com/PaloAltoNetworks/docusaurus-openapi-docs) を使用して、OpenAPI 仕様から API リファレンスドキュメントを生成します。このプラグインは仕様ファイルを読み込み、`docs/` ツリー内に一連の MDX ファイルを書き込みます。Docusaurus はそれらを通常のページとしてビルドします。
+
+## 設定
+
+API ソースは `config/docusaurus/index.json` の `openapi.apis` 配列で設定されます。各エントリには、名前、仕様ファイルへのパス、出力ディレクトリ、およびオプションのグループ化オプションを指定します：
+
+```json
+{
+  "openapi": {
+    "apis": [
+      {
+        "name": "petstore",
+        "specPath": "openapi/petstore.yaml",
+        "outputDir": "docs/api/petstore",
+        "groupPathsBy": "tag",
+        "categoryLinkSource": "tag"
+      }
+    ]
+  }
+}
+```
+
+次のコマンドで生成を実行します：
+
+```bash
+npm run gen-api-docs
+```
+
+生成されたファイルを削除するには：
+
+```bash
+npm run clean-api-docs
+```
+
+## タグページ
+
+`groupPathsBy` と `categoryLinkSource` の両方が `"tag"` に設定されている場合、プラグインは各 OpenAPI タグに対してカテゴリインデックスページ（例：`store.tag.mdx`）を作成します。デフォルトでは、これらのファイルには `DocCardList` と `useCurrentSidebarCategory` をインポートする冗長なボイラープレートブロックが含まれています。docStatic では `DocCardList` がすでに MDX コンポーネントとしてグローバルに登録されており、プロパティなしで呼び出された場合に現在のカテゴリのアイテムを自動的に解決するため、どちらも冗長です。
+
+docStatic はカスタムタグテンプレートを使用してプラグインを設定し、代わりに簡略化された形式を生成します：
+
+```mdx
+<DocCardList />
+```
+
+テンプレートは `config/docusaurus/openapi-tag-template.md` にあり、`docusaurus.config.ts` の `tagTemplate` オプションで接続されています。
+
+## 生成されたタグファイルの編集
+
+プラグインは**ファイルが存在しない場合にのみタグファイルを作成します**。編集済みのファイルを上書きすることは決してありません。つまり、タグページの説明テキストを自由にカスタマイズでき、その変更は以降の `gen-api-docs` 実行後も保持されます。新たに追加されたタグのみファイルが作成され、それらにはカスタムテンプレートが使用されます。
+
+<RelatedTopics maxResults={7} />

@@ -1,0 +1,49 @@
+---
+help: null
+lastmod: "2026-06-01T21:56:58.635Z"
+title: Static assets
+tags:
+  - "software"
+  - "software_static-site-generators"
+  - "software_static-site-generators_docusaurus"
+  - "content"
+  - "content_images"
+  - "development"
+draft: false
+review: false
+translate: false
+approved: false
+published: true
+unlisted: false
+---
+
+# 静的アセット
+
+スタティックアセットとは、ビルド出力に直接コピーされるコード以外のファイルです。画像、スタイルシート、ファビコン、フォントなどが含まれます。
+
+これらのアセットは `static` フォルダーに置いてください。そのフォルダーに入れたすべてのファイルは、フォルダー階層を保持したまま生成されたビルドフォルダーのルートにコピーされます。たとえば、`sun.jpg` というファイルをstaticフォルダーに追加すると、`build/sun.jpg` にコピーされます。
+
+これは以下を意味します。
+
+* サイトの `baseUrl: '/'` の場合、画像 `/static/img/sun.jpg` は `/img/sun.jpg` で提供されます。
+* サイトの `baseUrl: '/subpath/'` の場合、画像 `/static/img/sun.jpg` は `/subpath/img/sun.jpg` で提供されます。
+
+## スタティックアセットの参照
+
+### CMSで
+
+1. リンクを挿入します。
+2. 絶対パスを入力します（例：/files/note.docx）。
+3. 表示するテキストを入力します。
+
+### Markdownで
+
+```markdown
+You write a link like this: [Download this document](/files/note.docx)
+
+Docusaurus changes that to: <a href={require('static/files/note.docx')}>Download this document</a>
+```
+
+詳細については、Docusaurusドキュメントの[Static Assets](https://docusaurus.io/docs/static-assets)を参照してください。
+
+<RelatedTopics maxResults={7} />

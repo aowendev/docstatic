@@ -1,0 +1,262 @@
+---
+help: null
+lastmod: "2026-06-01T21:56:58.651Z"
+title: MCP Server Implementation Details
+tags:
+  - "software"
+  - "software_content-management-systems"
+  - "software_content-management-systems_tinacms"
+  - "software_ai-integration"
+  - "software_mcp"
+  - "development"
+  - "development_apis"
+  - "development_apis_graphql"
+draft: false
+review: false
+translate: false
+approved: false
+published: true
+unlisted: false
+---
+
+# docStatic MCP Server Implementation
+
+TinaCMS GraphQLエンドポイントを通じてAIアシスタントにdocStaticドキュメントへの構造化アクセスを提供するModel Context Protocol（MCP）サーバーです。
+
+## 概要
+
+このMCPサーバーはローカルのTinaCMS GraphQLエンドポイント（`http://localhost:4001/graphql`）に接続し、以下のためのツールを提供します。
+
+* ドキュメントコンテンツの検索
+* 特定のドキュメントの取得
+* すべての利用可能なドキュメントのリスト
+* タグによるドキュメントのフィルタリング
+* MDXコンポーネントの使用状況の分析
+* サーバー接続の確認
+
+## セットアップ
+
+### 1. 依存関係のインストール
+
+docStaticのメインディレクトリから：
+
+```bash
+npm install
+# This will automatically install MCP server dependencies via postinstall hook
+```
+
+または手動で：
+
+```bash
+cd mcp-server
+npm install
+```
+
+### 2. サーバーのビルド
+
+```bash
+npm run mcp:build
+```
+
+### 3. docStatic開発サーバーの起動
+
+MCPサーバーにはTinaCMS GraphQLエンドポイントの実行が必要です。
+
+```bash
+npm run dev
+```
+
+これによりDocusaurusとともにTinaCMSが起動します。
+
+* Docusaurus: [http://localhost:3000](http://localhost:3000)
+* GraphQLエンドポイント: [http://localhost:4001/graphql](http://localhost:4001/graphql)
+* Tina Admin: [http://localhost:3000/admin](http://localhost:3000/admin)
+
+### 4. MCPサーバーの実行
+
+別のターミナルで：
+
+```bash
+npm run mcp:start
+```
+
+## 利用可能なツール
+
+### `search_documents`
+
+キーワードを使用してドキュメントを検索します。
+
+**パラメーター：**
+
+* `query`（必須）：検索キーワード
+* `limit`（オプション）：最大結果数（デフォルト：20）
+
+**例：**
+
+```json
+{
+  "query": "installation",
+  "limit": 10
+}
+```
+
+### `get_document`
+
+パスで特定のドキュメントを取得します。
+
+**パラメーター：**
+
+* `path`（必須）：ドキュメントへの相対パス
+
+**例：**
+
+```json
+{
+  "path": "installation.mdx"
+}
+```
+
+### `list_all_documents`
+
+メタデータを含むすべての利用可能なドキュメントのリストを取得します。
+
+### `get_documents_by_tag`
+
+特定のタグでドキュメントをフィルタリングします。
+
+**パラメーター：**
+
+* `tag`（必須）：フィルタリングするタグ
+
+**例：**
+
+```json
+{
+  "tag": "software_content-management-systems_tinacms"
+}
+```
+
+### `analyze_mdx_components`
+
+ドキュメントで使用されているMDXコンポーネントを分析します。
+
+**パラメーター：**
+
+* `path`（必須）：ドキュメントへの相対パス
+
+### `check_server_status`
+
+GraphQLサーバーの接続を確認します。
+
+## Claude Desktopでの使用
+
+Claude DesktopのMCP設定に以下の構成を追加します。
+
+```json
+{
+  "mcpServers": {
+    "docstatic": {
+      "command": "node",
+      "args": ["/path/to/docstatic/mcp-server/dist/server.js"],
+      "cwd": "/path/to/docstatic"
+    }
+  }
+}
+```
+
+## 開発
+
+### ウォッチモード
+
+アクティブな開発では、ウォッチモードを使用して変更時に自動的に再ビルドします。
+
+```bash
+cd mcp-server
+npm run watch
+```
+
+### 手動ビルドと実行
+
+```bash
+npm run mcp:build  # Build TypeScript
+npm run mcp:start  # Start the server
+```
+
+### 自動再起動付き開発
+
+```bash
+npm run mcp:dev    # Build and start in one command
+```
+
+## トラブルシューティング
+
+<Admonition type="info" title="よくある問題">
+  **「GraphQLサーバーが実行されていません」**
+
+  * メインディレクトリで `npm run dev` が実行されていることを確認してください
+  * [http://localhost:4001/graphql](http://localhost:4001/graphql)にアクセスできることを確認してください
+
+  **「接続が拒否されました」**
+
+  * TinaCMSが正しく起動していることを確認してください
+  * ポート4001がファイアウォールでブロックされていないか確認してください
+
+  **「ドキュメントが見つかりません」**
+
+  * `docs/` ディレクトリにドキュメントが存在することを確認してください
+  * `/docs/installation.mdx` ではなく `installation.mdx` のような相対パスを使用してください
+</Admonition>
+
+### サーバーのテスト
+
+GraphQLの接続をテストします。
+
+```bash
+curl -X POST http://localhost:4001/graphql \
+  -H "Content-Type: application/json" \
+  -d '{"query":"{ __typename }"}'
+  
+# Expected response:
+# {"data":{"__typename":"Query"}}
+```
+
+## アーキテクチャ
+
+MCPサーバーのアーキテクチャ：
+
+```text
+docStatic Project
+├── docs/               # MDX documentation files
+├── mcp-server/         # MCP server implementation
+│   ├── src/server.ts   # Main server logic
+│   ├── package.json    # MCP dependencies
+│   └── dist/           # Compiled JavaScript
+└── tina/               # TinaCMS configuration
+    └── config.jsx      # GraphQL schema definition
+```
+
+MCPサーバーは：
+
+1. TinaCMS GraphQLエンドポイントに接続します
+2. GraphQLクエリを実行してドキュメントデータを取得します
+3. MCPプロトコルを介して構造化されたレスポンスを提供します
+4. エラーケースと接続の問題を処理します
+
+## AIアシスタントとの統合
+
+<Admonition type="tip" title="AIアシスタントの機能">
+  このMCPサーバーにより、AIアシスタントは以下が可能になります。
+
+  * **ドキュメント構造を理解する**
+  * **特定のトピックや概念を検索する**
+  * **完全なドキュメントコンテンツにアクセスする**
+  * **MDXコンポーネントの使用パターンを分析する**
+  * **実際のドキュメントに基づいたコンテキスト対応のサポートを提供する**
+</Admonition>
+
+サーバーは以下を含むdocStatic固有の形式を理解します。
+
+* フロントマターメタデータ
+* MDXコンポーネントの使用（`<Admonition>`、`<Figure>` など）
+* 階層的なタグ構造
+* TinaCMSワークフローの状態

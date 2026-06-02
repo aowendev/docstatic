@@ -1,0 +1,66 @@
+---
+help: null
+lastmod: "2026-06-01T21:56:58.752Z"
+modifiedBy: "aowendev <aowen@translationcommons.org>"
+title: Assets
+tags:
+  - "content"
+  - "content_images"
+draft: false
+review: false
+translate: false
+approved: false
+published: true
+unlisted: false
+---
+
+# アセット
+
+トピックからアセット（docx ファイルや画像など）に直接リンクしたい場合があります。docStatic では static/ フォルダを通じてこれを管理します。
+
+フォルダに配置されたコンテンツはすべて、公開サイトのルートから利用可能になります。たとえば：
+
+```
+# ドキュメント
+/website/docs/myFeature.mdx
+
+# 使用したいアセット
+/website/assets/docstatic-asset-example.docx
+/website/img/docstastic-asset-example-banner.png
+```
+
+## 画像
+
+docStatic には、トピックに画像を追加する2つの方法があります。インライン画像の場合は、**Image** アイコンをクリックしてトピックに画像を配置できます。これはアイコン（![](/img/docs/example.svg)）や小さな画像に最適です。アイコンは事前にスケーリングされた SVG ファイルとして保存してください。これらはダークモードでは反転され、色空間が 180° 回転されます。
+
+<Admonition type="tip" title="ヒント">
+  SVG のスケーリングには [Librsvg](https://wiki.gnome.org/Projects/LibRsvg) を使用できます。たとえば、`rsvg-convert example.svg -h 12 -f svg -o example.svg` は高さを 12 ポイントに設定します。
+</Admonition>
+
+大きな画像の場合は、Figure コンポーネントを使用することをお勧めします。
+
+1. **Embed** リストから **Figure** を選択します。
+2. コンポーネントを編集します。
+3. **Image** エリアをクリックして **Media Manager** を開きます。
+4. 画像をアップロードまたは選択します。
+5. **Caption**（キャプション）を付けます。
+
+#### 例
+
+<Figure img="/img/docStaticDemo.jpg" caption="図の例" />
+
+図はビューウィンドウに基づいてサイズが変更されます。クリックすると、ライトボックス内で最大サイズで表示されます。
+
+Media Manager の詳細については、TinaCMS ドキュメントの [Media Overview](https://tina.io/docs/reference/media/overview) を参照してください。
+
+## ファイル
+
+同様に、URL 内で static/ フォルダからのパスを使用することで、既存のアセットにリンクできます。たとえば：
+
+```
+./assets/docstatic-asset-example.docx
+```
+
+詳細については、Docusaurus ドキュメントの [Static assets](https://docusaurus.io/docs/markdown-features/assets) を参照してください。
+
+<RelatedTopics maxResults={7} />

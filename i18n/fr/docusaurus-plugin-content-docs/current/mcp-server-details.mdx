@@ -1,0 +1,262 @@
+---
+help: null
+lastmod: "2026-06-01T21:56:58.800Z"
+title: MCP Server Implementation Details
+tags:
+  - "software"
+  - "software_content-management-systems"
+  - "software_content-management-systems_tinacms"
+  - "software_ai-integration"
+  - "software_mcp"
+  - "development"
+  - "development_apis"
+  - "development_apis_graphql"
+draft: false
+review: false
+translate: false
+approved: false
+published: true
+unlisted: false
+---
+
+# Implémentation du serveur MCP docStatic
+
+Un serveur Model Context Protocol (MCP) qui fournit aux assistants IA un accès structuré à votre documentation docStatic via le point de terminaison GraphQL de TinaCMS.
+
+## Vue d'ensemble
+
+Ce serveur MCP se connecte à votre point de terminaison GraphQL TinaCMS local (`http://localhost:4001/graphql`) et fournit des outils pour :
+
+* Rechercher du contenu dans la documentation
+* Récupérer des documents spécifiques
+* Lister tous les documents disponibles
+* Filtrer les documents par balises
+* Analyser l'utilisation des composants MDX
+* Vérifier la connectivité au serveur
+
+## Configuration
+
+### 1. Installer les dépendances
+
+Depuis le répertoire principal de docStatic :
+
+```bash
+npm install
+# Cela installera automatiquement les dépendances du serveur MCP via le hook postinstall
+```
+
+Ou manuellement :
+
+```bash
+cd mcp-server
+npm install
+```
+
+### 2. Construire le serveur
+
+```bash
+npm run mcp:build
+```
+
+### 3. Démarrer votre serveur de développement docStatic
+
+Le serveur MCP nécessite que le point de terminaison GraphQL TinaCMS soit en cours d'exécution :
+
+```bash
+npm run dev
+```
+
+Cela démarre TinaCMS avec Docusaurus à :
+
+* Docusaurus : [http://localhost:3000](http://localhost:3000)
+* Point de terminaison GraphQL : [http://localhost:4001/graphql](http://localhost:4001/graphql)
+* Administration Tina : [http://localhost:3000/admin](http://localhost:3000/admin)
+
+### 4. Exécuter le serveur MCP
+
+Dans un terminal séparé :
+
+```bash
+npm run mcp:start
+```
+
+## Outils disponibles
+
+### `search_documents`
+
+Rechercher dans la documentation à l'aide de mots-clés.
+
+**Paramètres :**
+
+* `query` (requis) : Terme de recherche
+* `limit` (facultatif) : Nombre maximum de résultats (par défaut : 20)
+
+**Exemple :**
+
+```json
+{
+  "query": "installation",
+  "limit": 10
+}
+```
+
+### `get_document`
+
+Récupérer un document spécifique par son chemin.
+
+**Paramètres :**
+
+* `path` (requis) : Chemin relatif vers le document
+
+**Exemple :**
+
+```json
+{
+  "path": "installation.mdx"
+}
+```
+
+### `list_all_documents`
+
+Obtenir une liste de tous les documents disponibles avec leurs métadonnées.
+
+### `get_documents_by_tag`
+
+Filtrer les documents par une balise spécifique.
+
+**Paramètres :**
+
+* `tag` (requis) : Balise à filtrer
+
+**Exemple :**
+
+```json
+{
+  "tag": "software_content-management-systems_tinacms"
+}
+```
+
+### `analyze_mdx_components`
+
+Analyser quels composants MDX sont utilisés dans un document.
+
+**Paramètres :**
+
+* `path` (requis) : Chemin relatif vers le document
+
+### `check_server_status`
+
+Vérifier la connectivité au serveur GraphQL.
+
+## Utilisation avec Claude Desktop
+
+Ajoutez cette configuration à vos paramètres MCP de Claude Desktop :
+
+```json
+{
+  "mcpServers": {
+    "docstatic": {
+      "command": "node",
+      "args": ["/path/to/docstatic/mcp-server/dist/server.js"],
+      "cwd": "/path/to/docstatic"
+    }
+  }
+}
+```
+
+## Développement
+
+### Mode surveillance
+
+Pour le développement actif, utilisez le mode surveillance pour reconstruire automatiquement lors des modifications :
+
+```bash
+cd mcp-server
+npm run watch
+```
+
+### Construction et exécution manuelles
+
+```bash
+npm run mcp:build  # Construire TypeScript
+npm run mcp:start  # Démarrer le serveur
+```
+
+### Développement avec redémarrage automatique
+
+```bash
+npm run mcp:dev    # Construire et démarrer en une seule commande
+```
+
+## Dépannage
+
+<Admonition type="info" title="Problèmes courants">
+  **"GraphQL server is not running"**
+
+  * Assurez-vous que `npm run dev` est en cours d'exécution dans le répertoire principal
+  * Vérifiez que [http://localhost:4001/graphql](http://localhost:4001/graphql) est accessible
+
+  **"Connection refused"**
+
+  * Vérifiez que TinaCMS a bien démarré
+  * Vérifiez si le port 4001 est bloqué par un pare-feu
+
+  **"Document not found"**
+
+  * Assurez-vous que le document existe dans le répertoire `docs/`
+  * Utilisez des chemins relatifs comme `installation.mdx`, et non `/docs/installation.mdx`
+</Admonition>
+
+### Tester le serveur
+
+Tester la connectivité GraphQL :
+
+```bash
+curl -X POST http://localhost:4001/graphql \
+  -H "Content-Type: application/json" \
+  -d '{"query":"{ __typename }"}'
+  
+# Réponse attendue :
+# {"data":{"__typename":"Query"}}
+```
+
+## Architecture
+
+L'architecture du serveur MCP :
+
+```text
+docStatic Project
+├── docs/               # MDX documentation files
+├── mcp-server/         # MCP server implementation
+│   ├── src/server.ts   # Main server logic
+│   ├── package.json    # MCP dependencies
+│   └── dist/           # Compiled JavaScript
+└── tina/               # TinaCMS configuration
+    └── config.jsx      # GraphQL schema definition
+```
+
+Le serveur MCP :
+
+1. Se connecte au point de terminaison GraphQL de TinaCMS
+2. Exécute des requêtes GraphQL pour récupérer les données des documents
+3. Fournit des réponses structurées via le protocole MCP
+4. Gère les cas d'erreur et les problèmes de connectivité
+
+## Intégration avec les assistants IA
+
+<Admonition type="tip" title="Capacités des assistants IA">
+  Ce serveur MCP permet aux assistants IA de :
+
+  * **Comprendre la structure de votre documentation**
+  * **Rechercher des sujets ou concepts spécifiques**
+  * **Accéder au contenu complet des documents**
+  * **Analyser les modèles d'utilisation des composants MDX**
+  * **Fournir une assistance contextuelle** basée sur votre documentation réelle
+</Admonition>
+
+Le serveur comprend votre format spécifique à docStatic, notamment :
+
+* Les métadonnées de l'en-tête (frontmatter)
+* L'utilisation des composants MDX (`<Admonition>`, `<Figure>`, etc.)
+* La structure hiérarchique des balises
+* Les états du flux de travail TinaCMS

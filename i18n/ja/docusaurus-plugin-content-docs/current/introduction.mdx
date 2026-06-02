@@ -1,0 +1,78 @@
+---
+help: null
+lastmod: "2026-06-01T21:56:58.655Z"
+modifiedBy: "aowendev <aowen@translationcommons.org>"
+title: Introduction
+tags:
+  - "software"
+  - "software_source-control"
+  - "software_source-control_git"
+  - "computer-languages"
+  - "computer-languages_javascript"
+  - "software_static-site-generators"
+  - "software_static-site-generators_docusaurus"
+  - "software_content-management-systems"
+  - "software_content-management-systems_tinacms"
+  - "development"
+  - "development_getting-started"
+draft: false
+review: false
+translate: false
+approved: false
+published: true
+unlisted: false
+---
+
+# はじめに
+
+docStaticは、ライターと開発者の間の溝を埋め、ユーザーが愛するオンラインドキュメントの作成を支援するモダンなドキュメントプラットフォームです。
+
+オンラインドキュメント向けの[コンポーネントコンテンツ管理システム](https://en.wikipedia.org/wiki/Component_content_management_system)と[docs-as-code](https://www.writethedocs.org/guide/docs-as-code/)ソリューションの優れた機能を同時に提供します。docStaticを使用すると、チームの誰もが開発者のワークフローを犠牲にすることなくドキュメントの作成・編集ができます。
+
+## 機能
+
+docStaticは[Tinasaurus](https://tina.io/blog/tinasaurus-docusaurus-starter)を改良したものです。Tinasaurusは、[静的サイトジェネレーター](https://en.wikipedia.org/wiki/Static_site_generator)（[Docusaurus](https://docusaurus.io/)）と[ヘッドレスコンテンツ管理システム](https://en.wikipedia.org/wiki/Headless_content_management_system)（[TinaCMS](https://tina.io/)）を組み合わせたオープンソースの[React](https://react.dev/)ベースのプロジェクトです。以下が含まれます。
+
+* Markdown、MDX、JSON、YAMLコンテンツの使いやすい編集インターフェース
+* 既存のGitおよびCI/CDワークフローとの統合
+* リッチなコンテンツオーサリングのための埋め込みMDXコンポーネント
+* サードパーティメディアプロバイダーをサポートするメディアマネージャー
+* クラウドでの編集（ローカルセットアップ不要）
+* AIアシスタント統合のためのModel Context Protocol（MCP）サーバー
+
+## 簡単なコンテンツ管理
+
+docStaticのデフォルトコレクションには、CCMSに期待されるより高度なオーサリング機能のいくつかが含まれています。
+
+リッチテキストエディターを使用すると、以下を簡単に追加できます。
+
+* コンテンツ再利用のための条件付きテキスト、スニペット、変数セット
+* タクソノミー
+* 用語集の用語
+* コードブロック、コメント、折りたたみ可能な詳細、図、脚注、タブ。これらはコンテンツファイルに挿入できるテンプレートとして利用可能です
+
+CMSは[GraphQL](https://graphql.org/)スキーマを使用して、コンテンツの構造をコレクションのセットとして記述します。
+
+## Gitバックエンド
+
+ソースコントロール、自動化、オプションで公開は[GitHub](https://github.com/)を通じて管理されます。リッチテキストエディターでファイルを編集する場合、TinaCMSは保存時にコミットするか、ローカルで作業している場合はファイルに直接保存します。Gitはチーム全体の唯一の信頼できる情報源のままです。
+
+リポジトリ構造はDocusaurusのデフォルトと非常に似ていますが、TinaCMSとの統合に必要な変更がいくつかあります。
+
+## 事前設定済みプラグイン
+
+docStaticは、[KaTeX](https://katex.org/)数式、[Lunr](https://lunrjs.com/)検索、[Mermaid](https://mermaid.js.org/)ダイアグラム、[OpenAPI](https://www.openapis.org/)ドキュメントなどの機能をサポートするプラグインが事前設定されています。国際化（i18n）の組み込みサポートがあります。多言語のスペル、文法、オプションのスタイルチェックは、ブラウザおよびIDEプラグインを通じて[LanguageTool](https://languagetool.org/)によって提供されます。
+
+## AI統合
+
+docStaticには統合された[Model Context Protocol（MCP）サーバー](mcp-server.mdx)が含まれており、AIアシスタントがドキュメントに直接アクセスして理解できるようにします。これにより、実際のドキュメント構造とコンテンツに基づいたコンテンツ編集、検索、分析のためのインテリジェントなサポートが提供されます。
+
+## Reactベース
+
+コンテンツはMDX形式で保存されます。MDXはMarkdownの拡張で、注記などの機能のためのカスタムReactコンポーネントをサポートします。これらのコンポーネントはユニバーサルに利用可能で、個々のファイルで宣言する必要はありません。ローカルで作業する場合、開発サーバーは変更を保存するとすぐにページを再コンパイルします。
+
+## 完全なドキュメント化
+
+開発者は、[Docusaurus](https://docusaurus.io/docs)と[TinaCMS](https://tina.io/docs)のドキュメントでdocStaticの設定と使用開始に必要なすべての情報を見つけられます。情報が古くなる可能性を避けるため、その情報はここには重複して記載していません。代わりに、docStaticのドキュメントはCMSの使用に焦点を当てています。
+
+<RelatedTopics maxResults={7} />

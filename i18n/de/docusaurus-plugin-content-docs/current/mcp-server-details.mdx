@@ -1,0 +1,262 @@
+---
+help: null
+lastmod: "2026-06-01T21:56:58.582Z"
+title: MCP Server Implementation Details
+tags:
+  - "software"
+  - "software_content-management-systems"
+  - "software_content-management-systems_tinacms"
+  - "software_ai-integration"
+  - "software_mcp"
+  - "development"
+  - "development_apis"
+  - "development_apis_graphql"
+draft: false
+review: false
+translate: false
+approved: false
+published: true
+unlisted: false
+---
+
+# docStatic MCP-Server-Implementierung
+
+Ein Model Context Protocol (MCP) Server, der KI-Assistenten über den TinaCMS GraphQL-Endpunkt strukturierten Zugriff auf Ihre docStatic-Dokumentation ermöglicht.
+
+## Übersicht
+
+Dieser MCP-Server stellt eine Verbindung zu Ihrem lokalen TinaCMS GraphQL-Endpunkt (`http://localhost:4001/graphql`) her und bietet Werkzeuge für:
+
+* Suchen in der Dokumentation
+* Abrufen bestimmter Dokumente
+* Auflisten aller verfügbaren Dokumente
+* Filtern von Dokumenten nach Tags
+* Analyse der MDX-Komponentennutzung
+* Überprüfung der Serverkonnektivität
+
+## Einrichtung
+
+### 1. Abhängigkeiten installieren
+
+Vom Hauptverzeichnis von docStatic aus:
+
+```bash
+npm install
+# Dadurch werden die MCP-Server-Abhängigkeiten automatisch über den postinstall-Hook installiert
+```
+
+Oder manuell:
+
+```bash
+cd mcp-server
+npm install
+```
+
+### 2. Server erstellen
+
+```bash
+npm run mcp:build
+```
+
+### 3. docStatic-Entwicklungsserver starten
+
+Der MCP-Server erfordert, dass der TinaCMS GraphQL-Endpunkt läuft:
+
+```bash
+npm run dev
+```
+
+Dadurch wird TinaCMS mit Docusaurus gestartet unter:
+
+* Docusaurus: [http://localhost:3000](http://localhost:3000)
+* GraphQL-Endpunkt: [http://localhost:4001/graphql](http://localhost:4001/graphql)
+* Tina Admin: [http://localhost:3000/admin](http://localhost:3000/admin)
+
+### 4. MCP-Server ausführen
+
+In einem separaten Terminal:
+
+```bash
+npm run mcp:start
+```
+
+## Verfügbare Werkzeuge
+
+### `search_documents`
+
+Durchsucht die Dokumentation anhand von Schlüsselwörtern.
+
+**Parameter:**
+
+* `query` (erforderlich): Suchbegriff
+* `limit` (optional): Maximale Ergebnisse (Standard: 20)
+
+**Beispiel:**
+
+```json
+{
+  "query": "installation",
+  "limit": 10
+}
+```
+
+### `get_document`
+
+Ruft ein bestimmtes Dokument anhand seines Pfads ab.
+
+**Parameter:**
+
+* `path` (erforderlich): Relativer Pfad zum Dokument
+
+**Beispiel:**
+
+```json
+{
+  "path": "installation.mdx"
+}
+```
+
+### `list_all_documents`
+
+Ruft eine Liste aller verfügbaren Dokumente mit Metadaten ab.
+
+### `get_documents_by_tag`
+
+Filtert Dokumente nach einem bestimmten Tag.
+
+**Parameter:**
+
+* `tag` (erforderlich): Tag zum Filtern
+
+**Beispiel:**
+
+```json
+{
+  "tag": "software_content-management-systems_tinacms"
+}
+```
+
+### `analyze_mdx_components`
+
+Analysiert, welche MDX-Komponenten in einem Dokument verwendet werden.
+
+**Parameter:**
+
+* `path` (erforderlich): Relativer Pfad zum Dokument
+
+### `check_server_status`
+
+Überprüft die GraphQL-Serverkonnektivität.
+
+## Verwendung mit Claude Desktop
+
+Fügen Sie diese Konfiguration zu Ihren MCP-Einstellungen von Claude Desktop hinzu:
+
+```json
+{
+  "mcpServers": {
+    "docstatic": {
+      "command": "node",
+      "args": ["/path/to/docstatic/mcp-server/dist/server.js"],
+      "cwd": "/path/to/docstatic"
+    }
+  }
+}
+```
+
+## Entwicklung
+
+### Überwachungsmodus
+
+Für aktive Entwicklung verwenden Sie den Überwachungsmodus, um bei Änderungen automatisch neu zu erstellen:
+
+```bash
+cd mcp-server
+npm run watch
+```
+
+### Manuelles Erstellen und Ausführen
+
+```bash
+npm run mcp:build  # TypeScript erstellen
+npm run mcp:start  # Server starten
+```
+
+### Entwicklung mit automatischem Neustart
+
+```bash
+npm run mcp:dev    # Erstellen und Starten in einem Befehl
+```
+
+## Fehlerbehebung
+
+<Admonition type="info" title="Häufige Probleme">
+  **„GraphQL server is not running"**
+
+  * Stellen Sie sicher, dass `npm run dev` im Hauptverzeichnis ausgeführt wird
+  * Überprüfen Sie, ob [http://localhost:4001/graphql](http://localhost:4001/graphql) zugänglich ist
+
+  **„Connection refused"**
+
+  * Stellen Sie sicher, dass TinaCMS ordnungsgemäß gestartet ist
+  * Überprüfen Sie, ob Port 4001 durch eine Firewall blockiert wird
+
+  **„Document not found"**
+
+  * Stellen Sie sicher, dass das Dokument im Verzeichnis `docs/` vorhanden ist
+  * Verwenden Sie relative Pfade wie `installation.mdx`, nicht `/docs/installation.mdx`
+</Admonition>
+
+### Server testen
+
+GraphQL-Konnektivität testen:
+
+```bash
+curl -X POST http://localhost:4001/graphql \
+  -H "Content-Type: application/json" \
+  -d '{"query":"{ __typename }"}'
+  
+# Erwartete Antwort:
+# {"data":{"__typename":"Query"}}
+```
+
+## Architektur
+
+Die MCP-Server-Architektur:
+
+```text
+docStatic Project
+├── docs/               # MDX documentation files
+├── mcp-server/         # MCP server implementation
+│   ├── src/server.ts   # Main server logic
+│   ├── package.json    # MCP dependencies
+│   └── dist/           # Compiled JavaScript
+└── tina/               # TinaCMS configuration
+    └── config.jsx      # GraphQL schema definition
+```
+
+Der MCP-Server:
+
+1. Stellt eine Verbindung zum TinaCMS GraphQL-Endpunkt her
+2. Führt GraphQL-Abfragen aus, um Dokumentdaten abzurufen
+3. Liefert strukturierte Antworten über das MCP-Protokoll
+4. Behandelt Fehlerfälle und Konnektivitätsprobleme
+
+## Integration mit KI-Assistenten
+
+<Admonition type="tip" title="Fähigkeiten von KI-Assistenten">
+  Dieser MCP-Server ermöglicht KI-Assistenten:
+
+  * **Ihre Dokumentationsstruktur zu verstehen**
+  * **Nach bestimmten Themen oder Konzepten zu suchen**
+  * **Auf vollständige Dokumentinhalte zuzugreifen**
+  * **MDX-Komponentennutzungsmuster zu analysieren**
+  * **Kontextbezogene Unterstützung** basierend auf Ihrer tatsächlichen Dokumentation zu leisten
+</Admonition>
+
+Der Server versteht Ihr docStatic-spezifisches Format einschließlich:
+
+* Frontmatter-Metadaten
+* MDX-Komponentennutzung (`<Admonition>`, `<Figure>`, etc.)
+* Hierarchische Tag-Struktur
+* TinaCMS-Workflow-Zustände

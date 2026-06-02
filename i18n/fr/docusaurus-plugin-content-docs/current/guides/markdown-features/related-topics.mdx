@@ -1,0 +1,48 @@
+---
+help: null
+lastmod: "2026-06-01T21:56:58.817Z"
+title: Related Topics
+tags:
+  - "elements"
+  - "elements_links"
+  - "computer-languages"
+  - "computer-languages_markdown"
+  - "software"
+  - "software_content-management-systems"
+  - "software_content-management-systems_tinacms"
+  - "metadata"
+  - "metadata_taxonomies"
+draft: false
+review: false
+translate: false
+approved: false
+published: true
+unlisted: false
+---
+
+# Sujets connexes
+
+Le composant **Sujets connexes** suggère automatiquement du contenu connexe basé sur des balises de taxonomie partagées. Il analyse les balises de la page courante et trouve d'autres documents avec des balises similaires, puis les affiche sous forme de liste de recommandations organisée.
+
+## Ajout de sujets connexes
+
+1. Sélectionnez **Sujets connexes** dans la liste **Intégrer**.
+2. Modifiez le composant.
+3. (Facultatif) Définissez le **Nombre de résultats maximum** pour contrôler le nombre de sujets connexes affichés (5 par défaut).
+4. **Enregistrez** vos modifications.
+
+## Options de configuration
+
+* **Nombre de résultats maximum** : Contrôle le nombre de sujets connexes affichés (1-20)
+
+## Fonctionnement
+
+Le composant utilise l'algorithme de similarité de Jaccard pour comparer les balises de taxonomie entre la page courante et toutes les autres pages publiées. Les pages ayant plus de balises en commun apparaîtront plus haut dans la liste. Le composant n'apparaît que sur les pages qui ont des balises de taxonomie et lorsque du contenu connexe est trouvé.
+
+## Bonnes pratiques
+
+* **Utilisez un balisage cohérent** : Plus vous appliquez des balises de taxonomie de façon cohérente dans votre contenu, meilleures seront les suggestions de sujets connexes.
+* **Placement optimal** : Placez le composant Sujets connexes à la fin de votre contenu pour encourager une lecture approfondie.
+* **Limites raisonnables** : Utilisez 3 à 7 sujets connexes pour une meilleure expérience utilisateur. Trop de suggestions peuvent être écrasantes.
+
+<RelatedTopics maxResults={7} />
