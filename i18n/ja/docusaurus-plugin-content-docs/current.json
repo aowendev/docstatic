@@ -1,30 +1,30 @@
 {
   "version.label": {
-    "message": "Next",
+    "message": "次のバージョン",
     "description": "The label for version current"
   },
   "sidebar.docSidebar.category.Getting started": {
-    "message": "Erste Schritte",
+    "message": "はじめに",
     "description": "The label for category 'Getting started' in sidebar 'docSidebar'"
   },
   "sidebar.docSidebar.category.Guides": {
-    "message": "Anleitungen",
+    "message": "ガイド",
     "description": "The label for category 'Guides' in sidebar 'docSidebar'"
   },
   "sidebar.docSidebar.category.Docs": {
-    "message": "Dokumentation",
+    "message": "ドキュメント",
     "description": "The label for category 'Docs' in sidebar 'docSidebar'"
   },
   "sidebar.docSidebar.category.Markdown features": {
-    "message": "Markdown-Funktionen",
+    "message": "Markdownの機能",
     "description": "The label for category 'Markdown features' in sidebar 'docSidebar'"
   },
   "sidebar.docSidebar.category.Advanced guides": {
-    "message": "Erweiterte Anleitungen",
+    "message": "高度なガイド",
     "description": "The label for category 'Advanced guides' in sidebar 'docSidebar'"
   },
   "sidebar.docSidebar.category.Hosted CMS": {
-    "message": "Gehostetes CMS",
+    "message": "ホステッドCMS",
     "description": "The label for category 'Hosted CMS' in sidebar 'docSidebar'"
   },
   "sidebar.openApiSidebar.category.Petstore": {
@@ -36,107 +36,107 @@
     "description": "The generated-index page title for category 'Petstore' in sidebar 'openApiSidebar'"
   },
   "sidebar.openApiSidebar.category.Pets": {
-    "message": "Tiere",
+    "message": "ペット",
     "description": "The label for category 'Pets' in sidebar 'openApiSidebar'"
   },
   "sidebar.openApiSidebar.category.Petstore Orders": {
-    "message": "Petstore-Bestellungen",
+    "message": "Petstoreの注文",
     "description": "The label for category 'Petstore Orders' in sidebar 'openApiSidebar'"
   },
   "sidebar.openApiSidebar.category.Users": {
-    "message": "Benutzer",
+    "message": "ユーザー",
     "description": "The label for category 'Users' in sidebar 'openApiSidebar'"
   },
   "sidebar.openApiSidebar.doc.Cat": {
-    "message": "Katze",
+    "message": "猫",
     "description": "The label for the doc item 'Cat' in sidebar 'openApiSidebar', linking to the doc api/petstore/schemas/cat"
   },
   "sidebar.openApiSidebar.doc.Add a new pet to the store": {
-    "message": "Neues Tier zum Laden hinzufügen",
+    "message": "ストアに新しいペットを追加する",
     "description": "The label for the doc item 'Add a new pet to the store' in sidebar 'openApiSidebar', linking to the doc api/petstore/add-pet"
   },
   "sidebar.openApiSidebar.doc.Update an existing pet": {
-    "message": "Vorhandenes Tier aktualisieren",
+    "message": "既存のペットを更新する",
     "description": "The label for the doc item 'Update an existing pet' in sidebar 'openApiSidebar', linking to the doc api/petstore/update-pet"
   },
   "sidebar.openApiSidebar.doc.Find pet by ID": {
-    "message": "Tier nach ID suchen",
+    "message": "IDでペットを検索する",
     "description": "The label for the doc item 'Find pet by ID' in sidebar 'openApiSidebar', linking to the doc api/petstore/get-pet-by-id"
   },
   "sidebar.openApiSidebar.doc.Updates a pet in the store with form data": {
-    "message": "Tier im Laden mit Formulardaten aktualisieren",
+    "message": "フォームデータでストアのペットを更新する",
     "description": "The label for the doc item 'Updates a pet in the store with form data' in sidebar 'openApiSidebar', linking to the doc api/petstore/update-pet-with-form"
   },
   "sidebar.openApiSidebar.doc.Deletes a pet": {
-    "message": "Tier löschen",
+    "message": "ペットを削除する",
     "description": "The label for the doc item 'Deletes a pet' in sidebar 'openApiSidebar', linking to the doc api/petstore/delete-pet"
   },
   "sidebar.openApiSidebar.doc.uploads an image": {
-    "message": "Bild hochladen",
+    "message": "画像をアップロードする",
     "description": "The label for the doc item 'uploads an image' in sidebar 'openApiSidebar', linking to the doc api/petstore/upload-file"
   },
   "sidebar.openApiSidebar.doc.Finds Pets by status": {
-    "message": "Tiere nach Status suchen",
+    "message": "ステータスでペットを検索する",
     "description": "The label for the doc item 'Finds Pets by status' in sidebar 'openApiSidebar', linking to the doc api/petstore/find-pets-by-status"
   },
   "sidebar.openApiSidebar.doc.Finds Pets by tags": {
-    "message": "Tiere nach Tags suchen",
+    "message": "タグでペットを検索する",
     "description": "The label for the doc item 'Finds Pets by tags' in sidebar 'openApiSidebar', linking to the doc api/petstore/find-pets-by-tags"
   },
   "sidebar.openApiSidebar.doc.New pet": {
-    "message": "Neues Tier",
+    "message": "新しいペット",
     "description": "The label for the doc item 'New pet' in sidebar 'openApiSidebar', linking to the doc api/petstore/new-pet"
   },
   "sidebar.openApiSidebar.doc.Returns pet inventories by status": {
-    "message": "Tierbestand nach Status abrufen",
+    "message": "ステータスでペットの在庫を返す",
     "description": "The label for the doc item 'Returns pet inventories by status' in sidebar 'openApiSidebar', linking to the doc api/petstore/get-inventory"
   },
   "sidebar.openApiSidebar.doc.Place an order for a pet": {
-    "message": "Bestellung für ein Tier aufgeben",
+    "message": "ペットの注文をする",
     "description": "The label for the doc item 'Place an order for a pet' in sidebar 'openApiSidebar', linking to the doc api/petstore/place-order"
   },
   "sidebar.openApiSidebar.doc.Find purchase order by ID": {
-    "message": "Kaufauftrag nach ID suchen",
+    "message": "IDで購入注文を検索する",
     "description": "The label for the doc item 'Find purchase order by ID' in sidebar 'openApiSidebar', linking to the doc api/petstore/get-order-by-id"
   },
   "sidebar.openApiSidebar.doc.Delete purchase order by ID": {
-    "message": "Kaufauftrag nach ID löschen",
+    "message": "IDで購入注文を削除する",
     "description": "The label for the doc item 'Delete purchase order by ID' in sidebar 'openApiSidebar', linking to the doc api/petstore/delete-order"
   },
   "sidebar.openApiSidebar.doc.Subscribe to the Store events": {
-    "message": "Store-Ereignisse abonnieren",
+    "message": "ストアのイベントを購読する",
     "description": "The label for the doc item 'Subscribe to the Store events' in sidebar 'openApiSidebar', linking to the doc api/petstore/subscribe-to-the-store-events"
   },
   "sidebar.openApiSidebar.doc.Create user": {
-    "message": "Benutzer erstellen",
+    "message": "ユーザーを作成する",
     "description": "The label for the doc item 'Create user' in sidebar 'openApiSidebar', linking to the doc api/petstore/create-user"
   },
   "sidebar.openApiSidebar.doc.Get user by user name": {
-    "message": "Benutzer nach Benutzername abrufen",
+    "message": "ユーザー名でユーザーを取得する",
     "description": "The label for the doc item 'Get user by user name' in sidebar 'openApiSidebar', linking to the doc api/petstore/get-user-by-name"
   },
   "sidebar.openApiSidebar.doc.Updated user": {
-    "message": "Benutzer aktualisiert",
+    "message": "ユーザーを更新しました",
     "description": "The label for the doc item 'Updated user' in sidebar 'openApiSidebar', linking to the doc api/petstore/update-user"
   },
   "sidebar.openApiSidebar.doc.Delete user": {
-    "message": "Benutzer löschen",
+    "message": "ユーザーを削除する",
     "description": "The label for the doc item 'Delete user' in sidebar 'openApiSidebar', linking to the doc api/petstore/delete-user"
   },
   "sidebar.openApiSidebar.doc.Creates list of users with given input array": {
-    "message": "Benutzerliste mit Array-Eingabe erstellen",
+    "message": "入力配列でユーザーリストを作成する",
     "description": "The label for the doc item 'Creates list of users with given input array' in sidebar 'openApiSidebar', linking to the doc api/petstore/create-users-with-array-input"
   },
   "sidebar.openApiSidebar.doc.Creates list of users with given input list": {
-    "message": "Benutzerliste mit Listen-Eingabe erstellen",
+    "message": "入力リストでユーザーリストを作成する",
     "description": "The label for the doc item 'Creates list of users with given input list' in sidebar 'openApiSidebar', linking to the doc api/petstore/create-users-with-list-input"
   },
   "sidebar.openApiSidebar.doc.Logs user into the system": {
-    "message": "Benutzer ins System einloggen",
+    "message": "ユーザーをシステムにログインさせる",
     "description": "The label for the doc item 'Logs user into the system' in sidebar 'openApiSidebar', linking to the doc api/petstore/login-user"
   },
   "sidebar.openApiSidebar.doc.Logs out current logged in user session": {
-    "message": "Aktuelle Benutzersitzung abmelden",
+    "message": "現在ログイン中のユーザーセッションをログアウトする",
     "description": "The label for the doc item 'Logs out current logged in user session' in sidebar 'openApiSidebar', linking to the doc api/petstore/logout-user"
   }
 }
