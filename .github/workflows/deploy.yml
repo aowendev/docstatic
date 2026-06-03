@@ -95,7 +95,7 @@ jobs:
           TINA_TOKEN: ${{ secrets.TINA_TOKEN }}
           TINA_SEARCH_TOKEN: ${{ secrets.TINA_SEARCH_TOKEN }}
           NODE_OPTIONS: "--max_old_space_size=8192"
-        run: yarn build
+        run: yarn tinacms build --skip-cloud-checks && yarn docusaurus build
 
       - name: Commit updated tina-lock.json
         run: |
