@@ -32,6 +32,7 @@ import { MDXTemplates } from "../src/theme/template";
 import { docusaurusDate, titleFromSlug } from "../scripts/util";
 
 // Function to extract available locales from Docusaurus config
+
 function getDocusaurusLocales() {
   return docusaurusData.languages.supported.map((lang) => lang.code);
 }

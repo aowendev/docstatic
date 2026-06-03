@@ -86,9 +86,6 @@ jobs:
           yarn clean-api-docs all
           yarn gen-api-docs all
 
-      - name: Remove stale tina-lock.json
-        run: rm -f tina/tina-lock.json
-
       - name: Build website
         env:
           NEXT_PUBLIC_TINA_CLIENT_ID: ${{ secrets.TINA_PUBLIC_CLIENT_ID }}
