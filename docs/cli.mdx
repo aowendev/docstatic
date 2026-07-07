@@ -17,7 +17,7 @@ translate: false
 approved: false
 published: true
 unlisted: false
-lastmod: "2026-06-01T00:00:00.000Z"
+lastmod: "2026-07-07T00:00:00.000Z"
 ---
 docStatic provides a set of scripts to help you generate, serve, and deploy your website.
 
@@ -40,6 +40,8 @@ docStatic provides a set of scripts to help you generate, serve, and deploy your
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
     "setup-git-hooks": "git config core.hooksPath .githooks && chmod +x .githooks/pre-commit",
+    "sync-template": "node scripts/sync-template.js",
+    "sync-template:check": "node scripts/sync-template.js --check",
     "clear": "docusaurus clear",
     "serve": "docusaurus serve",
     "write-translations": "docusaurus write-translations",
@@ -67,52 +69,83 @@ To invoke the commands, use npm or yarn. For example, `npm run dev` or `yarn dev
 
 ### Key docStatic scripts:
 
-- **`dev`**: Start development server with TinaCMS integration
-- **`build`**: Build for production (runs TinaCMS build then Docusaurus build)
-- **`build-local`**: Build locally without cloud features
-- **`generate-media-index`**: Generate index of media files
-- **`generate-git-identity`**: Generate git identity information
-- **`generate-files`**: Generate file lists for the application
-- **`generate-docs-metadata`**: Generate metadata index used by dashboards and search
-- **`update-theme-css`**: Update theme CSS files
-- **`mcp:install`**: Install Model Context Protocol server dependencies
-- **`mcp:build`**: Build the MCP server from TypeScript
-- **`mcp:dev`**: Start MCP server in development mode with auto-restart
-- **`mcp:start`**: Start the compiled MCP server for AI assistant integration
-- **`mcp:test`**: Run MCP server connectivity tests
+* **`dev`**: Start development server with TinaCMS integration
+* **`build`**: Build for production (runs TinaCMS build then Docusaurus build)
+* **`build-local`**: Build locally without cloud features
+* **`generate-media-index`**: Generate index of media files
+* **`generate-git-identity`**: Generate git identity information
+* **`generate-files`**: Generate file lists for the application
+* **`generate-docs-metadata`**: Generate metadata index used by dashboards and search
+* **`update-theme-css`**: Update theme CSS files
+* **`mcp:install`**: Install Model Context Protocol server dependencies
+* **`mcp:build`**: Build the MCP server from TypeScript
+* **`mcp:dev`**: Start MCP server in development mode with auto-restart
+* **`mcp:start`**: Start the compiled MCP server for AI assistant integration
+* **`mcp:test`**: Run MCP server connectivity tests
 
 For more information about the MCP server, see [MCP Server Integration](mcp-server.mdx).
 
 These commands are built on top of standard Docusaurus commands described in [CLI](https://docusaurus.io/docs/cli) in the Docusaurus documentation:
 
-* docusaurus
-* start
-* build
-* swizzle
-* deploy
-* clear
-* serve
-* write-translations
-* write-heading-ids
+* `docusaurus`
+* `start`
+* `build`
+* `swizzle`
+* `deploy`
+* `clear`
+* `serve`
+* `write-translations`
+* `write-heading-ids`
 
 ### Automated commands
 
-These commands are run automatically at build time or when starting the dev server:
+These commands are run automatically at build time or when starting the `dev` server:
 
-* generate-files
-* generate-docs-metadata
-* prebuild
-* predev
+* `generate-files`
+* `generate-docs-metadata`
+* `prebuild`
+* `predev`
 
 ### API commands
 
-* clean-api-docs
-* gen-api-docs
-* gen-graphql
+* `clean-api-docs`
+* `gen-api-docs`
+* `gen-graphql`
 
 For more information on the OpenAPI commands, refer to [CLI Usage](https://github.com/PaloAltoNetworks/docusaurus-openapi-docs?tab=readme-ov-file#cli-usage) in the Docusaurus OpenAPI Plugin documentation.
 
 For more information on the GraphQL command, refer to [Usage](https://github.com/Zhouzi/docusaurus-graphql-plugin?tab=readme-ov-file#usage) in the Docusaurus GraphQL Plugin documentation.
+
+### Site creation and update commands
+
+These commands come from the `create-docstatic` package rather than `package.json`, so they work anywhere—you don't need a docStatic site to run them.
+
+* **`npx create-docstatic@latest <project-name>`**: Create a new docStatic site. See [Installation](installation.mdx) for details.
+* **`npx create-docstatic@latest --update`**: Update an existing site to the latest docStatic release. Run it from the root folder of a site created with `create-docstatic`. It updates the docStatic-owned files and dependency versions, and leaves your content untouched.
+
+The update command accepts these options:
+
+* **`--dry-run`**: Report what would change without writing anything.
+* **`--force`**: Proceed even if the git working tree isn't clean. Without it, the command asks you to commit or stash your changes first so you can review the update with `git diff`.
+* **`--tag <dist-tag>`**: Update to a specific `docstatic` package version or dist-tag instead of `latest`.
+* **`--no-install`**: Skip installing dependencies after the update.
+
+### Template sync commands
+
+These commands only exist in the docStatic repository itself (and forks of it)—not in sites created with `create-docstatic`. They keep the scaffolding template in the `template/` folder in sync with the main site.
+
+The template is what `npx create-docstatic@latest` ships to new sites, so whenever you change code that the template shares with the main site—React components in `src/`, the build scripts in `scripts/`, `tina/config.jsx`, `docusaurus.config.ts` or `sidebars.ts`—the template needs the same change.
+
+* **`sync-template`**: Copy the shared code surface from the main site into `template/`, align the template's `package.json` dependencies and scripts, and regenerate `update-manifest.json` (the file that `npx create-docstatic@latest --update` uses to update existing sites). Template content such as the starter docs and configuration values is left alone.
+* **`sync-template:check`**: Report what would change without writing anything, and exit with an error if the template has drifted. The pre-commit hook runs this check, so a commit fails with `template out of sync` until you run `yarn sync-template` and stage the result.
+
+A typical flow after changing a shared file:
+
+```shell
+yarn sync-template
+git add template/ update-manifest.json
+git commit
+```
 
 ### Linting commands
 
