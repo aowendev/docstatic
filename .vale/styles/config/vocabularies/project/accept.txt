@@ -12,3 +12,10 @@ Netlify
 Vercel
 Cloudflare
 GitHub
+npm
+npx
+nvm
+sudo
+config
+repo
+[Mm]onorepos?

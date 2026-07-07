@@ -25,13 +25,13 @@ translate: false
 approved: false
 published: true
 unlisted: false
-lastmod: "2026-06-01T00:00:00.000Z"
+lastmod: "2026-07-07T00:00:00.000Z"
 ---
 # Installation
 
 Welcome! This guide walks you through setting up docStatic for the first time.
 
-If you’ve never worked with GitHub or docs-as-code before, don’t worry—we’ll explain what’s needed, why, and where to find more detail.
+If you’ve never worked with GitHub or docs-as-code before, don’t worry—we’ll explain what’s needed, why and where to find more detail.
 
 ## Prerequisites
 
@@ -115,16 +115,79 @@ npm install -g yarn
 
 ***
 
-## Get the docStatic repository
+## Get docStatic
 
-docStatic’s source code lives on GitHub. To start, you’ll need to make your own copy by:
+There are two ways to get your own copy of docStatic:
 
-1. **Create a fork** of the docStatic repository
-   Forking creates a copy that you can use to work independently on your own project.
-2. **Create a clone** of your fork.
-   Cloning makes a copy that is associated with the original fork that you made. This can be useful for fixing schema issues, should they occur later.
+1. **Create a new site with `create-docstatic`** (recommended). One command gives you a fresh, standalone site with its own name and git history.
+2. **Fork and clone the repository.** Choose this if you want to contribute to docStatic itself, or prefer to manage updates by merging with git.
+
+### Create a new site
+
+Open a terminal (Command Prompt or Terminal app) and run one of the following commands, depending on your preferred package manager. Replace `my-docs` with the name of your project.
+
+<Tabs>
+  <TabItem value="npx" label="npx">
+
+  ```shell
+  npx create-docstatic@latest my-docs
+  ```
+
+  </TabItem>
+
+  <TabItem value="npm" label="npm">
+
+  ```shell
+  npm create docstatic@latest my-docs
+  ```
+
+  </TabItem>
+
+  <TabItem value="yarn" label="yarn">
+
+  ```shell
+  yarn create docstatic my-docs
+  ```
+
+  </TabItem>
+</Tabs>
+
+The command downloads the latest docStatic template, creates the `my-docs` folder, turns it into a git repository and installs the project dependencies. When it finishes, start the local development server:
+
+```shell
+cd my-docs
+yarn dev
+```
+
+<Admonition type="tip" title="Tip">
+
+  Run `npx create-docstatic@latest --help` to see the available options, such as `--no-install` to skip dependency installation.
+
+</Admonition>
+
+If you created your site this way, you can skip ahead to the [Project structure](#project-structure) section.
+
+#### Keep your site up to date
+
+When a new version of docStatic is released, run this command from the root folder of your site:
+
+```shell
+npx create-docstatic@latest --update
+```
+
+The command updates the docStatic-owned files (React components, build scripts, Docusaurus and Tina configuration, dependency versions) and leaves your content—`docs/`, `blog/`, `config/`, `reuse/` and `static/`—untouched. Your site's name and any custom `package.json` scripts you added are preserved.
+
+The update requires a clean git working tree, so commit your work first. Afterwards, review the result with `git diff`, reapply any customisations you had made to updated files and commit.
+
+<Admonition type="tip" title="Tip">
+
+  Add `--dry-run` to see what would change without writing anything.
+
+</Admonition>
 
 ### Fork the docStatic repository
+
+Forking and cloning is the right choice if you plan to contribute to docStatic, or if you prefer to merge future docStatic releases into your site with git.
 
 1. Log in to your account in GitHub.
 2. Visit [https://github.com/aowendev/docstatic](https://github.com/aowendev/docstatic).
@@ -143,9 +206,9 @@ To create a clone:
 1. Log in to your GitHub account.
 2. Navigate to the repository for the fork.
 3. Click on the repository to open it.
-4. Click on **\<> Code** and then copy the url.
+4. Click on **\<> Code** and then copy the URL.
 5. Open your terminal or command prompt and use `cd` to navigate to the location where you want to store the clone. For example, `cd Documents/Projects/`.
-6. Enter `git clone` followed by the url of your clone.
+6. Enter `git clone` followed by the URL of your clone.
 
 ```shell
 git clone https://github.com/acme-projects/docstatic.git
@@ -155,7 +218,9 @@ git clone https://github.com/acme-projects/docstatic.git
 
 ## Install the project dependencies
 
-If you're going to work locally, you also need to install the project dependencies. Use `cd` to navigate to the root folder of your cloned or forked docStatic repository and install the packages:
+This step only applies if you forked and cloned the repository—`create-docstatic` installs the dependencies for you.
+
+Use `cd` to navigate to the root folder of your cloned docStatic repository and install the packages:
 
 ```
 cd docstatic
@@ -168,7 +233,7 @@ Yarn will download everything listed in package.json. This may take a few minute
 
 ## Project structure
 
-After forking or cloning the repository, you will see various files in your in your `docstatic/` folder. Below, we've included **some** of the project structure files and folders that you need to be aware of. **It is not a complete list of everything in the project**.
+After creating your site or cloning the repository, you will see various files in your project folder. Below, we've included **some** of the project structure files and folders that you need to be aware of. **It is not a complete list of everything in the project**.
 
 ```
 docstatic

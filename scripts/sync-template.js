@@ -236,6 +236,42 @@ This is your first blog post. Edit it in the CMS at
 `
 );
 
+// Manifest shipped in the npm tarball; `create-docstatic --update` uses it
+// to know which files in an existing site are docStatic-owned code surface
+// (safe to overwrite) versus user content (never touched).
+{
+  const manifest = {
+    manifestVersion: 1,
+    // Directories copied over the site's copy, overwriting file by file
+    mirrorDirs: [...MIRROR_SRC_DIRS, "scripts"],
+    // Individual files overwritten
+    files: COPY_FILES.filter((f) => f !== "src/pages/example-page.mdx"),
+    // Stale files deleted if present
+    removeFiles: REMOVE_FILES,
+    // Created only if missing (content-ish or required-to-exist files)
+    ensureFiles: [
+      "src/pages/example-page.mdx",
+      "i18n/.gitkeep",
+      "reuse/media/index.json",
+      "blog/welcome.mdx",
+    ],
+    // package.json sections replaced from the template's package.json
+    packageJsonKeys: [
+      "dependencies",
+      "devDependencies",
+      "resolutions",
+      "browserslist",
+      "engines",
+    ],
+  };
+  const dest = path.join(ROOT, "update-manifest.json");
+  const serialized = `${JSON.stringify(manifest, null, 2)}\n`;
+  if (!fs.existsSync(dest) || fs.readFileSync(dest, "utf8") !== serialized) {
+    log(fs.existsSync(dest) ? "update" : "add", "update-manifest.json");
+    if (!CHECK) fs.writeFileSync(dest, serialized);
+  }
+}
+
 if (changes === 0) {
   console.log("Template is in sync.");
 } else if (CHECK) {

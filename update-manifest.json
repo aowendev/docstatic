@@ -1,0 +1,40 @@
+{
+  "manifestVersion": 1,
+  "mirrorDirs": [
+    "src/clientModules",
+    "src/components",
+    "src/plugins",
+    "src/theme",
+    "src/utils",
+    "scripts"
+  ],
+  "files": [
+    "docusaurus.config.ts",
+    "sidebars.ts",
+    "biome.json",
+    "frontmatter.json",
+    "tina/config.jsx",
+    "config/docusaurus/openapi-tag-template.md",
+    "src/css/custom.css",
+    "src/pages/404.js",
+    "src/pages/index.jsx",
+    "src/pages/index.module.css"
+  ],
+  "removeFiles": [
+    "util.js",
+    "babel.config.js"
+  ],
+  "ensureFiles": [
+    "src/pages/example-page.mdx",
+    "i18n/.gitkeep",
+    "reuse/media/index.json",
+    "blog/welcome.mdx"
+  ],
+  "packageJsonKeys": [
+    "dependencies",
+    "devDependencies",
+    "resolutions",
+    "browserslist",
+    "engines"
+  ]
+}
