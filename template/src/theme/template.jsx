@@ -7,7 +7,7 @@
 
 import React from "react";
 import codeFiles from "../../reuse/code-files.json";
-import { slugify } from "../../util";
+import { slugify } from "../../scripts/util";
 import { CodeSnippetBlockTemplate } from "../components/CodeSnippet/template";
 import { CommentBlockTemplate } from "../components/Comment/template";
 import { ConditionalTextBlockTemplate } from "../components/ConditionalText/template";
@@ -15,6 +15,7 @@ import { FigureBlockTemplate } from "../components/Figure/template";
 import { FootnoteBlockTemplate } from "../components/Footnote/template";
 import { GlossaryTermBlockTemplate } from "../components/GlossaryTerm/template";
 import { PassthroughBlockTemplate } from "../components/Passthrough/template";
+import { RelatedTopicsBlockTemplate } from "../components/RelatedTopics/template";
 import { SnippetBlockTemplate } from "../components/Snippet/template";
 import { VariableSetBlockTemplate } from "../components/VariableSet/template";
 
@@ -245,8 +246,9 @@ export const MDXTemplates = [
   FigureBlockTemplate,
   FootnoteBlockTemplate,
   GlossaryTermBlockTemplate,
-  SnippetBlockTemplate,
   PassthroughBlockTemplate,
+  RelatedTopicsBlockTemplate,
+  SnippetBlockTemplate,
   TabsTemplate,
   TruncateTemplate,
   VariableSetBlockTemplate,

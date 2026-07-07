@@ -35,6 +35,8 @@
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
     "setup-git-hooks": "git config core.hooksPath .githooks && chmod +x .githooks/pre-commit",
+    "sync-template": "node scripts/sync-template.js",
+    "sync-template:check": "node scripts/sync-template.js --check",
     "clear": "docusaurus clear",
     "serve": "docusaurus serve",
     "write-translations": "docusaurus write-translations",

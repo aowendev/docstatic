@@ -28,4 +28,808 @@ a[id^="footnote-ref-"] {
 
 .glossary-definition-portal > div {
   pointer-events: auto !important;
+  z-index: 2147483647 !important;
+  position: fixed !important;
+}
+
+/* Ensure definition boxes work in both light and dark modes */
+[data-theme="light"] .glossary-definition-portal,
+[data-theme="dark"] .glossary-definition-portal,
+html[data-theme="light"] .glossary-definition-portal,
+html[data-theme="dark"] .glossary-definition-portal {
+  z-index: 2147483647 !important;
+  position: fixed !important;
+  isolation: isolate !important;
+  transform: translateZ(0) !important;
+}
+
+[data-theme="light"] .glossary-definition-portal > div,
+[data-theme="dark"] .glossary-definition-portal > div,
+html[data-theme="light"] .glossary-definition-portal > div,
+html[data-theme="dark"] .glossary-definition-portal > div {
+  z-index: 2147483647 !important;
+  position: fixed !important;
+  isolation: isolate !important;
+  transform: translateZ(0) !important;
+}
+
+/* Specific fix for light mode stacking issues */
+[data-theme="light"] div[style*="z-index"],
+html[data-theme="light"] div[style*="z-index"] {
+  z-index: 2147483647 !important;
+}
+
+/* Global improvements */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-feature-settings:
+    "kern" 1,
+    "liga" 1;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Enhanced button styles */
+.button {
+  transition: all 0.2s ease;
+  font-weight: 600;
+  border-radius: var(--ifm-button-border-radius);
+}
+
+.button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.button--primary {
+  background: linear-gradient(
+    135deg,
+    var(--ifm-color-primary),
+    var(--ifm-color-primary-dark)
+  );
+  border: none;
+}
+
+.button--primary:hover {
+  background: linear-gradient(
+    135deg,
+    var(--ifm-color-primary-dark),
+    var(--ifm-color-primary-darker)
+  );
+}
+
+/* Enhanced card styles */
+.card {
+  border-radius: var(--ifm-card-border-radius);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+/* Base64-encoded SVGs (data URIs) */
+html[data-theme="dark"] img[src^="data:image/svg+xml"] {
+  filter: invert(1) hue-rotate(180deg);
+}
+
+/* Dark mode navbar */
+[data-theme="dark"] .navbar {
+  background: rgba(0, 0, 0, 0.9);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Improved content sections */
+.container {
+  max-width: 1140px;
+}
+
+/* Smooth animations for elements */
+.margin-bottom--lg,
+.margin-top--lg,
+.padding-bottom--lg,
+.padding-top--lg {
+  transition: all 0.3s ease;
+}
+
+/* Enhanced code blocks */
+.prism-code {
+  border-radius: 8px;
+  font-size: 0.9rem;
+}
+
+/* Better table styles */
+.table-of-contents {
+  border-left: 3px solid var(--ifm-color-primary);
+  padding-left: 1rem;
+}
+
+/* Improved pagination */
+.pagination-nav {
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.pagination-nav__item {
+  transition: all 0.2s ease;
+}
+
+.pagination-nav__item:hover {
+  transform: translateX(4px);
+}
+
+.pagination-nav__item--next:hover {
+  transform: translateX(-4px);
+}
+
+/* Better admonitions */
+.alert {
+  border-radius: 8px;
+  border-left-width: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* Enhanced doc item */
+.theme-doc-markdown {
+  line-height: 1.7;
+}
+
+.theme-doc-markdown h1,
+.theme-doc-markdown h2,
+.theme-doc-markdown h3 {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+/* Improved sidebar */
+.theme-doc-sidebar-container {
+  border-right: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="dark"] .theme-doc-sidebar-container {
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Better menu items */
+.menu__link {
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.menu__link:hover {
+  background: rgba(var(--ifm-color-primary-rgb), 0.1);
+}
+
+/* Enhanced footer */
+.footer {
+  background: var(--ifm-footer-background-color);
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="dark"] .footer {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Sidebar Method labels */
+.api-method > .menu__link {
+  align-items: center;
+  justify-content: start;
+}
+
+.api-method > .menu__link::before {
+  width: 50px;
+  height: 20px;
+  font-size: 12px;
+  line-height: 20px;
+  text-transform: uppercase;
+  font-weight: 600;
+  border-radius: 0.25rem;
+  border: 1px solid;
+  margin-right: var(--ifm-spacing-horizontal);
+  text-align: center;
+  flex-shrink: 0;
+  border-color: transparent;
+  color: white;
+}
+
+.get > .menu__link::before {
+  content: "get";
+  background-color: rgb(47, 129, 50);
+}
+
+.put > .menu__link::before {
+  content: "put";
+  background-color: rgb(149, 80, 124);
+}
+
+.post > .menu__link::before {
+  content: "post";
+  background-color: rgb(24, 111, 175);
+}
+
+.delete > .menu__link::before {
+  content: "del";
+  background-color: rgb(204, 51, 51);
+}
+
+.patch > .menu__link::before {
+  content: "patch";
+  background-color: rgb(191, 88, 29);
+}
+
+/* GET */
+.badge--primary {
+  background-color: rgb(47, 129, 50);
+  border-color: rgb(47, 129, 50);
+  color: white;
+}
+
+/* PUT */
+.badge--info {
+  background-color: rgb(149, 80, 124);
+  border-color: rgb(149, 80, 124);
+  color: white;
+}
+
+/* POST */
+.badge--success {
+  background-color: rgb(24, 111, 175);
+  border-color: rgb(24, 111, 175);
+  color: white;
+}
+
+/* DEL */
+.badge--danger {
+  background-color: rgb(204, 51, 51);
+  border-color: rgb(204, 51, 51);
+  color: white;
+}
+
+/* PATCH */
+.badge--warning {
+  background-color: rgb(191, 88, 29);
+  border-color: rgb(191, 88, 29);
+  color: white;
+}
+
+/* Lower baseline of openapi-schema__property element */
+.openapi-schema__property {
+  vertical-align: text-bottom !important;
+  position: relative !important;
+  top: -0.055em !important;
+}
+
+/* Broader targeting for all code elements in OpenAPI components */
+[class*="openapi"] code,
+[class*="schema"] code,
+.theme-api-method code {
+  position: relative !important;
+  top: -0.055rem !important;
+  transform: translateY(-0.1rem) !important;
+  vertical-align: baseline !important;
+}
+
+/* Fix for menu bar hiding content on anchor links */
+html {
+  scroll-padding-top: 80px;
+}
+
+/* Adjust scroll margin for headings and anchor targets */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+[id],
+.anchor {
+  scroll-margin-top: 80px;
+}
+
+/* Additional targeting for specific content areas */
+.theme-doc-markdown h1,
+.theme-doc-markdown h2,
+.theme-doc-markdown h3,
+.theme-doc-markdown h4,
+.theme-doc-markdown h5,
+.theme-doc-markdown h6 {
+  scroll-margin-top: 80px;
+}
+
+/* Fix for context-sensitive help links and API documentation */
+.theme-api-method h1,
+.theme-api-method h2,
+.theme-api-method h3,
+.theme-api-method h4,
+.theme-api-method h5,
+.theme-api-method h6,
+.theme-api-method [id] {
+  scroll-margin-top: 80px;
+}
+
+/* Fix search UI overlapping site title on mobile */
+@media (max-width: 768px) {
+  /* Adjust navbar layout on mobile */
+  .navbar {
+    flex-wrap: wrap;
+    padding: 0.5rem 1rem;
+  }
+
+  /* Ensure logo/title has enough space */
+  .navbar__brand {
+    flex: 1;
+    min-width: 0;
+    margin-right: 0.5rem;
+  }
+
+  /* Control search input width on mobile */
+  .navbar__search {
+    flex: none !important;
+    width: 40px !important;
+    min-width: 40px !important;
+    max-width: 40px !important;
+    margin-left: auto !important;
+  }
+
+  /* Adjust search input styling */
+  .navbar__search-input {
+    width: 40px !important;
+    min-width: 40px !important;
+    max-width: 40px !important;
+    font-size: 14px !important;
+    padding: 0.5rem !important;
+    border-radius: 50% !important;
+  }
+
+  /* Stack navigation items if needed */
+  .navbar__items {
+    flex-wrap: wrap;
+    gap: 0.25rem;
+  }
+
+  /* Adjust toggle button positioning */
+  .navbar__toggle {
+    margin-left: 0.5rem;
+  }
+}
+
+/* Extra small mobile devices */
+@media (max-width: 480px) {
+  .navbar {
+    padding: 0.25rem 0.75rem;
+  }
+
+  .navbar__brand {
+    font-size: 1rem;
+  }
+
+  .navbar__search {
+    max-width: 120px;
+  }
+
+  .navbar__search-input {
+    font-size: 13px;
+    padding: 0.2rem 0.4rem;
+  }
+}
+
+/* Fix "Loading..." text overlapping icons on mobile */
+@media (max-width: 768px) {
+  /* Docusaurus search loading states */
+  .DocSearch-LoadingIndicator,
+  .DocSearch-Button .DocSearch-Search-Icon + span,
+  .navbar__search-input:focus + .loading,
+  .search-suggestions .loading {
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.25rem !important;
+    font-size: 12px !important;
+  }
+
+  /* Lunr search loading fixes */
+  .navbar__search .loading,
+  .navbar__search-input[placeholder*="Loading"] {
+    position: relative !important;
+    padding-left: 2rem !important;
+  }
+
+  /* Loading icon positioning */
+  .navbar__search::before,
+  .navbar__search .loading-icon {
+    position: absolute !important;
+    left: 0.5rem !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    width: 16px !important;
+    height: 16px !important;
+    z-index: 1 !important;
+  }
+
+  /* Search input text positioning when loading */
+  .navbar__search-input {
+    text-indent: 0.5rem !important;
+  }
+
+  /* Alternative: hide loading text entirely on mobile */
+  .navbar__search-input[placeholder*="Loading..."] {
+    text-indent: 0 !important;
+    font-size: 0 !important;
+  }
+
+  .navbar__search-input[placeholder*="Loading..."]::placeholder {
+    font-size: 12px !important;
+    text-indent: 1.5rem !important;
+  }
+}
+
+/* Very small mobile devices */
+@media (max-width: 480px) {
+  /* More aggressive fixes for very small screens */
+  .navbar__search-input[placeholder*="Loading"] {
+    font-size: 0 !important;
+  }
+
+  .navbar__search-input[placeholder*="Loading"]::placeholder {
+    font-size: 10px !important;
+    content: "..." !important;
+  }
+
+  /* Hide loading text completely if needed */
+  .DocSearch-LoadingIndicator span,
+  .navbar__search .loading-text {
+    display: none !important;
+  }
+
+  /* Hide "Search +K" text on mobile */
+  .DocSearch-Button-Placeholder,
+  .DocSearch-Button-Key,
+  .DocSearch-Button .DocSearch-Search-Icon + span,
+  .navbar__search-input::placeholder {
+    display: none !important;
+  }
+
+  /* Hide search placeholder text */
+  .navbar__search-input {
+    text-indent: 0 !important;
+  }
+
+  .navbar__search-input::placeholder {
+    color: transparent !important;
+    font-size: 0 !important;
+  }
+}
+
+/* Hide "Search +K" text on all mobile devices */
+@media (max-width: 768px) {
+  /* DocSearch button text hiding */
+  .DocSearch-Button-Placeholder,
+  .DocSearch-Button-Key {
+    display: none !important;
+  }
+
+  /* Keep only the search icon - force consistent sizing */
+  .DocSearch-Button {
+    width: 40px !important;
+    min-width: 40px !important;
+    max-width: 40px !important;
+    padding: 0.5rem !important;
+    margin: 0 !important;
+  }
+
+  /* Force search container sizing */
+  .navbar__search {
+    flex: none !important;
+    width: 40px !important;
+    min-width: 40px !important;
+    max-width: 40px !important;
+    margin-left: auto !important;
+  }
+
+  /* Hide search input placeholder on mobile */
+  .navbar__search-input {
+    width: 40px !important;
+    min-width: 40px !important;
+    max-width: 40px !important;
+    padding: 0.5rem !important;
+    border-radius: 50% !important;
+    text-indent: -9999px !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23999' viewBox='0 0 16 16'%3E%3Cpath d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z'/%3E%3C/svg%3E") !important;
+    background-repeat: no-repeat !important;
+    background-position: center !important;
+    background-size: 16px !important;
+  }
+
+  .navbar__search-input::placeholder {
+    color: transparent !important;
+  }
+
+  /* Lunr search input placeholder hiding */
+  .navbar__search-input[placeholder*="Search"] {
+    text-indent: -9999px !important;
+  }
+
+  .navbar__search-input[placeholder*="Search"]:focus {
+    text-indent: 0 !important;
+    width: calc(100vw - 120px) !important;
+    max-width: calc(100vw - 120px) !important;
+    min-width: 200px !important;
+    border-radius: 0.375rem !important;
+    position: absolute !important;
+    right: 0 !important;
+    top: 0 !important;
+    z-index: 1000 !important;
+    padding-left: 2.5rem !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23999' viewBox='0 0 16 16'%3E%3Cpath d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z'/%3E%3C/svg%3E") !important;
+    background-repeat: no-repeat !important;
+    background-position: 0.75rem center !important;
+    background-size: 16px !important;
+  }
+
+  /* Mobile search results container */
+  .DocSearch-Container {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    z-index: 9999 !important;
+    padding: 1rem !important;
+  }
+
+  .DocSearch-Modal {
+    width: 100% !important;
+    max-width: calc(100vw - 2rem) !important;
+    max-height: calc(100vh - 2rem) !important;
+    margin: 0 !important;
+    border-radius: 0.5rem !important;
+  }
+
+  /* Lunr search results positioning */
+  .navbar__search {
+    position: relative !important;
+  }
+
+  .navbar__search .search-suggestions,
+  .navbar__search .search-results {
+    position: absolute !important;
+    top: 100% !important;
+    right: 0 !important;
+    left: auto !important;
+    width: calc(100vw - 2rem) !important;
+    max-width: 400px !important;
+    max-height: 60vh !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    -webkit-overflow-scrolling: touch !important;
+    z-index: 1000 !important;
+    background: var(--ifm-background-color) !important;
+    border: 1px solid var(--ifm-border-color) !important;
+    border-radius: 0.375rem !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+    margin-top: 0.25rem !important;
+    scrollbar-width: thin !important;
+  }
+
+  /* Improve scrollbar visibility on mobile */
+  .navbar__search .search-suggestions::-webkit-scrollbar,
+  .navbar__search .search-results::-webkit-scrollbar {
+    width: 8px !important;
+  }
+
+  .navbar__search .search-suggestions::-webkit-scrollbar-track,
+  .navbar__search .search-results::-webkit-scrollbar-track {
+    background: var(--ifm-color-emphasis-200) !important;
+    border-radius: 4px !important;
+  }
+
+  .navbar__search .search-suggestions::-webkit-scrollbar-thumb,
+  .navbar__search .search-results::-webkit-scrollbar-thumb {
+    background: var(--ifm-color-emphasis-400) !important;
+    border-radius: 4px !important;
+  }
+
+  /* DocSearch modal scrolling improvements */
+  .DocSearch-Modal {
+    width: 100% !important;
+    max-width: calc(100vw - 2rem) !important;
+    max-height: calc(100vh - 2rem) !important;
+    margin: 0 !important;
+    border-radius: 0.5rem !important;
+    overflow: hidden !important;
+  }
+
+  .DocSearch-Dropdown {
+    max-height: calc(100vh - 200px) !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    scrollbar-width: thin !important;
+  }
+
+  /* Lunr search specific scrolling fix */
+  .ds-dataset-1 {
+    max-height: 60vh !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    -webkit-overflow-scrolling: touch !important;
+    scrollbar-width: thin !important;
+  }
+
+  .ds-dataset-1::-webkit-scrollbar {
+    width: 8px !important;
+  }
+
+  .ds-dataset-1::-webkit-scrollbar-track {
+    background: var(--ifm-color-emphasis-200) !important;
+    border-radius: 4px !important;
+  }
+
+  .ds-dataset-1::-webkit-scrollbar-thumb {
+    background: var(--ifm-color-emphasis-400) !important;
+    border-radius: 4px !important;
+  }
+}
+
+/* Very small mobile devices */
+@media (max-width: 480px) {
+  .loading,
+  .loading-text,
+  [class*="loading"] {
+    font-size: 11px !important;
+    gap: 0.25rem !important;
+  }
+
+  .loading-spinner,
+  .spinner {
+    width: 14px !important;
+    height: 14px !important;
+  }
+
+  /* Hide loading text on very small screens if needed */
+  .loading-text-responsive {
+    display: none !important;
+  }
+
+  /* Small mobile search adjustments */
+  .navbar__search-input[placeholder*="Search"]:focus {
+    width: calc(100vw - 80px) !important;
+    max-width: calc(100vw - 80px) !important;
+    min-width: 160px !important;
+    padding-left: 2.5rem !important;
+  }
+
+  .navbar__search .search-suggestions,
+  .navbar__search .search-results {
+    width: calc(100vw - 1rem) !important;
+    max-width: calc(100vw - 1rem) !important;
+    left: 0.5rem !important;
+    right: 0.5rem !important;
+    max-height: 50vh !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+
+  .DocSearch-Modal {
+    width: calc(100vw - 1rem) !important;
+    max-width: calc(100vw - 1rem) !important;
+    margin: 0.5rem !important;
+  }
+
+  .DocSearch-Dropdown {
+    max-height: calc(100vh - 150px) !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+
+  /* Small mobile Lunr search scrolling */
+  .ds-dataset-1 {
+    max-height: 50vh !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+}
+
+/* Mermaid Zoom Functionality */
+@import "../theme/Mermaid/mermaid-zoom.css";
+
+/* Ordered list styling */
+ol {
+  list-style-type: decimal; /* First level: 1, 2, 3, ... */
+}
+
+ol ol {
+  list-style-type: lower-alpha; /* Second level: a, b, c, ... */
+}
+
+ol ol ol {
+  list-style-type: lower-roman; /* Third level: i, ii, iii, ... */
+}
+
+ol ol ol ol {
+  list-style-type: decimal; /* Fourth level: 1, 2, 3, ... (cycle back) */
+}
+
+/* maintain list spacing when using reusable elements */
+ol li > p,
+ul li > p,
+ol li div p,
+ul li div p {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+/* Strikethrough styling customization */
+/* Default behavior: Remove strikethrough effect on rendered pages */
+article del,
+article s,
+.markdown del,
+.markdown s,
+main del,
+main s,
+.theme-doc-markdown del,
+.theme-doc-markdown s {
+  text-decoration: none;
+  background: transparent;
+  color: inherit;
+}
+
+/* Hanging indent for task list items to align wrapped text */
+.passthrough-content li.task-list-item {
+  padding-left: 2em;
+  text-indent: -2em;
+}
+
+/* Task list checkbox styling with primary color (static, non-interactive) */
+.contains-task-list input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 1.2em;
+  height: 1.2em;
+  border: 2px solid var(--ifm-color-primary);
+  border-radius: 3px;
+  outline: none;
+  cursor: default;
+  position: relative;
+  margin-right: 0.5em;
+  vertical-align: middle;
+  background-color: transparent;
+  pointer-events: none;
+}
+
+.contains-task-list input[type="checkbox"]:checked {
+  background-color: var(--ifm-color-primary);
+  border-color: var(--ifm-color-primary);
+}
+
+.contains-task-list input[type="checkbox"]:checked::after {
+  content: "";
+  position: absolute;
+  left: 0.2em;
+  top: 0.05em;
+  width: 0.35em;
+  height: 0.65em;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+
+/*
+ * Merge consecutive lists separated by ConditionalText components.
+ * Also handle cases where empty elements are between lists 
+ */
+ul + ul,
+ol + ol {
+  margin-top: -1em;
+}
+
+ul + :empty + ul,
+ol + :empty + ol {
+  margin-top: -1em;
 }

@@ -1,12 +1,12 @@
 #!/usr/bin/env node
 
-const fs = require('fs-extra');
-const path = require('path');
-const { execSync } = require('child_process');
+const fs = require("fs-extra");
+const path = require("path");
+const { execSync } = require("child_process");
 
 const projectName = process.argv[2];
 if (!projectName) {
-  console.error('Usage: npx docstatic <project-name>');
+  console.error("Usage: npx docstatic <project-name>");
   process.exit(1);
 }
 
@@ -23,11 +23,18 @@ fs.mkdirSync(targetDir);
 
 // Copy starter files from a template directory in your package
 // Assume you have a 'template' folder in the package root with starter files
-const templateDir = path.join(__dirname, '..', 'template');
+const templateDir = path.join(__dirname, "..", "template");
 fs.copySync(templateDir, targetDir);
 
+// npm strips .gitignore files from packages, so the template ships a
+// dotless "gitignore" that gets renamed here.
+const gitignorePath = path.join(targetDir, "gitignore");
+if (fs.existsSync(gitignorePath)) {
+  fs.renameSync(gitignorePath, path.join(targetDir, ".gitignore"));
+}
+
 // Update package.json with the project name
-const packageJsonPath = path.join(targetDir, 'package.json');
+const packageJsonPath = path.join(targetDir, "package.json");
 const packageJson = fs.readJsonSync(packageJsonPath);
 packageJson.name = projectName;
 fs.writeJsonSync(packageJsonPath, packageJson, { spaces: 2 });
@@ -36,6 +43,6 @@ console.log(`Starter repo created in ${targetDir}`);
 
 // Optionally, initialize npm and install dependencies
 process.chdir(targetDir);
-execSync('npm install', { stdio: 'inherit' });
+execSync("npm install", { stdio: "inherit" });
 
 console.log('Project setup complete. Run "npm run dev" to start.');

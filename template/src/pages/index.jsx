@@ -10,10 +10,17 @@ import Layout from "@theme/Layout";
 import React from "react";
 import { Blocks } from "../components/Blocks";
 
-const pageData = require("../../config/homepage/index.json");
+function getPageData(locale) {
+  try {
+    return require(`../../config/homepage/index.${locale}.json`);
+  } catch {
+    return require("../../config/homepage/index.json");
+  }
+}
 
 export default function Home() {
-  const { siteConfig } = useDocusaurusContext();
+  const { siteConfig, i18n } = useDocusaurusContext();
+  const pageData = getPageData(i18n.currentLocale);
 
   return (
     <Layout

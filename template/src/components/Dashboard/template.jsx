@@ -1,7 +1,19 @@
+/**
+ * Copyright (c) Source Solutions, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 import React from 'react';
 import Dashboard1 from './Dashboard1';
+import MediaDashboard from './MediaDashboard';
+import TranslationDashboard from './TranslationDashboard';
+import BrokenLinksDashboard from './BrokenLinksDashboard';
+import ContentReuseDashboard from './ContentReuseDashboard';
 import StatusBar from './StatusBar';
 import HelpButton from '../HelpButton';
+//. import DocumentMutationDashboard from './DocumentMutationDashboard';
 
 export const DashboardsCollection = {
   name: "dashboards",
@@ -14,7 +26,7 @@ export const DashboardsCollection = {
       delete: false,
     },
   },
-  fields: [
+	fields: [
 	{
 	  type: "boolean",
 	  name: "statusBar",
@@ -56,11 +68,77 @@ export const DashboardsCollection = {
 	  required: false,
 	  ui: {
 		component: (props) => (
-		  <Dashboard1/>
+		  <div style={{ display: 'block', width: '100%', clear: 'both' }}>
+			<Dashboard1/>
+		  </div>
 		),
 	  },
 	},
-  ],
+	{
+	  type: "boolean",
+	  name: "contentReuseDashboard",
+	  label: "Content Reuse Overview",
+	  required: false,
+	  ui: {
+		component: (props) => (
+		  <div style={{ display: 'block', width: '100%', clear: 'both' }}>
+			<ContentReuseDashboard/>
+		  </div>
+		),
+	  },
+	},
+	{
+	  type: "boolean",
+	  name: "mediaDashboard",
+	  label: "Media Library",
+	  required: false,
+	  ui: {
+		component: (props) => (
+		  <div style={{ display: 'block', width: '100%', clear: 'both' }}>
+			<MediaDashboard/>
+		  </div>
+		),
+	  },
+	},
+	{
+	  type: "boolean",
+	  name: "translationDashboard",
+	  label: "Translation Status",
+	  required: false,
+	  ui: {
+		component: (props) => (
+		  <div style={{ display: 'block', width: '100%', clear: 'both' }}>
+			<TranslationDashboard/>
+		  </div>
+		),
+	  },
+	},
+	{
+	  type: "boolean",
+	  name: "brokenLinksDashboard",
+	  label: "Broken Links",
+	  required: false,
+	  ui: {
+		component: (props) => (
+		  <div style={{ display: 'block', width: '100%', clear: 'both' }}>
+			<BrokenLinksDashboard/>
+		  </div>
+		),
+	  },
+	},
+
+		// {
+		// 	type: "boolean",
+		// 	name: "documentMutationDashboard",
+		// 	label: "Document Mutations",
+		// 	required: false,
+		// 	ui: {
+		// 		component: (props) => (
+		// 			<DocumentMutationDashboard />
+		// 		),
+		// 	},
+		// },
+	],
 };
 
-export { Dashboard1, StatusBar };
+export { Dashboard1, MediaDashboard, TranslationDashboard, BrokenLinksDashboard, StatusBar };

@@ -2,18 +2,36 @@
   "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
   "files": {
     "maxSize": 10485760,
-    "ignore": [
-      ".next/**",
-      "node_modules/**",
-      "dist/**",
-      "public/**",
-      "content/**",
-      "coverage/**",
-      "tina/__generated__/**",
-      "tina/tina-lock.json",
-      "src/styles/**"
+    "includes": [
+      "**",
+      "!**/.next/**",
+      "!**/node_modules/**",
+      "!**/dist/**",
+      "!**/public/**",
+      "!**/content/**",
+      "!**/coverage/**",
+      "!**/tina/__generated__/**",
+      "!**/tina/tina-lock.json",
+      "!**/src/styles/**",
+      "!**/reuse/code-files.json",
+      "!**/reuse/snippets-files.json",
+      "!**/reuse/media/index.json",
+      "!**/src/data/docs-metadata.json",
+      "!**/config/**/*.json"
     ]
   },
+  "overrides": [
+    {
+      "includes": ["scripts/**", "bin/**", "create-docstatic/**"],
+      "linter": {
+        "rules": {
+          "suspicious": {
+            "noConsole": "off"
+          }
+        }
+      }
+    }
+  ],
   "formatter": {
     "enabled": true,
     "useEditorconfig": false,

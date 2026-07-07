@@ -5,6 +5,35 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import conditionsData from "../../../reuse/conditions/index.json";
+import docusaurusData from "../../../config/docusaurus/index.json";
+import ConditionsTreeField from "../ConditionsField";
+
+// Build condition options from conditions data
+const conditionOptions = [];
+if (Array.isArray(conditionsData?.categories)) {
+  for (const category of conditionsData.categories) {
+    if (category.conditions && Array.isArray(category.conditions)) {
+      for (const condition of category.conditions) {
+        if (condition.active !== false) {
+          conditionOptions.push({
+            value: condition.condition,
+            label: `${condition.condition} (${category.name})`,
+          });
+        }
+      }
+    }
+  }
+}
+
+// Build language options from docusaurus config
+const languageOptions = (docusaurusData.languages?.supported || []).map(
+  (lang) => ({
+    value: lang.code,
+    label: `${lang.label} (${lang.code})`,
+  })
+);
+
 export const ConditionalTextBlockTemplate = {
   name: "ConditionalText",
   label: "Conditional Text",
@@ -12,23 +41,33 @@ export const ConditionalTextBlockTemplate = {
   ui: {
     previewSrc: "/blocks/ConditionalText.png",
     defaultItem: {
-      text: "This text will appear when conditions are met.",
+      action: "show",
       conditions: [],
       languages: [],
       logic: "any",
       languageLogic: "any",
       requireBothConditions: false,
       fallback: "",
-      debug: false,
+      // debug: false,
     },
   },
   fields: [
     {
+      type: "rich-text",
+      name: "children",
+      label: "Content",
+    },
+    {
       type: "string",
-      name: "text",
-      label: "Text Content",
+      name: "action",
+      label: "Action",
+      options: [
+        { value: "show", label: "Show when conditions are met" },
+        { value: "hide", label: "Hide when conditions are met" },
+      ],
       ui: {
-        component: "textarea",
+        component: "select",
+        description: "Choose whether to show or hide content when conditions match",
       },
     },
     {
@@ -36,8 +75,10 @@ export const ConditionalTextBlockTemplate = {
       name: "conditions",
       label: "Required Conditions",
       list: true,
+      options: conditionOptions,
       ui: {
-        description: "Content will show when these conditions are met",
+        component: ConditionsTreeField,
+        description: "Content action will be triggered when these conditions are met (defined in page metadata)",
       },
     },
     {
@@ -45,8 +86,10 @@ export const ConditionalTextBlockTemplate = {
       name: "languages",
       label: "Required Languages",
       list: true,
+      options: languageOptions,
       ui: {
-        description: "Content will show for these languages (e.g., en, fr, es)",
+        component: "checkbox-group",
+        description: "Content action will be triggered for these languages",
       },
     },
     {
@@ -91,13 +134,13 @@ export const ConditionalTextBlockTemplate = {
         description: "Optional text to show when conditions are not met",
       },
     },
-    {
-      type: "boolean",
-      name: "debug",
-      label: "Show Debug Info",
-      ui: {
-        description: "Display debugging information (for development)",
-      },
-    },
+    // {
+    //   type: "boolean",
+    //   name: "debug",
+    //   label: "Show Debug Info",
+    //   ui: {
+    //     description: "Display debugging information (for development)",
+    //   },
+    // },
   ],
 };

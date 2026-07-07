@@ -11,3 +11,18 @@ DocStatic is a modern documentation platform that bridges the gap between writer
 ![Doc-bugs](https://img.shields.io/github/issues/aowendev/docstatic/documentation)
 
 ![DocStatic Demo](/static/img/docStaticDemo.jpg)
+
+## Getting started
+
+Create a new docStatic site with one command:
+
+```sh
+npx create-docstatic@latest my-docs
+```
+
+Then start the local dev server with the TinaCMS editor:
+
+```sh
+cd my-docs
+npm run dev
+```

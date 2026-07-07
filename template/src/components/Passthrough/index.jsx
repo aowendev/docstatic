@@ -11,6 +11,7 @@ import rehypeKatex from "rehype-katex";
 import rehypeRaw from "rehype-raw";
 import remarkBreaks from "remark-breaks";
 import remarkMath from "remark-math";
+import remarkGfm from "remark-gfm";
 import "katex/dist/katex.min.css"; // Import KaTeX CSS
 
 // Import available components that can be used in JSX
@@ -23,16 +24,72 @@ import ColorGenerator from "@site/src/components/ColorGenerator";
  * @param {string} type - The content type: 'jsx', 'html', 'markdown', 'code', or 'auto' (default)
  */
 const Passthrough = ({ summary, string, type }) => {
+    // Custom input renderer to make task list checkboxes interactive
+    const CustomInput = ({ disabled, style, ...props }) => {
+      // Remove disabled attribute from task list checkboxes and add readOnly
+      if (props.type === "checkbox") {
+        return <input {...props} readOnly />;
+      }
+      return <input disabled={disabled} {...props} />;
+    };
+
+    // Custom ul renderer with static CSS-only indentation
+    const CustomUl = ({ className, children, ...props }) => {
+      const isTaskList = className?.includes('contains-task-list');
+      
+      if (isTaskList) {
+        return (
+          <ul 
+            className={className} 
+            style={{
+              marginLeft: '0', 
+              paddingLeft: '0',
+              listStyle: 'none'
+            }}
+            {...props}
+          >
+            {children}
+          </ul>
+        );
+      }
+      
+      return (
+        <ul className={className} {...props}>
+          {children}
+        </ul>
+      );
+    };
+
+    // Custom li renderer with proper task list styling
+    const CustomLi = ({ className, children, ...props }) => {
+      const isTaskListItem = className?.includes('task-list-item');
+      
+      return (
+        <li 
+          className={className}
+          style={isTaskListItem ? { 
+            listStyle: 'none',
+          } : undefined}
+          {...props}
+        >
+          {children}
+        </li>
+      );
+    };
+
   if (!string) return null;
-  const processedString = string.replace(/\\n/g, "\n");
+  
+  // Process ^ symbols for indentation (each ^ = 2 spaces)
+  const processedString = string.replace(/\^/g, "  ");
 
   if (type === "html") {
     return (
       <Markdown
-        remarkPlugins={[remarkMath, remarkBreaks]}
+        remarkPlugins={[remarkMath, remarkBreaks, remarkGfm]}
         rehypePlugins={[rehypeKatex, rehypeRaw]}
         components={{
           p: ({ children, ...props }) => <span {...props}>{children}</span>,
+          input: CustomInput,
         }}
       >
         {processedString}
@@ -56,31 +113,32 @@ const Passthrough = ({ summary, string, type }) => {
 
   // Default to markdown
   return (
-    <Markdown
-      remarkPlugins={[remarkMath, remarkBreaks]}
-      rehypePlugins={[rehypeKatex]}
-      components={{
-        p: ({ children, ...props }) => <span {...props}>{children}</span>,
-        br: () => <br />,
-        strong: ({ children, ...props }) => (
-          <strong {...props}>{children}</strong>
-        ),
-        em: ({ children, ...props }) => <em {...props}>{children}</em>,
-        code: ({ children, ...props }) => <code {...props}>{children}</code>,
-        a: ({ children, ...props }) => <a {...props}>{children}</a>,
-        ul: ({ children, ...props }) => <ul {...props}>{children}</ul>,
-        ol: ({ children, ...props }) => <ol {...props}>{children}</ol>,
-        li: ({ children, ...props }) => <li {...props}>{children}</li>,
-        h1: ({ children, ...props }) => <h1 {...props}>{children}</h1>,
-        h2: ({ children, ...props }) => <h2 {...props}>{children}</h2>,
-        h3: ({ children, ...props }) => <h3 {...props}>{children}</h3>,
-        h4: ({ children, ...props }) => <h4 {...props}>{children}</h4>,
-        h5: ({ children, ...props }) => <h5 {...props}>{children}</h5>,
-        h6: ({ children, ...props }) => <h6 {...props}>{children}</h6>,
-      }}
-    >
-      {processedString}
-    </Markdown>
+    <div className="passthrough-content">
+      <Markdown
+        remarkPlugins={[remarkMath, remarkBreaks, remarkGfm]}
+        rehypePlugins={[rehypeKatex]}
+        components={{
+          ul: CustomUl,
+          li: CustomLi,
+          br: () => <br />,
+          strong: ({ children, ...props }) => (
+            <strong {...props}>{children}</strong>
+          ),
+          em: ({ children, ...props }) => <em {...props}>{children}</em>,
+          code: ({ children, ...props }) => <code {...props}>{children}</code>,
+          a: ({ children, ...props }) => <a {...props}>{children}</a>,
+          input: CustomInput,
+          h1: ({ children, ...props }) => <h1 {...props}>{children}</h1>,
+          h2: ({ children, ...props }) => <h2 {...props}>{children}</h2>,
+          h3: ({ children, ...props }) => <h3 {...props}>{children}</h3>,
+          h4: ({ children, ...props }) => <h4 {...props}>{children}</h4>,
+          h5: ({ children, ...props }) => <h5 {...props}>{children}</h5>,
+          h6: ({ children, ...props }) => <h6 {...props}>{children}</h6>,
+        }}
+      >
+        {processedString}
+      </Markdown>
+    </div>
   );
 };
 

@@ -1,0 +1,30 @@
+{
+  "name": "create-docstatic",
+  "version": "0.1.0",
+  "description": "Create a docStatic documentation site with one command.",
+  "author": "aowendev <aowen@ieee.org>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aowendev/docstatic.git",
+    "directory": "create-docstatic"
+  },
+  "keywords": [
+    "docstatic",
+    "docusaurus",
+    "tinacms",
+    "documentation",
+    "static site",
+    "scaffold",
+    "create"
+  ],
+  "bin": {
+    "create-docstatic": "./index.js"
+  },
+  "files": [
+    "index.js"
+  ],
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

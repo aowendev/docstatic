@@ -4,6 +4,13 @@ echo "[pre-commit] hook running" 1>&2
 
 # Regenerate tina-lock.json and stage it if changed
 root_dir=$(git rev-parse --show-toplevel)
+
+# Fail if the scaffolding template has drifted from the main site
+echo "[pre-commit] checking template sync" 1>&2
+if ! node "$root_dir/scripts/sync-template.js" --check 1>&2; then
+  echo "[pre-commit] template out of sync — run: yarn sync-template (then stage template/)" 1>&2
+  exit 1
+fi
 echo "[pre-commit] regenerating tina-lock.json" 1>&2
 (cd "$root_dir" && yarn tinacms build --skip-cloud-checks 2>/dev/null) || true
 if [ -n "$(git diff --name-only "$root_dir/tina/tina-lock.json" 2>/dev/null)" ]; then

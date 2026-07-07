@@ -1,4 +1,5 @@
 import React from "react";
+import HelpButton from "../HelpButton";
 
 const WarningIcon = (props) => {
   return (
@@ -51,6 +52,20 @@ export const ThemeCollection = {
         component: () => {
           return <RestartWarning />;
         },
+      },
+    },
+    {
+      type: "boolean",
+      name: "help",
+      label: "Help",
+      required: false,
+      ui: {
+        component: (props) => (
+          <HelpButton
+            url="https://docstatic.com/docs/configuration"
+            {...props}
+          />
+        ),
       },
     },
     {

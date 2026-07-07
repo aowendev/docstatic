@@ -50,36 +50,34 @@ function getFutureDatedBlogFiles(blogDir) {
           postDateString = frontmatter.date.toISOString().split('T')[0];
         } else if (typeof frontmatter.date === 'string') {
           // Try to parse the date string
-          const parsed = new Date(frontmatter.date);
-          if (isNaN(parsed.getTime())) {
-            console.warn(`Invalid date format in ${file}: ${frontmatter.date}`);
-            continue;
+          const parsedDate = new Date(frontmatter.date);
+          if (!isNaN(parsedDate.getTime())) {
+            postDateString = parsedDate.toISOString().split('T')[0];
+          } else {
+            // Assume YYYY-MM-DD format if parsing fails
+            postDateString = frontmatter.date.split('T')[0];
           }
-          postDateString = parsed.toISOString().split('T')[0];
-        } else {
-          console.warn(`Unsupported date type in ${file}:`, typeof frontmatter.date);
-          continue;
         }
         
-        // Compare dates (YYYY-MM-DD format)
-        if (postDateString > currentDateString) {
+        // Add to exclude list if post date is in the future
+        if (postDateString && postDateString > currentDateString) {
           futureDatedFiles.push(file);
-          console.log(`📅 Excluding future-dated post: ${file} (${postDateString})`);
+          console.log(`📅 Excluding future-dated blog post: ${file} (date: ${postDateString})`);
         }
+        
       } catch (error) {
-        console.warn(`Error processing blog file ${file}:`, error.message);
+        console.warn(`Error checking blog post date for ${file}:`, error.message);
+        // Skip files with parsing errors (don't exclude them)
       }
     }
 
-    if (futureDatedFiles.length > 0) {
-      console.log(`📝 Total future-dated posts excluded: ${futureDatedFiles.length}`);
-    }
-
   } catch (error) {
-    console.warn('Error reading blog directory:', error.message);
+    console.warn(`Error reading blog directory ${blogDir}:`, error.message);
   }
-  
+
   return futureDatedFiles;
 }
 
-module.exports = { getFutureDatedBlogFiles };
+module.exports = {
+  getFutureDatedBlogFiles
+};

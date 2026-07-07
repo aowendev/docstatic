@@ -22,50 +22,64 @@ function decodeJwtPayload(token) {
   }
 }
 
-async function fetchGitIdentity() {
+async function tryTinaCloudIdentity() {
   try {
-    const response = await fetch('/git-identity.json');
-    if (response.ok) {
-      return await response.json();
+    if (typeof window === "undefined") return null;
+    const ls = window.localStorage;
+    for (let i = 0; i < ls.length; i++) {
+      const key = ls.key(i);
+      if (!key) continue;
+      const val = ls.getItem(key);
+      if (!val) continue;
+      if (val.includes(".")) {
+        const parts = val.split(".");
+        if (parts.length === 3) {
+          const payload = decodeJwtPayload(val);
+          const name = payload?.name || payload?.preferred_username;
+          const email = payload?.email;
+          if (name || email) {
+            return name ? `${name}${email ? ` <${email}>` : ""}` : email;
+          }
+        }
+      }
     }
-  } catch (error) {
-    console.log('No git identity file available');
+  } catch (_) {
+    // ignore
+  }
+  return null;
+}
+
+async function tryLocalGitIdentity() {
+  try {
+    if (typeof window === "undefined") return null;
+    const res = await fetch("/git-identity.json", { cache: "no-store" });
+    if (!res.ok) return null;
+    const data = await res.json();
+    const name = data?.name || data?.user?.name;
+    const email = data?.email || data?.user?.email;
+    if (name || email) {
+      return name ? `${name}${email ? ` <${email}>` : ""}` : email;
+    }
+  } catch (_) {
+    // ignore
   }
   return null;
 }
 
 export async function getEditorIdentity() {
-  // Check if we're in a browser environment
-  if (typeof window === 'undefined') {
-    return 'unknown';
+  // 1) Tina Cloud (when authenticated)
+  const cloud = await tryTinaCloudIdentity();
+  if (cloud) return cloud;
+
+  // 2) Local Git identity exposed as static JSON
+  const gitLocal = await tryLocalGitIdentity();
+  if (gitLocal) return gitLocal;
+
+  // 3) Env-provided local user
+  if (typeof process !== "undefined" && process.env && process.env.NEXT_PUBLIC_LOCAL_USER) {
+    return process.env.NEXT_PUBLIC_LOCAL_USER;
   }
 
-  try {
-    // 1. Check for Tina Cloud JWT in localStorage
-    const tinaToken = localStorage.getItem('tinacms.auth.token');
-    if (tinaToken) {
-      const payload = decodeJwtPayload(tinaToken);
-      if (payload?.name || payload?.email) {
-        return payload.name || payload.email;
-      }
-    }
-
-    // 2. Check for static Git identity (local development)
-    const gitIdentity = await fetchGitIdentity();
-    if (gitIdentity?.name) {
-      return gitIdentity.name;
-    }
-
-    // 3. Check environment variable
-    const envUser = process.env.NEXT_PUBLIC_LOCAL_USER;
-    if (envUser) {
-      return envUser;
-    }
-
-  } catch (error) {
-    console.warn('Error getting editor identity:', error);
-  }
-
-  // 4. Fallback
-  return 'unknown';
+  // 4) Fallback
+  return "unknown";
 }

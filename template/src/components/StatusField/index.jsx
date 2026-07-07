@@ -9,7 +9,8 @@ import React from "react";
 import { wrapFieldsWithMeta } from "tinacms";
 
 const StatusField = wrapFieldsWithMeta(({ input, field, tinaForm }) => {
-  const statusFields = [
+  // All boolean field names involved in the workflow
+  const allBooleans = [
     "draft",
     "review",
     "translate",
@@ -18,41 +19,50 @@ const StatusField = wrapFieldsWithMeta(({ input, field, tinaForm }) => {
     "unlisted",
   ];
 
-  // Get current status values from the form
-  // Priority order: published > unlisted > approved > translate > review > draft
-  const getCurrentStatus = () => {
-    const priorityOrder = [
-      "published",
-      "unlisted",
-      "approved",
-      "translate",
-      "review",
-      "draft",
-    ];
+  // Each workflow status maps to exactly which booleans should be true
+  const statusMap = {
+    draft:     { draft: true,  review: false, translate: false, approved: false, published: false, unlisted: false },
+    review:    { draft: false, review: true,  translate: false, approved: false, published: false, unlisted: true  },
+    translate: { draft: false, review: false, translate: true,  approved: false, published: false, unlisted: true  },
+    approved:  { draft: false, review: false, translate: false, approved: true,  published: true,  unlisted: false },
+    published: { draft: false, review: false, translate: false, approved: false, published: true,  unlisted: false },
+    unlisted:  { draft: false, review: false, translate: false, approved: false, published: false, unlisted: true  },
+  };
 
-    for (const statusField of priorityOrder) {
-      if (tinaForm.values[statusField] === true) {
-        return statusField;
-      }
+  // The UI options in display order
+  const statusOptions = ["draft", "review", "translate", "approved", "published", "unlisted"];
+
+  // Determine which single workflow status is currently active based on the boolean combination
+  const getCurrentStatus = () => {
+    const vals = {};
+    for (const b of allBooleans) {
+      vals[b] = tinaForm.values[b] === true;
     }
-    return "draft"; // default
+
+    // Match against statusMap in reverse-priority order (most specific first)
+    // Order matters: approved (published+approved) must be checked before published (published only)
+    const checkOrder = ["review", "translate", "approved", "published", "unlisted", "draft"];
+    for (const status of checkOrder) {
+      const expected = statusMap[status];
+      const match = allBooleans.every((b) => !!expected[b] === !!vals[b]);
+      if (match) return status;
+    }
+
+    // Fallback: if no exact match, use priority-based detection
+    if (vals.approved && vals.published) return "approved";
+    if (vals.translate && vals.unlisted) return "translate";
+    if (vals.review && vals.unlisted) return "review";
+    if (vals.published) return "published";
+    if (vals.unlisted) return "unlisted";
+    return "draft";
   };
 
   const activeStatus = getCurrentStatus();
 
   const handleStatusChange = (selectedStatus) => {
-    // Update all status fields
-    for (const field of statusFields) {
-      const fieldValue = field === selectedStatus;
-
-      // Use the form's change method to update each field
-      tinaForm.change(field, fieldValue);
-    }
-
-    // Special behavior: draft should always be true unless published or unlisted is true
-    // This is invisible to the user but ensures proper workflow state
-    if (selectedStatus !== "published" && selectedStatus !== "unlisted") {
-      tinaForm.change("draft", true);
+    const mapping = statusMap[selectedStatus];
+    for (const boolField of allBooleans) {
+      tinaForm.change(boolField, mapping[boolField]);
     }
   };
 
@@ -77,7 +87,7 @@ const StatusField = wrapFieldsWithMeta(({ input, field, tinaForm }) => {
   return (
     <div className="mb-6">
       <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-        {statusFields.map((status) => {
+        {statusOptions.map((status) => {
           const isActive = activeStatus === status;
           const baseClasses =
             "relative flex items-center justify-center px-4 py-3 text-sm font-medium border-2 rounded-lg cursor-pointer transition-all duration-200 hover:shadow-md";

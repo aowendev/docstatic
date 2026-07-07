@@ -29,9 +29,10 @@ import { ThemeCollection } from "../src/components/Theme/template";
 import { YouTubeEmbedBlockTemplate } from "../src/components/YouTubeEmbed/template";
 import { DashboardsCollection } from "../src/components/Dashboard/template";
 import { MDXTemplates } from "../src/theme/template";
-import { docusaurusDate, titleFromSlug } from "../util";
+import { docusaurusDate, titleFromSlug } from "../scripts/util";
 
 // Function to extract available locales from Docusaurus config
+
 function getDocusaurusLocales() {
   return docusaurusData.languages.supported.map((lang) => lang.code);
 }
@@ -39,14 +40,14 @@ function getDocusaurusLocales() {
 // Function to create language options from config data
 function createLanguageOptions(configData = docusaurusData) {
   const supportedLanguages = configData.languages?.supported || [
-	{ code: "en", label: "English" },
+    { code: "en", label: "English" },
   ];
 
   return supportedLanguages.map((langObj) => {
-	return {
-	  value: langObj.code,
-	  label: `${langObj.label} (${langObj.code})`,
-	};
+    return {
+      value: langObj.code,
+      label: `${langObj.label} (${langObj.code})`,
+    };
   });
 }
 
@@ -66,8 +67,8 @@ const allTags = [];
 function collectTags(nodes) {
   if (!Array.isArray(nodes)) return;
   for (const node of nodes) {
-	if (node.tag) allTags.push(node.tag);
-	if (node.children) collectTags(node.children);
+    if (node.tag) allTags.push(node.tag);
+    if (node.children) collectTags(node.children);
   }
 }
 
@@ -77,17 +78,17 @@ const allConditions = [];
 function collectConditions(categories) {
   if (!Array.isArray(categories)) return;
   for (const category of categories) {
-	if (category.conditions && Array.isArray(category.conditions)) {
-	  for (const condition of category.conditions) {
-		if (condition.active !== false) {
-		  // include active conditions and those without active field
-		  allConditions.push({
-			value: condition.condition,
-			label: `${condition.condition} (${category.name})`,
-		  });
-		}
-	  }
-	}
+    if (category.conditions && Array.isArray(category.conditions)) {
+      for (const condition of category.conditions) {
+        if (condition.active !== false) {
+          // include active conditions and those without active field
+          allConditions.push({
+            value: condition.condition,
+            label: `${condition.condition} (${category.name})`,
+          });
+        }
+      }
+    }
   }
 }
 
@@ -102,33 +103,33 @@ const branch =
 
 const WarningIcon = (props) => {
   return (
-	<svg
-	  stroke="currentColor"
-	  fill="currentColor"
-	  stroke-width="0"
-	  viewBox="0 0 24 24"
-	  height="1em"
-	  width="1em"
-	  xmlns="http://www.w3.org/2000/svg"
-	  {...props}
-	>
-	  <path d="M11.001 10h2v5h-2zM11 16h2v2h-2z" />
-	  <path d="M13.768 4.2C13.42 3.545 12.742 3.138 12 3.138s-1.42.407-1.768 1.063L2.894 18.064a1.986 1.986 0 0 0 .054 1.968A1.984 1.984 0 0 0 4.661 21h14.678c.708 0 1.349-.362 1.714-.968a1.989 1.989 0 0 0 .054-1.968L13.768 4.2zM4.661 19 12 5.137 19.344 19H4.661z" />
-	</svg>
+    <svg
+      stroke="currentColor"
+      fill="currentColor"
+      stroke-width="0"
+      viewBox="0 0 24 24"
+      height="1em"
+      width="1em"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
+      <path d="M11.001 10h2v5h-2zM11 16h2v2h-2z" />
+      <path d="M13.768 4.2C13.42 3.545 12.742 3.138 12 3.138s-1.42.407-1.768 1.063L2.894 18.064a1.986 1.986 0 0 0 .054 1.968A1.984 1.984 0 0 0 4.661 21h14.678c.708 0 1.349-.362 1.714-.968a1.989 1.989 0 0 0 .054-1.968L13.768 4.2zM4.661 19 12 5.137 19.344 19H4.661z" />
+    </svg>
   );
 };
 
 const RestartWarning = () => {
   return (
-	<p className="rounded-lg border shadow px-4 py-2.5 bg-gradient-to-r from-yellow-50 to-yellow-100 border-yellow-200 mb-4">
-	  <div className="flex items-center gap-2">
-		<WarningIcon className={"w-6 h-auto flex-shrink-0 text-yellow-400"} />
-		<div className={"flex-1 text-sm text-yellow-700 whitespace-normal	"}>
-		  To see settings changes reflected on your site, restart the Tina CLI
-		  after saving <em>(local development only)</em>.
-		</div>
-	  </div>
-	</p>
+    <p className="rounded-lg border shadow px-4 py-2.5 bg-gradient-to-r from-yellow-50 to-yellow-100 border-yellow-200 mb-4">
+      <div className="flex items-center gap-2">
+        <WarningIcon className={"w-6 h-auto flex-shrink-0 text-yellow-400"} />
+        <div className={"flex-1 text-sm text-yellow-700 whitespace-normal	"}>
+          To see settings changes reflected on your site, restart the Tina CLI
+          after saving <em>(local development only)</em>.
+        </div>
+      </div>
+    </p>
   );
 };
 
@@ -138,124 +139,124 @@ const PostCollection = {
   path: "blog",
   format: "mdx",
   ui: {
-	beforeSubmit: async ({ values }) => {
-	  return {
-		...values,
-		lastmod: new Date().toISOString(),
-	  };
-	},
-	defaultItem: {
-	  date: docusaurusDate(new Date()),
-	},
+    beforeSubmit: async ({ values }) => {
+      return {
+        ...values,
+        lastmod: new Date().toISOString(),
+      };
+    },
+    defaultItem: {
+      date: docusaurusDate(new Date()),
+    },
   },
   fields: [
-	{
-	  type: "boolean",
-	  name: "help",
-	  label: "Help",
-	  required: false,
-	  ui: {
-		component: (props) => (
-		  <HelpButton url="https://docstatic.com/docs/blog" {...props} />
-		),
-	  },
-	},
-	{
-	  label: "Last Modified",
-	  type: "string",
-	  name: "lastmod",
-	  ui: {
-		component: "hidden",
-	  },
-	},
-	{
-	  type: "string",
-	  name: "title",
-	  label: "Title",
-	  isTitle: true,
-	  required: true,
-	},
-	{
-	  name: "authors",
-	  label: "Authors",
-	  type: "object",
-	  list: true,
-	  ui: {
-		itemProps: (item) => {
-		  return { label: item?.name };
-		},
-	  },
-	  fields: [
-		{
-		  name: "name",
-		  label: "Name",
-		  type: "string",
-		  isTitle: true,
-		  required: true,
-		},
-		{
-		  name: "title",
-		  label: "Title",
-		  type: "string",
-		},
-		{
-		  name: "url",
-		  label: "URL",
-		  type: "string",
-		},
-		{
-		  name: "image_url",
-		  label: "Image URL",
-		  type: "string",
-		},
-	  ],
-	},
-	{
-	  name: "date",
-	  label: "Date",
-	  type: "string",
-	  required: true,
-	  ui: {
-		component: "date",
-		dateFormat: "YYYY-MM-DD",
-		parse: (val) => {
-		  if (!val) return docusaurusDate(new Date());
-		  // Always return the simple YYYY-MM-DD format
-		  return docusaurusDate(new Date(val));
-		},
-		format: (val) => {
-		  if (!val) return new Date();
-		  // If we already have a YYYY-MM-DD string, create a Date object for the picker
-		  if (typeof val === 'string' && val.match(/^\d{4}-\d{2}-\d{2}$/)) {
-			return new Date(val + 'T12:00:00.000Z'); // Use noon to avoid timezone issues
-		  }
-		  return new Date(val);
-		},
-	  },
-	},
-	{
-	  label: "Tags",
-	  name: "tags",
-	  type: "string",
-	  list: true,
-	  ui: {
-		component: (props) => (
-		  <CollapsibleField
-			{...props}
-			FieldComponent={TagsField}
-			defaultCollapsed={true}
-		  />
-		),
-	  },
-	  options: allTags,
-	},
-	{
-	  type: "rich-text",
-	  name: "body",
-	  label: "Body",
-	  isBody: true,
-	  templates: [...MDXTemplates],
-	},
+    {
+      type: "boolean",
+      name: "help",
+      label: "Help",
+      required: false,
+      ui: {
+        component: (props) => (
+          <HelpButton url="https://docstatic.com/docs/blog" {...props} />
+        ),
+      },
+    },
+    {
+      label: "Last Modified",
+      type: "string",
+      name: "lastmod",
+      ui: {
+        component: "hidden",
+      },
+    },
+    {
+      type: "string",
+      name: "title",
+      label: "Title",
+      isTitle: true,
+      required: true,
+    },
+    {
+      name: "authors",
+      label: "Authors",
+      type: "object",
+      list: true,
+      ui: {
+        itemProps: (item) => {
+          return { label: item?.name };
+        },
+      },
+      fields: [
+        {
+          name: "name",
+          label: "Name",
+          type: "string",
+          isTitle: true,
+          required: true,
+        },
+        {
+          name: "title",
+          label: "Title",
+          type: "string",
+        },
+        {
+          name: "url",
+          label: "URL",
+          type: "string",
+        },
+        {
+          name: "image_url",
+          label: "Image URL",
+          type: "string",
+        },
+      ],
+    },
+    {
+      name: "date",
+      label: "Date",
+      type: "string",
+      required: true,
+      ui: {
+        component: "date",
+        dateFormat: "YYYY-MM-DD",
+        parse: (val) => {
+          if (!val) return docusaurusDate(new Date());
+          // Always return the simple YYYY-MM-DD format
+          return docusaurusDate(new Date(val));
+        },
+        format: (val) => {
+          if (!val) return new Date();
+          // If we already have a YYYY-MM-DD string, create a Date object for the picker
+          if (typeof val === 'string' && val.match(/^\d{4}-\d{2}-\d{2}$/)) {
+            return new Date(val + 'T12:00:00.000Z'); // Use noon to avoid timezone issues
+          }
+          return new Date(val);
+        },
+      },
+    },
+    {
+      label: "Tags",
+      name: "tags",
+      type: "string",
+      list: true,
+      ui: {
+        component: (props) => (
+          <CollapsibleField
+            {...props}
+            FieldComponent={TagsField}
+            defaultCollapsed={true}
+          />
+        ),
+      },
+      options: allTags,
+    },
+    {
+      type: "rich-text",
+      name: "body",
+      label: "Body",
+      isBody: true,
+      templates: [...MDXTemplates],
+    },
   ],
 };
 
@@ -265,58 +266,58 @@ const SnippetsCollection = {
   path: "reuse/snippets",
   format: "mdx",
   ui: {
-	beforeSubmit: async ({ values }) => {
-	  return {
-		...values,
-		lastmod: new Date().toISOString(),
-	  };
-	},
-	defaultItem: {
-	  lastmod: new Date().toISOString(),
-	},
+    beforeSubmit: async ({ values }) => {
+      return {
+        ...values,
+        lastmod: new Date().toISOString(),
+      };
+    },
+    defaultItem: {
+      lastmod: new Date().toISOString(),
+    },
   },
   fields: [
-	{
-	  type: "boolean",
-	  name: "help",
-	  label: "Help",
-	  required: false,
-	  ui: {
-		component: (props) => (
-		  <HelpButton
-			url="https://docstatic.com/docs/guides/markdown-features/snippets"
-			{...props}
-		  />
-		),
-	  },
-	},
-	{
-	  label: "Last Modified",
-	  type: "string",
-	  name: "lastmod",
-	  ui: {
-		component: "hidden",
-	  },
-	},
-	{
-	  type: "string",
-	  name: "title",
-	  label: "Title",
-	  isTitle: true,
-	  required: true,
-	},
-	{
-	  type: "string",
-	  name: "description",
-	  label: "Description",
-	},
-	{
-	  type: "rich-text",
-	  name: "body",
-	  label: "Body",
-	  isBody: true,
-	  templates: [...MDXTemplates],
-	},
+    {
+      type: "boolean",
+      name: "help",
+      label: "Help",
+      required: false,
+      ui: {
+        component: (props) => (
+          <HelpButton
+            url="https://docstatic.com/docs/guides/markdown-features/snippets"
+            {...props}
+          />
+        ),
+      },
+    },
+    {
+      label: "Last Modified",
+      type: "string",
+      name: "lastmod",
+      ui: {
+        component: "hidden",
+      },
+    },
+    {
+      type: "string",
+      name: "title",
+      label: "Title",
+      isTitle: true,
+      required: true,
+    },
+    {
+      type: "string",
+      name: "description",
+      label: "Description",
+    },
+    {
+      type: "rich-text",
+      name: "body",
+      label: "Body",
+      isBody: true,
+      templates: [...MDXTemplates],
+    },
   ],
 };
 
@@ -325,167 +326,177 @@ const DocsCollection = {
   label: "Topics",
   path: "docs",
   match: {
-	exclude: "{api/**/**,wiki/**/**}",
+    exclude: "{api/**/**,wiki/**/**}",
   },
   format: "mdx",
   ui: {
-	beforeSubmit: async ({ values }) => {
-	  return {
-		...values,
-		lastmod: new Date().toISOString(),
-	  };
-	},
-	defaultItem: {
-	  draft: true,
-	  review: false,
-	  translate: false,
-	  approved: false,
-	  published: false,
-	  unlisted: false,
-	},
+    beforeSubmit: async ({ values }) => {
+      const modifiedBy = await getEditorIdentity();
+      return {
+        ...values,
+        lastmod: new Date().toISOString(),
+        modifiedBy,
+      };
+    },
+    defaultItem: {
+      draft: true,
+      review: false,
+      translate: false,
+      approved: false,
+      published: false,
+      unlisted: false,
+    },
   },
   fields: [
-	{
-	  type: "boolean",
-	  name: "help",
-	  label: "Help",
-	  required: false,
-	  ui: {
-		component: (props) => (
-		  <HelpButton
-			url="https://docstatic.com/docs/guides/docs/create-doc"
-			{...props}
-		  />
-		),
-	  },
-	},
-	{
-	  label: "Last Modified",
-	  type: "string",
-	  name: "lastmod",
-	  ui: {
-		component: "hidden",
-	  },
-	},
-	{
-	  type: "string",
-	  name: "title",
-	  label: "Title",
-	  isTitle: true,
-	  required: true,
-	},
-	{
-	  type: "rich-text",
-	  name: "body",
-	  label: "Body",
-	  isBody: true,
-	  templates: [...MDXTemplates],
-	},
-	{
-	  label: "Conditions",
-	  name: "conditions",
-	  type: "string",
-	  list: true,
-	  ui: {
-		component: (props) => (
-		  <CollapsibleField
-			{...props}
-			FieldComponent={ConditionsTreeField}
-			defaultCollapsed={true}
-		  />
-		),
-	  },
-	  options: allConditions,
-	},
-	{
-	  type: "string",
-	  name: "description",
-	  label: "Description",
-	  ui: {
-		component: (props) => (
-		  <CollapsibleField
-			{...props}
-			FieldComponent={TextField}
-			defaultCollapsed={true}
-		  />
-		),
-	  },
-	},
-	{
-	  type: "string",
-	  name: "slug",
-	  label: "Slug",
-	  ui: {
-		component: (props) => (
-		  <CollapsibleField
-			{...props}
-			FieldComponent={TextField}
-			defaultCollapsed={true}
-		  />
-		),
-	  },
-	},
-	{
-	  label: "Tags",
-	  name: "tags",
-	  type: "string",
-	  list: true,
-	  ui: {
-		component: (props) => (
-		  <CollapsibleField
-			{...props}
-			FieldComponent={TagsField}
-			defaultCollapsed={true}
-		  />
-		),
-	  },
-	  options: allTags,
-	},
+    {
+      type: "boolean",
+      name: "help",
+      label: "Help",
+      required: false,
+      ui: {
+        component: (props) => (
+          <HelpButton
+            url="https://docstatic.com/docs/guides/docs/create-doc"
+            {...props}
+          />
+        ),
+      },
+    },
+    {
+      label: "Last Modified",
+      type: "string",
+      name: "lastmod",
+      ui: {
+        component: "hidden",
+      },
+    },
+    {
+      label: "Modified By",
+      type: "string",
+      name: "modifiedBy",
+      ui: {
+        component: "hidden",
+      },
+    },
+    {
+      type: "string",
+      name: "title",
+      label: "Title",
+      isTitle: true,
+      required: true,
+    },
+    {
+      type: "rich-text",
+      name: "body",
+      label: "Body",
+      isBody: true,
+      templates: [...MDXTemplates],
+    },
+    {
+      label: "Conditions",
+      name: "conditions",
+      type: "string",
+      list: true,
+      ui: {
+        component: (props) => (
+          <CollapsibleField
+            {...props}
+            FieldComponent={ConditionsTreeField}
+            defaultCollapsed={true}
+          />
+        ),
+      },
+      options: allConditions,
+    },
+    {
+      type: "string",
+      name: "description",
+      label: "Description",
+      ui: {
+        component: (props) => (
+          <CollapsibleField
+            {...props}
+            FieldComponent={TextField}
+            defaultCollapsed={true}
+          />
+        ),
+      },
+    },
+    {
+      type: "string",
+      name: "slug",
+      label: "Slug",
+      ui: {
+        component: (props) => (
+          <CollapsibleField
+            {...props}
+            FieldComponent={TextField}
+            defaultCollapsed={true}
+          />
+        ),
+      },
+    },
+    {
+      label: "Tags",
+      name: "tags",
+      type: "string",
+      list: true,
+      ui: {
+        component: (props) => (
+          <CollapsibleField
+            {...props}
+            FieldComponent={TagsField}
+            defaultCollapsed={true}
+          />
+        ),
+      },
+      options: allTags,
+    },
 
-	{
-	  type: "boolean",
-	  name: "draft",
-	  label: "Workflow",
-	  ui: {
-		component: (props) => (
-		  <CollapsibleField
-			{...props}
-			FieldComponent={StatusField}
-			defaultCollapsed={true}
-		  />
-		),
-	  },
-	},
-	{
-	  type: "boolean",
-	  name: "review",
-	  label: "In Review",
-	  ui: { component: "hidden" },
-	},
-	{
-	  type: "boolean",
-	  name: "translate",
-	  label: "In Translation",
-	  ui: { component: "hidden" },
-	},
-	{
-	  type: "boolean",
-	  name: "approved",
-	  label: "Translation Approved",
-	  ui: { component: "hidden" },
-	},
-	{
-	  type: "boolean",
-	  name: "published",
-	  label: "Published",
-	  ui: { component: "hidden" },
-	},
-	{
-	  type: "boolean",
-	  name: "unlisted",
-	  label: "Unlisted",
-	  ui: { component: "hidden" },
-	},
+    {
+      type: "boolean",
+      name: "draft",
+      label: "Workflow",
+      ui: {
+        component: (props) => (
+          <CollapsibleField
+            {...props}
+            FieldComponent={StatusField}
+            defaultCollapsed={true}
+          />
+        ),
+      },
+    },
+    {
+      type: "boolean",
+      name: "review",
+      label: "In Review",
+      ui: { component: "hidden" },
+    },
+    {
+      type: "boolean",
+      name: "translate",
+      label: "In Translation",
+      ui: { component: "hidden" },
+    },
+    {
+      type: "boolean",
+      name: "approved",
+      label: "Translation Approved",
+      ui: { component: "hidden" },
+    },
+    {
+      type: "boolean",
+      name: "published",
+      label: "Published",
+      ui: { component: "hidden" },
+    },
+    {
+      type: "boolean",
+      name: "unlisted",
+      label: "Unlisted",
+      ui: { component: "hidden" },
+    },
   ],
 };
 
@@ -495,50 +506,50 @@ const WikiCollection = {
   path: "docs/wiki",
   format: "mdx",
   ui: {
-	beforeSubmit: async ({ values }) => {
-	  return {
-		...values,
-		lastmod: new Date().toISOString(),
-	  };
-	},
+    beforeSubmit: async ({ values }) => {
+      return {
+        ...values,
+        lastmod: new Date().toISOString(),
+      };
+    },
   },
   fields: [
-	{
-	  type: "boolean",
-	  name: "help",
-	  label: "Help",
-	  required: false,
-	  ui: {
-		component: (props) => (
-		  <HelpButton
-			url="https://docstatic.com/docs/guides/wikis"
-			{...props}
-		  />
-		),
-	  },
-	},
-	{
-	  label: "Last Modified",
-	  type: "string",
-	  name: "lastmod",
-	  ui: {
-		component: "hidden",
-	  },
-	},
-	{
-	  type: "string",
-	  name: "title",
-	  label: "Title",
-	  isTitle: true,
-	  required: true,
-	},
-	{
-	  type: "rich-text",
-	  name: "body",
-	  label: "Body",
-	  isBody: true,
-	  templates: [...MDXTemplates],
-	},
+    {
+      type: "boolean",
+      name: "help",
+      label: "Help",
+      required: false,
+      ui: {
+        component: (props) => (
+          <HelpButton
+            url="https://docstatic.com/docs/guides/wikis"
+            {...props}
+          />
+        ),
+      },
+    },
+    {
+      label: "Last Modified",
+      type: "string",
+      name: "lastmod",
+      ui: {
+        component: "hidden",
+      },
+    },
+    {
+      type: "string",
+      name: "title",
+      label: "Title",
+      isTitle: true,
+      required: true,
+    },
+    {
+      type: "rich-text",
+      name: "body",
+      label: "Body",
+      isBody: true,
+      templates: [...MDXTemplates],
+    },
   ],
 };
 
@@ -548,20 +559,20 @@ const APIsCollection = {
   path: "docs/api",
   format: "mdx",
   ui: {
-	global: false,
-	allowedActions: {
-	  create: false,
-	  delete: false,
-	},
+    global: false,
+    allowedActions: {
+      create: false,
+      delete: false,
+    },
   },
   fields: [
-	{
-	  type: "boolean",
-	  name: "help",
-	  label: "Help",
-	  ui: { component: "hidden" },
-	  required: false,
-	},
+    {
+      type: "boolean",
+      name: "help",
+      label: "Help",
+      ui: { component: "hidden" },
+      required: false,
+    },
   ],
 };
 
@@ -571,163 +582,173 @@ const TranslationCollection = {
   path: "i18n",
   format: "mdx",
   ui: {
-	beforeSubmit: async ({ values }) => {
-	  return {
-		...values,
-		lastmod: new Date().toISOString(),
-	  };
-	},
-	defaultItem: {
-	  draft: true,
-	  review: false,
-	  translate: false,
-	  approved: false,
-	  published: false,
-	  unlisted: false,
-	},
+    beforeSubmit: async ({ values }) => {
+      const modifiedBy = await getEditorIdentity();
+      return {
+        ...values,
+        lastmod: new Date().toISOString(),
+        modifiedBy,
+      };
+    },
+    defaultItem: {
+      draft: true,
+      review: false,
+      translate: false,
+      approved: false,
+      published: false,
+      unlisted: false,
+    },
   },
   fields: [
-	{
-	  type: "boolean",
-	  name: "help",
-	  label: "Help",
-	  required: false,
-	  ui: {
-		component: (props) => (
-		  <HelpButton
-			url="https://docstatic.com/docs/i18n/introduction"
-			{...props}
-		  />
-		),
-	  },
-	},
-	{
-	  label: "Last Modified",
-	  type: "string",
-	  name: "lastmod",
-	  ui: {
-		component: "hidden",
-	  },
-	},
-	{
-	  type: "string",
-	  name: "title",
-	  label: "Title",
-	  isTitle: true,
-	  required: true,
-	},
-	{
-	  type: "rich-text",
-	  name: "body",
-	  label: "Body",
-	  isBody: true,
-	  templates: [...MDXTemplates],
-	},
-	{
-	  label: "Conditions",
-	  name: "conditions",
-	  type: "string",
-	  list: true,
-	  ui: {
-		component: (props) => (
-		  <CollapsibleField
-			{...props}
-			FieldComponent={ConditionsTreeField}
-			defaultCollapsed={true}
-		  />
-		),
-	  },
-	  options: allConditions,
-	},
-	{
-	  type: "string",
-	  name: "description",
-	  label: "Description",
-	  ui: {
-		component: (props) => (
-		  <CollapsibleField
-			{...props}
-			FieldComponent={TextField}
-			defaultCollapsed={true}
-		  />
-		),
-	  },
-	},
-	{
-	  type: "string",
-	  name: "slug",
-	  label: "Slug",
-	  ui: {
-		component: (props) => (
-		  <CollapsibleField
-			{...props}
-			FieldComponent={TextField}
-			defaultCollapsed={true}
-		  />
-		),
-	  },
-	},
-	{
-	  label: "Tags",
-	  name: "tags",
-	  type: "string",
-	  list: true,
-	  ui: {
-		component: (props) => (
-		  <CollapsibleField
-			{...props}
-			FieldComponent={TagsField}
-			defaultCollapsed={true}
-		  />
-		),
-	  },
-	  options: allTags,
-	},
+    {
+      type: "boolean",
+      name: "help",
+      label: "Help",
+      required: false,
+      ui: {
+        component: (props) => (
+          <HelpButton
+            url="https://docstatic.com/docs/i18n/introduction"
+            {...props}
+          />
+        ),
+      },
+    },
+    {
+      label: "Last Modified",
+      type: "string",
+      name: "lastmod",
+      ui: {
+        component: "hidden",
+      },
+    },
+    {
+      label: "Modified By",
+      type: "string",
+      name: "modifiedBy",
+      ui: {
+        component: "hidden",
+      },
+    },
+    {
+      type: "string",
+      name: "title",
+      label: "Title",
+      isTitle: true,
+      required: true,
+    },
+    {
+      type: "rich-text",
+      name: "body",
+      label: "Body",
+      isBody: true,
+      templates: [...MDXTemplates],
+    },
+    {
+      label: "Conditions",
+      name: "conditions",
+      type: "string",
+      list: true,
+      ui: {
+        component: (props) => (
+          <CollapsibleField
+            {...props}
+            FieldComponent={ConditionsTreeField}
+            defaultCollapsed={true}
+          />
+        ),
+      },
+      options: allConditions,
+    },
+    {
+      type: "string",
+      name: "description",
+      label: "Description",
+      ui: {
+        component: (props) => (
+          <CollapsibleField
+            {...props}
+            FieldComponent={TextField}
+            defaultCollapsed={true}
+          />
+        ),
+      },
+    },
+    {
+      type: "string",
+      name: "slug",
+      label: "Slug",
+      ui: {
+        component: (props) => (
+          <CollapsibleField
+            {...props}
+            FieldComponent={TextField}
+            defaultCollapsed={true}
+          />
+        ),
+      },
+    },
+    {
+      label: "Tags",
+      name: "tags",
+      type: "string",
+      list: true,
+      ui: {
+        component: (props) => (
+          <CollapsibleField
+            {...props}
+            FieldComponent={TagsField}
+            defaultCollapsed={true}
+          />
+        ),
+      },
+      options: allTags,
+    },
 
-	{
-	  type: "boolean",
-	  name: "draft",
-	  label: "Workflow",
-	  ui: {
-		component: (props) => (
-		  <CollapsibleField
-			{...props}
-			FieldComponent={StatusField}
-			defaultCollapsed={true}
-		  />
-		),
-	  },
-	},
-	{
-	  type: "boolean",
-	  name: "review",
-	  label: "In Review",
-	  ui: { component: "hidden" },
-	},
-	{
-	  type: "boolean",
-	  name: "translate",
-	  label: "In Translation",
-	  ui: { component: "hidden" },
-	},
-	{
-	  type: "boolean",
-	  name: "approved",
-	  label: "Translation Approved",
-	  ui: { component: "hidden" },
-	},
-	{
-	  type: "boolean",
-	  name: "published",
-	  label: "Published",
-	  ui: { component: "hidden" },
-	},
-	{
-	  type: "boolean",
-	  name: "unlisted",
-	  label: "Unlisted",
-	  ui: { component: "hidden" },
-	},
+    {
+      type: "boolean",
+      name: "draft",
+      label: "Workflow",
+      ui: {
+        component: (props) => (
+          <CollapsibleField
+            {...props}
+            FieldComponent={StatusField}
+            defaultCollapsed={true}
+          />
+        ),
+      },
+    },
+    {
+      type: "boolean",
+      name: "review",
+      label: "In Review",
+      ui: { component: "hidden" },
+    },
+    {
+      type: "boolean",
+      name: "translate",
+      label: "In Translation",
+      ui: { component: "hidden" },
+    },
+    {
+      type: "boolean",
+      name: "approved",
+      label: "Translation Approved",
+      ui: { component: "hidden" },
+    },
+    {
+      type: "boolean",
+      name: "published",
+      label: "Published",
+      ui: { component: "hidden" },
+    },
+    {
+      type: "boolean",
+      name: "unlisted",
+      label: "Unlisted",
+      ui: { component: "hidden" },
+    },
   ],
 };
 
@@ -735,31 +756,31 @@ const DocLinkTemplate = {
   name: "doc",
   label: "Doc Link",
   ui: {
-	itemProps: (item) => {
-	  return {
-		label: item?.label
-		  ? item?.label
-		  : item?.document
-			? titleFromSlug(item?.document)
-			: item.name,
-	  };
-	},
+    itemProps: (item) => {
+      return {
+        label: item?.label
+          ? item?.label
+          : item?.document
+            ? titleFromSlug(item?.document)
+            : item.name,
+      };
+    },
   },
   fields: [
-	{
-	  label: "Document",
-	  name: "document",
-	  type: "reference",
-	  collections: ["doc"],
-	  isTitle: true,
-	  required: true,
-	},
-	{
-	  name: "label",
-	  label: "Label",
-	  description: "By default this is the document title",
-	  type: "string",
-	},
+    {
+      label: "Document",
+      name: "document",
+      type: "reference",
+      collections: ["doc"],
+      isTitle: true,
+      required: true,
+    },
+    {
+      name: "label",
+      label: "Label",
+      description: "By default this is the document title",
+      type: "string",
+    },
   ],
 };
 
@@ -767,80 +788,80 @@ const ExternalLinkTemplate = {
   name: "link",
   label: "External Link",
   ui: {
-	itemProps: (item) => {
-	  return {
-		label: item?.title ? item?.title : item.name,
-	  };
-	},
+    itemProps: (item) => {
+      return {
+        label: item?.title ? item?.title : item.name,
+      };
+    },
   },
   fields: [
-	{
-	  name: "title",
-	  label: "Label",
-	  type: "string",
-	  isTitle: true,
-	  required: true,
-	},
-	{
-	  name: "href",
-	  label: "URL",
-	  type: "string",
-	  required: true,
-	},
+    {
+      name: "title",
+      label: "Label",
+      type: "string",
+      isTitle: true,
+      required: true,
+    },
+    {
+      name: "href",
+      label: "URL",
+      type: "string",
+      required: true,
+    },
   ],
 };
 
 const CategoryFields = [
   {
-	name: "title",
-	label: "Title",
-	type: "string",
-	isTitle: true,
-	required: true,
+    name: "title",
+    label: "Title",
+    type: "string",
+    isTitle: true,
+    required: true,
   },
   {
-	name: "link",
-	label: "Link",
-	type: "string",
-	options: [
-	  {
-		label: "None",
-		value: "none",
-	  },
-	  {
-		label: "Document",
-		value: "doc",
-	  },
-	  {
-		label: "Generated Index",
-		value: "generated",
-	  },
-	],
+    name: "link",
+    label: "Link",
+    type: "string",
+    options: [
+      {
+        label: "None",
+        value: "none",
+      },
+      {
+        label: "Document",
+        value: "doc",
+      },
+      {
+        label: "Generated Index",
+        value: "generated",
+      },
+    ],
   },
   {
-	name: "docLink",
-	label: "Document",
-	type: "reference",
-	collections: ["doc"],
-	ui: {
-	  component: (props) => {
-		const link = React.useMemo(() => {
-		  let fieldName = props.field.name;
-		  fieldName =
-			fieldName.substring(0, fieldName.lastIndexOf(".")) || fieldName;
+    name: "docLink",
+    label: "Document",
+    type: "reference",
+    collections: ["doc"],
+    ui: {
+      component: (props) => {
+        const link = React.useMemo(() => {
+          let fieldName = props.field.name;
+          fieldName =
+            fieldName.substring(0, fieldName.lastIndexOf(".")) || fieldName;
 
-		  return fieldName
-			.split(".")
-			.reduce((o, i) => o[i], props.tinaForm.values).link;
-		}, [props.tinaForm.values, props.field.name]);
+          return fieldName
+            .split(".")
+            .reduce((o, i) => o[i], props.tinaForm.values).link;
+        }, [props.tinaForm.values, props.field.name]);
 
-		if (link !== "doc") {
-		  return null;
-		}
+        if (link !== "doc") {
+          return null;
+        }
 
-		return ReferenceField(props);
-	  },
-	},
+        return ReferenceField(props);
+      },
+    },
   },
 ];
 
@@ -855,57 +876,131 @@ const CategoryTemplateProps = {
   name: "category",
   label: "Category",
   ui: {
-	itemProps: (item) => {
-	  return {
-		label: item?.title ? item?.title : item.name,
-	  };
-	},
-	defaultItem: {
-	  link: "none",
-	},
+    itemProps: (item) => {
+      return {
+        label: item?.title ? item?.title : item.name,
+      };
+    },
+    defaultItem: {
+      link: "none",
+    },
   },
 };
+
+const AutogeneratedTemplate = {
+  name: "autogenerated",
+  label: "Auto-populated from Folder",
+  ui: {
+    itemProps: (item) => {
+      return {
+        label: item?.title
+          ? `${item.title} (auto: ${item.dirName || "?"})`
+          : item.name,
+      };
+    },
+    defaultItem: {
+      title: "New Auto-populated Section",
+      dirName: "",
+    },
+  },
+  fields: [
+    {
+      name: "title",
+      label: "Title",
+      type: "string",
+      isTitle: true,
+      required: true,
+    },
+    {
+      name: "dirName",
+      label: "Folder Name",
+      description:
+        "The folder path inside docs/ to auto-populate from (for example 'teams' or 'architecture/diagrams')",
+      type: "string",
+      required: true,
+    },
+  ],
+};
+
+const LeafTemplates = [DocLinkTemplate, ExternalLinkTemplate, AutogeneratedTemplate];
 
 const CategoryTemplate = {
   ...CategoryTemplateProps,
   fields: [
-	...CategoryFields,
-	{
-	  ...ItemsField,
-	  templates: [
-		{
-		  ...CategoryTemplateProps,
-		  fields: [
-			...CategoryFields,
-			{
-			  ...ItemsField,
-			  templates: [
-				{
-				  ...CategoryTemplateProps,
-				  fields: [
-					...CategoryFields,
-					{
-					  ...ItemsField,
-					  templates: [DocLinkTemplate, ExternalLinkTemplate],
-					},
-				  ],
-				},
-				DocLinkTemplate,
-				ExternalLinkTemplate,
-			  ],
-			},
-		  ],
-		},
-		DocLinkTemplate,
-		ExternalLinkTemplate,
-	  ],
-	},
+    ...CategoryFields,
+    {
+      ...ItemsField,
+      templates: [
+        {
+          ...CategoryTemplateProps,
+          fields: [
+            ...CategoryFields,
+            {
+              ...ItemsField,
+              templates: [
+                {
+                  ...CategoryTemplateProps,
+                  fields: [
+                    ...CategoryFields,
+                    {
+                      ...ItemsField,
+                      templates: [
+                        {
+                          ...CategoryTemplateProps,
+                          fields: [
+                            ...CategoryFields,
+                            {
+                              ...ItemsField,
+                              templates: [
+                                {
+                                  ...CategoryTemplateProps,
+                                  fields: [
+                                    ...CategoryFields,
+                                    {
+                                      ...ItemsField,
+                                      templates: [
+                                        {
+                                          ...CategoryTemplateProps,
+                                          fields: [
+                                            ...CategoryFields,
+                                            {
+                                              ...ItemsField,
+                                              templates: LeafTemplates,
+                                            },
+                                          ],
+                                        },
+                                        ...LeafTemplates,
+                                      ],
+                                    },
+                                  ],
+                                },
+                                ...LeafTemplates,
+                              ],
+                            },
+                          ],
+                        },
+                        ...LeafTemplates,
+                      ],
+                    },
+                  ],
+                },
+                ...LeafTemplates,
+              ],
+            },
+          ],
+        },
+        ...LeafTemplates,
+      ],
+    },
   ],
 };
 
 const SidebarItemsField = {
   ...ItemsField,
-  templates: [CategoryTemplate, DocLinkTemplate, ExternalLinkTemplate],
+  templates: [
+    CategoryTemplate,
+    ...LeafTemplates,
+  ],
 };
 
 const SidebarCollection = {
@@ -914,47 +1009,47 @@ const SidebarCollection = {
   path: "config/sidebar",
   format: "json",
   ui: {
-	global: true,
-	allowedActions: {
-	  create: false,
-	  delete: false,
-	},
+    global: true,
+    allowedActions: {
+      create: false,
+      delete: false,
+    },
   },
   fields: [
-	{
-	  type: "boolean",
-	  name: "help",
-	  label: "Help",
-	  required: false,
-	  ui: {
-		component: (props) => (
-		  <HelpButton
-			url="https://docstatic.com/docs/guides/markdown-features/toc"
-			{...props}
-		  />
-		),
-	  },
-	},
-	{
-	  type: "string",
-	  name: "_warning",
-	  ui: {
-		component: () => {
-		  return <RestartWarning />;
-		},
-	  },
-	},
-	{
-	  type: "string",
-	  label: "Label",
-	  name: "label",
-	  required: true,
-	  isTitle: true,
-	  ui: {
-		component: "hidden",
-	  },
-	},
-	SidebarItemsField,
+    {
+      type: "boolean",
+      name: "help",
+      label: "Help",
+      required: false,
+      ui: {
+        component: (props) => (
+          <HelpButton
+            url="https://docstatic.com/docs/guides/markdown-features/toc"
+            {...props}
+          />
+        ),
+      },
+    },
+    {
+      type: "string",
+      name: "_warning",
+      ui: {
+        component: () => {
+          return <RestartWarning />;
+        },
+      },
+    },
+    {
+      type: "string",
+      label: "Label",
+      name: "label",
+      required: true,
+      isTitle: true,
+      ui: {
+        component: "hidden",
+      },
+    },
+    SidebarItemsField,
   ],
 };
 
@@ -962,70 +1057,70 @@ const HomepageCollection = {
   name: "homepage",
   label: "Home Page",
   description:
-	"To see settings changes reflected on your site, you must restart the Tina CLI after saving changes (local development only).",
+    "To see settings changes reflected on your site, you must restart the Tina CLI after saving changes (local development only).",
   path: "config/homepage",
   format: "json",
   ui: {
-	allowedActions: {
-	  create: false,
-	  delete: false,
-	},
+    allowedActions: {
+      create: false,
+      delete: false,
+    },
   },
   fields: [
-	{
-	  type: "boolean",
-	  name: "help",
-	  label: "Help",
-	  required: false,
-	  ui: {
-		component: (props) => (
-		  <HelpButton
-			url="https://docstatic.com/docs/introduction"
-			{...props}
-		  />
-		),
-	  },
-	},
-	{
-	  type: "string",
-	  name: "_warning",
-	  ui: {
-		component: () => {
-		  return <RestartWarning />;
-		},
-	  },
-	},
-	{
-	  type: "string",
-	  label: "Label",
-	  name: "label",
-	  required: true,
-	  isTitle: true,
-	  ui: {
-		component: "hidden",
-	  },
-	},
-	{
-	  type: "string",
-	  name: "title",
-	  label: "Title",
-	},
-	{
-	  type: "string",
-	  name: "description",
-	  label: "Description",
-	},
-	{
-	  type: "object",
-	  list: true,
-	  name: "blocks",
-	  label: "Blocks",
-	  templates: [
-		HeroBlockTemplate,
-		FeaturesBlockTemplate,
-		YouTubeEmbedBlockTemplate,
-	  ],
-	},
+    {
+      type: "boolean",
+      name: "help",
+      label: "Help",
+      required: false,
+      ui: {
+        component: (props) => (
+          <HelpButton
+            url="https://docstatic.com/docs/introduction"
+            {...props}
+          />
+        ),
+      },
+    },
+    {
+      type: "string",
+      name: "_warning",
+      ui: {
+        component: () => {
+          return <RestartWarning />;
+        },
+      },
+    },
+    {
+      type: "string",
+      label: "Label",
+      name: "label",
+      required: true,
+      isTitle: true,
+      ui: {
+        component: "hidden",
+      },
+    },
+    {
+      type: "string",
+      name: "title",
+      label: "Title",
+    },
+    {
+      type: "string",
+      name: "description",
+      label: "Description",
+    },
+    {
+      type: "object",
+      list: true,
+      name: "blocks",
+      label: "Blocks",
+      templates: [
+        HeroBlockTemplate,
+        FeaturesBlockTemplate,
+        YouTubeEmbedBlockTemplate,
+      ],
+    },
   ],
 };
 
@@ -1035,45 +1130,45 @@ const PagesCollection = {
   path: "src/pages",
   format: "mdx",
   fields: [
-	{
-	  type: "boolean",
-	  name: "help",
-	  label: "Help",
-	  required: false,
-	  ui: {
-		component: (props) => (
-		  <HelpButton
-			url="https://docstatic.com/docs/guides/creating-pages"
-			{...props}
-		  />
-		),
-	  },
-	},
-	{
-	  type: "string",
-	  name: "title",
-	  label: "Title",
-	  isTitle: true,
-	  required: true,
-	},
-	{
-	  type: "string",
-	  name: "description",
-	  label: "Description",
-	},
-	{
-	  type: "rich-text",
-	  name: "body",
-	  label: "Body",
-	  isBody: true,
-	  templates: [...MDXTemplates],
-	},
+    {
+      type: "boolean",
+      name: "help",
+      label: "Help",
+      required: false,
+      ui: {
+        component: (props) => (
+          <HelpButton
+            url="https://docstatic.com/docs/guides/creating-pages"
+            {...props}
+          />
+        ),
+      },
+    },
+    {
+      type: "string",
+      name: "title",
+      label: "Title",
+      isTitle: true,
+      required: true,
+    },
+    {
+      type: "string",
+      name: "description",
+      label: "Description",
+    },
+    {
+      type: "rich-text",
+      name: "body",
+      label: "Body",
+      isBody: true,
+      templates: [...MDXTemplates],
+    },
   ],
   ui: {
-	allowedActions: {
-	  create: true,
-	  delete: true,
-	},
+    allowedActions: {
+      create: true,
+      delete: true,
+    },
   },
 };
 
@@ -1086,83 +1181,83 @@ const ConditionsCollection = {
   path: "reuse/conditions",
   format: "json",
   fields: [
-	{
-	  type: "boolean",
-	  name: "help",
-	  label: "Help",
-	  required: false,
-	  ui: {
-		component: (props) => (
-		  <HelpButton
-			url="https://docstatic.com/docs/guides/markdown-features/conditional-text"
-			{...props}
-		  />
-		),
-	  },
-	},
-	{
-	  type: "object",
-	  label: "Categories",
-	  name: "categories",
-	  list: true,
-	  ui: {
-		itemProps: (item) => ({
-		  label: item.name,
-		}),
-	  },
-	  fields: [
-		{
-		  type: "string",
-		  label: "Category Name",
-		  name: "name",
-		  isTitle: true,
-		  required: true,
-		},
-		{
-		  type: "string",
-		  label: "Description",
-		  name: "description",
-		},
-		{
-		  type: "object",
-		  label: "Conditions",
-		  name: "conditions",
-		  list: true,
-		  ui: {
-			itemProps: (item) => ({
-			  label: item.condition,
-			}),
-		  },
-		  fields: [
-			{
-			  type: "string",
-			  label: "Condition",
-			  name: "condition",
-			  isTitle: true,
-			  required: true,
-			},
-			{
-			  type: "string",
-			  label: "Description",
-			  name: "description",
-			},
-			{
-			  type: "boolean",
-			  label: "Active",
-			  name: "active",
-			  description:
-				"Whether this condition is currently active/available",
-			},
-		  ],
-		},
-	  ],
-	},
+    {
+      type: "boolean",
+      name: "help",
+      label: "Help",
+      required: false,
+      ui: {
+        component: (props) => (
+          <HelpButton
+            url="https://docstatic.com/docs/guides/markdown-features/conditional-text"
+            {...props}
+          />
+        ),
+      },
+    },
+    {
+      type: "object",
+      label: "Categories",
+      name: "categories",
+      list: true,
+      ui: {
+        itemProps: (item) => ({
+          label: item.name,
+        }),
+      },
+      fields: [
+        {
+          type: "string",
+          label: "Category Name",
+          name: "name",
+          isTitle: true,
+          required: true,
+        },
+        {
+          type: "string",
+          label: "Description",
+          name: "description",
+        },
+        {
+          type: "object",
+          label: "Conditions",
+          name: "conditions",
+          list: true,
+          ui: {
+            itemProps: (item) => ({
+              label: item.condition,
+            }),
+          },
+          fields: [
+            {
+              type: "string",
+              label: "Condition",
+              name: "condition",
+              isTitle: true,
+              required: true,
+            },
+            {
+              type: "string",
+              label: "Description",
+              name: "description",
+            },
+            {
+              type: "boolean",
+              label: "Active",
+              name: "active",
+              description:
+                "Whether this condition is currently active/available",
+            },
+          ],
+        },
+      ],
+    },
   ],
   ui: {
-	allowedActions: {
-	  create: false,
-	  delete: false,
-	},
+    allowedActions: {
+      create: false,
+      delete: false,
+    },
   },
 };
 
@@ -1173,92 +1268,92 @@ const VariableSetCollection = {
   path: "reuse/variableSets",
   format: "json",
   fields: [
-	{
-	  type: "boolean",
-	  name: "help",
-	  label: "Help",
-	  required: false,
-	  ui: {
-		component: (props) => (
-		  <HelpButton
-			url="https://docstatic.com/docs/guides/markdown-features/variables"
-			{...props}
-		  />
-		),
-	  },
-	},
-	{
-	  type: "object",
-	  label: "Variable Sets",
-	  name: "variableSets",
-	  list: true,
-	  ui: {
-		itemProps: (item) => ({
-		  label: item.name,
-		}),
-	  },
-	  fields: [
-		{
-		  type: "string",
-		  label: "Variable Set Name",
-		  name: "name",
-		  isTitle: true,
-		  required: true,
-		},
-		{
-		  type: "object",
-		  label: "Variables",
-		  name: "variables",
-		  list: true,
-		  ui: {
-			itemProps: (item) => ({
-			  label: item.key,
-			}),
-		  },
-		  fields: [
-			{
-			  type: "string",
-			  label: "Key",
-			  name: "key",
-			  isTitle: true,
-			  required: true,
-			},
-			{
-			  type: "object",
-			  label: "Translations",
-			  name: "translations",
-			  list: true,
-			  ui: {
-				itemProps: (item) => ({
-				  label: `${item.lang}: ${item.value}`,
-				}),
-			  },
-			  fields: [
-				{
-				  type: "string",
-				  label: "Language",
-				  name: "lang",
-				  required: true,
-				  options: languageOptions,
-				},
-				{
-				  type: "string",
-				  label: "Value",
-				  name: "value",
-				  required: true,
-				},
-			  ],
-			},
-		  ],
-		},
-	  ],
-	},
+    {
+      type: "boolean",
+      name: "help",
+      label: "Help",
+      required: false,
+      ui: {
+        component: (props) => (
+          <HelpButton
+            url="https://docstatic.com/docs/guides/markdown-features/variables"
+            {...props}
+          />
+        ),
+      },
+    },
+    {
+      type: "object",
+      label: "Variable Sets",
+      name: "variableSets",
+      list: true,
+      ui: {
+        itemProps: (item) => ({
+          label: item.name,
+        }),
+      },
+      fields: [
+        {
+          type: "string",
+          label: "Variable Set Name",
+          name: "name",
+          isTitle: true,
+          required: true,
+        },
+        {
+          type: "object",
+          label: "Variables",
+          name: "variables",
+          list: true,
+          ui: {
+            itemProps: (item) => ({
+              label: item.key,
+            }),
+          },
+          fields: [
+            {
+              type: "string",
+              label: "Key",
+              name: "key",
+              isTitle: true,
+              required: true,
+            },
+            {
+              type: "object",
+              label: "Translations",
+              name: "translations",
+              list: true,
+              ui: {
+                itemProps: (item) => ({
+                  label: `${item.lang}: ${item.value}`,
+                }),
+              },
+              fields: [
+                {
+                  type: "string",
+                  label: "Language",
+                  name: "lang",
+                  required: true,
+                  options: languageOptions,
+                },
+                {
+                  type: "string",
+                  label: "Value",
+                  name: "value",
+                  required: true,
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
   ],
   ui: {
-	allowedActions: {
-	  create: false,
-	  delete: false,
-	},
+    allowedActions: {
+      create: false,
+      delete: false,
+    },
   },
 };
 
@@ -1270,133 +1365,161 @@ const TaxonomyCollection = {
   path: "reuse/taxonomy",
   format: "json",
   fields: [
-	{
-	  type: "boolean",
-	  name: "help",
-	  label: "Help",
-	  required: false,
-	  ui: {
-		component: (props) => (
-		  <HelpButton
-			url="https://docstatic.com/docs/guides/docs/taxonomies"
-			{...props}
-		  />
-		),
-	  },
-	},
-	{
-	  type: "object",
-	  list: true,
-	  name: "taxonomy",
-	  label: "Taxonomy",
-	  ui: {
-		itemProps: (item) => ({
-		  label: item?.tag,
-		}),
-	  },
-	  fields: [
-		{
-		  type: "string",
-		  name: "tag",
-		  label: "Tag",
-		  isTitle: true,
-		  required: true,
-		},
-		{
-		  type: "object",
-		  list: true,
-		  name: "children",
-		  label: "Children",
-		  ui: {
-			itemProps: (item) => ({
-			  label: item?.tag ? item.tag : item.name,
-			}),
-		  },
-		  fields: [
-			{
-			  type: "string",
-			  name: "tag",
-			  label: "Tag",
-			  isTitle: true,
-			  required: true,
-			},
-			{
-			  type: "object",
-			  list: true,
-			  name: "children",
-			  label: "Children",
-			  ui: {
-				itemProps: (item) => ({
-				  label: item?.tag ? item.tag : item.name,
-				}),
-			  },
-			  fields: [
-				{
-				  type: "string",
-				  name: "tag",
-				  label: "Tag",
-				  isTitle: true,
-				  required: true,
-				},
-			  ],
-			},
-		  ],
-		},
-	  ],
-	},
+    {
+      type: "boolean",
+      name: "help",
+      label: "Help",
+      required: false,
+      ui: {
+        component: (props) => (
+          <HelpButton
+            url="https://docstatic.com/docs/guides/docs/taxonomies"
+            {...props}
+          />
+        ),
+      },
+    },
+    {
+      type: "object",
+      list: true,
+      name: "taxonomy",
+      label: "Taxonomy",
+      ui: {
+        itemProps: (item) => ({
+          label: item?.tag,
+        }),
+      },
+      fields: [
+        {
+          type: "string",
+          name: "tag",
+          label: "Tag",
+          isTitle: true,
+          required: true,
+        },
+        {
+          type: "object",
+          list: true,
+          name: "children",
+          label: "Children",
+          ui: {
+            itemProps: (item) => ({
+              label: item?.tag ? item.tag : item.name,
+            }),
+          },
+          fields: [
+            {
+              type: "string",
+              name: "tag",
+              label: "Tag",
+              isTitle: true,
+              required: true,
+            },
+            {
+              type: "object",
+              list: true,
+              name: "children",
+              label: "Children",
+              ui: {
+                itemProps: (item) => ({
+                  label: item?.tag ? item.tag : item.name,
+                }),
+              },
+              fields: [
+                {
+                  type: "string",
+                  name: "tag",
+                  label: "Tag",
+                  isTitle: true,
+                  required: true,
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
   ],
 
   ui: {
-	allowedActions: {
-	  create: false,
-	  delete: false,
-	},
+    allowedActions: {
+      create: false,
+      delete: false,
+    },
   },
 };
 
-// glossary terms collection - imported from template
+const MediaCollection = {
+  name: "media",
+  label: "Media (generated)",
+  path: "reuse/media",
+  format: "json",
+  ui: {
+    allowedActions: {
+      create: false,
+      delete: false,
+    },
+  },
+  fields: [
+    {
+      type: "object",
+      name: "media",
+      label: "Media",
+      list: true,
+      fields: [
+        { type: "string", name: "filename", label: "Filename", required: true },
+        { type: "string", name: "path", label: "Path", required: true },
+        { type: "number", name: "size", label: "Size (bytes)", required: true },
+        { type: "string", name: "dimensions", label: "Dimensions (WxH)", required: false },
+        { type: "string", name: "lastModified", label: "Last Modified", required: false },
+      ],
+    },
+  ],
+};
+
 
 export default defineConfig({
   branch,
   clientId: process.env.NEXT_PUBLIC_TINA_CLIENT_ID, // Get this from tina.io
   token: process.env.TINA_TOKEN, // Read-only token from tina.io
   build: {
-	outputFolder: "admin",
-	publicFolder: "static",
-	//    basePath: "", // if your Tina admin is not at the root of your site, set this to the path where it is hosted
+    outputFolder: "admin",
+    publicFolder: "static",
+    //    basePath: "", // if your Tina admin is not at the root of your site, set this to the path where it is hosted
   },
   media: {
-	tina: {
-	  mediaRoot: "img",
-	  publicFolder: "static",
-	},
+    tina: {
+      mediaRoot: "img",
+      publicFolder: "static",
+    },
   },
   schema: {
-	collections: [
-	  PostCollection,
-	  ConditionsCollection,
-	  DashboardsCollection,
-	  GlossaryTermCollection,
-	  HomepageCollection,
-	  PagesCollection,
-	  SettingsCollection,
-	  SnippetsCollection,
-	  SidebarCollection,
-	  TaxonomyCollection,
-	  ThemeCollection,
-	  DocsCollection,
-	  TranslationCollection,
-	  VariableSetCollection,
-	  WikiCollection,
-	  APIsCollection,
-	],
+    collections: [
+      PostCollection,
+      ConditionsCollection,
+      DashboardsCollection,
+      GlossaryTermCollection,
+      HomepageCollection,
+      PagesCollection,
+      SettingsCollection,
+      SnippetsCollection,
+      SidebarCollection,
+      TaxonomyCollection,
+      ThemeCollection,
+      DocsCollection,
+      TranslationCollection,
+      VariableSetCollection,
+      WikiCollection,
+      APIsCollection,
+      MediaCollection,
+    ],
   },
   search: {
-	tina: {
-	  indexerToken: process.env.TINA_SEARCH_TOKEN, // Search token from tina.io
-	  stopwordLanguages: ["eng"],
-	},
-	indexBatchSize: 100,
-	maxSearchIndexFieldLength: 100,
+    tina: {
+      indexerToken: process.env.TINA_SEARCH_TOKEN, // Search token from tina.io
+      stopwordLanguages: ["eng"],
+    },
+    indexBatchSize: 100,
+    maxSearchIndexFieldLength: 100,
   },
 });
