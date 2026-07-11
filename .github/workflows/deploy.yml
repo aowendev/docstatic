@@ -86,9 +86,9 @@ jobs:
           yarn clean-api-docs all
           yarn gen-api-docs all
 
-      - name: Remove stale tina-lock.json
-        run: rm -f tina/tina-lock.json
-
+      # tina-lock.json is only written by `tinacms dev`, never by
+      # `tinacms build`, so there is nothing to refresh or commit here.
+      # Cloud schema checks are skipped explicitly instead.
       - name: Build website
         env:
           NEXT_PUBLIC_TINA_CLIENT_ID: ${{ secrets.TINA_PUBLIC_CLIENT_ID }}
@@ -96,20 +96,6 @@ jobs:
           TINA_SEARCH_TOKEN: ${{ secrets.TINA_SEARCH_TOKEN }}
           NODE_OPTIONS: "--max_old_space_size=8192"
         run: yarn tinacms build --skip-cloud-checks && yarn docusaurus build
-
-      - name: Commit updated tina-lock.json
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add tina/tina-lock.json
-          if git diff --cached --quiet; then
-            echo "No changes to tina-lock.json"
-          else
-            git commit -m "Update tina-lock.json [skip ci]"
-            git push origin HEAD:main
-          fi
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Upload Build Artifact
         uses: actions/upload-pages-artifact@v3
