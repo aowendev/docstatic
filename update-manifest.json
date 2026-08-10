@@ -11,15 +11,18 @@
   "files": [
     "docusaurus.config.ts",
     "sidebars.ts",
-    "biome.json",
     "frontmatter.json",
     "tina/config.jsx",
     "config/docusaurus/openapi-tag-template.md",
     "src/css/custom.css",
     "src/pages/404.js",
     "src/pages/index.jsx",
-    "src/pages/index.module.css"
+    "src/pages/index.module.css",
+    "biome.template.json"
   ],
+  "renameFiles": {
+    "biome.template.json": "biome.json"
+  },
   "removeFiles": [
     "util.js",
     "babel.config.js"

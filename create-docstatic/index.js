@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 
-const fs = require("fs");
-const os = require("os");
-const path = require("path");
-const { execSync, execFileSync } = require("child_process");
+const fs = require("node:fs");
+const os = require("node:os");
+const path = require("node:path");
+const { execSync, execFileSync } = require("node:child_process");
 
 const HELP = `
 Usage: npx create-docstatic@latest <project-name> [options]
@@ -250,11 +250,15 @@ function runUpdate(options) {
     const manifest = JSON.parse(fs.readFileSync(manifestPath, "utf8"));
     const templateDir = path.join(packageDir, "template");
 
+    // Some files ship under a different name than they take in the site (see
+    // renameFiles in the manifest, e.g. biome.template.json -> biome.json).
+    const renames = manifest.renameFiles || {};
     const copy = (rel) => {
       const src = path.join(templateDir, rel);
-      const dest = path.join(siteDir, rel);
+      const destRel = renames[rel] || rel;
+      const dest = path.join(siteDir, destRel);
       if (!fs.existsSync(src) || filesEqual(src, dest)) return;
-      log(fs.existsSync(dest) ? "update" : "add", rel);
+      log(fs.existsSync(dest) ? "update" : "add", destRel);
       if (dryRun) return;
       fs.mkdirSync(path.dirname(dest), { recursive: true });
       fs.copyFileSync(src, dest);
@@ -387,6 +391,23 @@ function main() {
     const gitignorePath = path.join(targetDir, "gitignore");
     if (fs.existsSync(gitignorePath)) {
       fs.renameSync(gitignorePath, path.join(targetDir, ".gitignore"));
+    }
+
+    // Files the template ships under a different name (biome.template.json ->
+    // biome.json, so Biome does not discover it inside the docstatic repo).
+    const scaffoldManifestPath = path.join(packageDir, "update-manifest.json");
+    if (fs.existsSync(scaffoldManifestPath)) {
+      const scaffoldManifest = JSON.parse(
+        fs.readFileSync(scaffoldManifestPath, "utf8")
+      );
+      for (const [from, to] of Object.entries(
+        scaffoldManifest.renameFiles || {}
+      )) {
+        const fromPath = path.join(targetDir, from);
+        if (fs.existsSync(fromPath)) {
+          fs.renameSync(fromPath, path.join(targetDir, to));
+        }
+      }
     }
 
     const packageJsonPath = path.join(targetDir, "package.json");

@@ -18,8 +18,8 @@
  *   --check  Report what would change without writing (exits 1 if out of sync)
  */
 
-const fs = require("fs");
-const path = require("path");
+const fs = require("node:fs");
+const path = require("node:path");
 
 const ROOT = path.join(__dirname, "..");
 const TEMPLATE = path.join(ROOT, "template");
@@ -38,7 +38,7 @@ const MIRROR_SRC_DIRS = [
 const COPY_FILES = [
   "docusaurus.config.ts",
   "sidebars.ts",
-  "biome.json",
+  // biome.json ships under a different name, see BIOME_TEMPLATE_NAME below
   "frontmatter.json",
   "tina/config.jsx",
   "config/docusaurus/openapi-tag-template.md",
@@ -61,11 +61,22 @@ const SCRIPTS_ALLOWLIST = [
   "util.js",
 ];
 
-// Stale template files removed on sync
+// Biome only auto-discovers "biome.json"/"biome.jsonc", so the template ships
+// its config under this name and the create CLI renames it on scaffold.
+const BIOME_TEMPLATE_NAME = "biome.template.json";
+
+// Stale files removed from BOTH template/ and, via the update manifest, from
+// existing sites. Only put things here that sites should genuinely lose.
 const REMOVE_FILES = [
   "util.js", // moved to scripts/util.js
   "babel.config.js", // root site dropped it (@docusaurus/faster)
 ];
+
+// Stale files removed from template/ only. biome.json lives here because a
+// scaffolded site must KEEP its biome.json — it is merely shipped under
+// BIOME_TEMPLATE_NAME, so listing it in REMOVE_FILES would tell every existing
+// site to delete its config.
+const TEMPLATE_ONLY_REMOVE = ["biome.json"];
 
 // Root package.json scripts that make no sense in a scaffolded site
 const EXCLUDED_SCRIPTS = [
@@ -191,7 +202,7 @@ mirrorScripts();
 for (const file of COPY_FILES) copyFile(file);
 syncPackageJson();
 
-for (const rel of REMOVE_FILES) {
+for (const rel of [...REMOVE_FILES, ...TEMPLATE_ONLY_REMOVE]) {
   const dest = path.join(TEMPLATE, rel);
   if (fs.existsSync(dest)) {
     log("remove", rel);
@@ -209,6 +220,22 @@ for (const rel of REMOVE_FILES) {
   if (!fs.existsSync(dest) || fs.readFileSync(dest, "utf8") !== gitignore) {
     log(fs.existsSync(dest) ? "update" : "add", "gitignore");
     if (!CHECK) fs.writeFileSync(dest, gitignore);
+  }
+}
+
+// Biome discovers nested config files regardless of files.includes, so shipping
+// template/biome.json would make `biome check .` abort at the repo root with
+// "found a nested root configuration". Marking it "root": false is NOT a fix:
+// Biome then looks for a parent root config and, finding none in a scaffolded
+// site, silently ignores the whole file. So the template ships it under a name
+// Biome does not discover, and the create CLI renames it during scaffolding
+// (same trick as the dotless "gitignore" above).
+{
+  const serialized = fs.readFileSync(path.join(ROOT, "biome.json"), "utf8");
+  const dest = path.join(TEMPLATE, BIOME_TEMPLATE_NAME);
+  if (!fs.existsSync(dest) || fs.readFileSync(dest, "utf8") !== serialized) {
+    log(fs.existsSync(dest) ? "update" : "add", BIOME_TEMPLATE_NAME);
+    if (!CHECK) fs.writeFileSync(dest, serialized);
   }
 }
 
@@ -245,7 +272,12 @@ This is your first blog post. Edit it in the CMS at
     // Directories copied over the site's copy, overwriting file by file
     mirrorDirs: [...MIRROR_SRC_DIRS, "scripts"],
     // Individual files overwritten
-    files: COPY_FILES.filter((f) => f !== "src/pages/example-page.mdx"),
+    files: [
+      ...COPY_FILES.filter((f) => f !== "src/pages/example-page.mdx"),
+      BIOME_TEMPLATE_NAME,
+    ],
+    // Template path -> path written into the site
+    renameFiles: { [BIOME_TEMPLATE_NAME]: "biome.json" },
     // Stale files deleted if present
     removeFiles: REMOVE_FILES,
     // Created only if missing (content-ish or required-to-exist files)
