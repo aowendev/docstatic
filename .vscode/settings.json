@@ -1,10 +1,9 @@
 {
-	"[markdown]": {
-	},
-	"typescript.surveys.enabled": false,
-	"typescript.disableAutomaticTypeAcquisition": true,
-	"output.smartScroll.enabled": false,
-	"problems.autoReveal": false,
-	"terminal.integrated.focusAfterRun": "terminal",
-	"biome.lspBin": null
+  "[markdown]": {},
+  "typescript.surveys.enabled": false,
+  "typescript.disableAutomaticTypeAcquisition": true,
+  "output.smartScroll.enabled": false,
+  "problems.autoReveal": false,
+  "terminal.integrated.focusAfterRun": "terminal",
+  "biome.lspBin": null
 }

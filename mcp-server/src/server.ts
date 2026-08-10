@@ -1,11 +1,11 @@
-import { Server } from '@modelcontextprotocol/sdk/server/index.js';
-import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
+import { Server } from "@modelcontextprotocol/sdk/server/index.js";
+import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import {
   CallToolRequestSchema,
   ListResourcesRequestSchema,
   ListToolsRequestSchema,
   ReadResourceRequestSchema,
-} from '@modelcontextprotocol/sdk/types.js';
+} from "@modelcontextprotocol/sdk/types.js";
 
 interface Document {
   _sys: {
@@ -22,23 +22,17 @@ interface Document {
   _values?: any;
 }
 
-interface DocumentConnection {
-  edges: {
-    node: Document;
-  }[];
-}
-
 class DocStaticMCPServer {
   private graphqlUrl: string;
   private server: Server;
 
-  constructor(graphqlUrl = 'http://localhost:4001/graphql') {
+  constructor(graphqlUrl = "http://localhost:4001/graphql") {
     this.graphqlUrl = graphqlUrl;
-    
+
     this.server = new Server(
       {
-        name: 'docstatic-server',
-        version: '1.0.0',
+        name: "docstatic-server",
+        version: "1.0.0",
       },
       {
         capabilities: {
@@ -52,36 +46,34 @@ class DocStaticMCPServer {
   }
 
   private async executeGraphQL(query: string, variables?: any): Promise<any> {
-    try {
-      const response = await fetch(this.graphqlUrl, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          query,
-          variables,
-        }),
-      });
+    const response = await fetch(this.graphqlUrl, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        query,
+        variables,
+      }),
+    });
 
-      if (!response.ok) {
-        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-      }
-
-      const result = await response.json();
-      
-      if (result.errors) {
-        throw new Error(`GraphQL errors: ${JSON.stringify(result.errors)}`);
-      }
-
-      return result.data;
-    } catch (error) {
-      console.error('GraphQL execution error:', error);
-      throw error;
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status}: ${response.statusText}`);
     }
+
+    const result = await response.json();
+
+    if (result.errors) {
+      throw new Error(`GraphQL errors: ${JSON.stringify(result.errors)}`);
+    }
+
+    return result.data;
   }
 
-  private async searchDocuments(query: string, limit = 20): Promise<Document[]> {
+  private async searchDocuments(
+    query: string,
+    limit = 20
+  ): Promise<Document[]> {
     const graphqlQuery = `
       query SearchDocuments($first: Float) {
         docConnection(first: $first, sort: "title") {
@@ -107,11 +99,13 @@ class DocStaticMCPServer {
     // Filter documents by search query
     const searchTerm = query.toLowerCase();
     return documents.filter((doc: Document) => {
-      const bodyText = typeof doc.body === 'string' ? doc.body : JSON.stringify(doc.body);
+      const bodyText =
+        typeof doc.body === "string" ? doc.body : JSON.stringify(doc.body);
       return (
         doc.title.toLowerCase().includes(searchTerm) ||
         bodyText.toLowerCase().includes(searchTerm) ||
-        (doc._values && JSON.stringify(doc._values).toLowerCase().includes(searchTerm))
+        (doc._values &&
+          JSON.stringify(doc._values).toLowerCase().includes(searchTerm))
       );
     });
   }
@@ -135,8 +129,7 @@ class DocStaticMCPServer {
     try {
       const data = await this.executeGraphQL(graphqlQuery, { relativePath });
       return data.doc;
-    } catch (error) {
-      console.error(`Failed to get document ${relativePath}:`, error);
+    } catch {
       return null;
     }
   }
@@ -176,11 +169,17 @@ class DocStaticMCPServer {
 
   private extractMDXComponents(content: string): string[] {
     const componentMatches = content.match(/<[A-Z][a-zA-Z0-9]*[^>]*>/g) || [];
-    const uniqueComponents = [...new Set(componentMatches.map(match => {
-      const componentName = match.match(/<([A-Z][a-zA-Z0-9]*)/)?.[1];
-      return componentName;
-    }).filter(Boolean))];
-    
+    const uniqueComponents = [
+      ...new Set(
+        componentMatches
+          .map((match) => {
+            const componentName = match.match(/<([A-Z][a-zA-Z0-9]*)/)?.[1];
+            return componentName;
+          })
+          .filter(Boolean)
+      ),
+    ];
+
     return uniqueComponents as string[];
   }
 
@@ -190,79 +189,83 @@ class DocStaticMCPServer {
       return {
         tools: [
           {
-            name: 'search_documents',
-            description: 'Search through docStatic documentation using keywords',
+            name: "search_documents",
+            description:
+              "Search through docStatic documentation using keywords",
             inputSchema: {
-              type: 'object',
+              type: "object",
               properties: {
                 query: {
-                  type: 'string',
-                  description: 'Search query to find relevant documents',
+                  type: "string",
+                  description: "Search query to find relevant documents",
                 },
                 limit: {
-                  type: 'number',
-                  description: 'Maximum number of results to return (default: 20)',
+                  type: "number",
+                  description:
+                    "Maximum number of results to return (default: 20)",
                   default: 20,
                 },
               },
-              required: ['query'],
+              required: ["query"],
             },
           },
           {
-            name: 'get_document',
-            description: 'Get a specific document by its relative path',
+            name: "get_document",
+            description: "Get a specific document by its relative path",
             inputSchema: {
-              type: 'object',
+              type: "object",
               properties: {
                 path: {
-                  type: 'string',
-                  description: 'Relative path to the document (e.g., "installation.mdx")',
+                  type: "string",
+                  description:
+                    'Relative path to the document (e.g., "installation.mdx")',
                 },
               },
-              required: ['path'],
+              required: ["path"],
             },
           },
           {
-            name: 'list_all_documents',
-            description: 'List all available documents with metadata',
+            name: "list_all_documents",
+            description: "List all available documents with metadata",
             inputSchema: {
-              type: 'object',
+              type: "object",
               properties: {},
             },
           },
           {
-            name: 'get_documents_by_tag',
-            description: 'Get documents filtered by a specific tag',
+            name: "get_documents_by_tag",
+            description: "Get documents filtered by a specific tag",
             inputSchema: {
-              type: 'object',
+              type: "object",
               properties: {
                 tag: {
-                  type: 'string',
-                  description: 'Tag to filter documents by',
+                  type: "string",
+                  description: "Tag to filter documents by",
                 },
               },
-              required: ['tag'],
+              required: ["tag"],
             },
           },
           {
-            name: 'analyze_mdx_components',
-            description: 'Analyze MDX components used in a document',
+            name: "analyze_mdx_components",
+            description: "Analyze MDX components used in a document",
             inputSchema: {
-              type: 'object',
+              type: "object",
               properties: {
                 path: {
-                  type: 'string',
-                  description: 'Relative path to the document to analyze',
+                  type: "string",
+                  description: "Relative path to the document to analyze",
                 },
               },
-              required: ['path'],
+              required: ["path"],
             },
           },
           {
-            name: 'check_server_status',
-            description: 'Check if the GraphQL server is running and accessible',
+            name: "check_server_status",
+            description:
+              "Check if the GraphQL server is running and accessible",
             inputSchema: {
-              type: 'object',
+              type: "object",
               properties: {},
             },
           },
@@ -276,38 +279,49 @@ class DocStaticMCPServer {
         const { name, arguments: args } = request.params;
 
         switch (name) {
-          case 'search_documents': {
-            const { query, limit = 20 } = args as { query: string; limit?: number };
+          case "search_documents": {
+            const { query, limit = 20 } = args as {
+              query: string;
+              limit?: number;
+            };
             const results = await this.searchDocuments(query, limit);
-            
+
             return {
               content: [
                 {
-                  type: 'text',
-                  text: JSON.stringify({
-                    query,
-                    resultCount: results.length,
-                    documents: results.map(doc => ({
-                      path: doc._sys.relativePath,
-                      title: doc.title,
-                      lastModified: doc.lastmod,
-                      preview: (typeof doc.body === 'string' ? doc.body : JSON.stringify(doc.body)).substring(0, 200) + '...',
-                    })),
-                  }, null, 2),
+                  type: "text",
+                  text: JSON.stringify(
+                    {
+                      query,
+                      resultCount: results.length,
+                      documents: results.map((doc) => ({
+                        path: doc._sys.relativePath,
+                        title: doc.title,
+                        lastModified: doc.lastmod,
+                        preview: `${(
+                          typeof doc.body === "string"
+                            ? doc.body
+                            : JSON.stringify(doc.body)
+                        ).substring(0, 200)}...`,
+                      })),
+                    },
+                    null,
+                    2
+                  ),
                 },
               ],
             };
           }
 
-          case 'get_document': {
+          case "get_document": {
             const { path } = args as { path: string };
             const document = await this.getDocument(path);
-            
+
             if (!document) {
               return {
                 content: [
                   {
-                    type: 'text',
+                    type: "text",
                     text: `Document not found: ${path}`,
                   },
                 ],
@@ -317,71 +331,86 @@ class DocStaticMCPServer {
             return {
               content: [
                 {
-                  type: 'text',
-                  text: JSON.stringify({
-                    path: document._sys.relativePath,
-                    title: document.title,
-                    lastModified: document.lastmod,
-                    content: document.body,
-                    metadata: document._values,
-                  }, null, 2),
+                  type: "text",
+                  text: JSON.stringify(
+                    {
+                      path: document._sys.relativePath,
+                      title: document.title,
+                      lastModified: document.lastmod,
+                      content: document.body,
+                      metadata: document._values,
+                    },
+                    null,
+                    2
+                  ),
                 },
               ],
             };
           }
 
-          case 'list_all_documents': {
+          case "list_all_documents": {
             const documents = await this.getAllDocuments();
-            
+
             return {
               content: [
                 {
-                  type: 'text',
-                  text: JSON.stringify({
-                    totalDocuments: documents.length,
-                    documents: documents.map(doc => ({
-                      path: doc._sys.relativePath,
-                      title: doc.title,
-                      lastModified: doc.lastmod,
-                      wordCount: (typeof doc.body === 'string' ? doc.body : JSON.stringify(doc.body)).split(' ').length,
-                    })),
-                  }, null, 2),
+                  type: "text",
+                  text: JSON.stringify(
+                    {
+                      totalDocuments: documents.length,
+                      documents: documents.map((doc) => ({
+                        path: doc._sys.relativePath,
+                        title: doc.title,
+                        lastModified: doc.lastmod,
+                        wordCount: (typeof doc.body === "string"
+                          ? doc.body
+                          : JSON.stringify(doc.body)
+                        ).split(" ").length,
+                      })),
+                    },
+                    null,
+                    2
+                  ),
                 },
               ],
             };
           }
 
-          case 'get_documents_by_tag': {
+          case "get_documents_by_tag": {
             const { tag } = args as { tag: string };
             const documents = await this.getDocumentsByTag(tag);
-            
+
             return {
               content: [
                 {
-                  type: 'text',
-                  text: JSON.stringify({
-                    tag,
-                    documentCount: documents.length,
-                    documents: documents.map(doc => ({
-                      path: doc._sys.relativePath,
-                      title: doc.title,
-                      lastModified: doc.lastmod,
-                    })),
-                  }, null, 2),
+                  type: "text",
+                  text: JSON.stringify(
+                    {
+                      tag,
+                      documentCount: documents.length,
+                      documents: documents.map((doc) => ({
+                        path: doc._sys.relativePath,
+                        title: doc.title,
+                        lastModified: doc.lastmod,
+                      })),
+                    },
+                    null,
+                    2
+                  ),
                 },
               ],
             };
           }
 
-          case 'analyze_mdx_components': {
+          case "analyze_mdx_components": {
             const { path } = args as { path: string };
             const document = await this.getDocument(path);
-            
+
             if (!document) {
               return {
                 content: [
                   {
-                    type: 'text',
+                    type: "text",
                     text: `Document not found: ${path}`,
                   },
                 ],
@@ -389,36 +418,44 @@ class DocStaticMCPServer {
             }
 
             const components = this.extractMDXComponents(document.body);
-            
+
             return {
               content: [
                 {
-                  type: 'text',
-                  text: JSON.stringify({
-                    path: document._sys.relativePath,
-                    title: document.title,
-                    mdxComponents: components,
-                    componentCount: components.length,
-                  }, null, 2),
+                  type: "text",
+                  text: JSON.stringify(
+                    {
+                      path: document._sys.relativePath,
+                      title: document.title,
+                      mdxComponents: components,
+                      componentCount: components.length,
+                    },
+                    null,
+                    2
+                  ),
                 },
               ],
             };
           }
 
-          case 'check_server_status': {
+          case "check_server_status": {
             try {
               const query = `query { __typename }`;
               await this.executeGraphQL(query);
-              
+
               return {
                 content: [
                   {
-                    type: 'text',
-                    text: JSON.stringify({
-                      status: 'connected',
-                      endpoint: this.graphqlUrl,
-                      message: 'GraphQL server is running and accessible',
-                    }, null, 2),
+                    type: "text",
+                    text: JSON.stringify(
+                      {
+                        status: "connected",
+                        endpoint: this.graphqlUrl,
+                        message: "GraphQL server is running and accessible",
+                      },
+                      null,
+                      2
+                    ),
                   },
                 ],
               };
@@ -426,12 +463,19 @@ class DocStaticMCPServer {
               return {
                 content: [
                   {
-                    type: 'text',
-                    text: JSON.stringify({
-                      status: 'error',
-                      endpoint: this.graphqlUrl,
-                      message: error instanceof Error ? error.message : 'Unknown error',
-                    }, null, 2),
+                    type: "text",
+                    text: JSON.stringify(
+                      {
+                        status: "error",
+                        endpoint: this.graphqlUrl,
+                        message:
+                          error instanceof Error
+                            ? error.message
+                            : "Unknown error",
+                      },
+                      null,
+                      2
+                    ),
                   },
                 ],
               };
@@ -442,11 +486,12 @@ class DocStaticMCPServer {
             throw new Error(`Unknown tool: ${name}`);
         }
       } catch (error) {
-        const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';
+        const errorMessage =
+          error instanceof Error ? error.message : "Unknown error occurred";
         return {
           content: [
             {
-              type: 'text',
+              type: "text",
               text: `Error: ${errorMessage}`,
             },
           ],
@@ -459,47 +504,49 @@ class DocStaticMCPServer {
       return {
         resources: [
           {
-            uri: 'docstatic://documents',
-            name: 'All Documents',
-            description: 'Complete list of all documentation files',
-            mimeType: 'application/json',
+            uri: "docstatic://documents",
+            name: "All Documents",
+            description: "Complete list of all documentation files",
+            mimeType: "application/json",
           },
         ],
       };
     });
 
     // Read resources
-    this.server.setRequestHandler(ReadResourceRequestSchema, async (request) => {
-      const { uri } = request.params;
+    this.server.setRequestHandler(
+      ReadResourceRequestSchema,
+      async (request) => {
+        const { uri } = request.params;
 
-      if (uri === 'docstatic://documents') {
-        const documents = await this.getAllDocuments();
-        
-        return {
-          contents: [
-            {
-              uri,
-              mimeType: 'application/json',
-              text: JSON.stringify(documents, null, 2),
-            },
-          ],
-        };
+        if (uri === "docstatic://documents") {
+          const documents = await this.getAllDocuments();
+
+          return {
+            contents: [
+              {
+                uri,
+                mimeType: "application/json",
+                text: JSON.stringify(documents, null, 2),
+              },
+            ],
+          };
+        }
+
+        throw new Error(`Unknown resource: ${uri}`);
       }
-
-      throw new Error(`Unknown resource: ${uri}`);
-    });
+    );
   }
 
   async run() {
     const transport = new StdioServerTransport();
     await this.server.connect(transport);
-    console.error('docStatic MCP server running on stdio');
   }
 }
 
 // Create and run the server
 const server = new DocStaticMCPServer();
 server.run().catch((error) => {
-  console.error('Server error:', error);
-  process.exit(1);
+  process.exitCode = 1;
+  throw error;
 });

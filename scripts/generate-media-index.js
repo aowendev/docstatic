@@ -5,24 +5,24 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const fs = require('fs');
-const path = require('path');
-const { imageSize } = require('image-size');
+const fs = require("node:fs");
+const path = require("node:path");
+const { imageSize } = require("image-size");
 
-const IMG_DIR = path.join(__dirname, '../static/img');
-const OUTPUT_FILE = path.join(__dirname, '../reuse/media/index.json');
+const IMG_DIR = path.join(__dirname, "../static/img");
+const OUTPUT_FILE = path.join(__dirname, "../reuse/media/index.json");
 
 function getMediaFiles(dir, baseDir = IMG_DIR) {
   let results = [];
   const list = fs.readdirSync(dir);
-  list.forEach(file => {
+  for (const file of list) {
     const filePath = path.join(dir, file);
     const stat = fs.statSync(filePath);
-    if (stat && stat.isDirectory()) {
+    if (stat?.isDirectory()) {
       results = results.concat(getMediaFiles(filePath, baseDir));
     } else if (/\.(jpg|jpeg|png|gif|svg|webp)$/i.test(file)) {
       const ext = path.extname(file).toLowerCase();
-      let dimensions = undefined;
+      let dimensions;
       // Only get dimensions for raster images
       if (/(jpg|jpeg|png|gif|webp)$/i.test(ext)) {
         try {
@@ -31,7 +31,7 @@ function getMediaFiles(dir, baseDir = IMG_DIR) {
           if (size.width && size.height) {
             dimensions = `${size.width}x${size.height}`;
           }
-        } catch (e) {
+        } catch (_e) {
           // Skip dimensions for this file, continue processing others
         }
       }
@@ -39,13 +39,13 @@ function getMediaFiles(dir, baseDir = IMG_DIR) {
       const lastModified = stat.mtime.toISOString();
       results.push({
         filename: file,
-        path: path.relative(baseDir, filePath).replace(/\\/g, '/'),
+        path: path.relative(baseDir, filePath).replace(/\\/g, "/"),
         size: stat.size,
         ...(dimensions ? { dimensions } : {}),
-        lastModified
+        lastModified,
       });
     }
-  });
+  }
   return results;
 }
 

@@ -10,8 +10,8 @@ import Markdown from "react-markdown";
 import rehypeKatex from "rehype-katex";
 import rehypeRaw from "rehype-raw";
 import remarkBreaks from "remark-breaks";
-import remarkMath from "remark-math";
 import remarkGfm from "remark-gfm";
+import remarkMath from "remark-math";
 import "katex/dist/katex.min.css"; // Import KaTeX CSS
 
 // Import available components that can be used in JSX
@@ -23,62 +23,66 @@ import ColorGenerator from "@site/src/components/ColorGenerator";
  * @param {string} string - The content to render
  * @param {string} type - The content type: 'jsx', 'html', 'markdown', 'code', or 'auto' (default)
  */
-const Passthrough = ({ summary, string, type }) => {
-    // Custom input renderer to make task list checkboxes interactive
-    const CustomInput = ({ disabled, style, ...props }) => {
-      // Remove disabled attribute from task list checkboxes and add readOnly
-      if (props.type === "checkbox") {
-        return <input {...props} readOnly />;
-      }
-      return <input disabled={disabled} {...props} />;
-    };
+const Passthrough = ({ string, type }) => {
+  // Custom input renderer to make task list checkboxes interactive
+  const CustomInput = ({ disabled, style, ...props }) => {
+    // Remove disabled attribute from task list checkboxes and add readOnly
+    if (props.type === "checkbox") {
+      return <input {...props} readOnly />;
+    }
+    return <input disabled={disabled} {...props} />;
+  };
 
-    // Custom ul renderer with static CSS-only indentation
-    const CustomUl = ({ className, children, ...props }) => {
-      const isTaskList = className?.includes('contains-task-list');
-      
-      if (isTaskList) {
-        return (
-          <ul 
-            className={className} 
-            style={{
-              marginLeft: '0', 
-              paddingLeft: '0',
-              listStyle: 'none'
-            }}
-            {...props}
-          >
-            {children}
-          </ul>
-        );
-      }
-      
-      return (
-        <ul className={className} {...props}>
-          {children}
-        </ul>
-      );
-    };
+  // Custom ul renderer with static CSS-only indentation
+  const CustomUl = ({ className, children, ...props }) => {
+    const isTaskList = className?.includes("contains-task-list");
 
-    // Custom li renderer with proper task list styling
-    const CustomLi = ({ className, children, ...props }) => {
-      const isTaskListItem = className?.includes('task-list-item');
-      
+    if (isTaskList) {
       return (
-        <li 
+        <ul
           className={className}
-          style={isTaskListItem ? { 
-            listStyle: 'none',
-          } : undefined}
+          style={{
+            marginLeft: "0",
+            paddingLeft: "0",
+            listStyle: "none",
+          }}
           {...props}
         >
           {children}
-        </li>
+        </ul>
       );
-    };
+    }
+
+    return (
+      <ul className={className} {...props}>
+        {children}
+      </ul>
+    );
+  };
+
+  // Custom li renderer with proper task list styling
+  const CustomLi = ({ className, children, ...props }) => {
+    const isTaskListItem = className?.includes("task-list-item");
+
+    return (
+      <li
+        className={className}
+        style={
+          isTaskListItem
+            ? {
+                listStyle: "none",
+              }
+            : undefined
+        }
+        {...props}
+      >
+        {children}
+      </li>
+    );
+  };
 
   if (!string) return null;
-  
+
   // Process ^ symbols for indentation (each ^ = 2 spaces)
   const processedString = string.replace(/\^/g, "  ");
 

@@ -5,8 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import conditionsData from "../../../reuse/conditions/index.json";
 import docusaurusData from "../../../config/docusaurus/index.json";
+import conditionsData from "../../../reuse/conditions/index.json";
 import ConditionsTreeField from "../ConditionsField";
 
 // Build condition options from conditions data
@@ -67,7 +67,8 @@ export const ConditionalTextBlockTemplate = {
       ],
       ui: {
         component: "select",
-        description: "Choose whether to show or hide content when conditions match",
+        description:
+          "Choose whether to show or hide content when conditions match",
       },
     },
     {
@@ -78,7 +79,8 @@ export const ConditionalTextBlockTemplate = {
       options: conditionOptions,
       ui: {
         component: ConditionsTreeField,
-        description: "Content action will be triggered when these conditions are met (defined in page metadata)",
+        description:
+          "Content action will be triggered when these conditions are met (defined in page metadata)",
       },
     },
     {

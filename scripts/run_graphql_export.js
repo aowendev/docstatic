@@ -1,14 +1,14 @@
 #!/usr/bin/env node
-const fs = require('fs');
-const path = require('path');
+const fs = require("node:fs");
+const path = require("node:path");
 
-const xliff = require('../src/utils/xliff');
-const GRAPHQL_URL = process.env.GRAPHQL_URL || 'http://localhost:4001/graphql';
+const xliff = require("../src/utils/xliff");
+const GRAPHQL_URL = process.env.GRAPHQL_URL || "http://localhost:4001/graphql";
 
 async function gql(query, variables) {
   const res = await fetch(GRAPHQL_URL, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ query, variables }),
   });
   const json = await res.json();
@@ -36,14 +36,20 @@ const client = {
 
 (async () => {
   try {
-    console.error('Calling exporter using GraphQL at', GRAPHQL_URL);
-    const xml = await xliff.exportOutOfDateAsXliff(client, process.argv[2] || 'fr');
-    const out = path.join(process.cwd(), process.argv[3] || 'fr-translations.generated.xlf');
-    fs.writeFileSync(out, xml, 'utf8');
-    console.error('Wrote', out);
+    console.error("Calling exporter using GraphQL at", GRAPHQL_URL);
+    const xml = await xliff.exportOutOfDateAsXliff(
+      client,
+      process.argv[2] || "fr"
+    );
+    const out = path.join(
+      process.cwd(),
+      process.argv[3] || "fr-translations.generated.xlf"
+    );
+    fs.writeFileSync(out, xml, "utf8");
+    console.error("Wrote", out);
     console.log(xml.slice(0, 2000));
   } catch (e) {
-    console.error('Export failed:', e && e.stack ? e.stack : e);
+    console.error("Export failed:", e?.stack ? e.stack : e);
     process.exit(1);
   }
 })();

@@ -24,7 +24,7 @@ export const generateFootnoteKey = (content) => {
     }
     if (typeof content === "object" && content !== null) {
       // For objects, try to stringify safely
-      return JSON.stringify(content, (key, value) => {
+      return JSON.stringify(content, (_key, value) => {
         if (typeof value === "object" && value !== null) {
           // Skip React internal properties that can cause circular references
           if (value._owner || value._store || value._source || value._self) {
@@ -39,8 +39,8 @@ export const generateFootnoteKey = (content) => {
       });
     }
     return String(content);
-  } catch (error) {
-    return `fallback-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+  } catch {
+    return `fallback-${Date.now()}-${Math.random().toString(36).slice(2, 11)}`;
   }
 };
 

@@ -3,9 +3,9 @@
  * Writes the current Git user's identity to static/git-identity.json
  * so the Tina admin (browser) can read it during local development.
  */
-const { execSync } = require("child_process");
-const fs = require("fs");
-const path = require("path");
+const { execSync } = require("node:child_process");
+const fs = require("node:fs");
+const path = require("node:path");
 
 function safe(cmd) {
   try {
@@ -26,9 +26,11 @@ function main() {
   const outFile = path.join(outDir, "git-identity.json");
   try {
     if (!fs.existsSync(outDir)) fs.mkdirSync(outDir, { recursive: true });
-    fs.writeFileSync(outFile, JSON.stringify(data, null, 2) + "\n");
+    fs.writeFileSync(outFile, `${JSON.stringify(data, null, 2)}\n`);
     // eslint-disable-next-line no-console
-    console.log(`[git-identity] Wrote ${outFile}: ${name}${email ? ` <${email}>` : ""}`);
+    console.log(
+      `[git-identity] Wrote ${outFile}: ${name}${email ? ` <${email}>` : ""}`
+    );
   } catch (err) {
     // eslint-disable-next-line no-console
     console.warn("[git-identity] Failed to write git identity:", err.message);

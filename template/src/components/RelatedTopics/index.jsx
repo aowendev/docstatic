@@ -5,12 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { useLocation } from "@docusaurus/router";
-import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import Link from "@docusaurus/Link";
-import React from "react";
+import { useLocation } from "@docusaurus/router";
 // Import the generated static metadata
 import docsMetadata from "@site/src/data/docs-metadata.json";
+import React from "react";
 
 /**
  * RelatedTopics component for Tina CMS
@@ -26,19 +25,21 @@ const RelatedTopics = ({ maxResults = 5 }) => {
   // Get current page metadata from static data
   const getCurrentPageMetadata = () => {
     const currentPath = location.pathname;
-    
+
     // Remove /docs prefix if present to match metadata format
-    const normalizedPath = currentPath.startsWith('/docs') 
-      ? currentPath.replace('/docs', '') 
+    const normalizedPath = currentPath.startsWith("/docs")
+      ? currentPath.replace("/docs", "")
       : currentPath;
-    
+
     // Find current page in static docs metadata
-    const currentDoc = docsMetadata.find(doc => {
+    const currentDoc = docsMetadata.find((doc) => {
       // Handle different path variations
       const docPath = doc.path;
-      return docPath === normalizedPath || 
-             docPath === normalizedPath.replace(/\/$/, '') ||
-             `${docPath}/` === normalizedPath;
+      return (
+        docPath === normalizedPath ||
+        docPath === normalizedPath.replace(/\/$/, "") ||
+        `${docPath}/` === normalizedPath
+      );
     });
 
     return currentDoc;
@@ -46,26 +47,33 @@ const RelatedTopics = ({ maxResults = 5 }) => {
 
   // Calculate tag similarity between two arrays of tags
   const calculateSimilarity = (currentTags, otherTags) => {
-    if (!currentTags || !otherTags || !currentTags.length || !otherTags.length) {
+    if (
+      !currentTags ||
+      !otherTags ||
+      !currentTags.length ||
+      !otherTags.length
+    ) {
       return 0;
     }
 
     const currentTagsSet = new Set(currentTags);
     const otherTagsSet = new Set(otherTags);
-    
+
     // Calculate intersection
-    const intersection = new Set([...currentTagsSet].filter(tag => otherTagsSet.has(tag)));
-    
+    const intersection = new Set(
+      [...currentTagsSet].filter((tag) => otherTagsSet.has(tag))
+    );
+
     // Calculate union
     const union = new Set([...currentTagsSet, ...otherTagsSet]);
-    
+
     // Jaccard similarity coefficient
     return intersection.size / union.size;
   };
 
   // Get related topics based on tag similarity
   const getRelatedTopics = (currentDoc) => {
-    if (!currentDoc || !currentDoc.tags) {
+    if (!currentDoc?.tags) {
       return [];
     }
 
@@ -74,17 +82,15 @@ const RelatedTopics = ({ maxResults = 5 }) => {
 
     // Find related docs
     const relatedDocs = docsMetadata
-      .filter(doc => {
+      .filter((doc) => {
         // Exclude current document and docs without tags
-        return doc.path !== currentPath && 
-               doc.tags &&
-               Array.isArray(doc.tags);
+        return doc.path !== currentPath && doc.tags && Array.isArray(doc.tags);
       })
-      .map(doc => ({
+      .map((doc) => ({
         ...doc,
-        similarity: calculateSimilarity(currentTags, doc.tags)
+        similarity: calculateSimilarity(currentTags, doc.tags),
       }))
-      .filter(doc => doc.similarity > 0) // Only include docs with some similarity
+      .filter((doc) => doc.similarity > 0) // Only include docs with some similarity
       .sort((a, b) => {
         // Sort by similarity first, then by title for consistent ordering
         if (b.similarity !== a.similarity) {
@@ -98,8 +104,8 @@ const RelatedTopics = ({ maxResults = 5 }) => {
   };
 
   const currentDoc = getCurrentPageMetadata();
-  
-  if (!currentDoc || !currentDoc.tags) {
+
+  if (!currentDoc?.tags) {
     return null;
   }
 
@@ -115,12 +121,11 @@ const RelatedTopics = ({ maxResults = 5 }) => {
       <ul>
         {relatedTopics.map((topic, index) => (
           <li key={index}>
-            <Link to={`/docs${topic.path}`}>
-              {topic.title}
-            </Link>
+            <Link to={`/docs${topic.path}`}>{topic.title}</Link>
             {topic.description && (
               <span>
-                {" – "}{topic.description}
+                {" – "}
+                {topic.description}
               </span>
             )}
           </li>

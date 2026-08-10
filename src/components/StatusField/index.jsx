@@ -8,7 +8,7 @@
 import React from "react";
 import { wrapFieldsWithMeta } from "tinacms";
 
-const StatusField = wrapFieldsWithMeta(({ input, field, tinaForm }) => {
+const StatusField = wrapFieldsWithMeta(({ tinaForm }) => {
   // All boolean field names involved in the workflow
   const allBooleans = [
     "draft",
@@ -21,16 +21,65 @@ const StatusField = wrapFieldsWithMeta(({ input, field, tinaForm }) => {
 
   // Each workflow status maps to exactly which booleans should be true
   const statusMap = {
-    draft:     { draft: true,  review: false, translate: false, approved: false, published: false, unlisted: false },
-    review:    { draft: false, review: true,  translate: false, approved: false, published: false, unlisted: true  },
-    translate: { draft: false, review: false, translate: true,  approved: false, published: false, unlisted: true  },
-    approved:  { draft: false, review: false, translate: false, approved: true,  published: true,  unlisted: false },
-    published: { draft: false, review: false, translate: false, approved: false, published: true,  unlisted: false },
-    unlisted:  { draft: false, review: false, translate: false, approved: false, published: false, unlisted: true  },
+    draft: {
+      draft: true,
+      review: false,
+      translate: false,
+      approved: false,
+      published: false,
+      unlisted: false,
+    },
+    review: {
+      draft: false,
+      review: true,
+      translate: false,
+      approved: false,
+      published: false,
+      unlisted: true,
+    },
+    translate: {
+      draft: false,
+      review: false,
+      translate: true,
+      approved: false,
+      published: false,
+      unlisted: true,
+    },
+    approved: {
+      draft: false,
+      review: false,
+      translate: false,
+      approved: true,
+      published: true,
+      unlisted: false,
+    },
+    published: {
+      draft: false,
+      review: false,
+      translate: false,
+      approved: false,
+      published: true,
+      unlisted: false,
+    },
+    unlisted: {
+      draft: false,
+      review: false,
+      translate: false,
+      approved: false,
+      published: false,
+      unlisted: true,
+    },
   };
 
   // The UI options in display order
-  const statusOptions = ["draft", "review", "translate", "approved", "published", "unlisted"];
+  const statusOptions = [
+    "draft",
+    "review",
+    "translate",
+    "approved",
+    "published",
+    "unlisted",
+  ];
 
   // Determine which single workflow status is currently active based on the boolean combination
   const getCurrentStatus = () => {
@@ -41,7 +90,14 @@ const StatusField = wrapFieldsWithMeta(({ input, field, tinaForm }) => {
 
     // Match against statusMap in reverse-priority order (most specific first)
     // Order matters: approved (published+approved) must be checked before published (published only)
-    const checkOrder = ["review", "translate", "approved", "published", "unlisted", "draft"];
+    const checkOrder = [
+      "review",
+      "translate",
+      "approved",
+      "published",
+      "unlisted",
+      "draft",
+    ];
     for (const status of checkOrder) {
       const expected = statusMap[status];
       const match = allBooleans.every((b) => !!expected[b] === !!vals[b]);

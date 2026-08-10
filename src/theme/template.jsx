@@ -6,8 +6,6 @@
  */
 
 import React from "react";
-import codeFiles from "../../reuse/code-files.json";
-import { slugify } from "../../scripts/util";
 import { CodeSnippetBlockTemplate } from "../components/CodeSnippet/template";
 import { CommentBlockTemplate } from "../components/Comment/template";
 import { ConditionalTextBlockTemplate } from "../components/ConditionalText/template";
@@ -145,21 +143,11 @@ const TruncateTemplate = {
   ],
 };
 
-// Get the last segment of the path as the slug
-const usePageSlug = () => {
-  if (typeof window === "undefined") return "";
-  const path = window.location.pathname;
-  const segments = path.split("/").filter(Boolean);
-  return segments[segments.length - 1] || "";
-};
-
-const slug = usePageSlug();
-
 const ContextHelpTemplate = {
   name: "a",
   label: "Context Help",
   ui: {
-    itemProps: (item, slug) => {
+    itemProps: (item) => {
       return { label: item?.title };
     },
   },
@@ -178,7 +166,7 @@ const TabsTemplate = {
   name: "Tabs",
   label: "Tabs",
   ui: {
-    itemProps: (item) => {
+    itemProps: (_item) => {
       return { label: "Tabs" };
     },
   },

@@ -5,7 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { createContext, useCallback, useRef, useState } from "react";
+import React, {
+  createContext,
+  useCallback,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import { generateFootnoteKey } from "./utils";
 
 // Create context with default values
@@ -48,15 +54,22 @@ export const FootnotesProvider = ({ children }) => {
     footnoteCountRef.current = 0;
   }, []);
 
-  const value = {
-    footnotes,
-    addFootnote,
-    clearFootnotes,
-    getFootnoteNumber: (content) => {
-      const contentKey = generateFootnoteKey(content);
-      return footnoteMapRef.current.get(contentKey);
-    },
-  };
+  const getFootnoteNumber = useCallback((content) => {
+    const contentKey = generateFootnoteKey(content);
+    return footnoteMapRef.current.get(contentKey);
+  }, []);
+
+  // Memoised: rebuilding this object every render re-rendered every consumer
+  // and defeated the useCallback wrappers above it.
+  const value = useMemo(
+    () => ({
+      footnotes,
+      addFootnote,
+      clearFootnotes,
+      getFootnoteNumber,
+    }),
+    [footnotes, addFootnote, clearFootnotes, getFootnoteNumber]
+  );
 
   return (
     <FootnotesContext.Provider value={value}>

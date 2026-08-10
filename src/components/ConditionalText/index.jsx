@@ -24,21 +24,19 @@ const ConditionalText = ({
   let pageConditions = [];
   let currentLanguage = "en";
 
+  // useDoc() throws outside a doc page (blog posts, custom pages), so this
+  // guard is load-bearing. useDocusaurusContext() needs no guard: its provider
+  // is mounted at the app root.
   try {
-    // Get document metadata (conditions from frontmatter)
+    // biome-ignore lint/correctness/useHookAtTopLevel: useDoc throws off doc pages; the catch is the only way to render this component elsewhere
     const doc = useDoc();
     pageConditions = doc?.frontMatter?.conditions || [];
   } catch {
     // Not in a doc context, pageConditions stays empty
   }
 
-  try {
-    // Get current language from Docusaurus context
-    const { i18n } = useDocusaurusContext();
-    currentLanguage = i18n?.currentLocale || "en";
-  } catch {
-    // Context not available, use default
-  }
+  const { i18n } = useDocusaurusContext();
+  currentLanguage = i18n?.currentLocale || "en";
 
   // Check if required conditions are met against page metadata conditions
   const checkConditionsMet = () => {
@@ -46,21 +44,25 @@ const ConditionalText = ({
 
     if (logic === "all") {
       // All required conditions must be present in page metadata
-      return conditions.every((condition) => pageConditions.includes(condition));
+      return conditions.every((condition) =>
+        pageConditions.includes(condition)
+      );
     }
     // Any required condition must be present in page metadata
     return conditions.some((condition) => pageConditions.includes(condition));
   };
 
-  // Check if language conditions are satisfied
+  // Check if language conditions are satisfied. Only one language is ever
+  // active, so "all" is only satisfiable by a single-entry list — previously
+  // both branches were identical and languageLogic had no effect at all.
   const checkLanguageConditions = () => {
     if (languages.length === 0) return true;
 
     if (languageLogic === "all") {
-      // For 'all' logic, current language must be in the list
-      return languages.includes(currentLanguage);
+      // Every listed language must match the active one
+      return languages.every((language) => language === currentLanguage);
     }
-    // For 'any' logic, current language must match at least one
+    // Any listed language may match the active one
     return languages.includes(currentLanguage);
   };
 
@@ -90,7 +92,8 @@ const ConditionalText = ({
   }
 
   // Apply action logic: show or hide based on whether conditions are met
-  const shouldShow = action === "hide" ? !conditionsSatisfied : conditionsSatisfied;
+  const shouldShow =
+    action === "hide" ? !conditionsSatisfied : conditionsSatisfied;
 
   // const debugInfo = debug
   //   ? {
@@ -131,11 +134,11 @@ const ConditionalText = ({
         </details>
       )} */}
 
-      {shouldShow ? (
-        children
-      ) : (
-        fallback && <span className="conditional-text__fallback">{fallback}</span>
-      )}
+      {shouldShow
+        ? children
+        : fallback && (
+            <span className="conditional-text__fallback">{fallback}</span>
+          )}
     </>
   );
 };

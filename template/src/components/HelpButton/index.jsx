@@ -99,14 +99,14 @@ export default function HelpButton({ url }) {
       const unwantedLinks = document.querySelectorAll(
         'a[href="#/collections/generated/~"], a[href="#/collections/media/~"]'
       );
-      unwantedLinks.forEach((link) => {
+      for (const link of unwantedLinks) {
         const li = link.closest("li");
         if (li) {
           li.remove();
         } else {
           link.remove();
         }
-      });
+      }
     };
 
     // Inject custom TinaCMS styles
@@ -189,8 +189,9 @@ export default function HelpButton({ url }) {
     // which bypasses beforeunload (e.g. TinaCMS left nav links).
     const originalPushState = history.pushState.bind(history);
     const originalReplaceState = history.replaceState.bind(history);
-    const guardNavigation = (original) =>
-      function (...args) {
+    const guardNavigation =
+      (original) =>
+      (...args) => {
         if (hasUnsavedChanges()) {
           const confirmed = window.confirm(
             "You have unsaved changes. Leave without saving?"
@@ -207,23 +208,24 @@ export default function HelpButton({ url }) {
       window.location.hostname === "127.0.0.1"
     ) {
       const autoSaveTimeout = setTimeout(() => {
-        autoSaveInterval = setInterval(() => {
-          if (isNewDocumentPage()) return;
-          const saveBtn = Array.from(document.querySelectorAll("button")).find(
-            (b) =>
-              b.textContent?.trim() === "Save" &&
-              !b.disabled &&
-              b.offsetParent !== null
-          );
-          if (saveBtn) {
-            saveBtn.click();
-            lastAutoSaveAt = Date.now();
-            console.log(
-              `[TinaCMS Auto-Save] Saved at ${new Date().toLocaleTimeString()}`
+        autoSaveInterval = setInterval(
+          () => {
+            if (isNewDocumentPage()) return;
+            const saveBtn = Array.from(
+              document.querySelectorAll("button")
+            ).find(
+              (b) =>
+                b.textContent?.trim() === "Save" &&
+                !b.disabled &&
+                b.offsetParent !== null
             );
-          }
-        }, 5 * 60 * 1000);
-        console.log("[TinaCMS Auto-Save] Active — checking every 5m (local only, skips new documents)");
+            if (saveBtn) {
+              saveBtn.click();
+              lastAutoSaveAt = Date.now();
+            }
+          },
+          5 * 60 * 1000
+        );
       }, 3000);
 
       return () => {
@@ -245,7 +247,7 @@ export default function HelpButton({ url }) {
       history.pushState = originalPushState;
       history.replaceState = originalReplaceState;
     };
-  }, []);
+  }, [url]);
 
   return null;
 }

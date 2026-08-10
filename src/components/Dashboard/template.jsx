@@ -5,14 +5,14 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
-import Dashboard1 from './Dashboard1';
-import MediaDashboard from './MediaDashboard';
-import TranslationDashboard from './TranslationDashboard';
-import BrokenLinksDashboard from './BrokenLinksDashboard';
-import ContentReuseDashboard from './ContentReuseDashboard';
-import StatusBar from './StatusBar';
-import HelpButton from '../HelpButton';
+import React from "react";
+import HelpButton from "../HelpButton";
+import BrokenLinksDashboard from "./BrokenLinksDashboard";
+import ContentReuseDashboard from "./ContentReuseDashboard";
+import Dashboard1 from "./Dashboard1";
+import MediaDashboard from "./MediaDashboard";
+import StatusBar from "./StatusBar";
+import TranslationDashboard from "./TranslationDashboard";
 //. import DocumentMutationDashboard from './DocumentMutationDashboard';
 
 export const DashboardsCollection = {
@@ -26,119 +26,127 @@ export const DashboardsCollection = {
       delete: false,
     },
   },
-	fields: [
-	{
-	  type: "boolean",
-	  name: "statusBar",
-	  label: "",
-	  required: false,
-	  ui: {
-		component: (props) => (
-		  <div style={{ 
-			position: 'relative',
-			width: '100%',
-			marginLeft: '-20px',
-			marginRight: '-20px',
-			marginBottom: '20px',
-			zIndex: 1000
-		  }}>
-			<StatusBar/>
-		  </div>
-		),
-	  },
-	},
-	{
-	  type: "boolean",
-	  name: "help",
-	  label: "Help",
-	  required: false,
-	  ui: {
-		component: (props) => (
-		  <HelpButton
-			url="https://docstatic.com/docs/guides/dashboards"
-			{...props}
-		  />
-		),
-	  },
-	},
-	{
-	  type: "boolean",
-	  name: "dashboard1",
-	  label: "Content Overview",
-	  required: false,
-	  ui: {
-		component: (props) => (
-		  <div style={{ display: 'block', width: '100%', clear: 'both' }}>
-			<Dashboard1/>
-		  </div>
-		),
-	  },
-	},
-	{
-	  type: "boolean",
-	  name: "contentReuseDashboard",
-	  label: "Content Reuse Overview",
-	  required: false,
-	  ui: {
-		component: (props) => (
-		  <div style={{ display: 'block', width: '100%', clear: 'both' }}>
-			<ContentReuseDashboard/>
-		  </div>
-		),
-	  },
-	},
-	{
-	  type: "boolean",
-	  name: "mediaDashboard",
-	  label: "Media Library",
-	  required: false,
-	  ui: {
-		component: (props) => (
-		  <div style={{ display: 'block', width: '100%', clear: 'both' }}>
-			<MediaDashboard/>
-		  </div>
-		),
-	  },
-	},
-	{
-	  type: "boolean",
-	  name: "translationDashboard",
-	  label: "Translation Status",
-	  required: false,
-	  ui: {
-		component: (props) => (
-		  <div style={{ display: 'block', width: '100%', clear: 'both' }}>
-			<TranslationDashboard/>
-		  </div>
-		),
-	  },
-	},
-	{
-	  type: "boolean",
-	  name: "brokenLinksDashboard",
-	  label: "Broken Links",
-	  required: false,
-	  ui: {
-		component: (props) => (
-		  <div style={{ display: 'block', width: '100%', clear: 'both' }}>
-			<BrokenLinksDashboard/>
-		  </div>
-		),
-	  },
-	},
+  fields: [
+    {
+      type: "boolean",
+      name: "statusBar",
+      label: "",
+      required: false,
+      ui: {
+        component: (_props) => (
+          <div
+            style={{
+              position: "relative",
+              width: "100%",
+              marginLeft: "-20px",
+              marginRight: "-20px",
+              marginBottom: "20px",
+              zIndex: 1000,
+            }}
+          >
+            <StatusBar />
+          </div>
+        ),
+      },
+    },
+    {
+      type: "boolean",
+      name: "help",
+      label: "Help",
+      required: false,
+      ui: {
+        component: (props) => (
+          <HelpButton
+            url="https://docstatic.com/docs/guides/dashboards"
+            {...props}
+          />
+        ),
+      },
+    },
+    {
+      type: "boolean",
+      name: "dashboard1",
+      label: "Content Overview",
+      required: false,
+      ui: {
+        component: (_props) => (
+          <div style={{ display: "block", width: "100%", clear: "both" }}>
+            <Dashboard1 />
+          </div>
+        ),
+      },
+    },
+    {
+      type: "boolean",
+      name: "contentReuseDashboard",
+      label: "Content Reuse Overview",
+      required: false,
+      ui: {
+        component: (_props) => (
+          <div style={{ display: "block", width: "100%", clear: "both" }}>
+            <ContentReuseDashboard />
+          </div>
+        ),
+      },
+    },
+    {
+      type: "boolean",
+      name: "mediaDashboard",
+      label: "Media Library",
+      required: false,
+      ui: {
+        component: (_props) => (
+          <div style={{ display: "block", width: "100%", clear: "both" }}>
+            <MediaDashboard />
+          </div>
+        ),
+      },
+    },
+    {
+      type: "boolean",
+      name: "translationDashboard",
+      label: "Translation Status",
+      required: false,
+      ui: {
+        component: (_props) => (
+          <div style={{ display: "block", width: "100%", clear: "both" }}>
+            <TranslationDashboard />
+          </div>
+        ),
+      },
+    },
+    {
+      type: "boolean",
+      name: "brokenLinksDashboard",
+      label: "Broken Links",
+      required: false,
+      ui: {
+        component: (_props) => (
+          <div style={{ display: "block", width: "100%", clear: "both" }}>
+            <BrokenLinksDashboard />
+          </div>
+        ),
+      },
+    },
 
-		// {
-		// 	type: "boolean",
-		// 	name: "documentMutationDashboard",
-		// 	label: "Document Mutations",
-		// 	required: false,
-		// 	ui: {
-		// 		component: (props) => (
-		// 			<DocumentMutationDashboard />
-		// 		),
-		// 	},
-		// },
-	],
+    // {
+    // 	type: "boolean",
+    // 	name: "documentMutationDashboard",
+    // 	label: "Document Mutations",
+    // 	required: false,
+    // 	ui: {
+    // 		component: (props) => (
+    // 			<DocumentMutationDashboard />
+    // 		),
+    // 	},
+    // },
+  ],
 };
 
-export { Dashboard1, MediaDashboard, TranslationDashboard, BrokenLinksDashboard, StatusBar };
+export {
+  BrokenLinksDashboard,
+  Dashboard1,
+  MediaDashboard,
+  StatusBar,
+  TranslationDashboard,
+};

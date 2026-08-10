@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
 const fs = require("fs-extra");
-const path = require("path");
-const { execSync } = require("child_process");
+const path = require("node:path");
+const { execSync } = require("node:child_process");
 
 const projectName = process.argv[2];
 if (!projectName) {
