@@ -34,7 +34,11 @@ function generateDocsMetadata() {
             const { data: frontmatter } = matter(fileContent);
 
             // Only include published documents with tags
-            if (frontmatter.published !== false && frontmatter.tags && Array.isArray(frontmatter.tags)) {
+            if (
+              frontmatter.published !== false &&
+              frontmatter.tags &&
+              Array.isArray(frontmatter.tags)
+            ) {
               // Generate the URL path for Docusaurus
               let urlPath = relativeFilePath
                 .replace(/\.(mdx?|md)$/, "")
@@ -50,7 +54,9 @@ function generateDocsMetadata() {
               }
 
               docs.push({
-                title: frontmatter.title || path.basename(entry.name, path.extname(entry.name)),
+                title:
+                  frontmatter.title ||
+                  path.basename(entry.name, path.extname(entry.name)),
                 description: frontmatter.description || "",
                 tags: frontmatter.tags || [],
                 path: urlPath,
@@ -59,12 +65,16 @@ function generateDocsMetadata() {
               });
             }
           } catch (error) {
-            console.warn(`Warning: Could not process ${fullPath}: ${error.message}`);
+            console.warn(
+              `Warning: Could not process ${fullPath}: ${error.message}`
+            );
           }
         }
       }
     } catch (error) {
-      console.warn(`Warning: Could not read directory ${dir}: ${error.message}`);
+      console.warn(
+        `Warning: Could not read directory ${dir}: ${error.message}`
+      );
     }
   }
 

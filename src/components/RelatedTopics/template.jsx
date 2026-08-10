@@ -12,8 +12,8 @@ export const RelatedTopicsBlockTemplate = {
   ui: {
     itemProps: (item) => {
       const maxResults = item?.maxResults || 5;
-      return { 
-        label: `Related Topics (max: ${maxResults})`
+      return {
+        label: `Related Topics (max: ${maxResults})`,
       };
     },
   },
