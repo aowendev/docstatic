@@ -7,32 +7,15 @@
 
 import React from "react";
 import { ImageField, ReferenceField, TextField } from "tinacms";
-import docusaurusData from "../../../config/docusaurus/index.json";
 import CollapsibleField from "../CollapsibleField";
 import HelpButton from "../HelpButton";
-
-// Function to create language options from config data
-function createLanguageOptions(configData = docusaurusData) {
-  const supportedLanguages = configData.languages?.supported || [
-    { code: "en", label: "English" },
-  ];
-
-  return supportedLanguages.map((langObj) => {
-    return {
-      value: langObj.code,
-      label: `${langObj.label} (${langObj.code})`,
-    };
-  });
-}
-
-const languageOptions = createLanguageOptions();
 
 const WarningIcon = (props) => {
   return (
     <svg
       stroke="currentColor"
       fill="currentColor"
-      stroke-width="0"
+      strokeWidth="0"
       viewBox="0 0 24 24"
       height="1em"
       width="1em"
@@ -47,7 +30,7 @@ const WarningIcon = (props) => {
 
 const RestartWarning = () => {
   return (
-    <p className="rounded-lg border shadow px-4 py-2.5 bg-gradient-to-r from-yellow-50 to-yellow-100 border-yellow-200 mb-4">
+    <div className="rounded-lg border shadow px-4 py-2.5 bg-gradient-to-r from-yellow-50 to-yellow-100 border-yellow-200 mb-4">
       <div className="flex items-center gap-2">
         <WarningIcon className={"w-6 h-auto flex-shrink-0 text-yellow-400"} />
         <div className={"flex-1 text-sm text-yellow-700 whitespace-normal	"}>
@@ -55,8 +38,35 @@ const RestartWarning = () => {
           after saving <em>(local development only)</em>.
         </div>
       </div>
-    </p>
+    </div>
   );
+};
+
+// Navbar item fields live inside an object list, so each component receives a
+// `field.name` such as "navbar.items.3.docLink". Which of the link-detail
+// fields is shown depends on the sibling `link` value on the same item.
+// (`doc` intentionally shows two: the reference picker and the anchor id.)
+const showWhenLinkIs = (expected, Field) => (props) => {
+  const link = React.useMemo(() => {
+    const fieldName = props.field.name;
+    const parentPath =
+      fieldName.substring(0, fieldName.lastIndexOf(".")) || fieldName;
+    // Guarded walk: an incomplete path used to throw and take the whole
+    // settings form down.
+    const parent = parentPath
+      .split(".")
+      .reduce(
+        (o, key) => (o == null ? undefined : o[key]),
+        props.tinaForm.values
+      );
+    return parent?.link;
+  }, [props.tinaForm.values, props.field.name]);
+
+  if (link !== expected) {
+    return null;
+  }
+
+  return Field(props);
 };
 
 const NavbarItemFields = [
@@ -120,23 +130,7 @@ const NavbarItemFields = [
     type: "reference",
     collections: ["doc"],
     ui: {
-      component: (props) => {
-        const link = React.useMemo(() => {
-          let fieldName = props.field.name;
-          fieldName =
-            fieldName.substring(0, fieldName.lastIndexOf(".")) || fieldName;
-
-          return fieldName
-            .split(".")
-            .reduce((o, i) => o[i], props.tinaForm.values).link;
-        }, [props.tinaForm.values, props.field.name]);
-
-        if (link !== "doc") {
-          return null;
-        }
-
-        return ReferenceField(props);
-      },
+      component: showWhenLinkIs("doc", ReferenceField),
     },
   },
   {
@@ -145,23 +139,7 @@ const NavbarItemFields = [
     type: "reference",
     collections: ["pages"],
     ui: {
-      component: (props) => {
-        const link = React.useMemo(() => {
-          let fieldName = props.field.name;
-          fieldName =
-            fieldName.substring(0, fieldName.lastIndexOf(".")) || fieldName;
-
-          return fieldName
-            .split(".")
-            .reduce((o, i) => o[i], props.tinaForm.values).link;
-        }, [props.tinaForm.values, props.field.name]);
-
-        if (link !== "page") {
-          return null;
-        }
-
-        return ReferenceField(props);
-      },
+      component: showWhenLinkIs("page", ReferenceField),
     },
   },
   {
@@ -169,23 +147,7 @@ const NavbarItemFields = [
     label: "URL",
     type: "string",
     ui: {
-      component: (props) => {
-        const link = React.useMemo(() => {
-          let fieldName = props.field.name;
-          fieldName =
-            fieldName.substring(0, fieldName.lastIndexOf(".")) || fieldName;
-
-          return fieldName
-            .split(".")
-            .reduce((o, i) => o[i], props.tinaForm.values).link;
-        }, [props.tinaForm.values, props.field.name]);
-
-        if (link !== "external") {
-          return null;
-        }
-
-        return TextField(props);
-      },
+      component: showWhenLinkIs("external", TextField),
     },
   },
   {
@@ -193,23 +155,7 @@ const NavbarItemFields = [
     label: "Manual Path",
     type: "string",
     ui: {
-      component: (props) => {
-        const link = React.useMemo(() => {
-          let fieldName = props.field.name;
-          fieldName =
-            fieldName.substring(0, fieldName.lastIndexOf(".")) || fieldName;
-
-          return fieldName
-            .split(".")
-            .reduce((o, i) => o[i], props.tinaForm.values).link;
-        }, [props.tinaForm.values, props.field.name]);
-
-        if (link !== "manualPath") {
-          return null;
-        }
-
-        return TextField(props);
-      },
+      component: showWhenLinkIs("manualPath", TextField),
     },
   },
   {
@@ -217,23 +163,7 @@ const NavbarItemFields = [
     label: "Document ID",
     type: "string",
     ui: {
-      component: (props) => {
-        const link = React.useMemo(() => {
-          let fieldName = props.field.name;
-          fieldName =
-            fieldName.substring(0, fieldName.lastIndexOf(".")) || fieldName;
-
-          return fieldName
-            .split(".")
-            .reduce((o, i) => o[i], props.tinaForm.values).link;
-        }, [props.tinaForm.values, props.field.name]);
-
-        if (link !== "doc") {
-          return null;
-        }
-
-        return TextField(props);
-      },
+      component: showWhenLinkIs("doc", TextField),
     },
   },
   {

@@ -57,11 +57,7 @@ const GlossaryTerm = ({ termKey, lang, initcap, bold }) => {
       // Add debug mode - uncomment next line to force touch mode for testing
       // return true; // TEMPORARY: Force touch mode for testing
 
-      return (
-        "ontouchstart" in window ||
-        navigator.maxTouchPoints > 0 ||
-        navigator.msMaxTouchPoints > 0
-      );
+      return "ontouchstart" in window || navigator.maxTouchPoints > 0;
     };
 
     setIsTouchDevice(checkTouchDevice());
@@ -93,52 +89,6 @@ const GlossaryTerm = ({ termKey, lang, initcap, bold }) => {
       };
     }
   }, [showDefinition, isTouchDevice]);
-
-  // Position the definition box to avoid screen overflow
-  const getDefinitionStyle = () => {
-    if (!termRef.current || !showDefinition) return {};
-
-    const termRect = termRef.current.getBoundingClientRect();
-    const viewportWidth = window.innerWidth;
-    const viewportHeight = window.innerHeight;
-
-    // Default positioning below the term
-    let top = termRect.bottom + 8;
-    let left = termRect.left;
-
-    // Estimated definition box width (will be adjusted by CSS max-width)
-    const estimatedWidth = Math.min(300, viewportWidth - 20);
-
-    // Check if definition would overflow right edge
-    if (left + estimatedWidth > viewportWidth - 10) {
-      left = viewportWidth - estimatedWidth - 10;
-    }
-
-    // Check if definition would overflow left edge
-    if (left < 10) {
-      left = 10;
-    }
-
-    // Check if definition would overflow bottom edge
-    // Estimate height as roughly 100px (will be adjusted by content)
-    const estimatedHeight = 100;
-    if (top + estimatedHeight > viewportHeight - 10) {
-      // Position above the term instead
-      top = termRect.top - estimatedHeight - 8;
-
-      // If still overflowing top, position at top of viewport
-      if (top < 10) {
-        top = 10;
-      }
-    }
-
-    return {
-      position: "fixed",
-      top: `${top}px`,
-      left: `${left}px`,
-      zIndex: 2147483647, // Maximum z-index value
-    };
-  };
 
   const handleTermClick = () => {
     if (isTouchDevice) {
@@ -212,9 +162,15 @@ const GlossaryTerm = ({ termKey, lang, initcap, bold }) => {
   };
 
   const { term, definition } = getTermData();
+  const displayTerm =
+    initcap && term !== "TERM NOT FOUND"
+      ? term.charAt(0).toUpperCase() + term.slice(1)
+      : term;
 
-  // Create the definition box component
-  const DefinitionBox = () => {
+  // Rendered inline rather than declared as a component: a component defined
+  // in the render body gets a new identity every render, which made React
+  // unmount and remount the popup continuously while it was open.
+  const renderDefinitionBox = () => {
     if (!termRef.current) return null;
 
     const termRect = termRef.current.getBoundingClientRect();
@@ -261,6 +217,7 @@ const GlossaryTerm = ({ termKey, lang, initcap, bold }) => {
     return (
       <div
         ref={definitionRef}
+        role="tooltip"
         style={{
           position: "fixed",
           top: `${top}px`,
@@ -290,9 +247,7 @@ const GlossaryTerm = ({ termKey, lang, initcap, bold }) => {
             color: textColor,
           }}
         >
-          {initcap && term !== "TERM NOT FOUND"
-            ? term.charAt(0).toUpperCase() + term.slice(1)
-            : term}
+          {displayTerm}
         </div>
         <div style={{ color: secondaryTextColor }}>{definition}</div>
       </div>
@@ -301,10 +256,18 @@ const GlossaryTerm = ({ termKey, lang, initcap, bold }) => {
 
   return (
     <>
-      <span
+      <button
+        type="button"
         ref={termRef}
         title={!isTouchDevice ? definition : undefined}
+        aria-expanded={isTouchDevice ? showDefinition : undefined}
         style={{
+          // Reset the button chrome so it still reads as inline body text
+          background: "none",
+          border: "none",
+          padding: 0,
+          font: "inherit",
+          color: "inherit",
           textDecoration: "underline",
           cursor: isTouchDevice ? "pointer" : "help",
           position: "relative",
@@ -313,10 +276,8 @@ const GlossaryTerm = ({ termKey, lang, initcap, bold }) => {
         onClick={handleTermClick}
         onTouchStart={isTouchDevice ? (e) => e.stopPropagation() : undefined}
       >
-        {initcap && term !== "TERM NOT FOUND"
-          ? term.charAt(0).toUpperCase() + term.slice(1)
-          : term}
-      </span>
+        {displayTerm}
+      </button>
 
       {isTouchDevice &&
         showDefinition &&
@@ -335,7 +296,7 @@ const GlossaryTerm = ({ termKey, lang, initcap, bold }) => {
               zIndex: "999999999",
             }}
           >
-            <DefinitionBox />
+            {renderDefinitionBox()}
           </div>,
           portalElement
         )}

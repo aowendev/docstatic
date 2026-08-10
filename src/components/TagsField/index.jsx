@@ -8,14 +8,18 @@
 import React, { useMemo, useState } from "react";
 import { wrapFieldsWithMeta } from "tinacms";
 
-const TagsField = wrapFieldsWithMeta(({ input, field, tinaForm }) => {
+// Module-level constants: `field.options || []` produced a fresh array identity
+// on every render, so the memos below never hit their cache.
+const NO_TAGS = [];
+
+const TagsField = wrapFieldsWithMeta(({ input, field }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [isOpen, setIsOpen] = useState(false);
   const [expandedNodes, setExpandedNodes] = useState(new Set());
   const [viewMode, setViewMode] = useState("search"); // 'tree' or 'search'
 
-  const allTags = field.options || [];
-  const selectedTags = input.value || [];
+  const allTags = field.options || NO_TAGS;
+  const selectedTags = input.value || NO_TAGS;
 
   // Build tree structure from tags
   const tagTree = useMemo(() => {
@@ -35,8 +39,6 @@ const TagsField = wrapFieldsWithMeta(({ input, field, tinaForm }) => {
             name: part,
             fullPath: path,
             children: {},
-            isLeaf: index === parts.length - 1,
-            level: index,
           };
         }
 
@@ -68,6 +70,20 @@ const TagsField = wrapFieldsWithMeta(({ input, field, tinaForm }) => {
     }
     return groups;
   }, [filteredTags]);
+
+  // Top-level segments present in the taxonomy, most-used first. Previously a
+  // hardcoded list carried over from one specific site's tags.
+  const popularCategories = useMemo(() => {
+    const counts = new Map();
+    for (const tag of allTags) {
+      const top = tag.split("_")[0];
+      if (top) counts.set(top, (counts.get(top) || 0) + 1);
+    }
+    return [...counts.entries()]
+      .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
+      .slice(0, 5)
+      .map(([name]) => name);
+  }, [allTags]);
 
   // Get all parent paths for a given tag
   const getParentPaths = (tagPath) => {
@@ -330,25 +346,28 @@ const TagsField = wrapFieldsWithMeta(({ input, field, tinaForm }) => {
               Popular Tags
             </span>
             <div className="flex flex-wrap gap-1">
-              {["customers", "teams", "a3-features", "components", "regions"]
-                .filter((tag) => allTags.some((t) => t.startsWith(tag)))
-                .map((category) => (
-                  <button
-                    key={category}
-                    type="button"
-                    onClick={() => setSearchTerm(category)}
-                    className="px-2 py-1 text-xs bg-gray-100 text-gray-700 rounded hover:bg-gray-200"
-                  >
-                    {category}
-                  </button>
-                ))}
+              {popularCategories.map((category) => (
+                <button
+                  key={category}
+                  type="button"
+                  onClick={() => setSearchTerm(category)}
+                  className="px-2 py-1 text-xs bg-gray-100 text-gray-700 rounded hover:bg-gray-200"
+                >
+                  {category}
+                </button>
+              ))}
             </div>
           </div>
         )}
 
       {/* Click outside handler for search mode */}
       {viewMode === "search" && isOpen && (
-        <div className="fixed inset-0 z-0" onClick={() => setIsOpen(false)} />
+        <button
+          type="button"
+          aria-label="Close tag search"
+          className="fixed inset-0 z-0 cursor-default bg-transparent border-none"
+          onClick={() => setIsOpen(false)}
+        />
       )}
     </div>
   );

@@ -28,16 +28,8 @@ const CollapsibleField = wrapFieldsWithMeta(
     }
 
     const toggleCollapsed = () => {
-      setIsCollapsed(!isCollapsed);
+      setIsCollapsed((collapsed) => !collapsed);
     };
-
-    const hasValue =
-      input.value &&
-      (Array.isArray(input.value)
-        ? input.value.length > 0
-        : typeof input.value === "string"
-          ? input.value.trim() !== ""
-          : true);
 
     return (
       <>
@@ -82,10 +74,7 @@ const CollapsibleField = wrapFieldsWithMeta(
             >
               <FieldComponent
                 input={input}
-                field={{
-                  ...field,
-                  name: field.name,
-                }}
+                field={field}
                 tinaForm={tinaForm}
                 meta={meta}
                 {...props}

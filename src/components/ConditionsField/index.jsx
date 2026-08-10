@@ -72,54 +72,11 @@ const ConditionsTreeField = wrapFieldsWithMeta(({ input, field }) => {
   };
 
   const handleConditionToggle = (conditionValue) => {
-    try {
-      const newConditions = selectedConditions.includes(conditionValue)
-        ? selectedConditions.filter((c) => c !== conditionValue)
-        : [...selectedConditions, conditionValue];
+    const newConditions = selectedConditions.includes(conditionValue)
+      ? selectedConditions.filter((c) => c !== conditionValue)
+      : [...selectedConditions, conditionValue];
 
-      input.onChange(newConditions);
-    } catch (error) {
-      // Silent error handling for production
-    }
-  };
-
-  const handleCategoryToggle = (category, conditions) => {
-    try {
-      const categoryValues = conditions.map((c) => c.value);
-      const allSelected = categoryValues.every((value) =>
-        selectedConditions.includes(value)
-      );
-
-      let newConditions;
-      if (allSelected) {
-        // Deselect all conditions in this category
-        newConditions = selectedConditions.filter(
-          (c) => !categoryValues.includes(c)
-        );
-      } else {
-        // Select all conditions in this category
-        const toAdd = categoryValues.filter(
-          (value) => !selectedConditions.includes(value)
-        );
-        newConditions = [...selectedConditions, ...toAdd];
-      }
-
-      input.onChange(newConditions);
-    } catch (error) {
-      // Silent error handling for production
-    }
-  };
-
-  const getCategoryStatus = (conditions) => {
-    const categoryValues = conditions.map((c) => c.value);
-    const selectedCount = categoryValues.filter((value) =>
-      selectedConditions.includes(value)
-    ).length;
-    const totalCount = categoryValues.length;
-
-    if (selectedCount === 0) return "none";
-    if (selectedCount === totalCount) return "all";
-    return "some";
+    input.onChange(newConditions);
   };
 
   return (
@@ -177,11 +134,6 @@ const ConditionsTreeField = wrapFieldsWithMeta(({ input, field }) => {
         <div className="p-2">
           {Object.entries(conditionsTree).map(([category, conditions]) => {
             const isExpanded = expandedCategories.has(category);
-            const categoryStatus = getCategoryStatus(conditions);
-            const selectedInCategory = conditions.filter((c) =>
-              selectedConditions.includes(c.value)
-            ).length;
-
             return (
               <div key={category} style={{ marginBottom: "4px" }}>
                 {/* Category Header */}
@@ -204,12 +156,13 @@ const ConditionsTreeField = wrapFieldsWithMeta(({ input, field }) => {
                     ▶
                   </button>
 
-                  <span
+                  <button
+                    type="button"
                     onClick={() => toggleCategory(category)}
-                    className="flex-1 text-left text-sm cursor-pointer select-none"
+                    className="flex-1 text-left text-sm cursor-pointer select-none bg-transparent border-none p-0"
                   >
                     {category}
-                  </span>
+                  </button>
                 </div>
 
                 {/* Category Conditions */}

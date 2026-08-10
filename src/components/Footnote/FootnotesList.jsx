@@ -12,33 +12,18 @@ const FootnotesList = () => {
   const context = useContext(FootnotesContext);
   const [footnotes, setFootnotes] = useState([]);
 
+  // As in Footnote/index.jsx, the context default always supplies these, so the
+  // former window.globalFootnotes fallbacks were unreachable.
   useEffect(() => {
-    if (context?.footnotes) {
-      // Use context footnotes if available
-      setFootnotes(context.footnotes);
-    } else if (typeof window !== "undefined" && window.globalFootnotes) {
-      // Fallback to global footnotes
-      setFootnotes(window.globalFootnotes);
-    } else {
-      setFootnotes([]);
-    }
-  }, [context?.footnotes]);
+    setFootnotes(context.footnotes);
+  }, [context.footnotes]);
 
   // Clear footnotes when component unmounts (page navigation)
   useEffect(() => {
-    if (context?.clearFootnotes) {
-      return () => {
-        context.clearFootnotes();
-      };
-    }
-    // Clear global footnotes
     return () => {
-      if (typeof window !== "undefined") {
-        window.globalFootnotes = [];
-        window.globalFootnoteMap = new Map();
-      }
+      context.clearFootnotes();
     };
-  }, [context?.clearFootnotes]);
+  }, [context.clearFootnotes]);
 
   if (!footnotes || footnotes.length === 0) {
     return null;
