@@ -27,8 +27,8 @@
     "gen-graphql": "docusaurus docs:generate:graphql",
     "gen-api-docs:version": "docusaurus gen-api-docs:version",
     "clean-api-docs:version": "docusaurus clean-api-docs:version",
-    "lint": "biome check config/ reuse/ scripts/ src/ tina/",
-    "lint:fix": "biome check config/ reuse/ scripts/ src/ tina/ --fix"
+    "lint": "biome check .",
+    "lint:fix": "biome check . --fix"
   },
   "dependencies": {
     "@algolia/client-search": "^5.56.0",
