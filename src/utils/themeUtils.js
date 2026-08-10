@@ -5,8 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const fs = require("fs");
-const path = require("path");
+const fs = require("node:fs");
+const path = require("node:path");
 
 /**
  * Generate CSS variables from theme configuration
@@ -119,10 +119,12 @@ function updateThemeCSS() {
 
     // Write CSS file
     fs.writeFileSync(cssPath, css);
-
-    console.log("Theme CSS updated successfully!");
   } catch (error) {
-    console.error("Error updating theme CSS:", error);
+    // Let the caller (scripts/update-theme-css.js) report and set the exit
+    // code — swallowing this here made the script print success on failure.
+    throw new Error(`Failed to update theme CSS: ${error.message}`, {
+      cause: error,
+    });
   }
 }
 

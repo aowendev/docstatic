@@ -732,9 +732,6 @@ h6,
   }
 }
 
-/* Mermaid Zoom Functionality */
-@import "../theme/Mermaid/mermaid-zoom.css";
-
 /* Ordered list styling */
 ol {
   list-style-type: decimal; /* First level: 1, 2, 3, ... */
@@ -818,7 +815,6 @@ main s,
   border-width: 0 2px 2px 0;
   transform: rotate(45deg);
 }
-
 
 /*
  * Merge consecutive lists separated by ConditionalText components.
