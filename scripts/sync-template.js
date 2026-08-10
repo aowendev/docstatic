@@ -65,6 +65,12 @@ const SCRIPTS_ALLOWLIST = [
 // its config under this name and the create CLI renames it on scaffold.
 const BIOME_TEMPLATE_NAME = "biome.template.json";
 
+// Oldest create-docstatic that can consume this manifest correctly. Bump this
+// whenever the manifest gains semantics an older CLI would silently ignore —
+// renameFiles landed in 0.2.1, and a CLI without it scaffolds a site with no
+// biome.json at all. The CLI refuses rather than producing a broken site.
+const MIN_CREATE_VERSION = "0.2.1";
+
 // Stale files removed from BOTH template/ and, via the update manifest, from
 // existing sites. Only put things here that sites should genuinely lose.
 const REMOVE_FILES = [
@@ -269,6 +275,7 @@ This is your first blog post. Edit it in the CMS at
 {
   const manifest = {
     manifestVersion: 1,
+    minCreateVersion: MIN_CREATE_VERSION,
     // Directories copied over the site's copy, overwriting file by file
     mirrorDirs: [...MIRROR_SRC_DIRS, "scripts"],
     // Individual files overwritten

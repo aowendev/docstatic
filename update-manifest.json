@@ -1,5 +1,6 @@
 {
   "manifestVersion": 1,
+  "minCreateVersion": "0.2.1",
   "mirrorDirs": [
     "src/clientModules",
     "src/components",

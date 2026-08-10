@@ -38,6 +38,33 @@ function fail(message) {
   process.exit(1);
 }
 
+// Minimal numeric semver compare; enough for the x.y.z versions we publish.
+function compareVersions(a, b) {
+  const pa = String(a).split("-")[0].split(".").map(Number);
+  const pb = String(b).split("-")[0].split(".").map(Number);
+  for (let i = 0; i < 3; i++) {
+    const d = (pa[i] || 0) - (pb[i] || 0);
+    if (d !== 0) return d < 0 ? -1 : 1;
+  }
+  return 0;
+}
+
+// A docstatic release can require a newer CLI than the one being run — for
+// example when the template starts shipping a file under a new name that only
+// a newer CLI knows to rename. Refuse by name rather than producing a subtly
+// broken site. Manifests without the field predate the check and are allowed.
+function assertManifestSupported(manifest) {
+  const required = manifest.minCreateVersion;
+  if (!required) return;
+  const current = require("./package.json").version;
+  if (compareVersions(current, required) < 0) {
+    fail(
+      `This docstatic release needs create-docstatic ${required} or later, but you are running ${current}.\n` +
+        "Re-run with: npx create-docstatic@latest"
+    );
+  }
+}
+
 function parseArgs(argv) {
   const options = {
     projectName: null,
@@ -248,6 +275,7 @@ function runUpdate(options) {
       );
     }
     const manifest = JSON.parse(fs.readFileSync(manifestPath, "utf8"));
+    assertManifestSupported(manifest);
     const templateDir = path.join(packageDir, "template");
 
     // Some files ship under a different name than they take in the site (see
@@ -382,6 +410,13 @@ function main() {
     const packageDir = downloadTemplate(options.tag, tmpDir);
     const templateDir = resolveTemplateDir(packageDir, options.template);
 
+    // Checked before anything is written, so a refusal leaves no debris.
+    const scaffoldManifestPath = path.join(packageDir, "update-manifest.json");
+    const scaffoldManifest = fs.existsSync(scaffoldManifestPath)
+      ? JSON.parse(fs.readFileSync(scaffoldManifestPath, "utf8"))
+      : null;
+    if (scaffoldManifest) assertManifestSupported(scaffoldManifest);
+
     console.log(`Creating a new docStatic site in ${targetDir}...`);
     fs.mkdirSync(targetDir, { recursive: true });
     fs.cpSync(templateDir, targetDir, { recursive: true });
@@ -395,18 +430,40 @@ function main() {
 
     // Files the template ships under a different name (biome.template.json ->
     // biome.json, so Biome does not discover it inside the docstatic repo).
-    const scaffoldManifestPath = path.join(packageDir, "update-manifest.json");
-    if (fs.existsSync(scaffoldManifestPath)) {
-      const scaffoldManifest = JSON.parse(
-        fs.readFileSync(scaffoldManifestPath, "utf8")
-      );
-      for (const [from, to] of Object.entries(
-        scaffoldManifest.renameFiles || {}
-      )) {
+    if (scaffoldManifest) {
+      const renameFiles = scaffoldManifest.renameFiles || {};
+      for (const [from, to] of Object.entries(renameFiles)) {
         const fromPath = path.join(targetDir, from);
         if (fs.existsSync(fromPath)) {
           fs.renameSync(fromPath, path.join(targetDir, to));
         }
+      }
+
+      // Every declared rename must have landed. Without this a mismatch
+      // between the manifest and this CLI ships a site missing the renamed
+      // file entirely (a scaffolded site with no biome.json, say) and says
+      // nothing about it.
+      for (const [from, to] of Object.entries(renameFiles)) {
+        if (fs.existsSync(path.join(targetDir, from))) {
+          fail(`Template file "${from}" was not renamed to "${to}".`);
+        }
+        if (!fs.existsSync(path.join(targetDir, to))) {
+          fail(
+            `Template file "${to}" is missing after renaming from "${from}".`
+          );
+        }
+      }
+
+      // Catch-all for a *.template.json added to the template but never
+      // declared in renameFiles.
+      const stray = fs
+        .readdirSync(targetDir)
+        .filter((f) => f.endsWith(".template.json"));
+      if (stray.length) {
+        fail(
+          `Template shipped ${stray.join(", ")} without a renameFiles entry. ` +
+            "This is a docstatic packaging bug; try npx create-docstatic@latest."
+        );
       }
     }
 
