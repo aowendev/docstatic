@@ -17,7 +17,7 @@ function decodeJwtPayload(token) {
     const [, payload] = token.split(".");
     // atob works in browsers; guard against Unicode issues if needed
     return JSON.parse(atob(payload));
-  } catch (e) {
+  } catch (_e) {
     return null;
   }
 }
@@ -76,7 +76,11 @@ export async function getEditorIdentity() {
   if (gitLocal) return gitLocal;
 
   // 3) Env-provided local user
-  if (typeof process !== "undefined" && process.env && process.env.NEXT_PUBLIC_LOCAL_USER) {
+  if (
+    typeof process !== "undefined" &&
+    process.env &&
+    process.env.NEXT_PUBLIC_LOCAL_USER
+  ) {
     return process.env.NEXT_PUBLIC_LOCAL_USER;
   }
 

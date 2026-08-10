@@ -1,13 +1,12 @@
-import remarkMath from 'remark-math';
-import rehypeKatex from 'rehype-katex';
-import { themes } from 'prism-react-renderer';
-
-import PrismLight from './src/utils/prismLight';
-import PrismDark from './src/utils/prismDark';
+import { themes } from "prism-react-renderer";
+import rehypeKatex from "rehype-katex";
+import remarkMath from "remark-math";
+import PrismDark from "./src/utils/prismDark";
+import PrismLight from "./src/utils/prismLight";
 
 // Import the blog date filter utility
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const { getFutureDatedBlogFiles } = require('./src/plugins/blog-date-filter');
+const { getFutureDatedBlogFiles } = require("./src/plugins/blog-date-filter");
 
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = createConfig;
@@ -16,29 +15,52 @@ const docusaurusData = require("./config/docusaurus/index.json");
 // Function to map theme names to actual theme objects
 const getTheme = (themeName: string) => {
   switch (themeName) {
-    case 'github': return themes.github;
-    case 'vsLight': return themes.vsLight;
-    case 'vsDark': return themes.vsDark;
-    case 'dracula': return themes.dracula;
-    case 'nightOwl': return themes.nightOwl;
-    case 'nightOwlLight': return themes.nightOwlLight;
-    case 'oceanicNext': return themes.oceanicNext;
-    case 'oneLight': return themes.oneLight;
-    case 'oneDark': return themes.oneDark;
-    case 'duotoneLight': return themes.duotoneLight;
-    case 'duotoneDark': return themes.duotoneDark;
-    case 'gruvboxMaterialLight': return themes.gruvboxMaterialLight;
-    case 'gruvboxMaterialDark': return themes.gruvboxMaterialDark;
-    case 'jettwaveLight': return themes.jettwaveLight;
-    case 'jettwaveDark': return themes.jettwaveDark;
-    case 'okaidia': return themes.okaidia;
-    case 'palenight': return themes.palenight;
-    case 'shadesOfPurple': return themes.shadesOfPurple;
-    case 'synthwave84': return themes.synthwave84;
-    case 'ultramin': return themes.ultramin;
-    case 'prismLight': return PrismLight;
-    case 'prismDark': return PrismDark;
-    default: return themes.github;
+    case "github":
+      return themes.github;
+    case "vsLight":
+      return themes.vsLight;
+    case "vsDark":
+      return themes.vsDark;
+    case "dracula":
+      return themes.dracula;
+    case "nightOwl":
+      return themes.nightOwl;
+    case "nightOwlLight":
+      return themes.nightOwlLight;
+    case "oceanicNext":
+      return themes.oceanicNext;
+    case "oneLight":
+      return themes.oneLight;
+    case "oneDark":
+      return themes.oneDark;
+    case "duotoneLight":
+      return themes.duotoneLight;
+    case "duotoneDark":
+      return themes.duotoneDark;
+    case "gruvboxMaterialLight":
+      return themes.gruvboxMaterialLight;
+    case "gruvboxMaterialDark":
+      return themes.gruvboxMaterialDark;
+    case "jettwaveLight":
+      return themes.jettwaveLight;
+    case "jettwaveDark":
+      return themes.jettwaveDark;
+    case "okaidia":
+      return themes.okaidia;
+    case "palenight":
+      return themes.palenight;
+    case "shadesOfPurple":
+      return themes.shadesOfPurple;
+    case "synthwave84":
+      return themes.synthwave84;
+    case "ultramin":
+      return themes.ultramin;
+    case "prismLight":
+      return PrismLight;
+    case "prismDark":
+      return PrismDark;
+    default:
+      return themes.github;
   }
 };
 const getPageRoute = (page: string) => {
@@ -55,7 +77,13 @@ type FooterItem =
   | { title: any; items: FooterItem[] }
   | { label: any; to?: any; href?: any };
 
-const formatFooterItem = (item: { title: any; items: any[]; label: any; to: any; href: any; }): FooterItem => {
+const formatFooterItem = (item: {
+  title: any;
+  items: any[];
+  label: any;
+  to: any;
+  href: any;
+}): FooterItem => {
   if (item.title) {
     return {
       title: item.title,
@@ -145,12 +173,12 @@ const config = {
     hooks: {
       onBrokenMarkdownLinks: "warn",
     },
-    preprocessor: ({fileContent, filePath}: {fileContent: string; filePath: string}) => {
+    preprocessor: ({ fileContent }: { fileContent: string }) => {
       // Convert <Truncate /> markers to MDX comments before compilation.
       // Tina CMS writes <Truncate /> but Docusaurus expects {/* truncate */}.
       // The truncateMarker regex in the blog plugin handles the actual split
       // for list-view truncation *before* this runs, so removing it here is safe.
-      return fileContent.replace(/<Truncate\s*\/?>/g, '{/* truncate */}');
+      return fileContent.replace(/<Truncate\s*\/?>/g, "{/* truncate */}");
     },
   },
   title: docusaurusData.title,
@@ -169,14 +197,14 @@ const config = {
 
   stylesheets: [
     {
-      href: 'https://cdn.jsdelivr.net/npm/katex@0.13.24/dist/katex.min.css',
-      type: 'text/css',
+      href: "https://cdn.jsdelivr.net/npm/katex@0.13.24/dist/katex.min.css",
+      type: "text/css",
       integrity:
-        'sha384-odtC+0UGzzFL/6PNoE8rX/SPcQDXBJ+uRepguP4QkPCm2LBxH3FA3y+fKSiJ+AmM',
-      crossorigin: 'anonymous',
+        "sha384-odtC+0UGzzFL/6PNoE8rX/SPcQDXBJ+uRepguP4QkPCm2LBxH3FA3y+fKSiJ+AmM",
+      crossorigin: "anonymous",
     },
   ],
-  
+
   // Even if you don't use internalization, you can use this field to set useful
   // metadata like html lang. For example, if your site is Chinese, you may want
   // to replace "en" with "zh-Hans".
@@ -194,7 +222,13 @@ const config = {
           remarkPlugins: [remarkMath],
           rehypePlugins: [rehypeKatex],
           // Remove this to remove the "edit this page" links.
-          editUrl: ({ versionDocsDirPath, docPath }: { versionDocsDirPath: string; docPath: string }) => {
+          editUrl: ({
+            versionDocsDirPath,
+            docPath,
+          }: {
+            versionDocsDirPath: string;
+            docPath: string;
+          }) => {
             // eslint-disable-next-line @typescript-eslint/no-unused-vars
             const _unused = versionDocsDirPath;
             // docPath gives us the file path relative to docs directory
@@ -212,7 +246,7 @@ const config = {
         blog: {
           exclude: (() => {
             // Get the absolute path to the blog directory
-            const blogDir = require('path').resolve(__dirname, 'blog');
+            const blogDir = require("node:path").resolve(__dirname, "blog");
             return getFutureDatedBlogFiles(blogDir);
           })(),
           showReadingTime: docusaurusData.showReadingTime,
@@ -253,7 +287,8 @@ const config = {
     colorMode: {
       defaultMode: docusaurusData.colorMode?.defaultMode,
       disableSwitch: docusaurusData.colorMode?.disableSwitch,
-      respectPrefersColorScheme: docusaurusData.colorMode?.respectPrefersColorScheme,
+      respectPrefersColorScheme:
+        docusaurusData.colorMode?.respectPrefersColorScheme,
     },
     docs: {
       sidebar: {
@@ -275,12 +310,12 @@ const config = {
       }),
       copyright: `Copyright © ${new Date().getFullYear()} ${docusaurusData.footer?.copyright}`,
     },
-      prism: {
-        additionalLanguages: docusaurusData.prism?.additionalLanguages,
-        magicComments: docusaurusData.prism?.magicComments,
-        theme: getTheme(docusaurusData.prism.theme),
-        darkTheme: getTheme(docusaurusData.prism.darkTheme),
-      },
+    prism: {
+      additionalLanguages: docusaurusData.prism?.additionalLanguages,
+      magicComments: docusaurusData.prism?.magicComments,
+      theme: getTheme(docusaurusData.prism.theme),
+      darkTheme: getTheme(docusaurusData.prism.darkTheme),
+    },
     languageTabs: (() => {
       // Define all available language configurations
       const availableLanguages = {
@@ -383,11 +418,13 @@ const config = {
       };
 
       // Get selected languages from global languageTabs setting
-      const selectedLanguages = docusaurusData.openapi?.languageTabs as Array<keyof typeof availableLanguages>;
-      
+      const selectedLanguages = docusaurusData.openapi?.languageTabs as Array<
+        keyof typeof availableLanguages
+      >;
+
       // Map selected languages to their full configurations
       return selectedLanguages
-        .map(lang => availableLanguages[lang])
+        .map((lang) => availableLanguages[lang])
         .filter(Boolean); // Remove any undefined entries
     })(),
   },
@@ -399,8 +436,26 @@ const config = {
         id: "openapi",
         docsPluginId: "classic",
         config: (() => {
-          const config: { [key: string]: { specPath: string; outputDir: string; downloadUrl?: string; tagTemplate?: string; sidebarOptions: { groupPathsBy: string; categoryLinkSource: string } } } = {};
-          const apis: Array<{ name: string; specPath: string; outputDir: string; downloadUrl?: string; groupPathsBy?: string; categoryLinkSource?: string }> = docusaurusData.openapi?.apis || [];
+          const config: {
+            [key: string]: {
+              specPath: string;
+              outputDir: string;
+              downloadUrl?: string;
+              tagTemplate?: string;
+              sidebarOptions: {
+                groupPathsBy: string;
+                categoryLinkSource: string;
+              };
+            };
+          } = {};
+          const apis: Array<{
+            name: string;
+            specPath: string;
+            outputDir: string;
+            downloadUrl?: string;
+            groupPathsBy?: string;
+            categoryLinkSource?: string;
+          }> = docusaurusData.openapi?.apis || [];
 
           for (const api of apis) {
             config[api.name] = {
@@ -414,7 +469,7 @@ const config = {
               },
             };
           }
-          
+
           return config;
         })(),
       },

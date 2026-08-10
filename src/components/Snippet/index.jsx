@@ -32,14 +32,14 @@ const Snippet = ({ filepath }) => {
           );
         }
         if (isMounted) setSnippetMDX(() => mod.default);
-      } catch (e) {
+      } catch (_e) {
         try {
           const mod = await import(
             /* webpackInclude: /\.mdx$/ */
             `@site/reuse/snippets/${filepath}`
           );
           if (isMounted) setSnippetMDX(() => mod.default);
-        } catch (e2) {
+        } catch (_e2) {
           if (isMounted) setError("Error: Snippet not found.");
         }
       }

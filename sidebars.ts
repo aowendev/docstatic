@@ -1,7 +1,7 @@
-const fs = require("fs");
-const path = require("path");
+const fs = require("node:fs");
+const path = require("node:path");
 const sidebarData = require("./config/sidebar/index.json");
-const docusaurusData = require("./config/docusaurus/index.json");
+const _docusaurusData = require("./config/docusaurus/index.json");
 
 const getDocId = (doc) => {
   return doc
@@ -73,7 +73,7 @@ const getItem = (item) => {
       },
     ];
   }
-  
+
   if (type === "link") {
     if (item.href && item.title) {
       itemProps.label = item.title;

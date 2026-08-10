@@ -1,11 +1,11 @@
+import React from "react";
+
 /**
  * Copyright (c) Source Solutions, Inc.
  *
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-
-import React from "react";
 
 /**
  * Comment component for Tina CMS
@@ -17,7 +17,7 @@ import React from "react";
  * @param {string} props.Comment - The comment text
  * @returns {null} - Component renders nothing
  */
-const Comment = ({ Reviewer, Comment }) => {
+const Comment = () => {
   // This component intentionally returns null
   // The comment is only visible in the source code
   return null;
