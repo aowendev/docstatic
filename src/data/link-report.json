@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-08-11T17:38:14.394Z",
-  "lastCheckedAt": "2026-08-11T17:38:14.392Z",
+  "generatedAt": "2026-08-11T17:47:48.882Z",
+  "lastCheckedAt": "2026-08-11T17:47:48.882Z",
   "checked": true,
   "stats": {
     "total": 166,
-    "ok": 129,
-    "broken": 1,
+    "ok": 130,
+    "broken": 0,
     "unverified": 2,
     "unchecked": 0,
     "skipped": 34
@@ -364,7 +364,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:38:09.769Z"
+      "checkedAt": "2026-08-11T17:47:46.784Z"
     },
     {
       "text": "TinaCMS",
@@ -375,7 +375,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:38:10.077Z"
+      "checkedAt": "2026-08-11T17:47:46.813Z"
     },
     {
       "text": "LanguageTool",
@@ -386,7 +386,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:38:09.970Z"
+      "checkedAt": "2026-08-11T17:47:46.974Z"
     },
     {
       "text": "https://github.com/aowendev/docstatic",
@@ -397,7 +397,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:38:10.355Z"
+      "checkedAt": "2026-08-11T17:47:46.781Z"
     },
     {
       "text": "MCP server",
@@ -418,7 +418,7 @@
       "reason": "HTTP 200",
       "code": 200,
       "redirectedTo": "https://docusaurus.io/docs/installation",
-      "checkedAt": "2026-08-11T17:38:09.895Z"
+      "checkedAt": "2026-08-11T17:47:47.341Z"
     },
     {
       "text": "http://localhost:3000",
@@ -438,7 +438,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:38:11.390Z"
+      "checkedAt": "2026-08-11T17:47:47.804Z"
     },
     {
       "text": "GitHub",
@@ -449,7 +449,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:38:09.769Z"
+      "checkedAt": "2026-08-11T17:47:46.784Z"
     },
     {
       "text": "Eclipse",
@@ -461,7 +461,7 @@
       "reason": "HTTP 200",
       "code": 200,
       "redirectedTo": "https://eclipseide.org/",
-      "checkedAt": "2026-08-11T17:38:10.336Z"
+      "checkedAt": "2026-08-11T17:47:47.180Z"
     },
     {
       "text": "VSCodium",
@@ -472,7 +472,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:38:09.847Z"
+      "checkedAt": "2026-08-11T17:47:46.785Z"
     },
     {
       "text": "Node.js",
@@ -484,7 +484,7 @@
       "reason": "HTTP 200",
       "code": 200,
       "redirectedTo": "https://nodejs.org/en",
-      "checkedAt": "2026-08-11T17:38:09.915Z"
+      "checkedAt": "2026-08-11T17:47:46.883Z"
     },
     {
       "text": "official Node.js downloads",
@@ -496,7 +496,7 @@
       "reason": "HTTP 200",
       "code": 200,
       "redirectedTo": "https://nodejs.org/en/download",
-      "checkedAt": "2026-08-11T17:38:10.042Z"
+      "checkedAt": "2026-08-11T17:47:46.884Z"
     },
     {
       "text": "Node Version Manager",
@@ -507,7 +507,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:38:10.645Z"
+      "checkedAt": "2026-08-11T17:47:46.811Z"
     },
     {
       "text": "https://github.com/aowendev/docstatic",
@@ -518,7 +518,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:38:10.355Z"
+      "checkedAt": "2026-08-11T17:47:46.781Z"
     },
     {
       "text": "MCP server",
@@ -539,7 +539,7 @@
       "reason": "HTTP 200",
       "code": 200,
       "redirectedTo": "https://docusaurus.io/docs/installation",
-      "checkedAt": "2026-08-11T17:38:09.895Z"
+      "checkedAt": "2026-08-11T17:47:47.341Z"
     },
     {
       "text": "http://localhost:3000",
@@ -559,7 +559,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:38:11.390Z"
+      "checkedAt": "2026-08-11T17:47:47.804Z"
     },
     {
       "text": "VSCodium",
@@ -570,7 +570,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:38:09.847Z"
+      "checkedAt": "2026-08-11T17:47:46.785Z"
     },
     {
       "text": "Front Matter",
@@ -581,7 +581,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:38:10.483Z"
+      "checkedAt": "2026-08-11T17:47:47.276Z"
     },
     {
       "text": "documentation",
@@ -592,7 +592,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:38:10.487Z"
+      "checkedAt": "2026-08-11T17:47:46.864Z"
     },
     {
       "text": "TinaCloud",
@@ -603,7 +603,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:38:10.441Z"
+      "checkedAt": "2026-08-11T17:47:46.898Z"
     },
     {
       "text": "register",
@@ -614,7 +614,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:38:11.016Z"
+      "checkedAt": "2026-08-11T17:47:47.366Z"
     },
     {
       "text": "pricing plans",
@@ -625,7 +625,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:38:10.416Z"
+      "checkedAt": "2026-08-11T17:47:46.932Z"
     },
     {
       "text": "self-hosting",
@@ -636,7 +636,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:38:10.406Z"
+      "checkedAt": "2026-08-11T17:47:46.942Z"
     },
     {
       "text": "Guides",
@@ -647,7 +647,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:38:11.388Z"
+      "checkedAt": "2026-08-11T17:47:47.135Z"
     },
     {
       "text": "Advanced Guides",
@@ -658,7 +658,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:38:11.056Z"
+      "checkedAt": "2026-08-11T17:47:47.149Z"
     },
     {
       "text": "GitHub Actions",
@@ -669,7 +669,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:38:10.480Z"
+      "checkedAt": "2026-08-11T17:47:47.010Z"
     },
     {
       "text": "secrets",
@@ -680,7 +680,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:38:10.502Z"
+      "checkedAt": "2026-08-11T17:47:47.117Z"
     },
     {
       "text": "iCloud",
@@ -691,7 +691,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:38:10.535Z"
+      "checkedAt": "2026-08-11T17:47:47.166Z"
     },
     {
       "text": "app-specific-password)",
@@ -702,7 +702,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:38:10.539Z"
+      "checkedAt": "2026-08-11T17:47:47.178Z"
     },
     {
       "text": "Outlook",
@@ -714,7 +714,7 @@
       "reason": "HTTP 200",
       "code": 200,
       "redirectedTo": "https://support.microsoft.com/en-US/Outlook/pop-imap-and-smtp-settings-for-outlook-com",
-      "checkedAt": "2026-08-11T17:38:10.863Z"
+      "checkedAt": "2026-08-11T17:47:47.456Z"
     },
     {
       "text": "Sending messages using incoming webhooks",
@@ -725,7 +725,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:38:10.791Z"
+      "checkedAt": "2026-08-11T17:47:47.396Z"
     },
     {
       "text": "                                ",
@@ -736,7 +736,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:38:11.143Z"
+      "checkedAt": "2026-08-11T17:47:47.216Z"
     },
     {
       "text": "LanguageTool",
@@ -747,7 +747,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:38:09.970Z"
+      "checkedAt": "2026-08-11T17:47:46.974Z"
     },
     {
       "text": "register",
@@ -758,7 +758,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:38:10.874Z"
+      "checkedAt": "2026-08-11T17:47:47.459Z"
     },
     {
       "text": "premium plan",
@@ -769,7 +769,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:38:11.210Z"
+      "checkedAt": "2026-08-11T17:47:47.873Z"
     },
     {
       "text": "businesses",
@@ -781,7 +781,7 @@
       "reason": "HTTP 200",
       "code": 200,
       "redirectedTo": "https://languagetool.org/premium",
-      "checkedAt": "2026-08-11T17:38:11.648Z"
+      "checkedAt": "2026-08-11T17:47:47.985Z"
     },
     {
       "text": "discount",
@@ -792,7 +792,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:38:11.210Z"
+      "checkedAt": "2026-08-11T17:47:47.873Z"
     },
     {
       "text": "self-hosting",
@@ -803,7 +803,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:38:11.103Z"
+      "checkedAt": "2026-08-11T17:47:47.601Z"
     },
     {
       "text": "Blog Plugin API Reference",
@@ -814,7 +814,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:38:12.287Z"
+      "checkedAt": "2026-08-11T17:47:47.442Z"
     },
     {
       "text": "Blog",
@@ -825,7 +825,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:38:11.128Z"
+      "checkedAt": "2026-08-11T17:47:47.452Z"
     },
     {
       "text": "browserslist configuration",
@@ -836,7 +836,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:38:11.660Z"
+      "checkedAt": "2026-08-11T17:47:47.462Z"
     },
     {
       "text": "Browser support",
@@ -847,7 +847,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:38:11.189Z"
+      "checkedAt": "2026-08-11T17:47:47.655Z"
     },
     {
       "text": "MCP Server Integration",
@@ -867,7 +867,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:38:11.205Z"
+      "checkedAt": "2026-08-11T17:47:47.659Z"
     },
     {
       "text": "CLI Usage",
@@ -879,7 +879,7 @@
       "reason": "HTTP 200",
       "code": 200,
       "redirectedTo": "https://github.com/PaloAltoNetworks/docusaurus-openapi-docs?tab=readme-ov-file",
-      "checkedAt": "2026-08-11T17:38:11.795Z"
+      "checkedAt": "2026-08-11T17:47:47.480Z"
     },
     {
       "text": "Usage",
@@ -891,7 +891,7 @@
       "reason": "HTTP 200",
       "code": 200,
       "redirectedTo": "https://github.com/Zhouzi/docusaurus-graphql-plugin?tab=readme-ov-file",
-      "checkedAt": "2026-08-11T17:38:12.327Z"
+      "checkedAt": "2026-08-11T17:47:47.481Z"
     },
     {
       "text": "Installation",
@@ -911,7 +911,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:38:11.766Z"
+      "checkedAt": "2026-08-11T17:47:47.691Z"
     },
     {
       "text": "Configuration",
@@ -922,7 +922,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:38:11.453Z"
+      "checkedAt": "2026-08-11T17:47:47.824Z"
     },
     {
       "text": "GitHub Pages",
@@ -933,7 +933,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:38:11.422Z"
+      "checkedAt": "2026-08-11T17:47:47.622Z"
     },
     {
       "text": "Deployment",
@@ -945,7 +945,7 @@
       "reason": "HTTP 200",
       "code": 200,
       "redirectedTo": "https://docusaurus.io/docs/deployment",
-      "checkedAt": "2026-08-11T17:38:11.479Z"
+      "checkedAt": "2026-08-11T17:47:47.679Z"
     },
     {
       "text": "Pages Plugin API Reference",
@@ -974,7 +974,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:38:11.639Z"
+      "checkedAt": "2026-08-11T17:47:47.716Z"
     },
     {
       "text": "context-sensitive help",
@@ -985,7 +985,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:38:11.611Z"
+      "checkedAt": "2026-08-11T17:47:47.686Z"
     },
     {
       "text": "taxonomy",
@@ -1005,7 +1005,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:38:12.026Z"
+      "checkedAt": "2026-08-11T17:47:47.756Z"
     },
     {
       "text": "Docs Plugin API Reference",
@@ -1016,7 +1016,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:38:11.696Z"
+      "checkedAt": "2026-08-11T17:47:47.798Z"
     },
     {
       "text": "Docs introduction",
@@ -1027,7 +1027,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:38:12.134Z"
+      "checkedAt": "2026-08-11T17:47:47.767Z"
     },
     {
       "text": "information architecture",
@@ -1038,7 +1038,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:38:11.733Z"
+      "checkedAt": "2026-08-11T17:47:47.827Z"
     },
     {
       "text": "indexing",
@@ -1067,7 +1067,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:38:11.817Z"
+      "checkedAt": "2026-08-11T17:47:47.904Z"
     },
     {
       "text": "Media Overview",
@@ -1078,7 +1078,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:38:12.052Z"
+      "checkedAt": "2026-08-11T17:47:47.851Z"
     },
     {
       "text": "Static assets",
@@ -1089,7 +1089,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:38:12.131Z"
+      "checkedAt": "2026-08-11T17:47:48.351Z"
     },
     {
       "text": "online help",
@@ -1100,7 +1100,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:38:11.873Z"
+      "checkedAt": "2026-08-11T17:47:47.885Z"
     },
     {
       "text": "Wikipedia",
@@ -1111,7 +1111,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:38:11.886Z"
+      "checkedAt": "2026-08-11T17:47:47.900Z"
     },
     {
       "text": "https://docstatic.com/docs/context-help#help-example",
@@ -1131,7 +1131,7 @@
       "status": "unverified",
       "reason": "Domain did not resolve — check DNS, then the link",
       "code": null,
-      "checkedAt": "2026-08-11T17:38:12.092Z"
+      "checkedAt": "2026-08-11T17:47:47.831Z"
     },
     {
       "text": "Mermaid",
@@ -1142,7 +1142,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:38:11.937Z"
+      "checkedAt": "2026-08-11T17:47:47.862Z"
     },
     {
       "text": "Diagrams",
@@ -1153,7 +1153,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:38:12.027Z"
+      "checkedAt": "2026-08-11T17:47:48.397Z"
     },
     {
       "text": "Markdown",
@@ -1164,7 +1164,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:38:12.215Z"
+      "checkedAt": "2026-08-11T17:47:47.886Z"
     },
     {
       "text": "learn it in ten minutes",
@@ -1175,7 +1175,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:38:12.204Z"
+      "checkedAt": "2026-08-11T17:47:47.892Z"
     },
     {
       "text": "YAML",
@@ -1186,7 +1186,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:38:12.249Z"
+      "checkedAt": "2026-08-11T17:47:47.907Z"
     },
     {
       "text": "Admonitions",
@@ -1323,7 +1323,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:38:12.144Z"
+      "checkedAt": "2026-08-11T17:47:47.953Z"
     },
     {
       "text": "Markdown Features",
@@ -1334,7 +1334,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:38:12.820Z"
+      "checkedAt": "2026-08-11T17:47:48.882Z"
     },
     {
       "text": "Markdown links",
@@ -1345,7 +1345,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:38:12.200Z"
+      "checkedAt": "2026-08-11T17:47:47.954Z"
     },
     {
       "text": "KaTeX",
@@ -1357,7 +1357,7 @@
       "reason": "HTTP 200",
       "code": 200,
       "redirectedTo": "https://katex.org/",
-      "checkedAt": "2026-08-11T17:38:12.407Z"
+      "checkedAt": "2026-08-11T17:47:47.987Z"
     },
     {
       "text": "KaTeX",
@@ -1369,7 +1369,7 @@
       "reason": "HTTP 200",
       "code": 200,
       "redirectedTo": "https://katex.org/",
-      "checkedAt": "2026-08-11T17:38:12.407Z"
+      "checkedAt": "2026-08-11T17:47:47.987Z"
     },
     {
       "text": "Head metadata",
@@ -1380,7 +1380,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:38:12.252Z"
+      "checkedAt": "2026-08-11T17:47:48.103Z"
     },
     {
       "text": "plugin system",
@@ -1391,7 +1391,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:38:12.357Z"
+      "checkedAt": "2026-08-11T17:47:47.978Z"
     },
     {
       "text": "MDX Plugins",
@@ -1402,7 +1402,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:38:12.755Z"
+      "checkedAt": "2026-08-11T17:47:48.159Z"
     },
     {
       "text": "math plugins",
@@ -1422,7 +1422,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:38:12.379Z"
+      "checkedAt": "2026-08-11T17:47:47.997Z"
     },
     {
       "text": "MDX and React",
@@ -1433,7 +1433,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:38:12.319Z"
+      "checkedAt": "2026-08-11T17:47:48.041Z"
     },
     {
       "text": "example page",
@@ -1462,7 +1462,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:38:12.343Z"
+      "checkedAt": "2026-08-11T17:47:48.429Z"
     },
     {
       "text": "information architecture",
@@ -1473,7 +1473,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:38:11.733Z"
+      "checkedAt": "2026-08-11T17:47:47.827Z"
     },
     {
       "text": "https://docstatic.com/docs/guides/markdown-features/toc#anchor-example",
@@ -1485,7 +1485,7 @@
       "reason": "HTTP 200",
       "code": 200,
       "redirectedTo": "https://docstatic.com/docs/guides/markdown-features/toc",
-      "checkedAt": "2026-08-11T17:38:12.458Z"
+      "checkedAt": "2026-08-11T17:47:48.021Z"
     },
     {
       "text": "Headings and Table of contents",
@@ -1496,7 +1496,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:38:12.389Z"
+      "checkedAt": "2026-08-11T17:47:48.674Z"
     },
     {
       "text": "Claude Code",
@@ -1507,7 +1507,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:38:12.421Z"
+      "checkedAt": "2026-08-11T17:47:48.099Z"
     },
     {
       "text": "Vale",
@@ -1519,31 +1519,29 @@
       "reason": "HTTP 200",
       "code": 200,
       "redirectedTo": "https://vale.sh/",
-      "checkedAt": "2026-08-11T17:38:12.467Z"
+      "checkedAt": "2026-08-11T17:47:48.188Z"
     },
     {
       "text": "Vale installation guide",
-      "url": "https://vale.sh/docs/vale-cli/installation/",
+      "url": "https://docs.vale.sh/topics/installation",
       "type": "markdown",
       "filePath": "/docs/guides/vale.mdx",
       "line": 6,
-      "status": "broken",
-      "reason": "HTTP 404",
-      "code": 404,
-      "redirectedTo": "https://docs.vale.sh/vale-cli/installation",
-      "checkedAt": "2026-08-11T17:38:13.085Z"
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-11T17:47:48.391Z"
     },
     {
       "text": "Vale documentation",
-      "url": "https://vale.sh/docs/topics/styles/",
+      "url": "https://docs.vale.sh/topics/styles",
       "type": "markdown",
       "filePath": "/docs/guides/vale.mdx",
       "line": 81,
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "redirectedTo": "https://docs.vale.sh/topics/styles",
-      "checkedAt": "2026-08-11T17:38:12.649Z"
+      "checkedAt": "2026-08-11T17:47:48.275Z"
     },
     {
       "text": "Vale VSCode",
@@ -1554,7 +1552,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:38:12.720Z"
+      "checkedAt": "2026-08-11T17:47:48.502Z"
     },
     {
       "text": "Autogenerated",
@@ -1566,7 +1564,7 @@
       "reason": "HTTP 200",
       "code": 200,
       "redirectedTo": "https://docusaurus.io/docs/sidebar/autogenerated",
-      "checkedAt": "2026-08-11T17:38:12.994Z"
+      "checkedAt": "2026-08-11T17:47:48.332Z"
     },
     {
       "text": "i18n",
@@ -1577,7 +1575,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:38:12.666Z"
+      "checkedAt": "2026-08-11T17:47:48.403Z"
     },
     {
       "text": "i18n - Introduction",
@@ -1588,7 +1586,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:38:12.753Z"
+      "checkedAt": "2026-08-11T17:47:48.407Z"
     },
     {
       "text": "GitHub",
@@ -1599,7 +1597,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:38:09.769Z"
+      "checkedAt": "2026-08-11T17:47:46.784Z"
     },
     {
       "text": "TinaCMS",
@@ -1610,7 +1608,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:38:10.077Z"
+      "checkedAt": "2026-08-11T17:47:46.813Z"
     },
     {
       "text": "LanguageTool",
@@ -1621,7 +1619,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:38:09.970Z"
+      "checkedAt": "2026-08-11T17:47:46.974Z"
     },
     {
       "text": "Eclipse",
@@ -1633,7 +1631,7 @@
       "reason": "HTTP 200",
       "code": 200,
       "redirectedTo": "https://eclipseide.org/",
-      "checkedAt": "2026-08-11T17:38:10.336Z"
+      "checkedAt": "2026-08-11T17:47:47.180Z"
     },
     {
       "text": "VSCodium",
@@ -1644,7 +1642,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:38:09.847Z"
+      "checkedAt": "2026-08-11T17:47:46.785Z"
     },
     {
       "text": "Node.js",
@@ -1656,7 +1654,7 @@
       "reason": "HTTP 200",
       "code": 200,
       "redirectedTo": "https://nodejs.org/en",
-      "checkedAt": "2026-08-11T17:38:09.915Z"
+      "checkedAt": "2026-08-11T17:47:46.883Z"
     },
     {
       "text": "official Node.js downloads",
@@ -1668,7 +1666,7 @@
       "reason": "HTTP 200",
       "code": 200,
       "redirectedTo": "https://nodejs.org/en/download",
-      "checkedAt": "2026-08-11T17:38:10.042Z"
+      "checkedAt": "2026-08-11T17:47:46.884Z"
     },
     {
       "text": "Node Version Manager",
@@ -1679,7 +1677,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:38:10.645Z"
+      "checkedAt": "2026-08-11T17:47:46.811Z"
     },
     {
       "text": "Project structure",
@@ -1699,7 +1697,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:38:10.355Z"
+      "checkedAt": "2026-08-11T17:47:46.781Z"
     },
     {
       "text": "MCP server",
@@ -1720,7 +1718,7 @@
       "reason": "HTTP 200",
       "code": 200,
       "redirectedTo": "https://docusaurus.io/docs/installation",
-      "checkedAt": "2026-08-11T17:38:09.895Z"
+      "checkedAt": "2026-08-11T17:47:47.341Z"
     },
     {
       "text": "http://localhost:3000",
@@ -1740,7 +1738,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:38:11.390Z"
+      "checkedAt": "2026-08-11T17:47:47.804Z"
     },
     {
       "text": "component content management systems",
@@ -1751,7 +1749,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:38:12.728Z"
+      "checkedAt": "2026-08-11T17:47:48.465Z"
     },
     {
       "text": "docs-as-code",
@@ -1762,7 +1760,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:38:12.818Z"
+      "checkedAt": "2026-08-11T17:47:48.435Z"
     },
     {
       "text": "Tinasaurus",
@@ -1773,7 +1771,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:38:12.752Z"
+      "checkedAt": "2026-08-11T17:47:48.442Z"
     },
     {
       "text": "React",
@@ -1784,7 +1782,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:38:12.811Z"
+      "checkedAt": "2026-08-11T17:47:48.444Z"
     },
     {
       "text": "static site generator",
@@ -1795,7 +1793,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:38:12.834Z"
+      "checkedAt": "2026-08-11T17:47:48.499Z"
     },
     {
       "text": "Docusaurus",
@@ -1806,7 +1804,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:38:12.144Z"
+      "checkedAt": "2026-08-11T17:47:47.953Z"
     },
     {
       "text": "headless content management system",
@@ -1817,7 +1815,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:38:12.827Z"
+      "checkedAt": "2026-08-11T17:47:48.525Z"
     },
     {
       "text": "TinaCMS",
@@ -1828,7 +1826,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:38:10.077Z"
+      "checkedAt": "2026-08-11T17:47:46.813Z"
     },
     {
       "text": "GraphQL",
@@ -1839,7 +1837,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:38:12.866Z"
+      "checkedAt": "2026-08-11T17:47:48.511Z"
     },
     {
       "text": "GitHub",
@@ -1850,7 +1848,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:38:09.769Z"
+      "checkedAt": "2026-08-11T17:47:46.784Z"
     },
     {
       "text": "KaTeX",
@@ -1861,7 +1859,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:38:12.901Z"
+      "checkedAt": "2026-08-11T17:47:48.537Z"
     },
     {
       "text": "Lunr",
@@ -1872,7 +1870,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:38:12.873Z"
+      "checkedAt": "2026-08-11T17:47:48.498Z"
     },
     {
       "text": "Mermaid",
@@ -1883,7 +1881,7 @@
       "status": "unverified",
       "reason": "Domain did not resolve — check DNS, then the link",
       "code": null,
-      "checkedAt": "2026-08-11T17:38:12.092Z"
+      "checkedAt": "2026-08-11T17:47:47.831Z"
     },
     {
       "text": "OpenAPI",
@@ -1894,7 +1892,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:38:13.224Z"
+      "checkedAt": "2026-08-11T17:47:48.542Z"
     },
     {
       "text": "LanguageTool",
@@ -1905,7 +1903,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:38:09.970Z"
+      "checkedAt": "2026-08-11T17:47:46.974Z"
     },
     {
       "text": "Model Context Protocol (MCP) server",
@@ -1925,7 +1923,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:38:12.900Z"
+      "checkedAt": "2026-08-11T17:47:48.565Z"
     },
     {
       "text": "TinaCMS",
@@ -1936,7 +1934,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:38:12.880Z"
+      "checkedAt": "2026-08-11T17:47:48.543Z"
     },
     {
       "text": "MCP Server Implementation Details",
@@ -1956,7 +1954,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:38:13.470Z"
+      "checkedAt": "2026-08-11T17:47:48.536Z"
     },
     {
       "text": "Lunr",
@@ -1967,7 +1965,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:38:12.873Z"
+      "checkedAt": "2026-08-11T17:47:48.498Z"
     },
     {
       "text": "Markprompt",
@@ -1978,7 +1976,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:38:13.655Z"
+      "checkedAt": "2026-08-11T17:47:48.550Z"
     },
     {
       "text": "Meilisearch",
@@ -1989,7 +1987,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:38:13.447Z"
+      "checkedAt": "2026-08-11T17:47:48.573Z"
     },
     {
       "text": "Orama",
@@ -2001,7 +1999,7 @@
       "reason": "HTTP 200",
       "code": 200,
       "redirectedTo": "https://github.com/oramasearch/orama/tree/main/packages/plugin-docusaurus-v3",
-      "checkedAt": "2026-08-11T17:38:13.582Z"
+      "checkedAt": "2026-08-11T17:47:48.586Z"
     },
     {
       "text": "Typesense DocSearch",
@@ -2012,7 +2010,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:38:13.655Z"
+      "checkedAt": "2026-08-11T17:47:48.550Z"
     },
     {
       "text": "Search",
@@ -2024,7 +2022,7 @@
       "reason": "HTTP 200",
       "code": 200,
       "redirectedTo": "https://docusaurus.io/docs/search",
-      "checkedAt": "2026-08-11T17:38:12.960Z"
+      "checkedAt": "2026-08-11T17:47:48.726Z"
     },
     {
       "text": "Search engine optimisation",
@@ -2035,7 +2033,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:38:13.704Z"
+      "checkedAt": "2026-08-11T17:47:48.597Z"
     },
     {
       "text": "Static Assets",
@@ -2046,7 +2044,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:38:13.532Z"
+      "checkedAt": "2026-08-11T17:47:48.848Z"
     },
     {
       "text": "Infima",
@@ -2057,7 +2055,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:38:14.392Z"
+      "checkedAt": "2026-08-11T17:47:48.629Z"
     },
     {
       "text": "Infima website",
@@ -2068,7 +2066,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:38:14.392Z"
+      "checkedAt": "2026-08-11T17:47:48.629Z"
     },
     {
       "text": "Example page",
@@ -2079,7 +2077,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:38:13.350Z"
+      "checkedAt": "2026-08-11T17:47:48.592Z"
     },
     {
       "text": "Styling and Layout",
@@ -2090,7 +2088,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:38:13.724Z"
+      "checkedAt": "2026-08-11T17:47:48.637Z"
     },
     {
       "text": "docs plugin",
@@ -2101,7 +2099,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:38:11.696Z"
+      "checkedAt": "2026-08-11T17:47:47.798Z"
     },
     {
       "text": "blog plugin",
@@ -2112,7 +2110,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:38:12.287Z"
+      "checkedAt": "2026-08-11T17:47:47.442Z"
     },
     {
       "text": "pages plugin",
@@ -2123,7 +2121,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:38:13.855Z"
+      "checkedAt": "2026-08-11T17:47:48.640Z"
     },
     {
       "text": "Using Plugins",
@@ -2134,7 +2132,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:38:13.525Z"
+      "checkedAt": "2026-08-11T17:47:48.649Z"
     }
   ]
 }
