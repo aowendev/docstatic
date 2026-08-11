@@ -1,6 +1,9 @@
 # macOS
 .DS_Store
 
+# XLIFF
+*.xlf
+
 # Dependencies
 node_modules
 

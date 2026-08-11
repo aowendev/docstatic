@@ -1,27 +1,26 @@
 ---
-help: null
-lastmod: "2026-06-01T21:56:58.772Z"
-modifiedBy: "unknown"
+lastmod: '2026-08-11T23:03:29.398Z'
+modifiedBy: aowendev <aowen@translationcommons.org>
 title: Markdown features
 tags:
-  - "computer-languages"
-  - "computer-languages_markdown"
-  - "computer-languages_markdown_mdx"
-  - "elements"
-  - "elements_tabs"
-  - "elements_footnotes"
-  - "elements_figures"
-  - "elements_doc-card-lists"
-  - "elements_admonitions"
-  - "elements_comments"
-  - "elements_code-blocks"
-  - "elements_horizontal-rules"
-  - "elements_links"
-  - "elements_tables"
-  - "elements_quotes"
-  - "software"
-  - "software_content-management-systems"
-  - "software_content-management-systems_tinacms"
+  - computer-languages
+  - computer-languages_markdown
+  - computer-languages_markdown_mdx
+  - elements
+  - elements_tabs
+  - elements_footnotes
+  - elements_figures
+  - elements_doc-card-lists
+  - elements_admonitions
+  - elements_comments
+  - elements_code-blocks
+  - elements_horizontal-rules
+  - elements_links
+  - elements_tables
+  - elements_quotes
+  - software
+  - software_content-management-systems
+  - software_content-management-systems_tinacms
 draft: false
 review: false
 translate: false
@@ -30,92 +29,92 @@ published: true
 unlisted: false
 ---
 
-# Markdown features
+# Markdownの機能
 
-docStaticは、コンテンツ作成のメインフォーマットとして[Markdown](https://commonmark.org/)を使用しています。[10分で学ぶ](https://commonmark.org/help/)こともできます。ただし、CMSがメタデータ、Markdown、Reactコンポーネントのための完全なリッチテキスト編集環境を提供しているため、必ずしも習得する必要はありません。
+docStaticでは、コンテンツ作成の主なフォーマットとして[Markdown](https://commonmark.org/)を採用しています。 [10分で習得できます](https://commonmark.org/help/)。ただし、CMSがメタデータ、Markdown、Reactコンポーネント向けの充実したリッチテキスト編集環境を提供しているため、必ずしも習得する必要はありません。
 
-## シンプルな構造化オーサリング
+## シンプルな構造化編集
 
-docStaticのトピックは3つの部分で構成されています。
+docStatic のトピックは、以下の 3 つの部分で構成されています。
 
-* メタデータ（[YAML](https://yaml.org/spec/1.2.2/)形式）
-* コンテンツ（Markdown形式）
-* 事前定義されたReactコンポーネント
+* メタデータ（[YAML](https://yaml.org/spec/1.2.2/) 形式）
+* コンテンツ（Markdown）
+* あらかじめ定義された React コンポーネント
 
-CMSはメタデータとMarkdownが一貫して使用されるよう管理し、Reactコンポーネントは統一されたスタイルとコンテンツ再利用機能のサポートを提供します。コンポーネントはすでにグローバルに利用可能なため、JSXコードを自分で追加する必要はありません。
+CMSは、メタデータとMarkdownが一貫して使用されるように管理し、Reactコンポーネントは統一されたスタイルとコンテンツの再利用機能を提供します。コンポーネントはすでにグローバルに利用可能であるため、自分でJSXコードを追加する必要はありません。
 
 ## 標準機能
 
-Markdownの機能には以下が含まれます。
+Markdownの機能には以下が含まれます：
 
-* 太字、コード、斜体、取り消し線の文字スタイル
-* 箇条書きリストと番号付きリスト
-* コードブロック
-* 見出しレベル（1〜6）
-* 水平線
-* 画像
-* リンク
-* 引用
-* シンプルなテーブル
+* 太字、コード、斜体、取り消し線の書式。
+* 箇条書きおよび番号付きリスト。
+* コードブロック。
+* 見出しレベル（1～6）。
+* 水平線。
+* 画像。
+* リンク。
+* 引用。
+* 簡易表。
 
-これらはすべてCMSのリッチテキストツールバーから直接選択できます。
+これらはすべて、CMSのリッチテキストツールバーから直接選択できます。
 
-これらに加えて、Docusaurusは以下を追加しています。
+これらに加え、Docusaurusでは以下の機能が追加されています：
 
-* [注記（Admonitions）](admonitions)
+* [注意書き](admonitions)
 * 詳細（展開可能なコンテンツ）
-* ドキュメントカードリスト
+* ドキュメントカード一覧
 * [タブ](tabs)
 
-docStaticはさらに以下で拡張しています。
+docStatic では、さらに以下の機能が拡張されています：
 
-* [コードスニペット](code-blocks)（ファイルから）
+* [コードスニペット](code-blocks)（ファイルからの挿入）
 * [コメント](comments)
 * [条件付きテキスト](conditional-text)
-* [コンテキストヘルプリンク](context-help)
-* [ダイアグラム](diagrams)
-* [図](figures)
+* [コンテキストヘルプリンク](../../context-help)
+* [図](diagrams)
+* [図表](figures)
 * [脚注](footnotes)
-* [用語集の用語](glossary)
+* [用語集](glossary)
 * [数式](math-equations)
-* [関連トピック](related-topics)（自動生成）
+* [関連トピック](related-topics) (自動生成)
 * [スニペット](snippets)
 * [変数](variables)
 
 ## フロントマター
 
-フロントマターは、Markdownファイルにメタデータを追加するために使用されます。ファイルの先頭に、3つのダッシュ（---）で囲んで記述します。コンテンツプラグインには独自のフロントマタースキーマがある場合があります。docStaticでは、フロントマターを以下の目的に使用します。
+フロントマターは、Markdown ファイルにメタデータを追加するために使用されます。ファイルの最上部に、3つのダッシュ（---）で囲んで記述します。コンテンツプラグインによっては、独自のフロントマタースキーマが用意されている場合があります。docStatic では、フロントマターを以下の目的で使用します：
 
 * 条件（条件付きテキスト用）
 * 説明
-* スラッグ（固定パス）
+* スラグ （固定パス）
 * タクソノミータグ
 * タイトル
 * ワークフローステータス
 
-## 詳細（Details）
+## 詳細
 
-1. **埋め込み** リストから **Details** を選択します。
+1. **Embed** リストから **Details** を選択します。
 2. コンポーネントを編集します。
-3. **概要（Summary）** を設定します。
-4. **詳細内容** を入力します。
+3. **Summary** を入力します。
+4. **Details** を入力します。
 
-#### 例:
+#### 例：
 
-<Details summary="クリックして展開">
-  これは詳細コンテンツです。
+<Details summary="Toggle me.">
+  This is the detailed content.
 
-  ここではMarkdownを使用できます。**太字** や *斜体* テキスト、インライン[リンク](https://docusaurus.io/)なども使用できます。
+  You can use Markdown here including **bold** and *italic* text, and inline [links](https://docusaurus.io/).
 </Details>
 
 ## ドキュメントカードリスト
 
-ドキュメントカードリストは、目次のカテゴリに対して自動的に生成されます。ただし、手動でトピックに追加することもできます。
+ドキュメントカードリストは、目次のカテゴリに対して自動的に生成されます。ただし、トピックに手動で追加することも可能です。
 
-1. **埋め込み** リストから **Doc Card List** を選択します。
-2. **タイトル** を設定します。
+1. **Embed** リストから **Doc Card List** を選択します。
+2. **タイトル**を指定します。
 
-詳細については、Docusaurusドキュメントの[Markdown Features](https://docusaurus.io/docs/markdown-features)を参照してください。
+詳細については、Docusaurus ドキュメントの [Markdown 機能](https://docusaurus.io/docs/markdown-features) を参照してください。
 
 #### 例:
 

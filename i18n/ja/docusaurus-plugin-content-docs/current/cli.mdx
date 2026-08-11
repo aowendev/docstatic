@@ -1,124 +1,118 @@
 ---
-help: null
-lastmod: "2026-06-01T21:56:58.680Z"
+lastmod: '2026-08-11T23:03:29.143Z'
 title: CLI
 tags:
-  - "software"
-  - "software_command-line-interface"
-  - "development"
-  - "software_static-site-generators"
-  - "software_static-site-generators_docusaurus"
-  - "software_content-management-systems"
-  - "software_content-management-systems_tinacms"
-  - "software_package-managers"
-  - "software_package-managers_yarn"
+  - software
+  - software_command-line-interface
+  - development
+  - software_static-site-generators
+  - software_static-site-generators_docusaurus
+  - software_content-management-systems
+  - software_content-management-systems_tinacms
+  - software_package-managers
+  - software_package-managers_yarn
 draft: false
 review: false
 translate: false
 approved: false
 published: true
 unlisted: false
+modifiedBy: aowendev <aowen@translationcommons.org>
 ---
 
-# CLI
+docStatic には、ウェブサイトの生成、配信、デプロイを支援する一連のスクリプトが用意されています。これらは、サイトの `package.json` 内の `scripts` セクションで定義されており、これが正式な一覧となります。引数を指定せずに `npm run` を実行すると、サイトに実際に含まれているスクリプトが表示されます。
 
-docStatic は、ウェブサイトの生成、提供、デプロイを支援する一連のスクリプトを提供しています。
-
-```json
-{
-  // ...
-  "scripts": {
-    "docusaurus": "docusaurus",
-    "dev": "tinacms dev -c \"docusaurus start\"",
-    "start": "docusaurus start",
-    "generate-media-index": "node scripts/generate-media-index.js",
-    "generate-git-identity": "node scripts/generate-git-identity.js",
-    "generate-files": "node scripts/generate-file-list.js",
-    "generate-docs-metadata": "node scripts/generate-docs-metadata.js",
-    "update-theme-css": "node scripts/update-theme-css.js",
-    "prebuild": "yarn generate-media-index && yarn generate-files && yarn generate-docs-metadata && yarn update-theme-css && yarn generate-git-identity",
-    "predev": "yarn generate-media-index && yarn generate-files && yarn generate-docs-metadata && yarn update-theme-css && yarn generate-git-identity",
-    "build": "tinacms build && docusaurus build",
-    "build-local": "tinacms build --local --skip-indexing --skip-cloud-checks && docusaurus build",
-    "swizzle": "docusaurus swizzle",
-    "deploy": "docusaurus deploy",
-    "setup-git-hooks": "git config core.hooksPath .githooks && chmod +x .githooks/pre-commit",
-    "clear": "docusaurus clear",
-    "serve": "docusaurus serve",
-    "write-translations": "docusaurus write-translations",
-    "write-heading-ids": "docusaurus write-heading-ids",
-    "gen-api-docs": "docusaurus gen-api-docs all",
-    "clean-api-docs": "docusaurus clean-api-docs all",
-    "gen-graphql": "docusaurus docs:generate:graphql",
-    "gen-api-docs:version": "docusaurus gen-api-docs:version",
-    "clean-api-docs:version": "docusaurus clean-api-docs:version",
-    "lint": "biome check config/ reuse/ scripts/ src/ tina/",
-    "lint:fix": "biome check config/ reuse/ scripts/ src/ tina/ --fix",
-    "mcp:install": "cd mcp-server && npm install",
-    "mcp:build": "cd mcp-server && npm run build",
-    "mcp:dev": "cd mcp-server && npm run dev",
-    "mcp:start": "cd mcp-server && npm start",
-    "mcp:test": "node mcp-server/test.js",
-    "postinstall": "npm run mcp:install"
-  }
-}
-```
+以下のコマンドは、その用途ごとにグループ分けされています。
 
 ## docStatic CLI コマンド
 
-コマンドを実行するには、npm または yarn を使用します。たとえば、`npm run dev` または `yarn dev` のように入力します。
+コマンドを実行するには、npm または yarn を使用します。例えば、`npm run dev` や `yarn dev` などです。
 
-### 主な docStatic スクリプト：
+### 主要な docStatic スクリプト:
 
-* **`dev`**: TinaCMS インテグレーションを含む開発サーバーを起動します
-* **`build`**: 本番用にビルドします（TinaCMS のビルドを実行した後、Docusaurus のビルドを実行します）
-* **`build-local`**: クラウド機能なしでローカルにビルドします
-* **`generate-media-index`**: メディアファイルのインデックスを生成します
-* **`generate-git-identity`**: Git のアイデンティティ情報を生成します
-* **`generate-files`**: アプリケーション用のファイルリストを生成します
-* **`generate-docs-metadata`**: ダッシュボードと検索で使用されるメタデータインデックスを生成します
-* **`update-theme-css`**: テーマ CSS ファイルを更新します
-* **`mcp:install`**: Model Context Protocol サーバーの依存関係をインストールします
-* **`mcp:build`**: TypeScript から MCP サーバーをビルドします
-* **`mcp:dev`**: 自動再起動付きで開発モードで MCP サーバーを起動します
-* **`mcp:start`**: AI アシスタントインテグレーション用にコンパイル済みの MCP サーバーを起動します
-* **`mcp:test`**: MCP サーバーの接続テストを実行します
+* **\`dev\`**: TinaCMSと連携した開発サーバーを起動します
+* **\`build\`**: 本番環境向けのビルドを行います（TinaCMSのビルドを実行した後、Docusaurusのビルドを実行します）
+* **\`build-local\`**: クラウド機能を使用せずにローカルでビルドします
+* **\`check-links\`**: トピック内のすべての外部リンクにリクエストを送信し、各サーバーが返したHTTPステータスを記録します。これにより、「Broken Links」ダッシュボードが実際の404や500エラーを報告できるようになります。`--strict` オプションを追加すると、リンク切れが見つかった場合にエラーで終了します。これは継続的インテグレーション（CI）ジョブで望ましい動作です。 [ダッシュボード](guides/dashboards.mdx)を参照してください。
+* **\`generate\`**: 以下のすべてのジェネレータを一括で実行します。`prebuild` および `predev` がこれを呼び出すため、直接使用する必要はほとんどありません。
+* **\`generate-media-index\`**: メディアファイルのインデックスを生成します
+* **\`generate-git-identity\`**: Git 識別情報を生成します
+* **\`generate-files\`**: アプリケーション用のファイルリストを生成します
+* **\`generate-docs-metadata\`**: ダッシュボードや検索で使用されるメタデータインデックスを生成します
+* **\`generate-link-report\`**: ネットワークリクエストを行わずにリンクインベントリを再構築します。前回の `check-links` 実行の結果は引き継がれるため、ビルド時にそれらの結果が破棄されることはありません。
+* **\`update-theme-css\`**: テーマの CSS ファイルを更新します
+* **\`lint\`** / **\`lint\:fix\`**: フォーマットおよびコード品質をチェックし、必要に応じて修正します
+* **\`mcp\:install\`**: Model Context Protocol サーバーの依存関係をインストールします
+* **\`mcp\:build\`**: TypeScript から MCP サーバーをビルドします
+* **\`mcp\:dev\`**: 自動再起動機能付きで、開発モードの MCP サーバーを起動します
+* **\`mcp\:start\`**: AI アシスタント統合用のコンパイル済み MCP サーバーを起動します
+* **\`mcp\:test\`**: MCP サーバーの接続性テストを実行します
 
-MCP サーバーの詳細については、[MCP Server Integration](mcp-server.mdx) を参照してください。
+MCPサーバーの詳細については、[MCPサーバーの統合](mcp-server.mdx)を参照してください。
 
-これらのコマンドは、Docusaurus ドキュメントの [CLI](https://docusaurus.io/docs/cli) に記載されている標準的な Docusaurus コマンドをベースに構築されています：
+これらのコマンドは、Docusaurusドキュメントの[CLI](https://docusaurus.io/docs/cli)に記載されている標準的なDocusaurusコマンドを基に構築されています：
 
-* docusaurus
-* start
-* build
-* swizzle
-* deploy
-* clear
-* serve
-* write-translations
-* write-heading-ids
+* `docusaurus`
+* `start`
+* `build`
+* `swizzle`
+* `deploy`
+* `clear`
+* `serve`
+* `write-translations`
+* `write-heading-ids`
 
-### 自動コマンド
+### 自動実行コマンド
 
-これらのコマンドはビルド時または開発サーバーの起動時に自動的に実行されます：
+これらは自動的に実行されるため、通常は手動で呼び出す必要はありません：
 
-* generate-files
-* generate-docs-metadata
-* prebuild
-* predev
+* `prebuild`、`predev`、`prebuild-local` は、ビルドや開発サーバーの起動前にそれぞれ `generate` を実行し、メディアインデックス、ファイルリスト、ドキュメントのメタデータ、リンクインベントリ、テーマの CSS、および Git 識別情報を更新します。
+* `prestart` は `start` の前にリンクインベントリを更新するため、たとえ `check-links` を実行したことがなくても、「Broken Links」ダッシュボードにレポートが表示されます。
+* `postinstall` は MCP サーバーの依存関係をインストールします。
 
 ### API コマンド
 
-* clean-api-docs
-* gen-api-docs
-* gen-graphql
+* `clean-api-docs`
+* `gen-api-docs`
+* `gen-graphql`
 
-OpenAPI コマンドの詳細については、Docusaurus OpenAPI Plugin ドキュメントの [CLI Usage](https://github.com/PaloAltoNetworks/docusaurus-openapi-docs?tab=readme-ov-file#cli-usage) を参照してください。
+OpenAPI コマンドの詳細については、Docusaurus OpenAPI プラグインのドキュメントにある [CLI の使用方法](https://github.com/PaloAltoNetworks/docusaurus-openapi-docs?tab=readme-ov-file#cli-usage) を参照してください。
 
-GraphQL コマンドの詳細については、Docusaurus GraphQL Plugin ドキュメントの [Usage](https://github.com/Zhouzi/docusaurus-graphql-plugin?tab=readme-ov-file#usage) を参照してください。
+GraphQL コマンドの詳細については、Docusaurus GraphQL プラグインのドキュメントにある [使用方法](https://github.com/Zhouzi/docusaurus-graphql-plugin?tab=readme-ov-file#usage) を参照してください。
 
-### リントコマンド
+### サイトの作成および更新コマンド
 
-リントコマンドの詳細については、Biome ドキュメントの [CLI](https://biomejs.dev/reference/cli/) を参照してください。
+これらのコマンドは `package.json` ではなく `create-docstatic` パッケージに由来するため、どこでも実行可能です。実行するために docStatic サイトは必要ありません。
+
+* **\`npx create-docstatic\@latest \<プロジェクト名>\`**: 新しい docStatic サイトを作成します。詳細については、[インストール](installation.mdx)を参照してください。
+* **\`npx create-docstatic\@latest --update\`**: 既存のサイトを最新の docStatic リリースに更新します。`create-docstatic` で作成されたサイトのルートフォルダから実行してください。docStatic が管理するファイルと依存関係のバージョンを更新し、コンテンツ自体には手を加えません。
+
+update コマンドでは、以下のオプションを使用できます:
+
+* **\`--dry-run\`**: 実際に変更を加えることなく、変更される内容を報告します。
+* **\`--force\`**: Gitのワーキングツリーがクリーンでない場合でも処理を実行します。このオプションを指定しない場合、コマンドはまず変更をコミットまたはスタッシュするよう求め、`git diff`で更新内容を確認できるようにします。
+* **\`--tag \<dist-tag>\`**: `latest` ではなく、特定の `docstatic` パッケージバージョンまたは dist-tag に更新します。
+* **\`--no-install\`**: 更新後の依存関係のインストールをスキップします。
+
+### テンプレート同期コマンド
+
+これらのコマンドは、docStatic リポジトリ自体（およびそのフォーク）にのみ存在し、`create-docstatic` で作成されたサイトには存在しません。これらは、`template/` フォルダ内のスケルトンテンプレートをメインサイトと同期させます。
+
+このテンプレートは、`npx create-docstatic@latest` が新しいサイトに展開するものであり、テンプレートとメインサイトが共有するコード（`src/` 内の React コンポーネント、`scripts/` 内のビルドスクリプト、`tina/config.jsx`、 `docusaurus.config.ts`、`sidebars.ts`など——テンプレート側でも同じ変更を行う必要があります。
+
+* **\`sync-template\`**: メインサイトから共有されているコード領域を `template/` にコピーし、テンプレートの `package.json` の依存関係とスクリプトを整合させ、`update-manifest.json`（`npx create-docstatic@latest --update` が既存のサイトを更新するために使用するファイル）を再生成します。 スタータードキュメントや設定値などのテンプレートコンテンツは変更されません。
+* **\`sync-template\:check\`**: 何も記述せずに、どのような変更が生じるかを報告し、テンプレートがずれている場合はエラーで終了します。 pre-commitフックがこのチェックを実行するため、`yarn sync-template`を実行して結果をステージングするまで、コミットは `template out of sync` のエラーで失敗します。
+
+共有ファイルを変更した後の典型的なフロー：
+
+```shell
+yarn sync-template
+git add template/ update-manifest.json
+git commit
+```
+
+### リンティングコマンド
+
+リンティングコマンドの詳細については、Biome ドキュメントの [CLI](https://biomejs.dev/reference/cli/) を参照してください。
 
 <RelatedTopics maxResults={7} />

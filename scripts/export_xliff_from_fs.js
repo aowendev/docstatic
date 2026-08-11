@@ -50,30 +50,49 @@ async function main() {
     const title = parsed.metadata?.title
       ? parsed.metadata.title
       : path.basename(file);
+    // Prefer the frontmatter lastmod (what Tina/GraphQL would report) over
+    // the file's mtime, which reflects the last checkout/clone, not the
+    // last real edit.
+    const lastmod = parsed.metadata?.lastmod || stat.mtime.toISOString();
     docNodes.push({
       node: {
         raw,
         title,
-        lastmod: stat.mtime.toISOString(),
+        lastmod,
         _sys: { relativePath: rel },
       },
     });
   });
 
-  // Build fake translations that exist but are older, so exportOutOfDateAsXliff
-  // will consider them out-of-date and include units.
-  const i18nNodes = docNodes.map((edge) => {
-    const rel = `${language}/docusaurus-plugin-content-docs/current/${edge.node._sys.relativePath.replace(/^docs\//, "")}`;
-    // translation body can be empty; we just need an older lastmod
-    return {
-      node: {
-        raw: edge.node.raw,
-        title: edge.node.title,
-        lastmod: new Date(2000, 0, 1).toISOString(),
-        _sys: { relativePath: rel },
-      },
-    };
-  });
+  // Read the translations that actually exist on disk, so
+  // exportOutOfDateAsXliff sees real lastmod dates and only includes topics
+  // that are genuinely out of date — the same "out of date" set the
+  // Translation Dashboard's Export XLIFF button produces via Tina/GraphQL.
+  const i18nRoot = path.join(
+    process.cwd(),
+    "i18n",
+    language,
+    "docusaurus-plugin-content-docs",
+    "current"
+  );
+  const i18nNodes = [];
+  if (fs.existsSync(i18nRoot)) {
+    walkDir(i18nRoot, (file) => {
+      if (!/\.mdx?$|\.md$/i.test(file)) return;
+      const relInLang = path.relative(i18nRoot, file).replace(/\\\\/g, "/");
+      const raw = fs.readFileSync(file, "utf8");
+      const stat = fs.statSync(file);
+      const parsed = extractFrontmatter(raw);
+      const title = parsed.metadata?.title
+        ? parsed.metadata.title
+        : path.basename(file);
+      const lastmod = parsed.metadata?.lastmod || stat.mtime.toISOString();
+      const rel = `${language}/docusaurus-plugin-content-docs/current/${relInLang}`;
+      i18nNodes.push({
+        node: { raw, title, lastmod, _sys: { relativePath: rel } },
+      });
+    });
+  }
 
   // Minimal fake client matching the shape expected by xliff util
   const client = {

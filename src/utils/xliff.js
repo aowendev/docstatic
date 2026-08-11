@@ -8,7 +8,7 @@
 // Minimal XLIFF 2.2 helpers for exporting/importing translation bundles
 // Exports title and body as JSON string in <target> so MDX/React content is preserved.
 
-function escapeXml(unsafe) {
+export function escapeXml(unsafe) {
   if (unsafe === null || unsafe === undefined) return "";
   return String(unsafe)
     .replace(/&/g, "&amp;")
@@ -16,6 +16,17 @@ function escapeXml(unsafe) {
     .replace(/>/g, "&gt;")
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&apos;");
+}
+
+// Inverse of escapeXml — decodes the same 5-entity set back to literal text.
+export function unescapeXml(safe) {
+  if (safe === null || safe === undefined) return "";
+  return String(safe)
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/&quot;/g, '"')
+    .replace(/&apos;/g, "'")
+    .replace(/&amp;/g, "&");
 }
 
 // Escape XML but preserve real newline characters so XLIFF consumers
@@ -33,7 +44,7 @@ function escapeXmlPreserveNewlines(unsafe) {
 // Remove control characters that may be embedded in AST serializations
 // (keep tab, LF, CR). This prevents NULs and other controls from
 // corrupting XLIFF consumers or terminal output.
-function stripControlChars(s) {
+export function stripControlChars(s) {
   if (s === null || s === undefined) return "";
   try {
     // Remove BOM and all Unicode C0/C1 control characters (U+0000..U+001F, U+007F..U+009F)
@@ -51,26 +62,32 @@ function stripControlChars(s) {
   }
 }
 
+// Splits text into alternating segments on fenced code blocks (``` or ~~~),
+// tagging each as code or prose. Shared by outsideCodeFences below and by
+// callers (e.g. the DeepL translation script) that need the fence contents
+// themselves rather than just a transformed string.
+export function splitOutsideCodeFences(text) {
+  if (!text || typeof text !== "string") {
+    return [{ code: false, text: text || "" }];
+  }
+  // The regex captures the complete fenced block (including opening/closing
+  // fences) so that odd-numbered parts are code blocks and even-numbered
+  // parts are prose.
+  const parts = text.split(
+    /(^`{3,}[^\n]*\n[\s\S]*?^`{3,}\s*$|^~{3,}[^\n]*\n[\s\S]*?^~{3,}\s*$)/m
+  );
+  return parts.map((part, i) => ({ code: i % 2 === 1, text: part }));
+}
+
 // Apply a text-processing function only to content OUTSIDE fenced code
 // blocks (``` or ~~~). This prevents link conversion, JSX marker conversion,
 // and other transformations from modifying code examples.
-function outsideCodeFences(fn) {
+export function outsideCodeFences(fn) {
   return (s) => {
     if (!s || typeof s !== "string") return fn(s);
-    // Split on fenced code blocks (``` or ~~~). The regex captures the
-    // complete fenced block (including opening/closing fences) so that
-    // odd-numbered parts are code blocks and even-numbered parts are prose.
-    const parts = s.split(
-      /(^`{3,}[^\n]*\n[\s\S]*?^`{3,}\s*$|^~{3,}[^\n]*\n[\s\S]*?^~{3,}\s*$)/m
-    );
-    for (let i = 0; i < parts.length; i++) {
-      if (i % 2 === 0) {
-        // Outside code fence – apply the transformation
-        parts[i] = fn(parts[i]);
-      }
-      // Odd indices are fenced code blocks – leave them untouched
-    }
-    return parts.join("");
+    return splitOutsideCodeFences(s)
+      .map((seg) => (seg.code ? seg.text : fn(seg.text)))
+      .join("");
   };
 }
 
@@ -1962,7 +1979,12 @@ export async function importXliffBundle(
     // available, fall back to `id` and append `.mdx` to satisfy the API.
     let rel = null;
     if (rawPathFromNote) {
-      const cleaned = rawPathFromNote.replace(/^docs\//, "");
+      let cleaned = rawPathFromNote.replace(/^docs\//, "");
+      // docStatic flattens `<dir>/index.mdx` (or readme) to `<dir>.mdx` when
+      // storing i18n translations on disk — mirror that collapse (already
+      // applied to `id` via canonicalize() above) so the mutation targets
+      // the file that actually exists rather than a nonexistent nested path.
+      cleaned = cleaned.replace(/\/(?:index|readme)(\.mdx?|\.md)$/i, "$1");
       rel = `${language}/docusaurus-plugin-content-docs/current/${cleaned}`;
     } else if (id) {
       // ensure extension present
@@ -2290,4 +2312,12 @@ export async function importXliffBundle(
   return results;
 }
 
-export default { exportOutOfDateAsXliff, importXliffBundle };
+export default {
+  exportOutOfDateAsXliff,
+  importXliffBundle,
+  escapeXml,
+  unescapeXml,
+  stripControlChars,
+  outsideCodeFences,
+  splitOutsideCodeFences,
+};
