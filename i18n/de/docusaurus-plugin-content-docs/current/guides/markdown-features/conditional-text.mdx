@@ -1,5 +1,5 @@
 ---
-lastmod: '2026-02-27T23:11:28.705Z'
+lastmod: '2026-08-11T23:19:39.812Z'
 modifiedBy: aowendev <aowen@translationcommons.org>
 title: Conditional text
 tags:
@@ -17,11 +17,11 @@ unlisted: false
 
 # Bedingter Text
 
-Mit der Komponente **Bedingter Text** können Sie Inhalte in eine Reihe von Bedingungen einbinden, die festlegen, wann sie angezeigt werden sollen:
+Mit der Komponente **Bedingter Text** können Sie Inhalte in eine Reihe von Bedingungen einbinden, die festlegen, wann diese angezeigt werden sollen:
 
-* Bedingungen können eine beliebige Kombination aus Sprachen oder benutzerdefinierten Bedingungen sein.
+* Bedingungen können aus einer beliebigen Kombination von Sprachen oder benutzerdefinierten Bedingungen bestehen.
 * Der Inhalt kann angezeigt oder ausgeblendet werden, wenn eine oder mehrere Bedingungen erfüllt sind (ODER) oder nur, wenn alle Bedingungen erfüllt sind (UND).
-  Sie können auch einen Fallback-Text festlegen, der angezeigt wird, wenn keine Bedingungen erfüllt sind.
+  Sie können außerdem einen Ausweichtext festlegen, der angezeigt wird, wenn keine der Bedingungen erfüllt ist.
 
 ## Kategorien und Bedingungen erstellen
 
@@ -30,24 +30,24 @@ Mit der Komponente **Bedingter Text** können Sie Inhalte in eine Reihe von Bedi
 3. Geben Sie einen **Namen** und eine **Beschreibung** ein.
 4. Für jede **Bedingung**, die Sie hinzufügen möchten:
    1. Klicken Sie auf das Symbol **Hinzufügen**.
-   2. Benennen Sie die **Bedingung** und geben Sie ihr eine **Beschreibung**.
+   2. Benennen Sie die **Bedingung** und geben Sie eine **Beschreibung** ein.
    3. Schalten Sie den Status **Aktiv** der Bedingung nach Bedarf um.
 
 ## Bedingungen zu einem Thema hinzufügen
 
-Bedingungen werden auf Themenebene festgelegt. Die Sprache wird durch die Seitensprache bestimmt. Andere Bedingungen werden als Array in den Metadaten am Anfang des Themas definiert.
+Bedingungen werden auf Themenebene festgelegt. Die Sprache richtet sich nach der Seitensprache. Weitere Bedingungen werden als Array in den Metadaten am Anfang des Themas definiert.
 
 1. Erstellen oder bearbeiten Sie ein Thema.
-2. Erweitern Sie im Bereich **Bedingungen** die **Kategorien** und aktivieren Sie das Kontrollkästchen aller **Bedingungen**, die Sie auf das Thema anwenden möchten.
+2. Erweitern Sie im Bereich **Bedingungen** die **Kategorien** und aktivieren Sie das Kontrollkästchen der **Bedingungen**, die Sie auf das Thema anwenden möchten.
 
 ## Bedingten Text hinzufügen
 
-1. Wählen Sie **Bedingter Text** aus der Liste **Einbetten**.
+1. Wählen Sie **Bedingter Text** aus der Liste **Einbetten** aus.
 2. Bearbeiten Sie die Komponente.
 3. Geben Sie den **Inhalt** ein.
 4. Legen Sie die **Aktion** fest (anzeigen oder ausblenden).
-5. Fügen Sie alle **erforderlichen Bedingungen** hinzu.
-6. Fügen Sie alle **erforderlichen Sprachen** hinzu.
+5. Fügen Sie gegebenenfalls **erforderliche Bedingungen** hinzu.
+6. Fügen Sie gegebenenfalls **erforderliche Sprachen** hinzu.
 7. Legen Sie die **Bedingungslogik** fest.
 8. Legen Sie die **Sprachlogik** fest.
 9. Wählen Sie aus, ob sowohl Bedingungen als auch Sprachen erforderlich sind.
@@ -56,5 +56,7 @@ Bedingungen werden auf Themenebene festgelegt. Die Sprache wird durch die Seiten
 ### Beispiel
 
 <ConditionalText action="show" conditions={["production"]} languages={[]} logic="any" languageLogic="any" requireBothConditions={false} fallback="">
-  Die Bedingung `production` ist auf dieser Seite festgelegt.
+  The `production` condition is set on this page.
 </ConditionalText>
+
+<RelatedTopics maxResults={7} />

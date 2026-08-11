@@ -1,67 +1,73 @@
 ---
-lastmod: "2026-03-10T23:00:25.237Z"
+lastmod: '2026-08-11T23:19:41.601Z'
 title: Introduction
 tags:
-  - "software"
-  - "software_source-control"
-  - "software_source-control_git"
-  - "computer-languages"
-  - "computer-languages_javascript"
-  - "software_static-site-generators"
-  - "software_static-site-generators_docusaurus"
-  - "software_content-management-systems"
-  - "software_content-management-systems_tinacms"
+  - software
+  - software_source-control
+  - software_source-control_git
+  - computer-languages
+  - computer-languages_javascript
+  - software_static-site-generators
+  - software_static-site-generators_docusaurus
+  - software_content-management-systems
+  - software_content-management-systems_tinacms
 draft: false
 review: false
 translate: false
 approved: false
 published: true
 unlisted: false
+modifiedBy: aowendev <aowen@translationcommons.org>
 ---
 
-# Einführung
+docStatic ist eine moderne Dokumentationsplattform, die die Kluft zwischen Autoren und Entwicklern überbrückt und Ihnen dabei hilft, Online-Dokumentationen zu erstellen, die Ihre Nutzer begeistern werden.
 
-DocStatic ist eine moderne Dokumentationsplattform, die die Lücke zwischen Autoren und Entwicklern schließt und Ihnen dabei hilft, Online-Dokumentationen zu erstellen, die Ihre Benutzer lieben werden.
-
-Sie bietet gleichzeitig die besten Funktionen von [Komponenten-Content-Management-Systemen](https://en.wikipedia.org/wiki/Component_content_management_system) und [Docs-as-Code](https://www.writethedocs.org/guide/docs-as-code/)-Lösungen für Online-Dokumentationen. Mit docStatic kann jeder in Ihrem Team Ihre Dokumente erstellen und bearbeiten, ohne den Arbeitsablauf Ihrer Entwickler zu beeinträchtigen.
+Sie vereint die besten Funktionen von [Komponenten-Content-Management-Systemen](https://en.wikipedia.org/wiki/Component_content_management_system) und [Docs-as-Code](https://www.writethedocs.org/guide/docs-as-code/)-Lösungen für Online-Dokumentation. Mit docStatic kann jeder in Ihrem Team Ihre Dokumente erstellen und bearbeiten, ohne den Arbeitsablauf Ihrer Entwickler zu beeinträchtigen.
 
 ## Funktionen
 
-DocStatic ist eine Weiterentwicklung von [Tinasaurus](https://tina.io/blog/tinasaurus-docusaurus-starter), einem Open-Source-Projekt auf Basis von [React](https://react.dev/), das einen [statischen Website-Generator](https://en.wikipedia.org/wiki/Static_site_generator) ([Docusaurus](https://docusaurus.io/)) mit einem [headless content management system](https://en.wikipedia.org/wiki/Headless_content_management_system) ([TinaCMS](https://tina.io/)) kombiniert. Es umfasst:
+docStatic ist eine Weiterentwicklung von [Tinasaurus](https://tina.io/blog/tinasaurus-docusaurus-starter), einem Open-Source-Projekt auf Basis von [React](https://react.dev/), das einen [Statik-Site-Generator](https://en.wikipedia.org/wiki/Static_site_generator) ([Docusaurus](https://docusaurus.io/)) mit einem [Headless-Content-Management-System](https://en.wikipedia.org/wiki/Headless_content_management_system) ([TinaCMS](https://tina.io/)). Es umfasst:
 
 * Eine benutzerfreundliche Bearbeitungsoberfläche für Markdown-, MDX-, JSON- und YAML-Inhalte.
 * Integration in bestehende Git- und CI/CD-Workflows.
-* Eingebettete MDX-Komponenten.
+* Eingebettete MDX-Komponenten für die Erstellung reichhaltiger Inhalte.
 * Medienmanager mit Unterstützung für Medienanbieter von Drittanbietern.
 * Bearbeitung in der Cloud (keine lokale Einrichtung erforderlich).
+* Model Context Protocol (MCP)-Server für die Integration von KI-Assistenten.
 
 ## Einfache Inhaltsverwaltung
 
-Die Standard-Sammlungen von docStatic umfassen einige der fortgeschritteneren Autorenfunktionen, die Sie von einem CCMS erwarten würden.
+Die Standard-Sammlungen von docStatic umfassen einige der fortgeschritteneren Erstellungsfunktionen, die man von einem CCMS erwarten würde.
 
 Der Rich-Text-Editor erleichtert das Hinzufügen von:
 
-* Bedingtem Text, Snippets und Variablensätzen für die Wiederverwendung von Inhalten
+* Bedingtem Text, Snippets und Variablensätzen zur Wiederverwendung von Inhalten
 * Taxonomien
 * Glossarbegriffen
-* Code-Blöcken, Kommentaren, ausblendbaren Details, Abbildungen, Fußnoten und Registerkarten. Diese sind als Vorlagen verfügbar, die Sie in eine Inhaltsdatei einfügen können.
+* Code-Blöcken, Kommentaren, ausblendbaren Details, Abbildungen, Fußnoten und Registerkarten. Diese stehen als Vorlagen zur Verfügung, die Sie in eine Inhaltsdatei einfügen können.
 
-Das CMS verwendet ein [GraphQL](https://graphql.org/)-Schema, um die Form Ihrer Inhalte als eine Reihe von Sammlungen zu beschreiben.
+Das CMS verwendet ein [GraphQL](https://graphql.org/)-Schema, um die Struktur Ihrer Inhalte als eine Reihe von Sammlungen zu beschreiben.
 
 ## Git-gestützt
 
-Die Quellcodeverwaltung, Automatisierung und optional auch die Veröffentlichung werden über [GitHub](https://github.com/) verwaltet. Beim Bearbeiten von Dateien mit dem Rich-Text-Editor führt TinaCMS entweder beim Speichern einen Commit durch oder speichert direkt in der Datei, wenn lokal gearbeitet wird. Git bleibt die Quelle der Wahrheit für das gesamte Team.
+Versionskontrolle, Automatisierung und optional die Veröffentlichung werden über [GitHub](https://github.com/) verwaltet. Beim Bearbeiten von Dateien mit dem Rich-Text-Editor führt TinaCMS beim Speichern entweder einen Commit durch oder speichert direkt in die Datei, wenn lokal gearbeitet wird. Git bleibt die zentrale Informationsquelle für das gesamte Team.
 
-Die Repository-Struktur ist den Docusaurus-Standardeinstellungen sehr ähnlich, jedoch mit einigen Änderungen, die für die Integration mit TinaCMS erforderlich sind.
+Die Repository-Struktur ähnelt stark den Docusaurus-Standardeinstellungen, weist jedoch einige Änderungen auf, die für die Integration mit TinaCMS erforderlich sind.
 
 ## Vorkonfigurierte Plugins
 
-DocStatic ist mit Plugins vorkonfiguriert, die Funktionen wie [KaTeX](https://katex.org/)-Gleichungen, [Lunr](https://lunrjs.com/)-Suche, [Mermaid](https://mermaid.js.org/)-Diagramme und [OpenAPI](https://www.openapis.org/)-Dokumente unterstützen. Es gibt eine integrierte Unterstützung für Internationalisierung (i18n). Mehrsprachige Rechtschreib-, Grammatik- und optional auch Stilprüfungen werden von [LanguageTool](https://languagetool.org/) über Browser- und IDE-Plugins bereitgestellt.
+docStatic ist mit Plugins vorkonfiguriert, die Funktionen wie [KaTeX](https://katex.org/)-Gleichungen, die [Lunr](https://lunrjs.com/)-Suche, [Mermaid](https://mermaid.js.org/)-Diagramme und [OpenAPI](https://www.openapis.org/)-Dokumentation. Es gibt eine integrierte Unterstützung für die Internationalisierung (i18n). Mehrsprachige Rechtschreib-, Grammatik- und optional auch Stilprüfungen werden von [LanguageTool](https://languagetool.org/) über Browser- und IDE-Plugins bereitgestellt.
+
+## KI-Integration
+
+docStatic enthält einen integrierten [Model Context Protocol (MCP)-Server](mcp-server.mdx), der es KI-Assistenten ermöglicht, direkt auf Ihre Dokumentation zuzugreifen und diese zu verstehen. Dies bietet intelligente Unterstützung bei der Bearbeitung, Suche und Analyse von Inhalten auf der Grundlage Ihrer tatsächlichen Dokumentationsstruktur und -inhalte.
 
 ## React-basiert
 
-Der Inhalt wird im MDX-Format gespeichert – einer Erweiterung von Markdown, die benutzerdefinierte React-Komponenten für Funktionen wie Admonitions unterstützt. Diese Komponenten sind universell verfügbar und müssen nicht in einzelnen Dateien deklariert werden. Bei der lokalen Arbeit kompiliert der Dev-Server die Seiten sofort neu, wenn Sie Ihre Änderungen speichern.
+Inhalte werden im MDX-Format gespeichert – einer Erweiterung von Markdown, die benutzerdefinierte React-Komponenten für Funktionen wie z. B. Warnhinweise unterstützt. Diese Komponenten sind universell verfügbar und müssen nicht in einzelnen Dateien deklariert werden. Bei der lokalen Arbeit kompiliert der Dev-Server die Seiten sofort neu, sobald Sie Ihre Änderungen speichern.
 
 ## Vollständig dokumentiert
 
-Entwickler finden alle Informationen, die sie zur Konfiguration und Inbetriebnahme von docStatic benötigen, in der Dokumentation von [Docusaurus](https://docusaurus.io/docs) und [TinaCMS](https://tina.io/docs). Diese Informationen werden hier nicht dupliziert, um zu vermeiden, dass sie veraltet sind. Stattdessen konzentriert sich die docStatic-Dokumentation auf die Verwendung des CMS.
+Entwickler finden alle Informationen, die sie zur Konfiguration und ersten Nutzung von docStatic benötigen, in der Dokumentation zu [Docusaurus](https://docusaurus.io/docs) und [TinaCMS](https://tina.io/docs). Diese Informationen werden hier nicht wiederholt, um zu vermeiden, dass sie möglicherweise veraltet sind. Stattdessen konzentriert sich die docStatic-Dokumentation auf die Nutzung des CMS.
+
+<RelatedTopics maxResults={7} />

@@ -1,5 +1,5 @@
 ---
-lastmod: '2026-02-27T23:11:44.490Z'
+lastmod: '2026-08-11T23:19:41.970Z'
 title: Static assets
 tags:
   - software
@@ -10,18 +10,17 @@ translate: false
 approved: false
 published: true
 unlisted: false
+modifiedBy: aowendev <aowen@translationcommons.org>
 ---
 
-# Statische Assets
+Statische Assets sind Dateien, die keinen Code enthalten und direkt in die Build-Ausgabe kopiert werden. Dazu gehören Bilder, Stylesheets, Favicons, Schriftarten und so weiter.
 
-Statische Assets sind Nicht-Code-Dateien, die direkt in die Build-Ausgabe kopiert werden. Dazu gehören Bilder, Stylesheets, Favicons, Schriftarten usw.
-
-Sie sollten diese Assets im Ordner „static” ablegen. Jede Datei, die Sie in diesen Ordner legen, wird unter Beibehaltung der Ordnerhierarchie in das Stammverzeichnis des generierten Build-Ordners kopiert. Wenn Sie beispielsweise eine Datei namens „sun.jpg” zum Ordner „static” hinzufügen, wird sie nach „build/sun.jpg” kopiert.
+Sie sollten diese Assets im Ordner `static` ablegen. Jede Datei, die Sie in diesen Ordner legen, wird unter Beibehaltung der Ordnerhierarchie in das Stammverzeichnis des generierten Build-Ordners kopiert. Wenn Sie beispielsweise eine Datei namens `sun.jpg` in den Ordner `static` einfügen, wird sie nach `build/sun.jpg` kopiert.
 
 Das bedeutet:
 
-* Für die Website „baseUrl: '/'“ wird das Bild „/static/img/sun.jpg“ unter „/img/sun.jpg“ bereitgestellt.
-* Für die Website „baseUrl: '/subpath/'“ wird das Bild „/static/img/sun.jpg“ unter „/subpath/img/sun.jpg“ bereitgestellt.
+* Bei einer Website mit `baseUrl: '/'` wird das Bild `/static/img/sun.jpg` unter `/img/sun.jpg` bereitgestellt.
+* Bei einer Website mit `baseUrl: '/subpath/'` wird das Bild `/static/img/sun.jpg` unter `/subpath/img/sun.jpg` bereitgestellt.
 
 ## Verweisen auf Ihre statischen Assets
 
@@ -34,9 +33,11 @@ Das bedeutet:
 ### In Markdown
 
 ```markdown
-Sie schreiben einen Link wie diesen: [Dieses Dokument herunterladen](/files/note.docx)
+You write a link like this: [Download this document](/files/note.docx)
 
-Docusaurus ändert dies in: <a href={require('static/files/note.docx')}>Dieses Dokument herunterladen</a>
+Docusaurus changes that to: <a href={require('static/files/note.docx')}>Download this document</a>
 ```
 
 Weitere Informationen finden Sie unter [Statische Assets](https://docusaurus.io/docs/static-assets) in der Docusaurus-Dokumentation.
+
+<RelatedTopics maxResults={7} />

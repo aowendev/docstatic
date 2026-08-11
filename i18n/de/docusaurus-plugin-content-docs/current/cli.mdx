@@ -1,5 +1,5 @@
 ---
-lastmod: '2026-02-27T23:11:25.784Z'
+lastmod: '2026-08-11T23:19:39.240Z'
 title: CLI
 tags:
   - software
@@ -10,75 +10,102 @@ translate: false
 approved: false
 published: true
 unlisted: false
+modifiedBy: aowendev <aowen@translationcommons.org>
 ---
 
-# CLI
+docStatic stellt eine Reihe von Skripten bereit, die Ihnen beim Erstellen, Bereitstellen und Deployen Ihrer Website helfen. Diese sind im Abschnitt `scripts` der Datei `package.json` Ihrer Website definiert, die die maßgebliche Liste darstellt – führen Sie `npm run` ohne Argumente aus, um die Skripte anzuzeigen, über die Ihre Website tatsächlich verfügt.
 
-DocStatic bietet eine Reihe von Skripten, die Ihnen beim Erstellen, Bereitstellen und Veröffentlichen Ihrer Website helfen.
+Die folgenden Befehle sind nach ihrem Verwendungszweck gruppiert.
 
-```json
-{
-  // ...
-  "scripts": {
-    "docusaurus": "docusaurus",
-    "dev": "tinacms dev -c \"docusaurus start\" ",
-    "start": "docusaurus start",
-    "generate-files": "node scripts/generate-file-list.js",
-    "prebuild": "yarn generate-files",
-    "predev": "yarn generate-files",
-    "build": "tinacms build && docusaurus build",
-    „build-local”: „tinacms build --local --skip-indexing --skip-cloud-checks && docusaurus build”,
-    „swizzle”: „docusaurus swizzle”,
-    „deploy”: „docusaurus deploy”,
-    „clear”: „docusaurus clear”,
-    „serve”: „docusaurus serve”,
-    „write-translations”: „docusaurus write-translations”,
-    „write-heading-ids”: „docusaurus write-heading-ids”,
-    „gen-api-docs”: „docusaurus gen-api-docs”,
-    „clean-api-docs”: „docusaurus clean-api-docs”,
-    „gen-graphql”: „docusaurus docs:generate:graphql”,
-    „gen-api-docs:version”: „docusaurus gen-api-docs:version”,
-    „clean-api-docs:version”: „docusaurus clean-api-docs:version”,
-    „lint”: „biome check apis/ config/ reuse/ scripts/ src/ static/ tina/”,
-    „lint:fix”: „biome check apis/ config/ reuse/ scripts/ src/ static/ tina/ --fix”
-  }
-}
-```
+## docStatic-CLI-Befehle
 
-## DocStatic-CLI-Befehle
+Um die Befehle aufzurufen, verwenden Sie `npm` oder `yarn`. Zum Beispiel `npm run dev` oder `yarn dev`.
 
-Um die Befehle aufzurufen, verwenden Sie yarn. Zum Beispiel yarn dev.
+### Wichtige docStatic-Skripte:
 
-Diese Befehle werden in [CLI](https://docusaurus.io/docs/cli) in der Docusaurus-Dokumentation beschrieben:
+* **\`dev\`**: Startet den Entwicklungsserver mit TinaCMS-Integration
+* **\`build\`**: Erstellt die Produktionsversion (führt zuerst den TinaCMS-Build und anschließend den Docusaurus-Build aus)
+* **\`build-local\`**: Erstellt lokal ohne Cloud-Funktionen
+* **\`check-links\`**: Ruft jeden externen Link in Ihren Themen ab und protokolliert den von jedem Server zurückgegebenen HTTP-Status, damit das „Broken Links“-Dashboard echte 404- und 500-Fehler melden kann. Fügen Sie `--strict` hinzu, um bei gefundenen defekten Links mit einem Fehler abzubrechen – was in einem Continuous-Integration-Job wünschenswert ist. Siehe [Dashboards](guides/dashboards.mdx).
+* **\`generate\`**: Führt alle unten aufgeführten Generatoren in einem Durchgang aus. `prebuild` und `predev` rufen diesen Befehl auf, sodass Sie ihn selten direkt benötigen.
+* **\`generate-media-index\`**: Erstellt einen Index der Mediendateien
+* **\`generate-git-identity\`**: Erzeugt Git-Identitätsinformationen
+* **\`generate-files\`**: Erzeugt Dateilisten für die Anwendung
+* **\`generate-docs-metadata\`**: Erzeugt einen Metadatenindex, der von Dashboards und der Suche verwendet wird
+* **\`generate-link-report\`**: Erstellt das Link-Verzeichnis neu, ohne Netzwerkanfragen zu stellen. Die Ergebnisse des letzten `check-links`-Laufs werden übernommen, sodass ein Build diese niemals verworfen.
+* **\`update-theme-css\`**: Aktualisiert die CSS-Dateien des Themes
+* **\`lint\`** / **\`lint\:fix\`**: Überprüfung und optional Korrektur der Formatierung und Codequalität
+* **\`mcp\:install\`**: Installation der Abhängigkeiten für den Model Context Protocol-Server
+* **\`mcp\:build\`**: Erstellung des MCP-Servers aus TypeScript
+* **\`mcp\:dev\`**: MCP-Server im Entwicklungsmodus mit automatischem Neustart starten
+* **\`mcp\:start\`**: Den kompilierten MCP-Server für die Integration eines KI-Assistenten starten
+* **\`mcp\:test\`**: Verbindungstests für den MCP-Server durchführen
 
-* docusaurus
-* start
-* build
-* swizzle
-* deploy
-* clear
-* serve
-* write-translations
-* write-heading-ids
+Weitere Informationen zum MCP-Server finden Sie unter [MCP-Server-Integration](mcp-server.mdx).
+
+Diese Befehle basieren auf den Standard-Docusaurus-Befehlen, die in der Docusaurus-Dokumentation unter [CLI](https://docusaurus.io/docs/cli) beschrieben sind:
+
+* `docusaurus`
+* `start`
+* `build`
+* `swizzle`
+* `deploy`
+* `clear`
+* `serve`
+* `write-translations`
+* `write-heading-ids`
 
 ### Automatisierte Befehle
 
-Diese Befehle werden automatisch beim Erstellen oder beim Starten des Entwicklungsservers ausgeführt:
+Diese werden automatisch ausgeführt, sodass Sie sie normalerweise nicht selbst aufrufen müssen:
 
-* generate-files
-* prebuild
-* predev
+* `prebuild`, `predev` und `prebuild-local` führen jeweils `generate` aus, bevor ein Build oder der Entwicklungsserver gestartet wird. Dadurch werden der Medienindex, die Dateilisten, die Dokument-Metadaten, das Link-Inventar, das Theme-CSS und die Git-Identität aktualisiert.
+* `prestart` aktualisiert das Link-Verzeichnis vor `start`, sodass das Dashboard „Broken Links“ auch dann einen Bericht anzeigen kann, wenn Sie `check-links` noch nie ausgeführt haben.
+* `postinstall` installiert die Abhängigkeiten des MCP-Servers.
 
 ### API-Befehle
 
-* clean-api-docs
-* gen-api-docs
-* gen-graphql
+* `clean-api-docs`
+* `gen-api-docs`
+* `gen-graphql`
 
 Weitere Informationen zu den OpenAPI-Befehlen finden Sie unter [CLI-Verwendung](https://github.com/PaloAltoNetworks/docusaurus-openapi-docs?tab=readme-ov-file#cli-usage) in der Dokumentation zum Docusaurus OpenAPI-Plugin.
 
-Weitere Informationen zum GraphQL-Befehl finden Sie unter [Verwendung](https://github.com/Zhouzi/docusaurus-graphql-plugin?tab=readme-ov-file#usage) in der Dokumentation zum Docusaurus GraphQL-Plugin.
+Weitere Informationen zum GraphQL-Befehl finden Sie unter [Verwendung](https://github.com/Zhouzi/docusaurus-graphql-plugin?tab=readme-ov-file#usage) in der Dokumentation zum Docusaurus-GraphQL-Plugin.
+
+### Befehle zum Erstellen und Aktualisieren von Websites
+
+Diese Befehle stammen aus dem Paket `create-docstatic` und nicht aus `package.json`, sodass sie überall funktionieren – Sie benötigen keine docStatic-Website, um sie auszuführen.
+
+* **\`npx create-docstatic\@latest \<Projektname>\`**: Erstellt eine neue docStatic-Website. Weitere Informationen findest du unter [Installation](installation.mdx).
+* **\`npx create-docstatic\@latest --update\`**: Aktualisiere eine bestehende Website auf die neueste docStatic-Version. Führe den Befehl im Stammverzeichnis einer mit `create-docstatic` erstellten Website aus. Dabei werden die docStatic-eigenen Dateien und die Versionen der Abhängigkeiten aktualisiert, während deine Inhalte unverändert bleiben.
+
+Der Update-Befehl akzeptiert folgende Optionen:
+
+* **\`--dry-run\`**: Zeigt an, was sich ändern würde, ohne Änderungen vorzunehmen.
+* **\`--force\`**: Führt den Vorgang auch dann aus, wenn der Git-Arbeitsbaum nicht sauber ist. Ohne diese Option fordert der Befehl Sie auf, Ihre Änderungen zunächst zu committen oder zu stashen, damit Sie das Update mit `git diff` überprüfen können.
+* **\`--tag \<dist-tag>\`**: Aktualisierung auf eine bestimmte `docstatic`-Paketversion oder ein bestimmtes Dist-Tag anstelle von `latest`.
+* **\`--no-install\`**: Die Installation von Abhängigkeiten nach der Aktualisierung wird übersprungen.
+
+### Befehle zur Synchronisierung der Vorlage
+
+Diese Befehle sind nur im docStatic-Repository selbst (und dessen Forks) vorhanden – nicht in Websites, die mit `create-docstatic` erstellt wurden. Sie sorgen dafür, dass die Scaffolding-Vorlage im Ordner `template/` mit der Hauptwebsite synchron bleibt.
+
+Die Vorlage ist das, was `npx create-docstatic@latest` an neue Websites ausliefert. Wenn Sie also Code ändern, den die Vorlage mit der Hauptwebsite gemeinsam nutzt – React-Komponenten in `src/`, die Build-Skripte in `scripts/`, `tina/config.jsx`, `docusaurus.config.ts` oder `sidebars.ts` – muss die Vorlage ebenfalls entsprechend angepasst werden.
+
+* **\`sync-template\`**: Kopiert den gemeinsamen Code-Bereich von der Hauptseite in `template/`, gleicht die Abhängigkeiten und Skripte in der `package.json` der Vorlage an und generiert `update-manifest.json` neu (die Datei, die `npx create-docstatic@latest --update` zur Aktualisierung bestehender Seiten verwendet). Vorlageninhalte wie die Starter-Dokumentation und Konfigurationswerte bleiben unverändert.
+* **\`sync-template\:check\`**: Zeigt an, was sich ändern würde, ohne etwas zu schreiben, und beendet den Vorgang mit einer Fehlermeldung, wenn die Vorlage nicht mehr synchron ist. Der Pre-Commit-Hook führt diese Überprüfung durch, sodass ein Commit mit der Meldung `template out of sync` fehlschlägt, bis du `yarn sync-template` ausführst und das Ergebnis stagest.
+
+Ein typischer Ablauf nach der Änderung einer gemeinsam genutzten Datei:
+
+```shell
+yarn sync-template
+git add template/ update-manifest.json
+git commit
+```
 
 ### Linting-Befehle
 
 Weitere Informationen zu den Linting-Befehlen finden Sie unter [CLI](https://biomejs.dev/reference/cli/) in der Biome-Dokumentation.
+
+<RelatedTopics maxResults={7} />

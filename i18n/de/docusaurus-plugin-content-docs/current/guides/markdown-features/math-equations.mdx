@@ -1,14 +1,14 @@
 ---
-lastmod: "2026-02-27T23:44:44.910Z"
-modifiedBy: "aowendev <aowen@translationcommons.org>"
+lastmod: '2026-08-11T23:19:40.694Z'
+modifiedBy: aowendev <aowen@translationcommons.org>
 title: Math equations
 tags:
-    - "content"
-    - "content_equations"
-    - "computer-languages"
-    - "computer-languages_"
-    - "computer-languages_latex"
-    - "computer-languages_latex_katex"
+  - content
+  - content_equations
+  - computer-languages
+  - computer-languages_
+  - computer-languages_latex
+  - computer-languages_latex_katex
 draft: false
 review: false
 translate: false
@@ -23,11 +23,26 @@ Mathematische Gleichungen können mit [KaTeX](https://katex.org) dargestellt wer
 
 ## Verwendung
 
-Um KaTeX aus dem CMS zu verwenden, binden Sie die Zeichenfolge in eine **Passthrough**-Komponente ein. Sie können eine **Zusammenfassung** hinzufügen, die beim Bearbeiten des Themas inline angezeigt wird.
+Um KaTeX über das CMS zu verwenden, betten Sie die Zeichenfolge in eine **Passthrough**-Komponente ein. Sie können eine **Zusammenfassung** hinzufügen, die beim Bearbeiten des Themas inline angezeigt wird.
 
 ### Inline
 
-Schreiben Sie Inline-Mathematikgleichungen, indem Sie LaTeX-Gleichungen zwischen `$` einschließen:
+Schreiben Sie mathematische Gleichungen inline, indem Sie LaTeX-Gleichungen mit \`
+
+        path\:guides/markdown-features/math-equations.mdx
+        title\:Math equations
+
+        \# Math equations
+
+Mathematical equations can be rendered using [KaTeX](https://katex.org).
+
+## Use
+
+To use KaTeX from the CMS, embed the string in a **Passthrough** component. You can include a **Summary** that will appear inline when editing the topic.
+
+### Inline
+
+Write inline math equations by wrapping LaTeX equations between `$`:
 
 ```latex
 Let $f\colon[a,b]\to\R$ be Riemann integrable. Let $F\colon[a,b]\to\R$ be
@@ -37,9 +52,9 @@ $f$ is continuous at $x$, $F$ is differentiable at $x$ with $F'(x)=f(x)$.
 
 <Passthrough type="markdown" string="Let $f\colon[a,b] \to \R$ be Riemann integrable. Let $F\colon[a,b]\to\R$ be $F(x)=\int_{a}^{x} f(t)\,dt$. Then $F$ is continuous, and at all $x$ such that $f$ is continuous at $x$, $F$ is differentiable at $x$ with $F'(x)=f(x)$." summary="inline equation" />
 
-### Blöcke
+### Blocks
 
-Für Gleichungsblöcke oder den Anzeigemodus verwenden Sie Zeilenumbrüche und `$$`:
+For equation block or display mode, use line breaks and `$$`:
 
 ```latex
 $$
@@ -47,14 +62,8 @@ I = \int_0^{2\pi} \sin(x)\,dx
 $$
 ```
 
-<Passthrough
-  type="markdown"
-  string="
-  $$
-  I = \int_0^{2\pi} \sin(x)\,dx
-  $$
-  "
-  summary="block equation"
-/>
+<Passthrough type="markdown" string="\n$$\nI = \int_0^{2\pi} \sin(x)\,dx\n$$\n" summary="block equation" />
 
-Weitere Informationen finden Sie in der Dokumentation zu [KaTeX](https://katex.org).
+For more information, refer to the [KaTeX](https://katex.org) documentation.
+
+<RelatedTopics maxResults={7} />
