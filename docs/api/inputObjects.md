@@ -3,6 +3,8 @@ id: inputObjects
 title: Input objects
 slug: inputObjects
 sidebar_position: 7
+modifiedBy: aowendev <aowen@translationcommons.org>
+lastmod: '2026-08-11T16:18:43.631Z'
 ---
 
 ## BooleanFilter
@@ -262,15 +264,6 @@ categories<br />
 <tbody>
 <tr>
 <td>
-miniWriteDashboard<br />
-<a href="/docs/api/inputObjects#booleanfilter"><code>BooleanFilter</code></a>
-</td>
-<td>
-
-</td>
-</tr>
-<tr>
-<td>
 statusBar<br />
 <a href="/docs/api/inputObjects#booleanfilter"><code>BooleanFilter</code></a>
 </td>
@@ -290,6 +283,15 @@ help<br />
 <tr>
 <td>
 dashboard1<br />
+<a href="/docs/api/inputObjects#booleanfilter"><code>BooleanFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+contentReuseDashboard<br />
 <a href="/docs/api/inputObjects#booleanfilter"><code>BooleanFilter</code></a>
 </td>
 <td>
@@ -337,15 +339,6 @@ brokenLinksDashboard<br />
 <tbody>
 <tr>
 <td>
-miniWriteDashboard<br />
-<a href="/docs/api/scalars#boolean"><code>Boolean</code></a>
-</td>
-<td>
-
-</td>
-</tr>
-<tr>
-<td>
 statusBar<br />
 <a href="/docs/api/scalars#boolean"><code>Boolean</code></a>
 </td>
@@ -365,6 +358,15 @@ help<br />
 <tr>
 <td>
 dashboard1<br />
+<a href="/docs/api/scalars#boolean"><code>Boolean</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+contentReuseDashboard<br />
 <a href="/docs/api/scalars#boolean"><code>Boolean</code></a>
 </td>
 <td>
@@ -823,8 +825,8 @@ GlossaryTerm<br />
 </tr>
 <tr>
 <td>
-Snippet<br />
-<a href="/docs/api/inputObjects#docbodysnippetfilter"><code>DocBodySnippetFilter</code></a>
+Passthrough<br />
+<a href="/docs/api/inputObjects#docbodypassthroughfilter"><code>DocBodyPassthroughFilter</code></a>
 </td>
 <td>
 
@@ -832,8 +834,17 @@ Snippet<br />
 </tr>
 <tr>
 <td>
-Passthrough<br />
-<a href="/docs/api/inputObjects#docbodypassthroughfilter"><code>DocBodyPassthroughFilter</code></a>
+RelatedTopics<br />
+<a href="/docs/api/inputObjects#docbodyrelatedtopicsfilter"><code>DocBodyRelatedTopicsFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+Snippet<br />
+<a href="/docs/api/inputObjects#docbodysnippetfilter"><code>DocBodySnippetFilter</code></a>
 </td>
 <td>
 
@@ -850,7 +861,7 @@ Tabs<br />
 </tr>
 <tr>
 <td>
-truncate<br />
+Truncate<br />
 <a href="/docs/api/inputObjects#docbodytruncatefilter"><code>DocBodyTruncateFilter</code></a>
 </td>
 <td>
@@ -969,6 +980,27 @@ string<br />
 <td>
 type<br />
 <a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## DocBodyRelatedTopicsFilter
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+maxResults<br />
+<a href="/docs/api/inputObjects#numberfilter"><code>NumberFilter</code></a>
 </td>
 <td>
 
@@ -3367,8 +3399,8 @@ GlossaryTerm<br />
 </tr>
 <tr>
 <td>
-Snippet<br />
-<a href="/docs/api/inputObjects#i18nbodysnippetfilter"><code>I18nBodySnippetFilter</code></a>
+Passthrough<br />
+<a href="/docs/api/inputObjects#i18nbodypassthroughfilter"><code>I18nBodyPassthroughFilter</code></a>
 </td>
 <td>
 
@@ -3376,8 +3408,17 @@ Snippet<br />
 </tr>
 <tr>
 <td>
-Passthrough<br />
-<a href="/docs/api/inputObjects#i18nbodypassthroughfilter"><code>I18nBodyPassthroughFilter</code></a>
+RelatedTopics<br />
+<a href="/docs/api/inputObjects#i18nbodyrelatedtopicsfilter"><code>I18nBodyRelatedTopicsFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+Snippet<br />
+<a href="/docs/api/inputObjects#i18nbodysnippetfilter"><code>I18nBodySnippetFilter</code></a>
 </td>
 <td>
 
@@ -3394,7 +3435,7 @@ Tabs<br />
 </tr>
 <tr>
 <td>
-truncate<br />
+Truncate<br />
 <a href="/docs/api/inputObjects#i18nbodytruncatefilter"><code>I18nBodyTruncateFilter</code></a>
 </td>
 <td>
@@ -3513,6 +3554,27 @@ string<br />
 <td>
 type<br />
 <a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## I18nBodyRelatedTopicsFilter
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+maxResults<br />
+<a href="/docs/api/inputObjects#numberfilter"><code>NumberFilter</code></a>
 </td>
 <td>
 
@@ -4687,8 +4749,8 @@ GlossaryTerm<br />
 </tr>
 <tr>
 <td>
-Snippet<br />
-<a href="/docs/api/inputObjects#pagesbodysnippetfilter"><code>PagesBodySnippetFilter</code></a>
+Passthrough<br />
+<a href="/docs/api/inputObjects#pagesbodypassthroughfilter"><code>PagesBodyPassthroughFilter</code></a>
 </td>
 <td>
 
@@ -4696,8 +4758,17 @@ Snippet<br />
 </tr>
 <tr>
 <td>
-Passthrough<br />
-<a href="/docs/api/inputObjects#pagesbodypassthroughfilter"><code>PagesBodyPassthroughFilter</code></a>
+RelatedTopics<br />
+<a href="/docs/api/inputObjects#pagesbodyrelatedtopicsfilter"><code>PagesBodyRelatedTopicsFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+Snippet<br />
+<a href="/docs/api/inputObjects#pagesbodysnippetfilter"><code>PagesBodySnippetFilter</code></a>
 </td>
 <td>
 
@@ -4714,7 +4785,7 @@ Tabs<br />
 </tr>
 <tr>
 <td>
-truncate<br />
+Truncate<br />
 <a href="/docs/api/inputObjects#pagesbodytruncatefilter"><code>PagesBodyTruncateFilter</code></a>
 </td>
 <td>
@@ -4833,6 +4904,27 @@ string<br />
 <td>
 type<br />
 <a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## PagesBodyRelatedTopicsFilter
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+maxResults<br />
+<a href="/docs/api/inputObjects#numberfilter"><code>NumberFilter</code></a>
 </td>
 <td>
 
@@ -5626,8 +5718,8 @@ GlossaryTerm<br />
 </tr>
 <tr>
 <td>
-Snippet<br />
-<a href="/docs/api/inputObjects#postbodysnippetfilter"><code>PostBodySnippetFilter</code></a>
+Passthrough<br />
+<a href="/docs/api/inputObjects#postbodypassthroughfilter"><code>PostBodyPassthroughFilter</code></a>
 </td>
 <td>
 
@@ -5635,8 +5727,17 @@ Snippet<br />
 </tr>
 <tr>
 <td>
-Passthrough<br />
-<a href="/docs/api/inputObjects#postbodypassthroughfilter"><code>PostBodyPassthroughFilter</code></a>
+RelatedTopics<br />
+<a href="/docs/api/inputObjects#postbodyrelatedtopicsfilter"><code>PostBodyRelatedTopicsFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+Snippet<br />
+<a href="/docs/api/inputObjects#postbodysnippetfilter"><code>PostBodySnippetFilter</code></a>
 </td>
 <td>
 
@@ -5653,7 +5754,7 @@ Tabs<br />
 </tr>
 <tr>
 <td>
-truncate<br />
+Truncate<br />
 <a href="/docs/api/inputObjects#postbodytruncatefilter"><code>PostBodyTruncateFilter</code></a>
 </td>
 <td>
@@ -5772,6 +5873,27 @@ string<br />
 <td>
 type<br />
 <a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## PostBodyRelatedTopicsFilter
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+maxResults<br />
+<a href="/docs/api/inputObjects#numberfilter"><code>NumberFilter</code></a>
 </td>
 <td>
 
@@ -8441,6 +8563,66 @@ items<br />
 </tbody>
 </table>
 
+## SidebarItemsAutogeneratedFilter
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+title<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+dirName<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## SidebarItemsAutogeneratedMutation
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+title<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+dirName<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
 ## SidebarItemsCategoryDocLinkFilter
 
 
@@ -8502,6 +8684,66 @@ docLink<br />
 <td>
 items<br />
 <a href="/docs/api/inputObjects#sidebaritemscategoryitemsfilter"><code>SidebarItemsCategoryItemsFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## SidebarItemsCategoryItemsAutogeneratedFilter
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+title<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+dirName<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## SidebarItemsCategoryItemsAutogeneratedMutation
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+title<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+dirName<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
 </td>
 <td>
 
@@ -8579,6 +8821,66 @@ items<br />
 </tbody>
 </table>
 
+## SidebarItemsCategoryItemsCategoryItemsAutogeneratedFilter
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+title<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+dirName<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## SidebarItemsCategoryItemsCategoryItemsAutogeneratedMutation
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+title<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+dirName<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
 ## SidebarItemsCategoryItemsCategoryItemsCategoryDocLinkFilter
 
 
@@ -8640,6 +8942,1290 @@ docLink<br />
 <td>
 items<br />
 <a href="/docs/api/inputObjects#sidebaritemscategoryitemscategoryitemscategoryitemsfilter"><code>SidebarItemsCategoryItemsCategoryItemsCategoryItemsFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## SidebarItemsCategoryItemsCategoryItemsCategoryItemsAutogeneratedFilter
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+title<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+dirName<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## SidebarItemsCategoryItemsCategoryItemsCategoryItemsAutogeneratedMutation
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+title<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+dirName<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## SidebarItemsCategoryItemsCategoryItemsCategoryItemsCategoryDocLinkFilter
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+doc<br />
+<a href="/docs/api/inputObjects#docfilter"><code>DocFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## SidebarItemsCategoryItemsCategoryItemsCategoryItemsCategoryFilter
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+title<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+link<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+docLink<br />
+<a href="/docs/api/inputObjects#sidebaritemscategoryitemscategoryitemscategoryitemscategorydoclinkfilter"><code>SidebarItemsCategoryItemsCategoryItemsCategoryItemsCategoryDocLinkFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+items<br />
+<a href="/docs/api/inputObjects#sidebaritemscategoryitemscategoryitemscategoryitemscategoryitemsfilter"><code>SidebarItemsCategoryItemsCategoryItemsCategoryItemsCategoryItemsFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## SidebarItemsCategoryItemsCategoryItemsCategoryItemsCategoryItemsAutogeneratedFilter
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+title<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+dirName<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## SidebarItemsCategoryItemsCategoryItemsCategoryItemsCategoryItemsAutogeneratedMutation
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+title<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+dirName<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## SidebarItemsCategoryItemsCategoryItemsCategoryItemsCategoryItemsCategoryDocLinkFilter
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+doc<br />
+<a href="/docs/api/inputObjects#docfilter"><code>DocFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## SidebarItemsCategoryItemsCategoryItemsCategoryItemsCategoryItemsCategoryFilter
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+title<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+link<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+docLink<br />
+<a href="/docs/api/inputObjects#sidebaritemscategoryitemscategoryitemscategoryitemscategoryitemscategorydoclinkfilter"><code>SidebarItemsCategoryItemsCategoryItemsCategoryItemsCategoryItemsCategoryDocLinkFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+items<br />
+<a href="/docs/api/inputObjects#sidebaritemscategoryitemscategoryitemscategoryitemscategoryitemscategoryitemsfilter"><code>SidebarItemsCategoryItemsCategoryItemsCategoryItemsCategoryItemsCategoryItemsFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## SidebarItemsCategoryItemsCategoryItemsCategoryItemsCategoryItemsCategoryItemsAutogeneratedFilter
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+title<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+dirName<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## SidebarItemsCategoryItemsCategoryItemsCategoryItemsCategoryItemsCategoryItemsAutogeneratedMutation
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+title<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+dirName<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## SidebarItemsCategoryItemsCategoryItemsCategoryItemsCategoryItemsCategoryItemsCategoryDocLinkFilter
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+doc<br />
+<a href="/docs/api/inputObjects#docfilter"><code>DocFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## SidebarItemsCategoryItemsCategoryItemsCategoryItemsCategoryItemsCategoryItemsCategoryFilter
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+title<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+link<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+docLink<br />
+<a href="/docs/api/inputObjects#sidebaritemscategoryitemscategoryitemscategoryitemscategoryitemscategoryitemscategorydoclinkfilter"><code>SidebarItemsCategoryItemsCategoryItemsCategoryItemsCategoryItemsCategoryItemsCategoryDocLinkFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+items<br />
+<a href="/docs/api/inputObjects#sidebaritemscategoryitemscategoryitemscategoryitemscategoryitemscategoryitemscategoryitemsfilter"><code>SidebarItemsCategoryItemsCategoryItemsCategoryItemsCategoryItemsCategoryItemsCategoryItemsFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## SidebarItemsCategoryItemsCategoryItemsCategoryItemsCategoryItemsCategoryItemsCategoryItemsAutogeneratedFilter
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+title<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+dirName<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## SidebarItemsCategoryItemsCategoryItemsCategoryItemsCategoryItemsCategoryItemsCategoryItemsAutogeneratedMutation
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+title<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+dirName<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## SidebarItemsCategoryItemsCategoryItemsCategoryItemsCategoryItemsCategoryItemsCategoryItemsDocDocumentFilter
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+doc<br />
+<a href="/docs/api/inputObjects#docfilter"><code>DocFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## SidebarItemsCategoryItemsCategoryItemsCategoryItemsCategoryItemsCategoryItemsCategoryItemsDocFilter
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+document<br />
+<a href="/docs/api/inputObjects#sidebaritemscategoryitemscategoryitemscategoryitemscategoryitemscategoryitemscategoryitemsdocdocumentfilter"><code>SidebarItemsCategoryItemsCategoryItemsCategoryItemsCategoryItemsCategoryItemsCategoryItemsDocDocumentFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+label<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## SidebarItemsCategoryItemsCategoryItemsCategoryItemsCategoryItemsCategoryItemsCategoryItemsDocMutation
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+document<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+label<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## SidebarItemsCategoryItemsCategoryItemsCategoryItemsCategoryItemsCategoryItemsCategoryItemsFilter
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+doc<br />
+<a href="/docs/api/inputObjects#sidebaritemscategoryitemscategoryitemscategoryitemscategoryitemscategoryitemscategoryitemsdocfilter"><code>SidebarItemsCategoryItemsCategoryItemsCategoryItemsCategoryItemsCategoryItemsCategoryItemsDocFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+link<br />
+<a href="/docs/api/inputObjects#sidebaritemscategoryitemscategoryitemscategoryitemscategoryitemscategoryitemscategoryitemslinkfilter"><code>SidebarItemsCategoryItemsCategoryItemsCategoryItemsCategoryItemsCategoryItemsCategoryItemsLinkFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+autogenerated<br />
+<a href="/docs/api/inputObjects#sidebaritemscategoryitemscategoryitemscategoryitemscategoryitemscategoryitemscategoryitemsautogeneratedfilter"><code>SidebarItemsCategoryItemsCategoryItemsCategoryItemsCategoryItemsCategoryItemsCategoryItemsAutogeneratedFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## SidebarItemsCategoryItemsCategoryItemsCategoryItemsCategoryItemsCategoryItemsCategoryItemsLinkFilter
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+title<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+href<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## SidebarItemsCategoryItemsCategoryItemsCategoryItemsCategoryItemsCategoryItemsCategoryItemsLinkMutation
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+title<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+href<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## SidebarItemsCategoryItemsCategoryItemsCategoryItemsCategoryItemsCategoryItemsCategoryItemsMutation
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+doc<br />
+<a href="/docs/api/inputObjects#sidebaritemscategoryitemscategoryitemscategoryitemscategoryitemscategoryitemscategoryitemsdocmutation"><code>SidebarItemsCategoryItemsCategoryItemsCategoryItemsCategoryItemsCategoryItemsCategoryItemsDocMutation</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+link<br />
+<a href="/docs/api/inputObjects#sidebaritemscategoryitemscategoryitemscategoryitemscategoryitemscategoryitemscategoryitemslinkmutation"><code>SidebarItemsCategoryItemsCategoryItemsCategoryItemsCategoryItemsCategoryItemsCategoryItemsLinkMutation</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+autogenerated<br />
+<a href="/docs/api/inputObjects#sidebaritemscategoryitemscategoryitemscategoryitemscategoryitemscategoryitemscategoryitemsautogeneratedmutation"><code>SidebarItemsCategoryItemsCategoryItemsCategoryItemsCategoryItemsCategoryItemsCategoryItemsAutogeneratedMutation</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## SidebarItemsCategoryItemsCategoryItemsCategoryItemsCategoryItemsCategoryItemsCategoryMutation
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+title<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+link<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+docLink<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+items<br />
+<a href="/docs/api/inputObjects#sidebaritemscategoryitemscategoryitemscategoryitemscategoryitemscategoryitemscategoryitemsmutation"><code>[SidebarItemsCategoryItemsCategoryItemsCategoryItemsCategoryItemsCategoryItemsCategoryItemsMutation]</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## SidebarItemsCategoryItemsCategoryItemsCategoryItemsCategoryItemsCategoryItemsDocDocumentFilter
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+doc<br />
+<a href="/docs/api/inputObjects#docfilter"><code>DocFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## SidebarItemsCategoryItemsCategoryItemsCategoryItemsCategoryItemsCategoryItemsDocFilter
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+document<br />
+<a href="/docs/api/inputObjects#sidebaritemscategoryitemscategoryitemscategoryitemscategoryitemscategoryitemsdocdocumentfilter"><code>SidebarItemsCategoryItemsCategoryItemsCategoryItemsCategoryItemsCategoryItemsDocDocumentFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+label<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## SidebarItemsCategoryItemsCategoryItemsCategoryItemsCategoryItemsCategoryItemsDocMutation
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+document<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+label<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## SidebarItemsCategoryItemsCategoryItemsCategoryItemsCategoryItemsCategoryItemsFilter
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+category<br />
+<a href="/docs/api/inputObjects#sidebaritemscategoryitemscategoryitemscategoryitemscategoryitemscategoryitemscategoryfilter"><code>SidebarItemsCategoryItemsCategoryItemsCategoryItemsCategoryItemsCategoryItemsCategoryFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+doc<br />
+<a href="/docs/api/inputObjects#sidebaritemscategoryitemscategoryitemscategoryitemscategoryitemscategoryitemsdocfilter"><code>SidebarItemsCategoryItemsCategoryItemsCategoryItemsCategoryItemsCategoryItemsDocFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+link<br />
+<a href="/docs/api/inputObjects#sidebaritemscategoryitemscategoryitemscategoryitemscategoryitemscategoryitemslinkfilter"><code>SidebarItemsCategoryItemsCategoryItemsCategoryItemsCategoryItemsCategoryItemsLinkFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+autogenerated<br />
+<a href="/docs/api/inputObjects#sidebaritemscategoryitemscategoryitemscategoryitemscategoryitemscategoryitemsautogeneratedfilter"><code>SidebarItemsCategoryItemsCategoryItemsCategoryItemsCategoryItemsCategoryItemsAutogeneratedFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## SidebarItemsCategoryItemsCategoryItemsCategoryItemsCategoryItemsCategoryItemsLinkFilter
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+title<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+href<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## SidebarItemsCategoryItemsCategoryItemsCategoryItemsCategoryItemsCategoryItemsLinkMutation
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+title<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+href<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## SidebarItemsCategoryItemsCategoryItemsCategoryItemsCategoryItemsCategoryItemsMutation
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+category<br />
+<a href="/docs/api/inputObjects#sidebaritemscategoryitemscategoryitemscategoryitemscategoryitemscategoryitemscategorymutation"><code>SidebarItemsCategoryItemsCategoryItemsCategoryItemsCategoryItemsCategoryItemsCategoryMutation</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+doc<br />
+<a href="/docs/api/inputObjects#sidebaritemscategoryitemscategoryitemscategoryitemscategoryitemscategoryitemsdocmutation"><code>SidebarItemsCategoryItemsCategoryItemsCategoryItemsCategoryItemsCategoryItemsDocMutation</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+link<br />
+<a href="/docs/api/inputObjects#sidebaritemscategoryitemscategoryitemscategoryitemscategoryitemscategoryitemslinkmutation"><code>SidebarItemsCategoryItemsCategoryItemsCategoryItemsCategoryItemsCategoryItemsLinkMutation</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+autogenerated<br />
+<a href="/docs/api/inputObjects#sidebaritemscategoryitemscategoryitemscategoryitemscategoryitemscategoryitemsautogeneratedmutation"><code>SidebarItemsCategoryItemsCategoryItemsCategoryItemsCategoryItemsCategoryItemsAutogeneratedMutation</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## SidebarItemsCategoryItemsCategoryItemsCategoryItemsCategoryItemsCategoryMutation
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+title<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+link<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+docLink<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+items<br />
+<a href="/docs/api/inputObjects#sidebaritemscategoryitemscategoryitemscategoryitemscategoryitemscategoryitemsmutation"><code>[SidebarItemsCategoryItemsCategoryItemsCategoryItemsCategoryItemsCategoryItemsMutation]</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## SidebarItemsCategoryItemsCategoryItemsCategoryItemsCategoryItemsDocDocumentFilter
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+doc<br />
+<a href="/docs/api/inputObjects#docfilter"><code>DocFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## SidebarItemsCategoryItemsCategoryItemsCategoryItemsCategoryItemsDocFilter
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+document<br />
+<a href="/docs/api/inputObjects#sidebaritemscategoryitemscategoryitemscategoryitemscategoryitemsdocdocumentfilter"><code>SidebarItemsCategoryItemsCategoryItemsCategoryItemsCategoryItemsDocDocumentFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+label<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## SidebarItemsCategoryItemsCategoryItemsCategoryItemsCategoryItemsDocMutation
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+document<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+label<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## SidebarItemsCategoryItemsCategoryItemsCategoryItemsCategoryItemsFilter
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+category<br />
+<a href="/docs/api/inputObjects#sidebaritemscategoryitemscategoryitemscategoryitemscategoryitemscategoryfilter"><code>SidebarItemsCategoryItemsCategoryItemsCategoryItemsCategoryItemsCategoryFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+doc<br />
+<a href="/docs/api/inputObjects#sidebaritemscategoryitemscategoryitemscategoryitemscategoryitemsdocfilter"><code>SidebarItemsCategoryItemsCategoryItemsCategoryItemsCategoryItemsDocFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+link<br />
+<a href="/docs/api/inputObjects#sidebaritemscategoryitemscategoryitemscategoryitemscategoryitemslinkfilter"><code>SidebarItemsCategoryItemsCategoryItemsCategoryItemsCategoryItemsLinkFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+autogenerated<br />
+<a href="/docs/api/inputObjects#sidebaritemscategoryitemscategoryitemscategoryitemscategoryitemsautogeneratedfilter"><code>SidebarItemsCategoryItemsCategoryItemsCategoryItemsCategoryItemsAutogeneratedFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## SidebarItemsCategoryItemsCategoryItemsCategoryItemsCategoryItemsLinkFilter
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+title<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+href<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## SidebarItemsCategoryItemsCategoryItemsCategoryItemsCategoryItemsLinkMutation
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+title<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+href<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## SidebarItemsCategoryItemsCategoryItemsCategoryItemsCategoryItemsMutation
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+category<br />
+<a href="/docs/api/inputObjects#sidebaritemscategoryitemscategoryitemscategoryitemscategoryitemscategorymutation"><code>SidebarItemsCategoryItemsCategoryItemsCategoryItemsCategoryItemsCategoryMutation</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+doc<br />
+<a href="/docs/api/inputObjects#sidebaritemscategoryitemscategoryitemscategoryitemscategoryitemsdocmutation"><code>SidebarItemsCategoryItemsCategoryItemsCategoryItemsCategoryItemsDocMutation</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+link<br />
+<a href="/docs/api/inputObjects#sidebaritemscategoryitemscategoryitemscategoryitemscategoryitemslinkmutation"><code>SidebarItemsCategoryItemsCategoryItemsCategoryItemsCategoryItemsLinkMutation</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+autogenerated<br />
+<a href="/docs/api/inputObjects#sidebaritemscategoryitemscategoryitemscategoryitemscategoryitemsautogeneratedmutation"><code>SidebarItemsCategoryItemsCategoryItemsCategoryItemsCategoryItemsAutogeneratedMutation</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## SidebarItemsCategoryItemsCategoryItemsCategoryItemsCategoryMutation
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+title<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+link<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+docLink<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+items<br />
+<a href="/docs/api/inputObjects#sidebaritemscategoryitemscategoryitemscategoryitemscategoryitemsmutation"><code>[SidebarItemsCategoryItemsCategoryItemsCategoryItemsCategoryItemsMutation]</code></a>
 </td>
 <td>
 
@@ -8740,6 +10326,15 @@ label<br />
 <tbody>
 <tr>
 <td>
+category<br />
+<a href="/docs/api/inputObjects#sidebaritemscategoryitemscategoryitemscategoryitemscategoryfilter"><code>SidebarItemsCategoryItemsCategoryItemsCategoryItemsCategoryFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
 doc<br />
 <a href="/docs/api/inputObjects#sidebaritemscategoryitemscategoryitemscategoryitemsdocfilter"><code>SidebarItemsCategoryItemsCategoryItemsCategoryItemsDocFilter</code></a>
 </td>
@@ -8751,6 +10346,15 @@ doc<br />
 <td>
 link<br />
 <a href="/docs/api/inputObjects#sidebaritemscategoryitemscategoryitemscategoryitemslinkfilter"><code>SidebarItemsCategoryItemsCategoryItemsCategoryItemsLinkFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+autogenerated<br />
+<a href="/docs/api/inputObjects#sidebaritemscategoryitemscategoryitemscategoryitemsautogeneratedfilter"><code>SidebarItemsCategoryItemsCategoryItemsCategoryItemsAutogeneratedFilter</code></a>
 </td>
 <td>
 
@@ -8830,6 +10434,15 @@ href<br />
 <tbody>
 <tr>
 <td>
+category<br />
+<a href="/docs/api/inputObjects#sidebaritemscategoryitemscategoryitemscategoryitemscategorymutation"><code>SidebarItemsCategoryItemsCategoryItemsCategoryItemsCategoryMutation</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
 doc<br />
 <a href="/docs/api/inputObjects#sidebaritemscategoryitemscategoryitemscategoryitemsdocmutation"><code>SidebarItemsCategoryItemsCategoryItemsCategoryItemsDocMutation</code></a>
 </td>
@@ -8841,6 +10454,15 @@ doc<br />
 <td>
 link<br />
 <a href="/docs/api/inputObjects#sidebaritemscategoryitemscategoryitemscategoryitemslinkmutation"><code>SidebarItemsCategoryItemsCategoryItemsCategoryItemsLinkMutation</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+autogenerated<br />
+<a href="/docs/api/inputObjects#sidebaritemscategoryitemscategoryitemscategoryitemsautogeneratedmutation"><code>SidebarItemsCategoryItemsCategoryItemsCategoryItemsAutogeneratedMutation</code></a>
 </td>
 <td>
 
@@ -9014,6 +10636,15 @@ link<br />
 
 </td>
 </tr>
+<tr>
+<td>
+autogenerated<br />
+<a href="/docs/api/inputObjects#sidebaritemscategoryitemscategoryitemsautogeneratedfilter"><code>SidebarItemsCategoryItemsCategoryItemsAutogeneratedFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
 </tbody>
 </table>
 
@@ -9108,6 +10739,15 @@ doc<br />
 <td>
 link<br />
 <a href="/docs/api/inputObjects#sidebaritemscategoryitemscategoryitemslinkmutation"><code>SidebarItemsCategoryItemsCategoryItemsLinkMutation</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+autogenerated<br />
+<a href="/docs/api/inputObjects#sidebaritemscategoryitemscategoryitemsautogeneratedmutation"><code>SidebarItemsCategoryItemsCategoryItemsAutogeneratedMutation</code></a>
 </td>
 <td>
 
@@ -9281,6 +10921,15 @@ link<br />
 
 </td>
 </tr>
+<tr>
+<td>
+autogenerated<br />
+<a href="/docs/api/inputObjects#sidebaritemscategoryitemsautogeneratedfilter"><code>SidebarItemsCategoryItemsAutogeneratedFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
 </tbody>
 </table>
 
@@ -9375,6 +11024,15 @@ doc<br />
 <td>
 link<br />
 <a href="/docs/api/inputObjects#sidebaritemscategoryitemslinkmutation"><code>SidebarItemsCategoryItemsLinkMutation</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+autogenerated<br />
+<a href="/docs/api/inputObjects#sidebaritemscategoryitemsautogeneratedmutation"><code>SidebarItemsCategoryItemsAutogeneratedMutation</code></a>
 </td>
 <td>
 
@@ -9548,6 +11206,15 @@ link<br />
 
 </td>
 </tr>
+<tr>
+<td>
+autogenerated<br />
+<a href="/docs/api/inputObjects#sidebaritemsautogeneratedfilter"><code>SidebarItemsAutogeneratedFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
 </tbody>
 </table>
 
@@ -9642,6 +11309,15 @@ doc<br />
 <td>
 link<br />
 <a href="/docs/api/inputObjects#sidebaritemslinkmutation"><code>SidebarItemsLinkMutation</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+autogenerated<br />
+<a href="/docs/api/inputObjects#sidebaritemsautogeneratedmutation"><code>SidebarItemsAutogeneratedMutation</code></a>
 </td>
 <td>
 
@@ -10120,8 +11796,8 @@ GlossaryTerm<br />
 </tr>
 <tr>
 <td>
-Snippet<br />
-<a href="/docs/api/inputObjects#snippetsbodysnippetfilter"><code>SnippetsBodySnippetFilter</code></a>
+Passthrough<br />
+<a href="/docs/api/inputObjects#snippetsbodypassthroughfilter"><code>SnippetsBodyPassthroughFilter</code></a>
 </td>
 <td>
 
@@ -10129,8 +11805,17 @@ Snippet<br />
 </tr>
 <tr>
 <td>
-Passthrough<br />
-<a href="/docs/api/inputObjects#snippetsbodypassthroughfilter"><code>SnippetsBodyPassthroughFilter</code></a>
+RelatedTopics<br />
+<a href="/docs/api/inputObjects#snippetsbodyrelatedtopicsfilter"><code>SnippetsBodyRelatedTopicsFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+Snippet<br />
+<a href="/docs/api/inputObjects#snippetsbodysnippetfilter"><code>SnippetsBodySnippetFilter</code></a>
 </td>
 <td>
 
@@ -10147,7 +11832,7 @@ Tabs<br />
 </tr>
 <tr>
 <td>
-truncate<br />
+Truncate<br />
 <a href="/docs/api/inputObjects#snippetsbodytruncatefilter"><code>SnippetsBodyTruncateFilter</code></a>
 </td>
 <td>
@@ -10266,6 +11951,27 @@ string<br />
 <td>
 type<br />
 <a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## SnippetsBodyRelatedTopicsFilter
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+maxResults<br />
+<a href="/docs/api/inputObjects#numberfilter"><code>NumberFilter</code></a>
 </td>
 <td>
 
@@ -10465,6 +12171,15 @@ help<br />
 </tr>
 <tr>
 <td>
+lastmod<br />
+<a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
 title<br />
 <a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
 </td>
@@ -10506,6 +12221,15 @@ body<br />
 <td>
 help<br />
 <a href="/docs/api/scalars#boolean"><code>Boolean</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+lastmod<br />
+<a href="/docs/api/scalars#string"><code>String</code></a>
 </td>
 <td>
 
@@ -12169,8 +13893,8 @@ GlossaryTerm<br />
 </tr>
 <tr>
 <td>
-Snippet<br />
-<a href="/docs/api/inputObjects#wikibodysnippetfilter"><code>WikiBodySnippetFilter</code></a>
+Passthrough<br />
+<a href="/docs/api/inputObjects#wikibodypassthroughfilter"><code>WikiBodyPassthroughFilter</code></a>
 </td>
 <td>
 
@@ -12178,8 +13902,17 @@ Snippet<br />
 </tr>
 <tr>
 <td>
-Passthrough<br />
-<a href="/docs/api/inputObjects#wikibodypassthroughfilter"><code>WikiBodyPassthroughFilter</code></a>
+RelatedTopics<br />
+<a href="/docs/api/inputObjects#wikibodyrelatedtopicsfilter"><code>WikiBodyRelatedTopicsFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>
+Snippet<br />
+<a href="/docs/api/inputObjects#wikibodysnippetfilter"><code>WikiBodySnippetFilter</code></a>
 </td>
 <td>
 
@@ -12196,7 +13929,7 @@ Tabs<br />
 </tr>
 <tr>
 <td>
-truncate<br />
+Truncate<br />
 <a href="/docs/api/inputObjects#wikibodytruncatefilter"><code>WikiBodyTruncateFilter</code></a>
 </td>
 <td>
@@ -12315,6 +14048,27 @@ string<br />
 <td>
 type<br />
 <a href="/docs/api/inputObjects#stringfilter"><code>StringFilter</code></a>
+</td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## WikiBodyRelatedTopicsFilter
+
+
+
+<p style={{ marginBottom: "0.4em" }}><strong>Arguments</strong></p>
+
+<table>
+<thead><tr><th>Name</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+maxResults<br />
+<a href="/docs/api/inputObjects#numberfilter"><code>NumberFilter</code></a>
 </td>
 <td>
 
