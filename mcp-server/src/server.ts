@@ -22,6 +22,36 @@ interface Document {
   _values?: any;
 }
 
+/**
+ * Tool arguments arrive as untyped JSON. A TypeScript cast is erased at
+ * runtime, so `required` in a tool's inputSchema is not enforced anywhere in
+ * this process — these turn a missing or wrong-typed argument into a clear
+ * error instead of a downstream TypeError.
+ */
+function requireString(
+  args: Record<string, unknown> | undefined,
+  name: string
+): string {
+  const value = args?.[name];
+  if (typeof value !== "string" || value.trim() === "") {
+    throw new Error(`"${name}" is required and must be a non-empty string.`);
+  }
+  return value;
+}
+
+function optionalPositiveInt(
+  args: Record<string, unknown> | undefined,
+  name: string,
+  fallback: number
+): number {
+  const value = args?.[name];
+  if (value === undefined || value === null) return fallback;
+  if (typeof value !== "number" || !Number.isInteger(value) || value < 1) {
+    throw new Error(`"${name}" must be a positive integer.`);
+  }
+  return value;
+}
+
 class DocStaticMCPServer {
   private graphqlUrl: string;
   private server: Server;
@@ -264,10 +294,8 @@ class DocStaticMCPServer {
 
         switch (name) {
           case "search_documents": {
-            const { query, limit = 20 } = args as {
-              query: string;
-              limit?: number;
-            };
+            const query = requireString(args, "query");
+            const limit = optionalPositiveInt(args, "limit", 20);
             const results = await this.searchDocuments(query, limit);
 
             return {
@@ -298,7 +326,7 @@ class DocStaticMCPServer {
           }
 
           case "get_document": {
-            const { path } = args as { path: string };
+            const path = requireString(args, "path");
             const document = await this.getDocument(path);
 
             if (!document) {
@@ -361,7 +389,7 @@ class DocStaticMCPServer {
           }
 
           case "get_documents_by_tag": {
-            const { tag } = args as { tag: string };
+            const tag = requireString(args, "tag");
             const documents = await this.getDocumentsByTag(tag);
 
             return {
@@ -387,7 +415,7 @@ class DocStaticMCPServer {
           }
 
           case "analyze_mdx_components": {
-            const { path } = args as { path: string };
+            const path = requireString(args, "path");
             const document = await this.getDocument(path);
 
             if (!document) {
