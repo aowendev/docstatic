@@ -74,40 +74,24 @@ class DocStaticMCPServer {
     query: string,
     limit = 20
   ): Promise<Document[]> {
-    const graphqlQuery = `
-      query SearchDocuments($first: Float) {
-        docConnection(first: $first, sort: "title") {
-          edges {
-            node {
-              _sys {
-                relativePath
-                filename
-              }
-              title
-              lastmod
-              body
-              _values
-            }
-          }
-        }
-      }
-    `;
+    // Search every document, then cap the results. Applying `limit` to the
+    // GraphQL fetch instead would search only the alphabetically-first N docs,
+    // so a match later in the collection could never be found.
+    const documents = await this.getAllDocuments();
 
-    const data = await this.executeGraphQL(graphqlQuery, { first: limit });
-    const documents = data.docConnection.edges.map((edge: any) => edge.node);
-
-    // Filter documents by search query
     const searchTerm = query.toLowerCase();
-    return documents.filter((doc: Document) => {
+    const matches = documents.filter((doc: Document) => {
       const bodyText =
         typeof doc.body === "string" ? doc.body : JSON.stringify(doc.body);
       return (
-        doc.title.toLowerCase().includes(searchTerm) ||
+        (doc.title || "").toLowerCase().includes(searchTerm) ||
         bodyText.toLowerCase().includes(searchTerm) ||
         (doc._values &&
           JSON.stringify(doc._values).toLowerCase().includes(searchTerm))
       );
     });
+
+    return matches.slice(0, limit);
   }
 
   private async getDocument(relativePath: string): Promise<Document | null> {
