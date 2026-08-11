@@ -141,9 +141,14 @@ const PostCollection = {
         lastmod: new Date().toISOString(),
       };
     },
-    defaultItem: {
+    // A function, not an object: an object literal is evaluated when the
+    // schema is defined, which bakes the build machine's clock into the schema
+    // itself and makes TinaCloud's cloud check fail forever — the indexed
+    // schema and the one CI computes can never agree. As a function it runs
+    // when an author creates a document, which is what was intended anyway.
+    defaultItem: () => ({
       date: docusaurusDate(new Date()),
-    },
+    }),
   },
   fields: [
     {
@@ -268,9 +273,12 @@ const SnippetsCollection = {
         lastmod: new Date().toISOString(),
       };
     },
-    defaultItem: {
+    // Must be a function — see the note on PostCollection. This one was the
+    // worst offender: a millisecond-precision timestamp in the schema meant no
+    // two computations of it ever matched.
+    defaultItem: () => ({
       lastmod: new Date().toISOString(),
-    },
+    }),
   },
   fields: [
     {
