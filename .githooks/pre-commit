@@ -11,10 +11,15 @@ if ! node "$root_dir/scripts/sync-template.js" --check 1>&2; then
   exit 1
 fi
 
-# Stamp modifiedBy and lastmod on staged Markdown/MDX files
+# Stamp modifiedBy and lastmod on staged Markdown/MDX files.
+#
+# docs/api is excluded: it is regenerated wholesale by gen-api-docs and the
+# GraphQL plugin, so a stamp there is erased on the next run and only shows up
+# as diff noise. Nobody edits those files, so "who changed this" has no answer
+# worth recording. biome.json skips the same directory for the same reason.
 raw=$(git diff --cached --name-only --diff-filter=AM || true)
 echo "[pre-commit] staged files: $(printf '%s' "$raw" | tr '\n' ' ')" 1>&2
-files=$(printf '%s' "$raw" | grep -E '\.(md|mdx)$' || true)
+files=$(printf '%s' "$raw" | grep -E '\.(md|mdx)$' | grep -v -E '^docs/api/' || true)
 echo "[pre-commit] filtered files: $(printf '%s' "$files" | tr '\n' ' ')" 1>&2
 
 if [ -z "$files" ]; then
