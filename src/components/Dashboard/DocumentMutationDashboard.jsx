@@ -6,6 +6,7 @@
  */
 
 import React, { useState } from "react";
+import { getTinaClient } from "./lib/tinaClient";
 
 const DocumentMutationDashboard = () => {
   const [createTitle, setCreateTitle] = useState("");
@@ -21,7 +22,7 @@ const DocumentMutationDashboard = () => {
     setStatus("");
     setDocuments([]);
     try {
-      const { client } = await import("../../../tina/__generated__/client");
+      const client = await getTinaClient();
       const docsResult = await client.queries.docConnection({
         sort: "title",
         first: 500,
@@ -43,7 +44,7 @@ const DocumentMutationDashboard = () => {
   const handleCreate = async () => {
     setStatus("");
     try {
-      const { client } = await import("../../../tina/__generated__/client");
+      const client = await getTinaClient();
       const mutation = `
         mutation CreateDocument($collection: String!, $relativePath: String!, $params: DocumentMutation!) {
           createDocument(collection: $collection, relativePath: $relativePath, params: $params) {
@@ -70,7 +71,7 @@ const DocumentMutationDashboard = () => {
   const handleDelete = async () => {
     setStatus("");
     try {
-      const { client } = await import("../../../tina/__generated__/client");
+      const client = await getTinaClient();
       const mutation = `
         mutation DeleteDocument($collection: String!, $relativePath: String!) {
           deleteDocument(collection: $collection, relativePath: $relativePath) {
@@ -95,7 +96,7 @@ const DocumentMutationDashboard = () => {
   const handleUpdate = async () => {
     setStatus("");
     try {
-      const { client } = await import("../../../tina/__generated__/client");
+      const client = await getTinaClient();
       const mutation = `
         mutation UpdateDocument($collection: String!, $relativePath: String!, $params: DocumentUpdateMutation!) {
           updateDocument(collection: $collection, relativePath: $relativePath, params: $params) {

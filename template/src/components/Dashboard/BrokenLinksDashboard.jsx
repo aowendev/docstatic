@@ -6,11 +6,12 @@
  */
 
 import React, { useState } from "react";
+import { useTinaTask } from "./lib/useTinaTask";
 
 const BrokenLinksDashboard = () => {
   const [linkData, setLinkData] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  // loading/error and unmount cancellation live in the shared hook
+  const { loading, error, run } = useTinaTask();
   const [showDetails, setShowDetails] = useState(false);
   const [_selectedFile, _setSelectedFile] = useState(null);
 
@@ -199,14 +200,8 @@ const BrokenLinksDashboard = () => {
   };
 
   // Function to scan docs directory for MDX files using GraphQL
-  const scanDocsForLinks = async () => {
-    setLoading(true);
-    setError(null);
-
-    try {
-      // Import the Tina client
-      const { client } = await import("../../../tina/__generated__/client");
-
+  const scanDocsForLinks = () =>
+    run(async ({ client, isCurrent }) => {
       // Fetch all docs from the main collection
       const docsResult = await client.queries.docConnection({
         sort: "title",
@@ -278,6 +273,8 @@ const BrokenLinksDashboard = () => {
         linksByFile[fileName].push(link);
       }
 
+      // Skipped when this scan has been superseded or the dashboard unmounted.
+      if (!isCurrent()) return;
       setLinkData({
         stats,
         fileStats,
@@ -289,12 +286,7 @@ const BrokenLinksDashboard = () => {
         ),
         timestamp: new Date().toISOString(),
       });
-    } catch (error) {
-      setError(error.message);
-    } finally {
-      setLoading(false);
-    }
-  };
+    });
 
   // Function to extract text content from Tina CMS rich text body
   const extractTextFromBody = (body) => {

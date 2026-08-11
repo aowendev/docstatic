@@ -8,6 +8,8 @@
 import React, { useState } from "react";
 import docusaurusData from "../../../config/docusaurus/index.json";
 import * as xliffUtils from "../../utils/xliff";
+import { getTinaClient } from "./lib/tinaClient";
+import { useTinaTask } from "./lib/useTinaTask";
 
 const TranslationDashboard = () => {
   const [status, setStatus] = useState("");
@@ -15,7 +17,7 @@ const TranslationDashboard = () => {
   const handleDeleteOrphanTopics = async () => {
     setStatus("");
     try {
-      const { client } = await import("../../../tina/__generated__/client");
+      const client = await getTinaClient();
       const lang = selectedLanguage;
       const docOrphaned = translationData?.[lang]
         ? translationData[lang].orphaned
@@ -52,7 +54,7 @@ const TranslationDashboard = () => {
   const handleAddMissingTopics = async () => {
     setStatus("");
     try {
-      const { client } = await import("../../../tina/__generated__/client");
+      const client = await getTinaClient();
       const lang = selectedLanguage;
       const missingDocs = translationData?.[lang]
         ? translationData[lang].missing
@@ -200,8 +202,8 @@ const TranslationDashboard = () => {
     );
   };
   const [translationData, setTranslationData] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  // loading/error and unmount cancellation live in the shared hook
+  const { loading, error, setError, run } = useTinaTask();
   const [importing, setImporting] = useState(false);
   const [importProgress, setImportProgress] = useState(null);
   const [adding, setAdding] = useState(false);
@@ -228,7 +230,7 @@ const TranslationDashboard = () => {
       if (!file) return;
       setStatus(`Importing: ${file.name}`);
       const text = await file.text();
-      const { client } = await import("../../../tina/__generated__/client");
+      const client = await getTinaClient();
       const _results = await xliffUtils.importXliffBundle(
         client,
         text,
@@ -255,13 +257,10 @@ const TranslationDashboard = () => {
 
   // (removed separate debug-upload handler) single Import button handles import
 
-  const scanTranslations = async () => {
-    setLoading(true);
-    setError(null);
-    try {
+  const scanTranslations = () =>
+    run(async ({ client, isCurrent }) => {
       // Build results container
       const results = {};
-      const { client } = await import("../../../tina/__generated__/client");
 
       // Helper to normalize paths for comparison (strip extensions and index/readme)
       const canonicalize = (p) => {
@@ -676,13 +675,14 @@ const TranslationDashboard = () => {
         setSelectedLanguage(langsFound[0]);
       }
 
+      if (!isCurrent()) return;
       setTranslationData(results);
-    } catch (error) {
-      setError(`Failed to scan translations: ${error.message}`);
-    } finally {
-      setLoading(false);
-    }
-  };
+    }).then((outcome) => {
+      if (outcome.status === "error") {
+        setError(`Failed to scan translations: ${outcome.error.message}`);
+      }
+      return outcome;
+    });
 
   const formatDate = (dateString) => {
     try {
