@@ -88,14 +88,20 @@ jobs:
 
       # tina-lock.json is only written by `tinacms dev`, never by
       # `tinacms build`, so there is nothing to refresh or commit here.
-      # Cloud schema checks are skipped explicitly instead.
+      #
+      # The cloud schema check runs. It used to be skipped, which meant a build
+      # against a stale TinaCloud index could ship an admin bundle missing the
+      # generated `queries` export — `client.queries` came out undefined and
+      # every dashboard failed at runtime, while the deploy still reported
+      # green. A failed check here is the signal that the remote schema needs
+      # re-indexing; do not silence it again.
       - name: Build website
         env:
           NEXT_PUBLIC_TINA_CLIENT_ID: ${{ secrets.TINA_PUBLIC_CLIENT_ID }}
           TINA_TOKEN: ${{ secrets.TINA_TOKEN }}
           TINA_SEARCH_TOKEN: ${{ secrets.TINA_SEARCH_TOKEN }}
           NODE_OPTIONS: "--max_old_space_size=8192"
-        run: yarn tinacms build --skip-cloud-checks && yarn docusaurus build
+        run: yarn tinacms build && yarn docusaurus build
 
       - name: Upload Build Artifact
         uses: actions/upload-pages-artifact@v3
