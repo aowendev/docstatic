@@ -91,28 +91,33 @@ const BrokenLinksDashboard = () => {
 
       // Handle relative/internal links
       if (!url.startsWith("http://") && !url.startsWith("https://")) {
-        // Check if it's a relative link to another doc
+        // Internal links are not checked here — Docusaurus already reports
+        // broken internal links at build time (onBrokenLinks).
         if (url.endsWith(".mdx") || url.endsWith(".md")) {
           return {
             ...link,
-            status: "valid",
-            reason: "Internal doc link (assumed valid)",
+            status: "skipped",
+            reason: "Internal doc link — checked by the Docusaurus build",
           };
         }
         return {
           ...link,
-          status: "valid",
-          reason: "Internal link (assumed valid)",
+          status: "skipped",
+          reason: "Internal link — checked by the Docusaurus build",
         };
       }
 
-      // Validate external links with timeout - use original no-cors approach first
+      // Reachability check only. The browser forces mode: "no-cors" for
+      // cross-origin requests, which yields an opaque response: status is
+      // always 0 and the body is unreadable. So this can tell you the host
+      // resolved and accepted a connection — enough to catch a typo'd or dead
+      // domain — but it CANNOT see HTTP status. A 404 or 500 resolves here
+      // exactly like a 200. Do not present these results as "link works".
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), 8000);
 
       try {
-        // Primary approach: Use no-cors mode (original working method)
-        const _response = await fetch(url, {
+        await fetch(url, {
           method: "HEAD",
           signal: controller.signal,
           mode: "no-cors",
@@ -124,8 +129,11 @@ const BrokenLinksDashboard = () => {
 
         clearTimeout(timeoutId);
 
-        // With no-cors mode, if no error is thrown, assume link is reachable
-        return { ...link, status: "valid", reason: "Link is reachable" };
+        return {
+          ...link,
+          status: "valid",
+          reason: "Host reachable (HTTP status not checked)",
+        };
       } catch (fetchError) {
         clearTimeout(timeoutId);
 
@@ -638,8 +646,20 @@ const BrokenLinksDashboard = () => {
         </button>
       </div>
 
+      {/* What this check can and cannot tell you. Browsers force no-cors on
+          cross-origin requests, so HTTP status is invisible to this page. */}
+      {/* whitespace-normal: a Tina admin ancestor sets whitespace-nowrap, which
+          this note would otherwise inherit and render as one long line. */}
+      <div className="rounded-lg border border-blue-200 bg-blue-50 px-4 py-3 mb-6 text-sm text-blue-900 whitespace-normal">
+        <strong>This is a reachability check.</strong> It confirms each external
+        host resolves and accepts a connection, which catches typos, dead
+        domains and links that time out. It <em>cannot</em> see the HTTP status:
+        a page returning 404 or 500 still counts as reachable. Internal links
+        are not checked here — the Docusaurus build already reports those.
+      </div>
+
       {/* Statistics Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6 mb-8">
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-6 mb-8">
         <div className="bg-white rounded-xl border border-gray-200 shadow-sm flex items-center gap-4 p-6">
           <div className="bg-blue-100 p-3 rounded-lg flex-shrink-0">
             <svg
@@ -682,7 +702,7 @@ const BrokenLinksDashboard = () => {
             </svg>
           </div>
           <div className="min-w-0">
-            <p className="text-sm text-gray-500 font-medium">Valid Links</p>
+            <p className="text-sm text-gray-500 font-medium">Reachable</p>
             <p className="text-3xl font-bold text-gray-800">{stats.valid}</p>
           </div>
         </div>
@@ -706,7 +726,7 @@ const BrokenLinksDashboard = () => {
             </svg>
           </div>
           <div className="min-w-0">
-            <p className="text-sm text-gray-500 font-medium">Broken Links</p>
+            <p className="text-sm text-gray-500 font-medium">Unreachable</p>
             <p className="text-3xl font-bold text-red-600">{stats.broken}</p>
           </div>
         </div>
@@ -731,9 +751,35 @@ const BrokenLinksDashboard = () => {
             </svg>
           </div>
           <div className="min-w-0">
-            <p className="text-sm text-gray-500 font-medium">Warning Links</p>
+            <p className="text-sm text-gray-500 font-medium">Unverified</p>
             <p className="text-3xl font-bold text-orange-600">
               {stats.warning || 0}
+            </p>
+          </div>
+        </div>
+
+        <div className="bg-white rounded-xl border border-gray-200 shadow-sm flex items-center gap-4 p-6">
+          <div className="bg-gray-100 p-3 rounded-lg flex-shrink-0">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="text-2xl text-gray-500"
+            >
+              <circle cx="12" cy="12" r="10" />
+              <path d="M8 12h8" />
+            </svg>
+          </div>
+          <div className="min-w-0">
+            <p className="text-sm text-gray-500 font-medium">Not checked</p>
+            <p className="text-3xl font-bold text-gray-800">
+              {stats.skipped || 0}
             </p>
           </div>
         </div>
@@ -1165,7 +1211,7 @@ const BrokenLinksDashboard = () => {
                 >
                   <path d="M20 6 9 17l-5-5" />
                 </svg>
-                All Links Valid!
+                All links reachable
               </>
             ) : stats.broken === 0 ? (
               <>
@@ -1202,9 +1248,9 @@ const BrokenLinksDashboard = () => {
                   <path d="M18 6 6 18" />
                   <path d="m6 6 12 12" />
                 </svg>
-                {stats.broken} Broken Links
+                {stats.broken} unreachable
                 {(stats.warning || 0) > 0
-                  ? ` and ${stats.warning} Warnings`
+                  ? ` and ${stats.warning} unverified`
                   : ""}
               </>
             )}
