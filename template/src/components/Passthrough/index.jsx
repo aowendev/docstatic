@@ -18,7 +18,27 @@ import "katex/dist/katex.min.css"; // Import KaTeX CSS
 import ColorGenerator from "@site/src/components/ColorGenerator";
 
 /**
- * Passthrough component that renders content as JSX, HTML, markdown, or plain text
+ * Passthrough renders authored content as JSX, HTML, markdown or plain text.
+ *
+ * It exists so a custom React page can still be opened and edited in the CMS:
+ * the markup lives in a content field rather than in a source file, so authors
+ * keep the visual editor. It doubles as the renderer for markdown task lists,
+ * which is why the custom input/ul/li renderers below exist.
+ *
+ * TRUST BOUNDARY
+ * --------------
+ * rehypeRaw is enabled, so raw HTML in the content string is parsed and
+ * rendered rather than escaped. That is the feature — passing markup through
+ * intact is the whole point — but it means the content field is executable:
+ * a <script> tag or an onerror attribute authored here runs for every visitor.
+ *
+ * The practical consequence is that CMS write access to any document using
+ * this component is equivalent to script execution on the published site.
+ * That is acceptable while authors are trusted, which is the normal docStatic
+ * setup. If editing is ever opened to a wider or less trusted group, this
+ * component is the thing to revisit — either drop rehypeRaw (which breaks the
+ * custom-page use case) or sanitise with rehype-sanitize on an allowlist.
+ *
  * @param {string} summary - A summary description (for documentation purposes)
  * @param {string} string - The content to render
  * @param {string} type - The content type: 'jsx', 'html', 'markdown', 'code', or 'auto' (default)

@@ -9,6 +9,7 @@
 
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import docusaurusSettings from "../../../config/docusaurus/index.json";
+import { getTinaClient } from "./lib/tinaClient";
 
 const GraphQLtest = () => {
   const [connectionTests, setConnectionTests] = useState([]);
@@ -123,7 +124,7 @@ const GraphQLtest = () => {
 
       // Test 4: Check if we can import the Tina client
       try {
-        const { client } = await import("../../../tina/__generated__/client");
+        const client = await getTinaClient();
         if (client) {
           tests.push({
             name: "Tina Generated Client",

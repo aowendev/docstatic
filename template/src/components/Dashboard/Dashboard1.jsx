@@ -6,6 +6,7 @@
  */
 
 import React, { useCallback, useEffect, useRef, useState } from "react";
+import { useTinaTask } from "./lib/useTinaTask";
 
 const getStatus = (node) => {
   if (node.published) return "Published";
@@ -19,8 +20,8 @@ const getStatus = (node) => {
 
 const Dashboard1 = () => {
   const [contentData, setContentData] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  // loading/error and unmount cancellation live in the shared hook
+  const { loading, error, run } = useTinaTask();
   const [showDocuments, setShowDocuments] = useState(null);
   const [filteredDocs, setFilteredDocs] = useState([]);
   const [allDocs, setAllDocs] = useState([]);
@@ -33,115 +34,109 @@ const Dashboard1 = () => {
   // which would loop).
   const hasLoadedRef = useRef(false);
 
-  const fetchContentOverview = useCallback(async () => {
-    setLoading(true);
-    setError(null);
+  const fetchContentOverview = useCallback(
+    () =>
+      run(async ({ client, isCurrent }) => {
+        // Fetch all docs from main collection
+        const docsResult = await client.queries.docConnection({
+          sort: "title",
+          first: 500, // Request more documents
+        });
 
-    try {
-      const { client } = await import("../../../tina/__generated__/client");
+        const docs = docsResult.data.docConnection.edges || [];
 
-      // Fetch all docs from main collection
-      const docsResult = await client.queries.docConnection({
-        sort: "title",
-        first: 500, // Request more documents
-      });
+        // Store all docs for filtering
+        setAllDocs(docs);
 
-      const docs = docsResult.data.docConnection.edges || [];
+        // Analyze workflow status for docs
+        const docStats = docs.reduce(
+          (acc, edge) => {
+            const node = edge.node;
+            acc.total++;
 
-      // Store all docs for filtering
-      setAllDocs(docs);
+            if (node.draft) acc.draft++;
+            if (node.review) acc.review++;
+            if (node.translate) acc.translate++;
+            if (node.approved) acc.approved++;
+            if (node.published) acc.published++;
+            if (node.unlisted) acc.unlisted++;
 
-      // Analyze workflow status for docs
-      const docStats = docs.reduce(
-        (acc, edge) => {
-          const node = edge.node;
-          acc.total++;
-
-          if (node.draft) acc.draft++;
-          if (node.review) acc.review++;
-          if (node.translate) acc.translate++;
-          if (node.approved) acc.approved++;
-          if (node.published) acc.published++;
-          if (node.unlisted) acc.unlisted++;
-
-          return acc;
-        },
-        {
-          total: 0,
-          draft: 0,
-          review: 0,
-          translate: 0,
-          approved: 0,
-          published: 0,
-          unlisted: 0,
-        }
-      );
-
-      // Get recent activity with configurable filters
-      // Only include docs that have a lastmod field set
-      const now = new Date();
-      const getTimePeriodFilter = () => {
-        if (activityPeriod === "week") {
-          return new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000); // 7 days ago
-        } else if (activityPeriod === "month") {
-          return new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000); // 30 days ago
-        }
-        return null; // No time filter for 'all'
-      };
-
-      const timeCutoff = getTimePeriodFilter();
-
-      const recentActivity = docs
-        .filter((edge) => {
-          const node = edge.node;
-          const _relativePath = node._sys.relativePath;
-
-          // Skip documents without lastmod field
-          if (!node.lastmod) return false;
-
-          // Apply time filter if specified
-          if (timeCutoff) {
-            const docDate = new Date(node.lastmod);
-            if (docDate < timeCutoff) return false;
+            return acc;
+          },
+          {
+            total: 0,
+            draft: 0,
+            review: 0,
+            translate: 0,
+            approved: 0,
+            published: 0,
+            unlisted: 0,
           }
+        );
 
-          return true;
-        })
-        .map((edge) => {
-          const node = edge.node;
-          // Use lastmod as primary source, with system lastModified as fallback
-          const timestamp = node.lastmod || node._sys?.lastModified;
+        // Get recent activity with configurable filters
+        // Only include docs that have a lastmod field set
+        const now = new Date();
+        const getTimePeriodFilter = () => {
+          if (activityPeriod === "week") {
+            return new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000); // 7 days ago
+          } else if (activityPeriod === "month") {
+            return new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000); // 30 days ago
+          }
+          return null; // No time filter for 'all'
+        };
 
-          return {
-            title: node.title || node._sys.filename,
-            type: "Documentation",
-            status: getStatus(node),
-            lastModified: timestamp,
-            path: node._sys.relativePath,
-            // Debug info
-            debugInfo: {
-              sysLastModified: node._sys?.lastModified,
-              lastmod: node.lastmod,
-              filename: node._sys.filename,
-            },
-          };
-        })
-        .sort((a, b) => new Date(b.lastModified) - new Date(a.lastModified))
-        .slice(0, activityLimit);
+        const timeCutoff = getTimePeriodFilter();
 
-      setContentData({
-        docs: docStats,
-        recentActivity,
-        totalProgress:
-          Math.round((docStats.published / docStats.total) * 100) || 0,
-      });
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      hasLoadedRef.current = true;
-      setLoading(false);
-    }
-  }, [activityLimit, activityPeriod]);
+        const recentActivity = docs
+          .filter((edge) => {
+            const node = edge.node;
+            const _relativePath = node._sys.relativePath;
+
+            // Skip documents without lastmod field
+            if (!node.lastmod) return false;
+
+            // Apply time filter if specified
+            if (timeCutoff) {
+              const docDate = new Date(node.lastmod);
+              if (docDate < timeCutoff) return false;
+            }
+
+            return true;
+          })
+          .map((edge) => {
+            const node = edge.node;
+            // Use lastmod as primary source, with system lastModified as fallback
+            const timestamp = node.lastmod || node._sys?.lastModified;
+
+            return {
+              title: node.title || node._sys.filename,
+              type: "Documentation",
+              status: getStatus(node),
+              lastModified: timestamp,
+              path: node._sys.relativePath,
+              // Debug info
+              debugInfo: {
+                sysLastModified: node._sys?.lastModified,
+                lastmod: node.lastmod,
+                filename: node._sys.filename,
+              },
+            };
+          })
+          .sort((a, b) => new Date(b.lastModified) - new Date(a.lastModified))
+          .slice(0, activityLimit);
+
+        if (!isCurrent()) return;
+        setContentData({
+          docs: docStats,
+          recentActivity,
+          totalProgress:
+            Math.round((docStats.published / docStats.total) * 100) || 0,
+        });
+        hasLoadedRef.current = true;
+      }),
+    [activityLimit, activityPeriod, run]
+  );
 
   const getStatusColor = (status) => {
     const colors = {

@@ -108,8 +108,11 @@ function generateThemeCSS(themeConfig) {
  */
 function updateThemeCSS() {
   try {
-    const configPath = path.join(process.cwd(), "config/theme/index.json");
-    const cssPath = path.join(process.cwd(), "src/css/theme-variables.css");
+    // Resolved from this file, not the caller's cwd, so the script works
+    // regardless of the directory it is invoked from.
+    const projectRoot = path.join(__dirname, "..", "..");
+    const configPath = path.join(projectRoot, "config/theme/index.json");
+    const cssPath = path.join(projectRoot, "src/css/theme-variables.css");
 
     // Read theme config
     const themeConfig = JSON.parse(fs.readFileSync(configPath, "utf8"));

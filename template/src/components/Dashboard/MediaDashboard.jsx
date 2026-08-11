@@ -6,11 +6,13 @@
  */
 
 import React, { useState } from "react";
+import { getTinaClient } from "./lib/tinaClient";
+import { useTinaTask } from "./lib/useTinaTask";
 
 const MediaDashboard = () => {
   const [mediaData, setMediaData] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  // loading/error and unmount cancellation live in the shared hook
+  const { loading, error, setError, run } = useTinaTask();
   const [mediaFiles, setMediaFiles] = useState([]);
   const [filterType, setFilterType] = useState("all");
   const [imageUsages, setImageUsages] = useState({});
@@ -105,7 +107,7 @@ const MediaDashboard = () => {
 
   const scanDocumentsForImageUsage = async (mediaFiles) => {
     try {
-      const { client } = await import("../../../tina/__generated__/client");
+      const client = await getTinaClient();
       // Fetch all documents to scan for image usage using connection query
       const docsResult = await client.queries.docConnection({
         sort: "title",
@@ -145,11 +147,8 @@ const MediaDashboard = () => {
     }
   };
 
-  const fetchMediaFiles = async () => {
-    setLoading(true);
-    setError(null);
-    try {
-      const { client } = await import("../../../tina/__generated__/client");
+  const fetchMediaFiles = () =>
+    run(async ({ client, isCurrent }) => {
       // Query Tina's MediaCollection (reuse/media/index.json)
       const mediaResult = await client.queries.media({
         relativePath: "index.json",
@@ -171,6 +170,7 @@ const MediaDashboard = () => {
           dimensions: file.dimensions || "",
         };
       });
+      if (!isCurrent()) return;
       setMediaFiles(files);
       const mediaStats = {
         total: files.length,
@@ -186,12 +186,12 @@ const MediaDashboard = () => {
         stats: mediaStats,
       });
       await scanDocumentsForImageUsage(files);
-    } catch (_err) {
-      setError("Failed to load media files from Tina MediaCollection.");
-    } finally {
-      setLoading(false);
-    }
-  };
+    }).then((outcome) => {
+      if (outcome.status === "error") {
+        setError("Failed to load media files from Tina MediaCollection.");
+      }
+      return outcome;
+    });
 
   const getFilteredFiles = () => {
     if (filterType === "all") return mediaFiles;

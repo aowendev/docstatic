@@ -22,6 +22,36 @@ interface Document {
   _values?: any;
 }
 
+/**
+ * Tool arguments arrive as untyped JSON. A TypeScript cast is erased at
+ * runtime, so `required` in a tool's inputSchema is not enforced anywhere in
+ * this process — these turn a missing or wrong-typed argument into a clear
+ * error instead of a downstream TypeError.
+ */
+function requireString(
+  args: Record<string, unknown> | undefined,
+  name: string
+): string {
+  const value = args?.[name];
+  if (typeof value !== "string" || value.trim() === "") {
+    throw new Error(`"${name}" is required and must be a non-empty string.`);
+  }
+  return value;
+}
+
+function optionalPositiveInt(
+  args: Record<string, unknown> | undefined,
+  name: string,
+  fallback: number
+): number {
+  const value = args?.[name];
+  if (value === undefined || value === null) return fallback;
+  if (typeof value !== "number" || !Number.isInteger(value) || value < 1) {
+    throw new Error(`"${name}" must be a positive integer.`);
+  }
+  return value;
+}
+
 class DocStaticMCPServer {
   private graphqlUrl: string;
   private server: Server;
@@ -74,40 +104,24 @@ class DocStaticMCPServer {
     query: string,
     limit = 20
   ): Promise<Document[]> {
-    const graphqlQuery = `
-      query SearchDocuments($first: Float) {
-        docConnection(first: $first, sort: "title") {
-          edges {
-            node {
-              _sys {
-                relativePath
-                filename
-              }
-              title
-              lastmod
-              body
-              _values
-            }
-          }
-        }
-      }
-    `;
+    // Search every document, then cap the results. Applying `limit` to the
+    // GraphQL fetch instead would search only the alphabetically-first N docs,
+    // so a match later in the collection could never be found.
+    const documents = await this.getAllDocuments();
 
-    const data = await this.executeGraphQL(graphqlQuery, { first: limit });
-    const documents = data.docConnection.edges.map((edge: any) => edge.node);
-
-    // Filter documents by search query
     const searchTerm = query.toLowerCase();
-    return documents.filter((doc: Document) => {
+    const matches = documents.filter((doc: Document) => {
       const bodyText =
         typeof doc.body === "string" ? doc.body : JSON.stringify(doc.body);
       return (
-        doc.title.toLowerCase().includes(searchTerm) ||
+        (doc.title || "").toLowerCase().includes(searchTerm) ||
         bodyText.toLowerCase().includes(searchTerm) ||
         (doc._values &&
           JSON.stringify(doc._values).toLowerCase().includes(searchTerm))
       );
     });
+
+    return matches.slice(0, limit);
   }
 
   private async getDocument(relativePath: string): Promise<Document | null> {
@@ -280,10 +294,8 @@ class DocStaticMCPServer {
 
         switch (name) {
           case "search_documents": {
-            const { query, limit = 20 } = args as {
-              query: string;
-              limit?: number;
-            };
+            const query = requireString(args, "query");
+            const limit = optionalPositiveInt(args, "limit", 20);
             const results = await this.searchDocuments(query, limit);
 
             return {
@@ -314,7 +326,7 @@ class DocStaticMCPServer {
           }
 
           case "get_document": {
-            const { path } = args as { path: string };
+            const path = requireString(args, "path");
             const document = await this.getDocument(path);
 
             if (!document) {
@@ -377,7 +389,7 @@ class DocStaticMCPServer {
           }
 
           case "get_documents_by_tag": {
-            const { tag } = args as { tag: string };
+            const tag = requireString(args, "tag");
             const documents = await this.getDocumentsByTag(tag);
 
             return {
@@ -403,7 +415,7 @@ class DocStaticMCPServer {
           }
 
           case "analyze_mdx_components": {
-            const { path } = args as { path: string };
+            const path = requireString(args, "path");
             const document = await this.getDocument(path);
 
             if (!document) {

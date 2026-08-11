@@ -1,0 +1,22 @@
+{
+  "generatedAt": "2026-08-11T15:15:02.937Z",
+  "lastCheckedAt": null,
+  "checked": false,
+  "stats": {
+    "total": 0,
+    "ok": 0,
+    "broken": 0,
+    "unverified": 0,
+    "unchecked": 0,
+    "skipped": 0
+  },
+  "files": {
+    "/docs/introduction.mdx": {
+      "fileName": "introduction.mdx",
+      "relativePath": "introduction.mdx",
+      "title": "Introduction",
+      "totalLinks": 0
+    }
+  },
+  "links": []
+}

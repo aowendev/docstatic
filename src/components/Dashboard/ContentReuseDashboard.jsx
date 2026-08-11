@@ -6,7 +6,7 @@
  */
 
 import React, { useState } from "react";
-import { client } from "../../../tina/__generated__/client";
+import { useTinaTask } from "./lib/useTinaTask";
 
 // --- AST utilities ---
 
@@ -147,7 +147,7 @@ function computeSuggestions(docBodies, glossaryTermsData, variableSetsData) {
 
 // --- Data fetching ---
 
-async function fetchReuseData() {
+async function fetchReuseData(client) {
   const glossaryConn = await client.queries.glossaryTermsConnection({
     first: 100,
   });
@@ -605,22 +605,14 @@ const ContentReuseDashboard = () => {
   const [reuseData, setReuseData] = useState(null);
   const [detailType, setDetailType] = useState(null);
   const [suggestionDetailType, setSuggestionDetailType] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  // loading/error and unmount cancellation live in the shared hook
+  const { loading, error, run } = useTinaTask();
 
-  const loadData = () => {
-    setLoading(true);
-    setError(null);
-    fetchReuseData()
-      .then((data) => {
-        setReuseData(data);
-        setLoading(false);
-      })
-      .catch((err) => {
-        setError(err.message || "Failed to load content reuse data");
-        setLoading(false);
-      });
-  };
+  const loadData = () =>
+    run(async ({ client, isCurrent }) => {
+      const data = await fetchReuseData(client);
+      if (isCurrent()) setReuseData(data);
+    });
 
   const headerButtons = (label) => (
     <button

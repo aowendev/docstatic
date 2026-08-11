@@ -9,6 +9,8 @@ api: eJztWEtv20YQ/isL5hIbkug4BQr4VNVJA6NJbdgO2kAykhU5lDYmd5ndpWlV8H/vN7ukHn7E7aG
 sidebar_class_name: "get api-method"
 info_path: docs/api/petstore/swagger-petstore-yaml
 custom_edit_url: null
+modifiedBy: aowendev <aowen@translationcommons.org>
+lastmod: '2026-08-11T16:04:50.741Z'
 ---
 
 import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
@@ -18,6 +20,7 @@ import StatusCodes from "@theme/StatusCodes";
 import OperationTabs from "@theme/OperationTabs";
 import TabItem from "@theme/TabItem";
 import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
 
 <Heading
   as={"h1"}
@@ -38,23 +41,18 @@ import Heading from "@theme/Heading";
 
 Returns a map of status codes to quantities
 
-<ParamsDetails
-  parameters={undefined}
->
+<ParamsDetails>
   
 </ParamsDetails>
 
 <RequestSchema
-  title={"Body"}
-  body={undefined}
+  {...require("./get-inventory.RequestSchema.json")}
 >
   
 </RequestSchema>
 
 <StatusCodes
-  id={undefined}
-  label={undefined}
-  responses={{"200":{"description":"successful operation","content":{"application/json":{"schema":{"type":"object","additionalProperties":{"type":"integer","format":"int32"}}}}}}}
+  {...require("./get-inventory.StatusCodes.json")}
 >
   
 </StatusCodes>

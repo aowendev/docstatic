@@ -6,6 +6,7 @@
  */
 
 import React, { useCallback, useEffect, useState } from "react";
+import { getTinaClient } from "./lib/tinaClient";
 
 const getStatusColor = (type) => {
   switch (type) {
@@ -87,7 +88,7 @@ const StatusBar = () => {
       if (clientId) {
         // Try to import and check TinaCMS client for TinaCloud
         try {
-          await import("../../../tina/__generated__/client");
+          await getTinaClient();
           // If we have a client and clientId, assume TinaCloud is configured
           connectionStatus = {
             type: "success",
@@ -135,7 +136,7 @@ const StatusBar = () => {
 
     // Check if TinaCMS client is properly generated
     try {
-      await import("../../../tina/__generated__/client");
+      await getTinaClient();
     } catch (_err) {
       missingSettings.push("TinaCMS client (run: yarn tina-build)");
     }

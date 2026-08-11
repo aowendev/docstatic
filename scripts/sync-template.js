@@ -57,6 +57,7 @@ const SCRIPTS_ALLOWLIST = [
   "generate-media-index.js",
   "generate-docs-metadata.js",
   "generate-git-identity.js",
+  "generate-link-report.js",
   "update-theme-css.js",
   "util.js",
 ];
@@ -90,6 +91,9 @@ const EXCLUDED_SCRIPTS = [
   "setup-git-hooks",
   "sync-template",
   "sync-template:check",
+  // test/ is docstatic's own suite and is not shipped in the template, so a
+  // scaffolded site would get a `test` script that passes vacuously.
+  "test",
 ];
 
 let changes = 0;
