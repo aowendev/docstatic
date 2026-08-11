@@ -50,6 +50,7 @@
     "clean-api-docs:version": "docusaurus clean-api-docs:version",
     "lint": "biome check .",
     "lint:fix": "biome check . --fix",
+    "test": "node --test \"test/**/*.test.mjs\"",
     "mcp:install": "cd mcp-server && npm install",
     "mcp:build": "cd mcp-server && npm run build",
     "mcp:dev": "cd mcp-server && npm run dev",
