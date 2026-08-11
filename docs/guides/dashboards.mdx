@@ -1,5 +1,5 @@
 ---
-lastmod: "2026-03-04T22:51:28.725Z"
+lastmod: '2026-08-11T17:45:19.489Z'
 title: Dashboards
 description: Viewing dashboards in TinaCMS
 tags:
@@ -12,7 +12,7 @@ translate: false
 approved: false
 published: true
 unlisted: false
-modifiedBy: "aowendev <aowen@translationcommons.org>"
+modifiedBy: aowendev <aowen@translationcommons.org>
 ---
 
 docStatic adds dashboard functionality to TinaCMS. Tina generates a GraphQL API using the filesystem in the Git repository as the database. Dashboards query the API (locally or in the cloud) and present actionable reports directly in the CMS. Dashboard functionality is currently considered beta. The functionality is fully tested, but the user interface is provisional and requires refinement. Dashboards update when the page is updated. If another user has made changes since you viewed a dashboard, you can click **Refresh** to update the dashboard.
@@ -92,19 +92,29 @@ For used content, click Used in n docs to display the topics where the content i
 
 ## Checking broken links
 
-The Broken Links dashboard validates all the hyperlinks in the topics. The report includes number for:
+The Broken Links dashboard reports on the hyperlinks in your topics, including their HTTP status, so a page that returns 404 or 500 is identified as broken.
+
+The dashboard displays the results of the last check. It does not run the check itself, because a browser cannot read the HTTP status of a link to another site. To check your links, run:
+
+```bash
+yarn check-links
+```
+
+This requests every external link, records what each server answered, and updates the report. Run it whenever you want fresh results. The dashboard shows the date and time of the last check.
+
+The report counts:
 
 * Total links.
-* Valid links where a connection could be established. 
-* Broken links where no connection could be established.
-* Warning links where the connection was rejected but the link could still be valid.
+* OK: the server answered with a success or redirect status.
+* Broken: the server answered with an error status, such as 404 Not Found or 500 Internal Server Error. These are the links to fix.
+* Unverified: no answer came back, so the link could not be judged. Causes include a domain that did not resolve, a request that timed out, a site that refused the request with 403, and rate limiting with 429. Any of these can be a problem with the machine running the check rather than the link, so validate these manually by clicking the hyperlink.
+* Not checked: links that are not requested. This covers internal links, anchors, `mailto:` and `tel:` links, and localhost addresses.
+* Files scanned.
 
-You can safely ignore warnings about http\://localhost if you are describing software running locally. But document links should be relative.
-
-Warnings are typically the results of aggressive CORS/CORP policies that do not respect no-cors settings. You must manually validate these sites by clicking the hyperlink.
+Internal links are deliberately not requested here, because the site build already validates them against the real page list and reports any that are broken. Localhost addresses are also skipped, since they point at whatever happens to be running on the machine doing the check. You can document a localhost URL without it being reported.
 
 The dashboard lists files with problem links. You can open them by clicking Edit in either list.
 
-The dashboard also provides a summary with the date when the report was run.
+To fail a build when broken links are found, for example in a continuous integration job, run `yarn check-links --strict`. This exits with an error only for broken links, not unverified ones, so an intermittent network problem does not fail your build.
 
 <RelatedTopics maxResults={7} />

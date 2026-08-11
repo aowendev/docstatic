@@ -13,7 +13,8 @@ translate: false
 approved: false
 published: true
 unlisted: false
-lastmod: "2026-03-10T22:59:20.481Z"
+lastmod: '2026-08-11T18:15:07.576Z'
+modifiedBy: aowendev <aowen@translationcommons.org>
 ---
 
 # MDX and React
@@ -24,31 +25,36 @@ docStatic has built-in support for [MDX](https://mdxjs.com/), which enables you 
 
 The preferred way to use components in MDX in docStatic is by registering them in the global scope, which makes them automatically available in every MDX file, without any import statements. You also need to add a template definition to the component and import it so that the CMS knows about it. For examples of how this is done you can explore docStatic's own components, such as `CodeSnippet`. It's important to ensure that global components are statically rendered, or they may add delays to page rendering.
 
-For example, here's the contents of `src/themes/MDXComponents.jsx`:
+For example, `src/theme/MDXComponents.jsx` currently registers these:
 
 ```javascript
-import CodeBlock from "@theme-original/CodeBlock";
-import DocCardList from "@theme-original/DocCardList";
-import MDXComponents from "@theme-original/MDXComponents";
-import TabItem from "@theme-original/TabItem";
-import Tabs from "@theme-original/Tabs";
-import Details from "@theme/Details";
-import React from "react";
-
 import CodeSnippet from "@site/src/components/CodeSnippet";
+import Comment from "@site/src/components/Comment";
 import ConditionalText from "@site/src/components/ConditionalText";
 import Figure from "@site/src/components/Figure";
 import Footnote from "@site/src/components/Footnote";
 import GlossaryTerm from "@site/src/components/GlossaryTerm";
 import Passthrough from "@site/src/components/Passthrough";
+import RelatedTopics from "@site/src/components/RelatedTopics";
 import Snippet from "@site/src/components/Snippet";
 import VariableSet from "@site/src/components/VariableSet";
+import Details from "@theme/Details";
+import CodeBlock from "@theme-original/CodeBlock";
+import DocCardList from "@theme-original/DocCardList";
+import MDXComponents from "@theme-original/MDXComponents";
+import TabItem from "@theme-original/TabItem";
+import Tabs from "@theme-original/Tabs";
+import React from "react";
+
+// <Truncate /> is converted to {/* truncate */} by the Markdown preprocessor at build time.
+const Truncate = () => null;
 
 export default {
   ...MDXComponents,
   Admonition: MDXComponents.admonition,
   CodeBlock: CodeBlock,
   CodeSnippet: CodeSnippet,
+  Comment: Comment,
   ConditionalText: ConditionalText,
   Details: Details,
   DocCardList: DocCardList,
@@ -56,16 +62,18 @@ export default {
   Footnote: Footnote,
   GlossaryTerm: GlossaryTerm,
   Passthrough: Passthrough,
+  RelatedTopics: RelatedTopics,
   Snippet: Snippet,
   TabItem: TabItem,
   Tabs: Tabs,
+  Truncate: Truncate,
   VariableSet: VariableSet,
 };
 ```
 
-The imports that begin with `@site/src/components`/ are the custom components that can be rendered in topics. There are also custom components that are used by the CMS such as StatusField that do not need to be imported.
+The imports that begin with `@site/src/components/` are the custom components that can be rendered in topics. There are also custom components that are used by the CMS such as StatusField that do not need to be imported.
 
-The `src/themes/tempate.jsx` file begins:
+The `src/theme/template.jsx` file begins:
 
 ```javascript
 import React from "react";

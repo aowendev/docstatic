@@ -9,6 +9,48 @@ const fs = require("node:fs");
 const path = require("node:path");
 const matter = require("gray-matter");
 
+/** Collapse duplicate and trailing slashes, keeping a single leading one. */
+function normalizeUrlPath(urlPath) {
+  const collapsed = `/${urlPath.split("/").filter(Boolean).join("/")}`;
+  return collapsed;
+}
+
+/**
+ * Work out the URL a document is served at, relative to the docs root.
+ *
+ * RelatedTopics renders `/docs${path}` from this value, so anything that does
+ * not match the route Docusaurus actually creates becomes a dead link on every
+ * page that lists the document. Three rules were previously missing and each
+ * produced real 404s:
+ *
+ *   - `slug` front matter overrides the file path entirely. A slug starting
+ *     with "/" is relative to the docs root, otherwise to the file's own
+ *     directory. `guides/markdown-features/context-help.mdx` sets
+ *     `slug: "/context-help"` and is served at /docs/context-help.
+ *   - `index` AND `readme` both name their parent directory. Only `index` was
+ *     handled, so `wiki/readme.mdx` was recorded as /wiki/readme when it is
+ *     served at /wiki.
+ *   - Docusaurus preserves case in routes, so lowercasing the path invents a
+ *     URL that does not exist for any file with a capital in its name.
+ */
+function docUrlPath(relativeFilePath, slug) {
+  const withoutExtension = relativeFilePath.replace(/\.mdx?$/i, "");
+  const lastSlash = withoutExtension.lastIndexOf("/");
+  const directory =
+    lastSlash === -1 ? "" : withoutExtension.slice(0, lastSlash);
+
+  if (typeof slug === "string" && slug.trim()) {
+    const trimmed = slug.trim();
+    return normalizeUrlPath(
+      trimmed.startsWith("/") ? trimmed : `${directory}/${trimmed}`
+    );
+  }
+
+  return normalizeUrlPath(
+    withoutExtension.replace(/(^|\/)(index|readme)$/i, "")
+  );
+}
+
 function generateDocsMetadata() {
   const docs = [];
   const docsDir = path.join(__dirname, "../docs");
@@ -39,19 +81,7 @@ function generateDocsMetadata() {
               frontmatter.tags &&
               Array.isArray(frontmatter.tags)
             ) {
-              // Generate the URL path for Docusaurus
-              let urlPath = relativeFilePath
-                .replace(/\.(mdx?|md)$/, "")
-                .replace(/\/index$/, "")
-                .replace(/\s+/g, "-")
-                .toLowerCase();
-
-              // Handle root level files
-              if (!urlPath.includes("/")) {
-                urlPath = `/${urlPath}`;
-              } else {
-                urlPath = `/${urlPath}`;
-              }
+              const urlPath = docUrlPath(relativeFilePath, frontmatter.slug);
 
               docs.push({
                 title:
@@ -104,3 +134,4 @@ if (require.main === module) {
 }
 
 module.exports = generateDocsMetadata;
+module.exports.docUrlPath = docUrlPath;
