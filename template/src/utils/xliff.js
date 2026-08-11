@@ -982,7 +982,10 @@ function serializeRichTextToMarkdown(node) {
           for (const k of Object.keys(obj)) {
             try {
               parts.push(deepSerialize(obj[k]));
-            } catch {}
+            } catch {
+              // Skip keys that cannot be serialized (cyclic references,
+              // throwing getters) rather than losing the whole document.
+            }
           }
           return parts.join("");
         }
@@ -1652,7 +1655,10 @@ export async function importXliffBundle(
   // Surface an immediate progress signal so UI knows the import started
   try {
     if (onProgress) onProgress({ id: null, status: "started" });
-  } catch {}
+  } catch {
+    // onProgress is caller-supplied; a throwing callback must not abort the
+    // import.
+  }
   // Parse XLIFF using DOMParser
   let doc;
   try {
@@ -1701,7 +1707,9 @@ export async function importXliffBundle(
   try {
     if (onProgress)
       onProgress({ id: null, status: "discovered", count: units.length });
-  } catch {}
+  } catch {
+    // As above: a throwing progress callback must not abort the import.
+  }
   const results = [];
   for (const unit of units) {
     // Try to determine an id for this unit. If unit lacks an explicit id,
@@ -1896,7 +1904,10 @@ export async function importXliffBundle(
         .split("\n")
         .map((l) => l.replace(/\s+$/, ""))
         .join("\n");
-    } catch {}
+    } catch {
+      // Target text arrives from a CAT tool and may not be the shape these
+      // transforms expect; fall through with whatever was parsed so far.
+    }
 
     // Targets exported by older flows may be JSON blobs; try to parse
     // JSON when it looks like a JSON object, otherwise keep string.
@@ -1936,7 +1947,10 @@ export async function importXliffBundle(
         }
       }
       rawTarget = fenceParts.join("");
-    } catch {}
+    } catch {
+      // Fence-aware JSX restoration is best-effort; leave rawTarget as it was
+      // rather than failing the unit.
+    }
     // The parseMarkdownToTinaAst parser handles marker-form JSX directly
     // and creates proper mdxJsxFlowElement/mdxJsxTextElement nodes,
     // avoiding the problem where angle-bracket JSX in text nodes gets
@@ -1998,7 +2012,10 @@ export async function importXliffBundle(
           parsedBody = parsedBody.replace(/\\([#*\-+[\]()>`_~!|:.\\])/g, "$1");
           // Some CAT tools encode '#' as HTML entity; unescape common ones
           parsedBody = parsedBody.replace(/&#35;|&num;/g, "#");
-        } catch {}
+        } catch {
+          // parsedBody is not guaranteed to be a string here (older exports
+          // stored JSON); skip the unescaping rather than failing the unit.
+        }
 
         // Preserve full markdown text by parsing it into the structured
         // Tina AST that TinaCMS expects for the `body` field. Previously
@@ -2100,10 +2117,9 @@ export async function importXliffBundle(
           sourceDocRel = `${cleaned}.mdx`;
         }
         if (sourceDocRel) {
-          // Strip leading slashes.
-          try {
-            sourceDocRel = String(sourceDocRel || "").replace(/^\//, "");
-          } catch {}
+          // Strip leading slashes. String().replace() on a string cannot
+          // throw, so this needs no guard.
+          sourceDocRel = String(sourceDocRel || "").replace(/^\//, "");
           try {
             const docQuery = await client.queries.doc({
               relativePath: sourceDocRel,

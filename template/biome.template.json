@@ -89,7 +89,8 @@
       },
       "correctness": {
         "noChildrenProp": "off",
-        "useExhaustiveDependencies": "error"
+        "useExhaustiveDependencies": "error",
+        "noUndeclaredVariables": "error"
       },
       "complexity": {
         "noForEach": "error",
