@@ -1,49 +1,47 @@
 ---
-lastmod: "2026-02-26T20:12:34.762Z"
+lastmod: '2026-08-11T23:23:42.217Z'
 title: Code blocks and snippets
 tags:
-  - "elements"
-  - "elements_code-blocks"
-  - "reuse"
-  - "reuse_snippets"
+  - elements
+  - elements_code-blocks
+  - reuse
+  - reuse_snippets
 draft: false
 review: false
 translate: false
 approved: false
 published: true
 unlisted: false
+modifiedBy: aowendev <aowen@translationcommons.org>
 ---
 
-# Bloques de código y fragmentos
+# Bloques de código y fragmentos de código
 
-DocStatic ofrece dos formas de incluir código en tu documentación. Ambas admiten el resaltado de sintaxis.
+docStatic ofrece dos formas de incluir código en tu documentación. Ambas admiten el resaltado de sintaxis.
 
 ## Bloques de código
 
 1. Haz clic en el icono **Bloque de código** del editor de texto enriquecido.
-2. Haz clic en la lista de idiomas y selecciona o busca un idioma.
+2. Haz clic en la lista de lenguajes y selecciona o busca un lenguaje.
 3. Introduce tu código en el cuadro.
 
 #### Ejemplo:
 
-\`\`\` texto sin formato
-
-Esto es texto sin formato.
-
+```plaintext
+This is some plain text.
 ```
-
-
 
 ## Fragmentos de código
 
-1. Seleccione **Fragmento de código** en la lista **Incrustar**.
-2. Asigne un **Título**.
-3. Seleccione un **Lenguaje**.
-4. Elija un archivo de la lista. La lista se rellena con todos los archivos de la carpeta `reuse/code/` cada vez que se ejecuta el servidor de desarrollo o se realiza una compilación.
+1. Selecciona **Fragmento de código** en la lista **Incrustar**.
+2. Asigna un **Título**.
+3. Selecciona un **Lenguaje**.
+4. Elige un archivo de la lista. La lista se rellena con todos los archivos de la carpeta `reuse/code/` cada vez que ejecutas el servidor de desarrollo o realizas una compilación.
 
 #### Ejemplo:
 
-(jsx:CodeSnippet title="Título de ejemplo" language="xml" filepath="example.xml")Título de ejemplo(/jsx:CodeSnippet)
+<CodeSnippet title="Example Title" language="xml" filepath="example.xml" />
 
-La ventaja de utilizar fragmentos de código es que hay un archivo físico que se puede someter a pruebas unitarias.
-```
+La ventaja de utilizar fragmentos de código es que existe un archivo físico que se puede someter a pruebas unitarias.
+
+<RelatedTopics maxResults={7} />

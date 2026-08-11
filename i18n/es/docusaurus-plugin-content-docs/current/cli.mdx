@@ -1,84 +1,111 @@
 ---
-lastmod: "2026-03-10T23:00:32.094Z"
+lastmod: '2026-08-11T23:23:41.802Z'
 title: CLI
 tags:
-  - "software"
-  - "software_command-line-interface"
+  - software
+  - software_command-line-interface
 draft: false
 review: false
 translate: false
 approved: false
 published: true
 unlisted: false
+modifiedBy: aowendev <aowen@translationcommons.org>
 ---
 
-# CLI
+docStatic proporciona un conjunto de scripts que te ayudarán a generar, servir e implementar tu sitio web. Están definidos en la sección `scripts` del archivo `package.json` de tu sitio, que es la lista oficial; ejecuta `npm run` sin argumentos para ver los scripts que tiene realmente tu sitio.
 
-DocStatic proporciona un conjunto de scripts para ayudarte a generar, servir y desplegar tu sitio web.
+Los comandos que aparecen a continuación están agrupados según su finalidad.
 
-```json
-{
-  // ...
-  "scripts": {
-    "docusaurus": "docusaurus",
-    "dev": "tinacms dev -c \"docusaurus start\" ",
-    "start": "docusaurus start",
-    "generate-files": "node scripts/generate-file-list.js",
-    "prebuild": "yarn generate-files",
-    "predev": "yarn generate-files",
-    "build": "tinacms build && docusaurus build",
-    "build-local": "tinacms build --local --skip-indexing --skip-cloud-checks && docusaurus build",
-    "swizzle": "docusaurus swizzle",
-    "deploy": "docusaurus deploy",
-    "clear": "docusaurus clear",
-    "serve": "docusaurus serve",
-    "write-translations": "docusaurus write-translations",
-    "write-heading-ids": "docusaurus write-heading-ids",
-    "gen-api-docs": "docusaurus gen-api-docs",
-    «clean-api-docs»: «docusaurus clean-api-docs»,
-    «gen-graphql»: «docusaurus docs:generate:graphql»,
-    «gen-api-docs:version»: «docusaurus gen-api-docs:version»,
-    "clean-api-docs:version": "docusaurus clean-api-docs:version",
-    "lint": "biome check apis/ config/ reuse/ scripts/ src/ static/ tina/",
-    "lint:fix": "biome check apis/ config/ reuse/ scripts/ src/ static/ tina/ --fix"
-  }
-}
-```
+## Comandos de la CLI de docStatic
 
-## Comandos CLI de docStatic
+Para ejecutar los comandos, utiliza npm o yarn. Por ejemplo, `npm run dev` o `yarn dev`.
 
-Para invocar los comandos, utilice yarn. Por ejemplo, yarn dev.
+### Scripts clave de docStatic:
 
-Estos comandos se describen en [CLI](https://docusaurus.io/docs/cli) en la documentación de Docusaurus:
+* **\`dev\`**: Inicia el servidor de desarrollo con la integración de TinaCMS
+* **\`build\`**: Compila para producción (ejecuta la compilación de TinaCMS y, a continuación, la de Docusaurus)
+* **\`build-local\`**: Compila localmente sin funciones en la nube
+* **\`check-links\`**: Solicita todos los enlaces externos de tus temas y registra el estado HTTP devuelto por cada servidor, para que el panel de control de enlaces rotos pueda informar de los errores 404 y 500 reales. Añade `--strict` para que el proceso finalice con un error cuando se encuentren enlaces rotos, que es lo que se busca en una tarea de integración continua. Consulta [Paneles de control](guides/dashboards.mdx).
+* **\`generate\`**: Ejecuta todos los generadores que se indican a continuación de una sola vez. `prebuild` y `predev` lo invocan, por lo que rara vez lo necesitarás directamente.
+* **\`generate-media-index\`**: Genera un índice de archivos multimedia
+* **\`generate-git-identity\`**: Genera información de identidad de Git
+* **\`generate-files\`**: Genera listas de archivos para la aplicación
+* **\`generate-docs-metadata\`**: Genera el índice de metadatos utilizado por los paneles de control y la búsqueda
+* **\`generate-link-report\`**: Reconstruye el inventario de enlaces sin realizar ninguna solicitud de red. Los resultados de la última ejecución de `check-links` se conservan, por lo que una compilación nunca los descarta.
+* **\`update-theme-css\`**: Actualiza los archivos CSS del tema
+* **\`lint\`** / **\`lint\:fix\`**: Comprueba y, opcionalmente, corrige el formato y la calidad del código
+* **\`mcp\:install\`**: Instala las dependencias del servidor del Protocolo de Contexto de Modelos (MCP)
+* **\`mcp\:build\`**: Compila el servidor MCP a partir de TypeScript
+* **\`mcp\:dev\`**: Inicia el servidor MCP en modo de desarrollo con reinicio automático
+* **\`mcp\:start\`**: Inicia el servidor MCP compilado para la integración del asistente de IA
+* **\`mcp\:test\`**: Ejecuta pruebas de conectividad del servidor MCP
 
-* docusaurus
-* start
-* build
-* swizzle
-* deploy
-* clear
-* serve
-* write-translations
-* write-heading-ids
+Para obtener más información sobre el servidor MCP, consulta [Integración del servidor MCP](mcp-server.mdx).
+
+Estos comandos se basan en los comandos estándar de Docusaurus descritos en [CLI](https://docusaurus.io/docs/cli) en la documentación de Docusaurus:
+
+* `docusaurus`
+* `start`
+* `build`
+* `swizzle`
+* `deploy`
+* `clear`
+* `serve`
+* `write-translations`
+* `write-heading-ids`
 
 ### Comandos automatizados
 
-Estos comandos se ejecutan automáticamente en el momento de la compilación o al iniciar el servidor de desarrollo:
+Estos se ejecutan automáticamente, por lo que normalmente no es necesario que los ejecutes tú mismo:
 
-* generate-files
-* prebuild
-* predev
+* `prebuild`, `predev` y `prebuild-local` ejecutan `generate` antes de que comience una compilación o se inicie el servidor de desarrollo, lo que actualiza el índice de medios, las listas de archivos, los metadatos de la documentación, el inventario de enlaces, el CSS del tema y la identidad de Git.
+* `prestart` actualiza el inventario de enlaces antes de `start`, de modo que el panel de control de enlaces rotos tiene un informe que mostrar incluso si nunca has ejecutado `check-links`.
+* `postinstall` instala las dependencias del servidor MCP.
 
-### Comandos API
+### Comandos de la API
 
-* clean-api-docs
-* gen-api-docs
-* gen-graphql
+* `clean-api-docs`
+* `gen-api-docs`
+* `gen-graphql`
 
-Para obtener más información sobre los comandos OpenAPI, consulte [Uso de la CLI](https://github.com/PaloAltoNetworks/docusaurus-openapi-docs?tab=readme-ov-file#cli-usage) en la documentación del complemento OpenAPI de Docusaurus.
+Para obtener más información sobre los comandos de OpenAPI, consulta [Uso de la CLI](https://github.com/PaloAltoNetworks/docusaurus-openapi-docs?tab=readme-ov-file#cli-usage) en la documentación del complemento Docusaurus OpenAPI.
 
-Para obtener más información sobre el comando GraphQL, consulte [Uso](https://github.com/Zhouzi/docusaurus-graphql-plugin?tab=readme-ov-file#usage) en la documentación del complemento Docusaurus GraphQL.
+Para obtener más información sobre el comando GraphQL, consulta [Uso](https://github.com/Zhouzi/docusaurus-graphql-plugin?tab=readme-ov-file#usage) en la documentación del complemento Docusaurus GraphQL.
+
+### Comandos para crear y actualizar sitios
+
+Estos comandos proceden del paquete `create-docstatic` y no de `package.json`, por lo que funcionan en cualquier lugar; no es necesario tener un sitio docStatic para ejecutarlos.
+
+* **\`npx create-docstatic\@latest \<nombre-del-proyecto>\`**: Crea un nuevo sitio docStatic. Consulta [Instalación](installation.mdx) para obtener más detalles.
+* **\`npx create-docstatic\@latest --update\`**: Actualiza un sitio existente a la última versión de docStatic. Ejecútalo desde la carpeta raíz de un sitio creado con `create-docstatic`. Actualiza los archivos propios de docStatic y las versiones de las dependencias, y no modifica tu contenido.
+
+El comando de actualización admite estas opciones:
+
+* **\`--dry-run\`**: Muestra qué cambios se producirían sin aplicar ninguno.
+* **\`--force\`**: Continúa incluso si el árbol de trabajo de Git no está limpio. Sin esta opción, el comando te pedirá que primero confirmes o guardes temporalmente tus cambios para que puedas revisar la actualización con `git diff`.
+* **\`--tag \<dist-tag>\`**: Actualiza a una versión específica del paquete `docstatic` o a una etiqueta de distribución (dist-tag) en lugar de a `latest`.
+* **\`--no-install\`**: Omite la instalación de dependencias tras la actualización.
+
+### Comandos de sincronización de plantillas
+
+Estos comandos solo existen en el propio repositorio docStatic (y en sus bifurcaciones), no en los sitios creados con `create-docstatic`. Mantienen la plantilla de estructura de la carpeta `template/` sincronizada con el sitio principal.
+
+La plantilla es lo que `npx create-docstatic@latest` envía a los nuevos sitios, por lo que cada vez que modifiques código que la plantilla comparta con el sitio principal —componentes de React en `src/`, los scripts de compilación en `scripts/`, `tina/config.jsx`, `docusaurus.config.ts` o `sidebars.ts`—, la plantilla necesita el mismo cambio.
+
+* **\`sync-template\`**: Copia el código compartido del sitio principal a `template/`, sincroniza las dependencias y los scripts de `package.json` de la plantilla y vuelve a generar `update-manifest.json` (el archivo que utiliza `npx create-docstatic@latest --update` para actualizar los sitios existentes). El contenido de la plantilla, como la documentación inicial y los valores de configuración, no se modifica.
+* **\`sync-template\:check\`**: Informa de lo que cambiaría sin escribir nada y sale con un error si la plantilla se ha desincronizado. El hook «pre-commit» ejecuta esta comprobación, por lo que una confirmación fallará con el mensaje «`template out of sync`» hasta que se ejecute «`yarn sync-template`» y se prepare el resultado.
+
+Un flujo típico tras modificar un archivo compartido:
+
+```shell
+yarn sync-template
+git add template/ update-manifest.json
+git commit
+```
 
 ### Comandos de linting
 
-Para obtener más información sobre los comandos de linting, consulte [CLI](https://biomejs.dev/reference/cli/) en la documentación de Biome.
+Para obtener más información sobre los comandos de linting, consulta [CLI](https://biomejs.dev/reference/cli/) en la documentación de Biome.
+
+<RelatedTopics maxResults={7} />

@@ -1,32 +1,35 @@
 ---
-lastmod: "2026-02-26T20:12:34.746Z"
+lastmod: '2026-08-11T23:23:43.913Z'
 title: Taxonomy tags
 tags:
-  - "metadata"
-  - "metadata_taxonomies"
+  - metadata
+  - metadata_taxonomies
 draft: false
 review: false
 translate: false
 approved: false
 published: true
 unlisted: false
+modifiedBy: aowendev <aowen@translationcommons.org>
 ---
 
-# Etiquetas taxonómicas
+# Etiquetas de taxonomía
 
-Las etiquetas taxonómicas te permiten aplicar una [arquitectura de la información](https://en.wikipedia.org/wiki/Information_architecture) al contenido de tu sitio. Deben aplicarse a cualquier plataforma de documentación que utilices, como los sistemas de seguimiento de errores y las wikis. Los requisitos de etiquetas más restrictivos con los que probablemente te encontrarás son los sistemas planos (no jerárquicos) que solo admiten letras minúsculas y guiones bajos (`_`) sin espacios.
+Las etiquetas de taxonomía te permiten aplicar una [arquitectura de la información](https://en.wikipedia.org/wiki/Information_architecture) al contenido de tu sitio web. Deben aplicarse a cualquier plataforma de documentación que utilices, como los sistemas de seguimiento de errores y los wikis. Los requisitos más restrictivos que probablemente te encontrarás son los sistemas planos (no jerárquicos) que solo admiten letras minúsculas y guiones bajos (`_`) sin espacios.
 
-DocStatic aplica una jerarquía de tres niveles a las etiquetas de taxonomía. Para evitar que las etiquetas se vuelvan excesivamente largas, el anidamiento se limita a una profundidad máxima de tres. En algunos casos, esto requiere aplanar la estructura (por ejemplo, aunque «regions*europe*uk*scotland» es lógico, tiene cuatro niveles, por lo que debe estructurarse como «regions*uk\_scotland»).
+docStatic aplica una jerarquía de tres niveles a las etiquetas de taxonomía. Para evitar que las etiquetas alcancen una longitud excesiva, el anidamiento se limita a una profundidad máxima de tres niveles. En algunos casos, esto requiere aplanar la estructura (por ejemplo, aunque `regions_europe_uk_scotland` sea lógico, tiene cuatro niveles, por lo que debe estructurarse como `regions_uk_scotland`).
 
-Al diseñar una arquitectura de información de tres niveles, se recomienda que intente tener alrededor de diez categorías de nivel superior, siete categorías de nivel medio y tantas categorías de nivel inferior como necesite. Debe escribir las siglas y abreviaturas y tratar de evitar la redundancia.
+Al diseñar una arquitectura de información de tres niveles, se recomienda intentar tener unas diez categorías de nivel superior, siete de nivel intermedio y tantas categorías de nivel hoja como sean necesarias. Debes escribir las siglas y abreviaturas completas, y tratar de evitar la redundancia.
 
 ## Edición de etiquetas de taxonomía
 
-1. Desde la colección **Taxonomías**, **Añada** una taxonomía.
-2. Asigne una **Etiqueta** utilizando solo letras minúsculas.
-3. Añada cualquier **Hijo** y asígnele una etiqueta, comenzando por la etiqueta principal seguida de un guión bajo.
-4. Para cada subcategoría, añada las subcategorías que desee.
+1. En la colección **Taxonomías**, **Añade** una taxonomía.
+2. Asígnale una **Etiqueta** utilizando únicamente letras minúsculas.
+3. Añade cualquier **Hijo** y asígnales una etiqueta que comience por la etiqueta principal seguida de un guión bajo.
+4. Para cada hijo, añade cualquier hijo.
 
-<Admonition type="note" title="Nota">
-  Puede introducir etiquetas sin el nombre de la etiqueta precedente y el guión bajo, pero si lo hace al añadirlas a un tema, se mostrarán como una lista plana.
+<Admonition type="note" title="Note">
+  You can enter tags without the preceding tag name and an underscore, but if you do when adding them to a topic, they will be presented as a flat list.
 </Admonition>
+
+<RelatedTopics maxResults={7} />

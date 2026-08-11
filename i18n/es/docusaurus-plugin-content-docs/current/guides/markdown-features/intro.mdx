@@ -1,83 +1,85 @@
 ---
-lastmod: "2026-03-10T23:00:51.559Z"
+lastmod: '2026-08-11T23:23:42.801Z'
 title: Markdown features
 tags:
-  - "computer-languages"
-  - "computer-languages_markdown"
-  - "elements"
-  - "elements_tabs"
-  - "elements_footnotes"
-  - "elements_figures"
-  - "elements_doc-card-lists"
-  - "elements_admonitions"
-  - "elements_comments"
-  - "elements_code-blocks"
-  - "elements_horizontal-rules"
-  - "elements_links"
-  - "elements_tables"
-  - "elements_quotes"
+  - computer-languages
+  - computer-languages_markdown
+  - elements
+  - elements_tabs
+  - elements_footnotes
+  - elements_figures
+  - elements_doc-card-lists
+  - elements_admonitions
+  - elements_comments
+  - elements_code-blocks
+  - elements_horizontal-rules
+  - elements_links
+  - elements_tables
+  - elements_quotes
 draft: false
 review: false
 translate: false
 approved: false
 published: true
 unlisted: false
+modifiedBy: aowendev <aowen@translationcommons.org>
 ---
 
 # Funciones de Markdown
 
-DocStatic utiliza [Markdown](https://commonmark.org/) como formato principal para la creación de contenidos. Puedes [aprenderlo en diez minutos](https://commonmark.org/help/). Pero no es necesario, ya que el CMS proporciona un entorno completo de edición de texto enriquecido para metadatos, Markdown y componentes React.
+docStatic utiliza [Markdown](https://commonmark.org/) como formato principal para la creación de contenidos. Puedes [aprenderlo en diez minutos](https://commonmark.org/help/). Pero no es necesario, ya que el CMS ofrece un entorno completo de edición de texto enriquecido para metadatos, Markdown y componentes de React.
 
-## Creación estructurada sencilla
+## Creación de contenido estructurada y sencilla
 
-Los temas en docStatic tienen tres partes:
+Los temas en docStatic constan de tres partes:
 
 * Metadatos (en formato [YAML](https://yaml.org/spec/1.2.2/))
 * Contenido (en Markdown)
 * Componentes React predefinidos.
 
-El CMS se asegura de que los metadatos y Markdown se utilicen de forma coherente, mientras que los componentes React proporcionan un estilo uniforme y compatibilidad con las funciones de reutilización de contenido. No es necesario añadir ningún código JSX, ya que los componentes ya están disponibles globalmente.
+El CMS garantiza que los metadatos y Markdown se utilicen de forma coherente, mientras que los componentes de React proporcionan un estilo uniforme y compatibilidad con las funciones de reutilización de contenido. No es necesario añadir código JSX por tu cuenta, ya que los componentes ya están disponibles de forma global.
 
 ## Funciones estándar
 
 Las funciones de Markdown incluyen:
 
-* Estilos de caracteres en negrita, código, cursiva y tachado.
+* Estilos de texto en negrita, código, cursiva y tachado.
 * Listas con viñetas y numeradas.
 * Bloques de código.
-* Niveles de encabezado (1 a 6).
-* Reglas horizontales.
+* Niveles de encabezado (del 1 al 6).
+* Líneas horizontales.
 * Imágenes.
 * Enlaces.
 * Citas.
-* Tablas simples.
+* Tablas sencillas.
 
-Todas estas funciones se pueden seleccionar directamente desde la barra de herramientas de texto enriquecido del CMS.
+Todas estas opciones se pueden seleccionar directamente desde la barra de herramientas de texto enriquecido del CMS.
 
 A estas, Docusaurus añade:
 
-* Advertencias
-* Detalles (contenido expandible)
-* Listas de tarjetas de documentación
-* Pestañas
+* [Advertencias](admonitions)
+* Detalles (contenido desplegable)
+* Listas de fichas de documentación
+* [Pestañas](tabs)
 
-DocStatic amplía aún más estas funciones con:
+docStatic amplía aún más estas posibilidades con:
 
-* Fragmentos de código (de archivos)
-* Comentarios
-* Texto condicional
-* Enlaces de ayuda contextual
-* Diagramas
-* Figuras
-* Notas al pie
-* Términos del glosario
-* Ecuaciones matemáticas
-* Fragmentos
-* Variables
+* [Fragmentos de código](code-blocks) (desde archivos)
+* [Comentarios](comments)
+* [Texto condicional](conditional-text)
+* [Enlaces de ayuda contextual](../../context-help)
+* [Diagramas](diagramas)
+* [Figuras](figuras)
+* [Notas al pie](<notas al pie>)
+* [Términos del glosario](glosario)
+* [Ecuaciones matemáticas](ecuaciones-matemáticas)
+* [Temas relacionados](temas-relacionados) (generados automáticamente)
+* [Fragmentos](fragmentos)
+* [Variables](variables)
 
 ## Front matter
 
-El front matter se utiliza para añadir metadatos a tu archivo Markdown. Se proporciona en la parte superior del archivo, entre tres guiones ---. Los complementos de contenido pueden tener su propio esquema de front matter. docStatic utiliza el front matter para:
+La información preliminar se utiliza para añadir metadatos a tu archivo Markdown. Se incluye en la parte superior del archivo, entre tres guiones ---. Los complementos de contenido pueden tener su propio esquema de información preliminar. docStatic utiliza la información preliminar para:
 
 * Condiciones (para texto condicional)
 * Descripciones
@@ -88,28 +90,28 @@ El front matter se utiliza para añadir metadatos a tu archivo Markdown. Se prop
 
 ## Detalles
 
-1. Seleccione **Detalles** en la lista **Incrustar**.
-2. Edite el componente.
-3. Asigne un **Resumen**.
-4. Introduzca los **Detalles**.
+1. Selecciona **Detalles** en la lista **Incrustar**.
+2. Edita el componente.
+3. Añádele un **Resumen**.
+4. Introduce los **Detalles**.
 
 #### Ejemplo:
 
-<Details summary="Alternar">
-  . Este es el contenido detallado.
+<Details summary="Toggle me.">
+  This is the detailed content.
 
-  Aquí puede utilizar Markdown, incluyendo texto **en negrita** y *cursiva*, y [enlaces](https://docusaurus.io/) en línea. 
+  You can use Markdown here including **bold** and *italic* text, and inline [links](https://docusaurus.io/).
 </Details>
 
-## Listas de tarjetas de documentación
+## Listas de fichas de documentación
 
-Las listas de tarjetas de documentación se generan automáticamente para las categorías del índice. Sin embargo, también puedes añadirlas manualmente a un tema.
+Las listas de fichas de documentación se generan automáticamente para las categorías de la tabla de contenidos. Sin embargo, también puedes añadirlas manualmente a un tema.
 
-1. Selecciona **Lista de tarjetas de documentación** en la lista **Insertar**.
-2. Dale un **Título**.
+1. Selecciona **Lista de fichas de documentación** en la lista **Incrustar**.
+2. Asigna un **Título**.
 
-Para obtener más información, consulta [Características de Markdown](https://docusaurus.io/docs/markdown-features) en la documentación de Docusarus.
+Para obtener más información, consulta [Funciones de Markdown](https://docusaurus.io/docs/markdown-features) en la documentación de Docusaurus.
 
 #### Ejemplo:
 
-<DocCardList title="Características de Markdown" />
+<DocCardList title="Markdown Features" />

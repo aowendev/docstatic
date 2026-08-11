@@ -1,42 +1,43 @@
 ---
-lastmod: "2026-02-26T20:12:34.734Z"
+lastmod: '2026-08-11T23:23:44.699Z'
 title: Static assets
 tags:
-  - "software"
-  - "software_static-site-generators"
+  - software
+  - software_static-site-generators
 draft: false
 review: false
 translate: false
 approved: false
 published: true
 unlisted: false
+modifiedBy: aowendev <aowen@translationcommons.org>
 ---
 
-# Activos estáticos
+Los recursos estáticos son los archivos que no son código y que se copian directamente en el resultado de la compilación. Entre ellos se incluyen imágenes, hojas de estilo, favicons, fuentes, etc.
 
-Los activos estáticos son los archivos que no contienen código y que se copian directamente en el resultado de la compilación. Incluyen imágenes, hojas de estilo, favicons, fuentes, etc.
-
-Debes colocar estos activos en la carpeta «static». Todos los archivos que coloques en esa carpeta se copiarán en la raíz de la carpeta de compilación generada, conservando la jerarquía de carpetas. Por ejemplo, si añades un archivo llamado «sun.jpg» a la carpeta «static», se copiará en «build/sun.jpg».
+Debes colocar estos recursos en la carpeta `static`. Todos los archivos que coloques en esa carpeta se copiarán en la raíz de la carpeta de compilación generada, conservando la jerarquía de carpetas. Por ejemplo, si añades un archivo llamado `sun.jpg` a la carpeta `static`, se copiará en `build/sun.jpg`.
 
 Esto significa que:
 
-* Para el sitio `baseUrl: '/'`, la imagen `/static/img/sun.jpg` se servirá en `/img/sun.jpg`.
-* Para el sitio `baseUrl: '/subpath/'`, la imagen `/static/img/sun.jpg` se servirá en `/subpath/img/sun.jpg`.
+* Para un sitio con `baseUrl: '/'`, la imagen `/static/img/sun.jpg` se servirá en `/img/sun.jpg`.
+* Para un sitio con `baseUrl: '/subpath/'`, la imagen `/static/img/sun.jpg` se mostrará en `/subpath/img/sun.jpg`.
 
-## Referenciar su activo estático
+## Cómo hacer referencia a tus recursos estáticos
 
 ### En el CMS
 
-1. Inserte un enlace.
-2. Introduzca la ruta absoluta, por ejemplo, /files/note.docx.
-3. Introduzca el texto que desea mostrar.
+1. Inserta un enlace.
+2. Introduce la ruta absoluta, por ejemplo, /files/note.docx.
+3. Introduce el texto que se va a mostrar.
 
 ### En Markdown
 
 ```markdown
-Escriba un enlace como este: [Descargar este documento](/files/note.docx)
+You write a link like this: [Download this document](/files/note.docx)
 
-Docusaurus lo cambia por: <a href={require('static/files/note.docx')}>Descargar este documento</a>
+Docusaurus changes that to: <a href={require('static/files/note.docx')}>Download this document</a>
 ```
 
 Para obtener más información, consulta [Recursos estáticos](https://docusaurus.io/docs/static-assets) en la documentación de Docusaurus.
+
+<RelatedTopics maxResults={7} />

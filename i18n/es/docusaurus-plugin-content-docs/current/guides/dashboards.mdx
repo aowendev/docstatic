@@ -1,11 +1,11 @@
 ---
-lastmod: "2026-02-26T20:12:34.744Z"
-modifiedBy: "aowendev <aowen@translationcommons.org>"
+lastmod: '2026-08-11T23:23:42.028Z'
+modifiedBy: aowendev <aowen@translationcommons.org>
 title: Dashboards
 tags:
-  - "content-management-systems"
-  - "content-management-systems_tinacms"
-  - "content-management-systems_media-management"
+  - content-management-systems
+  - content-management-systems_tinacms
+  - content-management-systems_media-management
 draft: false
 review: false
 translate: false
@@ -14,50 +14,70 @@ published: true
 unlisted: false
 ---
 
-# Paneles
+docStatic añade la funcionalidad de paneles de control a TinaCMS. Tina genera una API GraphQL utilizando el sistema de archivos del repositorio Git como base de datos. Los paneles de control consultan la API (de forma local o en la nube) y presentan informes con información útil directamente en el CMS. La funcionalidad de los paneles de control se considera actualmente en fase beta. La funcionalidad se ha probado exhaustivamente, pero la interfaz de usuario es provisional y requiere mejoras. Los paneles de control se actualizan cuando se actualiza la página. Si otro usuario ha realizado cambios desde que consultaste un panel de control, puedes hacer clic en **Actualizar** para actualizarlo.
 
-DocStatic añade la funcionalidad de panel de control a TinaCMS. Tina genera una API GraphQL utilizando el sistema de archivos del repositorio Git como base de datos. Los paneles de control consultan la API (localmente o en la nube) y presentan informes procesables directamente en el CMS. La funcionalidad del panel de control se considera actualmente en fase beta. La funcionalidad se ha probado completamente, pero la interfaz de usuario es provisional y requiere mejoras. Los paneles de control se actualizan cuando se actualiza la página. Si otro usuario ha realizado cambios desde que usted vio un panel de control, puede hacer clic en **Actualizar** para actualizar el panel.
-
-<Admonition type="note" title="Nota">
-  Dependiendo de la cantidad de contenido del sistema, algunos paneles de control pueden tardar un poco en cargarse. Estos paneles suelen actualizarse un poco más rápido cuando se ejecutan localmente.
+<Admonition type="note" title="Note">
+  Depending on the amount of content in the system, some dashboards may take some time to load. These dashboards will typically update slightly faster when running locally.
 </Admonition>
 
 ## Visualización de los paneles de control
 
-Desde el CMS, navegue hasta la colección Dashboards (Paneles de control). En la parte superior de la página hay una barra de estado que muestra la conexión GraphQL. Indica si está conectado a la nube o al host local. Si el host local está disponible, siempre se conectará al host local. Para utilizar la nube, asegúrese de que el servidor de desarrollo local esté detenido. La barra de estado también muestra el entorno y comprueba que todos los ajustes sean válidos.
+Desde el CMS, acceda a la colección «Cuadros de mando». En la parte superior de la página hay una barra de estado que muestra la conexión GraphQL. Indica si está conectado a la nube o al localhost. Si el localhost está disponible, siempre se conectará al localhost. Para utilizar la nube, asegúrese de que el servidor de desarrollo local esté detenido. La barra de estado también muestra el entorno y comprueba que todos los ajustes sean válidos.
 
 ## Visualización del estado del flujo de trabajo
 
-El panel de control «Descripción general del contenido» muestra el número total de temas en la ruta /docs y los temas en cada estado del flujo de trabajo:
+El panel de control «Resumen de contenido» muestra el número total de temas en la ruta /docs y los temas en cada estado del flujo de trabajo:
 
 * Borrador
-* Revisión
-* Traducción
+* En revisión
+* Traducir
 * Aprobado
 * Publicado
 * No listado
 
-Haga clic en el enlace de estado para mostrar todos los temas en ese estado.
+Haz clic en el enlace de estado para mostrar todos los temas que se encuentran en ese estado.
 
-Haga clic en Editar para abrir el tema y editarlo.
+Haz clic en «Editar» para abrir el tema y editarlo.
 
-Haga clic en el icono Cerrar para cerrar la lista de temas.
+Haz clic en el icono «Cerrar» para cerrar la lista de temas.
 
 ### Visualización de la actividad reciente
 
-La sección Actividad reciente muestra los temas modificados recientemente. Puede filtrar el intervalo de tiempo (Todo el tiempo, Última semana o Último mes) y establecer el número de resultados entre 5 y 50.
+La sección «Actividad reciente» muestra los temas modificados recientemente. Puede filtrar el intervalo de tiempo (Todo el tiempo, La semana pasada o El mes pasado) y establecer el número de resultados entre 5 y 50.
 
 ## Visualización del estado de la traducción
 
-El panel de control Traducciones muestra el estado de cada tema para el idioma seleccionado en la lista:
+El panel de control «Traducciones» muestra el estado de cada tema para el idioma seleccionado de la lista:
 
-* Actualizado: la fecha de la última modificación de la traducción es posterior a la del original.
-* Desactualizado: la fecha de la última modificación del original es posterior a la de la traducción.
-* Falta: hay un archivo original sin archivo de traducción equivalente.
+* Actualizado: La fecha de la última modificación de la traducción es posterior a la del original.
+* Desactualizado: La fecha de la última modificación del original es posterior a la de la traducción.
+* Falta: Hay un archivo original sin un archivo de traducción equivalente.
+
+## Visualización de la reutilización de contenido
+
+El panel de control «Reutilización de contenido» muestra el contenido reutilizable del sistema y dónde se utiliza. Incluye información sobre cuatro categorías:
+
+* Fragmentos de código: archivos de código a los que hace referencia el componente CodeSnippet.
+* Términos del glosario: términos definidos en la colección de términos del glosario.
+* Fragmentos: archivos de contenido MDX a los que hace referencia el componente Snippet.
+* Conjuntos de variables: conjuntos de variables a los que hace referencia el componente VariableSet.
+
+Haz clic en la ficha de una categoría para ver una lista de elementos de dicha categoría con los temas en los que se utiliza cada elemento.
+
+### Visualización de sugerencias de reutilización
+
+La sección «Sugerencias» del panel de control «Reutilización de contenido» identifica el contenido que podría convertirse en componentes reutilizables:
+
+* Posibles fragmentos (código): bloques de código en línea en los temas que podrían extraerse a archivos de fragmentos de código.
+* Posibles términos: texto de términos del glosario que aparece como texto sin formato en los temas y que podría sustituirse por el componente GlossaryTerm.
+* Posibles fragmentos (texto duplicado): bloques de texto que aparecen en dos o más temas y que podrían extraerse a archivos de fragmentos.
+* Posibles variables: valores de variables que aparecen como texto sin formato en los temas y que podrían utilizar el componente VariableSet en su lugar.
+
+Haz clic en una tarjeta de sugerencias para ver los elementos encontrados y los temas en los que aparecen.
 
 ## Visualización de la reutilización de medios
 
-El panel Biblioteca de medios muestra dónde se utiliza el contenido de la ruta /static/img. Muestra el número total de archivos e imágenes, el tamaño de los archivos, las rutas de las imágenes y el tamaño de las imágenes.
+El panel de control de la biblioteca multimedia muestra dónde se utiliza el contenido de la ruta /static/img. Muestra el número total de archivos e imágenes, el tamaño de los archivos, las rutas de las imágenes y los tamaños de las imágenes.
 
 Puede filtrar por:
 
@@ -67,21 +87,33 @@ Puede filtrar por:
 * Utilizados.
 * No utilizados.
 
-Para el contenido utilizado, haga clic en Utilizado en n documentos para mostrar los temas en los que se utiliza el contenido. A continuación, puede hacer clic en Editar para editar esos temas.
+En el caso del contenido utilizado, haga clic en «Utilizado en n documentos» para mostrar los temas en los que se utiliza dicho contenido. A continuación, puede hacer clic en «Editar» para modificar esos temas.
 
 ## Comprobación de enlaces rotos
 
-El panel de control Enlaces rotos valida todos los hipervínculos de los temas. El informe incluye el número de:
+El panel de control «Enlaces rotos» ofrece información sobre los hipervínculos de tus temas, incluido su estado HTTP, de modo que una página que devuelva un código 404 o 500 se identifica como rota.
 
-* Enlaces totales.
-* Enlaces válidos en los que se pudo establecer una conexión.
-* Enlaces rotos en los que no se pudo establecer ninguna conexión.
-* Enlaces de advertencia en los que se rechazó la conexión, pero el enlace aún podría ser válido.
+El panel de control muestra los resultados de la última comprobación. No ejecuta la comprobación por sí mismo, ya que un navegador no puede leer el estado HTTP de un enlace a otro sitio web. Para comprobar tus enlaces, ejecuta:
 
-Puede ignorar con seguridad las advertencias sobre [localhost](http://localhost) si está describiendo software que se ejecuta localmente. Pero los enlaces de los documentos deben ser relativos.
+```bash
+yarn check-links
+```
 
-Las advertencias suelen ser el resultado de políticas CORS/CORP agresivas que no respetan la configuración no-cors. Debe validar manualmente estos sitios haciendo clic en el hipervínculo.
+Esto solicita todos los enlaces externos, registra la respuesta de cada servidor y actualiza el informe. Ejecútalo siempre que desees obtener resultados actualizados. El panel muestra la fecha y la hora de la última comprobación.
 
-El panel muestra una lista de archivos con enlaces problemáticos. Puede abrirlos haciendo clic en Editar en cualquiera de las listas.
+El informe cuenta:
 
-El panel también proporciona un resumen con la fecha en la que se ejecutó el informe.
+* Total de enlaces.
+* Correctos: el servidor respondió con un estado de éxito o de redireccionamiento.
+* Rotos: el servidor respondió con un estado de error, como 404 No encontrado o 500 Error interno del servidor. Estos son los enlaces que hay que corregir.
+* No verificados: no se recibió respuesta, por lo que no se pudo evaluar el enlace. Entre las causas se incluyen un dominio que no se ha resuelto, una solicitud que ha agotado el tiempo de espera, un sitio que ha rechazado la solicitud con un 403 y una limitación de frecuencia con un 429. Cualquiera de estas situaciones puede deberse a un problema con el equipo que realiza la comprobación, más que con el enlace en sí, por lo que debes validarlas manualmente haciendo clic en el hipervínculo.
+* No comprobados: enlaces que no se han solicitado. Esto incluye enlaces internos, anclajes, enlaces `mailto:` y `tel:`, y direcciones de localhost.
+* Archivos analizados.
+
+Los enlaces internos no se solicitan aquí de forma deliberada, ya que la propia estructura del sitio ya los valida comparándolos con la lista real de páginas e informa de cualquier enlace roto. Las direcciones de localhost también se omiten, ya que apuntan a lo que sea que se esté ejecutando en la máquina que realiza la comprobación. Puedes documentar una URL de localhost sin que se informe de ella.
+
+El panel de control muestra los archivos con enlaces problemáticos. Puedes abrirlos haciendo clic en «Editar» en cualquiera de las dos listas.
+
+Para que la compilación falle cuando se encuentren enlaces rotos, por ejemplo, en un trabajo de integración continua, ejecuta `yarn check-links --strict`. Esto finaliza con un error solo en caso de enlaces rotos, no de los no verificados, por lo que un problema de red intermitente no hará que falle tu compilación.
+
+<RelatedTopics maxResults={7} />
