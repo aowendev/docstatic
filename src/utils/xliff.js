@@ -1223,109 +1223,6 @@ function htmlAnchorsToMarkdown(s) {
   }
 }
 
-function escapeRegExpFor(text) {
-  return String(text).replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-}
-
-// Walk an AST-like object (various shapes from Tina) and gather link
-// nodes as {text, href} pairs. This is a best-effort extractor that
-// recognizes common shapes used by serializeRichTextToMarkdown.
-function gatherLinkPairsFromAst(node, out) {
-  out = out || [];
-  if (!node) return out;
-  if (typeof node === "string") return out;
-  if (Array.isArray(node)) {
-    for (const c of node) gatherLinkPairsFromAst(c, out);
-    return out;
-  }
-  if (typeof node === "object") {
-    const type = node.type || node._type || node.name || node.tagName;
-    if (type && String(type).toLowerCase() === "link") {
-      const text =
-        (node.children || [])
-          .map((n) => (typeof n === "string" ? n : n.text || n.value || ""))
-          .join("") ||
-        node.title ||
-        node.text ||
-        "";
-      const href = node.url || node.href || node.destination || "";
-      if (text && href)
-        out.push({ text: String(text).trim(), href: String(href).trim() });
-    }
-    // also inspect known prop shapes that may contain links
-    if (node.url && (node.title || node.text)) {
-      out.push({
-        text: String(node.title || node.text).trim(),
-        href: String(node.url).trim(),
-      });
-    }
-    // recursively inspect properties
-    for (const k of Object.keys(node)) {
-      try {
-        gatherLinkPairsFromAst(node[k], out);
-      } catch {}
-    }
-  }
-  return out;
-}
-
-// If serialized text lost hrefs, use the source AST to re-insert inline
-// URLs for known link texts. This attempts to avoid replacing when the
-// href is already present in the conv text.
-function repairLinksFromAst(conv, srcNode) {
-  try {
-    if (!conv || typeof conv !== "string") return conv;
-    if (!srcNode) return conv;
-    // if conv already contains an explicit url, skip repair
-    if (/https?:\/\//.test(conv) || /<https?:\/\//.test(conv)) return conv;
-    const pairs = gatherLinkPairsFromAst(srcNode, []);
-    if (!pairs?.length) return conv;
-    let out = String(conv);
-    for (const p of pairs) {
-      if (!p.text || !p.href) continue;
-      if (out.includes(p.href)) continue;
-      const re = new RegExp(`\\b${escapeRegExpFor(p.text)}\\b`);
-      if (re.test(out)) {
-        out = out.replace(re, `${p.text} <${p.href}>`);
-      }
-    }
-    return out;
-  } catch {
-    return conv;
-  }
-}
-
-// Extract any URLs present anywhere in a source object by stringifying
-// and matching common URL patterns. Returns array of urls in appearance order.
-function findUrlsInObject(obj) {
-  try {
-    const txt = JSON.stringify(obj || {}, null, 0);
-    const re = /https?:\/\/[^"'\\\s,<>]*/gi;
-    return txt.match(re) || [];
-  } catch {
-    return [];
-  }
-}
-
-// Append extracted URLs to plain list items when link pairs aren't available.
-function appendUrlsToListItems(conv, urls) {
-  if (!conv || !urls?.length) return conv;
-  const lines = String(conv).split(/\r?\n/);
-  let i = 0;
-  for (let li = 0; li < lines.length && i < urls.length; li++) {
-    const line = lines[li];
-    if (
-      /^\s*-\s+/.test(line) &&
-      !/https?:\/\//.test(line) &&
-      !/<https?:\/\//.test(line)
-    ) {
-      lines[li] = `${line} <${urls[i]}>`;
-      i++;
-    }
-  }
-  return lines.join("\n");
-}
-
 // Preserve Markdown inline links [text](url) as-is. Previously this function
 // converted them to "text <url>" inline form for CAT tools, but the angle
 // brackets get XML-escaped in the XLIFF output and are not reliably
@@ -1686,24 +1583,6 @@ export async function exportOutOfDateAsXliff(client, language) {
       );
       conv = outsideCodeFences(markdownLinksToInlineUrl)(conv);
       conv = outsideCodeFences(htmlAnchorsToMarkdown)(conv);
-      // If conversion appears to have lost hrefs, attempt AST-based repair
-      try {
-        if (
-          (!/https?:\/\//.test(conv) || /\[.*\]\(/.test(safeSource)) &&
-          src &&
-          src._values
-        ) {
-          conv = repairLinksFromAst(conv, src._values.body || src._values);
-          // If repair didn't find pairs, try extracting raw URLs from the
-          // source object and append them to list items in order.
-          if (!/https?:\/\//.test(conv) || !/</.test(conv)) {
-            try {
-              const urls = findUrlsInObject(src._values);
-              if (urls?.length) conv = appendUrlsToListItems(conv, urls);
-            } catch {}
-          }
-        }
-      } catch {}
       // Convert JSX/marker props that look like links into explicit markdown
       // prior to angle->marker conversion so hrefs are visible to translators.
       conv = outsideCodeFences(convertJsxPropLinksToMarkdown)(conv);
