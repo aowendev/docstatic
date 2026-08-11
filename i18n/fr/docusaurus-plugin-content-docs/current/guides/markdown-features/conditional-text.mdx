@@ -1,5 +1,5 @@
 ---
-lastmod: '2026-02-25T23:51:55.809Z'
+lastmod: '2026-08-11T23:12:23.801Z'
 title: Texte conditionnel
 description: Filtrer le contenu avec des paramètres de texte conditionnels.
 tags:
@@ -13,48 +13,51 @@ translate: false
 approved: false
 published: true
 unlisted: false
+modifiedBy: aowendev <aowen@translationcommons.org>
 ---
 
 # Texte conditionnel
 
-Le composant **Texte conditionnel** vous permet d'encadrer le contenu dans un ensemble de conditions qui déterminent quand il doit être affiché :
+Le composant **Texte conditionnel** vous permet d'associer un contenu à un ensemble de conditions qui déterminent quand il doit s'afficher :
 
 * Les conditions peuvent être n'importe quelle combinaison de langues ou de conditions définies par l'utilisateur.
 * Le contenu peut être affiché ou masqué si une ou plusieurs conditions sont remplies (OU) ou uniquement si toutes les conditions sont remplies (ET).
-  Vous pouvez également spécifier un texte de remplacement à afficher si aucune condition n'est remplie.
+  Vous pouvez également spécifier un texte de secours à afficher si aucune condition n’est remplie.
 
 ## Créer des catégories et des conditions
 
 1. Dans le CMS, cliquez sur la collection **Conditions**.
-2. Cliquez sur l'icône **Ajouter** pour ajouter une nouvelle **Catégorie**.
+2. Cliquez sur l’icône **Ajouter** pour ajouter une nouvelle **Catégorie**
 3. Donnez-lui un **Nom** et une **Description**.
 4. Pour chaque **Condition** que vous souhaitez ajouter :
-   1. Cliquez sur l'icône **Ajouter**.
-   2. Nommez la **Condition** et donnez-lui une **Description**.
+   1. Cliquez sur l’icône **Ajouter**.
+   2. Nommez la **Condition** et ajoutez-lui une **Description**.
    3. Activez ou désactivez le statut **Actif** de la condition selon vos besoins.
 
-## Ajouter des conditions à un sujet
+## Ajouter des conditions à une rubrique
 
-Les conditions sont définies au niveau du sujet. La langue est déterminée par la langue de la page. Les autres conditions sont définies sous forme de tableau dans les métadonnées au début du sujet.
+Les conditions sont définies au niveau de la rubrique. La langue est déterminée par la langue de la page. Les autres conditions sont définies sous forme de tableau dans les métadonnées au début de la rubrique.
 
-1. Créez ou modifiez un sujet.
-2. Dans la zone **Conditions**, développez les **Catégories** et cochez les cases des **Conditions** que vous souhaitez appliquer au sujet.
+1. Créez ou modifiez une rubrique.
+2. Dans la zone **Conditions**, développez les **Catégories** et cochez la case de toutes les **Conditions** que vous souhaitez appliquer à la rubrique.
 
 ## Ajouter du texte conditionnel
 
 1. Sélectionnez **Texte conditionnel** dans la liste **Intégrer**.
 2. Modifiez le composant.
 3. Saisissez le **Contenu**.
-4. Définissez l'**Action** (afficher ou masquer).
+4. Définissez l’**Action** (afficher ou masquer).
 5. Ajoutez les **Conditions requises**.
 6. Ajoutez les **Langues requises**.
 7. Définissez la **Logique de condition**.
-8. Définissez la **Logique de langue**.
-9. Indiquez si les conditions et les langues sont toutes deux requises.
-10. (Facultatif) Saisissez le **Texte de secours**.
+8. Définissez la **logique de langue**.
+9. Indiquez si les conditions et les langues sont toutes deux obligatoires.
+10. (Facultatif) Saisissez le **texte de secours**.
 
 ### Exemple
 
 <ConditionalText action="show" conditions={["production"]} languages={[]} logic="any" languageLogic="any" requireBothConditions={false} fallback="">
-  La condition `production` est définie sur cette page.
+  The `production` condition is set on this page.
 </ConditionalText>
+
+<RelatedTopics maxResults={7} />

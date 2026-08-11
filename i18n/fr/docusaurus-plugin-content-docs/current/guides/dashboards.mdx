@@ -1,11 +1,11 @@
 ---
-lastmod: "2026-02-26T20:12:34.779Z"
-modifiedBy: "aowendev <aowen@translationcommons.org>"
+lastmod: '2026-08-11T23:12:23.628Z'
+modifiedBy: aowendev <aowen@translationcommons.org>
 title: Dashboards
 tags:
-  - "content-management-systems"
-  - "content-management-systems_tinacms"
-  - "content-management-systems_media-management"
+  - content-management-systems
+  - content-management-systems_tinacms
+  - content-management-systems_media-management
 draft: false
 review: false
 translate: false
@@ -14,74 +14,106 @@ published: true
 unlisted: false
 ---
 
-# Tableaux de bord
+docStatic ajoute une fonctionnalité de tableaux de bord à TinaCMS. Tina génère une API GraphQL en utilisant le système de fichiers du dépôt Git comme base de données. Les tableaux de bord interrogent l'API (en local ou dans le cloud) et présentent des rapports exploitables directement dans le CMS. La fonctionnalité de tableaux de bord est actuellement considérée comme étant en version bêta. La fonctionnalité a été entièrement testée, mais l’interface utilisateur est provisoire et nécessite des améliorations. Les tableaux de bord se mettent à jour lorsque la page est actualisée. Si un autre utilisateur a apporté des modifications depuis que vous avez consulté un tableau de bord, vous pouvez cliquer sur **Actualiser** pour mettre à jour le tableau de bord.
 
-DocStatic ajoute une fonctionnalité de tableau de bord à TinaCMS. Tina génère une API GraphQL en utilisant le système de fichiers du dépôt Git comme base de données. Les tableaux de bord interrogent l'API (localement ou dans le cloud) et présentent des rapports exploitables directement dans le CMS. La fonctionnalité de tableau de bord est actuellement considérée comme bêta. La fonctionnalité a été entièrement testée, mais l'interface utilisateur est provisoire et doit être affinée. Les tableaux de bord sont mis à jour lorsque la page est actualisée. Si un autre utilisateur a apporté des modifications depuis que vous avez consulté un tableau de bord, vous pouvez cliquer sur **Actualiser** pour mettre à jour le tableau de bord.
-
-<Admonition type="note" title="Remarque">
-  En fonction de la quantité de contenu dans le système, certains tableaux de bord peuvent prendre un certain temps à se charger. Ces tableaux de bord s'actualisent généralement un peu plus rapidement lorsqu'ils sont exécutés localement.
+<Admonition type="note" title="Note">
+  Depending on the amount of content in the system, some dashboards may take some time to load. These dashboards will typically update slightly faster when running locally.
 </Admonition>
 
 ## Affichage des tableaux de bord
 
-Dans le CMS, accédez à la collection Dashboards. En haut de la page se trouve une barre d'état qui affiche la connexion GraphQL. Elle indique si vous êtes connecté au cloud ou à l'hôte local. Si l'hôte local est disponible, il se connectera toujours à l'hôte local. Pour utiliser le cloud, assurez-vous que le serveur de développement local est arrêté. La barre d'état affiche également l'environnement et vérifie que tous les paramètres sont valides.
+Depuis le CMS, accédez à la collection Tableaux de bord. En haut de la page se trouve une barre d’état qui affiche la connexion GraphQL. Elle indique si vous êtes connecté au cloud ou à localhost. Si localhost est disponible, la connexion s’effectuera toujours vers localhost. Pour utiliser le cloud, assurez-vous que le serveur de développement local est arrêté. La barre d’état affiche également l’environnement et vérifie que tous les paramètres sont valides.
 
-## Affichage de l'état du flux de travail
+## Affichage de l’état des workflows
 
-Le tableau de bord Aperçu du contenu affiche le nombre total de rubriques dans le chemin /docs et les rubriques dans chaque état du flux de travail :
+Le tableau de bord « Aperçu du contenu » affiche le nombre total de rubriques dans le chemin /docs ainsi que les rubriques correspondant à chaque état de workflow :
 
 * Brouillon
-* Révision
+* En révision
 * Traduction
 * Approuvé
 * Publié
 * Non répertorié
 
-Cliquez sur le lien d'état pour afficher toutes les rubriques dans cet état.
+Cliquez sur le lien de statut pour afficher tous les sujets correspondant à ce statut.
 
-Cliquez sur Modifier pour ouvrir la rubrique à modifier.
+Cliquez sur Modifier pour ouvrir le sujet et le modifier.
 
-Cliquez sur l'icône Fermer pour fermer la liste des rubriques.
+Cliquez sur l’icône Fermer pour fermer la liste des sujets.
 
-### Affichage de l'activité récente
+### Affichage de l’activité récente
 
-La section Activité récente affiche les rubriques récemment modifiées. Vous pouvez filtrer la période (Toutes les périodes, Semaine dernière ou Mois dernier) et définir le nombre de résultats de 5 à 50.
+La section Activité récente affiche les sujets récemment modifiés. Vous pouvez filtrer la période (Depuis le début, La semaine dernière ou Le mois dernier) et définir le nombre de résultats entre 5 et 50.
 
-## Affichage de l'état de la traduction
+## Affichage du statut de traduction
 
-Le tableau de bord Traductions affiche l'état de chaque rubrique pour la langue sélectionnée dans la liste :
+Le tableau de bord « Traductions » affiche le statut de chaque rubrique pour la langue sélectionnée dans la liste :
 
-* À jour : la date de dernière modification de la traduction est postérieure à celle de la source.
+* À jour : La date de dernière modification de la traduction est postérieure à celle de la source.
 * Obsolète : la date de dernière modification de la source est postérieure à celle de la traduction.
-* Manquant : il existe un fichier source sans fichier de traduction équivalent.
+* Manquant : il existe un fichier source sans fichier de traduction correspondant.
+
+## Affichage de la réutilisation de contenu
+
+Le tableau de bord « Réutilisation de contenu » affiche le contenu réutilisable dans le système et indique où il est utilisé. Il présente quatre catégories :
+
+* Extraits de code : fichiers de code référencés par le composant CodeSnippet.
+* Termes du glossaire : termes définis dans la collection de termes du glossaire.
+* Extraits : fichiers de contenu MDX référencés par le composant Snippet.
+* Ensembles de variables : ensembles de variables référencés par le composant VariableSet.
+
+Cliquez sur la carte d’une catégorie pour afficher la liste des éléments de cette catégorie, ainsi que les rubriques dans lesquelles chaque élément est utilisé.
+
+### Affichage des suggestions de réutilisation
+
+La section « Suggestions » du tableau de bord « Réutilisation du contenu » identifie le contenu susceptible d’être converti en composants réutilisables :
+
+* Extraits possibles (code) : blocs de code intégrés dans des rubriques qui pourraient être extraits pour former des fichiers d’extraits de code.
+* Termes possibles : texte des termes du glossaire apparaissant sous forme de texte brut dans des rubriques qui pourraient utiliser à la place le composant GlossaryTerm.
+* Extraits possibles (texte en double) : blocs de texte apparaissant dans au moins deux rubriques et pouvant être extraits pour être placés dans des fichiers d’extraits.
+* Variables possibles : valeurs de variables apparaissant sous forme de texte brut dans des rubriques et pouvant être remplacées par le composant « VariableSet ».
+
+Cliquez sur une fiche de suggestion pour voir les éléments détectés et les rubriques dans lesquelles ils apparaissent.
 
 ## Affichage de la réutilisation des médias
 
-Le tableau de bord Bibliothèque multimédia affiche où le contenu du chemin /static/img est utilisé. Il affiche le nombre total de fichiers et d'images, la taille des fichiers, les chemins d'accès aux images et la taille des images.
+Le tableau de bord de la bibliothèque multimédia indique où le contenu du chemin /static/img est utilisé. Il affiche le nombre total de fichiers et d’images, la taille des fichiers, les chemins d’accès aux images et les dimensions des images.
 
 Vous pouvez filtrer par :
 
 * Tout le contenu.
 * Images uniquement.
-* Récents (7 jours).
-* Utilisés.
-* Inutilisés.
+* Récent (7 jours).
+* Utilisé.
+* Inutilisé.
 
-Pour le contenu utilisé, cliquez sur Utilisé dans n documents pour afficher les rubriques dans lesquelles le contenu est utilisé. Vous pouvez ensuite cliquer sur Modifier pour modifier ces rubriques.
+Pour le contenu utilisé, cliquez sur « Utilisé dans n documents » pour afficher les rubriques dans lesquelles le contenu est utilisé. Vous pouvez ensuite cliquer sur « Modifier » pour modifier ces rubriques.
 
 ## Vérification des liens rompus
 
-Le tableau de bord Liens rompus valide tous les hyperliens dans les rubriques. Le rapport comprend le nombre de :
+Le tableau de bord « Liens rompus » fournit des informations sur les hyperliens présents dans vos rubriques, y compris leur statut HTTP ; ainsi, une page renvoyant un code 404 ou 500 est identifiée comme rompue.
 
-* Liens totaux.
-* Liens valides pour lesquels une connexion a pu être établie.
-* Liens rompus pour lesquels aucune connexion n'a pu être établie.
-* Liens d'avertissement pour lesquels la connexion a été rejetée, mais le lien peut encore être valide.
+Le tableau de bord affiche les résultats de la dernière vérification. Il n’effectue pas la vérification lui-même, car un navigateur ne peut pas lire le statut HTTP d’un lien vers un autre site. Pour vérifier vos liens, exécutez :
 
-Vous pouvez ignorer en toute sécurité les avertissements concernant [localhost](http://localhost) si vous décrivez un logiciel fonctionnant localement. Mais les liens vers les documents doivent être relatifs.
+```bash
+yarn check-links
+```
 
-Les avertissements sont généralement le résultat de politiques CORS/CORP agressives qui ne respectent pas les paramètres no-cors. Vous devez valider manuellement ces sites en cliquant sur le lien hypertexte.
+Cette commande interroge chaque lien externe, enregistre la réponse de chaque serveur et met à jour le rapport. Exécutez-la chaque fois que vous souhaitez obtenir des résultats récents. Le tableau de bord affiche la date et l’heure de la dernière vérification.
 
-Le tableau de bord répertorie les fichiers contenant des liens problématiques. Vous pouvez les ouvrir en cliquant sur Modifier dans l'une ou l'autre des listes.
+Le rapport recense :
 
-Le tableau de bord fournit également un résumé avec la date à laquelle le rapport a été généré.
+* Le nombre total de liens.
+* OK : le serveur a répondu avec un statut de réussite ou de redirection.
+* Cassé : le serveur a répondu avec un statut d’erreur, tel que 404 Not Found ou 500 Internal Server Error. Ce sont les liens à corriger.
+* Non vérifié : aucune réponse n’a été reçue, le lien n’a donc pas pu être évalué. Les causes peuvent être un nom de domaine non résolu, un délai d’attente dépassé, un site ayant refusé la requête avec un code 403 ou une limitation de débit avec un code 429. Chacune de ces situations peut être due à un problème au niveau de la machine effectuant la vérification plutôt qu’au lien lui-même ; vérifiez-les donc manuellement en cliquant sur le lien hypertexte.
+* Non vérifiés : liens qui n’ont pas été consultés. Cela concerne les liens internes, les ancres, les liens `mailto:` et `tel:`, ainsi que les adresses `localhost`.
+* Fichiers analysés.
+
+Les liens internes ne sont délibérément pas consultés ici, car la structure du site les valide déjà par rapport à la liste réelle des pages et signale ceux qui sont rompus. Les adresses « localhost » sont également ignorées, car elles pointent vers tout ce qui est en cours d’exécution sur la machine effectuant la vérification. Vous pouvez documenter une URL « localhost » sans qu’elle soit signalée.
+
+Le tableau de bord répertorie les fichiers contenant des liens problématiques. Vous pouvez les ouvrir en cliquant sur « Modifier » dans l’une ou l’autre des listes.
+
+Pour faire échouer une compilation lorsque des liens rompus sont détectés, par exemple dans une tâche d’intégration continue, exécutez `yarn check-links --strict`. Cette commande se termine par une erreur uniquement en cas de liens rompus, et non pour ceux qui n’ont pas été vérifiés ; ainsi, un problème réseau intermittent n’entraînera pas l’échec de votre compilation.
+
+<RelatedTopics maxResults={7} />
