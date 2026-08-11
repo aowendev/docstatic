@@ -1,14 +1,14 @@
 {
-  "generatedAt": "2026-08-11T17:47:48.882Z",
+  "generatedAt": "2026-08-11T18:09:40.582Z",
   "lastCheckedAt": "2026-08-11T17:47:48.882Z",
-  "checked": true,
+  "checked": false,
   "stats": {
-    "total": 166,
+    "total": 167,
     "ok": 130,
     "broken": 0,
     "unverified": 2,
     "unchecked": 0,
-    "skipped": 34
+    "skipped": 35
   },
   "files": {
     "/docs/Getting-started---working-in-the-cloud.mdx": {
@@ -81,7 +81,7 @@
       "fileName": "cli.mdx",
       "relativePath": "cli.mdx",
       "title": "CLI",
-      "totalLinks": 6
+      "totalLinks": 7
     },
     "/docs/configuration.mdx": {
       "fileName": "configuration.mdx",
@@ -850,11 +850,20 @@
       "checkedAt": "2026-08-11T17:47:47.655Z"
     },
     {
+      "text": "Dashboards",
+      "url": "guides/dashboards.mdx",
+      "type": "markdown",
+      "filePath": "/docs/cli.mdx",
+      "line": 14,
+      "status": "skipped",
+      "reason": "Internal link — checked by the Docusaurus build"
+    },
+    {
       "text": "MCP Server Integration",
       "url": "mcp-server.mdx",
       "type": "markdown",
       "filePath": "/docs/cli.mdx",
-      "line": 65,
+      "line": 29,
       "status": "skipped",
       "reason": "Internal link — checked by the Docusaurus build"
     },
@@ -863,7 +872,7 @@
       "url": "https://docusaurus.io/docs/cli",
       "type": "markdown",
       "filePath": "/docs/cli.mdx",
-      "line": 67,
+      "line": 31,
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
@@ -874,7 +883,7 @@
       "url": "https://github.com/PaloAltoNetworks/docusaurus-openapi-docs?tab=readme-ov-file#cli-usage",
       "type": "markdown",
       "filePath": "/docs/cli.mdx",
-      "line": 94,
+      "line": 57,
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
@@ -886,7 +895,7 @@
       "url": "https://github.com/Zhouzi/docusaurus-graphql-plugin?tab=readme-ov-file#usage",
       "type": "markdown",
       "filePath": "/docs/cli.mdx",
-      "line": 96,
+      "line": 59,
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
@@ -898,7 +907,7 @@
       "url": "installation.mdx",
       "type": "markdown",
       "filePath": "/docs/cli.mdx",
-      "line": 102,
+      "line": 65,
       "status": "skipped",
       "reason": "Internal link — checked by the Docusaurus build"
     },
@@ -907,7 +916,7 @@
       "url": "https://biomejs.dev/reference/cli/",
       "type": "markdown",
       "filePath": "/docs/cli.mdx",
-      "line": 131,
+      "line": 94,
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
@@ -1235,7 +1244,7 @@
     },
     {
       "text": "Context help links",
-      "url": "context-help",
+      "url": "context-help.mdx",
       "type": "markdown",
       "filePath": "/docs/guides/markdown-features/intro.mdx",
       "line": 44,
@@ -1429,7 +1438,7 @@
       "url": "https://docusaurus.io/docs/markdown-features/react",
       "type": "markdown",
       "filePath": "/docs/guides/markdown-features/react.mdx",
-      "line": 120,
+      "line": 127,
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
@@ -1440,7 +1449,7 @@
       "url": "/example-page",
       "type": "markdown",
       "filePath": "/docs/guides/markdown-features/react.mdx",
-      "line": 133,
+      "line": 140,
       "status": "skipped",
       "reason": "Internal link — checked by the Docusaurus build"
     },
@@ -1449,7 +1458,7 @@
       "url": "/docs/guides/markdown-features/math-equations",
       "type": "markdown",
       "filePath": "/docs/guides/markdown-features/react.mdx",
-      "line": 133,
+      "line": 140,
       "status": "skipped",
       "reason": "Internal link — checked by the Docusaurus build"
     },

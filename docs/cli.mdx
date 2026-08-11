@@ -17,51 +17,12 @@ translate: false
 approved: false
 published: true
 unlisted: false
-lastmod: "2026-07-07T00:00:00.000Z"
+lastmod: '2026-08-11T18:15:07.446Z'
+modifiedBy: aowendev <aowen@translationcommons.org>
 ---
-docStatic provides a set of scripts to help you generate, serve, and deploy your website.
+docStatic provides a set of scripts to help you generate, serve, and deploy your website. They are defined in the `scripts` section of your site's `package.json`, which is the authoritative list — run `npm run` with no arguments to print the scripts your site actually has.
 
-```json
-{
-  // ...
-  "scripts": {
-    "docusaurus": "docusaurus",
-    "dev": "tinacms dev -c \"docusaurus start\"",
-    "start": "docusaurus start",
-    "generate-media-index": "node scripts/generate-media-index.js",
-    "generate-git-identity": "node scripts/generate-git-identity.js",
-    "generate-files": "node scripts/generate-file-list.js",
-    "generate-docs-metadata": "node scripts/generate-docs-metadata.js",
-    "update-theme-css": "node scripts/update-theme-css.js",
-    "prebuild": "yarn generate-media-index && yarn generate-files && yarn generate-docs-metadata && yarn update-theme-css && yarn generate-git-identity",
-    "predev": "yarn generate-media-index && yarn generate-files && yarn generate-docs-metadata && yarn update-theme-css && yarn generate-git-identity",
-    "build": "tinacms build && docusaurus build",
-    "build-local": "tinacms build --local --skip-indexing --skip-cloud-checks && docusaurus build",
-    "swizzle": "docusaurus swizzle",
-    "deploy": "docusaurus deploy",
-    "setup-git-hooks": "git config core.hooksPath .githooks && chmod +x .githooks/pre-commit",
-    "sync-template": "node scripts/sync-template.js",
-    "sync-template:check": "node scripts/sync-template.js --check",
-    "clear": "docusaurus clear",
-    "serve": "docusaurus serve",
-    "write-translations": "docusaurus write-translations",
-    "write-heading-ids": "docusaurus write-heading-ids",
-    "gen-api-docs": "docusaurus gen-api-docs all",
-    "clean-api-docs": "docusaurus clean-api-docs all",
-    "gen-graphql": "docusaurus docs:generate:graphql",
-    "gen-api-docs:version": "docusaurus gen-api-docs:version",
-    "clean-api-docs:version": "docusaurus clean-api-docs:version",
-    "lint": "biome check config/ reuse/ scripts/ src/ tina/",
-    "lint:fix": "biome check config/ reuse/ scripts/ src/ tina/ --fix",
-    "mcp:install": "cd mcp-server && npm install",
-    "mcp:build": "cd mcp-server && npm run build",
-    "mcp:dev": "cd mcp-server && npm run dev",
-    "mcp:start": "cd mcp-server && npm start",
-    "mcp:test": "node mcp-server/test.js",
-    "postinstall": "npm run mcp:install"
-  }
-}
-```
+The commands below are grouped by what they are for.
 
 ## docStatic CLI commands
 
@@ -72,11 +33,15 @@ To invoke the commands, use npm or yarn. For example, `npm run dev` or `yarn dev
 * **`dev`**: Start development server with TinaCMS integration
 * **`build`**: Build for production (runs TinaCMS build then Docusaurus build)
 * **`build-local`**: Build locally without cloud features
+* **`check-links`**: Request every external link in your topics and record the HTTP status each server returned, so the Broken Links dashboard can report real 404s and 500s. Add `--strict` to exit with an error when broken links are found, which is what you want in a continuous integration job. See [Dashboards](guides/dashboards.mdx).
+* **`generate`**: Run every generator below in one go. `prebuild` and `predev` call this, so you rarely need it directly.
 * **`generate-media-index`**: Generate index of media files
 * **`generate-git-identity`**: Generate git identity information
 * **`generate-files`**: Generate file lists for the application
 * **`generate-docs-metadata`**: Generate metadata index used by dashboards and search
+* **`generate-link-report`**: Rebuild the link inventory without making any network requests. Results from the last `check-links` run are carried forward, so a build never discards them.
 * **`update-theme-css`**: Update theme CSS files
+* **`lint`** / **`lint:fix`**: Check, and optionally fix, formatting and code quality
 * **`mcp:install`**: Install Model Context Protocol server dependencies
 * **`mcp:build`**: Build the MCP server from TypeScript
 * **`mcp:dev`**: Start MCP server in development mode with auto-restart
@@ -99,12 +64,11 @@ These commands are built on top of standard Docusaurus commands described in [CL
 
 ### Automated commands
 
-These commands are run automatically at build time or when starting the `dev` server:
+These run automatically, so you do not normally invoke them yourself:
 
-* `generate-files`
-* `generate-docs-metadata`
-* `prebuild`
-* `predev`
+* `prebuild`, `predev` and `prebuild-local` each run `generate` before a build or the dev server starts, which refreshes the media index, file lists, docs metadata, link inventory, theme CSS and git identity.
+* `prestart` refreshes the link inventory before `start`, so the Broken Links dashboard has a report to display even if you have never run `check-links`.
+* `postinstall` installs the MCP server's dependencies.
 
 ### API commands
 
