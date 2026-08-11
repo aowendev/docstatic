@@ -231,7 +231,7 @@ const TranslationDashboard = () => {
       setStatus(`Importing: ${file.name}`);
       const text = await file.text();
       const client = await getTinaClient();
-      const _results = await xliffUtils.importXliffBundle(
+      const results = await xliffUtils.importXliffBundle(
         client,
         text,
         selectedLanguage,
@@ -243,7 +243,14 @@ const TranslationDashboard = () => {
           if (p && p.progress !== undefined) setImportProgress(p.progress);
         }
       );
-      setStatus("Import complete");
+      const failed = results.filter((r) => r.status === "error");
+      if (failed.length) {
+        setStatus(
+          `Import complete: ${results.length - failed.length}/${results.length} updated, ${failed.length} failed (${failed.map((f) => f.id).join(", ")}) — retry to pick up the rest`
+        );
+      } else {
+        setStatus("Import complete");
+      }
       setImportProgress(100);
       setTimeout(() => setImportProgress(null), 800);
       setImporting(false);
