@@ -163,19 +163,13 @@ const BrokenLinksDashboard = () => {
         </div>
       </div>
 
-      {/* What the numbers below do and do not prove. */}
+      {/* No standing explanation of what the statuses mean: the card labels
+          carry it, each problem link states its own reason, and the Help
+          button links to docs/guides/dashboards for the full account. This
+          alert stays because it is actionable rather than explanatory, and it
+          only appears when there is something to act on. */}
       {/* whitespace-normal: a Tina admin ancestor sets whitespace-nowrap, which
-          this note would otherwise inherit and render as one long line. */}
-      <div className="rounded-lg border border-blue-200 bg-blue-50 px-4 py-3 mb-6 text-sm text-blue-900 whitespace-normal">
-        <strong>Broken means the server said so.</strong> Every external link is
-        requested by <code>yarn check-links</code>, which reads the real HTTP
-        status, so a 404 or 500 is reported as broken. Links that produced no
-        answer at all — a DNS failure, a timeout, a 403 — are counted as
-        unverified rather than broken, because the cause may be the machine that
-        ran the check. Internal links are not requested here; the Docusaurus
-        build already validates those against the real route table.
-      </div>
-
+          this alert would otherwise inherit and render as one long line. */}
       {uncheckedCount > 0 && (
         <div className="rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 mb-6 text-sm text-amber-900 whitespace-normal">
           <strong>
