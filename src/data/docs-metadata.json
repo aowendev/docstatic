@@ -93,7 +93,7 @@
     ],
     "path": "/cli",
     "filePath": "cli.mdx",
-    "lastmod": "2026-07-07T00:00:00.000Z"
+    "lastmod": "2026-08-11T18:15:07.446Z"
   },
   {
     "title": "Code blocks and snippets",
@@ -366,7 +366,7 @@
     ],
     "path": "/installation",
     "filePath": "installation.mdx",
-    "lastmod": "2026-07-07T00:00:00.000Z"
+    "lastmod": "2026-08-11T18:15:07.647Z"
   },
   {
     "title": "Internationalization",
@@ -444,7 +444,7 @@
     ],
     "path": "/guides/markdown-features/intro",
     "filePath": "guides/markdown-features/intro.mdx",
-    "lastmod": "2026-03-10T23:10:09.911Z"
+    "lastmod": "2026-08-11T18:15:07.511Z"
   },
   {
     "title": "Markdown links",
@@ -502,7 +502,7 @@
     ],
     "path": "/mcp-server",
     "filePath": "mcp-server.mdx",
-    "lastmod": "2026-03-10T23:14:29.772Z"
+    "lastmod": "2026-08-11T18:15:07.726Z"
   },
   {
     "title": "MDX and React",
@@ -516,7 +516,7 @@
     ],
     "path": "/guides/markdown-features/react",
     "filePath": "guides/markdown-features/react.mdx",
-    "lastmod": "2026-03-10T22:59:20.481Z"
+    "lastmod": "2026-08-11T18:15:07.576Z"
   },
   {
     "title": "MDX plugins",

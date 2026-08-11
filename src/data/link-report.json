@@ -1,28 +1,16 @@
 {
-  "generatedAt": "2026-08-11T18:09:40.582Z",
+  "generatedAt": "2026-08-11T18:37:49.515Z",
   "lastCheckedAt": "2026-08-11T17:47:48.882Z",
   "checked": false,
   "stats": {
-    "total": 167,
-    "ok": 130,
+    "total": 148,
+    "ok": 115,
     "broken": 0,
     "unverified": 2,
     "unchecked": 0,
-    "skipped": 35
+    "skipped": 31
   },
   "files": {
-    "/docs/Getting-started---working-in-the-cloud.mdx": {
-      "fileName": "Getting-started---working-in-the-cloud.mdx",
-      "relativePath": "Getting-started---working-in-the-cloud.mdx",
-      "title": "Getting started - working in the cloud",
-      "totalLinks": 8
-    },
-    "/docs/Getting-started---working-locally.mdx": {
-      "fileName": "Getting-started---working-locally.mdx",
-      "relativePath": "Getting-started---working-locally.mdx",
-      "title": "Getting started - working locally",
-      "totalLinks": 11
-    },
     "/docs/advanced/adding-the-cms-to-an-ipad-home-screen.mdx": {
       "fileName": "adding-the-cms-to-an-ipad-home-screen.mdx",
       "relativePath": "advanced/adding-the-cms-to-an-ipad-home-screen.mdx",
@@ -355,212 +343,6 @@
     }
   },
   "links": [
-    {
-      "text": "GitHub",
-      "url": "https://github.com/",
-      "type": "markdown",
-      "filePath": "/docs/Getting-started---working-in-the-cloud.mdx",
-      "line": 14,
-      "status": "ok",
-      "reason": "HTTP 200",
-      "code": 200,
-      "checkedAt": "2026-08-11T17:47:46.784Z"
-    },
-    {
-      "text": "TinaCMS",
-      "url": "https://tina.io/",
-      "type": "markdown",
-      "filePath": "/docs/Getting-started---working-in-the-cloud.mdx",
-      "line": 15,
-      "status": "ok",
-      "reason": "HTTP 200",
-      "code": 200,
-      "checkedAt": "2026-08-11T17:47:46.813Z"
-    },
-    {
-      "text": "LanguageTool",
-      "url": "https://languagetool.org/",
-      "type": "markdown",
-      "filePath": "/docs/Getting-started---working-in-the-cloud.mdx",
-      "line": 16,
-      "status": "ok",
-      "reason": "HTTP 200",
-      "code": 200,
-      "checkedAt": "2026-08-11T17:47:46.974Z"
-    },
-    {
-      "text": "https://github.com/aowendev/docstatic",
-      "url": "https://github.com/aowendev/docstatic",
-      "type": "markdown",
-      "filePath": "/docs/Getting-started---working-in-the-cloud.mdx",
-      "line": 25,
-      "status": "ok",
-      "reason": "HTTP 200",
-      "code": 200,
-      "checkedAt": "2026-08-11T17:47:46.781Z"
-    },
-    {
-      "text": "MCP server",
-      "url": "mcp-server.mdx",
-      "type": "markdown",
-      "filePath": "/docs/Getting-started---working-in-the-cloud.mdx",
-      "line": 101,
-      "status": "skipped",
-      "reason": "Internal link — checked by the Docusaurus build"
-    },
-    {
-      "text": "Monorepos",
-      "url": "https://docusaurus.io/docs/installation#monorepos",
-      "type": "markdown",
-      "filePath": "/docs/Getting-started---working-in-the-cloud.mdx",
-      "line": 126,
-      "status": "ok",
-      "reason": "HTTP 200",
-      "code": 200,
-      "redirectedTo": "https://docusaurus.io/docs/installation",
-      "checkedAt": "2026-08-11T17:47:47.341Z"
-    },
-    {
-      "text": "http://localhost:3000",
-      "url": "http://localhost:3000",
-      "type": "markdown",
-      "filePath": "/docs/Getting-started---working-in-the-cloud.mdx",
-      "line": 140,
-      "status": "skipped",
-      "reason": "Local address — not checked"
-    },
-    {
-      "text": "Deployment",
-      "url": "https://docusaurus.io/docs/deployment",
-      "type": "markdown",
-      "filePath": "/docs/Getting-started---working-in-the-cloud.mdx",
-      "line": 152,
-      "status": "ok",
-      "reason": "HTTP 200",
-      "code": 200,
-      "checkedAt": "2026-08-11T17:47:47.804Z"
-    },
-    {
-      "text": "GitHub",
-      "url": "https://github.com/",
-      "type": "markdown",
-      "filePath": "/docs/Getting-started---working-locally.mdx",
-      "line": 14,
-      "status": "ok",
-      "reason": "HTTP 200",
-      "code": 200,
-      "checkedAt": "2026-08-11T17:47:46.784Z"
-    },
-    {
-      "text": "Eclipse",
-      "url": "https://eclipseide.org",
-      "type": "markdown",
-      "filePath": "/docs/Getting-started---working-locally.mdx",
-      "line": 16,
-      "status": "ok",
-      "reason": "HTTP 200",
-      "code": 200,
-      "redirectedTo": "https://eclipseide.org/",
-      "checkedAt": "2026-08-11T17:47:47.180Z"
-    },
-    {
-      "text": "VSCodium",
-      "url": "https://vscodium.com/",
-      "type": "markdown",
-      "filePath": "/docs/Getting-started---working-locally.mdx",
-      "line": 17,
-      "status": "ok",
-      "reason": "HTTP 200",
-      "code": 200,
-      "checkedAt": "2026-08-11T17:47:46.785Z"
-    },
-    {
-      "text": "Node.js",
-      "url": "https://nodejs.org/",
-      "type": "markdown",
-      "filePath": "/docs/Getting-started---working-locally.mdx",
-      "line": 25,
-      "status": "ok",
-      "reason": "HTTP 200",
-      "code": 200,
-      "redirectedTo": "https://nodejs.org/en",
-      "checkedAt": "2026-08-11T17:47:46.883Z"
-    },
-    {
-      "text": "official Node.js downloads",
-      "url": "https://nodejs.org/en/download/prebuilt-installer",
-      "type": "markdown",
-      "filePath": "/docs/Getting-started---working-locally.mdx",
-      "line": 40,
-      "status": "ok",
-      "reason": "HTTP 200",
-      "code": 200,
-      "redirectedTo": "https://nodejs.org/en/download",
-      "checkedAt": "2026-08-11T17:47:46.884Z"
-    },
-    {
-      "text": "Node Version Manager",
-      "url": "https://github.com/nvm-sh/nvm",
-      "type": "markdown",
-      "filePath": "/docs/Getting-started---working-locally.mdx",
-      "line": 46,
-      "status": "ok",
-      "reason": "HTTP 200",
-      "code": 200,
-      "checkedAt": "2026-08-11T17:47:46.811Z"
-    },
-    {
-      "text": "https://github.com/aowendev/docstatic",
-      "url": "https://github.com/aowendev/docstatic",
-      "type": "markdown",
-      "filePath": "/docs/Getting-started---working-locally.mdx",
-      "line": 156,
-      "status": "ok",
-      "reason": "HTTP 200",
-      "code": 200,
-      "checkedAt": "2026-08-11T17:47:46.781Z"
-    },
-    {
-      "text": "MCP server",
-      "url": "mcp-server.mdx",
-      "type": "markdown",
-      "filePath": "/docs/Getting-started---working-locally.mdx",
-      "line": 279,
-      "status": "skipped",
-      "reason": "Internal link — checked by the Docusaurus build"
-    },
-    {
-      "text": "Monorepos",
-      "url": "https://docusaurus.io/docs/installation#monorepos",
-      "type": "markdown",
-      "filePath": "/docs/Getting-started---working-locally.mdx",
-      "line": 304,
-      "status": "ok",
-      "reason": "HTTP 200",
-      "code": 200,
-      "redirectedTo": "https://docusaurus.io/docs/installation",
-      "checkedAt": "2026-08-11T17:47:47.341Z"
-    },
-    {
-      "text": "http://localhost:3000",
-      "url": "http://localhost:3000",
-      "type": "markdown",
-      "filePath": "/docs/Getting-started---working-locally.mdx",
-      "line": 318,
-      "status": "skipped",
-      "reason": "Local address — not checked"
-    },
-    {
-      "text": "Deployment",
-      "url": "https://docusaurus.io/docs/deployment",
-      "type": "markdown",
-      "filePath": "/docs/Getting-started---working-locally.mdx",
-      "line": 330,
-      "status": "ok",
-      "reason": "HTTP 200",
-      "code": 200,
-      "checkedAt": "2026-08-11T17:47:47.804Z"
-    },
     {
       "text": "VSCodium",
       "url": "https://vscodium.com/",
@@ -1244,7 +1026,7 @@
     },
     {
       "text": "Context help links",
-      "url": "context-help.mdx",
+      "url": "../../context-help",
       "type": "markdown",
       "filePath": "/docs/guides/markdown-features/intro.mdx",
       "line": 44,
@@ -1722,7 +1504,7 @@
       "url": "https://docusaurus.io/docs/installation#monorepos",
       "type": "markdown",
       "filePath": "/docs/installation.mdx",
-      "line": 289,
+      "line": 295,
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
@@ -1734,7 +1516,7 @@
       "url": "http://localhost:3000",
       "type": "markdown",
       "filePath": "/docs/installation.mdx",
-      "line": 303,
+      "line": 309,
       "status": "skipped",
       "reason": "Local address — not checked"
     },
@@ -1743,7 +1525,7 @@
       "url": "https://docusaurus.io/docs/deployment",
       "type": "markdown",
       "filePath": "/docs/installation.mdx",
-      "line": 315,
+      "line": 321,
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
