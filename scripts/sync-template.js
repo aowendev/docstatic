@@ -57,6 +57,7 @@ const SCRIPTS_ALLOWLIST = [
   "generate-media-index.js",
   "generate-docs-metadata.js",
   "generate-git-identity.js",
+  "generate-link-report.js",
   "update-theme-css.js",
   "util.js",
 ];

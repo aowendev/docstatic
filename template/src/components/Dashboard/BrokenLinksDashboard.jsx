@@ -5,189 +5,77 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useState } from "react";
-import { useTinaTask } from "./lib/useTinaTask";
+import React, { useMemo, useState } from "react";
+// Relative, not the "@site" alias: this component is pulled into the Tina
+// admin bundle, which esbuild builds without Docusaurus's path aliases.
+import linkReport from "../../data/link-report.json";
 
+/**
+ * The results shown here are produced by `scripts/generate-link-report.js`, not
+ * by this page.
+ *
+ * This dashboard used to check links itself, which it fundamentally could not
+ * do: a browser fetching a third-party URL is making a cross-origin request, so
+ * it is forced into `mode: "no-cors"` and gets back an opaque response whose
+ * status is always 0. Every link that answered at all was reported "valid",
+ * including 404s — the one thing a broken-link dashboard exists to catch.
+ *
+ * Node has no such restriction, so the check moved to `yarn check-links` and
+ * this page renders what that recorded.
+ */
 const BrokenLinksDashboard = () => {
-  const [linkData, setLinkData] = useState(null);
-  // loading/error and unmount cancellation live in the shared hook
-  const { loading, error, run } = useTinaTask();
   const [showDetails, setShowDetails] = useState(false);
   const [_selectedFile, _setSelectedFile] = useState(null);
 
-  // Function to extract links from MDX content
-  const extractLinksFromContent = (content, filePath) => {
-    const links = [];
+  // The report maps onto the vocabulary this view already speaks: "valid" is a
+  // real 2xx/3xx, "broken" is a server-attested 4xx/5xx, and "warning" covers
+  // links no answer came back for, which are for a human to judge.
+  const linkData = useMemo(() => {
+    const statusMap = {
+      ok: "valid",
+      broken: "broken",
+      unverified: "warning",
+      unchecked: "skipped",
+      skipped: "skipped",
+    };
 
-    // Regex for markdown links [text](url)
-    const markdownLinkRegex = /\[([^\]]*)\]\(([^)]+)\)/g;
-    // Regex for HTML links <a href="url">
-    const htmlLinkRegex = /<a[^>]+href=["']([^"']+)["'][^>]*>/gi;
-    // Regex for reference links [text][ref] and [ref]: url
-    const refLinkRegex = /\[([^\]]+)\]\[([^\]]*)\]/g;
-    const refDefRegex = /^\[([^\]]+)\]:\s*(.+)$/gm;
+    const allLinks = (linkReport.links || []).map((link) => ({
+      ...link,
+      status: statusMap[link.status] || "skipped",
+      lineNumber: link.line,
+    }));
 
-    // Extract markdown links
-    for (const match of content.matchAll(markdownLinkRegex)) {
-      links.push({
-        text: match[1],
-        url: match[2].trim(),
-        type: "markdown",
-        filePath,
-        lineNumber: content.substring(0, match.index).split("\n").length,
-      });
+    const stats = allLinks.reduce(
+      (acc, link) => {
+        acc.total++;
+        acc[link.status]++;
+        return acc;
+      },
+      { total: 0, valid: 0, broken: 0, warning: 0, skipped: 0 }
+    );
+
+    // Keyed by full path, not basename. fileStats is keyed by full path, and
+    // the two are looked up against each other — with basenames, every doc
+    // called index.mdx shared one bucket and files inherited each other's
+    // problems, inflating the "files with problem links" count.
+    const linksByFile = {};
+    for (const link of allLinks) {
+      if (!linksByFile[link.filePath]) linksByFile[link.filePath] = [];
+      linksByFile[link.filePath].push(link);
     }
 
-    // Extract HTML links
-    for (const match of content.matchAll(htmlLinkRegex)) {
-      links.push({
-        text: match[0],
-        url: match[1].trim(),
-        type: "html",
-        filePath,
-        lineNumber: content.substring(0, match.index).split("\n").length,
-      });
-    }
-
-    // Extract reference definitions
-    const refDefs = {};
-    for (const match of content.matchAll(refDefRegex)) {
-      refDefs[match[1].toLowerCase()] = match[2].trim();
-    }
-
-    // Extract reference links
-    for (const match of content.matchAll(refLinkRegex)) {
-      const refKey = (match[2] || match[1]).toLowerCase();
-      if (refDefs[refKey]) {
-        links.push({
-          text: match[1],
-          url: refDefs[refKey],
-          type: "reference",
-          filePath,
-          lineNumber: content.substring(0, match.index).split("\n").length,
-        });
-      }
-    }
-
-    return links;
-  };
-
-  // Function to validate a single link
-  const validateLink = async (link) => {
-    try {
-      const url = link.url.trim();
-
-      // Skip anchors, mailto, and tel links
-      if (
-        url.startsWith("#") ||
-        url.startsWith("mailto:") ||
-        url.startsWith("tel:")
-      ) {
-        return {
-          ...link,
-          status: "skipped",
-          reason: "Not validated (anchor/mailto/tel)",
-        };
-      }
-
-      // Handle relative/internal links
-      if (!url.startsWith("http://") && !url.startsWith("https://")) {
-        // Internal links are not checked here — Docusaurus already reports
-        // broken internal links at build time (onBrokenLinks).
-        if (url.endsWith(".mdx") || url.endsWith(".md")) {
-          return {
-            ...link,
-            status: "skipped",
-            reason: "Internal doc link — checked by the Docusaurus build",
-          };
-        }
-        return {
-          ...link,
-          status: "skipped",
-          reason: "Internal link — checked by the Docusaurus build",
-        };
-      }
-
-      // Reachability check only. The browser forces mode: "no-cors" for
-      // cross-origin requests, which yields an opaque response: status is
-      // always 0 and the body is unreadable. So this can tell you the host
-      // resolved and accepted a connection — enough to catch a typo'd or dead
-      // domain — but it CANNOT see HTTP status. A 404 or 500 resolves here
-      // exactly like a 200. Do not present these results as "link works".
-      const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 8000);
-
-      try {
-        await fetch(url, {
-          method: "HEAD",
-          signal: controller.signal,
-          mode: "no-cors",
-          headers: {
-            "User-Agent":
-              "Mozilla/5.0 (compatible; docStatic Link Checker/1.0)",
-          },
-        });
-
-        clearTimeout(timeoutId);
-
-        return {
-          ...link,
-          status: "valid",
-          reason: "Host reachable (HTTP status not checked)",
-        };
-      } catch (fetchError) {
-        clearTimeout(timeoutId);
-
-        if (fetchError.name === "AbortError") {
-          return { ...link, status: "broken", reason: "Timeout (>8s)" };
-        }
-
-        // Fallback: Check if this might be a CORS/CORP issue for known problematic domains
-        const urlObj = new URL(url);
-        const knownCorsDomains = [
-          "docs.github.com",
-          "support.microsoft.com",
-          "docs.microsoft.com",
-          "developer.mozilla.org",
-        ];
-
-        const isKnownCorsDomain = knownCorsDomains.some(
-          (domain) =>
-            urlObj.hostname === domain || urlObj.hostname.endsWith(`.${domain}`)
-        );
-
-        if (isKnownCorsDomain) {
-          return {
-            ...link,
-            status: "warning",
-            reason:
-              "CORS/CORP policy prevents validation - manual check required",
-          };
-        }
-
-        // For other errors, use original logic
-        if (
-          fetchError.message.includes("network") ||
-          fetchError.message.includes("fetch")
-        ) {
-          return {
-            ...link,
-            status: "broken",
-            reason: "Network error or unreachable",
-          };
-        }
-
-        // For other errors, assume CORS restrictions but link might be valid
-        return {
-          ...link,
-          status: "warning",
-          reason: "CORS restricted (unable to verify)",
-        };
-      }
-    } catch (error) {
-      return { ...link, status: "broken", reason: error.message };
-    }
-  };
+    return {
+      stats,
+      fileStats: linkReport.files || {},
+      linksByFile,
+      allLinks,
+      brokenLinks: allLinks.filter((link) => link.status === "broken"),
+      warningLinks: allLinks.filter((link) => link.status === "warning"),
+      generatedAt: linkReport.generatedAt,
+      lastCheckedAt: linkReport.lastCheckedAt,
+      uncheckedCount: linkReport.stats?.unchecked || 0,
+    };
+  }, []);
 
   // Function to open file in CMS editor
   const openInCMS = (filePath) => {
@@ -199,351 +87,15 @@ const BrokenLinksDashboard = () => {
     window.open(cmsUrl, "_blank");
   };
 
-  // Function to scan docs directory for MDX files using GraphQL
-  const scanDocsForLinks = () =>
-    run(async ({ client, isCurrent }) => {
-      // Fetch all docs from the main collection
-      const docsResult = await client.queries.docConnection({
-        sort: "title",
-        first: 500, // Request more documents
-      });
-
-      const docs = docsResult.data.docConnection.edges || [];
-
-      const allLinks = [];
-      const fileStats = {};
-
-      // Process each document
-      for (const edge of docs) {
-        const node = edge.node;
-        const fileName = `${node._sys.filename}.mdx`;
-        const filePath = `/docs/${node._sys.relativePath}`;
-
-        // Get the document body content
-        let content = "";
-        if (node.body) {
-          // Extract text content from rich text blocks
-          content = extractTextFromBody(node.body);
-        }
-
-        // Add title content if available
-        if (node.title) {
-          content = `# ${node.title}\n\n${content}`;
-        }
-
-        const links = extractLinksFromContent(content, filePath);
-
-        fileStats[filePath] = {
-          totalLinks: links.length,
-          fileName: fileName,
-          title: node.title || node._sys.filename,
-          relativePath: node._sys.relativePath,
-        };
-
-        allLinks.push(...links);
-      }
-
-      // Validate all links
-      const validatedLinks = [];
-      for (const link of allLinks) {
-        const validatedLink = await validateLink(link);
-        validatedLinks.push(validatedLink);
-      }
-
-      // Calculate statistics
-      const stats = validatedLinks.reduce(
-        (acc, link) => {
-          acc.total++;
-          if (link.status === "valid") acc.valid++;
-          else if (link.status === "broken") acc.broken++;
-          else if (link.status === "warning") acc.warning++;
-          else if (link.status === "skipped") acc.skipped++;
-          return acc;
-        },
-        { total: 0, valid: 0, broken: 0, warning: 0, skipped: 0 }
-      );
-
-      // Group by file
-      const linksByFile = {};
-      for (const link of validatedLinks) {
-        const fileName = link.filePath.split("/").pop();
-        if (!linksByFile[fileName]) {
-          linksByFile[fileName] = [];
-        }
-        linksByFile[fileName].push(link);
-      }
-
-      // Skipped when this scan has been superseded or the dashboard unmounted.
-      if (!isCurrent()) return;
-      setLinkData({
-        stats,
-        fileStats,
-        linksByFile,
-        allLinks: validatedLinks,
-        brokenLinks: validatedLinks.filter((link) => link.status === "broken"),
-        warningLinks: validatedLinks.filter(
-          (link) => link.status === "warning"
-        ),
-        timestamp: new Date().toISOString(),
-      });
-    });
-
-  // Function to extract text content from Tina CMS rich text body
-  const extractTextFromBody = (body) => {
-    if (!body?.children) return "";
-
-    const extractFromChildren = (children) => {
-      return children
-        .map((child) => {
-          if (child.type === "text") {
-            return child.text || "";
-          }
-          if (child.type === "a" && child.url) {
-            const text = child.children
-              ? extractFromChildren(child.children)
-              : "";
-            return `[${text}](${child.url})`;
-          }
-          if (child.children) {
-            return extractFromChildren(child.children);
-          }
-          return "";
-        })
-        .join("");
-    };
-
-    return extractFromChildren(body.children);
-  };
-
-  // Always show the heading and button row, but if not loaded, only show the Load button (no dashboard content)
-  if (!linkData && !loading && !error) {
-    return (
-      <div
-        style={{
-          padding: "24px",
-          borderBottom: "2px solid #d1d9e0",
-          marginBottom: "32px",
-        }}
-      >
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            marginBottom: "16px",
-          }}
-        >
-          <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-            <span className="text-3xl text-tina-orange">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
-                <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
-                <line x1="2" x2="22" y1="2" y2="22" />
-              </svg>
-            </span>
-            <h2 className="m-0 text-2xl font-bold text-gray-800">
-              Broken Links Dashboard
-            </h2>
-          </div>
-          <button
-            type="button"
-            onClick={scanDocsForLinks}
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: "8px",
-              padding: "8px 16px",
-              borderRadius: "6px",
-              border: "1px solid #d1d5db",
-              backgroundColor: "#ffffff",
-              color: "#374151",
-              cursor: "pointer",
-              fontSize: "14px",
-              fontWeight: "500",
-              boxShadow: "0 1px 2px 0 rgba(0, 0, 0, 0.05)",
-              transition: "all 0.2s ease",
-            }}
-            onMouseEnter={(e) => {
-              e.target.style.backgroundColor = "#f3f4f6";
-              e.target.style.color = "#1f2937";
-            }}
-            onMouseLeave={(e) => {
-              e.target.style.backgroundColor = "#ffffff";
-              e.target.style.color = "#374151";
-            }}
-            disabled={loading}
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8" />
-              <path d="M21 3v5h-5" />
-              <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16" />
-              <path d="M8 16H3v5" />
-            </svg>
-            {loading ? "Loading..." : "Load"}
-          </button>
-        </div>
-      </div>
-    );
-  }
-
-  if (loading) {
-    return (
-      <div
-        style={{
-          padding: "24px",
-          borderBottom: "2px solid #d1d9e0",
-          marginBottom: "32px",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
-          minHeight: "120px",
-        }}
-      >
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            width: "100%",
-            maxWidth: "400px",
-          }}
-        >
-          <div className="font-bold text-gray-800 text-xl mb-2">
-            Loading Dashboard
-          </div>
-          <div className="font-medium text-gray-600 text-base mb-4">
-            Scanning docs for links and validating...
-          </div>
-
-          {/* Progress Bar for Loading */}
-          <div
-            style={{
-              width: "100%",
-              height: "6px",
-              backgroundColor: "#e5e7eb",
-              borderRadius: "3px",
-              overflow: "hidden",
-            }}
-          >
-            <div
-              style={{
-                width: "100%",
-                height: "100%",
-                background: "linear-gradient(45deg, #f59e0b, #d97706)",
-                borderRadius: "3px",
-                animation: "indeterminate 2s ease-in-out infinite",
-              }}
-            />
-          </div>
-        </div>
-        <style>{`
-          @keyframes indeterminate {
-            0% { transform: translateX(-100%); }
-            50% { transform: translateX(0%); }
-            100% { transform: translateX(100%); }
-          }
-        `}</style>
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div
-        style={{
-          padding: "24px",
-          borderBottom: "2px solid #d1d9e0",
-          marginBottom: "32px",
-        }}
-      >
-        <div
-          style={{
-            padding: "16px",
-            backgroundColor: "#ffebee",
-            borderLeft: "4px solid #d32f2f",
-            borderRadius: "6px",
-            color: "#d32f2f",
-          }}
-        >
-          <div
-            style={{
-              fontSize: "18px",
-              marginBottom: "10px",
-              fontWeight: "600",
-              display: "flex",
-              alignItems: "center",
-              gap: "8px",
-            }}
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="18"
-              height="18"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z" />
-              <path d="M12 9v4" />
-              <path d="m12 17 .01 0" />
-            </svg>
-            Error
-          </div>
-          <div style={{ marginBottom: "16px", fontSize: "14px" }}>{error}</div>
-          <button
-            type="button"
-            onClick={scanDocsForLinks}
-            style={{
-              padding: "8px 16px",
-              backgroundColor: "#f59e0b",
-              color: "white",
-              border: "none",
-              borderRadius: "6px",
-              cursor: "pointer",
-              fontSize: "14px",
-              fontWeight: "500",
-            }}
-          >
-            Retry
-          </button>
-        </div>
-      </div>
-    );
-  }
-
-  if (!linkData) {
-    return (
-      <div style={{ padding: "20px", textAlign: "center", color: "#666" }}>
-        No data available
-      </div>
-    );
-  }
-
-  const { stats, fileStats, linksByFile, brokenLinks, warningLinks } = linkData;
+  const {
+    stats,
+    fileStats,
+    linksByFile,
+    brokenLinks,
+    warningLinks,
+    lastCheckedAt,
+    uncheckedCount,
+  } = linkData;
   const problemLinks = [...(brokenLinks || []), ...(warningLinks || [])];
 
   return (
@@ -591,64 +143,48 @@ const BrokenLinksDashboard = () => {
             Broken Links Dashboard
           </h2>
         </div>
-        <button
-          type="button"
-          onClick={scanDocsForLinks}
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: "8px",
-            padding: "8px 16px",
-            borderRadius: "6px",
-            border: "1px solid #d1d5db",
-            backgroundColor: "#ffffff",
-            color: "#374151",
-            cursor: "pointer",
-            fontSize: "14px",
-            fontWeight: "500",
-            boxShadow: "0 1px 2px 0 rgba(0, 0, 0, 0.05)",
-            transition: "all 0.2s ease",
-          }}
-          onMouseEnter={(e) => {
-            e.target.style.backgroundColor = "#f3f4f6";
-            e.target.style.color = "#1f2937";
-          }}
-          onMouseLeave={(e) => {
-            e.target.style.backgroundColor = "#ffffff";
-            e.target.style.color = "#374151";
-          }}
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8" />
-            <path d="M21 3v5h-5" />
-            <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16" />
-            <path d="M8 16H3v5" />
-          </svg>
-          {loading ? "Refreshing..." : "Refresh"}
-        </button>
+        {/* No refresh control: these results come from `yarn check-links`,
+            which this page cannot run. Showing the age of the data instead is
+            the honest equivalent. */}
+        <div className="text-right text-sm text-gray-500 whitespace-normal">
+          {lastCheckedAt ? (
+            <>
+              Links last checked{" "}
+              <strong className="text-gray-700">
+                {new Date(lastCheckedAt).toLocaleString()}
+              </strong>
+            </>
+          ) : (
+            <strong className="text-gray-700">Links not checked yet</strong>
+          )}
+          <div className="text-xs text-gray-400">
+            Run <code>yarn check-links</code> to update
+          </div>
+        </div>
       </div>
 
-      {/* What this check can and cannot tell you. Browsers force no-cors on
-          cross-origin requests, so HTTP status is invisible to this page. */}
+      {/* What the numbers below do and do not prove. */}
       {/* whitespace-normal: a Tina admin ancestor sets whitespace-nowrap, which
           this note would otherwise inherit and render as one long line. */}
       <div className="rounded-lg border border-blue-200 bg-blue-50 px-4 py-3 mb-6 text-sm text-blue-900 whitespace-normal">
-        <strong>This is a reachability check.</strong> It confirms each external
-        host resolves and accepts a connection, which catches typos, dead
-        domains and links that time out. It <em>cannot</em> see the HTTP status:
-        a page returning 404 or 500 still counts as reachable. Internal links
-        are not checked here — the Docusaurus build already reports those.
+        <strong>Broken means the server said so.</strong> Every external link is
+        requested by <code>yarn check-links</code>, which reads the real HTTP
+        status, so a 404 or 500 is reported as broken. Links that produced no
+        answer at all — a DNS failure, a timeout, a 403 — are counted as
+        unverified rather than broken, because the cause may be the machine that
+        ran the check. Internal links are not requested here; the Docusaurus
+        build already validates those against the real route table.
       </div>
+
+      {uncheckedCount > 0 && (
+        <div className="rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 mb-6 text-sm text-amber-900 whitespace-normal">
+          <strong>
+            {uncheckedCount} external links have never been checked.
+          </strong>{" "}
+          Run <code>yarn check-links</code> to request them and record real HTTP
+          statuses.
+        </div>
+      )}
 
       {/* Statistics Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-6 mb-8">
@@ -694,7 +230,7 @@ const BrokenLinksDashboard = () => {
             </svg>
           </div>
           <div className="min-w-0">
-            <p className="text-sm text-gray-500 font-medium">Reachable</p>
+            <p className="text-sm text-gray-500 font-medium">OK</p>
             <p className="text-3xl font-bold text-gray-800">{stats.valid}</p>
           </div>
         </div>
@@ -718,7 +254,7 @@ const BrokenLinksDashboard = () => {
             </svg>
           </div>
           <div className="min-w-0">
-            <p className="text-sm text-gray-500 font-medium">Unreachable</p>
+            <p className="text-sm text-gray-500 font-medium">Broken</p>
             <p className="text-3xl font-bold text-red-600">{stats.broken}</p>
           </div>
         </div>
@@ -971,9 +507,8 @@ const BrokenLinksDashboard = () => {
       {/* Files with Broken Links */}
       {(() => {
         const filesWithProblemLinks = Object.entries(fileStats).filter(
-          ([_filePath, stats]) => {
-            const fileName = stats.fileName;
-            const fileLinks = linksByFile[fileName] || [];
+          ([filePath]) => {
+            const fileLinks = linksByFile[filePath] || [];
             return fileLinks.some(
               (link) => link.status === "broken" || link.status === "warning"
             );
@@ -1049,7 +584,7 @@ const BrokenLinksDashboard = () => {
                 .slice(0, showDetails ? undefined : 5)
                 .map(([filePath, stats], index) => {
                   const fileName = stats.fileName;
-                  const fileLinks = linksByFile[fileName] || [];
+                  const fileLinks = linksByFile[filePath] || [];
                   const brokenCount = fileLinks.filter(
                     (link) => link.status === "broken"
                   ).length;
@@ -1203,7 +738,7 @@ const BrokenLinksDashboard = () => {
                 >
                   <path d="M20 6 9 17l-5-5" />
                 </svg>
-                All links reachable
+                No broken links
               </>
             ) : stats.broken === 0 ? (
               <>
@@ -1222,7 +757,7 @@ const BrokenLinksDashboard = () => {
                   <path d="M12 9v4" />
                   <path d="m12 17 .01 0" />
                 </svg>
-                {stats.warning} Warning Links
+                {stats.warning} unverified, none broken
               </>
             ) : (
               <>
@@ -1240,7 +775,7 @@ const BrokenLinksDashboard = () => {
                   <path d="M18 6 6 18" />
                   <path d="m6 6 12 12" />
                 </svg>
-                {stats.broken} unreachable
+                {stats.broken} broken
                 {(stats.warning || 0) > 0
                   ? ` and ${stats.warning} unverified`
                   : ""}
@@ -1254,7 +789,11 @@ const BrokenLinksDashboard = () => {
             color: "#656d76",
           }}
         >
-          Link validation completed on {new Date().toLocaleString()}
+          {/* The time of the check, not of this render — those are not the
+              same thing once the results come from a build artefact. */}
+          {lastCheckedAt
+            ? `Links checked on ${new Date(lastCheckedAt).toLocaleString()}`
+            : "These links have not been checked yet"}
         </div>
       </div>
     </div>

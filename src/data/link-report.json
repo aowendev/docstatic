@@ -1,0 +1,2140 @@
+{
+  "generatedAt": "2026-08-11T15:12:04.373Z",
+  "lastCheckedAt": "2026-08-11T15:08:44.583Z",
+  "checked": false,
+  "stats": {
+    "total": 166,
+    "ok": 129,
+    "broken": 1,
+    "unverified": 2,
+    "unchecked": 0,
+    "skipped": 34
+  },
+  "files": {
+    "/docs/Getting-started---working-in-the-cloud.mdx": {
+      "fileName": "Getting-started---working-in-the-cloud.mdx",
+      "relativePath": "Getting-started---working-in-the-cloud.mdx",
+      "title": "Getting started - working in the cloud",
+      "totalLinks": 8
+    },
+    "/docs/Getting-started---working-locally.mdx": {
+      "fileName": "Getting-started---working-locally.mdx",
+      "relativePath": "Getting-started---working-locally.mdx",
+      "title": "Getting started - working locally",
+      "totalLinks": 11
+    },
+    "/docs/advanced/adding-the-cms-to-an-ipad-home-screen.mdx": {
+      "fileName": "adding-the-cms-to-an-ipad-home-screen.mdx",
+      "relativePath": "advanced/adding-the-cms-to-an-ipad-home-screen.mdx",
+      "title": "Adding the CMS to an iPad home screen",
+      "totalLinks": 0
+    },
+    "/docs/advanced/front-matter-cms.mdx": {
+      "fileName": "front-matter-cms.mdx",
+      "relativePath": "advanced/front-matter-cms.mdx",
+      "title": "Front Matter CMS",
+      "totalLinks": 3
+    },
+    "/docs/advanced/hosted-cms.mdx": {
+      "fileName": "hosted-cms.mdx",
+      "relativePath": "advanced/hosted-cms.mdx",
+      "title": "Hosted CMS",
+      "totalLinks": 4
+    },
+    "/docs/advanced/index.mdx": {
+      "fileName": "index.mdx",
+      "relativePath": "advanced/index.mdx",
+      "title": "Advanced guides",
+      "totalLinks": 2
+    },
+    "/docs/advanced/notifications.mdx": {
+      "fileName": "notifications.mdx",
+      "relativePath": "advanced/notifications.mdx",
+      "title": "Notifications",
+      "totalLinks": 6
+    },
+    "/docs/advanced/openapi.mdx": {
+      "fileName": "openapi.mdx",
+      "relativePath": "advanced/openapi.mdx",
+      "title": "OpenAPI reference docs",
+      "totalLinks": 1
+    },
+    "/docs/advanced/style.mdx": {
+      "fileName": "style.mdx",
+      "relativePath": "advanced/style.mdx",
+      "title": "Style checking",
+      "totalLinks": 6
+    },
+    "/docs/blog.mdx": {
+      "fileName": "blog.mdx",
+      "relativePath": "blog.mdx",
+      "title": "Blog",
+      "totalLinks": 2
+    },
+    "/docs/browser-support.mdx": {
+      "fileName": "browser-support.mdx",
+      "relativePath": "browser-support.mdx",
+      "title": "Browser support",
+      "totalLinks": 2
+    },
+    "/docs/cli.mdx": {
+      "fileName": "cli.mdx",
+      "relativePath": "cli.mdx",
+      "title": "CLI",
+      "totalLinks": 6
+    },
+    "/docs/configuration.mdx": {
+      "fileName": "configuration.mdx",
+      "relativePath": "configuration.mdx",
+      "title": "Configuration",
+      "totalLinks": 1
+    },
+    "/docs/deployment.mdx": {
+      "fileName": "deployment.mdx",
+      "relativePath": "deployment.mdx",
+      "title": "Deployment",
+      "totalLinks": 2
+    },
+    "/docs/guides/creating-pages.mdx": {
+      "fileName": "creating-pages.mdx",
+      "relativePath": "guides/creating-pages.mdx",
+      "title": "Creating pages",
+      "totalLinks": 3
+    },
+    "/docs/guides/dashboards.mdx": {
+      "fileName": "dashboards.mdx",
+      "relativePath": "guides/dashboards.mdx",
+      "title": "Dashboards",
+      "totalLinks": 0
+    },
+    "/docs/guides/docs/create-doc.mdx": {
+      "fileName": "create-doc.mdx",
+      "relativePath": "guides/docs/create-doc.mdx",
+      "title": "Create a doc",
+      "totalLinks": 3
+    },
+    "/docs/guides/docs/introduction.mdx": {
+      "fileName": "introduction.mdx",
+      "relativePath": "guides/docs/introduction.mdx",
+      "title": "Docs introduction",
+      "totalLinks": 2
+    },
+    "/docs/guides/docs/taxonomies.mdx": {
+      "fileName": "taxonomies.mdx",
+      "relativePath": "guides/docs/taxonomies.mdx",
+      "title": "Taxonomies",
+      "totalLinks": 2
+    },
+    "/docs/guides/index.mdx": {
+      "fileName": "index.mdx",
+      "relativePath": "guides/index.mdx",
+      "title": "Guides",
+      "totalLinks": 0
+    },
+    "/docs/guides/markdown-features/admonitions.mdx": {
+      "fileName": "admonitions.mdx",
+      "relativePath": "guides/markdown-features/admonitions.mdx",
+      "title": "Admonitions",
+      "totalLinks": 0
+    },
+    "/docs/guides/markdown-features/assets.mdx": {
+      "fileName": "assets.mdx",
+      "relativePath": "guides/markdown-features/assets.mdx",
+      "title": "Assets",
+      "totalLinks": 4
+    },
+    "/docs/guides/markdown-features/code-blocks.mdx": {
+      "fileName": "code-blocks.mdx",
+      "relativePath": "guides/markdown-features/code-blocks.mdx",
+      "title": "Code blocks and snippets",
+      "totalLinks": 0
+    },
+    "/docs/guides/markdown-features/comments.mdx": {
+      "fileName": "comments.mdx",
+      "relativePath": "guides/markdown-features/comments.mdx",
+      "title": "Comments",
+      "totalLinks": 0
+    },
+    "/docs/guides/markdown-features/conditional-text.mdx": {
+      "fileName": "conditional-text.mdx",
+      "relativePath": "guides/markdown-features/conditional-text.mdx",
+      "title": "Conditional text",
+      "totalLinks": 0
+    },
+    "/docs/guides/markdown-features/context-help.mdx": {
+      "fileName": "context-help.mdx",
+      "relativePath": "guides/markdown-features/context-help.mdx",
+      "title": "Context-sensitive help",
+      "totalLinks": 3
+    },
+    "/docs/guides/markdown-features/diagrams.mdx": {
+      "fileName": "diagrams.mdx",
+      "relativePath": "guides/markdown-features/diagrams.mdx",
+      "title": "Diagrams",
+      "totalLinks": 3
+    },
+    "/docs/guides/markdown-features/figures.mdx": {
+      "fileName": "figures.mdx",
+      "relativePath": "guides/markdown-features/figures.mdx",
+      "title": "Figures",
+      "totalLinks": 0
+    },
+    "/docs/guides/markdown-features/footnotes.mdx": {
+      "fileName": "footnotes.mdx",
+      "relativePath": "guides/markdown-features/footnotes.mdx",
+      "title": "Footnotes",
+      "totalLinks": 0
+    },
+    "/docs/guides/markdown-features/glossary.mdx": {
+      "fileName": "glossary.mdx",
+      "relativePath": "guides/markdown-features/glossary.mdx",
+      "title": "Glossary terms",
+      "totalLinks": 0
+    },
+    "/docs/guides/markdown-features/intro.mdx": {
+      "fileName": "intro.mdx",
+      "relativePath": "guides/markdown-features/intro.mdx",
+      "title": "Markdown features",
+      "totalLinks": 19
+    },
+    "/docs/guides/markdown-features/links.mdx": {
+      "fileName": "links.mdx",
+      "relativePath": "guides/markdown-features/links.mdx",
+      "title": "Markdown links",
+      "totalLinks": 1
+    },
+    "/docs/guides/markdown-features/math-equations.mdx": {
+      "fileName": "math-equations.mdx",
+      "relativePath": "guides/markdown-features/math-equations.mdx",
+      "title": "Math equations",
+      "totalLinks": 2
+    },
+    "/docs/guides/markdown-features/metadata.mdx": {
+      "fileName": "metadata.mdx",
+      "relativePath": "guides/markdown-features/metadata.mdx",
+      "title": "Head metadata",
+      "totalLinks": 1
+    },
+    "/docs/guides/markdown-features/plugins.mdx": {
+      "fileName": "plugins.mdx",
+      "relativePath": "guides/markdown-features/plugins.mdx",
+      "title": "MDX plugins",
+      "totalLinks": 3
+    },
+    "/docs/guides/markdown-features/react.mdx": {
+      "fileName": "react.mdx",
+      "relativePath": "guides/markdown-features/react.mdx",
+      "title": "MDX and React",
+      "totalLinks": 4
+    },
+    "/docs/guides/markdown-features/related-topics.mdx": {
+      "fileName": "related-topics.mdx",
+      "relativePath": "guides/markdown-features/related-topics.mdx",
+      "title": "Related Topics",
+      "totalLinks": 0
+    },
+    "/docs/guides/markdown-features/snippets.mdx": {
+      "fileName": "snippets.mdx",
+      "relativePath": "guides/markdown-features/snippets.mdx",
+      "title": "Snippets",
+      "totalLinks": 0
+    },
+    "/docs/guides/markdown-features/tabs.mdx": {
+      "fileName": "tabs.mdx",
+      "relativePath": "guides/markdown-features/tabs.mdx",
+      "title": "Tabs",
+      "totalLinks": 1
+    },
+    "/docs/guides/markdown-features/taxonomies.mdx": {
+      "fileName": "taxonomies.mdx",
+      "relativePath": "guides/markdown-features/taxonomies.mdx",
+      "title": "Taxonomy tags",
+      "totalLinks": 1
+    },
+    "/docs/guides/markdown-features/toc.mdx": {
+      "fileName": "toc.mdx",
+      "relativePath": "guides/markdown-features/toc.mdx",
+      "title": "Headings and table of contents",
+      "totalLinks": 2
+    },
+    "/docs/guides/markdown-features/variables.mdx": {
+      "fileName": "variables.mdx",
+      "relativePath": "guides/markdown-features/variables.mdx",
+      "title": "Variable sets",
+      "totalLinks": 0
+    },
+    "/docs/guides/using-claude.mdx": {
+      "fileName": "using-claude.mdx",
+      "relativePath": "guides/using-claude.mdx",
+      "title": "Using Claude in this project",
+      "totalLinks": 1
+    },
+    "/docs/guides/vale.mdx": {
+      "fileName": "vale.mdx",
+      "relativePath": "guides/vale.mdx",
+      "title": "Prose linting with Vale",
+      "totalLinks": 4
+    },
+    "/docs/guides/wikis.mdx": {
+      "fileName": "wikis.mdx",
+      "relativePath": "guides/wikis.mdx",
+      "title": "Wikis",
+      "totalLinks": 1
+    },
+    "/docs/i18n/introduction.mdx": {
+      "fileName": "introduction.mdx",
+      "relativePath": "i18n/introduction.mdx",
+      "title": "Internationalization",
+      "totalLinks": 2
+    },
+    "/docs/installation.mdx": {
+      "fileName": "installation.mdx",
+      "relativePath": "installation.mdx",
+      "title": "Installation",
+      "totalLinks": 14
+    },
+    "/docs/introduction.mdx": {
+      "fileName": "introduction.mdx",
+      "relativePath": "introduction.mdx",
+      "title": "Introduction",
+      "totalLinks": 18
+    },
+    "/docs/mcp-server-details.mdx": {
+      "fileName": "mcp-server-details.mdx",
+      "relativePath": "mcp-server-details.mdx",
+      "title": "MCP Server Implementation Details",
+      "totalLinks": 0
+    },
+    "/docs/mcp-server.mdx": {
+      "fileName": "mcp-server.mdx",
+      "relativePath": "mcp-server.mdx",
+      "title": "MCP Server Integration",
+      "totalLinks": 1
+    },
+    "/docs/migration/index.mdx": {
+      "fileName": "index.mdx",
+      "relativePath": "migration/index.mdx",
+      "title": "Upgrading",
+      "totalLinks": 1
+    },
+    "/docs/search.mdx": {
+      "fileName": "search.mdx",
+      "relativePath": "search.mdx",
+      "title": "Search",
+      "totalLinks": 6
+    },
+    "/docs/seo.mdx": {
+      "fileName": "seo.mdx",
+      "relativePath": "seo.mdx",
+      "title": "Search engine optimisation (SEO)",
+      "totalLinks": 1
+    },
+    "/docs/static-assets.mdx": {
+      "fileName": "static-assets.mdx",
+      "relativePath": "static-assets.mdx",
+      "title": "Static assets",
+      "totalLinks": 1
+    },
+    "/docs/styling-layout.mdx": {
+      "fileName": "styling-layout.mdx",
+      "relativePath": "styling-layout.mdx",
+      "title": "Styling and layout",
+      "totalLinks": 4
+    },
+    "/docs/using-plugins.mdx": {
+      "fileName": "using-plugins.mdx",
+      "relativePath": "using-plugins.mdx",
+      "title": "Using plugins",
+      "totalLinks": 4
+    },
+    "/docs/wiki/readme.mdx": {
+      "fileName": "readme.mdx",
+      "relativePath": "wiki/readme.mdx",
+      "title": "Introduction",
+      "totalLinks": 0
+    }
+  },
+  "links": [
+    {
+      "text": "GitHub",
+      "url": "https://github.com/",
+      "type": "markdown",
+      "filePath": "/docs/Getting-started---working-in-the-cloud.mdx",
+      "line": 14,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-11T15:08:40.593Z"
+    },
+    {
+      "text": "TinaCMS",
+      "url": "https://tina.io/",
+      "type": "markdown",
+      "filePath": "/docs/Getting-started---working-in-the-cloud.mdx",
+      "line": 15,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-11T15:08:40.645Z"
+    },
+    {
+      "text": "LanguageTool",
+      "url": "https://languagetool.org/",
+      "type": "markdown",
+      "filePath": "/docs/Getting-started---working-in-the-cloud.mdx",
+      "line": 16,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-11T15:08:40.827Z"
+    },
+    {
+      "text": "https://github.com/aowendev/docstatic",
+      "url": "https://github.com/aowendev/docstatic",
+      "type": "markdown",
+      "filePath": "/docs/Getting-started---working-in-the-cloud.mdx",
+      "line": 25,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-11T15:08:41.463Z"
+    },
+    {
+      "text": "MCP server",
+      "url": "mcp-server.mdx",
+      "type": "markdown",
+      "filePath": "/docs/Getting-started---working-in-the-cloud.mdx",
+      "line": 101,
+      "status": "skipped",
+      "reason": "Internal link — checked by the Docusaurus build"
+    },
+    {
+      "text": "Monorepos",
+      "url": "https://docusaurus.io/docs/installation#monorepos",
+      "type": "markdown",
+      "filePath": "/docs/Getting-started---working-in-the-cloud.mdx",
+      "line": 126,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "redirectedTo": "https://docusaurus.io/docs/installation",
+      "checkedAt": "2026-08-11T15:08:40.919Z"
+    },
+    {
+      "text": "http://localhost:3000",
+      "url": "http://localhost:3000",
+      "type": "markdown",
+      "filePath": "/docs/Getting-started---working-in-the-cloud.mdx",
+      "line": 140,
+      "status": "skipped",
+      "reason": "Local address — not checked"
+    },
+    {
+      "text": "Deployment",
+      "url": "https://docusaurus.io/docs/deployment",
+      "type": "markdown",
+      "filePath": "/docs/Getting-started---working-in-the-cloud.mdx",
+      "line": 152,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-11T15:08:40.670Z"
+    },
+    {
+      "text": "GitHub",
+      "url": "https://github.com/",
+      "type": "markdown",
+      "filePath": "/docs/Getting-started---working-locally.mdx",
+      "line": 14,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-11T15:08:40.593Z"
+    },
+    {
+      "text": "Eclipse",
+      "url": "https://eclipseide.org",
+      "type": "markdown",
+      "filePath": "/docs/Getting-started---working-locally.mdx",
+      "line": 16,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "redirectedTo": "https://eclipseide.org/",
+      "checkedAt": "2026-08-11T15:08:41.007Z"
+    },
+    {
+      "text": "VSCodium",
+      "url": "https://vscodium.com/",
+      "type": "markdown",
+      "filePath": "/docs/Getting-started---working-locally.mdx",
+      "line": 17,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-11T15:08:40.605Z"
+    },
+    {
+      "text": "Node.js",
+      "url": "https://nodejs.org/",
+      "type": "markdown",
+      "filePath": "/docs/Getting-started---working-locally.mdx",
+      "line": 25,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "redirectedTo": "https://nodejs.org/en",
+      "checkedAt": "2026-08-11T15:08:40.693Z"
+    },
+    {
+      "text": "official Node.js downloads",
+      "url": "https://nodejs.org/en/download/prebuilt-installer",
+      "type": "markdown",
+      "filePath": "/docs/Getting-started---working-locally.mdx",
+      "line": 40,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "redirectedTo": "https://nodejs.org/en/download",
+      "checkedAt": "2026-08-11T15:08:40.711Z"
+    },
+    {
+      "text": "Node Version Manager",
+      "url": "https://github.com/nvm-sh/nvm",
+      "type": "markdown",
+      "filePath": "/docs/Getting-started---working-locally.mdx",
+      "line": 46,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-11T15:08:42.573Z"
+    },
+    {
+      "text": "https://github.com/aowendev/docstatic",
+      "url": "https://github.com/aowendev/docstatic",
+      "type": "markdown",
+      "filePath": "/docs/Getting-started---working-locally.mdx",
+      "line": 156,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-11T15:08:41.463Z"
+    },
+    {
+      "text": "MCP server",
+      "url": "mcp-server.mdx",
+      "type": "markdown",
+      "filePath": "/docs/Getting-started---working-locally.mdx",
+      "line": 279,
+      "status": "skipped",
+      "reason": "Internal link — checked by the Docusaurus build"
+    },
+    {
+      "text": "Monorepos",
+      "url": "https://docusaurus.io/docs/installation#monorepos",
+      "type": "markdown",
+      "filePath": "/docs/Getting-started---working-locally.mdx",
+      "line": 304,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "redirectedTo": "https://docusaurus.io/docs/installation",
+      "checkedAt": "2026-08-11T15:08:40.919Z"
+    },
+    {
+      "text": "http://localhost:3000",
+      "url": "http://localhost:3000",
+      "type": "markdown",
+      "filePath": "/docs/Getting-started---working-locally.mdx",
+      "line": 318,
+      "status": "skipped",
+      "reason": "Local address — not checked"
+    },
+    {
+      "text": "Deployment",
+      "url": "https://docusaurus.io/docs/deployment",
+      "type": "markdown",
+      "filePath": "/docs/Getting-started---working-locally.mdx",
+      "line": 330,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-11T15:08:40.670Z"
+    },
+    {
+      "text": "VSCodium",
+      "url": "https://vscodium.com/",
+      "type": "markdown",
+      "filePath": "/docs/advanced/front-matter-cms.mdx",
+      "line": 2,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-11T15:08:40.605Z"
+    },
+    {
+      "text": "Front Matter",
+      "url": "https://frontmatter.codes/",
+      "type": "markdown",
+      "filePath": "/docs/advanced/front-matter-cms.mdx",
+      "line": 2,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-11T15:08:41.043Z"
+    },
+    {
+      "text": "documentation",
+      "url": "https://frontmatter.codes/docs",
+      "type": "markdown",
+      "filePath": "/docs/advanced/front-matter-cms.mdx",
+      "line": 2,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-11T15:08:41.071Z"
+    },
+    {
+      "text": "TinaCloud",
+      "url": "https://tina.io/docs/tinacloud",
+      "type": "markdown",
+      "filePath": "/docs/advanced/hosted-cms.mdx",
+      "line": 7,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-11T15:08:40.766Z"
+    },
+    {
+      "text": "register",
+      "url": "https://app.tina.io/register",
+      "type": "markdown",
+      "filePath": "/docs/advanced/hosted-cms.mdx",
+      "line": 7,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-11T15:08:41.119Z"
+    },
+    {
+      "text": "pricing plans",
+      "url": "https://tina.io/pricing",
+      "type": "markdown",
+      "filePath": "/docs/advanced/hosted-cms.mdx",
+      "line": 7,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-11T15:08:40.861Z"
+    },
+    {
+      "text": "self-hosting",
+      "url": "https://tina.io/docs/self-hosted/overview",
+      "type": "markdown",
+      "filePath": "/docs/advanced/hosted-cms.mdx",
+      "line": 11,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-11T15:08:40.895Z"
+    },
+    {
+      "text": "Guides",
+      "url": "https://docusaurus.io/docs/category/guides",
+      "type": "markdown",
+      "filePath": "/docs/advanced/index.mdx",
+      "line": 5,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-11T15:08:41.280Z"
+    },
+    {
+      "text": "Advanced Guides",
+      "url": "https://docusaurus.io/docs/advanced",
+      "type": "markdown",
+      "filePath": "/docs/advanced/index.mdx",
+      "line": 5,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-11T15:08:41.205Z"
+    },
+    {
+      "text": "GitHub Actions",
+      "url": "https://docs.github.com/en/actions",
+      "type": "markdown",
+      "filePath": "/docs/advanced/notifications.mdx",
+      "line": 3,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-11T15:08:41.041Z"
+    },
+    {
+      "text": "secrets",
+      "url": "https://docs.github.com/en/actions/how-tos/write-workflows/choose-what-workflows-do/use-secrets",
+      "type": "markdown",
+      "filePath": "/docs/advanced/notifications.mdx",
+      "line": 7,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-11T15:08:41.062Z"
+    },
+    {
+      "text": "iCloud",
+      "url": "https://support.apple.com/en-us/102525",
+      "type": "markdown",
+      "filePath": "/docs/advanced/notifications.mdx",
+      "line": 18,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-11T15:08:41.086Z"
+    },
+    {
+      "text": "app-specific-password)",
+      "url": "https://support.apple.com/en-us/102654",
+      "type": "markdown",
+      "filePath": "/docs/advanced/notifications.mdx",
+      "line": 18,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-11T15:08:41.099Z"
+    },
+    {
+      "text": "Outlook",
+      "url": "https://support.microsoft.com/en-us/office/pop-imap-and-smtp-settings-for-outlook-com-d088b986-291d-42b8-9564-9c414e2aa040",
+      "type": "markdown",
+      "filePath": "/docs/advanced/notifications.mdx",
+      "line": 19,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "redirectedTo": "https://support.microsoft.com/en-US/Outlook/pop-imap-and-smtp-settings-for-outlook-com",
+      "checkedAt": "2026-08-11T15:08:41.414Z"
+    },
+    {
+      "text": "Sending messages using incoming webhooks",
+      "url": "https://docs.slack.dev/messaging/sending-messages-using-incoming-webhooks/",
+      "type": "markdown",
+      "filePath": "/docs/advanced/notifications.mdx",
+      "line": 23,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-11T15:08:41.339Z"
+    },
+    {
+      "text": "                                ",
+      "url": "https://github.com/PaloAltoNetworks/docusaurus-openapi-docs",
+      "type": "markdown",
+      "filePath": "/docs/advanced/openapi.mdx",
+      "line": 3,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-11T15:08:41.871Z"
+    },
+    {
+      "text": "LanguageTool",
+      "url": "https://languagetool.org/",
+      "type": "markdown",
+      "filePath": "/docs/advanced/style.mdx",
+      "line": 7,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-11T15:08:40.827Z"
+    },
+    {
+      "text": "register",
+      "url": "https://languagetool.org/register",
+      "type": "markdown",
+      "filePath": "/docs/advanced/style.mdx",
+      "line": 7,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-11T15:08:41.508Z"
+    },
+    {
+      "text": "premium plan",
+      "url": "https://languagetool.org/premium",
+      "type": "markdown",
+      "filePath": "/docs/advanced/style.mdx",
+      "line": 7,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-11T15:08:42.526Z"
+    },
+    {
+      "text": "businesses",
+      "url": "https://languagetool.org/sales",
+      "type": "markdown",
+      "filePath": "/docs/advanced/style.mdx",
+      "line": 7,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "redirectedTo": "https://languagetool.org/premium",
+      "checkedAt": "2026-08-11T15:08:42.415Z"
+    },
+    {
+      "text": "discount",
+      "url": "https://languagetool.org/premium",
+      "type": "markdown",
+      "filePath": "/docs/advanced/style.mdx",
+      "line": 7,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-11T15:08:42.526Z"
+    },
+    {
+      "text": "self-hosting",
+      "url": "https://languagetool.org/dev",
+      "type": "markdown",
+      "filePath": "/docs/advanced/style.mdx",
+      "line": 11,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-11T15:08:41.860Z"
+    },
+    {
+      "text": "Blog Plugin API Reference",
+      "url": "https://docusaurus.io/docs/api/plugins/@docusaurus/plugin-content-blog",
+      "type": "markdown",
+      "filePath": "/docs/blog.mdx",
+      "line": 7,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-11T15:08:42.824Z"
+    },
+    {
+      "text": "Blog",
+      "url": "https://docusaurus.io/docs/blog",
+      "type": "markdown",
+      "filePath": "/docs/blog.mdx",
+      "line": 22,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-11T15:08:41.523Z"
+    },
+    {
+      "text": "browserslist configuration",
+      "url": "https://github.com/browserslist/browserslist",
+      "type": "markdown",
+      "filePath": "/docs/browser-support.mdx",
+      "line": 2,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-11T15:08:42.178Z"
+    },
+    {
+      "text": "Browser support",
+      "url": "https://docusaurus.io/docs/browser-support",
+      "type": "markdown",
+      "filePath": "/docs/browser-support.mdx",
+      "line": 4,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-11T15:08:41.795Z"
+    },
+    {
+      "text": "MCP Server Integration",
+      "url": "mcp-server.mdx",
+      "type": "markdown",
+      "filePath": "/docs/cli.mdx",
+      "line": 65,
+      "status": "skipped",
+      "reason": "Internal link — checked by the Docusaurus build"
+    },
+    {
+      "text": "CLI",
+      "url": "https://docusaurus.io/docs/cli",
+      "type": "markdown",
+      "filePath": "/docs/cli.mdx",
+      "line": 67,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-11T15:08:42.751Z"
+    },
+    {
+      "text": "CLI Usage",
+      "url": "https://github.com/PaloAltoNetworks/docusaurus-openapi-docs?tab=readme-ov-file#cli-usage",
+      "type": "markdown",
+      "filePath": "/docs/cli.mdx",
+      "line": 94,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "redirectedTo": "https://github.com/PaloAltoNetworks/docusaurus-openapi-docs?tab=readme-ov-file",
+      "checkedAt": "2026-08-11T15:08:42.806Z"
+    },
+    {
+      "text": "Usage",
+      "url": "https://github.com/Zhouzi/docusaurus-graphql-plugin?tab=readme-ov-file#usage",
+      "type": "markdown",
+      "filePath": "/docs/cli.mdx",
+      "line": 96,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "redirectedTo": "https://github.com/Zhouzi/docusaurus-graphql-plugin?tab=readme-ov-file",
+      "checkedAt": "2026-08-11T15:08:42.609Z"
+    },
+    {
+      "text": "Installation",
+      "url": "installation.mdx",
+      "type": "markdown",
+      "filePath": "/docs/cli.mdx",
+      "line": 102,
+      "status": "skipped",
+      "reason": "Internal link — checked by the Docusaurus build"
+    },
+    {
+      "text": "CLI",
+      "url": "https://biomejs.dev/reference/cli/",
+      "type": "markdown",
+      "filePath": "/docs/cli.mdx",
+      "line": 131,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-11T15:08:42.264Z"
+    },
+    {
+      "text": "Configuration",
+      "url": "https://docusaurus.io/docs/configuration",
+      "type": "markdown",
+      "filePath": "/docs/configuration.mdx",
+      "line": 4,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-11T15:08:42.311Z"
+    },
+    {
+      "text": "GitHub Pages",
+      "url": "https://docs.github.com/en/pages",
+      "type": "markdown",
+      "filePath": "/docs/deployment.mdx",
+      "line": 1,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-11T15:08:42.331Z"
+    },
+    {
+      "text": "Deployment",
+      "url": "https://docusaurus.io/docs/deployment#deploying-to-github-pages",
+      "type": "markdown",
+      "filePath": "/docs/deployment.mdx",
+      "line": 1,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "redirectedTo": "https://docusaurus.io/docs/deployment",
+      "checkedAt": "2026-08-11T15:08:42.869Z"
+    },
+    {
+      "text": "Pages Plugin API Reference",
+      "url": "http://localhost:3000/docs/api/plugins/plugin-content-pages.mdx",
+      "type": "markdown",
+      "filePath": "/docs/guides/creating-pages.mdx",
+      "line": 7,
+      "status": "skipped",
+      "reason": "Local address — not checked"
+    },
+    {
+      "text": "Passthrough",
+      "url": "/docs/guides/markdown-features/react#passthrough-component",
+      "type": "markdown",
+      "filePath": "/docs/guides/creating-pages.mdx",
+      "line": 19,
+      "status": "skipped",
+      "reason": "Internal link — checked by the Docusaurus build"
+    },
+    {
+      "text": "Creating Pages",
+      "url": "https://docusaurus.io/docs/creating-pages",
+      "type": "markdown",
+      "filePath": "/docs/guides/creating-pages.mdx",
+      "line": 31,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-11T15:08:42.680Z"
+    },
+    {
+      "text": "context-sensitive help",
+      "url": "https://docstatic.com/docs/context-help",
+      "type": "markdown",
+      "filePath": "/docs/guides/docs/create-doc.mdx",
+      "line": 14,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-11T15:08:42.547Z"
+    },
+    {
+      "text": "taxonomy",
+      "url": "taxonomies",
+      "type": "markdown",
+      "filePath": "/docs/guides/docs/create-doc.mdx",
+      "line": 16,
+      "status": "skipped",
+      "reason": "Internal link — checked by the Docusaurus build"
+    },
+    {
+      "text": "Create a doc",
+      "url": "https://docusaurus.io/docs/create-doc",
+      "type": "markdown",
+      "filePath": "/docs/guides/docs/create-doc.mdx",
+      "line": 30,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-11T15:08:42.604Z"
+    },
+    {
+      "text": "Docs Plugin API Reference",
+      "url": "https://docusaurus.io/docs/api/plugins/@docusaurus/plugin-content-docs",
+      "type": "markdown",
+      "filePath": "/docs/guides/docs/introduction.mdx",
+      "line": 6,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-11T15:08:42.774Z"
+    },
+    {
+      "text": "Docs introduction",
+      "url": "https://docusaurus.io/docs/docs-introduction",
+      "type": "markdown",
+      "filePath": "/docs/guides/docs/introduction.mdx",
+      "line": 9,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-11T15:08:43.017Z"
+    },
+    {
+      "text": "information architecture",
+      "url": "https://en.wikipedia.org/wiki/Information_architecture",
+      "type": "markdown",
+      "filePath": "/docs/guides/docs/taxonomies.mdx",
+      "line": 4,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-11T15:08:42.686Z"
+    },
+    {
+      "text": "indexing",
+      "url": "/docs/tags",
+      "type": "markdown",
+      "filePath": "/docs/guides/docs/taxonomies.mdx",
+      "line": 10,
+      "status": "skipped",
+      "reason": "Internal link — checked by the Docusaurus build"
+    },
+    {
+      "text": "",
+      "url": "/img/docs/example.svg",
+      "type": "markdown",
+      "filePath": "/docs/guides/markdown-features/assets.mdx",
+      "line": 19,
+      "status": "skipped",
+      "reason": "Internal link — checked by the Docusaurus build"
+    },
+    {
+      "text": "Librsvg",
+      "url": "https://wiki.gnome.org/Projects/LibRsvg",
+      "type": "markdown",
+      "filePath": "/docs/guides/markdown-features/assets.mdx",
+      "line": 22,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-11T15:08:42.787Z"
+    },
+    {
+      "text": "Media Overview",
+      "url": "https://tina.io/docs/reference/media/overview",
+      "type": "markdown",
+      "filePath": "/docs/guides/markdown-features/assets.mdx",
+      "line": 39,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-11T15:08:42.716Z"
+    },
+    {
+      "text": "Static assets",
+      "url": "https://docusaurus.io/docs/markdown-features/assets",
+      "type": "markdown",
+      "filePath": "/docs/guides/markdown-features/assets.mdx",
+      "line": 49,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-11T15:08:42.766Z"
+    },
+    {
+      "text": "online help",
+      "url": "https://en.wikipedia.org/wiki/Online_help",
+      "type": "markdown",
+      "filePath": "/docs/guides/markdown-features/context-help.mdx",
+      "line": 3,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-11T15:08:42.822Z"
+    },
+    {
+      "text": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Context-sensitive_help",
+      "type": "markdown",
+      "filePath": "/docs/guides/markdown-features/context-help.mdx",
+      "line": 3,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-11T15:08:42.839Z"
+    },
+    {
+      "text": "https://docstatic.com/docs/context-help#help-example",
+      "url": "/docs/context-help#help-example",
+      "type": "markdown",
+      "filePath": "/docs/guides/markdown-features/context-help.mdx",
+      "line": 16,
+      "status": "skipped",
+      "reason": "Internal link — checked by the Docusaurus build"
+    },
+    {
+      "text": "Mermaid",
+      "url": "https://mermaid.js.org/",
+      "type": "markdown",
+      "filePath": "/docs/guides/markdown-features/diagrams.mdx",
+      "line": 3,
+      "status": "unverified",
+      "reason": "Domain did not resolve — check DNS, then the link",
+      "code": null,
+      "checkedAt": "2026-08-11T15:08:42.780Z"
+    },
+    {
+      "text": "Mermaid",
+      "url": "https://tina.io/docs/reference/rich-text-usage/mermaid",
+      "type": "markdown",
+      "filePath": "/docs/guides/markdown-features/diagrams.mdx",
+      "line": 28,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-11T15:08:42.819Z"
+    },
+    {
+      "text": "Diagrams",
+      "url": "https://docusaurus.io/docs/markdown-features/diagrams",
+      "type": "markdown",
+      "filePath": "/docs/guides/markdown-features/diagrams.mdx",
+      "line": 30,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-11T15:08:42.950Z"
+    },
+    {
+      "text": "Markdown",
+      "url": "https://commonmark.org/",
+      "type": "markdown",
+      "filePath": "/docs/guides/markdown-features/intro.mdx",
+      "line": 4,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-11T15:08:42.827Z"
+    },
+    {
+      "text": "learn it in ten minutes",
+      "url": "https://commonmark.org/help/",
+      "type": "markdown",
+      "filePath": "/docs/guides/markdown-features/intro.mdx",
+      "line": 4,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-11T15:08:42.841Z"
+    },
+    {
+      "text": "YAML",
+      "url": "https://yaml.org/spec/1.2.2/",
+      "type": "markdown",
+      "filePath": "/docs/guides/markdown-features/intro.mdx",
+      "line": 10,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-11T15:08:42.843Z"
+    },
+    {
+      "text": "Admonitions",
+      "url": "admonitions",
+      "type": "markdown",
+      "filePath": "/docs/guides/markdown-features/intro.mdx",
+      "line": 34,
+      "status": "skipped",
+      "reason": "Internal link — checked by the Docusaurus build"
+    },
+    {
+      "text": "Tabs",
+      "url": "tabs",
+      "type": "markdown",
+      "filePath": "/docs/guides/markdown-features/intro.mdx",
+      "line": 37,
+      "status": "skipped",
+      "reason": "Internal link — checked by the Docusaurus build"
+    },
+    {
+      "text": "Code snippets",
+      "url": "code-blocks",
+      "type": "markdown",
+      "filePath": "/docs/guides/markdown-features/intro.mdx",
+      "line": 41,
+      "status": "skipped",
+      "reason": "Internal link — checked by the Docusaurus build"
+    },
+    {
+      "text": "Comments",
+      "url": "comments",
+      "type": "markdown",
+      "filePath": "/docs/guides/markdown-features/intro.mdx",
+      "line": 42,
+      "status": "skipped",
+      "reason": "Internal link — checked by the Docusaurus build"
+    },
+    {
+      "text": "Conditional text",
+      "url": "conditional-text",
+      "type": "markdown",
+      "filePath": "/docs/guides/markdown-features/intro.mdx",
+      "line": 43,
+      "status": "skipped",
+      "reason": "Internal link — checked by the Docusaurus build"
+    },
+    {
+      "text": "Context help links",
+      "url": "context-help",
+      "type": "markdown",
+      "filePath": "/docs/guides/markdown-features/intro.mdx",
+      "line": 44,
+      "status": "skipped",
+      "reason": "Internal link — checked by the Docusaurus build"
+    },
+    {
+      "text": "Diagrams",
+      "url": "diagrams",
+      "type": "markdown",
+      "filePath": "/docs/guides/markdown-features/intro.mdx",
+      "line": 45,
+      "status": "skipped",
+      "reason": "Internal link — checked by the Docusaurus build"
+    },
+    {
+      "text": "Figures",
+      "url": "figures",
+      "type": "markdown",
+      "filePath": "/docs/guides/markdown-features/intro.mdx",
+      "line": 46,
+      "status": "skipped",
+      "reason": "Internal link — checked by the Docusaurus build"
+    },
+    {
+      "text": "Footnotes",
+      "url": "footnotes",
+      "type": "markdown",
+      "filePath": "/docs/guides/markdown-features/intro.mdx",
+      "line": 47,
+      "status": "skipped",
+      "reason": "Internal link — checked by the Docusaurus build"
+    },
+    {
+      "text": "Glossary terms",
+      "url": "glossary",
+      "type": "markdown",
+      "filePath": "/docs/guides/markdown-features/intro.mdx",
+      "line": 48,
+      "status": "skipped",
+      "reason": "Internal link — checked by the Docusaurus build"
+    },
+    {
+      "text": "Math equations",
+      "url": "math-equations",
+      "type": "markdown",
+      "filePath": "/docs/guides/markdown-features/intro.mdx",
+      "line": 49,
+      "status": "skipped",
+      "reason": "Internal link — checked by the Docusaurus build"
+    },
+    {
+      "text": "Related topics",
+      "url": "related-topics",
+      "type": "markdown",
+      "filePath": "/docs/guides/markdown-features/intro.mdx",
+      "line": 50,
+      "status": "skipped",
+      "reason": "Internal link — checked by the Docusaurus build"
+    },
+    {
+      "text": "Snippets",
+      "url": "snippets",
+      "type": "markdown",
+      "filePath": "/docs/guides/markdown-features/intro.mdx",
+      "line": 51,
+      "status": "skipped",
+      "reason": "Internal link — checked by the Docusaurus build"
+    },
+    {
+      "text": "Variables",
+      "url": "variables",
+      "type": "markdown",
+      "filePath": "/docs/guides/markdown-features/intro.mdx",
+      "line": 52,
+      "status": "skipped",
+      "reason": "Internal link — checked by the Docusaurus build"
+    },
+    {
+      "text": "links",
+      "url": "https://docusaurus.io/",
+      "type": "markdown",
+      "filePath": "/docs/guides/markdown-features/intro.mdx",
+      "line": 77,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-11T15:08:42.880Z"
+    },
+    {
+      "text": "Markdown Features",
+      "url": "https://docusaurus.io/docs/markdown-features",
+      "type": "markdown",
+      "filePath": "/docs/guides/markdown-features/intro.mdx",
+      "line": 87,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-11T15:08:43.038Z"
+    },
+    {
+      "text": "Markdown links",
+      "url": "https://docusaurus.io/docs/markdown-features/links",
+      "type": "markdown",
+      "filePath": "/docs/guides/markdown-features/links.mdx",
+      "line": 16,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-11T15:08:43.313Z"
+    },
+    {
+      "text": "KaTeX",
+      "url": "https://katex.org",
+      "type": "markdown",
+      "filePath": "/docs/guides/markdown-features/math-equations.mdx",
+      "line": 3,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "redirectedTo": "https://katex.org/",
+      "checkedAt": "2026-08-11T15:08:42.925Z"
+    },
+    {
+      "text": "KaTeX",
+      "url": "https://katex.org",
+      "type": "markdown",
+      "filePath": "/docs/guides/markdown-features/math-equations.mdx",
+      "line": 41,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "redirectedTo": "https://katex.org/",
+      "checkedAt": "2026-08-11T15:08:42.925Z"
+    },
+    {
+      "text": "Head metadata",
+      "url": "https://docusaurus.io/docs/markdown-features/head-metadata",
+      "type": "markdown",
+      "filePath": "/docs/guides/markdown-features/metadata.mdx",
+      "line": 22,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-11T15:08:43.324Z"
+    },
+    {
+      "text": "plugin system",
+      "url": "https://mdxjs.com/advanced/plugins/",
+      "type": "markdown",
+      "filePath": "/docs/guides/markdown-features/plugins.mdx",
+      "line": 3,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-11T15:08:42.890Z"
+    },
+    {
+      "text": "MDX Plugins",
+      "url": "https://docusaurus.io/docs/markdown-features/plugins",
+      "type": "markdown",
+      "filePath": "/docs/guides/markdown-features/plugins.mdx",
+      "line": 9,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-11T15:08:43.077Z"
+    },
+    {
+      "text": "math plugins",
+      "url": "math-equations",
+      "type": "markdown",
+      "filePath": "/docs/guides/markdown-features/plugins.mdx",
+      "line": 12,
+      "status": "skipped",
+      "reason": "Internal link — checked by the Docusaurus build"
+    },
+    {
+      "text": "MDX",
+      "url": "https://mdxjs.com/",
+      "type": "markdown",
+      "filePath": "/docs/guides/markdown-features/react.mdx",
+      "line": 4,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-11T15:08:42.912Z"
+    },
+    {
+      "text": "MDX and React",
+      "url": "https://docusaurus.io/docs/markdown-features/react",
+      "type": "markdown",
+      "filePath": "/docs/guides/markdown-features/react.mdx",
+      "line": 120,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-11T15:08:42.962Z"
+    },
+    {
+      "text": "example page",
+      "url": "/example-page",
+      "type": "markdown",
+      "filePath": "/docs/guides/markdown-features/react.mdx",
+      "line": 133,
+      "status": "skipped",
+      "reason": "Internal link — checked by the Docusaurus build"
+    },
+    {
+      "text": "math equations",
+      "url": "/docs/guides/markdown-features/math-equations",
+      "type": "markdown",
+      "filePath": "/docs/guides/markdown-features/react.mdx",
+      "line": 133,
+      "status": "skipped",
+      "reason": "Internal link — checked by the Docusaurus build"
+    },
+    {
+      "text": "Tabs",
+      "url": "https://docusaurus.io/docs/markdown-features/tabs",
+      "type": "markdown",
+      "filePath": "/docs/guides/markdown-features/tabs.mdx",
+      "line": 33,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-11T15:08:43.225Z"
+    },
+    {
+      "text": "information architecture",
+      "url": "https://en.wikipedia.org/wiki/Information_architecture",
+      "type": "markdown",
+      "filePath": "/docs/guides/markdown-features/taxonomies.mdx",
+      "line": 4,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-11T15:08:42.686Z"
+    },
+    {
+      "text": "https://docstatic.com/docs/guides/markdown-features/toc#anchor-example",
+      "url": "https://docstatic.com/docs/guides/markdown-features/toc#anchor-example",
+      "type": "markdown",
+      "filePath": "/docs/guides/markdown-features/toc.mdx",
+      "line": 16,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "redirectedTo": "https://docstatic.com/docs/guides/markdown-features/toc",
+      "checkedAt": "2026-08-11T15:08:42.975Z"
+    },
+    {
+      "text": "Headings and Table of contents",
+      "url": "https://docusaurus.io/docs/markdown-features/toc",
+      "type": "markdown",
+      "filePath": "/docs/guides/markdown-features/toc.mdx",
+      "line": 22,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-11T15:08:43.218Z"
+    },
+    {
+      "text": "Claude Code",
+      "url": "https://claude.ai/code",
+      "type": "markdown",
+      "filePath": "/docs/guides/using-claude.mdx",
+      "line": 2,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-11T15:08:43.054Z"
+    },
+    {
+      "text": "Vale",
+      "url": "https://vale.sh",
+      "type": "markdown",
+      "filePath": "/docs/guides/vale.mdx",
+      "line": 2,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "redirectedTo": "https://vale.sh/",
+      "checkedAt": "2026-08-11T15:08:43.100Z"
+    },
+    {
+      "text": "Vale installation guide",
+      "url": "https://vale.sh/docs/vale-cli/installation/",
+      "type": "markdown",
+      "filePath": "/docs/guides/vale.mdx",
+      "line": 6,
+      "status": "broken",
+      "reason": "HTTP 404",
+      "code": 404,
+      "redirectedTo": "https://docs.vale.sh/vale-cli/installation",
+      "checkedAt": "2026-08-11T15:08:43.614Z"
+    },
+    {
+      "text": "Vale documentation",
+      "url": "https://vale.sh/docs/topics/styles/",
+      "type": "markdown",
+      "filePath": "/docs/guides/vale.mdx",
+      "line": 81,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "redirectedTo": "https://docs.vale.sh/topics/styles",
+      "checkedAt": "2026-08-11T15:08:43.306Z"
+    },
+    {
+      "text": "Vale VSCode",
+      "url": "https://marketplace.visualstudio.com/items?itemName=ChrisChinchilla.vale-vscode",
+      "type": "markdown",
+      "filePath": "/docs/guides/vale.mdx",
+      "line": 86,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-11T15:08:43.419Z"
+    },
+    {
+      "text": "Autogenerated",
+      "url": "https://docusaurus.io/docs/sidebar/autogenerated#autogenerated-sidebar-metadata",
+      "type": "markdown",
+      "filePath": "/docs/guides/wikis.mdx",
+      "line": 15,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "redirectedTo": "https://docusaurus.io/docs/sidebar/autogenerated",
+      "checkedAt": "2026-08-11T15:08:43.312Z"
+    },
+    {
+      "text": "i18n",
+      "url": "https://en.wikipedia.org/wiki/Internationalization_and_localization",
+      "type": "markdown",
+      "filePath": "/docs/i18n/introduction.mdx",
+      "line": 3,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-11T15:08:43.286Z"
+    },
+    {
+      "text": "i18n - Introduction",
+      "url": "https://docusaurus.io/docs/i18n/introduction",
+      "type": "markdown",
+      "filePath": "/docs/i18n/introduction.mdx",
+      "line": 3,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-11T15:08:43.431Z"
+    },
+    {
+      "text": "GitHub",
+      "url": "https://github.com/",
+      "type": "markdown",
+      "filePath": "/docs/installation.mdx",
+      "line": 13,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-11T15:08:40.593Z"
+    },
+    {
+      "text": "TinaCMS",
+      "url": "https://tina.io/",
+      "type": "markdown",
+      "filePath": "/docs/installation.mdx",
+      "line": 14,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-11T15:08:40.645Z"
+    },
+    {
+      "text": "LanguageTool",
+      "url": "https://languagetool.org/",
+      "type": "markdown",
+      "filePath": "/docs/installation.mdx",
+      "line": 15,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-11T15:08:40.827Z"
+    },
+    {
+      "text": "Eclipse",
+      "url": "https://eclipseide.org",
+      "type": "markdown",
+      "filePath": "/docs/installation.mdx",
+      "line": 27,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "redirectedTo": "https://eclipseide.org/",
+      "checkedAt": "2026-08-11T15:08:41.007Z"
+    },
+    {
+      "text": "VSCodium",
+      "url": "https://vscodium.com/",
+      "type": "markdown",
+      "filePath": "/docs/installation.mdx",
+      "line": 28,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-11T15:08:40.605Z"
+    },
+    {
+      "text": "Node.js",
+      "url": "https://nodejs.org/",
+      "type": "markdown",
+      "filePath": "/docs/installation.mdx",
+      "line": 34,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "redirectedTo": "https://nodejs.org/en",
+      "checkedAt": "2026-08-11T15:08:40.693Z"
+    },
+    {
+      "text": "official Node.js downloads",
+      "url": "https://nodejs.org/en/download/prebuilt-installer",
+      "type": "markdown",
+      "filePath": "/docs/installation.mdx",
+      "line": 46,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "redirectedTo": "https://nodejs.org/en/download",
+      "checkedAt": "2026-08-11T15:08:40.711Z"
+    },
+    {
+      "text": "Node Version Manager",
+      "url": "https://github.com/nvm-sh/nvm",
+      "type": "markdown",
+      "filePath": "/docs/installation.mdx",
+      "line": 55,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-11T15:08:42.573Z"
+    },
+    {
+      "text": "Project structure",
+      "url": "#project-structure",
+      "type": "markdown",
+      "filePath": "/docs/installation.mdx",
+      "line": 139,
+      "status": "skipped",
+      "reason": "Anchor link"
+    },
+    {
+      "text": "https://github.com/aowendev/docstatic",
+      "url": "https://github.com/aowendev/docstatic",
+      "type": "markdown",
+      "filePath": "/docs/installation.mdx",
+      "line": 164,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-11T15:08:41.463Z"
+    },
+    {
+      "text": "MCP server",
+      "url": "mcp-server.mdx",
+      "type": "markdown",
+      "filePath": "/docs/installation.mdx",
+      "line": 272,
+      "status": "skipped",
+      "reason": "Internal link — checked by the Docusaurus build"
+    },
+    {
+      "text": "Monorepos",
+      "url": "https://docusaurus.io/docs/installation#monorepos",
+      "type": "markdown",
+      "filePath": "/docs/installation.mdx",
+      "line": 289,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "redirectedTo": "https://docusaurus.io/docs/installation",
+      "checkedAt": "2026-08-11T15:08:40.919Z"
+    },
+    {
+      "text": "http://localhost:3000",
+      "url": "http://localhost:3000",
+      "type": "markdown",
+      "filePath": "/docs/installation.mdx",
+      "line": 303,
+      "status": "skipped",
+      "reason": "Local address — not checked"
+    },
+    {
+      "text": "Deployment",
+      "url": "https://docusaurus.io/docs/deployment",
+      "type": "markdown",
+      "filePath": "/docs/installation.mdx",
+      "line": 315,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-11T15:08:40.670Z"
+    },
+    {
+      "text": "component content management systems",
+      "url": "https://en.wikipedia.org/wiki/Component_content_management_system",
+      "type": "markdown",
+      "filePath": "/docs/introduction.mdx",
+      "line": 4,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-11T15:08:43.353Z"
+    },
+    {
+      "text": "docs-as-code",
+      "url": "https://www.writethedocs.org/guide/docs-as-code/",
+      "type": "markdown",
+      "filePath": "/docs/introduction.mdx",
+      "line": 4,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-11T15:08:43.341Z"
+    },
+    {
+      "text": "Tinasaurus",
+      "url": "https://tina.io/blog/tinasaurus-docusaurus-starter",
+      "type": "markdown",
+      "filePath": "/docs/introduction.mdx",
+      "line": 8,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-11T15:08:43.351Z"
+    },
+    {
+      "text": "React",
+      "url": "https://react.dev/",
+      "type": "markdown",
+      "filePath": "/docs/introduction.mdx",
+      "line": 8,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-11T15:08:43.342Z"
+    },
+    {
+      "text": "static site generator",
+      "url": "https://en.wikipedia.org/wiki/Static_site_generator",
+      "type": "markdown",
+      "filePath": "/docs/introduction.mdx",
+      "line": 8,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-11T15:08:43.394Z"
+    },
+    {
+      "text": "Docusaurus",
+      "url": "https://docusaurus.io/",
+      "type": "markdown",
+      "filePath": "/docs/introduction.mdx",
+      "line": 8,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-11T15:08:42.880Z"
+    },
+    {
+      "text": "headless content management system",
+      "url": "https://en.wikipedia.org/wiki/Headless_content_management_system",
+      "type": "markdown",
+      "filePath": "/docs/introduction.mdx",
+      "line": 8,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-11T15:08:43.411Z"
+    },
+    {
+      "text": "TinaCMS",
+      "url": "https://tina.io/",
+      "type": "markdown",
+      "filePath": "/docs/introduction.mdx",
+      "line": 8,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-11T15:08:40.645Z"
+    },
+    {
+      "text": "GraphQL",
+      "url": "https://graphql.org/",
+      "type": "markdown",
+      "filePath": "/docs/introduction.mdx",
+      "line": 28,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-11T15:08:43.399Z"
+    },
+    {
+      "text": "GitHub",
+      "url": "https://github.com/",
+      "type": "markdown",
+      "filePath": "/docs/introduction.mdx",
+      "line": 32,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-11T15:08:40.593Z"
+    },
+    {
+      "text": "KaTeX",
+      "url": "https://katex.org/",
+      "type": "markdown",
+      "filePath": "/docs/introduction.mdx",
+      "line": 38,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-11T15:08:43.433Z"
+    },
+    {
+      "text": "Lunr",
+      "url": "https://lunrjs.com/",
+      "type": "markdown",
+      "filePath": "/docs/introduction.mdx",
+      "line": 38,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-11T15:08:43.374Z"
+    },
+    {
+      "text": "Mermaid",
+      "url": "https://mermaid.js.org/",
+      "type": "markdown",
+      "filePath": "/docs/introduction.mdx",
+      "line": 38,
+      "status": "unverified",
+      "reason": "Domain did not resolve — check DNS, then the link",
+      "code": null,
+      "checkedAt": "2026-08-11T15:08:42.780Z"
+    },
+    {
+      "text": "OpenAPI",
+      "url": "https://www.openapis.org/",
+      "type": "markdown",
+      "filePath": "/docs/introduction.mdx",
+      "line": 38,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-11T15:08:43.403Z"
+    },
+    {
+      "text": "LanguageTool",
+      "url": "https://languagetool.org/",
+      "type": "markdown",
+      "filePath": "/docs/introduction.mdx",
+      "line": 38,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-11T15:08:40.827Z"
+    },
+    {
+      "text": "Model Context Protocol (MCP) server",
+      "url": "mcp-server.mdx",
+      "type": "markdown",
+      "filePath": "/docs/introduction.mdx",
+      "line": 42,
+      "status": "skipped",
+      "reason": "Internal link — checked by the Docusaurus build"
+    },
+    {
+      "text": "Docusaurus",
+      "url": "https://docusaurus.io/docs",
+      "type": "markdown",
+      "filePath": "/docs/introduction.mdx",
+      "line": 50,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-11T15:08:43.442Z"
+    },
+    {
+      "text": "TinaCMS",
+      "url": "https://tina.io/docs",
+      "type": "markdown",
+      "filePath": "/docs/introduction.mdx",
+      "line": 50,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-11T15:08:43.434Z"
+    },
+    {
+      "text": "MCP Server Implementation Details",
+      "url": "mcp-server-details.mdx",
+      "type": "markdown",
+      "filePath": "/docs/mcp-server.mdx",
+      "line": 184,
+      "status": "skipped",
+      "reason": "Internal link — checked by the Docusaurus build"
+    },
+    {
+      "text": "package.json",
+      "url": "https://github.com/aowendev/docstatic/blob/main/package.json",
+      "type": "markdown",
+      "filePath": "/docs/migration/index.mdx",
+      "line": 3,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-11T15:08:43.937Z"
+    },
+    {
+      "text": "Lunr",
+      "url": "https://lunrjs.com/",
+      "type": "markdown",
+      "filePath": "/docs/search.mdx",
+      "line": 1,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-11T15:08:43.374Z"
+    },
+    {
+      "text": "Markprompt",
+      "url": "https://github.com/typesense/docusaurus-theme-search-typesense",
+      "type": "markdown",
+      "filePath": "/docs/search.mdx",
+      "line": 6,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-11T15:08:44.126Z"
+    },
+    {
+      "text": "Meilisearch",
+      "url": "https://github.com/tauri-apps/meilisearch-docsearch",
+      "type": "markdown",
+      "filePath": "/docs/search.mdx",
+      "line": 7,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-11T15:08:44.249Z"
+    },
+    {
+      "text": "Orama",
+      "url": "https://github.com/askorama/orama/tree/main/packages/plugin-docusaurus-v3",
+      "type": "markdown",
+      "filePath": "/docs/search.mdx",
+      "line": 8,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "redirectedTo": "https://github.com/oramasearch/orama/tree/main/packages/plugin-docusaurus-v3",
+      "checkedAt": "2026-08-11T15:08:44.210Z"
+    },
+    {
+      "text": "Typesense DocSearch",
+      "url": "https://github.com/typesense/docusaurus-theme-search-typesense",
+      "type": "markdown",
+      "filePath": "/docs/search.mdx",
+      "line": 9,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-11T15:08:44.126Z"
+    },
+    {
+      "text": "Search",
+      "url": "https://docusaurus.io/docs/search#using-algolia-docsearch",
+      "type": "markdown",
+      "filePath": "/docs/search.mdx",
+      "line": 11,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "redirectedTo": "https://docusaurus.io/docs/search",
+      "checkedAt": "2026-08-11T15:08:43.717Z"
+    },
+    {
+      "text": "Search engine optimisation",
+      "url": "https://docusaurus.io/docs/seo",
+      "type": "markdown",
+      "filePath": "/docs/seo.mdx",
+      "line": 12,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-11T15:08:43.639Z"
+    },
+    {
+      "text": "Static Assets",
+      "url": "https://docusaurus.io/docs/static-assets",
+      "type": "markdown",
+      "filePath": "/docs/static-assets.mdx",
+      "line": 26,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-11T15:08:43.492Z"
+    },
+    {
+      "text": "Infima",
+      "url": "https://infima.dev/",
+      "type": "markdown",
+      "filePath": "/docs/styling-layout.mdx",
+      "line": 10,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-11T15:08:44.583Z"
+    },
+    {
+      "text": "Infima website",
+      "url": "https://infima.dev/",
+      "type": "markdown",
+      "filePath": "/docs/styling-layout.mdx",
+      "line": 10,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-11T15:08:44.583Z"
+    },
+    {
+      "text": "Example page",
+      "url": "https://docstatic.com/example-page",
+      "type": "markdown",
+      "filePath": "/docs/styling-layout.mdx",
+      "line": 12,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-11T15:08:43.635Z"
+    },
+    {
+      "text": "Styling and Layout",
+      "url": "https://docusaurus.io/docs/styling-layout",
+      "type": "markdown",
+      "filePath": "/docs/styling-layout.mdx",
+      "line": 45,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-11T15:08:43.696Z"
+    },
+    {
+      "text": "docs plugin",
+      "url": "https://docusaurus.io/docs/api/plugins/@docusaurus/plugin-content-docs",
+      "type": "markdown",
+      "filePath": "/docs/using-plugins.mdx",
+      "line": 1,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-11T15:08:42.774Z"
+    },
+    {
+      "text": "blog plugin",
+      "url": "https://docusaurus.io/docs/api/plugins/@docusaurus/plugin-content-blog",
+      "type": "markdown",
+      "filePath": "/docs/using-plugins.mdx",
+      "line": 1,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-11T15:08:42.824Z"
+    },
+    {
+      "text": "pages plugin",
+      "url": "https://docusaurus.io/docs/api/plugins/@docusaurus/plugin-content-pages",
+      "type": "markdown",
+      "filePath": "/docs/using-plugins.mdx",
+      "line": 1,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-11T15:08:43.715Z"
+    },
+    {
+      "text": "Using Plugins",
+      "url": "https://docusaurus.io/docs/using-plugins",
+      "type": "markdown",
+      "filePath": "/docs/using-plugins.mdx",
+      "line": 11,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-11T15:08:43.753Z"
+    }
+  ]
+}
