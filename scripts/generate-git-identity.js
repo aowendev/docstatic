@@ -22,7 +22,9 @@ function main() {
   const email = safe("git config user.email");
   const data = { name, email };
 
-  const outDir = path.join(process.cwd(), "static");
+  // Resolved from this file, not the caller's cwd, to match the other
+  // generate-* scripts.
+  const outDir = path.join(__dirname, "..", "static");
   const outFile = path.join(outDir, "git-identity.json");
   try {
     if (!fs.existsSync(outDir)) fs.mkdirSync(outDir, { recursive: true });
