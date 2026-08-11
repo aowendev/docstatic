@@ -6,6 +6,10 @@
  */
 
 import React, { useEffect } from "react";
+import {
+  installNavigationGuard,
+  uninstallNavigationGuard,
+} from "./navigationGuard";
 
 export default function HelpButton({ url }) {
   useEffect(() => {
@@ -186,23 +190,14 @@ export default function HelpButton({ url }) {
     };
     document.addEventListener("click", handleSaveClick, true);
 
-    // Also intercept SPA (client-side) navigation via history API,
-    // which bypasses beforeunload (e.g. TinaCMS left nav links).
-    const originalPushState = history.pushState.bind(history);
-    const originalReplaceState = history.replaceState.bind(history);
-    const guardNavigation =
-      (original) =>
-      (...args) => {
-        if (hasUnsavedChanges()) {
-          const confirmed = window.confirm(
-            "You have unsaved changes. Leave without saving?"
-          );
-          if (!confirmed) return;
-        }
-        return original(...args);
-      };
-    history.pushState = guardNavigation(originalPushState);
-    history.replaceState = guardNavigation(originalReplaceState);
+    // Also intercept SPA (client-side) navigation via history API, which
+    // bypasses beforeunload (e.g. TinaCMS left nav links). Ref-counted in
+    // navigationGuard.js so concurrent mounts cannot strand a wrapper on the
+    // History API.
+    installNavigationGuard(
+      hasUnsavedChanges,
+      "You have unsaved changes. Leave without saving?"
+    );
 
     if (
       window.location.hostname === "localhost" ||
@@ -240,8 +235,7 @@ export default function HelpButton({ url }) {
       if (autoSaveInterval) clearInterval(autoSaveInterval);
       window.removeEventListener("beforeunload", handleBeforeUnload);
       document.removeEventListener("click", handleSaveClick, true);
-      history.pushState = originalPushState;
-      history.replaceState = originalReplaceState;
+      uninstallNavigationGuard();
     };
   }, [url]);
 
