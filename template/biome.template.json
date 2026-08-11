@@ -17,6 +17,8 @@
       "!**/reuse/snippets-files.json",
       "!**/reuse/media/index.json",
       "!**/src/data/docs-metadata.json",
+      "!**/src/data/link-report.json",
+      "!**/docs/api",
       "!**/config/**/*.json",
       "!**/static/admin",
       "!**/build",

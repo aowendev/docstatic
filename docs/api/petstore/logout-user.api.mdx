@@ -9,6 +9,8 @@ api: eJztV99v2zYQ/lcI9aUObKtNBwzI07K0K4K1SxCn2Ao7aGnpJBORSI2krHiB//d9R8q/krTZy54
 sidebar_class_name: "get api-method"
 info_path: docs/api/petstore/swagger-petstore-yaml
 custom_edit_url: null
+modifiedBy: aowendev <aowen@translationcommons.org>
+lastmod: '2026-08-11T16:04:51.085Z'
 ---
 
 import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
@@ -18,6 +20,7 @@ import StatusCodes from "@theme/StatusCodes";
 import OperationTabs from "@theme/OperationTabs";
 import TabItem from "@theme/TabItem";
 import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
 
 <Heading
   as={"h1"}
@@ -38,23 +41,18 @@ import Heading from "@theme/Heading";
 
 
 
-<ParamsDetails
-  parameters={undefined}
->
+<ParamsDetails>
   
 </ParamsDetails>
 
 <RequestSchema
-  title={"Body"}
-  body={undefined}
+  {...require("./logout-user.RequestSchema.json")}
 >
   
 </RequestSchema>
 
 <StatusCodes
-  id={undefined}
-  label={undefined}
-  responses={{"default":{"description":"successful operation"}}}
+  {...require("./logout-user.StatusCodes.json")}
 >
   
 </StatusCodes>
