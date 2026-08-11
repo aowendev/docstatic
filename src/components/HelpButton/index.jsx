@@ -137,6 +137,7 @@ export default function HelpButton({ url }) {
     // Skips new document pages to prevent the first-save redirect issue
     // where the editor navigates away from the form to the file path.
     let autoSaveInterval = null;
+    let autoSaveTimeout = null;
     let lastAutoSaveAt = 0;
     const isNewDocumentPage = () => {
       const hash = window.location.hash || "";
@@ -207,7 +208,7 @@ export default function HelpButton({ url }) {
       window.location.hostname === "localhost" ||
       window.location.hostname === "127.0.0.1"
     ) {
-      const autoSaveTimeout = setTimeout(() => {
+      autoSaveTimeout = setTimeout(() => {
         autoSaveInterval = setInterval(
           () => {
             if (isNewDocumentPage()) return;
@@ -227,23 +228,18 @@ export default function HelpButton({ url }) {
           5 * 60 * 1000
         );
       }, 3000);
-
-      return () => {
-        clearTimeout(timeout);
-        clearTimeout(longerTimeout);
-        clearTimeout(autoSaveTimeout);
-        if (autoSaveInterval) clearInterval(autoSaveInterval);
-        window.removeEventListener("beforeunload", handleBeforeUnload);
-        document.removeEventListener("click", handleSaveClick, true);
-        history.pushState = originalPushState;
-        history.replaceState = originalReplaceState;
-      };
     }
 
+    // Single cleanup for every path. There used to be one per branch, and the
+    // non-localhost branch never removed handleSaveClick — so off localhost a
+    // capture-phase click listener leaked on every re-run of this effect.
     return () => {
       clearTimeout(timeout);
       clearTimeout(longerTimeout);
+      if (autoSaveTimeout) clearTimeout(autoSaveTimeout);
+      if (autoSaveInterval) clearInterval(autoSaveInterval);
       window.removeEventListener("beforeunload", handleBeforeUnload);
+      document.removeEventListener("click", handleSaveClick, true);
       history.pushState = originalPushState;
       history.replaceState = originalReplaceState;
     };
