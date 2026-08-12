@@ -187,6 +187,307 @@ function angleToMarker(source) {
 }
 
 // ---------------------------------------------------------------------------
+// JSX marker (jsx:Name ...) boundary/prop parsing, shared by the block-level
+// and inline-level import parsers below.
+//
+// The old approach used a single regex per marker shape
+// (`(?:[^)"'{}]|"[^"]*"|'[^']*'|\{[^}]*\})*`) to capture props. That only
+// matches ONE level of {}, so any component whose props contain a nested
+// object/array - e.g. `<CalsTable table={{ tgroup: { colspecs: [...] } }} />`
+// - silently failed to match. The marker then fell through to plain-text
+// handling, which Tina's own serializer backslash-escapes on write (looks
+// like markdown syntax), producing content that fails to compile as MDX.
+// findJsxMarkerEnd/parseJsxProps replace the regex with an actual scan that
+// tracks quote state and bracket depth, so nesting depth is unbounded.
+// ---------------------------------------------------------------------------
+
+// Scans forward from `start` (just after "(jsx:Name") to find this marker's
+// own closing paren, skipping over any nested (), {}, [] and quoted strings
+// along the way. Returns null if the marker is unterminated.
+function findJsxMarkerEnd(s, start) {
+  let depth = 0;
+  let quote = null;
+  let i = start;
+  while (i < s.length) {
+    const ch = s[i];
+    if (quote) {
+      if (ch === "\\") {
+        i += 2;
+        continue;
+      }
+      if (ch === quote) quote = null;
+      i++;
+      continue;
+    }
+    if (ch === '"' || ch === "'") {
+      quote = ch;
+      i++;
+      continue;
+    }
+    if (ch === "{" || ch === "[" || ch === "(") {
+      depth++;
+      i++;
+      continue;
+    }
+    if (ch === "}" || ch === "]") {
+      depth--;
+      i++;
+      continue;
+    }
+    if (ch === ")") {
+      if (depth === 0) {
+        const selfClosing = i > start && s[i - 1] === "/";
+        const propsEnd = selfClosing ? i - 1 : i;
+        return { propsEnd, selfClosing, tagEnd: i + 1 };
+      }
+      depth--;
+      i++;
+      continue;
+    }
+    i++;
+  }
+  return null;
+}
+
+// Parses `key="value" key={ ...arbitrarily nested... } key` prop text into a
+// plain object. Object/array values are parsed with a small recursive-descent
+// reader (parseJsLiteral below) rather than JSON.parse, since these are
+// JS object-literal expressions with unquoted keys, not JSON.
+export function parseJsxProps(rawProps) {
+  const s = rawProps;
+  const props = {};
+  let i = 0;
+
+  const skipWs = () => {
+    while (i < s.length && /\s/.test(s[i])) i++;
+  };
+
+  const parseString = () => {
+    const quote = s[i];
+    i++;
+    let out = "";
+    while (i < s.length && s[i] !== quote) {
+      if (s[i] === "\\" && i + 1 < s.length) {
+        out += s[i + 1];
+        i += 2;
+        continue;
+      }
+      out += s[i];
+      i++;
+    }
+    if (s[i] === quote) i++;
+    return out;
+  };
+
+  const parseBareword = () => {
+    const m = /^[^\s,}\]]+/.exec(s.slice(i));
+    const word = m ? m[0] : "";
+    i += word.length;
+    if (word === "true") return true;
+    if (word === "false") return false;
+    if (word === "null") return null;
+    if (word !== "" && !Number.isNaN(Number(word))) return Number(word);
+    return word;
+  };
+
+  // Used for values nested *inside* an object/array literal, where a `{`
+  // unambiguously starts a real object literal.
+  const parseValue = () => {
+    skipWs();
+    const ch = s[i];
+    if (ch === '"' || ch === "'") return parseString();
+    if (ch === "{") return parseObject();
+    if (ch === "[") return parseArray();
+    return parseBareword();
+  };
+
+  // Used for a prop's value at the top level: `key={expr}` - that `{` is
+  // JSX's "this is an expression" wrapper, not necessarily an object literal
+  // itself. If `expr` IS an object literal, the source reads `key={{...}}`:
+  // the first `{` is this wrapper, the second is where parseValue below
+  // takes over and treats it as a real object literal. Without this
+  // distinction, an object-valued prop like
+  // `table={{ tgroup: { colspecs: [...] } }}` gets parsed as an *empty*
+  // object, because parseObject would consume the wrapper's `{` and then
+  // immediately hit the object literal's `{` where it expected a key.
+  const parsePropValue = () => {
+    skipWs();
+    const ch = s[i];
+    if (ch === '"' || ch === "'") return parseString();
+    if (ch === "{") {
+      i++; // consume the JSX expression wrapper's opening brace
+      skipWs();
+      const val = parseValue();
+      skipWs();
+      if (s[i] === "}") i++; // consume the wrapper's closing brace
+      return val;
+    }
+    return parseBareword();
+  };
+
+  function parseObject() {
+    i++; // consume '{'
+    const obj = {};
+    skipWs();
+    while (i < s.length && s[i] !== "}") {
+      skipWs();
+      let key;
+      const keyMatch = /^[a-zA-Z_$][\w$]*/.exec(s.slice(i));
+      if (keyMatch) {
+        key = keyMatch[0];
+        i += key.length;
+      } else if (s[i] === '"' || s[i] === "'") {
+        key = parseString();
+      } else {
+        break; // malformed; stop rather than loop forever
+      }
+      skipWs();
+      if (s[i] === ":") i++;
+      skipWs();
+      obj[key] = parseValue();
+      skipWs();
+      if (s[i] === ",") {
+        i++;
+        skipWs();
+      }
+    }
+    if (s[i] === "}") i++;
+    return obj;
+  }
+
+  function parseArray() {
+    i++; // consume '['
+    const arr = [];
+    skipWs();
+    while (i < s.length && s[i] !== "]") {
+      arr.push(parseValue());
+      skipWs();
+      if (s[i] === ",") {
+        i++;
+        skipWs();
+      }
+    }
+    if (s[i] === "]") i++;
+    return arr;
+  }
+
+  while (i < s.length) {
+    skipWs();
+    if (i >= s.length) break;
+    const keyMatch = /^[a-zA-Z][\w-]*/.exec(s.slice(i));
+    if (!keyMatch) {
+      i++;
+      continue;
+    }
+    const key = keyMatch[0];
+    i += key.length;
+    skipWs();
+    if (s[i] !== "=") {
+      props[key] = true; // bare boolean prop, e.g. `initcap`
+      continue;
+    }
+    i++; // consume '='
+    skipWs();
+    let val = parsePropValue();
+    // Unescape JSON string escapes (\n -> newline, etc.) for plain string
+    // values, matching what the previous prop parser did.
+    if (typeof val === "string" && val.includes("\\")) {
+      try {
+        val = JSON.parse(`"${val.replace(/"/g, '\\"')}"`);
+      } catch {
+        /* keep as-is */
+      }
+    }
+    props[key] = val;
+    skipWs();
+  }
+
+  return props;
+}
+
+// Finds the first (jsx:Name ...) marker (paired or self-closing) anywhere in
+// `text`, used by the inline parser (which, unlike the block parser, doesn't
+// require the marker to start at position 0). Returns null if none is found
+// - including when a paired marker's opening is present but its closing
+// `(/jsx:Name)` never shows up, since that's not a marker this parser can
+// safely consume.
+function findInlineJsxMarker(text) {
+  const openRe = /\(jsx:([A-Z][\w-]*)\b/g;
+  let m = openRe.exec(text);
+  while (m) {
+    const name = m[1];
+    const propsStart = m.index + m[0].length;
+    const tag = findJsxMarkerEnd(text, propsStart);
+    if (!tag) {
+      openRe.lastIndex = propsStart;
+      m = openRe.exec(text);
+      continue;
+    }
+    const rawProps = text.slice(propsStart, tag.propsEnd);
+    if (tag.selfClosing) {
+      return {
+        type: "jsxSelf",
+        index: m.index,
+        name,
+        rawProps,
+        tagEnd: tag.tagEnd,
+      };
+    }
+    const closeMarker = `(/jsx:${name})`;
+    const closeIdx = text.indexOf(closeMarker, tag.tagEnd);
+    if (closeIdx === -1) {
+      openRe.lastIndex = tag.tagEnd;
+      m = openRe.exec(text);
+      continue;
+    }
+    const children = text.slice(tag.tagEnd, closeIdx);
+    return {
+      type: "jsxPaired",
+      index: m.index,
+      name,
+      rawProps,
+      children,
+      tagEnd: closeIdx + closeMarker.length,
+    };
+  }
+  return null;
+}
+
+// Matches a (jsx:Name ...) marker anchored at the start of one block-level
+// `line`. Distinguishes the three shapes the block parser needs to handle
+// differently: a self-closing tag that is the whole line ("jsxSelf"), a
+// paired tag whose closing (/jsx:Name) is also on this line ("jsxPaired"),
+// or a paired tag whose closing appears on a later line ("jsxOpen", with
+// `firstLineContent` holding whatever followed the opening tag on this
+// line). Returns null if `line` doesn't start with a JSX marker at all.
+function matchBlockJsxMarker(line) {
+  const nameMatch = /^\(jsx:([A-Z][\w-]*)\b/.exec(line);
+  if (!nameMatch) return null;
+  const name = nameMatch[1];
+  const propsStart = nameMatch[0].length;
+  const tag = findJsxMarkerEnd(line, propsStart);
+  if (!tag) return null;
+  const rawProps = line.slice(propsStart, tag.propsEnd);
+
+  if (tag.selfClosing) {
+    if (tag.tagEnd !== line.length) return null; // trailing content - not a clean block match
+    return { type: "jsxSelf", name, rawProps };
+  }
+
+  const rest = line.slice(tag.tagEnd);
+  const closeMarker = `(/jsx:${name})`;
+  if (rest.endsWith(closeMarker)) {
+    return {
+      type: "jsxPaired",
+      name,
+      rawProps,
+      children: rest.slice(0, rest.length - closeMarker.length),
+    };
+  }
+  return { type: "jsxOpen", name, rawProps, firstLineContent: rest };
+}
+
+// ---------------------------------------------------------------------------
 // parseMarkdownToTinaAst – lightweight Markdown → Tina-compatible AST parser.
 // Converts a Markdown string into the rich-text AST shape that TinaCMS
 // expects for the `body` field so that headings, lists, code blocks,
@@ -194,7 +495,7 @@ function angleToMarker(source) {
 // instead of being stuffed into raw text nodes (which Tina would then
 // backslash-escape, destroying all formatting).
 // ---------------------------------------------------------------------------
-function parseMarkdownToTinaAst(md) {
+export function parseMarkdownToTinaAst(md) {
   if (!md || typeof md !== "string") {
     return {
       type: "root",
@@ -213,22 +514,11 @@ function parseMarkdownToTinaAst(md) {
       let earliest = null;
       let earliestIdx = remaining.length;
 
-      // Inline JSX marker (paired): (jsx:Name props)content(/jsx:Name)
-      const jsxInlinePairedRe =
-        /\(jsx:([A-Z][\w-]*)\b((?:[^)"'{}]|"[^"]*"|'[^']*'|\{[^}]*\})*)\)([\s\S]*?)\(\/jsx:\1\)/;
-      const jsxInlinePairedM = jsxInlinePairedRe.exec(remaining);
-      if (jsxInlinePairedM && jsxInlinePairedM.index < earliestIdx) {
-        earliest = { type: "jsxPaired", match: jsxInlinePairedM };
-        earliestIdx = jsxInlinePairedM.index;
-      }
-
-      // Inline JSX marker (self-closing): (jsx:Name props/)
-      const jsxInlineSelfRe =
-        /\(jsx:([A-Z][\w-]*)\b((?:[^)"'{}]|"[^"]*"|'[^']*'|\{[^}]*\})*)\/\)/;
-      const jsxInlineSelfM = jsxInlineSelfRe.exec(remaining);
-      if (jsxInlineSelfM && jsxInlineSelfM.index < earliestIdx) {
-        earliest = { type: "jsxSelf", match: jsxInlineSelfM };
-        earliestIdx = jsxInlineSelfM.index;
+      // Inline JSX marker, paired or self-closing: (jsx:Name props)content(/jsx:Name) or (jsx:Name props/)
+      const jsxInlineM = findInlineJsxMarker(remaining);
+      if (jsxInlineM && jsxInlineM.index < earliestIdx) {
+        earliest = jsxInlineM;
+        earliestIdx = jsxInlineM.index;
       }
 
       // Markdown link: [text](url)
@@ -291,75 +581,33 @@ function parseMarkdownToTinaAst(md) {
         nodes.push({ type: "text", text: remaining.slice(0, earliestIdx) });
       }
 
+      if (earliest.type === "jsxPaired" || earliest.type === "jsxSelf") {
+        // Unescape HTML entities in prop values that CAT tools may have introduced
+        const rawProps = (earliest.rawProps || "")
+          .trim()
+          .replace(/&quot;/g, '"')
+          .replace(/&amp;/g, "&")
+          .replace(/&lt;/g, "<")
+          .replace(/&gt;/g, ">");
+
+        const props = parseJsxProps(rawProps);
+
+        if (earliest.type === "jsxPaired" && earliest.children) {
+          props.children = parseMarkdownToTinaAst(earliest.children);
+        }
+
+        nodes.push({
+          type: "mdxJsxTextElement",
+          name: earliest.name,
+          children: [{ type: "text", text: "" }],
+          props,
+        });
+        remaining = remaining.slice(earliest.tagEnd);
+        continue;
+      }
+
       const m = earliest.match;
       switch (earliest.type) {
-        case "jsxPaired":
-        case "jsxSelf": {
-          const compName = m[1];
-          let rawProps = (m[2] || "").trim();
-          const innerText = earliest.type === "jsxPaired" ? m[3] || "" : "";
-
-          // Unescape HTML entities in prop values that CAT tools may have introduced
-          rawProps = rawProps
-            .replace(/&quot;/g, '"')
-            .replace(/&amp;/g, "&")
-            .replace(/&lt;/g, "<")
-            .replace(/&gt;/g, ">");
-
-          // Parse simple props: key="value" or key='value' or key={value}
-          // Also handle bare boolean props (e.g. `initcap` without =value)
-          const props = {};
-          const propRe =
-            /([a-zA-Z][\w-]*)(?:=(?:"([^"]*)"|'([^']*)'|\{([^}]*)\}))?/g;
-          for (const pm of rawProps.matchAll(propRe)) {
-            const key = pm[1];
-            // If no =value was matched, this is a bare boolean prop
-            if (
-              pm[2] === undefined &&
-              pm[3] === undefined &&
-              pm[4] === undefined
-            ) {
-              props[key] = true;
-              continue;
-            }
-            let val =
-              pm[2] !== undefined ? pm[2] : pm[3] !== undefined ? pm[3] : pm[4];
-            if (val !== undefined && /^[[{]/.test(val)) {
-              try {
-                val = JSON.parse(val);
-              } catch {
-                /* keep string */
-              }
-            } else if (val === "true") {
-              val = true;
-            } else if (val === "false") {
-              val = false;
-            }
-            // Unescape JSON string escapes (\n → newline, \t → tab, etc.)
-            // that were introduced by JSON.stringify during export.
-            if (typeof val === "string" && val.includes("\\")) {
-              try {
-                val = JSON.parse(`"${val.replace(/"/g, '\\"')}"`);
-              } catch {
-                /* keep as-is */
-              }
-            }
-            props[key] = val;
-          }
-
-          // Build children prop as a Tina AST root node for paired elements
-          if (innerText) {
-            props.children = parseMarkdownToTinaAst(innerText);
-          }
-
-          nodes.push({
-            type: "mdxJsxTextElement",
-            name: compName,
-            children: [{ type: "text", text: "" }],
-            props,
-          });
-          break;
-        }
         case "link": {
           const linkText = m[1] || "";
           const href = m[2] || "";
@@ -573,76 +821,26 @@ function parseMarkdownToTinaAst(md) {
     // or self-closing: (jsx:Name props/)
     // Detect on the current line and produce a proper mdxJsxFlowElement node.
     // Supports both single-line and multi-line paired elements.
-    const jsxPairedRe =
-      /^\(jsx:([A-Z][\w-]*)\b((?:[^)"'{}]|"[^"]*"|'[^']*'|\{[^}]*\})*)\)([\s\S]*?)\(\/jsx:\1\)$/;
-    const jsxSelfRe =
-      /^\(jsx:([A-Z][\w-]*)\b((?:[^)"'{}]|"[^"]*"|'[^']*'|\{[^}]*\})*)\/\)$/;
-    const jsxPairedM = jsxPairedRe.exec(line);
-    const jsxSelfM = !jsxPairedM ? jsxSelfRe.exec(line) : null;
+    const blockJsx = matchBlockJsxMarker(line);
 
-    // Also detect multi-line paired JSX: opening tag on this line, closing
-    // on a subsequent line.  (jsx:Name props) ... lines ... (/jsx:Name)
-    const jsxOpenRe =
-      /^\(jsx:([A-Z][\w-]*)\b((?:[^)"'{}]|"[^"]*"|'[^']*'|\{[^}]*\})*)\)(.*)$/;
-    const jsxOpenM = !jsxPairedM && !jsxSelfM ? jsxOpenRe.exec(line) : null;
-
-    if (jsxPairedM || jsxSelfM) {
+    if (blockJsx && blockJsx.type !== "jsxOpen") {
       // Single-line paired or self-closing
-      const m = jsxPairedM || jsxSelfM;
-      const compName = m[1];
-      let rawProps = (m[2] || "").trim();
-      const innerText = jsxPairedM ? m[3] || "" : "";
-
-      rawProps = rawProps
+      const rawProps = blockJsx.rawProps
+        .trim()
         .replace(/&quot;/g, '"')
         .replace(/&amp;/g, "&")
         .replace(/&lt;/g, "<")
         .replace(/&gt;/g, ">");
-
-      // Parse simple props: key="value" or key={value} or bare boolean
-      const props = {};
-      const propRe =
-        /([a-zA-Z][\w-]*)(?:=(?:"([^"]*)"|'([^']*)'|\{([^}]*)\}))?/g;
-      for (const pm of rawProps.matchAll(propRe)) {
-        const key = pm[1];
-        // If no =value was matched, this is a bare boolean prop
-        if (pm[2] === undefined && pm[3] === undefined && pm[4] === undefined) {
-          props[key] = true;
-          continue;
-        }
-        let val =
-          pm[2] !== undefined ? pm[2] : pm[3] !== undefined ? pm[3] : pm[4];
-        // Try to parse JSON-like values (arrays, bools, numbers)
-        if (val !== undefined && /^[[{]/.test(val)) {
-          try {
-            val = JSON.parse(val);
-          } catch {
-            /* keep string */
-          }
-        } else if (val === "true") {
-          val = true;
-        } else if (val === "false") {
-          val = false;
-        }
-        // Unescape JSON string escapes (\n → newline, \t → tab, etc.)
-        if (typeof val === "string" && val.includes("\\")) {
-          try {
-            val = JSON.parse(`"${val.replace(/"/g, '\\"')}"`);
-          } catch {
-            /* keep as-is */
-          }
-        }
-        props[key] = val;
-      }
+      const props = parseJsxProps(rawProps);
 
       // Build children prop as a Tina AST root node
-      if (innerText) {
-        props.children = parseMarkdownToTinaAst(innerText);
+      if (blockJsx.children) {
+        props.children = parseMarkdownToTinaAst(blockJsx.children);
       }
 
       rootChildren.push({
         type: "mdxJsxFlowElement",
-        name: compName,
+        name: blockJsx.name,
         children: [{ type: "text", text: "" }],
         props,
       });
@@ -650,15 +848,14 @@ function parseMarkdownToTinaAst(md) {
       continue;
     }
 
-    if (jsxOpenM) {
+    if (blockJsx && blockJsx.type === "jsxOpen") {
       // Multi-line paired JSX: opening tag on this line, gather content
       // until we find the matching closing tag (/jsx:Name).
-      const compName = jsxOpenM[1];
-      let rawProps = (jsxOpenM[2] || "").trim();
-      const firstLineContent = jsxOpenM[3] || "";
+      const compName = blockJsx.name;
       const closingTag = `(/jsx:${compName})`;
       const contentLines = [];
-      if (firstLineContent) contentLines.push(firstLineContent);
+      if (blockJsx.firstLineContent)
+        contentLines.push(blockJsx.firstLineContent);
       i++;
       while (i < lines.length) {
         const cur = lines[i];
@@ -675,45 +872,13 @@ function parseMarkdownToTinaAst(md) {
       }
       const innerText = contentLines.join("\n");
 
-      rawProps = rawProps
+      const rawProps = blockJsx.rawProps
+        .trim()
         .replace(/&quot;/g, '"')
         .replace(/&amp;/g, "&")
         .replace(/&lt;/g, "<")
         .replace(/&gt;/g, ">");
-
-      const props = {};
-      const propRe =
-        /([a-zA-Z][\w-]*)(?:=(?:"([^"]*)"|'([^']*)'|\{([^}]*)\}))?/g;
-      for (const pm of rawProps.matchAll(propRe)) {
-        const key = pm[1];
-        // If no =value was matched, this is a bare boolean prop
-        if (pm[2] === undefined && pm[3] === undefined && pm[4] === undefined) {
-          props[key] = true;
-          continue;
-        }
-        let val =
-          pm[2] !== undefined ? pm[2] : pm[3] !== undefined ? pm[3] : pm[4];
-        if (val !== undefined && /^[[{]/.test(val)) {
-          try {
-            val = JSON.parse(val);
-          } catch {
-            /* keep string */
-          }
-        } else if (val === "true") {
-          val = true;
-        } else if (val === "false") {
-          val = false;
-        }
-        // Unescape JSON string escapes (\n → newline, \t → tab, etc.)
-        if (typeof val === "string" && val.includes("\\")) {
-          try {
-            val = JSON.parse(`"${val.replace(/"/g, '\\"')}"`);
-          } catch {
-            /* keep as-is */
-          }
-        }
-        props[key] = val;
-      }
+      const props = parseJsxProps(rawProps);
 
       if (innerText) {
         props.children = parseMarkdownToTinaAst(innerText);

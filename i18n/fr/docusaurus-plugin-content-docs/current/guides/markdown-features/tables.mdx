@@ -1,5 +1,5 @@
 ---
-lastmod: '2026-08-12T19:03:28.279Z'
+lastmod: '2026-08-12T20:31:12.006Z'
 modifiedBy: aowendev <aowen@translationcommons.org>
 title: CALS Tables
 description: Using CALS tables in docStatic, including merged cells, column widths and border control.
@@ -30,12 +30,12 @@ Le composant **CalsTable** prend en charge le [modèle de tableau CALS](https://
 7. **Enregistrez** vos modifications.
 
 <Admonition type="note" title="Scope">
-    Each table supports one header, body and footer section with a single set of columns. DocBook's multiple-`tgroup`-per-table and nested-table (`entrytbl`) features aren't supported.
+  Each table supports one header, body and footer section with a single set of columns. DocBook's multiple-`tgroup`-per-table and nested-table (`entrytbl`) features aren't supported.
 </Admonition>
 
 #### Exemple :
 
-(jsx\:CalsTable table={{ frame: "all", title: "Release channels", tgroup: { cols: 3, colspecs: \[ { colname: "c1", colwidth: "1*" }, { colname: "c2", colwidth: "1*" }, { colname: "c3", colwidth: "1\*" } ], thead: { rows: \[ { entries: \[ { content: "Channel" }, { content: "Cadence" }, { content: "Support" } ] } ] }, tbody: { rows: \[ { entries: \[ { content: "Stable" }, { content: "Monthly" }, { content: "Full", morerows: 1 } ] }, { entries: \[{ content: "Beta" }, { content: "Weekly" }] }, { entries: \[ { content: "Nightly", namest: "c1", nameend: "c2" }, { content: "None" } ] } ] } }, pgwide: true }}/)
+<CalsTable table={{ frame: "all", title: "Release channels", tgroup: { cols: 3, colspecs: [ { colname: "c1", colwidth: "1*" }, { colname: "c2", colwidth: "1*" }, { colname: "c3", colwidth: "1*" } ], thead: { rows: [ { entries: [ { content: "Channel" }, { content: "Cadence" }, { content: "Support" } ] } ] }, tbody: { rows: [ { entries: [ { content: "Stable" }, { content: "Monthly" }, { content: "Full", morerows: 1 } ] }, { entries: [{ content: "Beta" }, { content: "Weekly" }] }, { entries: [ { content: "Nightly", namest: "c1", nameend: "c2" }, { content: "None" } ] } ] } }, pgwide: true }} />
 
 Pour en savoir plus sur le modèle sous-jacent, consultez la [référence du modèle de tableau CALS](https://www.oasis-open.org/specs/tm9901.html) ou la [documentation sur les tableaux DocBook](https://tdg.docbook.org/tdg/5.2/table.html).
 

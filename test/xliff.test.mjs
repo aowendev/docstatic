@@ -18,6 +18,8 @@ import { test } from "node:test";
 import {
   exportOutOfDateAsXliff,
   importXliffBundle,
+  parseJsxProps,
+  parseMarkdownToTinaAst,
 } from "../src/utils/xliff.js";
 import { CURRENT, makeClient } from "./helpers/fake-tina-client.mjs";
 
@@ -147,4 +149,83 @@ test("importXliffBundle rejects malformed input the same way", async () => {
 
   assert.ok(Array.isArray(results));
   assert.equal(results[0].status, "error");
+});
+
+/**
+ * parseMarkdownToTinaAst is what importXliffBundle actually uses to turn a
+ * translated <target> back into the AST Tina writes to disk, and it's pure
+ * (no DOMParser dependency) so - unlike importXliffBundle itself - it can be
+ * exercised directly in Node. These cases target the bug that shipped a
+ * broken CALS Tables translation: the old marker parser used
+ * `\{[^}]*\}` for JSX props, which only matches one level of `{}`, so a
+ * component with a deeply nested object prop (e.g.
+ * `<CalsTable table={{ tgroup: { colspecs: [...] } }} />`) fell through to
+ * plain-text handling instead of being recognised as JSX - and Tina's own
+ * serializer then backslash-escaped the `[`/`:` characters in that text,
+ * producing MDX that fails to compile.
+ */
+
+test("parseMarkdownToTinaAst resolves a self-closing marker with deeply nested object/array props", () => {
+  const marker =
+    '(jsx:CalsTable table={{ frame: "all", tgroup: { cols: 2, colspecs: [ { colname: "c1", colwidth: "1*" }, { colname: "c2" } ] } }} pgwide/)';
+  const ast = parseMarkdownToTinaAst(marker);
+
+  const node = ast.children[0];
+  assert.equal(node.type, "mdxJsxFlowElement");
+  assert.equal(node.name, "CalsTable");
+  assert.equal(node.props.pgwide, true);
+  assert.equal(node.props.table.frame, "all");
+  assert.equal(node.props.table.tgroup.cols, 2);
+  assert.equal(node.props.table.tgroup.colspecs.length, 2);
+  assert.equal(node.props.table.tgroup.colspecs[0].colname, "c1");
+  assert.equal(node.props.table.tgroup.colspecs[0].colwidth, "1*");
+  assert.equal(node.props.table.tgroup.colspecs[1].colname, "c2");
+});
+
+test("parseMarkdownToTinaAst still resolves a simple paired marker (regression check)", () => {
+  const marker =
+    '(jsx:Admonition type="note" title="Scope")Body text here(/jsx:Admonition)';
+  const ast = parseMarkdownToTinaAst(marker);
+
+  const node = ast.children[0];
+  assert.equal(node.type, "mdxJsxFlowElement");
+  assert.equal(node.name, "Admonition");
+  assert.equal(node.props.type, "note");
+  assert.equal(node.props.title, "Scope");
+  assert.equal(
+    node.props.children.children[0].children[0].text,
+    "Body text here"
+  );
+});
+
+test("parseMarkdownToTinaAst resolves an inline self-closing marker with nested props inside a paragraph", () => {
+  const md =
+    "Before text (jsx:Figure meta={{ size: { width: 10, height: 20 } }}/) after text";
+  const ast = parseMarkdownToTinaAst(md);
+
+  const para = ast.children[0];
+  assert.equal(para.type, "p");
+  const jsxNode = para.children.find((c) => c.type === "mdxJsxTextElement");
+  assert.ok(
+    jsxNode,
+    "the inline marker should be recognised as JSX, not left as text"
+  );
+  assert.equal(jsxNode.name, "Figure");
+  assert.equal(jsxNode.props.meta.size.width, 10);
+  assert.equal(jsxNode.props.meta.size.height, 20);
+});
+
+test("parseJsxProps keeps brackets inside quoted strings from being mistaken for structural braces", () => {
+  const props = parseJsxProps(
+    'caption="Revenue (Q1)" data={{ label: "a [b] c" }}'
+  );
+  assert.equal(props.caption, "Revenue (Q1)");
+  assert.equal(props.data.label, "a [b] c");
+});
+
+test("parseJsxProps handles bare boolean props alongside typed ones", () => {
+  const props = parseJsxProps('initcap count={3} label="x"');
+  assert.equal(props.initcap, true);
+  assert.equal(props.count, 3);
+  assert.equal(props.label, "x");
 });
