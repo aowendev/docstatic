@@ -1,0 +1,42 @@
+---
+lastmod: '2026-08-12T19:03:28.081Z'
+modifiedBy: aowendev <aowen@translationcommons.org>
+title: CALS Tables
+description: Using CALS tables in docStatic, including merged cells, column widths and border control.
+tags:
+  - "elements"
+  - "elements_tables"
+  - "computer-languages"
+  - "computer-languages_markdown"
+  - "software"
+  - "software_content-management-systems"
+  - "software_content-management-systems_tinacms"
+draft: false
+review: false
+translate: false
+approved: false
+published: true
+unlisted: false
+---
+
+Die Komponente **CalsTable** bietet Unterstützung für das von DocBook und DITA verwendete [CALS-Tabellenmodell](https://www.oasis-open.org/specs/tm9901.html): zusammengeführte Zellen, spaltenbezogene Breiten und Ausrichtung sowie eine detaillierte Steuerung der Rahmen. Ein grafischer Rastereditor im CMS übernimmt die Strukturierung – das Zusammenführen und Teilen von Zellen sowie das Einfügen und Löschen von Zeilen und Spalten –, sodass Sie die zugrunde liegenden Tabellendaten niemals manuell bearbeiten müssen.
+
+1. Wählen Sie **CALS-Tabelle** aus der Liste **Einbetten** aus.
+2. Verwenden Sie die Steuerelemente **Rahmen**, **Titel** und **Seitenweit** oben, um den äußeren Rahmen, die Beschriftung und die Breite der Tabelle festzulegen.
+3. Klicken Sie auf eine Zelle, um sie auszuwählen. Klicken Sie bei gedrückter Umschalttaste oder ziehen Sie, um einen rechteckigen Zellbereich auszuwählen.
+4. Klicken Sie auf **Zusammenführen**, um die ausgewählten Zellen zusammenzuführen, oder auf **Teilen**, um eine Zusammenführung rückgängig zu machen. Die Option **Zusammenführen** ist nur aktiviert, wenn die Auswahl ein sauberes Rechteck ist, das keine bereits zusammengeführte Zelle durchschneidet.
+5. Verwenden Sie **„Zeile oben/unten einfügen“**, **„Zeile löschen“**, **„Spalte links/rechts einfügen“** und **„Spalte löschen“**, um die Form des Rasters zu ändern.
+6. Doppelklicken Sie auf eine Zelle, um deren Inhalt zu bearbeiten. Der Zellinhalt ist Markdown, daher funktionieren `**Fett**`, `*Kursiv*`, Links und Inline-Code.
+7. **Speichern** Sie Ihre Änderungen.
+
+<Admonition type="note" title="Scope">
+    Each table supports one header, body and footer section with a single set of columns. DocBook's multiple-`tgroup`-per-table and nested-table (`entrytbl`) features aren't supported.
+</Admonition>
+
+#### Beispiel:
+
+(jsx\:CalsTable table={{ frame: "all", title: "Release channels", tgroup: { cols: 3, colspecs: \[ { colname: "c1", colwidth: "1*" }, { colname: "c2", colwidth: "1*" }, { colname: "c3", colwidth: "1\*" } ], thead: { rows: \[ { entries: \[ { content: "Channel" }, { content: "Cadence" }, { content: "Support" } ] } ] }, tbody: { rows: \[ { entries: \[ { content: "Stable" }, { content: "Monthly" }, { content: "Full", morerows: 1 } ] }, { entries: \[{ content: "Beta" }, { content: "Weekly" }] }, { entries: \[ { content: "Nightly", namest: "c1", nameend: "c2" }, { content: "None" } ] } ] } }, pgwide: true }}/)
+
+Weitere Informationen zum zugrunde liegenden Modell finden Sie in der [CALS-Tabellenmodell-Referenz](https://www.oasis-open.org/specs/tm9901.html) oder die [DocBook-Tabellendokumentation](https://tdg.docbook.org/tdg/5.2/table.html).
+
+<RelatedTopics maxResults={7} />
