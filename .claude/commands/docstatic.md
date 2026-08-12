@@ -1,3 +1,8 @@
+---
+modifiedBy: aowendev <aowen@translationcommons.org>
+lastmod: '2026-08-12T18:46:20.405Z'
+---
+
 Write or edit a docStatic MDX file following this format exactly.
 
 ## Frontmatter (required)
@@ -58,6 +63,11 @@ unlisted: false
   <TabItem value="mac" label="macOS">Content</TabItem>
   <TabItem value="win" label="Windows">Content</TabItem>
 </Tabs>
+```
+
+**CALS Tables** (structured tables with merged cells, column widths, and border control — author with the Tina graphical table editor, not by hand; the raw MDX is a single deeply-nested prop and isn't meant to be hand-typed):
+```jsx
+<CalsTable table={{ frame: "all", tgroup: { cols: 2, colspecs: [{ colname: "c1" }, { colname: "c2" }], tbody: { rows: [{ entries: [{ content: "A" }, { content: "B" }] }] } } }} />
 ```
 
 **Other components**: `<ConditionalText conditions="">`, `<Snippet snippet="">`, `<GlossaryTerm term="">SSG</GlossaryTerm>`, `<VariableSet variables="">`, `<Passthrough type="html|jsx" string="" summary="">`

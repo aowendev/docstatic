@@ -13,7 +13,7 @@ translate: false
 approved: false
 published: true
 unlisted: false
-lastmod: '2026-08-11T18:15:07.576Z'
+lastmod: '2026-08-12T18:46:20.470Z'
 modifiedBy: aowendev <aowen@translationcommons.org>
 ---
 
@@ -28,6 +28,7 @@ The preferred way to use components in MDX in docStatic is by registering them i
 For example, `src/theme/MDXComponents.jsx` currently registers these:
 
 ```javascript
+import CalsTable from "@site/src/components/CalsTable";
 import CodeSnippet from "@site/src/components/CodeSnippet";
 import Comment from "@site/src/components/Comment";
 import ConditionalText from "@site/src/components/ConditionalText";
@@ -52,6 +53,7 @@ const Truncate = () => null;
 export default {
   ...MDXComponents,
   Admonition: MDXComponents.admonition,
+  CalsTable: CalsTable,
   CodeBlock: CodeBlock,
   CodeSnippet: CodeSnippet,
   Comment: Comment,
@@ -79,6 +81,7 @@ The `src/theme/template.jsx` file begins:
 import React from "react";
 import codeFiles from "../../reuse/code-files.json";
 import { slugify } from "../../util";
+import { CalsTableBlockTemplate } from "../components/CalsTable/template";
 import { CodeSnippetBlockTemplate } from "../components/CodeSnippet/template";
 import { ConditionalTextBlockTemplate } from "../components/ConditionalText/template";
 import { FigureBlockTemplate } from "../components/Figure/template";
@@ -117,6 +120,7 @@ The file ends by exporting all the templates:
 
 export const MDXTemplates = [
   AdmonitionTemplate,
+  CalsTableBlockTemplate,
   CodeSnippetBlockTemplate,
   CommentBlockTemplate,
   ConditionalTextBlockTemplate,
@@ -126,8 +130,9 @@ export const MDXTemplates = [
   FigureBlockTemplate,
   FootnoteBlockTemplate,
   GlossaryTermBlockTemplate,
-  SnippetBlockTemplate,
   PassthroughBlockTemplate,
+  RelatedTopicsBlockTemplate,
+  SnippetBlockTemplate,
   TabsTemplate,
   TruncateTemplate,
   VariableSetBlockTemplate,

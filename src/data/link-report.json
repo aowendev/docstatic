@@ -1,13 +1,13 @@
 {
-  "generatedAt": "2026-08-12T00:51:38.032Z",
+  "generatedAt": "2026-08-12T16:12:16.159Z",
   "lastCheckedAt": "2026-08-11T17:47:48.882Z",
   "checked": false,
   "stats": {
-    "total": 148,
+    "total": 151,
     "ok": 115,
     "broken": 0,
     "unverified": 2,
-    "unchecked": 0,
+    "unchecked": 3,
     "skipped": 31
   },
   "files": {
@@ -226,6 +226,12 @@
       "relativePath": "guides/markdown-features/snippets.mdx",
       "title": "Snippets",
       "totalLinks": 0
+    },
+    "/docs/guides/markdown-features/tables.mdx": {
+      "fileName": "tables.mdx",
+      "relativePath": "guides/markdown-features/tables.mdx",
+      "title": "CALS Tables",
+      "totalLinks": 3
     },
     "/docs/guides/markdown-features/tabs.mdx": {
       "fileName": "tabs.mdx",
@@ -1220,7 +1226,7 @@
       "url": "https://docusaurus.io/docs/markdown-features/react",
       "type": "markdown",
       "filePath": "/docs/guides/markdown-features/react.mdx",
-      "line": 127,
+      "line": 132,
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
@@ -1231,7 +1237,7 @@
       "url": "/example-page",
       "type": "markdown",
       "filePath": "/docs/guides/markdown-features/react.mdx",
-      "line": 140,
+      "line": 145,
       "status": "skipped",
       "reason": "Internal link — checked by the Docusaurus build"
     },
@@ -1240,9 +1246,36 @@
       "url": "/docs/guides/markdown-features/math-equations",
       "type": "markdown",
       "filePath": "/docs/guides/markdown-features/react.mdx",
-      "line": 140,
+      "line": 145,
       "status": "skipped",
       "reason": "Internal link — checked by the Docusaurus build"
+    },
+    {
+      "text": "CALS table model",
+      "url": "https://www.oasis-open.org/specs/tm9901.html",
+      "type": "markdown",
+      "filePath": "/docs/guides/markdown-features/tables.mdx",
+      "line": 1,
+      "status": "unchecked",
+      "reason": "Not checked yet"
+    },
+    {
+      "text": "CALS table model reference",
+      "url": "https://www.oasis-open.org/specs/tm9901.html",
+      "type": "markdown",
+      "filePath": "/docs/guides/markdown-features/tables.mdx",
+      "line": 19,
+      "status": "unchecked",
+      "reason": "Not checked yet"
+    },
+    {
+      "text": "DocBook table documentation",
+      "url": "https://tdg.docbook.org/tdg/5.2/table.html",
+      "type": "markdown",
+      "filePath": "/docs/guides/markdown-features/tables.mdx",
+      "line": 19,
+      "status": "unchecked",
+      "reason": "Not checked yet"
     },
     {
       "text": "Tabs",

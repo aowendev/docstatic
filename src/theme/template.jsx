@@ -6,6 +6,7 @@
  */
 
 import React from "react";
+import { CalsTableBlockTemplate } from "../components/CalsTable/template";
 import { CodeSnippetBlockTemplate } from "../components/CodeSnippet/template";
 import { CommentBlockTemplate } from "../components/Comment/template";
 import { ConditionalTextBlockTemplate } from "../components/ConditionalText/template";
@@ -225,6 +226,7 @@ const TabsTemplate = {
 
 export const MDXTemplates = [
   AdmonitionTemplate,
+  CalsTableBlockTemplate,
   CodeSnippetBlockTemplate,
   CommentBlockTemplate,
   ConditionalTextBlockTemplate,

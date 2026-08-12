@@ -5,6 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import CalsTable from "@site/src/components/CalsTable";
 import CodeSnippet from "@site/src/components/CodeSnippet";
 import Comment from "@site/src/components/Comment";
 import ConditionalText from "@site/src/components/ConditionalText";
@@ -29,6 +30,7 @@ const Truncate = () => null;
 export default {
   ...MDXComponents,
   Admonition: MDXComponents.admonition,
+  CalsTable: CalsTable,
   CodeBlock: CodeBlock,
   CodeSnippet: CodeSnippet,
   Comment: Comment,
