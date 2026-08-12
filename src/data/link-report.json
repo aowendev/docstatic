@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-12T16:12:16.159Z",
+  "generatedAt": "2026-08-12T21:46:32.032Z",
   "lastCheckedAt": "2026-08-11T17:47:48.882Z",
   "checked": false,
   "stats": {
@@ -1255,7 +1255,7 @@
       "url": "https://www.oasis-open.org/specs/tm9901.html",
       "type": "markdown",
       "filePath": "/docs/guides/markdown-features/tables.mdx",
-      "line": 1,
+      "line": 2,
       "status": "unchecked",
       "reason": "Not checked yet"
     },
@@ -1264,16 +1264,16 @@
       "url": "https://www.oasis-open.org/specs/tm9901.html",
       "type": "markdown",
       "filePath": "/docs/guides/markdown-features/tables.mdx",
-      "line": 19,
+      "line": 63,
       "status": "unchecked",
       "reason": "Not checked yet"
     },
     {
       "text": "DocBook table documentation",
-      "url": "https://tdg.docbook.org/tdg/5.2/table.html",
+      "url": "https://tdg.docbook.org/tdg/5.2/cals.table.html",
       "type": "markdown",
       "filePath": "/docs/guides/markdown-features/tables.mdx",
-      "line": 19,
+      "line": 63,
       "status": "unchecked",
       "reason": "Not checked yet"
     },
