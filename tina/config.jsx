@@ -1096,6 +1096,7 @@ const HomepageCollection = {
   path: "reuse/homepage",
   format: "json",
   ui: {
+    global: true,
     allowedActions: {
       create: false,
       delete: false,

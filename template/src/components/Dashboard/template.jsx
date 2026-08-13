@@ -21,6 +21,7 @@ export const DashboardsCollection = {
   path: "static/dashboards",
   format: "json",
   ui: {
+    global: true,
     allowedActions: {
       create: false,
       delete: false,
