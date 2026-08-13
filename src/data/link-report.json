@@ -1,13 +1,13 @@
 {
-  "generatedAt": "2026-08-13T06:26:57.862Z",
+  "generatedAt": "2026-08-13T14:17:29.629Z",
   "lastCheckedAt": "2026-08-11T17:47:48.882Z",
   "checked": false,
   "stats": {
-    "total": 151,
+    "total": 153,
     "ok": 115,
     "broken": 0,
     "unverified": 2,
-    "unchecked": 3,
+    "unchecked": 5,
     "skipped": 31
   },
   "files": {
@@ -63,6 +63,12 @@
       "fileName": "browser-support.mdx",
       "relativePath": "browser-support.mdx",
       "title": "Browser support",
+      "totalLinks": 2
+    },
+    "/docs/chatbot.mdx": {
+      "fileName": "chatbot.mdx",
+      "relativePath": "chatbot.mdx",
+      "title": "Chatbot",
       "totalLinks": 2
     },
     "/docs/cli.mdx": {
@@ -636,6 +642,24 @@
       "reason": "HTTP 200",
       "code": 200,
       "checkedAt": "2026-08-11T17:47:47.655Z"
+    },
+    {
+      "text": "WebLLM",
+      "url": "https://webllm.mlc.ai/",
+      "type": "markdown",
+      "filePath": "/docs/chatbot.mdx",
+      "line": 1,
+      "status": "unchecked",
+      "reason": "Not checked yet"
+    },
+    {
+      "text": "WebLLM prebuilt model ID",
+      "url": "https://github.com/mlc-ai/web-llm/blob/main/src/config.ts",
+      "type": "markdown",
+      "filePath": "/docs/chatbot.mdx",
+      "line": 21,
+      "status": "unchecked",
+      "reason": "Not checked yet"
     },
     {
       "text": "Dashboards",

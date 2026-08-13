@@ -1,16 +1,15 @@
 ---
-help: null
-lastmod: "2026-06-01T21:56:58.671Z"
-modifiedBy: "aowendev <aowen@translationcommons.org>"
+lastmod: '2026-08-13T14:24:36.178Z'
+modifiedBy: aowendev <aowen@translationcommons.org>
 title: Configuration
 tags:
-  - "configuration"
-  - "configuration_docusaurus"
-  - "software"
-  - "software_static-site-generators"
-  - "software_static-site-generators_docusaurus"
-  - "software_content-management-systems"
-  - "software_content-management-systems_tinacms"
+  - configuration
+  - configuration_docusaurus
+  - software
+  - software_static-site-generators
+  - software_static-site-generators_docusaurus
+  - software_content-management-systems
+  - software_content-management-systems_tinacms
 draft: false
 review: false
 translate: false
@@ -21,25 +20,34 @@ unlisted: false
 
 # 設定
 
-docStatic のサイト設定は `docusaurus.config.ts` ファイルで管理されます。このファイルを直接編集する方法については、Docusaurus ドキュメントの [Configuration](https://docusaurus.io/docs/configuration) を参照してください。
+docStatic のサイト設定は、`docusaurus.config.ts` ファイルを通じて管理されます。このファイルを直接編集する方法については、Docusaurus ドキュメントの [設定](https://docusaurus.io/docs/configuration) を参照してください。
 
-CMS を使用して設定を編集するには、**Settings** コレクションに移動します。ここから、サイトの以下の設定を変更できます：
+CMS を使用して設定を編集するには、**「設定」** コレクションに移動してください。ここから、サイトの以下の項目を設定できます：
 
-* **Title**（タイトル）。
-* **Tagline**（タグライン）。
-* **Favicon**（ファビコン）。
-* **GraphQL Schema URL**（GraphQL スキーマ URL）。
-* デフォルトの **Colour Mode**（カラーモード）（ダークまたはライト）。
-* **Footer**（フッター）アイテム。
-* **Languages**（言語）。
-* **Logo**（ロゴ）。
-* **OpenAPI** スキーマ。
-* **Syntax Highlighting**（シンタックスハイライト）。
+* **タイトル**。
+* **キャッチコピー**。
+* **ファビコン**。
+* **GraphQL スキーマの URL**。
+* デフォルトの **カラーモード**（ダークまたはライト）。
+* **フッター**の項目。
+* **言語**。
+* **ロゴ**。
+* **OpenAPI**スキーマ。
+* **シンタックスハイライト**。
 * **URL**。
-* **Navbar**（ナビゲーションバー）。
-* **Sidebar**（サイドバー）設定。
-* **Blog**（ブログ）設定。
+* **ナビゲーションバー**。
+* **サイドバー**の設定。
+* **ブログ**の設定。
 
-カラースキームとタイポグラフィ設定を変更するための **Theme** コレクションが別途用意されています。
+配色やタイポグラフィの設定を変更するための、独立した**テーマ**コレクションがあります。
+
+## サイトとコレクション
+
+CMSのサイドバーは2つのグループに分かれています：
+
+* **コレクション**—ブログ記事、ドキュメント、ページ、用語集、Wikiページなど、多くのドキュメントを作成するための反復可能なコンテンツ。
+* **サイト**—サイト全体に適用される単一の設定で、ドキュメントは常に1つだけです。**設定**、**テーマ**、**ホームページ**、**チャットボット**、**ダッシュボード**、**目次**、および組み込みの**メディアマネージャー**などがこれにあたります。
+
+スキーマで `ui.global: true` が設定されている場合、コレクションは **コレクション** ではなく **サイト** の下に表示されます。これにより編集方法も変わり、ドキュメント一覧を経由せずにサイドバーから直接開くようになります。
 
 <RelatedTopics maxResults={7} />

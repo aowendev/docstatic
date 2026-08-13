@@ -1,5 +1,6 @@
 ---
-lastmod: '2026-08-11T23:23:43.532Z'
+lastmod: '2026-08-13T14:24:35.666Z'
+modifiedBy: aowendev <aowen@translationcommons.org>
 title: MDX and React
 tags:
   - computer-languages
@@ -13,7 +14,6 @@ translate: false
 approved: false
 published: true
 unlisted: false
-modifiedBy: aowendev <aowen@translationcommons.org>
 ---
 
 # MDX y React
@@ -27,6 +27,7 @@ La forma recomendada de utilizar componentes MDX en docStatic es registrándolos
 Por ejemplo, `src/theme/MDXComponents.jsx` registra actualmente lo siguiente:
 
 ```javascript
+import CalsTable from "@site/src/components/CalsTable";
 import CodeSnippet from "@site/src/components/CodeSnippet";
 import Comment from "@site/src/components/Comment";
 import ConditionalText from "@site/src/components/ConditionalText";
@@ -51,6 +52,7 @@ const Truncate = () => null;
 export default {
   ...MDXComponents,
   Admonition: MDXComponents.admonition,
+  CalsTable: CalsTable,
   CodeBlock: CodeBlock,
   CodeSnippet: CodeSnippet,
   Comment: Comment,
@@ -78,6 +80,7 @@ El archivo `src/theme/template.jsx` comienza así:
 import React from "react";
 import codeFiles from "../../reuse/code-files.json";
 import { slugify } from "../../util";
+import { CalsTableBlockTemplate } from "../components/CalsTable/template";
 import { CodeSnippetBlockTemplate } from "../components/CodeSnippet/template";
 import { ConditionalTextBlockTemplate } from "../components/ConditionalText/template";
 import { FigureBlockTemplate } from "../components/Figure/template";
@@ -116,6 +119,7 @@ El archivo termina exportando todas las plantillas:
 
 export const MDXTemplates = [
   AdmonitionTemplate,
+  CalsTableBlockTemplate,
   CodeSnippetBlockTemplate,
   CommentBlockTemplate,
   ConditionalTextBlockTemplate,
@@ -125,8 +129,9 @@ export const MDXTemplates = [
   FigureBlockTemplate,
   FootnoteBlockTemplate,
   GlossaryTermBlockTemplate,
-  SnippetBlockTemplate,
   PassthroughBlockTemplate,
+  RelatedTopicsBlockTemplate,
+  SnippetBlockTemplate,
   TabsTemplate,
   TruncateTemplate,
   VariableSetBlockTemplate,
@@ -136,16 +141,16 @@ export const MDXTemplates = [
 Ahora estos componentes pueden utilizarse en cualquier archivo MDX.
 
 <Admonition type="caution" title="Caution">
-  Use upper-case tag names.
+    Use upper-case tag names.
 
-  From MDX v3+ onward, lower-case tag names are always rendered as native HTML elements and will not use any component mapping you provide.
+    From MDX v3+ onward, lower-case tag names are always rendered as native HTML elements and will not use any component mapping you provide.
 </Admonition>
 
 Para obtener más información, consulta [MDX y React](https://docusaurus.io/docs/markdown-features/react) en la documentación de Docusaurus.
 
 ## Componente «Passthrough»
 
-En ocasiones será necesario incluir código HTML, JSX o Markdown en un tema que el CMS no pueda mostrar en el editor de texto enriquecido. Para garantizar que el editor pueda seguir utilizándose para otros contenidos, se proporciona el componente `Passthrough`. Esto te permite envolver el contenido de forma que el editor de texto enriquecido lo ignore efectivamente.
+A veces será necesario incluir código HTML, JSX o Markdown en un tema que el CMS no pueda mostrar en el editor de texto enriquecido. Para garantizar que el editor pueda seguir utilizándose para otros contenidos, se proporciona el componente `Passthrough`. Esto te permite envolver el contenido de forma que el editor de texto enriquecido lo ignore efectivamente.
 
 1. Selecciona **Passthrough** en la lista **Incrustar**.
 2. Asigna un **Resumen**.

@@ -41,6 +41,45 @@
   "colorGenerator.text": {
     "message": "Replace the variables in {cssPath} with these new variables."
   },
+  "chatbot.intro.note": {
+    "message": "Al activarlo, se descarga un modelo de IA (varios cientos de MB) en tu navegador la primera vez. Después se guarda en caché, pero la descarga inicial puede tardar un poco."
+  },
+  "chatbot.intro.enableButton": {
+    "message": "Activar asistente de IA"
+  },
+  "chatbot.loading.error": {
+    "message": "Algo salió mal"
+  },
+  "chatbot.loading.inProgress": {
+    "message": "Cargando asistente de IA…"
+  },
+  "chatbot.loading.progressDetail": {
+    "message": "{percent}% completado ({seconds}s transcurridos)"
+  },
+  "chatbot.messages.empty": {
+    "message": "Haz una pregunta para empezar."
+  },
+  "chatbot.header.closeAriaLabel": {
+    "message": "Cerrar chat"
+  },
+  "chatbot.input.placeholder": {
+    "message": "Haz una pregunta…"
+  },
+  "chatbot.input.stop": {
+    "message": "Detener"
+  },
+  "chatbot.input.send": {
+    "message": "Enviar"
+  },
+  "chatbot.launcher.closeAriaLabel": {
+    "message": "Cerrar asistente de IA"
+  },
+  "chatbot.launcher.openAriaLabel": {
+    "message": "Abrir asistente de IA"
+  },
+  "chatbot.error.prefix": {
+    "message": "Lo sentimos, algo salió mal:"
+  },
   "theme.ErrorPageContent.title": {
     "message": "Esta página ha fallado.",
     "description": "The title of the fallback page when the page crashed"

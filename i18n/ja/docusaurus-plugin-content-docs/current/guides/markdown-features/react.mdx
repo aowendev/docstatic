@@ -1,5 +1,6 @@
 ---
-lastmod: '2026-08-11T23:03:29.476Z'
+lastmod: '2026-08-13T14:24:36.267Z'
+modifiedBy: aowendev <aowen@translationcommons.org>
 title: MDX and React
 tags:
   - computer-languages
@@ -13,7 +14,6 @@ translate: false
 approved: false
 published: true
 unlisted: false
-modifiedBy: aowendev <aowen@translationcommons.org>
 ---
 
 # MDX と React
@@ -24,9 +24,10 @@ docStaticには[MDX](https://mdxjs.com/)のサポートが組み込まれてお�
 
 docStatic で MDX コンポーネントを使用する際の推奨方法は、グローバルスコープに登録することです。これにより、インポート文を記述しなくても、すべての MDX ファイルで自動的に利用できるようになります。 また、CMSがコンポーネントを認識できるように、コンポーネントにテンプレート定義を追加し、それをインポートする必要があります。具体的な方法については、`CodeSnippet`など、docStaticが提供するコンポーネントを参照してください。グローバルコンポーネントは静的にレンダリングされるようにすることが重要です。そうしないと、ページのレンダリングに遅延が生じる可能性があります。
 
-例えば、`src/theme/MDXComponents.jsx` では現在、以下が登録されています：
+例えば、`src/theme/MDXComponents.jsx` では現在、以下のように登録されています：
 
 ```javascript
+import CalsTable from "@site/src/components/CalsTable";
 import CodeSnippet from "@site/src/components/CodeSnippet";
 import Comment from "@site/src/components/Comment";
 import ConditionalText from "@site/src/components/ConditionalText";
@@ -51,6 +52,7 @@ const Truncate = () => null;
 export default {
   ...MDXComponents,
   Admonition: MDXComponents.admonition,
+  CalsTable: CalsTable,
   CodeBlock: CodeBlock,
   CodeSnippet: CodeSnippet,
   Comment: Comment,
@@ -70,7 +72,7 @@ export default {
 };
 ```
 
-`@site/src/components/` で始まるインポートは、トピック内でレンダリング可能なカスタムコンポーネントです。 また、StatusField のように CMS によって使用されるカスタムコンポーネントもありますが、これらはインポートする必要はありません。
+`@site/src/components/` で始まるインポートは、トピック内でレンダリング可能なカスタムコンポーネントです。 また、StatusField のように CMS によって使用されるカスタムコンポーネントもあり、これらはインポートする必要はありません。
 
 `src/theme/template.jsx` ファイルは次のように始まります：
 
@@ -78,6 +80,7 @@ export default {
 import React from "react";
 import codeFiles from "../../reuse/code-files.json";
 import { slugify } from "../../util";
+import { CalsTableBlockTemplate } from "../components/CalsTable/template";
 import { CodeSnippetBlockTemplate } from "../components/CodeSnippet/template";
 import { ConditionalTextBlockTemplate } from "../components/ConditionalText/template";
 import { FigureBlockTemplate } from "../components/Figure/template";
@@ -116,6 +119,7 @@ const DetailsTemplate = {
 
 export const MDXTemplates = [
   AdmonitionTemplate,
+  CalsTableBlockTemplate,
   CodeSnippetBlockTemplate,
   CommentBlockTemplate,
   ConditionalTextBlockTemplate,
@@ -125,8 +129,9 @@ export const MDXTemplates = [
   FigureBlockTemplate,
   FootnoteBlockTemplate,
   GlossaryTermBlockTemplate,
-  SnippetBlockTemplate,
   PassthroughBlockTemplate,
+  RelatedTopicsBlockTemplate,
+  SnippetBlockTemplate,
   TabsTemplate,
   TruncateTemplate,
   VariableSetBlockTemplate,
@@ -136,16 +141,16 @@ export const MDXTemplates = [
 これで、これらのコンポーネントを任意の MDX ファイルで使用できるようになります。
 
 <Admonition type="caution" title="Caution">
-  Use upper-case tag names.
+    Use upper-case tag names.
 
-  From MDX v3+ onward, lower-case tag names are always rendered as native HTML elements and will not use any component mapping you provide.
+    From MDX v3+ onward, lower-case tag names are always rendered as native HTML elements and will not use any component mapping you provide.
 </Admonition>
 
 詳細については、Docusaurus ドキュメントの [MDX と React](https://docusaurus.io/docs/markdown-features/react) を参照してください。
 
 ## Passthrough コンポーネント
 
-CMSのリッチテキストエディタでは表示できないHTML、JSX、またはMarkdownをトピックに含める必要がある場合があります。エディタを他のコンテンツでも引き続き使用できるようにするため、`Passthrough`コンポーネントが用意されています。これにより、コンテンツをラップして、リッチテキストエディタが実質的にそれを無視するようにすることができます。
+CMSのリッチテキストエディタでは表示できないHTML、JSX、またはMarkdownをトピックに含める必要がある場合があります。エディタを他のコンテンツにも引き続き使用できるようにするため、`Passthrough`コンポーネントが用意されています。これにより、コンテンツをラップして、リッチテキストエディタが実質的にそれを無視するようにすることができます。
 
 1. **Embed** リストから **Passthrough** を選択します。
 2. **Summary**を入力します。

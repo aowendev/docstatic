@@ -41,6 +41,45 @@
   "colorGenerator.text": {
     "message": "Remplacez les variables de {cssPath} par ces nouvelles variables."
   },
+  "chatbot.intro.note": {
+    "message": "L'activation télécharge un modèle d'IA (plusieurs centaines de Mo) dans votre navigateur la première fois. Il est ensuite mis en cache, mais le premier téléchargement peut prendre un certain temps."
+  },
+  "chatbot.intro.enableButton": {
+    "message": "Activer l'assistant IA"
+  },
+  "chatbot.loading.error": {
+    "message": "Une erreur est survenue"
+  },
+  "chatbot.loading.inProgress": {
+    "message": "Chargement de l'assistant IA…"
+  },
+  "chatbot.loading.progressDetail": {
+    "message": "{percent} % terminé ({seconds}s écoulées)"
+  },
+  "chatbot.messages.empty": {
+    "message": "Posez une question pour commencer."
+  },
+  "chatbot.header.closeAriaLabel": {
+    "message": "Fermer le chat"
+  },
+  "chatbot.input.placeholder": {
+    "message": "Posez une question…"
+  },
+  "chatbot.input.stop": {
+    "message": "Arrêter"
+  },
+  "chatbot.input.send": {
+    "message": "Envoyer"
+  },
+  "chatbot.launcher.closeAriaLabel": {
+    "message": "Fermer l'assistant IA"
+  },
+  "chatbot.launcher.openAriaLabel": {
+    "message": "Ouvrir l'assistant IA"
+  },
+  "chatbot.error.prefix": {
+    "message": "Désolé, une erreur est survenue :"
+  },
   "theme.ErrorPageContent.title": {
     "message": "Cette page a planté.",
     "description": "The title of the fallback page when the page crashed"

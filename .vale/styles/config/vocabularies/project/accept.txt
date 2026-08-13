@@ -12,6 +12,7 @@ Netlify
 Vercel
 Cloudflare
 GitHub
+[Cc]hatbots?
 npm
 npx
 nvm

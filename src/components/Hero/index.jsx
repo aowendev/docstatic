@@ -77,7 +77,9 @@ export const Hero = ({ data, index }) => {
                 </div>
                 <div className={styles.cardContent}>
                   <div className={styles.codeBlock}>
-                    <span className={styles.codeKeyword}># Features</span>
+                    <span className={styles.codeKeyword}>
+                      {data.heroCardFeaturesLabel || "# Features"}
+                    </span>
                     <br />
                     {data.heroCardFeatures &&
                     data.heroCardFeatures.length > 0 ? (

@@ -41,6 +41,45 @@
   "colorGenerator.text": {
     "message": "Replace the variables in {cssPath} with these new variables."
   },
+  "chatbot.intro.note": {
+    "message": "Beim Aktivieren wird beim ersten Mal ein KI-Modell (mehrere hundert MB) in Ihren Browser heruntergeladen. Danach wird es zwischengespeichert, aber der erste Download kann eine Weile dauern."
+  },
+  "chatbot.intro.enableButton": {
+    "message": "KI-Assistent aktivieren"
+  },
+  "chatbot.loading.error": {
+    "message": "Etwas ist schiefgelaufen"
+  },
+  "chatbot.loading.inProgress": {
+    "message": "KI-Assistent wird geladen…"
+  },
+  "chatbot.loading.progressDetail": {
+    "message": "{percent}% abgeschlossen ({seconds}s vergangen)"
+  },
+  "chatbot.messages.empty": {
+    "message": "Stellen Sie eine Frage, um zu beginnen."
+  },
+  "chatbot.header.closeAriaLabel": {
+    "message": "Chat schließen"
+  },
+  "chatbot.input.placeholder": {
+    "message": "Frage stellen…"
+  },
+  "chatbot.input.stop": {
+    "message": "Stopp"
+  },
+  "chatbot.input.send": {
+    "message": "Senden"
+  },
+  "chatbot.launcher.closeAriaLabel": {
+    "message": "KI-Assistent schließen"
+  },
+  "chatbot.launcher.openAriaLabel": {
+    "message": "KI-Assistent öffnen"
+  },
+  "chatbot.error.prefix": {
+    "message": "Entschuldigung, etwas ist schiefgelaufen:"
+  },
   "theme.ErrorPageContent.title": {
     "message": "Die Seite ist abgestürzt.",
     "description": "The title of the fallback page when the page crashed"

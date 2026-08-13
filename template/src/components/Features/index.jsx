@@ -44,10 +44,12 @@ export const Features = ({ data, index }) => {
     <section key={index} className={styles.features}>
       <div className="container">
         <div className={styles.featuresHeader}>
-          <h2 className={styles.featuresTitle}>Built for Everyone</h2>
+          <h2 className={styles.featuresTitle}>
+            {data.title || "Built for Everyone"}
+          </h2>
           <p className={styles.featuresSubtitle}>
-            Whether you're a writer, developer or end user, docStatic has
-            something for you.
+            {data.subtitle ||
+              "Whether you're a writer, developer or end user, docStatic has something for you."}
           </p>
         </div>
         <div className="row">

@@ -1,0 +1,128 @@
+---
+lastmod: '2026-08-13T14:24:36.096Z'
+modifiedBy: aowendev <aowen@translationcommons.org>
+title: Chatbot
+tags:
+  - software
+  - software_artificial-intelligence
+  - software_ai-integration
+draft: false
+review: false
+translate: false
+approved: false
+published: true
+unlisted: false
+---
+
+docStatic を使用すると、ドキュメントに関する質問に答える AI チャットボットをサイトに追加できます。デフォルトでは、[WebLLM](https://webllm.mlc.ai/)（WebGPU 経由）を使用して訪問者のブラウザ上で完全に実行されるため、外部サービス、API キー、サーバーは一切必要ありません。 また、このウィジェットは、訪問者に表示される内容を一切変更することなく、ご自身でホストしている有料プロバイダーを指定して利用することも可能です。
+
+この機能はデフォルトで 2 つのレベルで無効になっているため、実際に必要とされる場合を除き、ページの読み込み時間に影響を与えることはありません：
+
+* **サイトレベル**—チャットボット設定内のマスタースイッチです。デフォルトではオフになっており、オフのときはチャットボットのコードが訪問者に一切配信されません。
+* **訪問者レベル**—サイト全体で有効になっている場合でも、各訪問者には折りたたまれたランチャーボタンしか表示されません。訪問者が明示的にクリックするまで、何もダウンロードされません。
+
+## チャットボットの有効化
+
+CMSでチャットボット設定を開き、**「チャットボットを有効にする」**をオンにします。**AIプロバイダー**を選択してください：
+
+* **WebLLM（ブラウザ内、無料）**—デフォルト設定です。オプションのモデル選択以外に、設定は不要です。
+* **リモートAPI（デプロイヤーがホストするプロキシ）**—以下で説明する、管理者が制御するバックエンドへリクエストを転送します。
+
+<Admonition type="tip" title="Answers grounded in your docs">
+  When the site has been built with its default local search index available, the chatbot retrieves the most relevant sections of your documentation and includes them as context before answering, so responses cite real pages instead of guessing. This context isn't available in local development, only after a full production build.
+</Admonition>
+
+## WebLLMモデルの選択
+
+デフォルトのモデルは `Qwen2.5-1.5B-Instruct-q4f16_1-MLC`（約1.6 GB、初回ダウンロード後はブラウザにキャッシュされます）です。これは、29以上の言語（当サイトがデフォルトで提供するすべてのロケールを含む）を幅広くカバーするように選択されています。 **WebLLM設定**フィールドで、任意の[WebLLMのプリビルドモデルID](https://github.com/mlc-ai/web-llm/blob/main/src/config.ts)を使用して変更できます：
+
+* `SmolLM2-360M-Instruct-q4f16_1-MLC`—サイズがはるかに小さく高速ですが、英語のみに対応しています。
+* `Llama-3.2-1B-Instruct-q4f16_1-MLC`—デフォルトよりも軽量で、英語、ドイツ語、フランス語、イタリア語、ポルトガル語、ヒンディー語、スペイン語、タイ語に対応していますが、日本語やその他の非ラテン文字言語には対応していません。
+
+<Admonition type="note" title="Check language coverage before switching models">
+  If your site serves a language a smaller model doesn't officially support, answers in that language may be unreliable even with the "respond in this language" instruction the chatbot already sends automatically. Check a model's supported languages before making it the default.
+</Admonition>
+
+## 多言語対応
+
+チャットボットは、訪問者が現在閲覧しているロケールに自動的に対応します。CMSのテキスト（以下）を翻訳する以外に、設定する必要はありません：
+
+* **モデルの応答言語。** チャットボットは、ページのロケールと（サイトの言語設定で指定された）設定済みの表示名に基づいて、モデルにどの言語で回答すべきかを指示するため、質問ごとに言語を選択する必要はありません。
+* **取得されるドキュメントのコンテキスト。** 各ロケールには、そのロケール固有の翻訳済みページから構築された独自の検索インデックスがあるため、引用先は自動的に適切な言語のコンテンツを指し示します。
+* **チャットウィジェット内のインターフェーステキスト**（ボタン、ステータスメッセージ）は、docStaticの標準的なコンポーネント翻訳メカニズムを通じて翻訳されます。これは、このサイトの他の部分でも使用されているものと同じです。
+
+**デプロイ担当者が作成したテキスト**—ランチャーボタンのラベル、ウェルカムメッセージ、および各プロバイダーに送信されるシステムプロンプト—は、CMS内の**Chatbot**セクションに、言語ごとの翻訳エントリとして保存されています。独自のエントリがないロケールでは、デフォルト（英語）のテキストが使用されます。
+
+## 有料プロバイダーの接続
+
+docStaticサイトは静的であり、独自のバックエンドを持たないため、チャットボットはプロバイダーのAPIキーをサイト自体に埋め込むことはありません。そうすると、すべての訪問者にAPIキーが公開されてしまうからです。代わりに、**AIプロバイダー**を**リモートAPI**に切り替えることで、ウィジェットはあなたがホストし管理する**エンドポイントURL**を指すようになります。 エンドポイント側では、実際のAPIキーをサーバーサイドで管理し、プロバイダーからの応答を、ウィジェットが理解できる小さなストリーミング形式（`data: {"delta": "...", "done": false}` という一連のイベントで、最後に `data: [DONE]` で終わる形式）に変換します。
+
+以下の例はあくまで参考実装です。これは docStatic によってデプロイされるものではなく、別途ホスト（たとえば Cloudflare Worker や Netlify Function など）し、独自の API キーをシークレットとして設定する必要があります。
+
+\<Tabs>
+  \<TabItem value="cloudflare" label="Cloudflare Worker">
+
+```javascript
+export default {
+  async fetch(request, env) {
+    const { messages } = await request.json();
+
+    const upstream = await fetch("https://api.anthropic.com/v1/messages", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+        "x-api-key": env.ANTHROPIC_API_KEY,
+        "anthropic-version": "2023-06-01",
+      },
+      body: JSON.stringify({
+        model: "claude-3-5-haiku-latest",
+        max_tokens: 1024,
+        stream: true,
+        messages,
+      }),
+    });
+
+    // Anthropic already streams as SSE; forward it as-is.
+    return new Response(upstream.body, {
+      headers: { "content-type": "text/event-stream" },
+    });
+  },
+};
+```
+
+  \</TabItem>
+  \<TabItem value="netlify" label="Netlify Function">
+
+```javascript
+export default async (request) => {
+  const { messages } = await request.json();
+
+  const upstream = await fetch("https://api.anthropic.com/v1/messages", {
+    method: "POST",
+    headers: {
+      "content-type": "application/json",
+      "x-api-key": process.env.ANTHROPIC_API_KEY,
+      "anthropic-version": "2023-06-01",
+    },
+    body: JSON.stringify({
+      model: "claude-3-5-haiku-latest",
+      max_tokens: 1024,
+      stream: true,
+      messages,
+    }),
+  });
+
+  return new Response(upstream.body, {
+    headers: { "content-type": "text/event-stream" },
+  });
+};
+```
+
+  \</TabItem>
+\</Tabs>
+
+<Admonition type="caution" title="Never embed a shared key client-side">
+  Do not put a real API key into the Chatbot settings' Endpoint URL field, or anywhere else that ships in the built site. The endpoint you configure should be a backend of your own, with the key held as a server-side secret.
+</Admonition>
+
+<RelatedTopics maxResults={7} />

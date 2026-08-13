@@ -158,6 +158,10 @@
           "_template": "doc"
         },
         {
+          "document": "docs/chatbot.mdx",
+          "_template": "doc"
+        },
+        {
           "document": "docs/browser-support.mdx",
           "_template": "doc"
         },
