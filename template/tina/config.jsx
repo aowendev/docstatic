@@ -7,6 +7,7 @@ import conditionsData from "../reuse/conditions/index.json";
 // doc tags from the taxonomy JSON file
 import data from "../reuse/taxonomy/index.json";
 import { docusaurusDate, titleFromSlug } from "../scripts/util";
+import { ChatbotCollection } from "../src/components/Chatbot/template";
 // collapsible field component
 import CollapsibleField from "../src/components/CollapsibleField";
 // conditions tree UI component
@@ -1510,6 +1511,7 @@ export default defineConfig({
   schema: {
     collections: [
       PostCollection,
+      ChatbotCollection,
       ConditionsCollection,
       DashboardsCollection,
       GlossaryTermCollection,

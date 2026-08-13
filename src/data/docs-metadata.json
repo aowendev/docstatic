@@ -94,6 +94,18 @@
     "lastmod": "2026-08-12T21:46:45.998Z"
   },
   {
+    "title": "Chatbot",
+    "description": "Add an in-browser AI chatbot that answers questions about your documentation, with no external service required.",
+    "tags": [
+      "software",
+      "software_artificial-intelligence",
+      "software_ai-integration"
+    ],
+    "path": "/chatbot",
+    "filePath": "chatbot.mdx",
+    "lastmod": "2026-08-13T00:00:00.000Z"
+  },
+  {
     "title": "CLI",
     "description": "docStatic command line scripts.",
     "tags": [
