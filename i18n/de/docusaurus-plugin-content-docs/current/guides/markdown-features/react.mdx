@@ -1,5 +1,6 @@
 ---
-lastmod: '2026-08-11T23:19:40.952Z'
+lastmod: '2026-08-13T14:24:35.422Z'
+modifiedBy: aowendev <aowen@translationcommons.org>
 title: MDX and React
 tags:
   - computer-languages
@@ -13,7 +14,6 @@ translate: false
 approved: false
 published: true
 unlisted: false
-modifiedBy: aowendev <aowen@translationcommons.org>
 ---
 
 # MDX und React
@@ -22,11 +22,12 @@ docStatic bietet integrierte Unterstützung für [MDX](https://mdxjs.com/), wodu
 
 ## MDX-Komponentenbereich
 
-Die empfohlene Vorgehensweise zur Verwendung von MDX-Komponenten in docStatic besteht darin, diese im globalen Bereich zu registrieren, wodurch sie automatisch in jeder MDX-Datei verfügbar sind, ohne dass Importanweisungen erforderlich sind. Außerdem musst du der Komponente eine Vorlagendefinition hinzufügen und sie importieren, damit das CMS sie erkennt. Beispiele dafür findest du in den eigenen Komponenten von docStatic, wie beispielsweise `CodeSnippet`. Es ist wichtig, sicherzustellen, dass globale Komponenten statisch gerendert werden, da sie sonst zu Verzögerungen beim Rendern der Seite führen können.
+Die empfohlene Vorgehensweise zur Verwendung von MDX-Komponenten in docStatic besteht darin, diese im globalen Bereich zu registrieren, wodurch sie automatisch in jeder MDX-Datei verfügbar sind, ohne dass Import-Anweisungen erforderlich sind. Außerdem musst du der Komponente eine Vorlagendefinition hinzufügen und sie importieren, damit das CMS sie erkennt. Beispiele dafür findest du in den eigenen Komponenten von docStatic, wie beispielsweise `CodeSnippet`. Es ist wichtig, sicherzustellen, dass globale Komponenten statisch gerendert werden, da sie sonst zu Verzögerungen beim Rendern der Seite führen können.
 
 Beispielsweise registriert `src/theme/MDXComponents.jsx` derzeit Folgendes:
 
 ```javascript
+import CalsTable from "@site/src/components/CalsTable";
 import CodeSnippet from "@site/src/components/CodeSnippet";
 import Comment from "@site/src/components/Comment";
 import ConditionalText from "@site/src/components/ConditionalText";
@@ -51,6 +52,7 @@ const Truncate = () => null;
 export default {
   ...MDXComponents,
   Admonition: MDXComponents.admonition,
+  CalsTable: CalsTable,
   CodeBlock: CodeBlock,
   CodeSnippet: CodeSnippet,
   Comment: Comment,
@@ -78,6 +80,7 @@ Die Datei `src/theme/template.jsx` beginnt wie folgt:
 import React from "react";
 import codeFiles from "../../reuse/code-files.json";
 import { slugify } from "../../util";
+import { CalsTableBlockTemplate } from "../components/CalsTable/template";
 import { CodeSnippetBlockTemplate } from "../components/CodeSnippet/template";
 import { ConditionalTextBlockTemplate } from "../components/ConditionalText/template";
 import { FigureBlockTemplate } from "../components/Figure/template";
@@ -88,7 +91,7 @@ import { SnippetBlockTemplate } from "../components/Snippet/template";
 import { VariableSetBlockTemplate } from "../components/VariableSet/template";
 ```
 
-Vorlagen für native Komponenten, wie beispielsweise `Details`, müssen direkt in der Datei definiert werden. Zum Beispiel:
+Vorlagen für native Komponenten, wie z. B. `Details`, müssen direkt in der Datei definiert werden. Zum Beispiel:
 
 ```javascript
 const DetailsTemplate = {
@@ -116,6 +119,7 @@ Die Datei endet mit dem Export aller Vorlagen:
 
 export const MDXTemplates = [
   AdmonitionTemplate,
+  CalsTableBlockTemplate,
   CodeSnippetBlockTemplate,
   CommentBlockTemplate,
   ConditionalTextBlockTemplate,
@@ -125,8 +129,9 @@ export const MDXTemplates = [
   FigureBlockTemplate,
   FootnoteBlockTemplate,
   GlossaryTermBlockTemplate,
-  SnippetBlockTemplate,
   PassthroughBlockTemplate,
+  RelatedTopicsBlockTemplate,
+  SnippetBlockTemplate,
   TabsTemplate,
   TruncateTemplate,
   VariableSetBlockTemplate,
@@ -136,21 +141,21 @@ export const MDXTemplates = [
 Nun können diese Komponenten in jeder MDX-Datei verwendet werden.
 
 <Admonition type="caution" title="Caution">
-  Use upper-case tag names.
+    Use upper-case tag names.
 
-  From MDX v3+ onward, lower-case tag names are always rendered as native HTML elements and will not use any component mapping you provide.
+    From MDX v3+ onward, lower-case tag names are always rendered as native HTML elements and will not use any component mapping you provide.
 </Admonition>
 
-Weitere Informationen findest du unter [MDX und React](https://docusaurus.io/docs/markdown-features/react) in der Docusaurus-Dokumentation.
+Weitere Informationen finden Sie unter [MDX und React](https://docusaurus.io/docs/markdown-features/react) in der Docusaurus-Dokumentation.
 
 ## Passthrough-Komponente
 
-Manchmal ist es erforderlich, HTML-, JSX- oder Markdown-Inhalte in ein Thema einzubinden, die das CMS im Rich-Text-Editor nicht anzeigen kann. Um sicherzustellen, dass der Editor weiterhin für andere Inhalte genutzt werden kann, steht die `Passthrough`-Komponente zur Verfügung. Damit können Sie Inhalte so umschließen, dass der Rich-Text-Editor sie effektiv ignoriert.
+Manchmal ist es notwendig, HTML-, JSX- oder Markdown-Inhalte in ein Thema einzubinden, die das CMS im Rich-Text-Editor nicht anzeigen kann. Um sicherzustellen, dass der Editor weiterhin für andere Inhalte genutzt werden kann, steht die `Passthrough`-Komponente zur Verfügung. Damit können Sie Inhalte so umschließen, dass der Rich-Text-Editor sie effektiv ignoriert.
 
 1. Wählen Sie **Passthrough** aus der Liste **Einbetten** aus.
 2. Geben Sie eine **Zusammenfassung** ein.
 3. Geben Sie den **Inhalt** als einfachen Text ein.
-4. Wählen Sie den **Inhaltstyp** (**Markdown**, **HTML** oder **JSX**) aus.
+4. Wählen Sie den **Inhaltstyp** aus (**Markdown**, **HTML** oder **JSX**).
 
 Der Inhalt wird beim Erstellen der Website direkt und ohne den Wrapper zur Seite hinzugefügt.
 

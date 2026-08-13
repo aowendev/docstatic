@@ -1,5 +1,6 @@
 ---
-lastmod: '2026-08-11T23:12:25.060Z'
+lastmod: '2026-08-13T14:24:35.979Z'
+modifiedBy: aowendev <aowen@translationcommons.org>
 title: MDX et React
 description: Utiliser React dans docStatic Documents Markdown avec MDX.
 tags:
@@ -14,7 +15,6 @@ translate: false
 approved: false
 published: true
 unlisted: false
-modifiedBy: aowendev <aowen@translationcommons.org>
 ---
 
 # MDX et React
@@ -23,11 +23,12 @@ docStatic intègre la prise en charge de [MDX](https://mdxjs.com/), ce qui vous 
 
 ## Portée des composants MDX
 
-La meilleure façon d’utiliser les composants MDX dans docStatic consiste à les enregistrer dans la portée globale, ce qui les rend automatiquement disponibles dans tous les fichiers MDX, sans aucune instruction d’importation. Vous devez également ajouter une définition de modèle au composant et l’importer afin que le CMS le reconnaisse. Pour voir des exemples de cette procédure, vous pouvez explorer les composants propres à docStatic, tels que `CodeSnippet`. Il est important de s’assurer que les composants globaux sont rendus de manière statique, sinon ils risquent d’entraîner des retards dans le rendu des pages.
+La meilleure façon d’utiliser les composants MDX dans docStatic consiste à les enregistrer dans la portée globale, ce qui les rend automatiquement disponibles dans tous les fichiers MDX, sans aucune instruction d’importation. Vous devez également ajouter une définition de modèle au composant et l’importer afin que le CMS le reconnaisse. Pour voir des exemples de cette procédure, vous pouvez consulter les composants propres à docStatic, tels que `CodeSnippet`. Il est important de s’assurer que les composants globaux sont rendus de manière statique, sinon ils risquent d’entraîner des retards dans le rendu des pages.
 
 Par exemple, le fichier `src/theme/MDXComponents.jsx` enregistre actuellement les éléments suivants :
 
 ```javascript
+import CalsTable from "@site/src/components/CalsTable";
 import CodeSnippet from "@site/src/components/CodeSnippet";
 import Comment from "@site/src/components/Comment";
 import ConditionalText from "@site/src/components/ConditionalText";
@@ -52,6 +53,7 @@ const Truncate = () => null;
 export default {
   ...MDXComponents,
   Admonition: MDXComponents.admonition,
+  CalsTable: CalsTable,
   CodeBlock: CodeBlock,
   CodeSnippet: CodeSnippet,
   Comment: Comment,
@@ -79,6 +81,7 @@ Le fichier `src/theme/template.jsx` commence ainsi :
 import React from "react";
 import codeFiles from "../../reuse/code-files.json";
 import { slugify } from "../../util";
+import { CalsTableBlockTemplate } from "../components/CalsTable/template";
 import { CodeSnippetBlockTemplate } from "../components/CodeSnippet/template";
 import { ConditionalTextBlockTemplate } from "../components/ConditionalText/template";
 import { FigureBlockTemplate } from "../components/Figure/template";
@@ -117,6 +120,7 @@ Le fichier se termine par l’exportation de tous les modèles :
 
 export const MDXTemplates = [
   AdmonitionTemplate,
+  CalsTableBlockTemplate,
   CodeSnippetBlockTemplate,
   CommentBlockTemplate,
   ConditionalTextBlockTemplate,
@@ -126,8 +130,9 @@ export const MDXTemplates = [
   FigureBlockTemplate,
   FootnoteBlockTemplate,
   GlossaryTermBlockTemplate,
-  SnippetBlockTemplate,
   PassthroughBlockTemplate,
+  RelatedTopicsBlockTemplate,
+  SnippetBlockTemplate,
   TabsTemplate,
   TruncateTemplate,
   VariableSetBlockTemplate,
@@ -137,16 +142,16 @@ export const MDXTemplates = [
 Ces composants peuvent désormais être utilisés dans n’importe quel fichier MDX.
 
 <Admonition type="caution" title="Caution">
-  Use upper-case tag names.
+    Use upper-case tag names.
 
-  From MDX v3+ onward, lower-case tag names are always rendered as native HTML elements and will not use any component mapping you provide.
+    From MDX v3+ onward, lower-case tag names are always rendered as native HTML elements and will not use any component mapping you provide.
 </Admonition>
 
 Pour plus d’informations, consultez la section [MDX et React](https://docusaurus.io/docs/markdown-features/react) dans la documentation de Docusaurus.
 
-## Composant `Passthrough`
+## Composant Passthrough
 
-Il est parfois nécessaire d’inclure du code HTML, JSX ou Markdown dans un sujet que le CMS ne peut pas afficher dans l’éditeur de texte enrichi. Pour que l’éditeur puisse continuer à être utilisé pour d’autres contenus, le composant `Passthrough` est fourni. Il vous permet d’encapsuler du contenu de manière à ce que l’éditeur de texte enrichi l’ignore complètement.
+Il est parfois nécessaire d’inclure du code HTML, JSX ou Markdown dans un sujet que le CMS ne peut pas afficher dans l’éditeur de texte enrichi. Afin de garantir que l’éditeur puisse toujours être utilisé pour d’autres contenus, le composant `Passthrough` est fourni. Il vous permet d’encapsuler du contenu de manière à ce que l’éditeur de texte enrichi l’ignore complètement.
 
 1. Sélectionnez **Passthrough** dans la liste **Embed**.
 2. Remplissez le champ **Résumé**.

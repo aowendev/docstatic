@@ -1,21 +1,22 @@
 ---
-lastmod: "2026-03-10T23:01:04.918Z"
+lastmod: '2026-08-13T14:24:35.898Z'
 title: Configuration
 description: Configurer le comportement de votre site grâce à docusaurus.config.ts et plus encore.
 tags:
-  - "configuration"
-  - "configuration_docusaurus"
+  - configuration
+  - configuration_docusaurus
 draft: false
 review: false
 translate: false
 approved: false
 published: true
 unlisted: false
+modifiedBy: aowendev <aowen@translationcommons.org>
 ---
 
 # Configuration
 
-La configuration du site docStatic est gérée via le fichier `docusaurus.config.ts`. Pour plus d'informations sur la modification directe de ce fichier, consultez la section [Configuration](https://docusaurus.io/docs/configuration) de la documentation Docusaurus.
+La configuration du site statique doc est gérée via le fichier `docusaurus.config.ts`. Pour savoir comment modifier directement ce fichier, consultez la section [Configuration](https://docusaurus.io/docs/configuration) de la documentation Docusaurus.
 
 Pour utiliser le CMS afin de modifier la configuration, accédez à la collection **Paramètres**. À partir de là, vous pouvez configurer les éléments suivants du site :
 
@@ -23,7 +24,7 @@ Pour utiliser le CMS afin de modifier la configuration, accédez à la collectio
 * **Slogan**.
 * **Favicon**.
 * **URL du schéma GraphQL**.
-* **Mode couleur** par défaut (foncé ou clair).
+* **Mode de couleur** par défaut (foncé ou clair).
 * Éléments du **pied de page**.
 * **Langues**.
 * **Logo**.
@@ -34,4 +35,15 @@ Pour utiliser le CMS afin de modifier la configuration, accédez à la collectio
 * Paramètres de la **barre latérale**.
 * Paramètres du **blog**.
 
-Il existe une collection **Thème** distincte pour modifier les paramètres de couleur et de typographie.
+Il existe une collection distincte intitulée **Thème** permettant de modifier la palette de couleurs et les paramètres typographiques.
+
+## Site vs. Collections
+
+La barre latérale du CMS se divise en deux groupes :
+
+* **Collections** — contenu réutilisable à partir duquel vous créez de nombreux documents, tels que des articles de blog, des documents, des pages, des termes de glossaire et des pages wiki.
+* **Site** — configuration unique à l’échelle du site qui ne comporte qu’un seul document : **Paramètres**, **Thème**, **Page d’accueil**, **Chatbot**, **Tableaux de bord**, **Table des matières** et le **Gestionnaire de médias** intégré.
+
+Une collection apparaît sous **Site** plutôt que sous **Collections** lorsque son schéma définit `ui.global: true`. Cela modifie également la manière dont elle est modifiée : elle s’ouvre directement depuis la barre latérale plutôt que via une liste de documents.
+
+<RelatedTopics maxResults={7} />

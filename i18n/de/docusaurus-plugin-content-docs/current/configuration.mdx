@@ -1,10 +1,10 @@
 ---
-lastmod: "2026-03-10T22:59:57.328Z"
-modifiedBy: "aowendev <aowen@translationcommons.org>"
+lastmod: '2026-08-13T14:24:35.342Z'
+modifiedBy: aowendev <aowen@translationcommons.org>
 title: Configuration
 tags:
-  - "configuration"
-  - "configuration_docusaurus"
+  - configuration
+  - configuration_docusaurus
 draft: false
 review: false
 translate: false
@@ -15,16 +15,16 @@ unlisted: false
 
 # Konfiguration
 
-Die Konfiguration der docStatic-Website wird über die Datei `docusaurus.config.ts` verwaltet. Informationen zum direkten Bearbeiten dieser Datei finden Sie unter [Konfiguration](https://docusaurus.io/docs/configuration) in der Docusaurus-Dokumentation.
+Die Konfiguration der statischen Website erfolgt über die Datei `docusaurus.config.ts`. Informationen zum direkten Bearbeiten dieser Datei finden Sie unter [Konfiguration](https://docusaurus.io/docs/configuration) in der Docusaurus-Dokumentation.
 
-Um die Konfiguration mit dem CMS zu bearbeiten, navigieren Sie zur Sammlung „Einstellungen“. Von hier aus können Sie Folgendes für die Website konfigurieren:
+Um die Konfiguration über das CMS zu bearbeiten, navigieren Sie zur Sammlung **Einstellungen**. Von hier aus können Sie folgende Einstellungen der Website konfigurieren:
 
 * **Titel**.
 * **Slogan**.
 * **Favicon**.
-* **GraphQL-Schema-URL**.
-* Standardmäßiger **Farbmodus** (dunkel oder hell).
-* **Fußzeilenelemente**.
+* **URL des GraphQL-Schemas**.
+* Standard-**Farbmodus** (dunkel oder hell).
+* **Fußzeilen**-Elemente.
 * **Sprachen**.
 * **Logo**.
 * **OpenAPI**-Schemas.
@@ -34,4 +34,15 @@ Um die Konfiguration mit dem CMS zu bearbeiten, navigieren Sie zur Sammlung „E
 * **Seitenleiste**-Einstellungen.
 * **Blog**-Einstellungen.
 
-Es gibt eine separate **Theme**-Sammlung zum Ändern der Farbschema- und Typografie-Einstellungen.
+Es gibt eine separate **Theme**-Sammlung zum Ändern des Farbschemas und der Typografie-Einstellungen.
+
+## Website vs. Sammlungen
+
+Die CMS-Seitenleiste ist in zwei Gruppen unterteilt:
+
+* **Sammlungen** – wiederverwendbare Inhalte, aus denen Sie viele Dokumente erstellen, wie z. B. Blog-Artikel, Dokumente, Seiten, Glossarbegriffe und Wiki-Seiten.
+* **Website** – eine einmalige, websiteweite Konfiguration, die immer nur ein Dokument enthält: **Einstellungen**, **Design**, **Startseite**, **Chatbot**, **Dashboards**, **Inhaltsverzeichnis** und den integrierten **Medienmanager**.
+
+Eine Sammlung wird unter **Website** statt unter **Sammlungen** angezeigt, wenn in ihrem Schema `ui.global: true` festgelegt ist. Dadurch ändert sich auch die Art der Bearbeitung: Die Sammlung wird direkt über die Seitenleiste geöffnet, anstatt über eine Dokumentliste.
+
+<RelatedTopics maxResults={7} />

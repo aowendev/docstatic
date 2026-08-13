@@ -1,5 +1,5 @@
 ---
-lastmod: '2026-08-11T23:23:41.920Z'
+lastmod: '2026-08-13T14:24:35.587Z'
 modifiedBy: aowendev <aowen@translationcommons.org>
 title: Configuration
 tags:
@@ -17,7 +17,7 @@ unlisted: false
 
 La configuración del sitio estático de Docusaurus se gestiona a través del archivo `docusaurus.config.ts`. Para obtener información sobre cómo editar este archivo directamente, consulta [Configuración](https://docusaurus.io/docs/configuration) en la documentación de Docusaurus.
 
-Para utilizar el CMS y editar la configuración, ve a la sección **Configuración**. Desde aquí, puedes configurar lo siguiente del sitio:
+Para utilizar el CMS y editar la configuración, ve a la colección **Configuración**. Desde aquí, puedes configurar lo siguiente del sitio:
 
 * **Título**.
 * **Eslogan**.
@@ -35,5 +35,14 @@ Para utilizar el CMS y editar la configuración, ve a la sección **Configuraci�
 * Ajustes del **blog**.
 
 Existe una sección independiente llamada **Tema** para cambiar la combinación de colores y los ajustes tipográficos.
+
+## Sitio frente a colecciones
+
+La barra lateral del CMS se divide en dos grupos:
+
+* **Colecciones**: contenido repetible a partir del cual se crean muchos documentos, como artículos de blog, documentos, páginas, términos de glosario y páginas wiki.
+* **Sitio**: configuración única para todo el sitio que solo contiene un documento: **Configuración**, **Tema**, **Página de inicio**, **Chatbot**, **Cuadros de mando**, **Índice** y el **Gestor de medios** integrado.
+
+Una colección aparece en **Sitio** en lugar de en **Colecciones** cuando su esquema establece `ui.global: true`. Esto también cambia la forma en que se edita: se abre directamente desde la barra lateral en lugar de a través de una lista de documentos.
 
 <RelatedTopics maxResults={7} />
