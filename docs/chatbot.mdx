@@ -1,8 +1,6 @@
 ---
 title: Chatbot
-description: >-
-  Add an in-browser AI chatbot that answers questions about your
-  documentation, with no external service required.
+description: Add an in-browser AI chatbot that answers questions about your documentation, with no external service required.
 tags:
   - "software"
   - "software_artificial-intelligence"
@@ -13,15 +11,19 @@ translate: false
 approved: false
 published: true
 unlisted: false
-lastmod: '2026-08-13T13:26:52.614Z'
+lastmod: '2026-08-13T15:29:06.737Z'
 modifiedBy: aowendev <aowen@translationcommons.org>
 ---
 docStatic can add an AI chatbot to your site that answers questions about your documentation. By default it runs entirely in the visitor's browser using [WebLLM](https://webllm.mlc.ai/) (via WebGPU), so no external service, API key or server is required. The same widget can also be pointed at a paid provider you host yourself, without changing anything visitors see.
 
 The feature is off by default at two levels, so it never affects page load times unless it's actually wanted:
 
-* **Site level**—a master switch in the Chatbot settings. Off by default; when off, none of the chatbot's code ships to visitors at all.
-* **Visitor level**—even when enabled site-wide, each visitor only sees a collapsed launcher button. Nothing downloads until they explicitly click it.
+* **Site level**: A master switch in the Chatbot settings. Off by default; when off, none of the chatbot's code ships to visitors at all.
+* **Visitor level**: Even when enabled site-wide, each visitor only sees a collapsed launcher button. Nothing downloads until they explicitly click it.
+
+<Admonition type="note" title="WebGPU requirement">
+  WebLLM requires the visitor's browser to support [WebGPU](https://www.w3.org/TR/webgpu/). This is currently only known to work reliably on Safari and Chromium-based browsers (Chrome, Opera) on desktop. Visitors on unsupported browsers will see an error when they try to enable the assistant; consider the Remote API option if you need broader reach.
+</Admonition>
 
 ## Enabling the chatbot
 
@@ -31,7 +33,7 @@ Open the Chatbot settings in the CMS and turn on **Enable Chatbot**. Choose an *
 * **Remote API (deployer-hosted proxy)**—forwards requests to a backend you control, described below.
 
 <Admonition type="tip" title="Answers grounded in your docs">
-When the site has been built with its default local search index available, the chatbot retrieves the most relevant sections of your documentation and includes them as context before answering, so responses cite real pages instead of guessing. This context isn't available in local development, only after a full production build.
+  When the site has been built with its default local search index available, the chatbot retrieves the most relevant sections of your documentation and includes them as context before answering, so responses cite real pages instead of guessing. This context isn't available in local development, only after a full production build.
 </Admonition>
 
 ## Choosing a WebLLM model

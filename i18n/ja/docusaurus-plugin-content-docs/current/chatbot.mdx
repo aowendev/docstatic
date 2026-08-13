@@ -1,11 +1,11 @@
 ---
-lastmod: '2026-08-13T14:24:36.096Z'
+lastmod: '2026-08-13T15:29:07.124Z'
 modifiedBy: aowendev <aowen@translationcommons.org>
 title: Chatbot
 tags:
-  - software
-  - software_artificial-intelligence
-  - software_ai-integration
+  - "software"
+  - "software_artificial-intelligence"
+  - "software_ai-integration"
 draft: false
 review: false
 translate: false
@@ -21,6 +21,10 @@ docStatic を使用すると、ドキュメントに関する質問に答える 
 * **サイトレベル**—チャットボット設定内のマスタースイッチです。デフォルトではオフになっており、オフのときはチャットボットのコードが訪問者に一切配信されません。
 * **訪問者レベル**—サイト全体で有効になっている場合でも、各訪問者には折りたたまれたランチャーボタンしか表示されません。訪問者が明示的にクリックするまで、何もダウンロードされません。
 
+<Admonition type="note" title="WebGPUの要件">
+  WebLLMを利用するには、訪問者のブラウザが[WebGPU](https://www.w3.org/TR/webgpu/)に対応している必要があります。現在、デスクトップ環境において、SafariおよびChromium系ブラウザ（Chrome、Opera）でのみ確実に動作することが確認されています。対応していないブラウザを使用している訪問者は、アシスタントを有効にしようとするとエラーが表示されます。より幅広いユーザーに対応する必要がある場合は、Remote APIのオプションをご検討ください。
+</Admonition>
+
 ## チャットボットの有効化
 
 CMSでチャットボット設定を開き、**「チャットボットを有効にする」**をオンにします。**AIプロバイダー**を選択してください：
@@ -28,8 +32,8 @@ CMSでチャットボット設定を開き、**「チャットボットを有効
 * **WebLLM（ブラウザ内、無料）**—デフォルト設定です。オプションのモデル選択以外に、設定は不要です。
 * **リモートAPI（デプロイヤーがホストするプロキシ）**—以下で説明する、管理者が制御するバックエンドへリクエストを転送します。
 
-<Admonition type="tip" title="Answers grounded in your docs">
-  When the site has been built with its default local search index available, the chatbot retrieves the most relevant sections of your documentation and includes them as context before answering, so responses cite real pages instead of guessing. This context isn't available in local development, only after a full production build.
+<Admonition type="tip" title="ドキュメントに基づいた回答">
+  サイトがデフォルトのローカル検索インデックスを利用可能な状態で構築されている場合、チャットボットはドキュメントの中から最も関連性の高いセクションを抽出し、回答の前にその内容をコンテキストとして含めます。これにより、回答では推測ではなく実際のページが引用されます。このコンテキストはローカル開発環境では利用できず、本番環境での完全なビルド完了後にのみ利用可能になります。
 </Admonition>
 
 ## WebLLMモデルの選択

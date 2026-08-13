@@ -1,11 +1,11 @@
 ---
-lastmod: '2026-08-13T14:24:35.278Z'
+lastmod: '2026-08-13T15:29:06.812Z'
 modifiedBy: aowendev <aowen@translationcommons.org>
 title: Chatbot
 tags:
-  - software
-  - software_artificial-intelligence
-  - software_ai-integration
+  - "software"
+  - "software_artificial-intelligence"
+  - "software_ai-integration"
 draft: false
 review: false
 translate: false
@@ -21,6 +21,10 @@ Die Funktion ist standardmäßig auf zwei Ebenen deaktiviert, sodass sie die Lad
 * **Website-Ebene** – ein Hauptschalter in den Chatbot-Einstellungen. Standardmäßig deaktiviert; in diesem Fall wird den Besuchern überhaupt kein Code des Chatbots übermittelt.
 * **Besucher-Ebene** – selbst wenn die Funktion websiteweit aktiviert ist, sieht jeder Besucher nur eine ausgeblendete Startschaltfläche. Es wird nichts heruntergeladen, bis der Besucher ausdrücklich darauf klickt.
 
+<Admonition type="note" title="WebGPU-Anforderung">
+WebLLM setzt voraus, dass der Browser des Besuchers [WebGPU](https://www.w3.org/TR/webgpu/) unterstützt. Derzeit funktioniert dies nachweislich nur zuverlässig in Safari und Chromium-basierten Browsern (Chrome, Opera) auf Desktop-Computern. Besucher, die nicht unterstützte Browser verwenden, erhalten eine Fehlermeldung, wenn sie versuchen, den Assistenten zu aktivieren. Ziehen Sie die Option „Remote API“ in Betracht, wenn Sie eine größere Reichweite benötigen.
+</Admonition>
+
 ## Den Chatbot aktivieren
 
 Öffnen Sie die Chatbot-Einstellungen im CMS und aktivieren Sie **Chatbot aktivieren**. Wählen Sie einen **KI-Anbieter** aus:
@@ -28,8 +32,8 @@ Die Funktion ist standardmäßig auf zwei Ebenen deaktiviert, sodass sie die Lad
 * **WebLLM (im Browser, kostenlos)** – die Standardeinstellung. Außer der optionalen Modellauswahl ist keine weitere Konfiguration erforderlich.
 * **Remote-API (vom Deployer gehosteter Proxy)** – leitet Anfragen an ein von Ihnen kontrolliertes Backend weiter, wie unten beschrieben.
 
-<Admonition type="tip" title="Answers grounded in your docs">
-  When the site has been built with its default local search index available, the chatbot retrieves the most relevant sections of your documentation and includes them as context before answering, so responses cite real pages instead of guessing. This context isn't available in local development, only after a full production build.
+<Admonition type="tip" title="Antworten auf Basis Ihrer Dokumentation">
+  Wenn die Website mit dem standardmäßigen lokalen Suchindex erstellt wurde, ruft der Chatbot die relevantesten Abschnitte Ihrer Dokumentation ab und fügt sie vor der Beantwortung als Kontext ein, sodass die Antworten auf konkrete Seiten verweisen, anstatt zu raten. Dieser Kontext ist bei der lokalen Entwicklung nicht verfügbar, sondern erst nach einer vollständigen Produktionsbereitstellung.
 </Admonition>
 
 ## Auswahl eines WebLLM-Modells
