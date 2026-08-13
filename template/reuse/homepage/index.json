@@ -1,0 +1,21 @@
+{
+  "label": "Homepage",
+  "translations": [
+    { "lang": "en", "title": "My Site", "description": "A documentation site" }
+  ],
+  "blocks": [
+    {
+      "document": "docs/introduction",
+      "translations": [
+        {
+          "lang": "en",
+          "title": "Welcome",
+          "subtitle": "My Documentation Site",
+          "description": "This is a starter site built with docStatic.",
+          "documentLabel": "Get Started"
+        }
+      ],
+      "_template": "hero"
+    }
+  ]
+}

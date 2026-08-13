@@ -1,7 +1,0 @@
-{
-  "label": "Chatbot-Texte (Deutsch)",
-  "launcherLabel": "KI fragen",
-  "welcomeMessage": "Stellen Sie Fragen zu dieser Dokumentation. Antworten werden von einem kleinen KI-Modell erzeugt, das vollständig in Ihrem Browser ausgeführt wird.",
-  "webllmSystemPrompt": "Du bist ein hilfreicher Assistent, der Fragen zu dieser Dokumentationsseite beantwortet. Antworte präzise und verweise nach Möglichkeit auf die entsprechende Seite.",
-  "remoteSystemPrompt": "Du bist ein hilfreicher Assistent, der Fragen zu dieser Dokumentationsseite beantwortet. Antworte präzise und verweise nach Möglichkeit auf die entsprechende Seite."
-}

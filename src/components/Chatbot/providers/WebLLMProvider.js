@@ -24,26 +24,26 @@ export class WebLLMProvider {
 
   async init(onProgress) {
     if (this.isLoaded) return;
-    onProgress?.({
-      status: "downloading",
-      progress: 0,
-      text: "Starting download…",
-    });
+    onProgress?.({ status: "downloading", progress: 0, timeElapsed: 0 });
 
     const { CreateMLCEngine } = await import("@mlc-ai/web-llm");
 
     this.engine = await CreateMLCEngine(this.model, {
+      // web-llm's own report.text is an English sentence baked into the
+      // library ("Fetching param cache[..]: ...MB fetched..."), with no
+      // translation hook — pass through only the numeric fields and let
+      // the UI build its own localized status message from them.
       initProgressCallback: (report) => {
         onProgress?.({
           status: report.progress >= 1 ? "loading" : "downloading",
           progress: report.progress,
-          text: report.text,
+          timeElapsed: report.timeElapsed,
         });
       },
     });
 
     this.isLoaded = true;
-    onProgress?.({ status: "ready", progress: 1, text: "Ready" });
+    onProgress?.({ status: "ready", progress: 1, timeElapsed: 0 });
   }
 
   async *chat({ messages, context, signal }) {

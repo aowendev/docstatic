@@ -59,10 +59,13 @@ function IntroPanel({ copy, onEnable }) {
 
 function LoadingPanel({ status }) {
   const percent = Math.round((status.progress || 0) * 100);
+  const seconds = Math.round(status.timeElapsed || 0);
+  const isError = status.status === "error";
+
   return (
     <div className={styles.intro}>
       <p>
-        {status.status === "error" ? (
+        {isError ? (
           <Translate id="chatbot.loading.error">Something went wrong</Translate>
         ) : (
           <Translate id="chatbot.loading.inProgress">
@@ -70,15 +73,27 @@ function LoadingPanel({ status }) {
           </Translate>
         )}
       </p>
-      {status.status !== "error" && (
-        <div className={styles.progressTrack}>
-          <div
-            className={styles.progressFill}
-            style={{ width: `${percent}%` }}
-          />
-        </div>
+      {!isError && (
+        <>
+          <div className={styles.progressTrack}>
+            <div
+              className={styles.progressFill}
+              style={{ width: `${percent}%` }}
+            />
+          </div>
+          <p className={styles.introNote}>
+            <Translate
+              id="chatbot.loading.progressDetail"
+              values={{ percent, seconds }}
+            >
+              {"{percent}% complete ({seconds}s elapsed)"}
+            </Translate>
+          </p>
+        </>
       )}
-      <p className={styles.introNote}>{status.text}</p>
+      {isError && status.text && (
+        <p className={styles.introNote}>{status.text}</p>
+      )}
     </div>
   );
 }

@@ -1,7 +1,0 @@
-{
-  "label": "Textos del chatbot (Español)",
-  "launcherLabel": "Preguntar a la IA",
-  "welcomeMessage": "Haz preguntas sobre esta documentación. Las respuestas son generadas por un pequeño modelo de IA que se ejecuta completamente en tu navegador.",
-  "webllmSystemPrompt": "Eres un asistente útil que responde preguntas sobre este sitio de documentación. Sé conciso y cita la página correspondiente cuando puedas.",
-  "remoteSystemPrompt": "Eres un asistente útil que responde preguntas sobre este sitio de documentación. Sé conciso y cita la página correspondiente cuando puedas."
-}

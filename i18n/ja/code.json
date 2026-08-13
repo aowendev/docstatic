@@ -11,6 +11,9 @@
   "chatbot.loading.inProgress": {
     "message": "AIアシスタントを読み込み中…"
   },
+  "chatbot.loading.progressDetail": {
+    "message": "{percent}%完了（経過{seconds}秒）"
+  },
   "chatbot.messages.empty": {
     "message": "質問を入力して始めてください。"
   },

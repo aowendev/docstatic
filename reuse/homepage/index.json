@@ -1,0 +1,288 @@
+{
+  "label": "Homepage",
+  "translations": [
+    { "lang": "en", "title": "docStatic", "description": "Modern Documentation Platform" },
+    { "lang": "de", "title": "docStatic", "description": "Moderne Dokumentationsplattform" },
+    { "lang": "es", "title": "docStatic", "description": "Plataforma de documentación moderna" },
+    { "lang": "fr", "title": "docStatic", "description": "Plateforme de documentation moderne" },
+    { "lang": "ja", "title": "docStatic", "description": "モダンなドキュメントプラットフォーム" }
+  ],
+  "blocks": [
+    {
+      "document": "docs/introduction",
+      "secondaryButtonLink": "/blog",
+      "showHeroCard": true,
+      "translations": [
+        {
+          "lang": "en",
+          "title": "docStatic",
+          "subtitle": "Modern Documentation Platform",
+          "description": "Bridging the gap between writers and developers to help you create online documentation your users will love.",
+          "documentLabel": "Get Started",
+          "secondaryButtonText": "View Blog",
+          "heroCardTitle": "docStatic",
+          "heroCardFeaturesLabel": "# Features"
+        },
+        {
+          "lang": "de",
+          "title": "docStatic",
+          "subtitle": "Moderne Dokumentationsplattform",
+          "description": "Wir überbrücken die Lücke zwischen Autoren und Entwicklern, damit Sie Online-Dokumentation erstellen können, die Ihre Nutzer lieben werden.",
+          "documentLabel": "Erste Schritte",
+          "secondaryButtonText": "Blog ansehen",
+          "heroCardTitle": "docStatic",
+          "heroCardFeaturesLabel": "# Funktionen"
+        },
+        {
+          "lang": "es",
+          "title": "docStatic",
+          "subtitle": "Plataforma de documentación moderna",
+          "description": "Tendemos puentes entre escritores y desarrolladores para ayudarle a crear documentación en línea que sus usuarios amarán.",
+          "documentLabel": "Comenzar",
+          "secondaryButtonText": "Ver blog",
+          "heroCardTitle": "docStatic",
+          "heroCardFeaturesLabel": "# Características"
+        },
+        {
+          "lang": "fr",
+          "title": "docStatic",
+          "subtitle": "Plateforme de documentation moderne",
+          "description": "Nous comblons le fossé entre les rédacteurs et les développeurs pour vous aider à créer une documentation en ligne que vos utilisateurs adoreront.",
+          "documentLabel": "Commencer",
+          "secondaryButtonText": "Voir le blog",
+          "heroCardTitle": "docStatic",
+          "heroCardFeaturesLabel": "# Fonctionnalités"
+        },
+        {
+          "lang": "ja",
+          "title": "docStatic",
+          "subtitle": "モダンなドキュメントプラットフォーム",
+          "description": "ライターと開発者の橋渡しをして、ユーザーに愛されるオンラインドキュメントの作成をサポートします。",
+          "documentLabel": "はじめる",
+          "secondaryButtonText": "ブログを見る",
+          "heroCardTitle": "docStatic",
+          "heroCardFeaturesLabel": "# 機能"
+        }
+      ],
+      "heroCardFeatures": [
+        {
+          "translations": [
+            { "lang": "en", "feature": "Content Reuse & Single Sourcing" },
+            { "lang": "de", "feature": "Wiederverwendung von Inhalten & Single Sourcing" },
+            { "lang": "es", "feature": "Reutilización de contenido y fuente única" },
+            { "lang": "fr", "feature": "Réutilisation de contenu et source unique" },
+            { "lang": "ja", "feature": "コンテンツの再利用とシングルソーシング" }
+          ]
+        },
+        {
+          "translations": [
+            { "lang": "en", "feature": "Simple Structured Authoring & Semantic Models" },
+            { "lang": "de", "feature": "Einfaches strukturiertes Authoring & semantische Modelle" },
+            { "lang": "es", "feature": "Autoría estructurada simple y modelos semánticos" },
+            { "lang": "fr", "feature": "Création structurée simple et modèles sémantiques" },
+            { "lang": "ja", "feature": "シンプルな構造化オーサリングとセマンティックモデル" }
+          ]
+        },
+        {
+          "translations": [
+            { "lang": "en", "feature": "Content Lifecycle & Workflow Management" },
+            { "lang": "de", "feature": "Content-Lifecycle- & Workflow-Management" },
+            { "lang": "es", "feature": "Gestión del ciclo de vida del contenido y flujos de trabajo" },
+            { "lang": "fr", "feature": "Gestion du cycle de vie du contenu et des flux de travail" },
+            { "lang": "ja", "feature": "コンテンツのライフサイクルとワークフロー管理" }
+          ]
+        },
+        {
+          "translations": [
+            { "lang": "en", "feature": "Translation & Localization Support" },
+            { "lang": "de", "feature": "Übersetzungs- & Lokalisierungsunterstützung" },
+            { "lang": "es", "feature": "Soporte de traducción y localización" },
+            { "lang": "fr", "feature": "Prise en charge de la traduction et de la localisation" },
+            { "lang": "ja", "feature": "翻訳とローカライゼーションのサポート" }
+          ]
+        },
+        {
+          "translations": [
+            { "lang": "en", "feature": "Versioning & Variant Management" },
+            { "lang": "de", "feature": "Versions- & Variantenverwaltung" },
+            { "lang": "es", "feature": "Gestión de versiones y variantes" },
+            { "lang": "fr", "feature": "Gestion des versions et des variantes" },
+            { "lang": "ja", "feature": "バージョン管理とバリアント管理" }
+          ]
+        },
+        {
+          "translations": [
+            { "lang": "en", "feature": "Integrated GraphQL & OpenAPI Documentation" },
+            { "lang": "de", "feature": "Integrierte GraphQL- & OpenAPI-Dokumentation" },
+            { "lang": "es", "feature": "Documentación integrada de GraphQL y OpenAPI" },
+            { "lang": "fr", "feature": "Documentation GraphQL et OpenAPI intégrée" },
+            { "lang": "ja", "feature": "GraphQL と OpenAPI ドキュメントの統合" }
+          ]
+        },
+        {
+          "translations": [
+            { "lang": "en", "feature": "Local MCP server for AI integration." },
+            { "lang": "de", "feature": "Lokaler MCP-Server für KI-Integration" },
+            { "lang": "es", "feature": "Servidor MCP local para integración con IA" },
+            { "lang": "fr", "feature": "Serveur MCP local pour l'intégration IA" },
+            { "lang": "ja", "feature": "AI 統合のためのローカル MCP サーバー" }
+          ]
+        }
+      ],
+      "_template": "hero"
+    },
+    {
+      "translations": [
+        {
+          "lang": "en",
+          "title": "Built for Everyone",
+          "subtitle": "Whether you're a writer, developer or end user, docStatic has something for you."
+        },
+        {
+          "lang": "de",
+          "title": "Für alle gemacht",
+          "subtitle": "Ob Autor, Entwickler oder Endnutzer – docStatic hat für jeden etwas zu bieten."
+        },
+        {
+          "lang": "es",
+          "title": "Diseñado para todos",
+          "subtitle": "Ya seas redactor, desarrollador o usuario final, docStatic tiene algo para ti."
+        },
+        {
+          "lang": "fr",
+          "title": "Conçu pour tous",
+          "subtitle": "Que vous soyez rédacteur, développeur ou utilisateur final, docStatic a quelque chose à vous offrir."
+        },
+        {
+          "lang": "ja",
+          "title": "すべての人のために",
+          "subtitle": "ライターでも、開発者でも、エンドユーザーでも、docStaticにはあなたに合った機能があります。"
+        }
+      ],
+      "items": [
+        {
+          "image": "/img/writers.jpg",
+          "translations": [
+            {
+              "lang": "en",
+              "title": "For Writers",
+              "description": "Intuitive CMS features with a visual editor that makes content creation effortless. Write in Markdown or use the rich-text editor.\n"
+            },
+            {
+              "lang": "de",
+              "title": "Für Autoren",
+              "description": "Intuitive CMS-Funktionen mit einem visuellen Editor, der die Inhaltserstellung mühelos macht. Schreiben Sie in Markdown oder nutzen Sie den Rich-Text-Editor.\n"
+            },
+            {
+              "lang": "es",
+              "title": "Para escritores",
+              "description": "Funciones intuitivas de CMS con un editor visual que hace que la creación de contenido sea sencilla. Escriba en Markdown o use el editor de texto enriquecido.\n"
+            },
+            {
+              "lang": "fr",
+              "title": "Pour les rédacteurs",
+              "description": "Fonctionnalités CMS intuitives avec un éditeur visuel qui rend la création de contenu sans effort. Rédigez en Markdown ou utilisez l'éditeur de texte enrichi.\n"
+            },
+            {
+              "lang": "ja",
+              "title": "ライター向け",
+              "description": "ビジュアルエディターを備えた直感的な CMS 機能で、コンテンツ作成を簡単に。Markdown またはリッチテキストエディターで執筆できます。\n"
+            }
+          ]
+        },
+        {
+          "image": "/img/developers.jpg",
+          "translations": [
+            {
+              "lang": "en",
+              "title": "For Developers",
+              "description": "Git-based workflow with Markdown, React components, and OpenAPI integration. Build exactly what you need.\n"
+            },
+            {
+              "lang": "de",
+              "title": "Für Entwickler",
+              "description": "Git-basierter Workflow mit Markdown, React-Komponenten und OpenAPI-Integration. Bauen Sie genau das, was Sie brauchen.\n"
+            },
+            {
+              "lang": "es",
+              "title": "Para desarrolladores",
+              "description": "Flujo de trabajo basado en Git con Markdown, componentes React e integración de OpenAPI. Construya exactamente lo que necesita.\n"
+            },
+            {
+              "lang": "fr",
+              "title": "Pour les développeurs",
+              "description": "Flux de travail basé sur Git avec Markdown, composants React et intégration OpenAPI. Construisez exactement ce dont vous avez besoin.\n"
+            },
+            {
+              "lang": "ja",
+              "title": "開発者向け",
+              "description": "Markdown、React コンポーネント、OpenAPI 統合を備えた Git ベースのワークフロー。必要なものを自由に構築できます。\n"
+            }
+          ]
+        },
+        {
+          "image": "/img/users.jpg",
+          "translations": [
+            {
+              "lang": "en",
+              "title": "For Users",
+              "description": "Fast, responsive documentation websites with excellent search and navigation. Beautiful on any device.\n"
+            },
+            {
+              "lang": "de",
+              "title": "Für Nutzer",
+              "description": "Schnelle, responsive Dokumentationswebsites mit hervorragender Suche und Navigation. Auf jedem Gerät wunderschön.\n"
+            },
+            {
+              "lang": "es",
+              "title": "Para usuarios",
+              "description": "Sitios web de documentación rápidos y responsivos con excelente búsqueda y navegación. Hermosos en cualquier dispositivo.\n"
+            },
+            {
+              "lang": "fr",
+              "title": "Pour les utilisateurs",
+              "description": "Sites de documentation rapides et réactifs avec une excellente recherche et navigation. Magnifiques sur tous les appareils.\n"
+            },
+            {
+              "lang": "ja",
+              "title": "ユーザー向け",
+              "description": "優れた検索とナビゲーションを備えた、高速でレスポンシブなドキュメントサイト。どのデバイスでも美しく表示されます。\n"
+            }
+          ]
+        }
+      ],
+      "_template": "features"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=2bHBwM54UB8",
+      "translations": [
+        {
+          "lang": "en",
+          "title": "Watch the Demo",
+          "caption": "See how Docusaurus and TinaCMS work together."
+        },
+        {
+          "lang": "de",
+          "title": "Demo ansehen",
+          "caption": "Sehen Sie, wie Docusaurus und TinaCMS zusammenarbeiten."
+        },
+        {
+          "lang": "es",
+          "title": "Ver la demo",
+          "caption": "Vea cómo Docusaurus y TinaCMS trabajan juntos."
+        },
+        {
+          "lang": "fr",
+          "title": "Voir la démo",
+          "caption": "Découvrez comment Docusaurus et TinaCMS fonctionnent ensemble."
+        },
+        {
+          "lang": "ja",
+          "title": "デモを見る",
+          "caption": "Docusaurus と TinaCMS がどのように連携するかをご覧ください。"
+        }
+      ],
+      "_template": "youTubeEmbed"
+    }
+  ]
+}

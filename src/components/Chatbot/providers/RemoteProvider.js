@@ -31,7 +31,7 @@ export class RemoteProvider {
       throw new Error("RemoteProvider: missing endpoint");
     }
     this.isLoaded = true;
-    onProgress?.({ status: "ready", progress: 1, text: "Ready" });
+    onProgress?.({ status: "ready", progress: 1 });
   }
 
   async *chat({ messages, context, signal }) {

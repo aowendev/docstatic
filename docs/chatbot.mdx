@@ -13,7 +13,7 @@ translate: false
 approved: false
 published: true
 unlisted: false
-lastmod: '2026-08-13T12:17:12.564Z'
+lastmod: '2026-08-13T13:26:52.614Z'
 modifiedBy: aowendev <aowen@translationcommons.org>
 ---
 docStatic can add an AI chatbot to your site that answers questions about your documentation. By default it runs entirely in the visitor's browser using [WebLLM](https://webllm.mlc.ai/) (via WebGPU), so no external service, API key or server is required. The same widget can also be pointed at a paid provider you host yourself, without changing anything visitors see.
@@ -53,7 +53,7 @@ The chatbot automatically matches whatever locale the visitor is currently brows
 * **Retrieved documentation context.** Each locale has its own search index, built from that locale's own translated pages, so citations point at the right language's content automatically.
 * **Interface text in the chat widget itself** (buttons, status messages) is translated through docStatic's standard component-translation mechanism, the same one used elsewhere in this site.
 
-**Deployer-authored copy**—the launcher button label, the welcome message and the system prompts sent to each provider—lives in the CMS under **Chatbot Copy**, one document per language. A locale without its own document falls back to the default (English) copy.
+**Deployer-authored copy**—the launcher button label, the welcome message and the system prompts sent to each provider—lives in the CMS under **Chatbot**, as a translation entry per language. A locale without its own entry falls back to the default (English) copy.
 
 ## Connecting a paid provider
 

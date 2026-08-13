@@ -5,13 +5,14 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-// Mirrors src/pages/index.jsx's getPageData(locale) — a relative path (not
-// the @site alias) is required for webpack's context-module resolution to
-// pick up this dynamic require correctly.
+import chatbotConfig from "../../../config/chatbot/index.json";
+import docusaurusData from "../../../config/docusaurus/index.json";
+import { resolveTranslation } from "../../utils/resolveTranslations";
+
 export function getChatbotCopy(locale) {
-  try {
-    return require(`../../../config/chatbot-copy/index.${locale}.json`);
-  } catch {
-    return require("../../../config/chatbot-copy/index.json");
-  }
+  return resolveTranslation(
+    chatbotConfig.translations,
+    locale,
+    docusaurusData.languages?.default
+  );
 }

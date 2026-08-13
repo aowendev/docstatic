@@ -4,6 +4,71 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
+import docusaurusData from "../../../config/docusaurus/index.json";
+
+// Function to create language options from config data
+function createLanguageOptions(configData = docusaurusData) {
+  const supportedLanguages = configData.languages?.supported || [
+    { code: "en", label: "English" },
+  ];
+
+  return supportedLanguages.map((langObj) => {
+    return {
+      value: langObj.code,
+      label: `${langObj.label} (${langObj.code})`,
+    };
+  });
+}
+
+const languageOptions = createLanguageOptions();
+
+export const ChatbotCopyTranslationTemplate = {
+  name: "translation",
+  label: "Translation",
+  ui: {
+    itemProps: (item) => ({
+      label: `${item.lang}: ${item.launcherLabel}`,
+    }),
+  },
+  fields: [
+    {
+      type: "string",
+      name: "lang",
+      label: "Language Code",
+      required: true,
+      options: languageOptions,
+    },
+    {
+      type: "string",
+      name: "launcherLabel",
+      label: "Launcher Button Label",
+    },
+    {
+      type: "string",
+      name: "welcomeMessage",
+      label: "Welcome Message",
+      ui: {
+        component: "textarea",
+      },
+    },
+    {
+      type: "string",
+      name: "webllmSystemPrompt",
+      label: "WebLLM System Prompt",
+      ui: {
+        component: "textarea",
+      },
+    },
+    {
+      type: "string",
+      name: "remoteSystemPrompt",
+      label: "Remote Provider System Prompt",
+      ui: {
+        component: "textarea",
+      },
+    },
+  ],
+};
 
 export const ChatbotCollection = {
   name: "chatbot",
@@ -97,61 +162,13 @@ export const ChatbotCollection = {
         },
       ],
     },
-  ],
-};
-
-export const ChatbotCopyCollection = {
-  name: "chatbotCopy",
-  label: "Chatbot Copy",
-  description:
-    'Deployer-authored chatbot text. One document per language — add a document named to match a configured locale code (e.g. "ja") to override the default (English) copy for that language. Falls back to the default document for any locale without its own.',
-  path: "config/chatbot-copy",
-  format: "json",
-  ui: {
-    allowedActions: {
-      create: false,
-      delete: false,
-    },
-  },
-  fields: [
     {
-      type: "string",
-      label: "Label",
-      name: "label",
-      required: true,
-      isTitle: true,
-      ui: {
-        component: "hidden",
-      },
-    },
-    {
-      type: "string",
-      name: "launcherLabel",
-      label: "Launcher Button Label",
-    },
-    {
-      type: "string",
-      name: "welcomeMessage",
-      label: "Welcome Message",
-      ui: {
-        component: "textarea",
-      },
-    },
-    {
-      type: "string",
-      name: "webllmSystemPrompt",
-      label: "WebLLM System Prompt",
-      ui: {
-        component: "textarea",
-      },
-    },
-    {
-      type: "string",
-      name: "remoteSystemPrompt",
-      label: "Remote Provider System Prompt",
-      ui: {
-        component: "textarea",
-      },
+      type: "object",
+      name: "translations",
+      label: "Copy",
+      description: "Deployer-authored chatbot text, per language.",
+      list: true,
+      templates: [ChatbotCopyTranslationTemplate],
     },
   ],
 };

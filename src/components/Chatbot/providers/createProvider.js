@@ -10,7 +10,7 @@ import { WebLLMProvider } from "./WebLLMProvider";
 
 /**
  * @param {object} chatbotConfig - the parsed config/chatbot/index.json (technical settings)
- * @param {object} [copy] - the resolved, locale-appropriate config/chatbot-copy/*.json (deployer prose)
+ * @param {object} [copy] - the resolved, locale-appropriate config/chatbot/index.json translations entry (deployer prose)
  * @returns {import("./WebLLMProvider").WebLLMProvider | import("./RemoteProvider").RemoteProvider}
  */
 export function createProvider(chatbotConfig, copy) {

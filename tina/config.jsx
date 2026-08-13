@@ -7,10 +7,7 @@ import conditionsData from "../reuse/conditions/index.json";
 // doc tags from the taxonomy JSON file
 import data from "../reuse/taxonomy/index.json";
 import { docusaurusDate, titleFromSlug } from "../scripts/util";
-import {
-  ChatbotCollection,
-  ChatbotCopyCollection,
-} from "../src/components/Chatbot/template";
+import { ChatbotCollection } from "../src/components/Chatbot/template";
 // collapsible field component
 import CollapsibleField from "../src/components/CollapsibleField";
 // conditions tree UI component
@@ -1062,12 +1059,41 @@ const SidebarCollection = {
   ],
 };
 
+const HomepageTranslationTemplate = {
+  name: "translation",
+  label: "Translation",
+  ui: {
+    itemProps: (item) => ({
+      label: `${item.lang}: ${item.title}`,
+    }),
+  },
+  fields: [
+    {
+      type: "string",
+      name: "lang",
+      label: "Language Code",
+      required: true,
+      options: languageOptions,
+    },
+    {
+      type: "string",
+      name: "title",
+      label: "Title",
+    },
+    {
+      type: "string",
+      name: "description",
+      label: "Description",
+    },
+  ],
+};
+
 const HomepageCollection = {
   name: "homepage",
   label: "Home Page",
   description:
     "To see settings changes reflected on your site, you must restart the Tina CLI after saving changes (local development only).",
-  path: "config/homepage",
+  path: "reuse/homepage",
   format: "json",
   ui: {
     allowedActions: {
@@ -1110,14 +1136,11 @@ const HomepageCollection = {
       },
     },
     {
-      type: "string",
-      name: "title",
-      label: "Title",
-    },
-    {
-      type: "string",
-      name: "description",
-      label: "Description",
+      type: "object",
+      name: "translations",
+      label: "Translations",
+      list: true,
+      templates: [HomepageTranslationTemplate],
     },
     {
       type: "object",
@@ -1515,7 +1538,6 @@ export default defineConfig({
     collections: [
       PostCollection,
       ChatbotCollection,
-      ChatbotCopyCollection,
       ConditionsCollection,
       DashboardsCollection,
       GlossaryTermCollection,

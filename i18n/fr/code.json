@@ -53,6 +53,9 @@
   "chatbot.loading.inProgress": {
     "message": "Chargement de l'assistant IA…"
   },
+  "chatbot.loading.progressDetail": {
+    "message": "{percent} % terminé ({seconds}s écoulées)"
+  },
   "chatbot.messages.empty": {
     "message": "Posez une question pour commencer."
   },

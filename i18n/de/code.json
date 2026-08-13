@@ -53,6 +53,9 @@
   "chatbot.loading.inProgress": {
     "message": "KI-Assistent wird geladen…"
   },
+  "chatbot.loading.progressDetail": {
+    "message": "{percent}% abgeschlossen ({seconds}s vergangen)"
+  },
   "chatbot.messages.empty": {
     "message": "Stellen Sie eine Frage, um zu beginnen."
   },

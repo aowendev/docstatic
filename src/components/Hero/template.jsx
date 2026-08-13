@@ -5,11 +5,64 @@ import React from "react";
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
+import docusaurusData from "../../../config/docusaurus/index.json";
 
-export const HeroBlockTemplate = {
-  name: "hero",
-  label: "Hero",
+// Function to create language options from config data
+function createLanguageOptions(configData = docusaurusData) {
+  const supportedLanguages = configData.languages?.supported || [
+    { code: "en", label: "English" },
+  ];
+
+  return supportedLanguages.map((langObj) => {
+    return {
+      value: langObj.code,
+      label: `${langObj.label} (${langObj.code})`,
+    };
+  });
+}
+
+const languageOptions = createLanguageOptions();
+
+export const HeroCardFeatureTranslationTemplate = {
+  name: "translation",
+  label: "Translation",
+  ui: {
+    itemProps: (item) => ({
+      label: `${item.lang}: ${item.feature}`,
+    }),
+  },
   fields: [
+    {
+      type: "string",
+      name: "lang",
+      label: "Language Code",
+      required: true,
+      options: languageOptions,
+    },
+    {
+      name: "feature",
+      label: "Feature",
+      type: "string",
+    },
+  ],
+};
+
+export const HeroTranslationTemplate = {
+  name: "translation",
+  label: "Translation",
+  ui: {
+    itemProps: (item) => ({
+      label: `${item.lang}: ${item.title}`,
+    }),
+  },
+  fields: [
+    {
+      type: "string",
+      name: "lang",
+      label: "Language Code",
+      required: true,
+      options: languageOptions,
+    },
     {
       name: "title",
       label: "Title",
@@ -29,12 +82,6 @@ export const HeroBlockTemplate = {
       type: "string",
     },
     {
-      label: "Document Link",
-      name: "document",
-      type: "reference",
-      collections: ["doc"],
-    },
-    {
       name: "documentLabel",
       label: "Primary Button Text",
       type: "string",
@@ -43,6 +90,30 @@ export const HeroBlockTemplate = {
       name: "secondaryButtonText",
       label: "Secondary Button Text",
       type: "string",
+    },
+    {
+      name: "heroCardTitle",
+      label: "Hero Card Title",
+      type: "string",
+    },
+    {
+      name: "heroCardFeaturesLabel",
+      label: "Hero Card Features Label",
+      description: 'Heading shown above the feature list, e.g. "# Features"',
+      type: "string",
+    },
+  ],
+};
+
+export const HeroBlockTemplate = {
+  name: "hero",
+  label: "Hero",
+  fields: [
+    {
+      label: "Document Link",
+      name: "document",
+      type: "reference",
+      collections: ["doc"],
     },
     {
       name: "secondaryButtonLink",
@@ -56,22 +127,31 @@ export const HeroBlockTemplate = {
       type: "boolean",
     },
     {
-      name: "heroCardTitle",
-      label: "Hero Card Title",
-      type: "string",
-    },
-    {
       name: "heroCardFeatures",
       label: "Hero Card Features",
       type: "object",
       list: true,
+      ui: {
+        itemProps: (item) => ({
+          label: item.translations?.[0]?.feature,
+        }),
+      },
       fields: [
         {
-          name: "feature",
-          label: "Feature",
-          type: "string",
+          type: "object",
+          name: "translations",
+          label: "Translations",
+          list: true,
+          templates: [HeroCardFeatureTranslationTemplate],
         },
       ],
+    },
+    {
+      type: "object",
+      name: "translations",
+      label: "Translations",
+      list: true,
+      templates: [HeroTranslationTemplate],
     },
   ],
 };
