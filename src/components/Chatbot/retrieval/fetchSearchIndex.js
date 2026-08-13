@@ -5,7 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import lunr from "lunr";
+// Import the plugin's own generated, locale-aware Lunr client (not the bare
+// "lunr" package) — docusaurus-lunr-search's configureWebpack hook writes
+// this into Docusaurus's @generated alias on every compilation, pre-wired
+// with whatever stemmer/segmenter modules match its `languages` plugin
+// option (see docusaurus.config.ts). Querying with a plain, unconfigured
+// lunr instance would silently mismatch how the index was actually stemmed.
+import lunr from "@generated/lunr.client";
 
 // docusaurus-lunr-search's postBuild hook writes these fixed-name files to the
 // build output root. They don't exist during `yarn start`/dev — only after a

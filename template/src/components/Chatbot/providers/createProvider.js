@@ -9,12 +9,19 @@ import { RemoteProvider } from "./RemoteProvider";
 import { WebLLMProvider } from "./WebLLMProvider";
 
 /**
- * @param {object} chatbotConfig - the parsed config/chatbot/index.json
+ * @param {object} chatbotConfig - the parsed config/chatbot/index.json (technical settings)
+ * @param {object} [copy] - the resolved, locale-appropriate config/chatbot-copy/*.json (deployer prose)
  * @returns {import("./WebLLMProvider").WebLLMProvider | import("./RemoteProvider").RemoteProvider}
  */
-export function createProvider(chatbotConfig) {
+export function createProvider(chatbotConfig, copy) {
   if (chatbotConfig?.provider === "remote") {
-    return new RemoteProvider(chatbotConfig.remote);
+    return new RemoteProvider({
+      ...chatbotConfig.remote,
+      systemPrompt: copy?.remoteSystemPrompt,
+    });
   }
-  return new WebLLMProvider(chatbotConfig?.webllm);
+  return new WebLLMProvider({
+    ...chatbotConfig?.webllm,
+    systemPrompt: copy?.webllmSystemPrompt,
+  });
 }

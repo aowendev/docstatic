@@ -7,7 +7,7 @@
 
 import { withContext } from "./BaseProvider";
 
-const DEFAULT_MODEL = "Llama-3.2-1B-Instruct-q4f16_1-MLC";
+const DEFAULT_MODEL = "Qwen2.5-1.5B-Instruct-q4f16_1-MLC";
 
 /**
  * In-browser inference via WebLLM (WebGPU). Runs on the main thread for now —

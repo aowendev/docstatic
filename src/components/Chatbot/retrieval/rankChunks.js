@@ -5,7 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import lunr from "lunr";
+// The plugin's own generated, locale-aware client — see fetchSearchIndex.js
+// for why this must match the module the index was built with, not the bare
+// "lunr" package.
+import lunr from "@generated/lunr.client";
 
 const MAX_CHUNKS = 6;
 

@@ -1,0 +1,38 @@
+{
+  "chatbot.intro.note": {
+    "message": "有効にすると、初回にAIモデル（数百MB）がブラウザにダウンロードされます。その後はキャッシュされますが、最初のダウンロードには時間がかかる場合があります。"
+  },
+  "chatbot.intro.enableButton": {
+    "message": "AIアシスタントを有効にする"
+  },
+  "chatbot.loading.error": {
+    "message": "問題が発生しました"
+  },
+  "chatbot.loading.inProgress": {
+    "message": "AIアシスタントを読み込み中…"
+  },
+  "chatbot.messages.empty": {
+    "message": "質問を入力して始めてください。"
+  },
+  "chatbot.header.closeAriaLabel": {
+    "message": "チャットを閉じる"
+  },
+  "chatbot.input.placeholder": {
+    "message": "質問を入力…"
+  },
+  "chatbot.input.stop": {
+    "message": "停止"
+  },
+  "chatbot.input.send": {
+    "message": "送信"
+  },
+  "chatbot.launcher.closeAriaLabel": {
+    "message": "AIアシスタントを閉じる"
+  },
+  "chatbot.launcher.openAriaLabel": {
+    "message": "AIアシスタントを開く"
+  },
+  "chatbot.error.prefix": {
+    "message": "申し訳ありません。問題が発生しました："
+  }
+}

@@ -429,7 +429,14 @@ const config = {
     })(),
   },
   plugins: [
-    require.resolve("docusaurus-lunr-search"),
+    [
+      "docusaurus-lunr-search",
+      {
+        languages: docusaurusData.languages.supported.map(
+          (lang: any) => lang.code
+        ),
+      },
+    ],
     [
       "docusaurus-plugin-openapi-docs",
       {

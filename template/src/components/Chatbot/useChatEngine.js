@@ -5,8 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { translate } from "@docusaurus/Translate";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import { useCallback, useRef, useState } from "react";
+import { getLocaleInstruction } from "./getLocaleInstruction";
 import { createProvider } from "./providers/createProvider";
 import { buildContext } from "./retrieval/buildContext";
 import { fetchSearchIndex } from "./retrieval/fetchSearchIndex";
@@ -18,8 +20,8 @@ import { rankChunks } from "./retrieval/rankChunks";
  * `load()`, which the widget wires to the visitor's explicit opt-in click —
  * never on mount.
  */
-export function useChatEngine(chatbotConfig) {
-  const { siteConfig } = useDocusaurusContext();
+export function useChatEngine(chatbotConfig, copy) {
+  const { siteConfig, i18n } = useDocusaurusContext();
   const providerRef = useRef(null);
   const historyRef = useRef([]);
   const abortRef = useRef(null);
@@ -34,14 +36,14 @@ export function useChatEngine(chatbotConfig) {
 
   const load = useCallback(async () => {
     if (providerRef.current) return;
-    const provider = createProvider(chatbotConfig);
+    const provider = createProvider(chatbotConfig, copy);
     providerRef.current = provider;
     try {
       await provider.init((progress) => setStatus(progress));
     } catch (err) {
       setStatus({ status: "error", progress: 0, text: err.message });
     }
-  }, [chatbotConfig]);
+  }, [chatbotConfig, copy]);
 
   const stopGeneration = useCallback(() => {
     abortRef.current?.abort();
@@ -71,7 +73,12 @@ export function useChatEngine(chatbotConfig) {
       try {
         const index = await fetchSearchIndex(siteConfig.baseUrl);
         const chunks = rankChunks(trimmed, index);
-        const context = buildContext(chunks);
+        const context = [
+          buildContext(chunks),
+          getLocaleInstruction(i18n.currentLocale),
+        ]
+          .filter(Boolean)
+          .join("\n\n");
 
         for await (const chunk of provider.chat({
           messages: providerMessages,
@@ -92,8 +99,11 @@ export function useChatEngine(chatbotConfig) {
         }
       } catch (err) {
         if (err?.name !== "AbortError") {
-          assistantText =
-            assistantText || `Sorry, something went wrong: ${err.message}`;
+          const prefix = translate({
+            id: "chatbot.error.prefix",
+            message: "Sorry, something went wrong:",
+          });
+          assistantText = assistantText || `${prefix} ${err.message}`;
           setMessages((prev) => {
             const next = [...prev];
             next[next.length - 1] = {
@@ -112,7 +122,7 @@ export function useChatEngine(chatbotConfig) {
         abortRef.current = null;
       }
     },
-    [isGenerating, siteConfig.baseUrl]
+    [isGenerating, siteConfig.baseUrl, i18n.currentLocale]
   );
 
   return { status, messages, isGenerating, load, sendMessage, stopGeneration };

@@ -1,0 +1,7 @@
+{
+  "label": "Textes du chatbot (Français)",
+  "launcherLabel": "Demander à l'IA",
+  "welcomeMessage": "Posez des questions sur cette documentation. Les réponses sont générées par un petit modèle d'IA qui s'exécute entièrement dans votre navigateur.",
+  "webllmSystemPrompt": "Vous êtes un assistant utile qui répond aux questions sur ce site de documentation. Soyez concis et citez la page pertinente lorsque possible.",
+  "remoteSystemPrompt": "Vous êtes un assistant utile qui répond aux questions sur ce site de documentation. Soyez concis et citez la page pertinente lorsque possible."
+}

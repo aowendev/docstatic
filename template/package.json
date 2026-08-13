@@ -59,7 +59,6 @@
     "dotenv": "^16.6.1",
     "fs-extra": "9.0.1",
     "image-size": "^2.0.2",
-    "lunr": "^2.3.9",
     "raw-loader": "^4.0.2",
     "react": "^19.2.8",
     "react-dnd": "^16.0.1",

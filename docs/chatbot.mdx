@@ -13,7 +13,7 @@ translate: false
 approved: false
 published: true
 unlisted: false
-lastmod: '2026-08-13T11:08:28.188Z'
+lastmod: '2026-08-13T12:17:12.564Z'
 modifiedBy: aowendev <aowen@translationcommons.org>
 ---
 docStatic can add an AI chatbot to your site that answers questions about your documentation. By default it runs entirely in the visitor's browser using [WebLLM](https://webllm.mlc.ai/) (via WebGPU), so no external service, API key or server is required. The same widget can also be pointed at a paid provider you host yourself, without changing anything visitors see.
@@ -36,10 +36,24 @@ When the site has been built with its default local search index available, the 
 
 ## Choosing a WebLLM model
 
-The default model is `Llama-3.2-1B-Instruct-q4f16_1-MLC`, a small instruction-tuned model that balances answer quality against download size (roughly 700-900 MB, cached in the browser after the first download). You can change it in the **WebLLM Settings** field using any [WebLLM prebuilt model ID](https://github.com/mlc-ai/web-llm/blob/main/src/config.ts):
+The default model is `Qwen2.5-1.5B-Instruct-q4f16_1-MLC` (roughly 1.6 GB, cached in the browser after the first download), chosen for broad multilingual coverage—29+ languages, including every locale this site ships by default. You can change it in the **WebLLM Settings** field using any [WebLLM prebuilt model ID](https://github.com/mlc-ai/web-llm/blob/main/src/config.ts):
 
-* `SmolLM2-360M-Instruct-q4f16_1-MLC`—smaller and faster, lower quality answers.
-* `Phi-3.5-mini-instruct-q4f16_1-MLC-1k`—larger download, higher quality answers.
+* `SmolLM2-360M-Instruct-q4f16_1-MLC`—much smaller and faster, but English-only.
+* `Llama-3.2-1B-Instruct-q4f16_1-MLC`—smaller than the default, and covers English, German, French, Italian, Portuguese, Hindi, Spanish and Thai, but not Japanese or other non-Latin-script languages.
+
+<Admonition type="note" title="Check language coverage before switching models">
+If your site serves a language a smaller model doesn't officially support, answers in that language may be unreliable even with the "respond in this language" instruction the chatbot already sends automatically. Check a model's supported languages before making it the default.
+</Admonition>
+
+## Multiple languages
+
+The chatbot automatically matches whatever locale the visitor is currently browsing in—there's nothing to configure beyond translating the CMS copy (below):
+
+* **The model's reply language.** The chatbot tells the model which language to answer in, based on the page's locale and its configured display name (from the site's language settings), so no per-question language selection is needed.
+* **Retrieved documentation context.** Each locale has its own search index, built from that locale's own translated pages, so citations point at the right language's content automatically.
+* **Interface text in the chat widget itself** (buttons, status messages) is translated through docStatic's standard component-translation mechanism, the same one used elsewhere in this site.
+
+**Deployer-authored copy**—the launcher button label, the welcome message and the system prompts sent to each provider—lives in the CMS under **Chatbot Copy**, one document per language. A locale without its own document falls back to the default (English) copy.
 
 ## Connecting a paid provider
 

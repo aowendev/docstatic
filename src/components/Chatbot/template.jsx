@@ -60,15 +60,7 @@ export const ChatbotCollection = {
           name: "model",
           label: "Model",
           description:
-            "MLC prebuilt model id, e.g. Llama-3.2-1B-Instruct-q4f16_1-MLC",
-        },
-        {
-          type: "string",
-          name: "systemPrompt",
-          label: "System Prompt",
-          ui: {
-            component: "textarea",
-          },
+            "MLC prebuilt model id, e.g. Qwen2.5-1.5B-Instruct-q4f16_1-MLC",
         },
       ],
     },
@@ -83,14 +75,6 @@ export const ChatbotCollection = {
           label: "Proxy Endpoint URL",
           description:
             "Your own backend/serverless URL that holds the real provider API key server-side. Never put a real API key in this file — it ships in the public site bundle.",
-        },
-        {
-          type: "string",
-          name: "systemPrompt",
-          label: "System Prompt",
-          ui: {
-            component: "textarea",
-          },
         },
       ],
     },
@@ -111,20 +95,63 @@ export const ChatbotCollection = {
             { label: "Bottom Left", value: "bottom-left" },
           ],
         },
-        {
-          type: "string",
-          name: "launcherLabel",
-          label: "Launcher Button Label",
-        },
-        {
-          type: "string",
-          name: "welcomeMessage",
-          label: "Welcome Message",
-          ui: {
-            component: "textarea",
-          },
-        },
       ],
+    },
+  ],
+};
+
+export const ChatbotCopyCollection = {
+  name: "chatbotCopy",
+  label: "Chatbot Copy",
+  description:
+    'Deployer-authored chatbot text. One document per language — add a document named to match a configured locale code (e.g. "ja") to override the default (English) copy for that language. Falls back to the default document for any locale without its own.',
+  path: "config/chatbot-copy",
+  format: "json",
+  ui: {
+    allowedActions: {
+      create: false,
+      delete: false,
+    },
+  },
+  fields: [
+    {
+      type: "string",
+      label: "Label",
+      name: "label",
+      required: true,
+      isTitle: true,
+      ui: {
+        component: "hidden",
+      },
+    },
+    {
+      type: "string",
+      name: "launcherLabel",
+      label: "Launcher Button Label",
+    },
+    {
+      type: "string",
+      name: "welcomeMessage",
+      label: "Welcome Message",
+      ui: {
+        component: "textarea",
+      },
+    },
+    {
+      type: "string",
+      name: "webllmSystemPrompt",
+      label: "WebLLM System Prompt",
+      ui: {
+        component: "textarea",
+      },
+    },
+    {
+      type: "string",
+      name: "remoteSystemPrompt",
+      label: "Remote Provider System Prompt",
+      ui: {
+        component: "textarea",
+      },
     },
   ],
 };
