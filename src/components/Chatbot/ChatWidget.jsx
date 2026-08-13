@@ -6,7 +6,7 @@
  */
 
 import Translate, { translate } from "@docusaurus/Translate";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./ChatWidget.module.css";
 import { useChatEngine } from "./useChatEngine";
 import { useOptIn } from "./useOptIn";
@@ -132,6 +132,15 @@ export function ChatWidget({ config, copy }) {
   const { status, messages, isGenerating, load, sendMessage, stopGeneration } =
     useChatEngine(config, copy);
   const [input, setInput] = useState("");
+
+  // A returning visitor's opt-in is persisted (see useOptIn.js), so on a
+  // fresh page load `optedIn` can already be true with the engine never
+  // having been loaded this session — kick off loading the same way the
+  // "Enable AI Assistant" button does. load() itself is a no-op once the
+  // provider is already initializing/initialized.
+  useEffect(() => {
+    if (optedIn) load();
+  }, [optedIn, load]);
 
   const handleEnable = () => {
     optIn();
