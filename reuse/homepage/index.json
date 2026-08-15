@@ -68,9 +68,9 @@
         {
           "translations": [
             { "lang": "en", "feature": "Content Reuse, Single Sourcing & Managed Links" },
-            { "lang": "de", "feature": "Wiederverwendung von Inhalten, Single Sourcing und verwaltete Links" },
+            { "lang": "de", "feature": "Wiederverwendung von Inhalten, Single Sourcing & verwaltete Links" },
             { "lang": "es", "feature": "Reutilización de contenidos, fuente única y enlaces gestionados" },
-            { "lang": "fr", "feature": "Réutilisation de contenu, source unique et liens gérés" },
+            { "lang": "fr", "feature": "Réutilisation de contenu, source unique & liens gérés" },
             { "lang": "ja", "feature": "コンテンツの再利用、シングルソーシング、および管理されたリンク" }
           ]
         },
@@ -79,16 +79,16 @@
             { "lang": "en", "feature": "Simple Structured Authoring & Semantic Models" },
             { "lang": "de", "feature": "Einfaches strukturiertes Authoring & semantische Modelle" },
             { "lang": "es", "feature": "Autoría estructurada simple y modelos semánticos" },
-            { "lang": "fr", "feature": "Création structurée simple et modèles sémantiques" },
+            { "lang": "fr", "feature": "Création structurée simple & modèles sémantiques" },
             { "lang": "ja", "feature": "シンプルな構造化オーサリングとセマンティックモデル" }
           ]
         },
         {
           "translations": [
             { "lang": "en", "feature": "Workflow Management & Content Dashboards" },
-            { "lang": "de", "feature": "Workflow-Management und Content-Dashboards" },
+            { "lang": "de", "feature": "Workflow-Management & Content-Dashboards" },
             { "lang": "es", "feature": "Gestión de flujos de trabajo y paneles de control de contenidos" },
-            { "lang": "fr", "feature": "Gestion des flux de travail et tableaux de bord de contenu" },
+            { "lang": "fr", "feature": "Gestion des flux de travail & tableaux de bord de contenu" },
             { "lang": "ja", "feature": "ワークフロー管理とコンテンツダッシュボード" }
           ]
         },
@@ -97,23 +97,23 @@
             { "lang": "en", "feature": "Translation & Localization Support" },
             { "lang": "de", "feature": "Übersetzungs- & Lokalisierungsunterstützung" },
             { "lang": "es", "feature": "Soporte de traducción y localización" },
-            { "lang": "fr", "feature": "Prise en charge de la traduction et de la localisation" },
+            { "lang": "fr", "feature": "Prise en charge de la traduction & de la localisation" },
             { "lang": "ja", "feature": "翻訳とローカライゼーションのサポート" }
           ]
         },
         {
           "translations": [
             { "lang": "en", "feature": "Versioning & Variant Management" },
-            { "lang": "de", "feature": "Versions- & Variantenverwaltung" },
+            { "lang": "de", "feature": "Versions & Variantenverwaltung" },
             { "lang": "es", "feature": "Gestión de versiones y variantes" },
-            { "lang": "fr", "feature": "Gestion des versions et des variantes" },
+            { "lang": "fr", "feature": "Gestion des versions & des variantes" },
             { "lang": "ja", "feature": "バージョン管理とバリアント管理" }
           ]
         },
         {
           "translations": [
             { "lang": "en", "feature": "Integrated GraphQL & OpenAPI Documentation" },
-            { "lang": "de", "feature": "Integrierte GraphQL- & OpenAPI-Dokumentation" },
+            { "lang": "de", "feature": "Integrierte GraphQL & OpenAPI-Dokumentation" },
             { "lang": "es", "feature": "Documentación integrada de GraphQL y OpenAPI" },
             { "lang": "fr", "feature": "Documentation GraphQL et OpenAPI intégrée" },
             { "lang": "ja", "feature": "GraphQL と OpenAPI ドキュメントの統合" }
@@ -124,7 +124,7 @@
             { "lang": "en", "feature": "AI Chat Assistant & Local MCP Server" },
             { "lang": "de", "feature": "KI-Chat-Assistent & lokaler MCP-Server" },
             { "lang": "es", "feature": "Asistente de chat con IA y servidor MCP local" },
-            { "lang": "fr", "feature": "Assistant de chat IA et serveur MCP local" },
+            { "lang": "fr", "feature": "Assistant de chat IA & serveur MCP local" },
             { "lang": "ja", "feature": "AIチャットアシスタントとローカルMCPサーバー" }
           ]
         }
