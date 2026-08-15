@@ -1261,6 +1261,44 @@
       "_template": "urlEntry"
     },
     {
+      "key": "github-actions",
+      "url": [
+        {
+          "lang": "en",
+          "url": "https://docs.github.com/en/actions",
+          "_template": "urlTranslation"
+        },
+        {
+          "lang": "de",
+          "url": "https://docs.github.com/de/actions",
+          "_template": "urlTranslation"
+        },
+        {
+          "lang": "es",
+          "url": "https://docs.github.com/es/actions",
+          "_template": "urlTranslation"
+        },
+        {
+          "lang": "fr",
+          "url": "https://docs.github.com/fr/actions",
+          "_template": "urlTranslation"
+        },
+        {
+          "lang": "ja",
+          "url": "https://docs.github.com/fr/actions",
+          "_template": "urlTranslation"
+        }
+      ],
+      "defaultText": [
+        {
+          "lang": "en",
+          "text": "GitHub Actions",
+          "_template": "textTranslation"
+        }
+      ],
+      "_template": "urlEntry"
+    },
+    {
       "key": "icloud-mailserver",
       "url": [
         {
