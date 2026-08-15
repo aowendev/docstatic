@@ -1,6 +1,44 @@
 {
   "urls": [
     {
+      "key": "apple-app-specific-passwords",
+      "url": [
+        {
+          "lang": "en",
+          "url": "https://support.apple.com/en-us/102654",
+          "_template": "urlTranslation"
+        },
+        {
+          "lang": "de",
+          "url": "https://support.apple.com/de-de/102654",
+          "_template": "urlTranslation"
+        },
+        {
+          "lang": "es",
+          "url": "https://support.apple.com/es-es/102654",
+          "_template": "urlTranslation"
+        },
+        {
+          "lang": "fr",
+          "url": "https://support.apple.com/fr-fr/102654",
+          "_template": "urlTranslation"
+        },
+        {
+          "lang": "ja",
+          "url": "https://support.apple.com/ja-ja/102654",
+          "_template": "urlTranslation"
+        }
+      ],
+      "defaultText": [
+        {
+          "lang": "en",
+          "text": "app-specific-password)",
+          "_template": "textTranslation"
+        }
+      ],
+      "_template": "urlEntry"
+    },
+    {
       "key": "biome-cli",
       "url": [
         {
@@ -1209,6 +1247,44 @@
         {
           "lang": "en",
           "text": "GitHub Pages",
+          "_template": "textTranslation"
+        }
+      ],
+      "_template": "urlEntry"
+    },
+    {
+      "key": "github-use-secrets",
+      "url": [
+        {
+          "lang": "en",
+          "url": "https://docs.github.com/en/actions/how-tos/write-workflows/choose-what-workflows-do/use-secrets",
+          "_template": "urlTranslation"
+        },
+        {
+          "lang": "de",
+          "url": "https://docs.github.com/de/actions/how-tos/write-workflows/choose-what-workflows-do/use-secrets",
+          "_template": "urlTranslation"
+        },
+        {
+          "lang": "es",
+          "url": "https://docs.github.com/de/actions/how-tos/write-workflows/choose-what-workflows-do/use-secrets",
+          "_template": "urlTranslation"
+        },
+        {
+          "lang": "fr",
+          "url": "https://docs.github.com/fr/actions/how-tos/write-workflows/choose-what-workflows-do/use-secrets",
+          "_template": "urlTranslation"
+        },
+        {
+          "lang": "ja",
+          "url": "https://docs.github.com/ja/actions/how-tos/write-workflows/choose-what-workflows-do/use-secrets",
+          "_template": "urlTranslation"
+        }
+      ],
+      "defaultText": [
+        {
+          "lang": "en",
+          "text": "secrets",
           "_template": "textTranslation"
         }
       ],
