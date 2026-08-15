@@ -12,18 +12,19 @@ translate: false
 approved: false
 published: true
 unlisted: false
-lastmod: "2026-03-10T22:57:13.928Z"
+lastmod: '2026-08-15T09:53:48.026Z'
+modifiedBy: aowendev <aowen@translationcommons.org>
 ---
-By default, docStatic is configured to use [Lunr](https://lunrjs.com/) search. Its main advantage is that it's a zero cost solution. Its main disadvantage is that the entire search index is downloaded to the user's browser; the larger your site gets, the slower it gets.
+By default, docStatic is configured to use <Url urlKey="lunr" /> search. Its main advantage is that it's a zero cost solution. Its main disadvantage is that the entire search index is downloaded to the user's browser; the larger your site gets, the slower it gets.
 
 A variety of alternatives are available as Docusaurus plugins, including:
 
 * Algolia (pre-installed)
-* [Markprompt](https://github.com/typesense/docusaurus-theme-search-typesense)
+* <Url urlKey="markprompt" />
 * [Meilisearch](https://github.com/tauri-apps/meilisearch-docsearch)
 * [Orama](https://github.com/askorama/orama/tree/main/packages/plugin-docusaurus-v3)
-* [Typesense DocSearch](https://github.com/typesense/docusaurus-theme-search-typesense)
+* <Url urlKey="markprompt" linkText={[{ lang: "en", text: "Typesense DocSearch" }]} />
 
-For more information, refer to [Search](https://docusaurus.io/docs/search#using-algolia-docsearch) in the Docusaurus documentation.
+For more information, refer to <Url urlKey="docusaurus-search" /> in the Docusaurus documentation.
 
 <RelatedTopics maxResults={7} />
