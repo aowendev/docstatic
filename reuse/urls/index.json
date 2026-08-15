@@ -1,6 +1,39 @@
 {
   "urls": [
     {
+      "key": "biome-cli",
+      "url": [
+        {
+          "lang": "en",
+          "url": "https://biomejs.dev/reference/cli/",
+          "_template": "urlTranslation"
+        },
+        {
+          "lang": "es",
+          "url": "https://biomejs.dev/es/reference/cli/",
+          "_template": "urlTranslation"
+        },
+        {
+          "lang": "fr",
+          "url": "https://biomejs.dev/fr/reference/cli/",
+          "_template": "urlTranslation"
+        },
+        {
+          "lang": "ja",
+          "url": "https://biomejs.dev/ja/reference/cli/",
+          "_template": "urlTranslation"
+        }
+      ],
+      "defaultText": [
+        {
+          "lang": "en",
+          "text": "CLI",
+          "_template": "textTranslation"
+        }
+      ],
+      "_template": "urlEntry"
+    },
+    {
       "key": "cals-table-model",
       "url": [
         {

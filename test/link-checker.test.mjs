@@ -194,6 +194,70 @@ test("falls back to the URL only when the matched link has no text of its own", 
   ]);
 });
 
+/* ------------------------------ defaultText ------------------------------ */
+
+test("omits linkText when the matched text equals the resolved default text", () => {
+  const body = root(paragraph(linkNode("Infima", "https://infima.dev/")));
+
+  const { body: next } = replaceLinkNodeWithUrl(body, "https://infima.dev/", {
+    urlKey: "infima",
+    lang: "en",
+    defaultText: "Infima",
+  });
+
+  const node = next.children[0].children[0];
+  assert.deepEqual(node.props, { urlKey: "infima" });
+  assert.equal("linkText" in node.props, false);
+});
+
+test("still overrides when the matched text differs from the default text", () => {
+  const body = root(
+    paragraph(linkNode("Infima website", "https://infima.dev/"))
+  );
+
+  const { body: next } = replaceLinkNodeWithUrl(body, "https://infima.dev/", {
+    urlKey: "infima",
+    lang: "en",
+    defaultText: "Infima",
+  });
+
+  assert.deepEqual(next.children[0].children[0].props.linkText, [
+    { lang: "en", text: "Infima website" },
+  ]);
+});
+
+test("no defaultText means always override, same as before this comparison existed", () => {
+  const body = root(paragraph(linkNode("Infima", "https://infima.dev/")));
+
+  const { body: next } = replaceLinkNodeWithUrl(body, "https://infima.dev/", {
+    urlKey: "infima",
+    lang: "en",
+  });
+
+  assert.deepEqual(next.children[0].children[0].props.linkText, [
+    { lang: "en", text: "Infima" },
+  ]);
+});
+
+test("each occurrence is compared against defaultText independently", () => {
+  // One matches the default, one doesn't — only the second gets an override.
+  const body = root(
+    paragraph(linkNode("CALS table model", "https://oasis.org/cals")),
+    paragraph(linkNode("CALS table model reference", "https://oasis.org/cals"))
+  );
+
+  const { body: next } = replaceLinkNodeWithUrl(
+    body,
+    "https://oasis.org/cals",
+    { urlKey: "cals-table-model", lang: "en", defaultText: "CALS table model" }
+  );
+
+  assert.equal("linkText" in next.children[0].children[0].props, false);
+  assert.deepEqual(next.children[1].children[0].props.linkText, [
+    { lang: "en", text: "CALS table model reference" },
+  ]);
+});
+
 /* -------- sanity check against extractLinksFromRichText -------- */
 
 test("a link replaceLinkNodeWithUrl acts on is one extractLinksFromRichText would have found", () => {

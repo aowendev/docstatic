@@ -187,14 +187,27 @@ export function extractLinksFromRichText(body, filePath) {
 
 /**
  * Replace every `a`/`link` node matching `targetUrl` in a rich-text body
- * with a `<Url urlKey linkText={[{ lang, text }]} />` embed, returning a new
- * body (the input is never mutated) and how many replacements were made.
+ * with a `<Url urlKey />` (or `<Url urlKey linkText={[{ lang, text }]} />`)
+ * embed, returning a new body (the input is never mutated) and how many
+ * replacements were made.
  *
  * `text` always comes from the matched link node itself, per-occurrence —
  * never a fallback to the key's preset default text. Two links to the same
  * URL with different wording (a real case: "CALS table model" and "CALS
  * table model reference" both point at the same OASIS page) get their own
  * linkText each, rather than one borrowing the other's.
+ *
+ * `defaultText` is the *other* direction of that same comparison: it's
+ * whatever `<Url>` would already show for `lang` with no override at all —
+ * generally `resolveTranslation(entry.defaultText, lang, DEFAULT_LOCALE).text`
+ * from the live urls.json entry, computed by the caller so this function
+ * doesn't need to know about that resolution order itself. When the matched
+ * link's text is exactly that, adding a linkText override would be a no-op
+ * that only duplicates the same string into every doc that would ever need
+ * to change it, so `linkText` is left off entirely and the bare key does
+ * the same job. `defaultText` is optional; omitting it (or passing a value
+ * that never matches) always overrides, which is what every call already
+ * did before this comparison existed.
  *
  * The node shape (`mdxJsxTextElement` with a plain `props` object, no
  * `_template` wrapper) was verified against the actual `@tinacms/mdx`
@@ -204,7 +217,11 @@ export function extractLinksFromRichText(body, filePath) {
  * parsed link's position serializes to the same MDX a human typing it by
  * hand would produce.
  */
-export function replaceLinkNodeWithUrl(body, targetUrl, { urlKey, lang }) {
+export function replaceLinkNodeWithUrl(
+  body,
+  targetUrl,
+  { urlKey, lang, defaultText }
+) {
   const target = normalizeUrl(targetUrl);
   let replacedCount = 0;
 
@@ -218,14 +235,16 @@ export function replaceLinkNodeWithUrl(body, targetUrl, { urlKey, lang }) {
       }
       if (typeof url === "string" && normalizeUrl(url) === target) {
         replacedCount += 1;
+        const text = plainText(child).trim() || target;
+        const props = { urlKey };
+        if (!defaultText || text !== defaultText) {
+          props.linkText = [{ lang, text }];
+        }
         return {
           type: "mdxJsxTextElement",
           name: "Url",
           children: [{ type: "text", text: "" }],
-          props: {
-            urlKey,
-            linkText: [{ lang, text: plainText(child).trim() || target }],
-          },
+          props,
         };
       }
 

@@ -22,6 +22,7 @@ import {
   probeUrlInBrowser,
   replaceLinkNodeWithUrl,
 } from "../../utils/linkChecker";
+import { resolveTranslation } from "../../utils/resolveTranslations";
 import { useTinaTask } from "./lib/useTinaTask";
 
 // Requests in flight during a browser Refresh. Lower than the Node script's
@@ -565,6 +566,14 @@ const LinkHealthDashboard = ({ tinaForm }) => {
   // uses it. Each translation's replacement is tagged with its own locale,
   // so if this key's linkText is ever consulted for that language, it's
   // that language's own wording that comes back, not English's.
+  //
+  // A match's own text is only kept as a linkText override when it actually
+  // says something different from what <Url> would already show with none —
+  // resolveTranslation() against the key's own defaultText, the same
+  // fallback order the component itself uses at render time. A match that
+  // already reads the same as the default gets the bare key instead of a
+  // redundant override, for the same reason the earlier bulk conversion of
+  // hardcoded links to <Url> treated an exact match as "nothing to add."
   const handleReplace = (candidate) => {
     if (!candidate.urlKey) return;
     setReplacingUrl(candidate.url);
@@ -575,6 +584,22 @@ const LinkHealthDashboard = ({ tinaForm }) => {
     runReplace(async ({ client, isCurrent }) => {
       const failures = [];
 
+      const urlsRes = await client.queries.urls({ relativePath: "index.json" });
+      const entry = (urlsRes.data.urls?.urls || []).find(
+        (u) => u.key === candidate.urlKey
+      );
+      const defaultTextCache = new Map();
+      const defaultTextFor = (lang) => {
+        if (!entry) return undefined;
+        if (!defaultTextCache.has(lang)) {
+          defaultTextCache.set(
+            lang,
+            resolveTranslation(entry.defaultText, lang, DEFAULT_LOCALE).text
+          );
+        }
+        return defaultTextCache.get(lang);
+      };
+
       for (const occ of candidate.occurrences) {
         const relativePath = occ.filePath.replace(/^\/docs\//, "");
 
@@ -583,7 +608,11 @@ const LinkHealthDashboard = ({ tinaForm }) => {
           const { body, replacedCount } = replaceLinkNodeWithUrl(
             res.data.doc.body,
             candidate.url,
-            { urlKey: candidate.urlKey, lang: DEFAULT_LOCALE }
+            {
+              urlKey: candidate.urlKey,
+              lang: DEFAULT_LOCALE,
+              defaultText: defaultTextFor(DEFAULT_LOCALE),
+            }
           );
           if (replacedCount > 0) {
             const params = await buildDocUpdateParams(res.data.doc, body);
@@ -614,7 +643,11 @@ const LinkHealthDashboard = ({ tinaForm }) => {
             const { body, replacedCount } = replaceLinkNodeWithUrl(
               i18nRes.data.i18n.body,
               candidate.url,
-              { urlKey: candidate.urlKey, lang: locale.code }
+              {
+                urlKey: candidate.urlKey,
+                lang: locale.code,
+                defaultText: defaultTextFor(locale.code),
+              }
             );
             if (replacedCount === 0) continue;
             const params = await buildDocUpdateParams(i18nRes.data.i18n, body);
