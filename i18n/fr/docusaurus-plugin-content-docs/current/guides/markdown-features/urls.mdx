@@ -1,0 +1,50 @@
+---
+help: null
+lastmod: '2026-08-15T15:55:17.351Z'
+modifiedBy: aowendev <aowen@translationcommons.org>
+title: URLs
+tags:
+  - reuse
+  - internationalization
+  - internationalization_localization
+draft: false
+review: false
+translate: true
+approved: false
+published: false
+unlisted: true
+---
+
+# URLs
+
+The **URL** component lets you reference an external link by key instead of hardcoding it. Each key maps to a URL per language, so a visitor always lands on the language-appropriate version of the destination, and a link that moves or breaks only needs fixing in one place, no matter how many docs reference it.
+
+## Managing URLs
+
+You can edit the URLs collection in the CMS.
+
+1. Click the **Add** icon ( **+** ) to add a new **Key**.
+2. Under **URL (per language)**, click the **Add** icon to add a **Translation** for each language the link should support. Give it a **Language Code** and the destination **URL**.
+3. Under **Default Link Text (per language)**, add a **Translation** for each language, giving the text a `<Url>` usage should show when it doesn't supply its own.
+
+## Using URLs
+
+1. Select **URL Link** from the **Embed** list.
+2. Enter the **URL Key** matching an entry in the URLs collection.
+3. Optionally, add **Link Text** translations to override the key's default text for this specific usage — the same key can be used in different places with different wording.
+
+<Admonition type="caution" title="Link text is not machine-translated">
+  Unlike ordinary prose, a `<Url>` usage's Link Text is never sent through automated translation — the whole component is preserved exactly as written when a document is translated, in every language. If you add Link Text, fill in every supported language at the same time, in the document where you first add the link. A language left out at that point will stay missing until someone edits the source and adds it by hand.
+
+  If you don't need custom wording for a particular usage, leave Link Text empty and the key's Default Link Text is used instead — that text is translated the normal way, one time, in the URLs collection.
+</Admonition>
+
+#### Example
+
+<Url urlKey="docusaurus-website" />
+
+## Checking link health
+
+The URLs collection also hosts the **Link Health** dashboard, which reports on both the URLs stored here and any external links still hardcoded directly in your docs — including which of those aren't in the URLs collection yet, so you can find and centralize them. See [Dashboards](/docs/guides/dashboards) for details.
+
+<RelatedTopics maxResults={7} />

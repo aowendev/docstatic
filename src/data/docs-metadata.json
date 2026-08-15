@@ -121,7 +121,7 @@
     ],
     "path": "/cli",
     "filePath": "cli.mdx",
-    "lastmod": "2026-08-15T09:53:45.940Z"
+    "lastmod": "2026-08-15T13:18:17.728Z"
   },
   {
     "title": "Code blocks and snippets",
@@ -231,7 +231,7 @@
     ],
     "path": "/guides/dashboards",
     "filePath": "guides/dashboards.mdx",
-    "lastmod": "2026-08-15T10:20:23.082Z"
+    "lastmod": "2026-08-15T14:26:51.386Z"
   },
   {
     "title": "Deployment",
@@ -247,7 +247,7 @@
     ],
     "path": "/deployment",
     "filePath": "deployment.mdx",
-    "lastmod": "2026-08-15T09:53:46.143Z"
+    "lastmod": "2026-08-15T14:00:25.907Z"
   },
   {
     "title": "Diagrams",
@@ -394,7 +394,7 @@
     ],
     "path": "/installation",
     "filePath": "installation.mdx",
-    "lastmod": "2026-08-15T09:53:47.874Z"
+    "lastmod": "2026-08-15T15:19:40.390Z"
   },
   {
     "title": "Internationalization",
@@ -430,7 +430,7 @@
     ],
     "path": "/introduction",
     "filePath": "introduction.mdx",
-    "lastmod": "2026-08-15T09:53:47.949Z"
+    "lastmod": "2026-08-15T14:35:45.443Z"
   },
   {
     "title": "Introduction",
@@ -570,7 +570,7 @@
     ],
     "path": "/advanced/notifications",
     "filePath": "advanced/notifications.mdx",
-    "lastmod": "2026-03-04T22:48:08.345Z"
+    "lastmod": "2026-08-15T14:47:37.170Z"
   },
   {
     "title": "OpenAPI reference docs",
