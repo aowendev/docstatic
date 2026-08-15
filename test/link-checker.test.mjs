@@ -22,9 +22,11 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
 import {
+  domainRoot,
   extractLinksFromRichText,
   isWikipediaUrl,
   replaceLinkNodeWithUrl,
+  suggestKey,
 } from "../src/utils/linkChecker.js";
 
 const textNode = (text) => ({ type: "text", text });
@@ -277,4 +279,97 @@ test("a link replaceLinkNodeWithUrl acts on is one extractLinksFromRichText woul
 test("isWikipediaUrl agrees with the Node script's version", () => {
   assert.ok(isWikipediaUrl("https://en.wikipedia.org/wiki/Docusaurus"));
   assert.ok(!isWikipediaUrl("https://example.com/"));
+});
+
+/* ------------------------------- domainRoot ------------------------------ */
+
+test("domainRoot drops a subdomain and the TLD for an ordinary two-part suffix", () => {
+  assert.equal(domainRoot("docs.github.com"), "github");
+  assert.equal(domainRoot("support.apple.com"), "apple");
+  assert.equal(domainRoot("en.wikipedia.org"), "wikipedia");
+});
+
+test("domainRoot strips www without treating it as the site name", () => {
+  assert.equal(domainRoot("www.oasis-open.org"), "oasis-open");
+});
+
+test("domainRoot keeps a bare two-label hostname as-is", () => {
+  assert.equal(domainRoot("docusaurus.io"), "docusaurus");
+  assert.equal(domainRoot("infima.dev"), "infima");
+});
+
+test("domainRoot knows the two-label suffixes that would otherwise mislead it", () => {
+  // "js.org" is the real suffix here, not "org" alone — the naive
+  // second-to-last-label guess would name this "js".
+  assert.equal(domainRoot("mermaid.js.org"), "mermaid");
+});
+
+/* ------------------------------- suggestKey ------------------------------ */
+
+test("suggestKey combines the site name with the last path segment", () => {
+  const key = suggestKey(
+    {
+      text: "secrets",
+      url: "https://docs.github.com/en/actions/how-tos/write-workflows/choose-what-workflows-do/use-secrets",
+    },
+    new Set()
+  );
+  assert.equal(key, "github-use-secrets");
+});
+
+test("suggestKey prefers the URL over generic anchor text", () => {
+  // The regression this guards: link text like "secrets" is real, but on
+  // its own it doesn't say what site or feature it's about the way the URL
+  // does — and the same key can carry different anchor text in every doc
+  // that uses it, so the anchor text of the first one shouldn't decide it.
+  const key = suggestKey(
+    { text: "click here", url: "https://mermaid.js.org/intro/" },
+    new Set()
+  );
+  assert.equal(key, "mermaid-intro");
+});
+
+test("suggestKey falls back to a bare site name with no path", () => {
+  assert.equal(
+    suggestKey({ text: "", url: "https://mermaid.js.org/" }, new Set()),
+    "mermaid"
+  );
+});
+
+test("suggestKey distinguishes two pages on the same site with no path in common", () => {
+  const existing = new Set();
+  const first = suggestKey(
+    { text: "", url: "https://support.apple.com/en-us/102525" },
+    existing
+  );
+  existing.add(first);
+  const second = suggestKey(
+    { text: "", url: "https://support.apple.com/en-us/102654" },
+    existing
+  );
+  assert.equal(first, "apple-102525");
+  assert.equal(second, "apple-102654");
+});
+
+test("suggestKey falls back to slugified text when the URL can't be parsed", () => {
+  assert.equal(
+    suggestKey({ text: "My Link!", url: "not a url" }, new Set()),
+    "my-link"
+  );
+});
+
+test("suggestKey falls back to 'link' when nothing usable is available", () => {
+  assert.equal(suggestKey({ text: "", url: "not a url" }, new Set()), "link");
+});
+
+test("suggestKey appends a numeric suffix only when the base key already exists", () => {
+  const existing = new Set(["github-use-secrets"]);
+  const key = suggestKey(
+    {
+      text: "",
+      url: "https://docs.github.com/en/actions/how-tos/write-workflows/choose-what-workflows-do/use-secrets",
+    },
+    existing
+  );
+  assert.equal(key, "github-use-secrets-2");
 });

@@ -386,3 +386,80 @@ export async function probeHreflangInBrowser(
     return false;
   }
 }
+
+export function slugify(s) {
+  return s
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
+/**
+ * Registrable-domain suffixes that span two labels, where the naive "the
+ * label before the last one" guess would grab the wrong part —
+ * "mermaid.js.org" is the real case this exists for: "js.org" is the actual
+ * suffix, not "org" alone, so that guess would name the key "js" rather than
+ * "mermaid". Deliberately small and not a public-suffix-list dependency:
+ * enough to cover what this project's own URLs collection has actually
+ * needed, not every domain that could ever appear here. A URL landing here
+ * with the wrong suffix just needs its suggested key hand-corrected once,
+ * same as any suggestion.
+ */
+const TWO_LABEL_SUFFIXES = new Set(["js.org", "github.io", "co.uk", "com.au"]);
+
+/**
+ * The site's own name from a hostname — "github" from "docs.github.com",
+ * "mermaid" from "mermaid.js.org", "oasis-open" from "www.oasis-open.org" —
+ * dropping both a leading "www." and whatever subdomain or suffix labels
+ * surround it.
+ */
+export function domainRoot(hostname) {
+  const host = hostname.replace(/^www\./, "");
+  const labels = host.split(".");
+  if (labels.length < 2) return host;
+  const lastTwo = labels.slice(-2).join(".");
+  const suffixLabelCount = TWO_LABEL_SUFFIXES.has(lastTwo) ? 2 : 1;
+  return labels[labels.length - suffixLabelCount - 1] || labels[0];
+}
+
+/**
+ * Short, readable key for a centralize/migration candidate, made unique
+ * against whatever keys already exist in the urls[] list.
+ *
+ * Derived from the URL — the site's own name plus the last path segment,
+ * when there is one — rather than the link's anchor text, on purpose: the
+ * same key can carry a different linkText override in every doc that uses
+ * it, so a generic anchor like "secrets" would make a poor, ambiguous key on
+ * its own, where the URL itself
+ * ("docs.github.com/.../use-secrets" → "github-use-secrets") reliably
+ * identifies what's actually being linked to. It also matches the naming
+ * convention every hand-picked key already in reuse/urls/index.json follows
+ * — "wikipedia-context-sensitive-help", "docusaurus-create-a-doc" — which
+ * are all site-plus-page, never a copy of whatever text first linked them.
+ * Two different pages on the same site with no path distinction would
+ * otherwise collide on the site name alone; the path segment keeps them
+ * apart without needing to fall back to an arbitrary "-2" suffix.
+ *
+ * Falls back to the link's own text only when the URL can't be parsed at
+ * all, and to a bare "link" when there's nothing usable in either.
+ */
+export function suggestKey(candidate, existingKeys) {
+  const fromUrl = (() => {
+    try {
+      const parsed = new URL(candidate.url);
+      const root = domainRoot(parsed.hostname);
+      const lastSegment = parsed.pathname.split("/").filter(Boolean).pop();
+      return slugify(lastSegment ? `${root}-${lastSegment}` : root);
+    } catch {
+      return "";
+    }
+  })();
+  const base = fromUrl || slugify(candidate.text || "") || "link";
+  let key = base;
+  let n = 2;
+  while (existingKeys.has(key)) {
+    key = `${base}-${n}`;
+    n += 1;
+  }
+  return key;
+}

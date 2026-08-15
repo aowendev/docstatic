@@ -21,6 +21,7 @@ import {
   probeHreflangInBrowser,
   probeUrlInBrowser,
   replaceLinkNodeWithUrl,
+  suggestKey,
 } from "../../utils/linkChecker";
 import { resolveTranslation } from "../../utils/resolveTranslations";
 import { useTinaTask } from "./lib/useTinaTask";
@@ -87,41 +88,6 @@ async function buildDocUpdateParams(doc, body) {
   if (doc.tags != null) params.tags = doc.tags;
   if (doc.conditions != null) params.conditions = doc.conditions;
   return params;
-}
-
-const slugify = (s) =>
-  s
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-+|-+$/g, "");
-
-// Short, readable key from a candidate's link text, falling back to its URL
-// when there's no text — host plus the last path segment when the URL has
-// one, not host alone. Two different pages on the same site with no link
-// text (e.g. two Apple support articles) would otherwise both fall back to
-// the same host and only be told apart by an arbitrary "-2" suffix; the path
-// segment keeps the key meaningful instead. Made unique against whatever
-// keys already exist in the urls[] list.
-function suggestKey(candidate, existingKeys) {
-  const fromText = slugify(candidate.text || "");
-  const fromUrl = (() => {
-    try {
-      const parsed = new URL(candidate.url);
-      const host = parsed.hostname.replace(/^www\./, "");
-      const lastSegment = parsed.pathname.split("/").filter(Boolean).pop();
-      return slugify(lastSegment ? `${host}-${lastSegment}` : host);
-    } catch {
-      return "link";
-    }
-  })();
-  const base = fromText || fromUrl || "link";
-  let key = base;
-  let n = 2;
-  while (existingKeys.has(key)) {
-    key = `${base}-${n}`;
-    n += 1;
-  }
-  return key;
 }
 
 /**

@@ -128,11 +128,6 @@
           "lang": "fr",
           "text": "Tutoriels avancés",
           "_template": "textTranslation"
-        },
-        {
-          "lang": "ja",
-          "text": "Advanced Guides",
-          "_template": "textTranslation"
         }
       ],
       "_template": "urlEntry"
@@ -197,26 +192,6 @@
       "defaultText": [
         {
           "lang": "en",
-          "text": "Blog",
-          "_template": "textTranslation"
-        },
-        {
-          "lang": "de",
-          "text": "Blog",
-          "_template": "textTranslation"
-        },
-        {
-          "lang": "es",
-          "text": "Blog",
-          "_template": "textTranslation"
-        },
-        {
-          "lang": "fr",
-          "text": "Blog",
-          "_template": "textTranslation"
-        },
-        {
-          "lang": "ja",
           "text": "Blog",
           "_template": "textTranslation"
         }
@@ -300,11 +275,6 @@
           "lang": "fr",
           "text": "Navigateurs pris en charge",
           "_template": "textTranslation"
-        },
-        {
-          "lang": "ja",
-          "text": "Browser support",
-          "_template": "textTranslation"
         }
       ],
       "_template": "urlEntry"
@@ -326,26 +296,6 @@
       "defaultText": [
         {
           "lang": "en",
-          "text": "CLI",
-          "_template": "textTranslation"
-        },
-        {
-          "lang": "de",
-          "text": "CLI",
-          "_template": "textTranslation"
-        },
-        {
-          "lang": "es",
-          "text": "CLI",
-          "_template": "textTranslation"
-        },
-        {
-          "lang": "fr",
-          "text": "CLI",
-          "_template": "textTranslation"
-        },
-        {
-          "lang": "ja",
           "text": "CLI",
           "_template": "textTranslation"
         }
@@ -380,11 +330,6 @@
         {
           "lang": "es",
           "text": "Configuración",
-          "_template": "textTranslation"
-        },
-        {
-          "lang": "fr",
-          "text": "Configuration",
           "_template": "textTranslation"
         },
         {
@@ -429,11 +374,6 @@
           "lang": "fr",
           "text": "Créer un doc",
           "_template": "textTranslation"
-        },
-        {
-          "lang": "ja",
-          "text": "Create a doc",
-          "_template": "textTranslation"
         }
       ],
       "_template": "urlEntry"
@@ -471,11 +411,6 @@
         {
           "lang": "fr",
           "text": "Création des pages",
-          "_template": "textTranslation"
-        },
-        {
-          "lang": "ja",
-          "text": "Creating Pages",
           "_template": "textTranslation"
         }
       ],
@@ -558,11 +493,6 @@
           "lang": "fr",
           "text": "Diagrammes",
           "_template": "textTranslation"
-        },
-        {
-          "lang": "ja",
-          "text": "Diagrams",
-          "_template": "textTranslation"
         }
       ],
       "_template": "urlEntry"
@@ -600,11 +530,6 @@
         {
           "lang": "fr",
           "text": "Introduction des docs",
-          "_template": "textTranslation"
-        },
-        {
-          "lang": "ja",
-          "text": "Docs introduction",
           "_template": "textTranslation"
         }
       ],
@@ -687,11 +612,6 @@
           "lang": "fr",
           "text": "Guides Docusaurus",
           "_template": "textTranslation"
-        },
-        {
-          "lang": "ja",
-          "text": "Guides",
-          "_template": "textTranslation"
         }
       ],
       "_template": "urlEntry"
@@ -729,11 +649,6 @@
         {
           "lang": "fr",
           "text": "Métadonnées d'entête",
-          "_template": "textTranslation"
-        },
-        {
-          "lang": "ja",
-          "text": "Head metadata",
           "_template": "textTranslation"
         }
       ],
@@ -773,11 +688,6 @@
           "lang": "fr",
           "text": "Entêtes et table des matières",
           "_template": "textTranslation"
-        },
-        {
-          "lang": "ja",
-          "text": "Headings and Table of contents",
-          "_template": "textTranslation"
         }
       ],
       "_template": "urlEntry"
@@ -810,16 +720,6 @@
         {
           "lang": "es",
           "text": "i18n - Introducción",
-          "_template": "textTranslation"
-        },
-        {
-          "lang": "fr",
-          "text": "i18n - Introduction",
-          "_template": "textTranslation"
-        },
-        {
-          "lang": "ja",
-          "text": "i18n - Introduction",
           "_template": "textTranslation"
         }
       ],
@@ -988,11 +888,6 @@
           "lang": "fr",
           "text": "Plugins MDX",
           "_template": "textTranslation"
-        },
-        {
-          "lang": "ja",
-          "text": "MDX Plugins",
-          "_template": "textTranslation"
         }
       ],
       "_template": "urlEntry"
@@ -1014,21 +909,6 @@
       "defaultText": [
         {
           "lang": "en",
-          "text": "Monorepos",
-          "_template": "textTranslation"
-        },
-        {
-          "lang": "de",
-          "text": "Monorepos",
-          "_template": "textTranslation"
-        },
-        {
-          "lang": "es",
-          "text": "Monorepos",
-          "_template": "textTranslation"
-        },
-        {
-          "lang": "fr",
           "text": "Monorepos",
           "_template": "textTranslation"
         },
@@ -1117,11 +997,6 @@
           "lang": "fr",
           "text": "Recherche",
           "_template": "textTranslation"
-        },
-        {
-          "lang": "ja",
-          "text": "Search",
-          "_template": "textTranslation"
         }
       ],
       "_template": "urlEntry"
@@ -1203,11 +1078,6 @@
           "lang": "fr",
           "text": "Onglets",
           "_template": "textTranslation"
-        },
-        {
-          "lang": "ja",
-          "text": "Tabs",
-          "_template": "textTranslation"
         }
       ],
       "_template": "urlEntry"
@@ -1246,11 +1116,6 @@
           "lang": "fr",
           "text": "Utilisation de Plugins",
           "_template": "textTranslation"
-        },
-        {
-          "lang": "ja",
-          "text": "Using Plugins",
-          "_template": "textTranslation"
         }
       ],
       "_template": "urlEntry"
@@ -1267,26 +1132,6 @@
       "defaultText": [
         {
           "lang": "en",
-          "text": "GitHub",
-          "_template": "textTranslation"
-        },
-        {
-          "lang": "de",
-          "text": "GitHub",
-          "_template": "textTranslation"
-        },
-        {
-          "lang": "es",
-          "text": "GitHub",
-          "_template": "textTranslation"
-        },
-        {
-          "lang": "fr",
-          "text": "GitHub",
-          "_template": "textTranslation"
-        },
-        {
-          "lang": "ja",
           "text": "GitHub",
           "_template": "textTranslation"
         }
@@ -1378,26 +1223,6 @@
           "lang": "en",
           "text": "Infima",
           "_template": "textTranslation"
-        },
-        {
-          "lang": "de",
-          "text": "Infima",
-          "_template": "textTranslation"
-        },
-        {
-          "lang": "es",
-          "text": "Infima",
-          "_template": "textTranslation"
-        },
-        {
-          "lang": "fr",
-          "text": "Infima",
-          "_template": "textTranslation"
-        },
-        {
-          "lang": "ja",
-          "text": "Infima",
-          "_template": "textTranslation"
         }
       ],
       "_template": "urlEntry"
@@ -1414,26 +1239,6 @@
       "defaultText": [
         {
           "lang": "en",
-          "text": "KaTeX",
-          "_template": "textTranslation"
-        },
-        {
-          "lang": "de",
-          "text": "KaTeX",
-          "_template": "textTranslation"
-        },
-        {
-          "lang": "es",
-          "text": "KaTeX",
-          "_template": "textTranslation"
-        },
-        {
-          "lang": "fr",
-          "text": "KaTeX",
-          "_template": "textTranslation"
-        },
-        {
-          "lang": "ja",
           "text": "KaTeX",
           "_template": "textTranslation"
         }
@@ -1467,26 +1272,6 @@
       "defaultText": [
         {
           "lang": "en",
-          "text": "LanguageTool",
-          "_template": "textTranslation"
-        },
-        {
-          "lang": "de",
-          "text": "LanguageTool",
-          "_template": "textTranslation"
-        },
-        {
-          "lang": "es",
-          "text": "LanguageTool",
-          "_template": "textTranslation"
-        },
-        {
-          "lang": "fr",
-          "text": "LanguageTool",
-          "_template": "textTranslation"
-        },
-        {
-          "lang": "ja",
           "text": "LanguageTool",
           "_template": "textTranslation"
         }
@@ -1714,26 +1499,6 @@
           "lang": "en",
           "text": "Lunr",
           "_template": "textTranslation"
-        },
-        {
-          "lang": "de",
-          "text": "Lunr",
-          "_template": "textTranslation"
-        },
-        {
-          "lang": "es",
-          "text": "Lunr",
-          "_template": "textTranslation"
-        },
-        {
-          "lang": "fr",
-          "text": "Lunr",
-          "_template": "textTranslation"
-        },
-        {
-          "lang": "ja",
-          "text": "Lunr",
-          "_template": "textTranslation"
         }
       ],
       "_template": "urlEntry"
@@ -1752,26 +1517,6 @@
           "lang": "en",
           "text": "Markprompt",
           "_template": "textTranslation"
-        },
-        {
-          "lang": "de",
-          "text": "Markprompt",
-          "_template": "textTranslation"
-        },
-        {
-          "lang": "es",
-          "text": "Markprompt",
-          "_template": "textTranslation"
-        },
-        {
-          "lang": "fr",
-          "text": "Markprompt",
-          "_template": "textTranslation"
-        },
-        {
-          "lang": "ja",
-          "text": "Markprompt",
-          "_template": "textTranslation"
         }
       ],
       "_template": "urlEntry"
@@ -1781,33 +1526,13 @@
       "url": [
         {
           "lang": "en",
-          "url": "https://mermaid.js.org/",
+          "url": "https://mermaid.ai/open-source/",
           "_template": "urlTranslation"
         }
       ],
       "defaultText": [
         {
           "lang": "en",
-          "text": "Mermaid",
-          "_template": "textTranslation"
-        },
-        {
-          "lang": "de",
-          "text": "Mermaid",
-          "_template": "textTranslation"
-        },
-        {
-          "lang": "es",
-          "text": "Mermaid",
-          "_template": "textTranslation"
-        },
-        {
-          "lang": "fr",
-          "text": "Mermaid",
-          "_template": "textTranslation"
-        },
-        {
-          "lang": "ja",
           "text": "Mermaid",
           "_template": "textTranslation"
         }
@@ -1942,26 +1667,6 @@
           "lang": "en",
           "text": "TinaCMS",
           "_template": "textTranslation"
-        },
-        {
-          "lang": "de",
-          "text": "TinaCMS",
-          "_template": "textTranslation"
-        },
-        {
-          "lang": "es",
-          "text": "TinaCMS",
-          "_template": "textTranslation"
-        },
-        {
-          "lang": "fr",
-          "text": "TinaCMS",
-          "_template": "textTranslation"
-        },
-        {
-          "lang": "ja",
-          "text": "TinaCMS",
-          "_template": "textTranslation"
         }
       ],
       "_template": "urlEntry"
@@ -1978,26 +1683,6 @@
       "defaultText": [
         {
           "lang": "en",
-          "text": "VSCodium",
-          "_template": "textTranslation"
-        },
-        {
-          "lang": "de",
-          "text": "VSCodium",
-          "_template": "textTranslation"
-        },
-        {
-          "lang": "es",
-          "text": "VSCodium",
-          "_template": "textTranslation"
-        },
-        {
-          "lang": "fr",
-          "text": "VSCodium",
-          "_template": "textTranslation"
-        },
-        {
-          "lang": "ja",
           "text": "VSCodium",
           "_template": "textTranslation"
         }
@@ -2079,26 +1764,6 @@
       "defaultText": [
         {
           "lang": "en",
-          "text": "i18n",
-          "_template": "textTranslation"
-        },
-        {
-          "lang": "de",
-          "text": "i18n",
-          "_template": "textTranslation"
-        },
-        {
-          "lang": "es",
-          "text": "i18n",
-          "_template": "textTranslation"
-        },
-        {
-          "lang": "fr",
-          "text": "i18n",
-          "_template": "textTranslation"
-        },
-        {
-          "lang": "ja",
           "text": "i18n",
           "_template": "textTranslation"
         }
