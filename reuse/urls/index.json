@@ -1692,6 +1692,44 @@
       "_template": "urlEntry"
     },
     {
+      "key": "nodejs-prebuilt-installer",
+      "url": [
+        {
+          "lang": "en",
+          "url": "https://nodejs.org/en/download/prebuilt-installer",
+          "_template": "urlTranslation"
+        },
+        {
+          "lang": "de",
+          "url": "https://nodejs.org/de/download/prebuilt-installer",
+          "_template": "urlTranslation"
+        },
+        {
+          "lang": "es",
+          "url": "https://nodejs.org/es/download/prebuilt-installer",
+          "_template": "urlTranslation"
+        },
+        {
+          "lang": "fr",
+          "url": "https://nodejs.org/fr/download/prebuilt-installer",
+          "_template": "urlTranslation"
+        },
+        {
+          "lang": "ja",
+          "url": "https://nodejs.org/ja/download/prebuilt-installer",
+          "_template": "urlTranslation"
+        }
+      ],
+      "defaultText": [
+        {
+          "lang": "en",
+          "text": "official Node.js downloads",
+          "_template": "textTranslation"
+        }
+      ],
+      "_template": "urlEntry"
+    },
+    {
       "key": "outlook",
       "url": [
         {

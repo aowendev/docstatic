@@ -713,7 +713,7 @@ const LinkHealthDashboard = ({ tinaForm }) => {
               <>
                 Links last checked{" "}
                 <strong className="text-gray-700">
-                  {new Date(lastCheckedAt).toLocaleString()}
+                  {new Date(lastCheckedAt).toISOString()}
                 </strong>
                 {checkedVia === "browser" && (
                   <span className="text-gray-400"> (from this browser)</span>
@@ -1912,7 +1912,7 @@ const LinkHealthDashboard = ({ tinaForm }) => {
           {/* The time of the check, not of this render — those are not the
               same thing once the results come from a build artefact. */}
           {lastCheckedAt
-            ? `Links checked on ${new Date(lastCheckedAt).toLocaleString()}`
+            ? `Links checked on ${new Date(lastCheckedAt).toISOString()}`
             : "These links have not been checked yet"}
         </div>
       </div>
