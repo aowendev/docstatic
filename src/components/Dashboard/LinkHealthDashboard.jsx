@@ -1243,7 +1243,7 @@ const LinkHealthDashboard = ({ tinaForm }) => {
                 fontSize: "12px",
               }}
             >
-              {showMigrationDetails ? "Hide Details" : "Show Details"}
+              {showMigrationDetails ? "Show fewer" : "Show more"}
             </button>
           </div>
           <div
@@ -1453,7 +1453,7 @@ const LinkHealthDashboard = ({ tinaForm }) => {
                 fontSize: "12px",
               }}
             >
-              {showCentralizedDocsDetails ? "Hide Details" : "Show Details"}
+              {showCentralizedDocsDetails ? "Show fewer" : "Show more"}
             </button>
           </div>
           <div
