@@ -43,6 +43,17 @@
   height: 100%;
 }
 
+.featureCardLink {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+
+.featureCardLink:hover {
+  color: inherit;
+  text-decoration: none;
+}
+
 .featureImageContainer {
   position: relative;
   text-align: center;
@@ -50,7 +61,7 @@
   border-radius: 16px;
   overflow: hidden;
   background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-  padding: 2rem;
+  aspect-ratio: 4 / 3;
   transition: all 0.3s ease;
 }
 
@@ -64,10 +75,11 @@
 }
 
 .featureSvg {
-  height: 180px;
-  width: 180px;
-  border-radius: 12px;
+  height: 100%;
+  width: 100%;
+  display: block;
   object-fit: cover;
+  object-position: center;
   transition: all 0.3s ease;
   position: relative;
   z-index: 2;
@@ -151,24 +163,10 @@
   .featuresSubtitle {
     font-size: 1.1rem;
   }
-
-  .featureSvg {
-    height: 150px;
-    width: 150px;
-  }
 }
 
 @media screen and (max-width: 768px) {
   .featuresTitle {
     font-size: 1.8rem;
-  }
-
-  .featureImageContainer {
-    padding: 1.5rem;
-  }
-
-  .featureSvg {
-    height: 120px;
-    width: 120px;
   }
 }

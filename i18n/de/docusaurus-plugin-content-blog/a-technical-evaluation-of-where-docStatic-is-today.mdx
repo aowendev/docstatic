@@ -1,0 +1,116 @@
+---
+lastmod: '2026-08-15T16:12:40.673Z'
+title: Eine technische Bestandsaufnahme der aktuellen Situation von docStatic
+authors:
+  - name: Andrew Owen
+    title: docStatic maintainer
+    url: 'https://github.com/aowendev'
+    image_url: 'https://avatars.githubusercontent.com/u/84041006'
+date: '2026-01-24'
+tags:
+  - content
+  - content_blog-articles
+modifiedBy: aowendev <aowen@translationcommons.org>
+---
+
+docStatic ist mein zweiter Versuch, eine Dokumentationslösung zu entwickeln, die den Anforderungen von Autoren und mitwirkenden Entwicklern gerecht wird. Über meinen ersten Versuch könnt ihr in meinem vorherigen Blogbeitrag lesen. Damals handelte es sich um eine lose Sammlung von Komponenten, während docStatic wesentlich enger integriert ist – auch wenn es architektonisch gesehen kein eigenständiges Produkt im herkömmlichen Sinne ist. Stattdessen handelt es sich um eine kuratierte, konzeptionell ausgerichtete Integration von Docusaurus (Generator für statische Websites) und TinaCMS (headless, Git-basiertes CMS).
+
+<Truncate />
+
+## Kernfunktionen
+
+* MDX (Markdown + React) als primäres Inhaltsformat.
+* Bearbeitung mit:
+  * Lokalen Texteditoren (Docs-as-Code) mit sofortiger Neuerstellung über den Entwicklungsserver.
+  * Dem browserbasierten Rich-Text-Editor von TinaCMS für nicht-technische Nutzer.
+* Funktionen im CCMS-Stil (Snippets, bedingter Text, Variablensätze, Taxonomien, Glossarbegriffe).
+
+### Entwicklungs-Workflow
+
+* Git bleibt die einzige Quelle der Wahrheit.
+* TinaCMS führt Commits direkt in Git durch (oder schreibt Dateien lokal).
+* Vollständig kompatibel mit CI/CD-Pipelines.
+* Die Repository-Struktur orientiert sich eng an den Docusaurus-Standardeinstellungen, wodurch Überraschungen minimiert werden.
+
+### Vorkonfigurierte Integrationen
+
+* Erstellung von OpenAPI-Dokumentation.
+* Mermaid-Diagramme.
+* KaTeX-Mathematik-Rendering.
+* Lunr-basierte Suche.
+* Internationalisierung (i18n).
+
+Die Integration von LanguageTool zur Rechtschreib- und Grammatikprüfung wird unterstützt, ist jedoch von Browser-/IDE-Plugins abhängig.
+
+## Einschränkungen
+
+Derzeit bedeutet der Einsatz von docStatic implizit:
+
+* Die Plattform muss selbst verwaltet und erweitert werden.
+* Man akzeptiert einen eingeschränkten Support im Stil eines Anbieters.
+
+DocStatic eignet sich nicht für Teams, die Dokumentationen im Druck- oder PDF-Format erstellen müssen. Es ist kein direkter Ersatz für kommerzielle CCMS-Tools. Für einen großen Teil des Marktes ist es jedoch funktional bereits gleichwertig.
+
+## Architektur
+
+### Workflow
+
+DocStatic bietet einen modular aufbaubaren Workflow. Zustände werden als MDX-Front-Matter-Metadaten implementiert. Der Zustand wird von TinaCMS gelesen und über eine benutzerdefinierte Benutzeroberfläche für den redaktionellen Status dargestellt. Zustandsübergänge sind inhaltsbezogen und versioniert. Dieses Muster wird von mehreren kommerziellen CCMS-Anbietern verwendet. Die Durchsetzung erfolgt jedoch prozedural und nicht systemisch.
+
+### Wiederverwendbare Inhalte
+
+Wiederverwendbare Inhalte werden an einem definierten Speicherort abgelegt, als eigenständige Inhalte verwaltet und in Dokumenten referenziert. Snippets sind Inhaltsobjekte. Dies ähnelt stark den DITA-Conrefs.
+
+### Übersetzung und Lokalisierung
+
+* Lokalespezifische Metadaten verfolgen den Übersetzungsstatus.
+* GitHub Actions:
+  * Erkennen von Statusänderungen.
+  * Auslösen von Slack- oder Teams-Benachrichtigungen.
+* Lokale Vorschauen pro Sprachversion.
+* Der Übersetzungsstatus ist deterministisch und kann überprüft sowie automatisiert werden.
+
+Kommerzielle CCMS-Lösungen bieten integrierten Hersteller-Support. Der Ansatz von DocStatic basiert auf „Translation-Ops-as-Code“. Dies kann bei der Implementierung automatisierter maschineller Übersetzung von Vorteil sein, ist jedoch für nicht-technische Lokalisierungsteams weniger benutzerfreundlich.
+
+## Wie sich DocStatic im Vergleich zu CCMS-Tools schlägt
+
+DocStatic unterstützt:
+
+* Strukturierte Inhalte.
+* Wiederverwendbare Inhaltsobjekte.
+* Workflow-Zustände.
+* Mehrsprachige Unterstützung.
+* Dashboards (Beta).
+
+Was bei DocStatic fehlt:
+
+* Zentralisierte Durchsetzung von Richtlinien. Workflow-Regeln sind in Metadaten, der Tina-UI-Logik und der CI/CD-Pipeline verankert.
+* Rollenbasierte Zugriffskontrolle. Dies ist jedoch mit einem kostenpflichtigen TinaCloud-Abonnement möglich.
+* Migrationswerkzeuge.
+
+Der wesentliche Unterschied zwischen docStatic und CCMS-Tools besteht darin, dass es sich bei docStatic um komponierbare, überprüfbare Systeme handelt, während CCMS-Tools eingebettete, undurchsichtige Systeme darstellen.
+
+docStatic:
+
+* Bevorzugt explizite Metadaten.
+* Nutzt bestehende Infrastruktur (Git, CI, Slack usw.).
+* Tauscht eine schlüsselfertige Benutzererfahrung gegen architektonische Klarheit ein.
+
+CCMS-Tools:
+
+* Zentralisieren alles.
+* Verbergen den Status in der Datenbank.
+* Sind auf nicht-technische Administratoren optimiert.
+
+## Für wen eignet sich docStatic am besten?
+
+DocStatic kann als ein „Engineer-First“-CCMS betrachtet werden. Es bietet Funktionen für die Erstellung, Wiederverwendung, Workflows und kontextbezogene Überprüfung – einschließlich Feedback von Nicht-Entwicklern direkt in TinaCMS mittels Hervorhebungen und Kommentaren –, während gleichzeitig eine transparente, Git-native „Source of Truth“ erhalten bleibt. Wenn Sie Wert auf offene Tools, Repo-basierte Workflows und Erweiterbarkeit auf Entwickler-Niveau legen, aber nicht auf die Überprüfung durch Nicht-Entwickler verzichten möchten, könnte docStatic das Richtige für Sie sein.
+
+## Roadmap
+
+DocStatic konzentriert sich ausschließlich darauf, Lesern das bestmögliche Online-Dokumentationserlebnis zu bieten. Druck- und PDF-Formate stehen nicht auf der Roadmap, und es ist unwahrscheinlich, dass sie jemals dazukommen werden. Es gibt jedoch zwei Bereiche, in denen der Einsatz von CCMS-Tools für Online-Dokumentationen gegenüber docStatic nach wie vor Vorteile bietet:
+
+* Einfache Bereitstellung.
+* Dashboards.
+
+Dashboards befinden sich bereits in der Beta-Phase. Was die Bereitstellung angeht, ist geplant, die Erstellung eines Standard-Repositorys über npm zu ermöglichen.

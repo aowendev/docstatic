@@ -1,5 +1,5 @@
 ---
-lastmod: '2026-08-12T21:46:46.447Z'
+lastmod: '2026-08-15T09:54:00.026Z'
 modifiedBy: aowendev <aowen@translationcommons.org>
 title: CALS Tables
 description: Using CALS tables in docStatic, including merged cells, column widths and border control.
@@ -19,7 +19,7 @@ published: true
 unlisted: false
 ---
 
-**CalsTable** コンポーネントは、DocBook や DITA で使用される [CALS テーブルモデル](https://www.oasis-open.org/specs/tm9901.html) に対応しています。これには、セルの結合、列ごとの幅や配置の設定、およびきめ細かな枠線の制御が含まれます。 CMS内のグラフィカルなグリッドエディタが構造（セルの結合や分割、行や列の挿入・削除）を処理するため、基になるテーブルデータを手作業で編集する必要は一切ありません。
+**CalsTable** コンポーネントは、DocBook や DITA で使用される <Url urlKey="cals-table-model" /> に対応しています。これには、セルの結合、列ごとの幅や配置の設定、およびきめ細かな枠線の制御が含まれます。 CMS内のグラフィカルなグリッドエディタが構造（セルの結合や分割、行や列の挿入・削除）を処理するため、基になるテーブルデータを手作業で編集する必要は一切ありません。
 
 1. **Embed**リストから**CALS Table**を選択します。
 2. 上部の **Frame**、**Title**、**Page-wide** コントロールを使用して、表の外枠、キャプション、幅を設定します。
@@ -37,6 +37,6 @@ unlisted: false
 
 <CalsTable table={{ frame: "all", title: "Release channels", tgroup: { cols: 3, colspecs: [ { colname: "c1", colwidth: "1*" }, { colname: "c2", colwidth: "1*" }, { colname: "c3", colwidth: "1*" } ], thead: { rows: [ { entries: [ { content: "Channel" }, { content: "Cadence" }, { content: "Support" } ] } ] }, tbody: { rows: [ { entries: [ { content: "Stable" }, { content: "Monthly" }, { content: "Full", morerows: 1 } ] }, { entries: [{ content: "Beta" }, { content: "Weekly" }] }, { entries: [ { content: "Nightly", namest: "c1", nameend: "c2" }, { content: "None" } ] } ] } }, pgwide: true }} />
 
-基盤となるモデルの詳細については、[CALS テーブルモデルリファレンス](https://www.oasis-open.org/specs/tm9901.html) または [DocBook テーブルのドキュメント](https://tdg.docbook.org/tdg/5.2/cals.table.html) を参照してください。
+基盤となるモデルの詳細については、<Url urlKey="cals-table-model" linkText={[{ lang: "ja", text: "CALS テーブルモデルリファレンス" }]} /> または [DocBook テーブルのドキュメント](https://tdg.docbook.org/tdg/5.2/cals.table.html) を参照してください。
 
 <RelatedTopics maxResults={7} />

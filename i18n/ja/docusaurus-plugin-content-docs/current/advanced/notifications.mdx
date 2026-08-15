@@ -1,13 +1,13 @@
 ---
-help: null
-lastmod: "2026-06-01T21:56:58.698Z"
+lastmod: '2026-08-15T14:47:37.598Z'
+modifiedBy: aowendev <aowen@translationcommons.org>
 title: Notifications
 tags:
-  - "software"
-  - "software_notifications"
-  - "software_notifications_email"
-  - "software_notifications_teams"
-  - "software_notifications_slack"
+  - software
+  - software_notifications
+  - software_notifications_email
+  - software_notifications_teams
+  - software_notifications_slack
 draft: false
 review: false
 translate: false
@@ -18,11 +18,11 @@ unlisted: false
 
 # 通知
 
-docStatic はワークフロー通知の送信に [GitHub Actions](https://docs.github.com/en/actions) を使用しています。レビューと翻訳の通知例は `.github/workflows/` フォルダに含まれています。これらを有効にするには、GitHub での設定が必要です。また、独自のカスタム通知を開発するための出発点としても使用できます。
+docStatic はワークフロー通知の送信に <Url urlKey="github-actions" /> を使用しています。レビューと翻訳の通知例は `.github/workflows/` フォルダに含まれています。これらを有効にするには、GitHub での設定が必要です。また、独自のカスタム通知を開発するための出発点としても使用できます。
 
 ## メール
 
-`email-review.yml` と `email-translate.yml` アクションは、メインブランチの Markdown ファイルにレビューまたは翻訳タグが設定されたときにトリガーされます。使用するには、以下の[シークレット](https://docs.github.com/en/actions/how-tos/write-workflows/choose-what-workflows-do/use-secrets)をリポジトリに追加してください：
+`email-review.yml` と `email-translate.yml` アクションは、メインブランチの Markdown ファイルにレビューまたは翻訳タグが設定されたときにトリガーされます。使用するには、以下の<Url urlKey="github-use-secrets" linkText={[{ lang: "ja", text: "シークレット" }]} />をリポジトリに追加してください：
 
 * `SMTP_SERVER`
 * `SMTP_PORT`
@@ -33,7 +33,7 @@ docStatic はワークフロー通知の送信に [GitHub Actions](https://docs.
 
 この情報はメールプロバイダーから取得できます。たとえば：
 
-* [iCloud](https://support.apple.com/en-us/102525)（[アプリ専用パスワード](https://support.apple.com/en-us/102654)が必要です）。
+* <Url urlKey="icloud-mailserver" />（<Url urlKey="apple-app-specific-passwords" linkText={[{ lang: "ja", text: "アプリ専用パスワード" }]} />が必要です）。
 * [Outlook](https://support.microsoft.com/en-us/office/pop-imap-and-smtp-settings-for-outlook-com-d088b986-291d-42b8-9564-9c414e2aa040)
 
 ## Slack

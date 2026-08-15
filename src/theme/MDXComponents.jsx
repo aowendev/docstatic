@@ -15,6 +15,7 @@ import GlossaryTerm from "@site/src/components/GlossaryTerm";
 import Passthrough from "@site/src/components/Passthrough";
 import RelatedTopics from "@site/src/components/RelatedTopics";
 import Snippet from "@site/src/components/Snippet";
+import Url from "@site/src/components/Url";
 import VariableSet from "@site/src/components/VariableSet";
 import Details from "@theme/Details";
 import CodeBlock from "@theme-original/CodeBlock";
@@ -46,5 +47,6 @@ export default {
   TabItem: TabItem,
   Tabs: Tabs,
   Truncate: Truncate,
+  Url: Url,
   VariableSet: VariableSet,
 };

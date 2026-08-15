@@ -1,5 +1,6 @@
 ---
-lastmod: '2026-08-11T23:12:25.251Z'
+lastmod: '2026-08-15T15:19:40.603Z'
+modifiedBy: aowendev <aowen@translationcommons.org>
 title: Installation
 description: Comment installer docStatic localement et démarrer un site docStatic en un rien de temps.
 tags:
@@ -21,7 +22,6 @@ translate: false
 approved: false
 published: true
 unlisted: false
-modifiedBy: aowendev <aowen@translationcommons.org>
 ---
 
 # Installation
@@ -36,9 +36,9 @@ Vous pouvez exécuter docStatic en local (sur votre ordinateur) ou l’héberger
 
 Pour une configuration dans le cloud des plus simples, créez des comptes gratuits auprès des services suivants :
 
-* [GitHub](https://github.com/) — stocke votre contenu et suit les modifications
-* [TinaCMS](https://tina.io/) — permet l’édition via un navigateur
-* [LanguageTool](https://languagetool.org/) — propose une vérification facultative de la grammaire et du style
+* <Url urlKey="github" /> — stocke votre contenu et suit les modifications
+* <Url urlKey="tinacms" /> — permet l’édition via un navigateur
+* <Url urlKey="languagetool" /> — propose une vérification facultative de la grammaire et du style
 
 Si vous prévoyez plutôt d’exécuter docStatic localement (sur votre ordinateur), consultez la section « Configuration requise pour le développement local ».
 
@@ -51,13 +51,13 @@ Cette section ne s’applique que si vous prévoyez de travailler localement.
 Vous aurez besoin d’un environnement de développement intégré (IDE) ou d’un éditeur de texte. Voici deux options open source :
 
 * [Eclipse](https://eclipseide.org)
-* [VSCodium](https://vscodium.com/)
+* <Url urlKey="vscodium" />
 
 Vous devrez également installer Node.js pour ses outils de compilation et Yarn pour la gestion des paquets.
 
 ### Installer Node.js
 
-Vous devez installer [Node.js](https://nodejs.org/) version 22.0 ou supérieure.
+Vous devez installer <Url urlKey="node-js" /> version 22.0 ou supérieure.
 
 Vérifiez si Node.js est déjà installé. Ouvrez un terminal (Invite de commandes ou application Terminal) et exécutez :
 
@@ -69,7 +69,7 @@ Si vous voyez un numéro de version commençant par v22 ou supérieur, tout est 
 
 Si Node.js n’est pas installé ou si vous disposez d’une version plus ancienne :
 
-1. Rendez-vous sur la page [de téléchargement officielle de Node.js](https://nodejs.org/en/download/prebuilt-installer).
+1. Rendez-vous sur la page <Url urlKey="nodejs-prebuilt-installer" linkText={[ { lang: "fr", text: "de téléchargement officielle de Node.js" }]} />.
 2. Choisissez la version LTS (support à long terme) adaptée à votre système d’exploitation. Le programme d’installation inclut npm, le gestionnaire de paquets Node, dont vous aurez besoin lors des étapes suivantes. Pendant l’installation :\* Conservez les options par défaut (celles-ci incluent les dépendances requises)
    \* Une fois l’installation terminée, fermez puis rouvrez votre terminal.
 3. (Facultatif) Si vous travaillez sur différents projets nécessitant des versions différentes de Node, installez nvm ([Node Version Manager](https://github.com/nvm-sh/nvm)). Grâce à nvm, vous pouvez passer d’une version de Node à une autre sans perturber votre configuration.
@@ -302,7 +302,7 @@ Le dossier `docs/` contient une copie de la documentation de docStatic — les p
 
 docStatic permet d’utiliser un seul dépôt contenant à la fois le code du projet et la documentation du projet. Dans la terminologie de Docusaurus, ce concept est appelé « monorepo ».
 
-Pour plus d’informations, consultez la section [Monorepos](https://docusaurus.io/docs/installation#monorepos) dans la documentation de Docusaurus.
+Pour plus d’informations, consultez la section <Url urlKey="docusaurus-monorepos" /> dans la documentation de Docusaurus.
 
 ***
 

@@ -102,6 +102,12 @@ export const FeaturesBlockTemplate = {
           type: "image",
         },
         {
+          label: "Document Link",
+          name: "document",
+          type: "reference",
+          collections: ["doc"],
+        },
+        {
           type: "object",
           name: "translations",
           label: "Translations",

@@ -1,5 +1,5 @@
 ---
-lastmod: '2026-08-12T21:46:46.215Z'
+lastmod: '2026-08-15T09:53:53.540Z'
 modifiedBy: aowendev <aowen@translationcommons.org>
 title: CALS Tables
 description: Using CALS tables in docStatic, including merged cells, column widths and border control.
@@ -19,7 +19,7 @@ published: true
 unlisted: false
 ---
 
-El componente **CalsTable** añade compatibilidad con el [modelo de tabla CALS](https://www.oasis-open.org/specs/tm9901.html) utilizado por DocBook y DITA: celdas fusionadas, anchos y alineación por columna, y control detallado de los bordes. Un editor gráfico de cuadrículas integrado en el CMS se encarga de la estructura —fusionar y dividir celdas, insertar y eliminar filas y columnas— para que nunca tengas que editar manualmente los datos subyacentes de la tabla.
+El componente **CalsTable** añade compatibilidad con el <Url urlKey="cals-table-model" /> utilizado por DocBook y DITA: celdas fusionadas, anchos y alineación por columna, y control detallado de los bordes. Un editor gráfico de cuadrículas integrado en el CMS se encarga de la estructura —fusionar y dividir celdas, insertar y eliminar filas y columnas— para que nunca tengas que editar manualmente los datos subyacentes de la tabla.
 
 1. Selecciona **Tabla CALS** en la lista **Incrustar**.
 2. Utiliza los controles **Marco**, **Título** y **A lo ancho de la página** situados en la parte superior para configurar el borde exterior, el título y el ancho de la tabla.
@@ -37,6 +37,6 @@ El componente **CalsTable** añade compatibilidad con el [modelo de tabla CALS](
 
 <CalsTable table={{ frame: "all", title: "Release channels", tgroup: { cols: 3, colspecs: [ { colname: "c1", colwidth: "1*" }, { colname: "c2", colwidth: "1*" }, { colname: "c3", colwidth: "1*" } ], thead: { rows: [ { entries: [ { content: "Channel" }, { content: "Cadence" }, { content: "Support" } ] } ] }, tbody: { rows: [ { entries: [ { content: "Stable" }, { content: "Monthly" }, { content: "Full", morerows: 1 } ] }, { entries: [{ content: "Beta" }, { content: "Weekly" }] }, { entries: [ { content: "Nightly", namest: "c1", nameend: "c2" }, { content: "None" } ] } ] } }, pgwide: true }} />
 
-Para obtener más información sobre el modelo subyacente, consulta la [referencia del modelo de tabla CALS](https://www.oasis-open.org/specs/tm9901.html) o la [documentación sobre tablas de DocBook](https://tdg.docbook.org/tdg/5.2/cals.table.html).
+Para obtener más información sobre el modelo subyacente, consulta la <Url urlKey="cals-table-model" linkText={[{ lang: "es", text: "referencia del modelo de tabla CALS" }]} /> o la [documentación sobre tablas de DocBook](https://tdg.docbook.org/tdg/5.2/cals.table.html).
 
 <RelatedTopics maxResults={7} />

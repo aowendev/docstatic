@@ -1,5 +1,5 @@
 ---
-lastmod: '2026-08-11T23:23:42.028Z'
+lastmod: '2026-08-15T16:12:41.413Z'
 modifiedBy: aowendev <aowen@translationcommons.org>
 title: Dashboards
 tags:
@@ -17,20 +17,20 @@ unlisted: false
 docStatic añade la funcionalidad de paneles de control a TinaCMS. Tina genera una API GraphQL utilizando el sistema de archivos del repositorio Git como base de datos. Los paneles de control consultan la API (de forma local o en la nube) y presentan informes con información útil directamente en el CMS. La funcionalidad de los paneles de control se considera actualmente en fase beta. La funcionalidad se ha probado exhaustivamente, pero la interfaz de usuario es provisional y requiere mejoras. Los paneles de control se actualizan cuando se actualiza la página. Si otro usuario ha realizado cambios desde que consultaste un panel de control, puedes hacer clic en **Actualizar** para actualizarlo.
 
 <Admonition type="note" title="Note">
-  Depending on the amount of content in the system, some dashboards may take some time to load. These dashboards will typically update slightly faster when running locally.
+    Depending on the amount of content in the system, some dashboards may take some time to load. These dashboards will typically update slightly faster when running locally.
 </Admonition>
 
 ## Visualización de los paneles de control
 
-Desde el CMS, acceda a la colección «Cuadros de mando». En la parte superior de la página hay una barra de estado que muestra la conexión GraphQL. Indica si está conectado a la nube o al localhost. Si el localhost está disponible, siempre se conectará al localhost. Para utilizar la nube, asegúrese de que el servidor de desarrollo local esté detenido. La barra de estado también muestra el entorno y comprueba que todos los ajustes sean válidos.
+Desde el CMS, accede a la colección «Paneles de control». En la parte superior de la página hay una barra de estado que muestra la conexión GraphQL. Indica si estás conectado a la nube o al localhost. Si el localhost está disponible, siempre se conectará al localhost. Para utilizar la nube, asegúrate de que el servidor de desarrollo local esté detenido. La barra de estado también muestra el entorno y comprueba que todos los ajustes sean válidos.
 
 ## Visualización del estado del flujo de trabajo
 
 El panel de control «Resumen de contenido» muestra el número total de temas en la ruta /docs y los temas en cada estado del flujo de trabajo:
 
 * Borrador
-* En revisión
-* Traducir
+* Revisión
+* Traducción
 * Aprobado
 * Publicado
 * No listado
@@ -43,77 +43,96 @@ Haz clic en el icono «Cerrar» para cerrar la lista de temas.
 
 ### Visualización de la actividad reciente
 
-La sección «Actividad reciente» muestra los temas modificados recientemente. Puede filtrar el intervalo de tiempo (Todo el tiempo, La semana pasada o El mes pasado) y establecer el número de resultados entre 5 y 50.
+La sección «Actividad reciente» muestra los temas modificados recientemente. Puedes filtrar el intervalo de tiempo (Todo el tiempo, La semana pasada o El mes pasado) y establecer el número de resultados entre 5 y 50.
 
-## Visualización del estado de la traducción
+## Visualización del estado de las traducciones
 
 El panel de control «Traducciones» muestra el estado de cada tema para el idioma seleccionado de la lista:
 
-* Actualizado: La fecha de la última modificación de la traducción es posterior a la del original.
-* Desactualizado: La fecha de la última modificación del original es posterior a la de la traducción.
-* Falta: Hay un archivo original sin un archivo de traducción equivalente.
+* Actualizado: la fecha de última modificación de la traducción es posterior a la del texto original.
+* Desactualizado: la fecha de última modificación del texto original es posterior a la de la traducción.
+* Falta: hay un archivo de origen sin un archivo de traducción equivalente.
 
 ## Visualización de la reutilización de contenido
 
-El panel de control «Reutilización de contenido» muestra el contenido reutilizable del sistema y dónde se utiliza. Incluye información sobre cuatro categorías:
+El panel de control «Reutilización de contenido» muestra el contenido reutilizable del sistema y dónde se utiliza. Ofrece información sobre cuatro categorías:
 
 * Fragmentos de código: archivos de código a los que hace referencia el componente CodeSnippet.
 * Términos del glosario: términos definidos en la colección de términos del glosario.
-* Fragmentos: archivos de contenido MDX a los que hace referencia el componente Snippet.
-* Conjuntos de variables: conjuntos de variables a los que hace referencia el componente VariableSet.
+* Fragmentos: archivos de contenido MDX a los que hace referencia el componente «Snippet».
+* Conjuntos de variables: conjuntos de variables a los que hace referencia el componente «VariableSet».
 
 Haz clic en la ficha de una categoría para ver una lista de elementos de dicha categoría con los temas en los que se utiliza cada elemento.
 
 ### Visualización de sugerencias de reutilización
 
-La sección «Sugerencias» del panel de control «Reutilización de contenido» identifica el contenido que podría convertirse en componentes reutilizables:
+La sección «Sugerencias» del panel de control de «Reutilización de contenido» identifica el contenido que podría convertirse en componentes reutilizables:
 
-* Posibles fragmentos (código): bloques de código en línea en los temas que podrían extraerse a archivos de fragmentos de código.
-* Posibles términos: texto de términos del glosario que aparece como texto sin formato en los temas y que podría sustituirse por el componente GlossaryTerm.
-* Posibles fragmentos (texto duplicado): bloques de texto que aparecen en dos o más temas y que podrían extraerse a archivos de fragmentos.
-* Posibles variables: valores de variables que aparecen como texto sin formato en los temas y que podrían utilizar el componente VariableSet en su lugar.
+* Posibles fragmentos (código): bloques de código en línea en temas que podrían extraerse a archivos de fragmentos de código.
+* Términos posibles: texto de términos del glosario que aparece como texto sin formato en los temas y que podría utilizar en su lugar el componente GlossaryTerm.
+* Fragmentos posibles (texto duplicado): bloques de texto que aparecen en dos o más temas y que podrían extraerse a archivos de fragmentos.
+* Posibles variables: valores de variables que aparecen como texto sin formato en los temas y que podrían utilizar el componente «VariableSet» en su lugar.
 
-Haz clic en una tarjeta de sugerencias para ver los elementos encontrados y los temas en los que aparecen.
+Haz clic en una ficha de sugerencia para ver los elementos encontrados y los temas en los que aparecen.
 
 ## Visualización de la reutilización de medios
 
-El panel de control de la biblioteca multimedia muestra dónde se utiliza el contenido de la ruta /static/img. Muestra el número total de archivos e imágenes, el tamaño de los archivos, las rutas de las imágenes y los tamaños de las imágenes.
+El panel de control de la biblioteca multimedia muestra dónde se utiliza el contenido de la ruta /static/img. Muestra el número total de archivos e imágenes, el tamaño de los archivos, las rutas de las imágenes y los tamaños de las mismas.
 
-Puede filtrar por:
+Puedes filtrar por:
 
 * Todo el contenido.
 * Solo imágenes.
 * Recientes (7 días).
 * Utilizados.
-* No utilizados.
+* No utilizado.
 
-En el caso del contenido utilizado, haga clic en «Utilizado en n documentos» para mostrar los temas en los que se utiliza dicho contenido. A continuación, puede hacer clic en «Editar» para modificar esos temas.
+En el caso del contenido utilizado, haz clic en «Utilizado en n documentos» para mostrar los temas en los que se utiliza dicho contenido. A continuación, puedes hacer clic en «Editar» para modificar esos temas.
 
-## Comprobación de enlaces rotos
+## Comprobación del estado de los enlaces
 
-El panel de control «Enlaces rotos» ofrece información sobre los hipervínculos de tus temas, incluido su estado HTTP, de modo que una página que devuelva un código 404 o 500 se identifica como rota.
+A diferencia de los demás paneles de esta página, el panel «Estado de los enlaces» se encuentra en la colección **URL** en lugar de en «Paneles»: es el mismo lugar en el que gestionas las [URL centralizadas](/docs/guides/markdown-features/urls) utilizadas por el componente `<Url>`, por lo que el estado de los enlaces y la gestión de los mismos se encuentran juntos.
 
-El panel de control muestra los resultados de la última comprobación. No ejecuta la comprobación por sí mismo, ya que un navegador no puede leer el estado HTTP de un enlace a otro sitio web. Para comprobar tus enlaces, ejecuta:
+El panel de control ofrece información sobre los hipervínculos de tus temas *y* las URL almacenadas en la colección de URL, incluido su estado HTTP. Así, una página que devuelva un error 404 o 500 se identifica como rota, independientemente de su origen. El panel de control muestra los resultados de la última ejecución de `yarn check-links`, incorporados al sitio la última vez que se compiló. Para comprobar tus enlaces con estados HTTP reales, ejecuta:
 
 ```bash
 yarn check-links
 ```
 
-Esto solicita todos los enlaces externos, registra la respuesta de cada servidor y actualiza el informe. Ejecútalo siempre que desees obtener resultados actualizados. El panel muestra la fecha y la hora de la última comprobación.
+Esto solicita todos los enlaces externos —tanto los codificados directamente en la documentación como los almacenados en la colección de URL—, registra la respuesta de cada servidor y actualiza el informe. Ejecútalo siempre que desees obtener resultados actualizados y, a continuación, vuelve a compilar el sitio para que el panel de control recoja el nuevo informe. El panel de control muestra la fecha y la hora de la última comprobación.
+
+Haz clic en **Actualizar** en el panel de control para actualizarlo sin necesidad de volver a compilar. Esto consulta la documentación actual y la colección de URL a través de GraphQL, por lo que refleja las modificaciones realizadas desde la última compilación; resulta útil en TinaCloud, donde no hay un shell desde el que ejecutar `yarn check-links`. También comprueba los enlaces externos directamente desde tu navegador, pero un navegador no puede leer el estado HTTP de un enlace a otro sitio como lo hace `yarn check-links`, por lo que cualquier cosa que «Actualizar» compruebe por sí mismo se muestra como «Sin verificar» en lugar de «OK» o «Roto»; nunca sobrescribe un veredicto real que `yarn check-links` ya haya registrado para un enlace que siga presente, sino que solo completa lo que es nuevo o lo que nunca se había comprobado.
 
 El informe cuenta:
 
 * Total de enlaces.
-* Correctos: el servidor respondió con un estado de éxito o de redireccionamiento.
-* Rotos: el servidor respondió con un estado de error, como 404 No encontrado o 500 Error interno del servidor. Estos son los enlaces que hay que corregir.
-* No verificados: no se recibió respuesta, por lo que no se pudo evaluar el enlace. Entre las causas se incluyen un dominio que no se ha resuelto, una solicitud que ha agotado el tiempo de espera, un sitio que ha rechazado la solicitud con un 403 y una limitación de frecuencia con un 429. Cualquiera de estas situaciones puede deberse a un problema con el equipo que realiza la comprobación, más que con el enlace en sí, por lo que debes validarlas manualmente haciendo clic en el hipervínculo.
-* No comprobados: enlaces que no se han solicitado. Esto incluye enlaces internos, anclajes, enlaces `mailto:` y `tel:`, y direcciones de localhost.
+* «OK»: el servidor respondió con un estado de éxito o de redirección.
+* «Roto»: el servidor respondió con un estado de error, como 404 No encontrado o 500 Error interno del servidor. Estos son los enlaces que hay que corregir.
+* «Sin verificar»: no se recibió respuesta, por lo que no se pudo evaluar el enlace. Entre las causas se incluyen un dominio que no se ha resuelto, una solicitud que ha agotado el tiempo de espera, un sitio que ha rechazado la solicitud con un 403 y la limitación de frecuencia con un 429. Cualquiera de estas situaciones puede deberse a un problema con el equipo que realiza la comprobación, más que con el enlace en sí, por lo que conviene validarlas manualmente haciendo clic en el hipervínculo.
+* Internos: enlaces que no se solicitan. Esto incluye enlaces internos, anclajes, enlaces `mailto:` y `tel:`, y direcciones de localhost.
 * Archivos analizados.
+* Centralizados: cuántos de los enlaces comprobados proceden de la colección de URL en lugar de estar codificados de forma fija en un documento.
+* Candidatos a migración: URL externas distintas que están codificadas de forma fija en un documento, que aún no están presentes en la colección de URL y que merece la pena centralizar; consulta más abajo qué requisitos deben cumplir.
 
-Los enlaces internos no se solicitan aquí de forma deliberada, ya que la propia estructura del sitio ya los valida comparándolos con la lista real de páginas e informa de cualquier enlace roto. Las direcciones de localhost también se omiten, ya que apuntan a lo que sea que se esté ejecutando en la máquina que realiza la comprobación. Puedes documentar una URL de localhost sin que se informe de ella.
+Los enlaces internos no se solicitan aquí de forma deliberada, ya que la compilación del sitio ya los valida comparándolos con la lista real de páginas e informa de cualquier enlace roto. Las direcciones «localhost» también se omiten, ya que apuntan a lo que sea que se esté ejecutando en la máquina que realiza la comprobación. Puedes documentar una URL «localhost» sin que aparezca en el informe.
 
-El panel de control muestra los archivos con enlaces problemáticos. Puedes abrirlos haciendo clic en «Editar» en cualquiera de las dos listas.
+El panel de control muestra una lista de archivos con enlaces problemáticos, indicando en cada uno si procede de un documento o de la colección de URL para que sepas cuál debes abrir. También muestra los candidatos a migración: URL externas utilizadas en documentos que aún no están centralizadas, agrupadas de modo que una URL que se repita en varios documentos solo aparezca una vez, con un botón **Centralizar** que la añade a la colección de URL.
 
-Para que la compilación falle cuando se encuentren enlaces rotos, por ejemplo, en un trabajo de integración continua, ejecuta `yarn check-links --strict`. Esto finaliza con un error solo en caso de enlaces rotos, no de los no verificados, por lo que un problema de red intermitente no hará que falle tu compilación.
+Al hacer clic en **Centralizar**, la entrada se añade al formulario de la colección de URL, pero no a la vista que tiene el propio panel de control de la misma. Guarda la entrada —añadiendo cualquier otra URL en otros idiomas que necesite— y, a continuación, haz clic en **Actualizar** antes de que pase a **Centralizada, aún sin actualizar en los documentos** con un botón **Reemplazar**. Esa diferencia es deliberada, no algo que haya que sortear: la opción **Reemplazar** no debería ofrecerse antes de que la entrada cuente realmente con los datos necesarios para sustituir un enlace codificado de forma fija, y rellenar las variantes lingüísticas que necesita una entrada no puede automatizarse, ya que los sitios web son demasiado inconsistentes en cómo las gestionan —diferentes prefijos de ruta, diferentes dominios, algunos sin ninguna URL específica por idioma—, por lo que solo una persona puede buscarlas e introducirlas.
+
+Centralizar una URL no afecta a los documentos que aún la tienen codificada de forma fija; ese es un paso aparte, ya que añadir la entrada en urls.json y sustituir todas las referencias de los documentos por ella son ediciones diferentes. El panel de control realiza un seguimiento de estos cambios por separado, en la sección **Centralizado, aún sin actualizar en los documentos**, con un botón **Reemplazar** que sustituye cada uso codificado de esa URL por una referencia `<Url>` de una sola vez, independientemente del número de documentos en los que aparezca. Cada aparición conserva su propio texto de enlace: una URL vinculada con una redacción diferente en dos documentos distintos recibe dos sustituciones distintas, y no una que tome prestada la de la otra—, a menos que esa redacción ya coincida con el texto predeterminado de la propia clave para ese idioma; en ese caso, «Reemplazar» omite la sustitución y la clave sin formato realiza la misma función sin duplicar la misma cadena en todos los documentos en los que fuera necesario cambiarla.
+
+«Replace» también comprueba cada traducción de cada documento independientemente del original en inglés y actualiza aquellas que aún tengan el mismo enlace codificado de forma rígida, utilizando la propia redacción de esa traducción, no la del original. Una etiqueta `<Url>` localizada solo resulta rentable una vez que todos los idiomas la estén utilizando realmente, por lo que dejar las traducciones codificadas de forma rígida iría en contra del objetivo inicial de centralizar el enlace. Una traducción que no exista, o que por casualidad no codifique de forma rígida este enlace concreto, no se modifica.
+
+No todas las URL externas codificadas de forma rígida son candidatas a la migración. Centralizar una solo resulta rentable cuando se repite o incluye una variante lingüística, por lo que una URL aparece aquí solo si se cumple alguna de estas condiciones:
+
+* Está codificada de forma rígida en dos o más documentos.
+* Su destino tiene una variante lingüística que transmitir: o bien la propia página declara una con `<link rel="alternate" hreflang>`, o bien se trata de un artículo de Wikipedia, que es una excepción conocida —Wikipedia tiene variantes lingüísticas, pero no publica etiquetas hreflang para ellas—.
+
+Un enlace de uso único a una página sin variante detectada sigue siendo simplemente un enlace codificado de forma estática; por sí solo, no merece una entrada en urls.json. Una candidata que cumple los requisitos únicamente por la variante lingüística se etiqueta como **tiene una variante lingüística** para que no parezca que se ha omitido la regla del recuento de repeticiones.
+
+Detectar hreflang requiere obtener el código HTML de la página de destino, algo que solo `yarn check-links` puede hacer de forma fiable: se ejecuta desde Node, por lo que no está sujeto a las restricciones de origen cruzado del navegador. Al hacer clic en **Actualizar** también se intenta esto desde tu navegador, y funciona para sitios que envían encabezados CORS permisivos, pero muchos no lo hacen; cuando un sitio bloquea la lectura, **Actualizar** no tiene forma de saber si existe una variante y deja fuera a ese candidato hasta que se ejecute `yarn check-links`. La excepción de Wikipedia se aplica en cualquier caso, ya que se determina por el nombre de host y no por la solicitud.
+
+Para que la compilación falle cuando se encuentren enlaces rotos, por ejemplo, en un trabajo de integración continua, ejecuta `yarn check-links --strict`. Esto termina con un error solo en caso de enlaces rotos, no de los no verificados, por lo que un problema intermitente de red no hará que falle tu compilación.
 
 <RelatedTopics maxResults={7} />

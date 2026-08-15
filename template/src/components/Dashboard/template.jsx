@@ -7,7 +7,6 @@
 
 import React from "react";
 import HelpButton from "../HelpButton";
-import BrokenLinksDashboard from "./BrokenLinksDashboard";
 import ContentReuseDashboard from "./ContentReuseDashboard";
 import Dashboard1 from "./Dashboard1";
 import MediaDashboard from "./MediaDashboard";
@@ -116,20 +115,6 @@ export const DashboardsCollection = {
         ),
       },
     },
-    {
-      type: "boolean",
-      name: "brokenLinksDashboard",
-      label: "Broken Links",
-      required: false,
-      ui: {
-        component: (_props) => (
-          <div style={{ display: "block", width: "100%", clear: "both" }}>
-            <BrokenLinksDashboard />
-          </div>
-        ),
-      },
-    },
-
     // {
     // 	type: "boolean",
     // 	name: "documentMutationDashboard",
@@ -144,10 +129,4 @@ export const DashboardsCollection = {
   ],
 };
 
-export {
-  BrokenLinksDashboard,
-  Dashboard1,
-  MediaDashboard,
-  StatusBar,
-  TranslationDashboard,
-};
+export { Dashboard1, MediaDashboard, StatusBar, TranslationDashboard };

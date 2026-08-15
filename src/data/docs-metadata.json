@@ -33,7 +33,7 @@
     ],
     "path": "/advanced",
     "filePath": "advanced/index.mdx",
-    "lastmod": "2026-06-01T11:36:07.825Z"
+    "lastmod": "2026-08-15T09:41:49.632Z"
   },
   {
     "title": "Assets",
@@ -44,7 +44,7 @@
     ],
     "path": "/guides/markdown-features/assets",
     "filePath": "guides/markdown-features/assets.mdx",
-    "lastmod": "2026-03-10T22:58:15.042Z"
+    "lastmod": "2026-08-15T09:53:46.599Z"
   },
   {
     "title": "Blog",
@@ -58,7 +58,7 @@
     ],
     "path": "/blog",
     "filePath": "blog.mdx",
-    "lastmod": "2026-03-10T22:51:28.371Z"
+    "lastmod": "2026-08-15T09:53:45.847Z"
   },
   {
     "title": "Browser support",
@@ -75,7 +75,7 @@
     ],
     "path": "/browser-support",
     "filePath": "browser-support.mdx",
-    "lastmod": "2026-03-04T22:51:26.689Z"
+    "lastmod": "2026-08-15T09:41:49.845Z"
   },
   {
     "title": "CALS Tables",
@@ -91,7 +91,7 @@
     ],
     "path": "/guides/markdown-features/tables",
     "filePath": "guides/markdown-features/tables.mdx",
-    "lastmod": "2026-08-12T21:46:45.998Z"
+    "lastmod": "2026-08-15T09:53:47.393Z"
   },
   {
     "title": "Chatbot",
@@ -103,7 +103,7 @@
     ],
     "path": "/chatbot",
     "filePath": "chatbot.mdx",
-    "lastmod": "2026-08-13T15:26:07.833Z"
+    "lastmod": "2026-08-13T15:29:06.737Z"
   },
   {
     "title": "CLI",
@@ -121,7 +121,7 @@
     ],
     "path": "/cli",
     "filePath": "cli.mdx",
-    "lastmod": "2026-08-11T18:15:07.446Z"
+    "lastmod": "2026-08-15T13:18:17.728Z"
   },
   {
     "title": "Code blocks and snippets",
@@ -174,7 +174,7 @@
     ],
     "path": "/configuration",
     "filePath": "configuration.mdx",
-    "lastmod": "2026-08-13T14:24:35.208Z"
+    "lastmod": "2026-08-15T09:53:46.052Z"
   },
   {
     "title": "Context-sensitive help",
@@ -185,7 +185,7 @@
     ],
     "path": "/context-help",
     "filePath": "guides/markdown-features/context-help.mdx",
-    "lastmod": "2026-03-10T22:58:37.179Z"
+    "lastmod": "2026-08-15T09:53:46.689Z"
   },
   {
     "title": "Create a doc",
@@ -201,7 +201,7 @@
     ],
     "path": "/guides/docs/create-doc",
     "filePath": "guides/docs/create-doc.mdx",
-    "lastmod": "2026-03-10T22:57:52.979Z"
+    "lastmod": "2026-08-15T09:53:46.346Z"
   },
   {
     "title": "Creating pages",
@@ -219,7 +219,7 @@
     ],
     "path": "/guides/creating-pages",
     "filePath": "guides/creating-pages.mdx",
-    "lastmod": "2026-03-04T22:51:29.069Z"
+    "lastmod": "2026-08-15T09:53:46.268Z"
   },
   {
     "title": "Dashboards",
@@ -231,7 +231,7 @@
     ],
     "path": "/guides/dashboards",
     "filePath": "guides/dashboards.mdx",
-    "lastmod": "2026-08-11T17:45:19.489Z"
+    "lastmod": "2026-08-15T14:26:51.386Z"
   },
   {
     "title": "Deployment",
@@ -247,7 +247,7 @@
     ],
     "path": "/deployment",
     "filePath": "deployment.mdx",
-    "lastmod": "2026-03-10T22:51:45.357Z"
+    "lastmod": "2026-08-15T14:00:25.907Z"
   },
   {
     "title": "Diagrams",
@@ -261,7 +261,7 @@
     ],
     "path": "/guides/markdown-features/diagrams",
     "filePath": "guides/markdown-features/diagrams.mdx",
-    "lastmod": "2026-03-04T22:51:34.727Z"
+    "lastmod": "2026-08-15T09:53:46.791Z"
   },
   {
     "title": "Docs introduction",
@@ -277,7 +277,7 @@
     ],
     "path": "/guides/docs/introduction",
     "filePath": "guides/docs/introduction.mdx",
-    "lastmod": "2026-03-10T22:58:03.765Z"
+    "lastmod": "2026-08-15T09:53:46.433Z"
   },
   {
     "title": "Figures",
@@ -345,7 +345,7 @@
     ],
     "path": "/guides/markdown-features/metadata",
     "filePath": "guides/markdown-features/metadata.mdx",
-    "lastmod": "2026-03-04T22:51:32.384Z"
+    "lastmod": "2026-08-15T09:53:47.153Z"
   },
   {
     "title": "Headings and table of contents",
@@ -356,7 +356,7 @@
     ],
     "path": "/guides/markdown-features/toc",
     "filePath": "guides/markdown-features/toc.mdx",
-    "lastmod": "2026-03-10T22:59:32.692Z"
+    "lastmod": "2026-08-15T09:53:47.649Z"
   },
   {
     "title": "Hosted CMS",
@@ -394,7 +394,7 @@
     ],
     "path": "/installation",
     "filePath": "installation.mdx",
-    "lastmod": "2026-08-11T18:15:07.647Z"
+    "lastmod": "2026-08-15T15:19:40.390Z"
   },
   {
     "title": "Internationalization",
@@ -410,7 +410,7 @@
     ],
     "path": "/i18n/introduction",
     "filePath": "i18n/introduction.mdx",
-    "lastmod": "2026-03-10T22:59:34.507Z"
+    "lastmod": "2026-08-15T09:53:47.797Z"
   },
   {
     "title": "Introduction",
@@ -430,7 +430,7 @@
     ],
     "path": "/introduction",
     "filePath": "introduction.mdx",
-    "lastmod": "2026-06-01T14:31:57.537Z"
+    "lastmod": "2026-08-15T14:35:45.443Z"
   },
   {
     "title": "Introduction",
@@ -472,7 +472,7 @@
     ],
     "path": "/guides/markdown-features/intro",
     "filePath": "guides/markdown-features/intro.mdx",
-    "lastmod": "2026-08-11T18:15:07.511Z"
+    "lastmod": "2026-08-15T09:53:46.899Z"
   },
   {
     "title": "Markdown links",
@@ -483,7 +483,7 @@
     ],
     "path": "/guides/markdown-features/links",
     "filePath": "guides/markdown-features/links.mdx",
-    "lastmod": "2026-03-04T22:51:33.159Z"
+    "lastmod": "2026-08-15T09:53:46.977Z"
   },
   {
     "title": "Math equations",
@@ -497,7 +497,7 @@
     ],
     "path": "/guides/markdown-features/math-equations",
     "filePath": "guides/markdown-features/math-equations.mdx",
-    "lastmod": "2026-03-04T22:51:32.786Z"
+    "lastmod": "2026-08-15T09:53:47.062Z"
   },
   {
     "title": "MCP Server Implementation Details",
@@ -544,7 +544,7 @@
     ],
     "path": "/guides/markdown-features/react",
     "filePath": "guides/markdown-features/react.mdx",
-    "lastmod": "2026-08-12T18:46:20.470Z"
+    "lastmod": "2026-08-15T09:53:47.315Z"
   },
   {
     "title": "MDX plugins",
@@ -556,7 +556,7 @@
     ],
     "path": "/guides/markdown-features/plugins",
     "filePath": "guides/markdown-features/plugins.mdx",
-    "lastmod": "2026-03-04T22:51:31.998Z"
+    "lastmod": "2026-08-15T09:53:47.227Z"
   },
   {
     "title": "Notifications",
@@ -570,7 +570,7 @@
     ],
     "path": "/advanced/notifications",
     "filePath": "advanced/notifications.mdx",
-    "lastmod": "2026-03-04T22:48:08.345Z"
+    "lastmod": "2026-08-15T14:47:37.170Z"
   },
   {
     "title": "OpenAPI reference docs",
@@ -629,7 +629,7 @@
     ],
     "path": "/search",
     "filePath": "search.mdx",
-    "lastmod": "2026-03-10T22:57:13.928Z"
+    "lastmod": "2026-08-15T09:53:48.026Z"
   },
   {
     "title": "Search engine optimisation (SEO)",
@@ -679,7 +679,7 @@
     ],
     "path": "/advanced/style",
     "filePath": "advanced/style.mdx",
-    "lastmod": "2026-03-10T22:57:39.428Z"
+    "lastmod": "2026-08-15T09:41:49.709Z"
   },
   {
     "title": "Styling and layout",
@@ -695,7 +695,7 @@
     ],
     "path": "/styling-layout",
     "filePath": "styling-layout.mdx",
-    "lastmod": "2026-03-10T22:57:18.324Z"
+    "lastmod": "2026-08-15T09:53:48.106Z"
   },
   {
     "title": "Tabs",
@@ -711,7 +711,7 @@
     ],
     "path": "/guides/markdown-features/tabs",
     "filePath": "guides/markdown-features/tabs.mdx",
-    "lastmod": "2026-03-10T22:59:22.464Z"
+    "lastmod": "2026-08-15T09:53:47.475Z"
   },
   {
     "title": "Taxonomies",
@@ -722,7 +722,7 @@
     ],
     "path": "/guides/docs/taxonomies",
     "filePath": "guides/docs/taxonomies.mdx",
-    "lastmod": "2026-03-10T22:58:05.213Z"
+    "lastmod": "2026-08-15T09:53:46.518Z"
   },
   {
     "title": "Taxonomy tags",
@@ -733,7 +733,7 @@
     ],
     "path": "/guides/markdown-features/taxonomies",
     "filePath": "guides/markdown-features/taxonomies.mdx",
-    "lastmod": "2026-03-04T22:51:30.150Z"
+    "lastmod": "2026-08-15T09:53:47.564Z"
   },
   {
     "title": "Upgrading",
@@ -750,6 +750,18 @@
     "path": "/migration",
     "filePath": "migration/index.mdx",
     "lastmod": "2026-03-10T22:59:35.900Z"
+  },
+  {
+    "title": "URLs",
+    "description": "Centrally managed, localizable external links.",
+    "tags": [
+      "reuse",
+      "internationalization",
+      "internationalization_localization"
+    ],
+    "path": "/guides/markdown-features/urls",
+    "filePath": "guides/markdown-features/urls.mdx",
+    "lastmod": "2026-08-15T09:41:50.263Z"
   },
   {
     "title": "Using Claude in this project",
@@ -773,7 +785,7 @@
     ],
     "path": "/using-plugins",
     "filePath": "using-plugins.mdx",
-    "lastmod": "2026-03-04T22:51:59.007Z"
+    "lastmod": "2026-08-15T09:53:48.191Z"
   },
   {
     "title": "Variable sets",
@@ -797,6 +809,6 @@
     ],
     "path": "/guides/wikis",
     "filePath": "guides/wikis.mdx",
-    "lastmod": "2026-03-10T22:57:51.359Z"
+    "lastmod": "2026-08-15T09:53:47.724Z"
   }
 ]

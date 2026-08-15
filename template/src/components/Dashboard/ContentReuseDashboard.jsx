@@ -27,19 +27,17 @@ function extractInlineCode(node, results = []) {
     return results;
   }
   if (node.name === "CodeSnippet") return results; // already a proper snippet
-  if (
-    node.code === true &&
-    typeof node.text === "string" &&
-    node.text.trim().length > 1
-  ) {
-    results.push(node.text.trim());
-  }
+  // Single-backtick inline code (e.g. `example`) is never long enough to be
+  // worth extracting into a snippet, so it's ignored entirely.
   if (
     (node.type === "code_block" || node.type === "code") &&
     typeof node.value === "string" &&
     node.value.trim()
   ) {
-    results.push(node.value.trim());
+    const lineCount = node.value.trim().split("\n").length;
+    if (lineCount > 3) {
+      results.push(node.value.trim());
+    }
   }
   if (Array.isArray(node.children))
     for (const c of node.children) extractInlineCode(c, results);
@@ -62,7 +60,7 @@ function extractParagraphTexts(node, results = []) {
 }
 
 function computeSuggestions(docBodies, glossaryTermsData, variableSetsData) {
-  // 1. Inline code blocks that could be snippets
+  // 1. Fenced code blocks (more than 3 lines) that could be snippets
   const codeValueMap = {};
   for (const { path, body } of docBodies) {
     if (!body) continue;
@@ -73,7 +71,7 @@ function computeSuggestions(docBodies, glossaryTermsData, variableSetsData) {
   }
   const codeSnippets = Object.entries(codeValueMap)
     .map(([value, paths]) => ({ value, paths }))
-    .filter((s) => s.value.length > 2)
+    .filter((s) => s.value.length > 2 && s.paths.length >= 2)
     .sort((a, b) => b.paths.length - a.paths.length);
 
   // 2. Glossary terms appearing as plain text (not via GlossaryTerm component)
@@ -445,8 +443,8 @@ const CATEGORIES = [
 const SUGGESTION_CATEGORIES = [
   {
     type: "codeSnippets",
-    label: "Possible Snippets",
-    description: "Inline code blocks that could become snippets",
+    label: "Possible Code Snippets",
+    description: "Code appearing in multiple topics that could become a snippet",
     color: "#3b82f6",
     bgClass: "bg-blue-100",
     icon: (

@@ -34,6 +34,7 @@ const matter = require("gray-matter");
 const ROOT = path.join(__dirname, "..");
 const DOCS_DIR = path.join(ROOT, "docs");
 const OUTPUT_PATH = path.join(ROOT, "src", "data", "link-report.json");
+const URLS_DATA_PATH = path.join(ROOT, "reuse", "urls", "index.json");
 
 const DEFAULT_CONCURRENCY = 8;
 const DEFAULT_TIMEOUT_MS = 15000;
@@ -250,6 +251,15 @@ function classifyError(error) {
  * GET result wins. Without that, the report would invent 404s, and a link
  * checker that cries wolf gets ignored.
  */
+// Release the socket rather than leaving an unread body streaming.
+function discardBody(response) {
+  try {
+    response.body?.cancel?.();
+  } catch {
+    // Nothing to clean up if the stream was already consumed.
+  }
+}
+
 async function checkUrl(
   url,
   { timeout = DEFAULT_TIMEOUT_MS, fetchImpl = fetch } = {}
@@ -261,15 +271,6 @@ async function checkUrl(
       signal: AbortSignal.timeout(timeout),
       headers: { "User-Agent": USER_AGENT, Accept: "*/*" },
     });
-
-  // Release the socket rather than leaving an unread body streaming.
-  const discardBody = (response) => {
-    try {
-      response.body?.cancel?.();
-    } catch {
-      // Nothing to clean up if the stream was already consumed.
-    }
-  };
 
   let response;
   try {
@@ -291,6 +292,68 @@ async function checkUrl(
     response.url && response.url !== url ? response.url : undefined;
   discardBody(response);
   return { ...verdict, code: response.status, redirectedTo };
+}
+
+/**
+ * Wikipedia is a known edge case for language variants: every article has
+ * one, reached through the "Languages" sidebar and the API's `langlinks`,
+ * but Wikipedia doesn't advertise them via `<link rel="alternate" hreflang>`
+ * the way most other multilingual sites do. Recognizing the domain directly
+ * means a single Wikipedia link still surfaces as a migration candidate
+ * without needing a real hreflang match.
+ */
+function isWikipediaUrl(url) {
+  try {
+    return /(^|\.)wikipedia\.org$/i.test(new URL(url).hostname);
+  } catch {
+    return false;
+  }
+}
+
+/**
+ * True if any `<link>` tag in the given HTML declares a language variant —
+ * `rel="alternate"` and `hreflang="..."` together, in either attribute
+ * order. A regex over each individual tag rather than a full HTML parser,
+ * consistent with how the rest of this script reads Markdown: good enough
+ * for a yes/no signal, not a spec-accurate parse.
+ */
+function hasHreflangTags(html) {
+  for (const [tag] of html.matchAll(/<link\b[^>]*>/gi)) {
+    if (
+      /\brel=["']alternate["']/i.test(tag) &&
+      /\bhreflang=["'][a-zA-Z-]+["']/i.test(tag)
+    ) {
+      return true;
+    }
+  }
+  return false;
+}
+
+/**
+ * Fetch a page and look for hreflang variants in its `<head>`. Failure of
+ * any kind — non-2xx, network error, timeout — means "not established,"
+ * not "no variant": the caller treats both the same way a migration
+ * candidate that hasn't cleared the bar yet.
+ */
+async function checkHreflang(
+  url,
+  { timeout = DEFAULT_TIMEOUT_MS, fetchImpl = fetch } = {}
+) {
+  try {
+    const response = await fetchImpl(url, {
+      method: "GET",
+      redirect: "follow",
+      signal: AbortSignal.timeout(timeout),
+      headers: { "User-Agent": USER_AGENT, Accept: "text/html" },
+    });
+    if (!response.ok) {
+      discardBody(response);
+      return false;
+    }
+    return hasHreflangTags(await response.text());
+  } catch {
+    return false;
+  }
 }
 
 /** Run `worker` over `items` with a fixed number of tasks in flight. */
@@ -337,6 +400,41 @@ function collectDocs(dir, relativePath = "") {
   return docs;
 }
 
+/** Read `reuse/urls/index.json`, tolerating a missing/unreadable file. */
+function loadUrlsData() {
+  try {
+    return JSON.parse(fs.readFileSync(URLS_DATA_PATH, "utf-8"));
+  } catch {
+    return { urls: [] };
+  }
+}
+
+/**
+ * Turn every {lang, url} pair in urls.json into a link record, in the same
+ * shape `extractLinks()` produces, so they flow through the rest of the
+ * pipeline (classification, checking, previous-verdict carry-forward)
+ * unchanged. Tagged `source: "urls-json"` so the dashboard can tell them
+ * apart from links found by scanning docs.
+ */
+function collectUrlsJsonLinks(urlsData) {
+  const links = [];
+  for (const entry of urlsData.urls || []) {
+    for (const { lang, url } of entry.url || []) {
+      links.push({
+        text: entry.key,
+        url: normalizeUrl(url),
+        type: "urls-json",
+        source: "urls-json",
+        urlKey: entry.key,
+        lang,
+        filePath: "reuse/urls/index.json",
+        line: null,
+      });
+    }
+  }
+  return links.filter((link) => link.url.length > 0);
+}
+
 /**
  * Read the verdicts from the previous report, keyed by URL.
  *
@@ -367,6 +465,28 @@ function loadPreviousVerdicts() {
 }
 
 /**
+ * Read hreflang verdicts from the previous report, keyed by URL. Loaded
+ * unconditionally, unlike `loadPreviousVerdicts()`: whether a site publishes
+ * hreflang tags is a structural fact about that site that rarely changes, so
+ * `--check` only fills in what isn't already known here rather than
+ * re-fetching every candidate's HTML on every run.
+ */
+function loadPreviousHreflang() {
+  const hreflang = new Map();
+  try {
+    const previous = JSON.parse(fs.readFileSync(OUTPUT_PATH, "utf-8"));
+    for (const link of previous.links || []) {
+      if (typeof link.hreflang === "boolean") {
+        hreflang.set(link.url, link.hreflang);
+      }
+    }
+  } catch {
+    // No usable previous report.
+  }
+  return hreflang;
+}
+
+/**
  * Build the report. With `check: false` no network request is made: previously
  * recorded verdicts are carried forward and anything new is left "unchecked".
  */
@@ -380,6 +500,13 @@ async function generateLinkReport({
   const files = {};
   const links = [];
   const previousVerdicts = check ? new Map() : loadPreviousVerdicts();
+  const previousHreflang = loadPreviousHreflang();
+  const urlsData = loadUrlsData();
+  const urlsJsonUrlSet = new Set(
+    (urlsData.urls || []).flatMap((entry) =>
+      (entry.url || []).map((u) => normalizeUrl(u.url))
+    )
+  );
 
   for (const doc of collectDocs(DOCS_DIR)) {
     let parsed;
@@ -415,12 +542,26 @@ async function generateLinkReport({
         continue;
       }
       const previous = previousVerdicts.get(link.url);
+      const tagged = {
+        ...link,
+        source: "doc",
+        inUrlsJson: urlsJsonUrlSet.has(link.url),
+      };
       links.push(
         previous
-          ? { ...link, ...previous }
-          : { ...link, status: "unchecked", reason: "Not checked yet" }
+          ? { ...tagged, ...previous }
+          : { ...tagged, status: "unchecked", reason: "Not checked yet" }
       );
     }
+  }
+
+  for (const link of collectUrlsJsonLinks(urlsData)) {
+    const previous = previousVerdicts.get(link.url);
+    links.push(
+      previous
+        ? { ...link, ...previous }
+        : { ...link, status: "unchecked", reason: "Not checked yet" }
+    );
   }
 
   if (check) {
@@ -451,6 +592,48 @@ async function generateLinkReport({
     }
   }
 
+  // Migration candidates: the dashboard only lists one worth centralizing
+  // when the same URL repeats across docs (grouped there, not here) or the
+  // target itself advertises a language variant. Wikipedia is free —
+  // hostname only, no request. Everything else needs its HTML fetched, so
+  // that's held to candidates that occur once — a repeat already qualifies
+  // without it — and to `--check` runs, and even then only for URLs neither
+  // Wikipedia nor already known from a previous check.
+  const candidateOccurrences = new Map();
+  for (const link of links) {
+    if (link.source === "doc" && link.inUrlsJson === false) {
+      candidateOccurrences.set(
+        link.url,
+        (candidateOccurrences.get(link.url) || 0) + 1
+      );
+    }
+  }
+
+  if (check) {
+    const hreflangTargets = [...candidateOccurrences.entries()]
+      .filter(
+        ([url, count]) =>
+          count === 1 && !isWikipediaUrl(url) && !previousHreflang.has(url)
+      )
+      .map(([url]) => url);
+
+    const hreflangOutcomes = await mapWithConcurrency(
+      hreflangTargets,
+      concurrency,
+      async (url) => [url, await checkHreflang(url, { timeout, fetchImpl })]
+    );
+    for (const [url, value] of hreflangOutcomes) {
+      previousHreflang.set(url, value);
+    }
+  }
+
+  for (const link of links) {
+    if (link.source === "doc" && link.inUrlsJson === false) {
+      link.hreflang =
+        isWikipediaUrl(link.url) || previousHreflang.get(link.url) === true;
+    }
+  }
+
   const stats = links.reduce(
     (acc, link) => {
       acc.total += 1;
@@ -459,6 +642,10 @@ async function generateLinkReport({
     },
     { total: 0, ok: 0, broken: 0, unverified: 0, unchecked: 0, skipped: 0 }
   );
+  stats.centralized = links.filter((l) => l.source === "urls-json").length;
+  stats.migrationCandidates = links.filter(
+    (l) => l.source === "doc" && l.inUrlsJson === false
+  ).length;
 
   // When the inventory pass carries verdicts forward, the newest of them is
   // what the dashboard should report as the age of the results.
@@ -550,5 +737,11 @@ module.exports = {
   maskNonProse,
   normalizeUrl,
   mapWithConcurrency,
+  loadUrlsData,
+  collectUrlsJsonLinks,
+  isWikipediaUrl,
+  hasHreflangTags,
+  checkHreflang,
   OUTPUT_PATH,
+  URLS_DATA_PATH,
 };

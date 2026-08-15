@@ -1,33 +1,34 @@
 ---
+lastmod: '2026-08-15T15:19:40.390Z'
+modifiedBy: aowendev <aowen@translationcommons.org>
 title: Installation
-description: How to install docStatic locally, and start a docStatic site in no time.
+description: 'How to install docStatic locally, and start a docStatic site in no time.'
 tags:
-  - "software"
-  - "software_integrated-development-environments"
-  - "software_integrated-development-environments_eclipse"
-  - "software_integrated-development-environments_vscodium"
-  - "software_package-managers"
-  - "software_package-managers_yarn"
-  - "software_source-control"
-  - "software_source-control_github"
-  - "software_content-management-systems"
-  - "software_content-management-systems_tinacms"
-  - "software_grammar-spelling-style"
-  - "software_grammar-spelling-style_languagetool"
-  - "development"
-  - "development_installation"
-  - "development_getting-started"
-  - "computer-languages"
-  - "computer-languages_javascript"
+  - software
+  - software_integrated-development-environments
+  - software_integrated-development-environments_eclipse
+  - software_integrated-development-environments_vscodium
+  - software_package-managers
+  - software_package-managers_yarn
+  - software_source-control
+  - software_source-control_github
+  - software_content-management-systems
+  - software_content-management-systems_tinacms
+  - software_grammar-spelling-style
+  - software_grammar-spelling-style_languagetool
+  - development
+  - development_installation
+  - development_getting-started
+  - computer-languages
+  - computer-languages_javascript
 draft: false
 review: false
 translate: false
 approved: false
 published: true
 unlisted: false
-lastmod: '2026-08-11T18:15:07.647Z'
-modifiedBy: aowendev <aowen@translationcommons.org>
 ---
+
 # Installation
 
 Welcome! This guide walks you through setting up docStatic for the first time.
@@ -40,9 +41,9 @@ You can run docStatic locally (on your computer) or host it in the cloud.
 
 For the easiest cloud setup, create free accounts with these services:
 
-* [GitHub](https://github.com/)—stores your content and tracks changes
-* [TinaCMS](https://tina.io/)—enables browser-based editing
-* [LanguageTool](https://languagetool.org/)—provides optional grammar and style checking
+* <Url urlKey="github" />: Stores your content and tracks changes
+* <Url urlKey="tinacms" />: Enables browser-based editing
+* <Url urlKey="languagetool" />: Provides optional grammar and style checking
 
 If you plan to run docStatic locally (on your computer) instead, see the Requirements for local development.
 
@@ -55,13 +56,13 @@ This section only applies if you plan to work locally.
 You'll need an Integrated Development Environment (IDE) or a text editor. Two open-source options are:
 
 * [Eclipse](https://eclipseide.org)
-* [VSCodium](https://vscodium.com/)
+* <Url urlKey="vscodium" />
 
 You will also need to install Node.js for its build tools and Yarn for package management.
 
 ### Install Node.js
 
-You need to install [Node.js](https://nodejs.org/) version 22.0 or above.
+You need to install <Url urlKey="node-js" /> version 22.0 or above.
 
 Check if Node.js is already installed. Open a terminal (Command Prompt or Terminal app) and run:
 
@@ -73,7 +74,7 @@ If you see a version number starting with v22 or higher, you're good to go.
 
 If Node.js is not installed or you have an older version:
 
-1. Go to the [official Node.js downloads](https://nodejs.org/en/download/prebuilt-installer) page.
+1. Go to the <Url urlKey="nodejs-prebuilt-installer" /> page.
 2. Choose the LTS (Long-Term Support) version for your operating system.
 
    The installer includes npm, the Node Package Manager, which you'll need in later steps.
@@ -129,27 +130,21 @@ Open a terminal (Command Prompt or Terminal app) and run one of the following co
 
 <Tabs>
   <TabItem value="npx" label="npx">
-
-  ```shell
-  npx create-docstatic@latest my-docs
-  ```
-
+    ```shell
+    npx create-docstatic@latest my-docs
+    ```
   </TabItem>
 
   <TabItem value="npm" label="npm">
-
-  ```shell
-  npm create docstatic@latest my-docs
-  ```
-
+    ```shell
+    npm create docstatic@latest my-docs
+    ```
   </TabItem>
 
   <TabItem value="yarn" label="yarn">
-
-  ```shell
-  yarn create docstatic my-docs
-  ```
-
+    ```shell
+    yarn create docstatic my-docs
+    ```
   </TabItem>
 </Tabs>
 
@@ -161,9 +156,7 @@ yarn dev
 ```
 
 <Admonition type="tip" title="Tip">
-
   Run `npx create-docstatic@latest --help` to see the available options, such as `--no-install` to skip dependency installation.
-
 </Admonition>
 
 If you created your site this way, you can skip ahead to the [Project structure](#project-structure) section.
@@ -181,9 +174,7 @@ The command updates the docStatic-owned files (React components, build scripts, 
 The update requires a clean git working tree, so commit your work first. Afterwards, review the result with `git diff`, reapply any customisations you had made to updated files and commit.
 
 <Admonition type="tip" title="Tip">
-
   Add `--dry-run` to see what would change without writing anything.
-
 </Admonition>
 
 ### Fork the docStatic repository
@@ -322,7 +313,7 @@ The `docs/` folder ships with a copy of the docStatic documentation—the pages 
 
 docStatic allows the use of a single repo that contains both the project code and the project documentation. In Docusaurus terminology, this concept is called a “monorepo”.
 
-For more information, see [Monorepos](https://docusaurus.io/docs/installation#monorepos) in the Docusaurus documentation.
+For more information, see <Url urlKey="docusaurus-monorepos" /> in the Docusaurus documentation.
 
 ***
 

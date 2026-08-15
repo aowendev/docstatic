@@ -5,13 +5,15 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import Link from "@docusaurus/Link";
 import clsx from "clsx";
 import React from "react";
+import { getDocPath } from "../../../scripts/util";
 import styles from "./styles.module.css";
 
-const Feature = ({ image, title, description }) => {
-  return (
-    <div className={clsx("col col--4", styles.featureCard)}>
+const Feature = ({ image, title, description, document }) => {
+  const content = (
+    <>
       {image && (
         <div className={styles.featureImageContainer}>
           <img className={styles.featureSvg} src={image} alt={description} />
@@ -35,6 +37,21 @@ const Feature = ({ image, title, description }) => {
           </svg>
         </div>
       </div>
+    </>
+  );
+
+  return (
+    <div className="col col--4">
+      {document ? (
+        <Link
+          to={getDocPath(document)}
+          className={clsx(styles.featureCard, styles.featureCardLink)}
+        >
+          {content}
+        </Link>
+      ) : (
+        <div className={styles.featureCard}>{content}</div>
+      )}
     </div>
   );
 };

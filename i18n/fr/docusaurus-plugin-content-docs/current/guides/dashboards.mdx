@@ -1,5 +1,5 @@
 ---
-lastmod: '2026-08-11T23:12:23.628Z'
+lastmod: '2026-08-15T16:12:41.863Z'
 modifiedBy: aowendev <aowen@translationcommons.org>
 title: Dashboards
 tags:
@@ -14,28 +14,28 @@ published: true
 unlisted: false
 ---
 
-docStatic ajoute une fonctionnalité de tableaux de bord à TinaCMS. Tina génère une API GraphQL en utilisant le système de fichiers du dépôt Git comme base de données. Les tableaux de bord interrogent l'API (en local ou dans le cloud) et présentent des rapports exploitables directement dans le CMS. La fonctionnalité de tableaux de bord est actuellement considérée comme étant en version bêta. La fonctionnalité a été entièrement testée, mais l’interface utilisateur est provisoire et nécessite des améliorations. Les tableaux de bord se mettent à jour lorsque la page est actualisée. Si un autre utilisateur a apporté des modifications depuis que vous avez consulté un tableau de bord, vous pouvez cliquer sur **Actualiser** pour mettre à jour le tableau de bord.
+docStatic ajoute une fonctionnalité de tableaux de bord à TinaCMS. Tina génère une API GraphQL en utilisant le système de fichiers du dépôt Git comme base de données. Les tableaux de bord interrogent l'API (en local ou dans le cloud) et présentent des rapports exploitables directement dans le CMS. La fonctionnalité de tableaux de bord est actuellement considérée comme étant en version bêta. La fonctionnalité a été entièrement testée, mais l’interface utilisateur est provisoire et doit encore être peaufinée. Les tableaux de bord se mettent à jour lorsque la page est actualisée. Si un autre utilisateur a apporté des modifications depuis que vous avez consulté un tableau de bord, vous pouvez cliquer sur **Actualiser** pour mettre à jour le tableau de bord.
 
 <Admonition type="note" title="Note">
-  Depending on the amount of content in the system, some dashboards may take some time to load. These dashboards will typically update slightly faster when running locally.
+    Depending on the amount of content in the system, some dashboards may take some time to load. These dashboards will typically update slightly faster when running locally.
 </Admonition>
 
 ## Affichage des tableaux de bord
 
-Depuis le CMS, accédez à la collection Tableaux de bord. En haut de la page se trouve une barre d’état qui affiche la connexion GraphQL. Elle indique si vous êtes connecté au cloud ou à localhost. Si localhost est disponible, la connexion s’effectuera toujours vers localhost. Pour utiliser le cloud, assurez-vous que le serveur de développement local est arrêté. La barre d’état affiche également l’environnement et vérifie que tous les paramètres sont valides.
+Dans le CMS, accédez à la collection Tableaux de bord. En haut de la page se trouve une barre d’état qui affiche la connexion GraphQL. Elle indique si vous êtes connecté au cloud ou à localhost. Si localhost est disponible, la connexion s’effectuera toujours vers localhost. Pour utiliser le cloud, assurez-vous que le serveur de développement local est arrêté. La barre d’état affiche également l’environnement et vérifie que tous les paramètres sont valides.
 
 ## Affichage de l’état des workflows
 
 Le tableau de bord « Aperçu du contenu » affiche le nombre total de rubriques dans le chemin /docs ainsi que les rubriques correspondant à chaque état de workflow :
 
 * Brouillon
-* En révision
+* Révision
 * Traduction
 * Approuvé
 * Publié
 * Non répertorié
 
-Cliquez sur le lien de statut pour afficher tous les sujets correspondant à ce statut.
+Cliquez sur le lien d’état pour afficher toutes les rubriques correspondant à cet état.
 
 Cliquez sur Modifier pour ouvrir le sujet et le modifier.
 
@@ -43,37 +43,37 @@ Cliquez sur l’icône Fermer pour fermer la liste des sujets.
 
 ### Affichage de l’activité récente
 
-La section Activité récente affiche les sujets récemment modifiés. Vous pouvez filtrer la période (Depuis le début, La semaine dernière ou Le mois dernier) et définir le nombre de résultats entre 5 et 50.
+La section Activité récente affiche les sujets récemment modifiés. Vous pouvez filtrer la période (Depuis toujours, Semaine dernière ou Mois dernier) et définir le nombre de résultats entre 5 et 50.
 
 ## Affichage du statut de traduction
 
 Le tableau de bord « Traductions » affiche le statut de chaque rubrique pour la langue sélectionnée dans la liste :
 
-* À jour : La date de dernière modification de la traduction est postérieure à celle de la source.
-* Obsolète : la date de dernière modification de la source est postérieure à celle de la traduction.
+* À jour : la date de dernière modification de la traduction est postérieure à celle du document source.
+* Obsolète : la date de dernière modification du document source est postérieure à celle de la traduction.
 * Manquant : il existe un fichier source sans fichier de traduction correspondant.
 
-## Affichage de la réutilisation de contenu
+## Affichage de la réutilisation du contenu
 
-Le tableau de bord « Réutilisation de contenu » affiche le contenu réutilisable dans le système et indique où il est utilisé. Il présente quatre catégories :
+Le tableau de bord « Réutilisation du contenu » affiche le contenu réutilisable dans le système et indique où il est utilisé. Il présente des informations sur quatre catégories :
 
 * Extraits de code : fichiers de code référencés par le composant CodeSnippet.
 * Termes du glossaire : termes définis dans la collection de termes du glossaire.
 * Extraits : fichiers de contenu MDX référencés par le composant Snippet.
 * Ensembles de variables : ensembles de variables référencés par le composant VariableSet.
 
-Cliquez sur la carte d’une catégorie pour afficher la liste des éléments de cette catégorie, ainsi que les rubriques dans lesquelles chaque élément est utilisé.
+Cliquez sur la fiche d’une catégorie pour afficher la liste des éléments de cette catégorie, ainsi que les rubriques dans lesquelles chaque élément est utilisé.
 
 ### Affichage des suggestions de réutilisation
 
 La section « Suggestions » du tableau de bord « Réutilisation du contenu » identifie le contenu susceptible d’être converti en composants réutilisables :
 
 * Extraits possibles (code) : blocs de code intégrés dans des rubriques qui pourraient être extraits pour former des fichiers d’extraits de code.
-* Termes possibles : texte des termes du glossaire apparaissant sous forme de texte brut dans des rubriques qui pourraient utiliser à la place le composant GlossaryTerm.
-* Extraits possibles (texte en double) : blocs de texte apparaissant dans au moins deux rubriques et pouvant être extraits pour être placés dans des fichiers d’extraits.
-* Variables possibles : valeurs de variables apparaissant sous forme de texte brut dans des rubriques et pouvant être remplacées par le composant « VariableSet ».
+* Termes potentiels : texte de termes de glossaire apparaissant sous forme de texte brut dans des rubriques et pouvant être remplacé par le composant GlossaryTerm.
+* Extraits potentiels (texte en double) : blocs de texte apparaissant dans au moins deux rubriques et pouvant être extraits dans des fichiers d’extraits.
+* Variables potentielles : valeurs de variables apparaissant sous forme de texte brut dans des rubriques et pouvant être remplacées par le composant « VariableSet ».
 
-Cliquez sur une fiche de suggestion pour voir les éléments détectés et les rubriques dans lesquelles ils apparaissent.
+Cliquez sur une fiche de suggestion pour afficher les éléments détectés et les rubriques dans lesquelles ils apparaissent.
 
 ## Affichage de la réutilisation des médias
 
@@ -85,35 +85,54 @@ Vous pouvez filtrer par :
 * Images uniquement.
 * Récent (7 jours).
 * Utilisé.
-* Inutilisé.
+* Non utilisés.
 
-Pour le contenu utilisé, cliquez sur « Utilisé dans n documents » pour afficher les rubriques dans lesquelles le contenu est utilisé. Vous pouvez ensuite cliquer sur « Modifier » pour modifier ces rubriques.
+Pour le contenu utilisé, cliquez sur « Utilisé dans n documents » pour afficher les rubriques dans lesquelles ce contenu est utilisé. Vous pouvez ensuite cliquer sur « Modifier » pour modifier ces rubriques.
 
-## Vérification des liens rompus
+## Vérification de l’intégrité des liens
 
-Le tableau de bord « Liens rompus » fournit des informations sur les hyperliens présents dans vos rubriques, y compris leur statut HTTP ; ainsi, une page renvoyant un code 404 ou 500 est identifiée comme rompue.
+Contrairement aux autres tableaux de bord de cette page, le tableau de bord « Intégrité des liens » se trouve dans la collection **URL** plutôt que dans « Tableaux de bord » : c’est là que vous gérez les [URL centralisées](/docs/guides/markdown-features/urls) utilisées par le composant `<Url>`, ce qui permet de regrouper l’état des liens et leur gestion.
 
-Le tableau de bord affiche les résultats de la dernière vérification. Il n’effectue pas la vérification lui-même, car un navigateur ne peut pas lire le statut HTTP d’un lien vers un autre site. Pour vérifier vos liens, exécutez :
+Le tableau de bord fournit des informations sur les hyperliens présents dans vos rubriques *et* sur les URL stockées dans la collection « URL », y compris leur statut HTTP. Ainsi, une page renvoyant un code 404 ou 500 est identifiée comme cassée, quelle que soit sa source. Le tableau de bord affiche les résultats de la dernière exécution de `yarn check-links`, intégrés au site lors de sa dernière compilation. Pour vérifier vos liens avec les statuts HTTP réels, exécutez :
 
 ```bash
 yarn check-links
 ```
 
-Cette commande interroge chaque lien externe, enregistre la réponse de chaque serveur et met à jour le rapport. Exécutez-la chaque fois que vous souhaitez obtenir des résultats récents. Le tableau de bord affiche la date et l’heure de la dernière vérification.
+Cette commande interroge chaque lien externe — qu’il soit codé en dur dans la documentation ou stocké dans la collection d’URL —, enregistre la réponse de chaque serveur et met à jour le rapport. Exécutez-la dès que vous souhaitez obtenir des résultats récents, puis recompilez le site afin que le tableau de bord prenne en compte le nouveau rapport. Le tableau de bord affiche la date et l’heure de la dernière vérification.
+
+Cliquez sur **Actualiser** dans le tableau de bord pour le mettre à jour sans avoir à reconstruire le site. Cette opération interroge la documentation actuelle et la collection d’URL via GraphQL, ce qui permet de refléter les modifications apportées depuis la dernière construction — ce qui est utile dans TinaCloud, où il n’y a pas de shell pour exécuter `yarn check-links`. Cette fonction analyse également les liens externes directement depuis votre navigateur, mais un navigateur ne peut pas lire le statut HTTP d’un lien vers un autre site comme le fait `yarn check-links` ; par conséquent, tout ce que la fonction « Actualiser » vérifie elle-même est signalé comme « Non vérifié » plutôt que « OK » ou « Cassé » ; il ne remplace jamais un verdict réel déjà enregistré par `yarn check-links` pour un lien toujours présent, mais se contente d’ajouter les nouveautés ou ce qui n’a jamais été vérifié.
 
 Le rapport recense :
 
-* Le nombre total de liens.
+* Nombre total de liens.
 * OK : le serveur a répondu avec un statut de réussite ou de redirection.
-* Cassé : le serveur a répondu avec un statut d’erreur, tel que 404 Not Found ou 500 Internal Server Error. Ce sont les liens à corriger.
-* Non vérifié : aucune réponse n’a été reçue, le lien n’a donc pas pu être évalué. Les causes peuvent être un nom de domaine non résolu, un délai d’attente dépassé, un site ayant refusé la requête avec un code 403 ou une limitation de débit avec un code 429. Chacune de ces situations peut être due à un problème au niveau de la machine effectuant la vérification plutôt qu’au lien lui-même ; vérifiez-les donc manuellement en cliquant sur le lien hypertexte.
-* Non vérifiés : liens qui n’ont pas été consultés. Cela concerne les liens internes, les ancres, les liens `mailto:` et `tel:`, ainsi que les adresses `localhost`.
+* « Broken » : le serveur a répondu avec un statut d’erreur, tel que 404 Not Found ou 500 Internal Server Error. Ce sont les liens à corriger.
+* « Unverified » : aucune réponse n’a été reçue, le lien n’a donc pas pu être évalué. Parmi les causes possibles : un domaine qui n’a pas pu être résolu, une requête ayant expiré, un site ayant refusé la requête avec un code 403, ou une limitation de débit avec un code 429. Chacune de ces situations peut être due à un problème au niveau de la machine effectuant la vérification plutôt qu’au lien lui-même ; il convient donc de les valider manuellement en cliquant sur le lien hypertexte.
+* Interne : liens qui ne font pas l’objet d’une requête. Cela inclut les liens internes, les ancres, les liens `mailto:` et `tel:`, ainsi que les adresses localhost.
 * Fichiers analysés.
+* Centralisé : nombre de liens vérifiés provenant de la collection d’URL plutôt que d’être codés en dur dans un document.
+* Candidats à la migration : URL externes distinctes qui sont codées en dur dans un document, qui ne figurent pas encore dans la collection d’URL et qui méritent d’être centralisées — voir ci-dessous pour savoir lesquelles sont concernées.
 
-Les liens internes ne sont délibérément pas consultés ici, car la structure du site les valide déjà par rapport à la liste réelle des pages et signale ceux qui sont rompus. Les adresses « localhost » sont également ignorées, car elles pointent vers tout ce qui est en cours d’exécution sur la machine effectuant la vérification. Vous pouvez documenter une URL « localhost » sans qu’elle soit signalée.
+Les liens internes ne sont délibérément pas interrogés ici, car la compilation du site les valide déjà par rapport à la liste réelle des pages et signale ceux qui sont rompus. Les adresses « localhost » sont également ignorées, car elles pointent vers tout ce qui est en cours d’exécution sur la machine effectuant la vérification. Vous pouvez documenter une URL « localhost » sans qu’elle soit signalée.
 
-Le tableau de bord répertorie les fichiers contenant des liens problématiques. Vous pouvez les ouvrir en cliquant sur « Modifier » dans l’une ou l’autre des listes.
+Le tableau de bord répertorie les fichiers contenant des liens problématiques, en indiquant pour chacun s’il provient d’un document ou de la collection d’URL, afin que vous sachiez lequel ouvrir. Il répertorie également les candidats à la migration — les URL externes utilisées dans des documents qui ne sont pas encore centralisées, regroupées de manière à ce qu’une URL répétée dans plusieurs documents n’apparaisse qu’une seule fois, avec un bouton **Centraliser** qui l’ajoute à la collection d’URL.
 
-Pour faire échouer une compilation lorsque des liens rompus sont détectés, par exemple dans une tâche d’intégration continue, exécutez `yarn check-links --strict`. Cette commande se termine par une erreur uniquement en cas de liens rompus, et non pour ceux qui n’ont pas été vérifiés ; ainsi, un problème réseau intermittent n’entraînera pas l’échec de votre compilation.
+Cliquer sur **Centraliser** ajoute l’entrée au formulaire de la collection d’URL, mais pas à la vue du tableau de bord lui-même. Enregistrez l’entrée — en ajoutant les URL dans les autres langues si nécessaire — puis cliquez sur **Actualiser** avant qu’elle ne passe à l’état **Centralisée, pas encore mise à jour dans les documents** avec un bouton **Remplacer**. Cette lacune est délibérée, ce n’est pas un contournement : l’option **Remplacer** ne doit pas être proposée avant que l’entrée ne dispose effectivement des données permettant de remplacer un lien codé en dur, et le renseignement des variantes linguistiques dont une entrée a besoin ne peut pas être automatisé, car les sites sont trop hétérogènes dans leur gestion de celles-ci — préfixes de chemin différents, domaines différents, certains n’ayant même pas d’URL par langue — ce qui ne peut être fait que par une personne qui doit les rechercher et les saisir.
+
+La centralisation d’une URL n’affecte pas les documents qui la contiennent encore en dur — il s’agit d’une étape distincte, car l’ajout de l’entrée dans urls.json et le remplacement de chaque référence dans les documents correspondent à des modifications différentes. Le tableau de bord suit ces modifications séparément, sous **Centralisé, pas encore mis à jour dans les documents**, avec un bouton **Remplacer** qui remplace en une seule étape chaque utilisation codée en dur de cette URL par une référence `<Url>`, quel que soit le nombre de documents dans lesquels elle apparaît. Chaque occurrence conserve son propre texte de lien : une URL associée à une formulation différente dans deux documents distincts bénéficie de deux remplacements distincts, et non d’un seul empruntant celui de l’autre— à moins que ce libellé ne corresponde déjà au texte par défaut de la clé pour cette langue, auquel cas la fonction **Remplacer** ne crée pas de remplacement et la clé seule remplit la même fonction sans dupliquer la même chaîne dans chaque document où elle devrait être modifiée.
+
+La fonction « Remplacer » vérifie également chaque traduction de chaque document indépendamment de la source anglaise et met à jour celles qui contiennent encore le même lien en dur — en utilisant la formulation propre à cette traduction, et non celle de la source. Une balise `<Url>` localisée n’est rentable que lorsque toutes les langues l’utilisent effectivement ; laisser les traductions codées en dur irait donc à l’encontre de l’objectif initial de centralisation du lien. Une traduction qui n’existe pas, ou qui ne code pas en dur ce lien particulier, n’est pas modifiée.
+
+Toutes les URL externes codées en dur ne sont pas candidates à la migration. La centralisation d’une URL n’est rentable que lorsqu’elle se répète ou comporte une variante linguistique ; une URL n’apparaît donc ici que si l’une des deux conditions suivantes est remplie :
+
+* Elle est codée en dur dans au moins deux documents.
+* Sa cible comporte une variante linguistique à prendre en compte : soit la page elle-même en déclare une avec `<link rel="alternate" hreflang>`, soit il s’agit d’un article Wikipédia, ce qui constitue une exception connue — Wikipédia propose des variantes linguistiques mais ne publie pas de balises hreflang pour celles-ci.
+
+Un lien à usage unique vers une page pour laquelle aucune variante n’a été détectée reste simplement un lien codé en dur ; il ne justifie pas à lui seul une entrée dans le fichier `urls.json`. Un candidat qui ne remplit les critères que par la présence d’une variante linguistique est marqué comme **ayant une variante linguistique** afin qu’il ne semble pas que la règle de comptage des répétitions ait été ignorée.
+
+La détection de hreflang nécessite de récupérer le code HTML de la page cible, ce que seul `yarn check-links` peut faire de manière fiable — il s’exécute depuis Node, et n’est donc pas soumis aux restrictions inter-origines du navigateur. Cliquer sur **Actualiser** tente également cette opération depuis votre navigateur, et cela fonctionne pour les sites qui envoient des en-têtes CORS permissifs, mais ce n’est pas le cas de nombreux sites ; lorsqu’un site bloque la lecture, la fonction « Actualiser » n’a aucun moyen de savoir si une variante existe et exclut ce candidat jusqu’à ce que `yarn check-links` soit exécuté. L’exception concernant Wikipédia s’applique dans les deux cas, car elle est déterminée par le nom d’hôte plutôt que par la requête.
+
+Pour faire échouer une compilation lorsque des liens rompus sont détectés, par exemple dans un job d’intégration continue, exécutez `yarn check-links --strict`. Cette commande se termine par une erreur uniquement en cas de liens rompus, et non pour ceux qui n’ont pas été vérifiés ; ainsi, un problème réseau intermittent n’entraînera pas l’échec de votre compilation.
 
 <RelatedTopics maxResults={7} />

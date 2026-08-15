@@ -1,0 +1,44 @@
+---
+title: Una nueva mirada a los sistemas híbridos de gestión documental
+lastmod: '2026-08-15T16:12:41.268Z'
+authors:
+  - name: Andrew Owen
+    title: docStatic maintainer
+    url: 'https://github.com/aowendev'
+    image_url: 'https://avatars.githubusercontent.com/u/84041006'
+date: '2025-02-27'
+tags:
+  - content
+  - content_blog-articles
+modifiedBy: aowendev <aowen@translationcommons.org>
+---
+
+En enero del año pasado, me presenté a un puesto de gestor de documentación y tenía que idear una solución que se adaptara a las necesidades tanto de los redactores como de los desarrolladores colaboradores.
+
+<Truncate />
+
+Mi solución era más o menos así:
+
+* Un repositorio central de documentación en GitHub con implementaciones automatizadas mediante Actions.
+* DAPS para texto condicional, traducción, compilaciones personalizadas y generación de PDF.
+* Hugo con Asciidoctor para sitios web en HTML5.
+* LanguageTool para la revisión ortográfica, gramatical y de estilo.
+* VS Code con los complementos AsciiDoc y LanguageTool para desarrolladores.
+* XML Mind XML Editor Web Edition con el complemento de LanguageTool para el navegador, destinado a los no desarrolladores.
+* Mermaid para diagramas.
+* Pandoc para convertir DocBook a Word.
+* Affinity Suite para contenidos de marketing (importa archivos de Word).
+* Un derivado de Lucene para la búsqueda.
+* Matomo para análisis de datos.
+* DeepL para traducción automática.
+* Scripts de API para publicar en wikis (como Confluence) y bases de conocimiento (como Zendesk).
+
+Yo era la segunda opción, así que, por suerte para mí, no tuve que encargarme de ello. En su lugar, acabé consiguiendo un encargo en el que tuve que crear una solución de portal de documentación que presentara las API REST y GraphQL de una manera más o menos coherente. Se basaba en [Magidoc](https://github.com/magidoc-org/magidoc «Documentación estática de GraphQL de Magidoc»), la herramienta gratuita [Redocly CLI](https://redocly.com/docs/cli «Redocly CLI») y un montón de scripts. Desde entonces, he descubierto [Archbee](https://www.archbee.com/ «Archbee»). Se trata de un sistema basado en Markdown con extensiones propias para presentar API REST y GraphQL. Aunque lo hubiera conocido en aquel momento, no creo que lo hubiera elegido debido a los problemas de fiabilidad documentados. Sin embargo, tras haberlo utilizado recientemente para otro cliente, creo que podría estar listo para su uso en producción en la documentación de usuario. Ofrece una interfaz web muy agradable, pero puedes utilizar tu propio repositorio de GitHub como fuente de referencia. Los cambios realizados en el editor web generan pull requests en el repositorio. Dispone de función de búsqueda y los sitios se pueden proteger con contraseña. Incorpora soporte integrado para diagramas Mermaid y modo oscuro. Tiene un precio bastante razonable y, al basarse en Markdown, no te ata a nada.
+
+Pero sigo siendo fan de DocBook. ¿Había alguna solución lista para usar que se pareciera más a mi propuesta de sistema híbrido de gestión de documentos (DMS)? Una posible solución sería [Magnolia CMS](https://www.magnolia-cms.com/), el generador de sitios estáticos (SSG) [Antora](https://antora.org/) y [AsciiDoc](https://asciidoc.org/). Sin embargo, Magnolia no revela sus precios. Y si alguna vez quisieras migrar a otro sistema, tendrías que desarrollarlo tú mismo, ya que otras soluciones de CMS sin interfaz no son compatibles con AsciiDoc.
+
+Lo cual me llevó de vuelta a Markdown. ¿Existía algún SSG destinado principalmente a crear sitios de documentación que funcionara con mi CMS «headless» favorito (<Url urlKey="tinacms" />)? Eso me llevó a <Url urlKey="docusaurus" />. Es lo que Meta (Facebook) creó para sustituir a Jekyll como su SSG interno y utiliza [React](https://react.dev/). Sus tiempos de compilación pueden parecer una eternidad en comparación con Hugo. Pero los sitios que genera son mucho más rápidos. ¿Existía, sin embargo, una integración gratuita mejor para la documentación de la API REST que manipular la salida de la CLI de Redocly? La respuesta era sí, gracias a un estupendo complemento de Docusaurus de Palo Alto Networks. Lo único que debería haber tenido que hacer para configurarlo era crear un nuevo sitio utilizando la plantilla inicial «Tina» de Docusaurus y, a continuación, añadir el complemento. No fue tan sencillo. Palo Alto Networks se ha pasado por completo al TypeScript. Como Docusaurus está basado en React, el sitio de partida creado por Tina utiliza JSX. No querían compenetrarse bien. Al final, acabé creando un sitio a partir de la plantilla de Palo Alto Networks y luego le incorporé la compatibilidad con Tina.
+
+No conseguí encontrar la manera de habilitar los widgets de control de versiones y localización en la barra de navegación con la solución de Tina, así que volví a utilizar una definición fija para ellos. Para la mayoría de los demás ajustes, Tina utiliza archivos JSON a los que hace referencia el archivo de configuración. Añadir la compatibilidad con la búsqueda mediante <Url urlKey="mermaid" /> y <Url urlKey="lunr" /> fue muy sencillo, aunque la búsqueda solo funciona en producción. En lugar de intentar explicarte paso a paso todo lo que tuve que hacer para que funcionara, esta vez he pensado en compartir simplemente el [repositorio](https://github.com/aowendev/docstatic). El componente de Palo Alto Networks está disponible bajo la licencia MIT, así que he utilizado la misma licencia. La única configuración que tendrás que realizar es añadir tus credenciales de Tina para habilitar la edición web en línea.
+
+Volviendo a los requisitos, tenemos un repositorio de GitHub con Actions. Docusaurus sustituye a Hugo como generador de páginas estáticas (SSG). Estamos utilizando Markdown Extended (MDX) en lugar de AsciiDoc. Seguimos pudiendo usar <Url urlKey="languagetool" /> con TinaCMS y VScode. Utilizamos Tina en lugar del editor XML Mind. Contamos con diagramas Mermaid, con vista previa en Tina. Utilizamos Lunr para las búsquedas, pero si eso no es suficiente, hay compatibilidad integrada con [Algolia](https://www.docusaurus.io/docs/search). Hay un complemento para [Matomo Analytics](https://github.com/karser/docusaurus-plugin-matomo). Hay un complemento para la [documentación de GraphQL](https://github.com/Zhouzi/docusaurus-graphql-plugin). Docusaurus incluye soporte para el control de versiones y la localización. Seguimos pudiendo utilizar [DeepL](https://www.deepl.com/) para la traducción automática. Seguimos pudiendo utilizar [Pandoc](https://pandoc.org/) para generar archivos PDF o Word y exportarlos a [Affinity Publisher](https://affinity.serif.com/en-us/publisher/).

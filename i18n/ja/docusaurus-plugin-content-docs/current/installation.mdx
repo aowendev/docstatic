@@ -1,5 +1,6 @@
 ---
-lastmod: '2026-08-11T23:03:29.559Z'
+lastmod: '2026-08-15T15:19:40.672Z'
+modifiedBy: aowendev <aowen@translationcommons.org>
 title: Installation
 tags:
   - software
@@ -25,7 +26,6 @@ translate: false
 approved: false
 published: true
 unlisted: false
-modifiedBy: aowendev <aowen@translationcommons.org>
 ---
 
 # インストール
@@ -40,9 +40,9 @@ docStaticは、ローカル（お使いのコンピュータ上）で実行す�
 
 最も簡単なクラウド設定を行うには、以下のサービスで無料アカウントを作成してください：
 
-* [GitHub](https://github.com/) — コンテンツを保存し、変更を追跡します
-* [TinaCMS](https://tina.io/) — ブラウザベースでの編集を可能にします
-* [LanguageTool](https://languagetool.org/) — オプションで文法およびスタイルチェックを提供します
+* <Url urlKey="github" /> — コンテンツを保存し、変更を追跡します
+* <Url urlKey="tinacms" /> — ブラウザベースでの編集を可能にします
+* <Url urlKey="languagetool" /> — オプションで文法およびスタイルチェックを提供します
 
 代わりに docStatic をローカル（お使いのコンピュータ上）で実行する場合は、「ローカル開発の要件」を参照してください。
 
@@ -55,13 +55,13 @@ docStaticは、ローカル（お使いのコンピュータ上）で実行す�
 統合開発環境（IDE）またはテキストエディタが必要です。オープンソースの選択肢としては、以下の2つがあります：
 
 * [Eclipse](https://eclipseide.org)
-* [VSCodium](https://vscodium.com/)
+* <Url urlKey="vscodium" />
 
 また、ビルドツールとして Node.js、パッケージ管理ツールとして Yarn をインストールする必要があります。
 
 ### Node.js のインストール
 
-[Node.js](https://nodejs.org/) バージョン 22.0 以降をインストールする必要があります。
+<Url urlKey="node-js" /> バージョン 22.0 以降をインストールする必要があります。
 
 Node.jsがすでにインストールされているか確認してください。ターミナル（コマンドプロンプトまたはターミナルアプリ）を開き、次のコマンドを実行します：
 
@@ -73,7 +73,7 @@ node -v
 
 Node.js がインストールされていない場合、または古いバージョンがインストールされている場合は：
 
-1. [Node.js 公式ダウンロード](https://nodejs.org/en/download/prebuilt-installer) ページにアクセスします。
+1. <Url urlKey="nodejs-prebuilt-installer" linkText={[{ lang: "ja", text: "Node.js 公式ダウンロード" }]} /> ページにアクセスします。
 2. お使いのオペレーティングシステムに対応した LTS（長期サポート）バージョンを選択してください。インストーラーには、後の手順で必要となる Node パッケージマネージャー「npm」が含まれています。インストール中は：\* デフォルトのオプションを選択したままにしてください（これには必要な依存関係が含まれています）
    \* インストーラーが完了したら、ターミナルを閉じてから再度開いてください。
 3. （オプション）異なるNodeバージョンを必要とする複数のプロジェクトに取り組んでいる場合は、nvm（[Node Version Manager](https://github.com/nvm-sh/nvm)）をインストールしてください。nvmを使用すると、環境設定を壊すことなくNodeのバージョンを切り替えることができます。
@@ -306,7 +306,7 @@ docstatic
 
 docStaticでは、プロジェクトのコードとドキュメントの両方を単一のリポジトリに格納することができます。 Docusaurusの用語では、この概念を「モノレポ」と呼びます。
 
-詳細については、Docusaurusのドキュメントにある [モノレポ](https://docusaurus.io/docs/installation#monorepos) を参照してください。
+詳細については、Docusaurusのドキュメントにある <Url urlKey="docusaurus-monorepos" /> を参照してください。
 
 ***
 
