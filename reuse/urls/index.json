@@ -1781,13 +1781,33 @@
       "url": [
         {
           "lang": "en",
-          "url": "https://mermaid.ai/open-source/",
+          "url": "https://mermaid.js.org/",
           "_template": "urlTranslation"
         }
       ],
       "defaultText": [
         {
           "lang": "en",
+          "text": "Mermaid",
+          "_template": "textTranslation"
+        },
+        {
+          "lang": "de",
+          "text": "Mermaid",
+          "_template": "textTranslation"
+        },
+        {
+          "lang": "es",
+          "text": "Mermaid",
+          "_template": "textTranslation"
+        },
+        {
+          "lang": "fr",
+          "text": "Mermaid",
+          "_template": "textTranslation"
+        },
+        {
+          "lang": "ja",
           "text": "Mermaid",
           "_template": "textTranslation"
         }
@@ -1865,6 +1885,44 @@
         {
           "lang": "en",
           "text": "Outlook",
+          "_template": "textTranslation"
+        }
+      ],
+      "_template": "urlEntry"
+    },
+    {
+      "key": "react",
+      "url": [
+        {
+          "lang": "en",
+          "url": "https://react.dev/",
+          "_template": "urlTranslation"
+        },
+        {
+          "lang": "de",
+          "url": "https://de.react.dev/",
+          "_template": "urlTranslation"
+        },
+        {
+          "lang": "es",
+          "url": "https://es.react.dev/",
+          "_template": "urlTranslation"
+        },
+        {
+          "lang": "fr",
+          "url": "https://fr.react.dev/",
+          "_template": "urlTranslation"
+        },
+        {
+          "lang": "ja",
+          "url": "https://ja.react.dev/",
+          "_template": "urlTranslation"
+        }
+      ],
+      "defaultText": [
+        {
+          "lang": "en",
+          "text": "React",
           "_template": "textTranslation"
         }
       ],

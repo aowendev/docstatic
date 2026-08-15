@@ -1,16 +1,16 @@
 {
-  "generatedAt": "2026-08-15T12:55:20.933Z",
-  "lastCheckedAt": "2026-08-15T12:55:20.930Z",
+  "generatedAt": "2026-08-15T13:36:45.817Z",
+  "lastCheckedAt": "2026-08-15T13:36:45.815Z",
   "checked": true,
   "stats": {
-    "total": 207,
-    "ok": 173,
+    "total": 218,
+    "ok": 183,
     "broken": 0,
-    "unverified": 0,
+    "unverified": 1,
     "unchecked": 0,
     "skipped": 34,
-    "centralized": 115,
-    "migrationCandidates": 58
+    "centralized": 129,
+    "migrationCandidates": 55
   },
   "files": {
     "/docs/advanced/adding-the-cms-to-an-ipad-home-screen.mdx": {
@@ -77,7 +77,7 @@
       "fileName": "cli.mdx",
       "relativePath": "cli.mdx",
       "title": "CLI",
-      "totalLinks": 6
+      "totalLinks": 5
     },
     "/docs/configuration.mdx": {
       "fileName": "configuration.mdx",
@@ -299,13 +299,13 @@
       "fileName": "installation.mdx",
       "relativePath": "installation.mdx",
       "title": "Installation",
-      "totalLinks": 9
+      "totalLinks": 8
     },
     "/docs/introduction.mdx": {
       "fileName": "introduction.mdx",
       "relativePath": "introduction.mdx",
       "title": "Introduction",
-      "totalLinks": 11
+      "totalLinks": 10
     },
     "/docs/mcp-server-details.mdx": {
       "fileName": "mcp-server-details.mdx",
@@ -374,7 +374,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:13.949Z",
+      "checkedAt": "2026-08-15T13:36:40.106Z",
       "hreflang": false
     },
     {
@@ -388,7 +388,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:13.947Z",
+      "checkedAt": "2026-08-15T13:36:40.104Z",
       "hreflang": false
     },
     {
@@ -402,7 +402,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:13.819Z",
+      "checkedAt": "2026-08-15T13:36:39.948Z",
       "hreflang": false
     },
     {
@@ -416,7 +416,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:14.366Z",
+      "checkedAt": "2026-08-15T13:36:40.568Z",
       "hreflang": false
     },
     {
@@ -430,7 +430,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:13.832Z",
+      "checkedAt": "2026-08-15T13:36:39.946Z",
       "hreflang": false
     },
     {
@@ -444,7 +444,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:13.821Z",
+      "checkedAt": "2026-08-15T13:36:39.948Z",
       "hreflang": false
     },
     {
@@ -458,7 +458,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:14.308Z",
+      "checkedAt": "2026-08-15T13:36:39.933Z",
       "hreflang": true
     },
     {
@@ -472,7 +472,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:13.816Z",
+      "checkedAt": "2026-08-15T13:36:39.944Z",
       "hreflang": true
     },
     {
@@ -487,7 +487,7 @@
       "reason": "HTTP 200",
       "code": 200,
       "redirectedTo": "https://support.microsoft.com/en-US/Outlook/pop-imap-and-smtp-settings-for-outlook-com",
-      "checkedAt": "2026-08-15T12:55:14.168Z",
+      "checkedAt": "2026-08-15T13:36:40.340Z",
       "hreflang": false
     },
     {
@@ -501,7 +501,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:14.134Z",
+      "checkedAt": "2026-08-15T13:36:40.200Z",
       "hreflang": false
     },
     {
@@ -515,7 +515,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:14.441Z",
+      "checkedAt": "2026-08-15T13:36:40.654Z",
       "hreflang": false
     },
     {
@@ -529,7 +529,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:14.232Z",
+      "checkedAt": "2026-08-15T13:36:40.446Z",
       "hreflang": false
     },
     {
@@ -543,7 +543,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:14.123Z",
+      "checkedAt": "2026-08-15T13:36:40.090Z",
       "hreflang": false
     },
     {
@@ -557,7 +557,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:13.992Z",
+      "checkedAt": "2026-08-15T13:36:40.145Z",
       "hreflang": false
     },
     {
@@ -571,7 +571,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:14.733Z",
+      "checkedAt": "2026-08-15T13:36:40.710Z",
       "hreflang": false
     },
     {
@@ -579,7 +579,7 @@
       "url": "guides/dashboards.mdx",
       "type": "markdown",
       "filePath": "/docs/cli.mdx",
-      "line": 14,
+      "line": 15,
       "status": "skipped",
       "reason": "Internal link — checked by the Docusaurus build"
     },
@@ -588,7 +588,7 @@
       "url": "mcp-server.mdx",
       "type": "markdown",
       "filePath": "/docs/cli.mdx",
-      "line": 29,
+      "line": 30,
       "status": "skipped",
       "reason": "Internal link — checked by the Docusaurus build"
     },
@@ -597,14 +597,14 @@
       "url": "https://github.com/PaloAltoNetworks/docusaurus-openapi-docs?tab=readme-ov-file#cli-usage",
       "type": "markdown",
       "filePath": "/docs/cli.mdx",
-      "line": 57,
+      "line": 58,
       "source": "doc",
       "inUrlsJson": false,
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
       "redirectedTo": "https://github.com/PaloAltoNetworks/docusaurus-openapi-docs?tab=readme-ov-file",
-      "checkedAt": "2026-08-15T12:55:14.620Z",
+      "checkedAt": "2026-08-15T13:36:40.641Z",
       "hreflang": false
     },
     {
@@ -612,14 +612,14 @@
       "url": "https://github.com/Zhouzi/docusaurus-graphql-plugin?tab=readme-ov-file#usage",
       "type": "markdown",
       "filePath": "/docs/cli.mdx",
-      "line": 59,
+      "line": 60,
       "source": "doc",
       "inUrlsJson": false,
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
       "redirectedTo": "https://github.com/Zhouzi/docusaurus-graphql-plugin?tab=readme-ov-file",
-      "checkedAt": "2026-08-15T12:55:14.950Z",
+      "checkedAt": "2026-08-15T13:36:40.605Z",
       "hreflang": false
     },
     {
@@ -627,23 +627,9 @@
       "url": "installation.mdx",
       "type": "markdown",
       "filePath": "/docs/cli.mdx",
-      "line": 65,
+      "line": 66,
       "status": "skipped",
       "reason": "Internal link — checked by the Docusaurus build"
-    },
-    {
-      "text": "CLI",
-      "url": "https://biomejs.dev/reference/cli/",
-      "type": "markdown",
-      "filePath": "/docs/cli.mdx",
-      "line": 94,
-      "source": "doc",
-      "inUrlsJson": false,
-      "status": "ok",
-      "reason": "HTTP 200",
-      "code": 200,
-      "checkedAt": "2026-08-15T12:55:14.299Z",
-      "hreflang": true
     },
     {
       "text": "GitHub Pages",
@@ -656,7 +642,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:14.257Z",
+      "checkedAt": "2026-08-15T13:36:40.224Z",
       "hreflang": true
     },
     {
@@ -733,7 +719,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:14.382Z",
+      "checkedAt": "2026-08-15T13:36:40.328Z",
       "hreflang": false
     },
     {
@@ -747,7 +733,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:14.334Z",
+      "checkedAt": "2026-08-15T13:36:40.373Z",
       "hreflang": false
     },
     {
@@ -770,7 +756,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:14.351Z",
+      "checkedAt": "2026-08-15T13:36:40.382Z",
       "hreflang": false
     },
     {
@@ -784,7 +770,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:14.502Z",
+      "checkedAt": "2026-08-15T13:36:40.552Z",
       "hreflang": false
     },
     {
@@ -798,7 +784,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:14.398Z",
+      "checkedAt": "2026-08-15T13:36:40.639Z",
       "hreflang": false
     },
     {
@@ -812,7 +798,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:14.542Z",
+      "checkedAt": "2026-08-15T13:36:40.587Z",
       "hreflang": false
     },
     {
@@ -952,7 +938,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:14.563Z",
+      "checkedAt": "2026-08-15T13:36:40.766Z",
       "hreflang": false
     },
     {
@@ -966,7 +952,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:14.547Z",
+      "checkedAt": "2026-08-15T13:36:40.699Z",
       "hreflang": false
     },
     {
@@ -989,7 +975,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:14.565Z",
+      "checkedAt": "2026-08-15T13:36:40.712Z",
       "hreflang": false
     },
     {
@@ -1021,7 +1007,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:14.791Z",
+      "checkedAt": "2026-08-15T13:36:40.780Z",
       "hreflang": false
     },
     {
@@ -1036,7 +1022,7 @@
       "reason": "HTTP 200",
       "code": 200,
       "redirectedTo": "https://docstatic.com/docs/guides/markdown-features/toc",
-      "checkedAt": "2026-08-15T12:55:14.680Z",
+      "checkedAt": "2026-08-15T13:36:40.788Z",
       "hreflang": false
     },
     {
@@ -1059,7 +1045,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:15.083Z",
+      "checkedAt": "2026-08-15T13:36:40.721Z",
       "hreflang": false
     },
     {
@@ -1074,7 +1060,7 @@
       "reason": "HTTP 200",
       "code": 200,
       "redirectedTo": "https://vale.sh/",
-      "checkedAt": "2026-08-15T12:55:15.122Z",
+      "checkedAt": "2026-08-15T13:36:40.758Z",
       "hreflang": false
     },
     {
@@ -1088,7 +1074,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:15.636Z",
+      "checkedAt": "2026-08-15T13:36:40.816Z",
       "hreflang": false
     },
     {
@@ -1102,7 +1088,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:15.653Z",
+      "checkedAt": "2026-08-15T13:36:40.834Z",
       "hreflang": false
     },
     {
@@ -1116,7 +1102,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:15.887Z",
+      "checkedAt": "2026-08-15T13:36:41.041Z",
       "hreflang": false
     },
     {
@@ -1131,23 +1117,8 @@
       "reason": "HTTP 200",
       "code": 200,
       "redirectedTo": "https://eclipseide.org/",
-      "checkedAt": "2026-08-15T12:55:16.193Z",
+      "checkedAt": "2026-08-15T13:36:41.160Z",
       "hreflang": false
-    },
-    {
-      "text": "Node.js",
-      "url": "https://nodejs.org/",
-      "type": "markdown",
-      "filePath": "/docs/installation.mdx",
-      "line": 35,
-      "source": "doc",
-      "inUrlsJson": false,
-      "status": "ok",
-      "reason": "HTTP 200",
-      "code": 200,
-      "redirectedTo": "https://nodejs.org/en",
-      "checkedAt": "2026-08-15T12:55:15.739Z",
-      "hreflang": true
     },
     {
       "text": "official Node.js downloads",
@@ -1161,7 +1132,7 @@
       "reason": "HTTP 200",
       "code": 200,
       "redirectedTo": "https://nodejs.org/en/download",
-      "checkedAt": "2026-08-15T12:55:15.778Z",
+      "checkedAt": "2026-08-15T13:36:40.980Z",
       "hreflang": true
     },
     {
@@ -1175,7 +1146,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:16.399Z",
+      "checkedAt": "2026-08-15T13:36:41.253Z",
       "hreflang": false
     },
     {
@@ -1198,7 +1169,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:16.216Z",
+      "checkedAt": "2026-08-15T13:36:41.448Z",
       "hreflang": false
     },
     {
@@ -1230,7 +1201,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:16.390Z",
+      "checkedAt": "2026-08-15T13:36:40.929Z",
       "hreflang": false
     },
     {
@@ -1244,7 +1215,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:15.754Z",
+      "checkedAt": "2026-08-15T13:36:40.903Z",
       "hreflang": true
     },
     {
@@ -1258,7 +1229,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:15.918Z",
+      "checkedAt": "2026-08-15T13:36:41.004Z",
       "hreflang": false
     },
     {
@@ -1272,22 +1243,8 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:15.798Z",
+      "checkedAt": "2026-08-15T13:36:41.008Z",
       "hreflang": false
-    },
-    {
-      "text": "React",
-      "url": "https://react.dev/",
-      "type": "markdown",
-      "filePath": "/docs/introduction.mdx",
-      "line": 8,
-      "source": "doc",
-      "inUrlsJson": false,
-      "status": "ok",
-      "reason": "HTTP 200",
-      "code": 200,
-      "checkedAt": "2026-08-15T12:55:15.846Z",
-      "hreflang": true
     },
     {
       "text": "static site generator",
@@ -1300,7 +1257,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:15.991Z",
+      "checkedAt": "2026-08-15T13:36:41.007Z",
       "hreflang": true
     },
     {
@@ -1314,7 +1271,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:15.928Z",
+      "checkedAt": "2026-08-15T13:36:41.056Z",
       "hreflang": true
     },
     {
@@ -1328,7 +1285,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:16.134Z",
+      "checkedAt": "2026-08-15T13:36:41.093Z",
       "hreflang": false
     },
     {
@@ -1342,7 +1299,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:16.224Z",
+      "checkedAt": "2026-08-15T13:36:42.099Z",
       "hreflang": false
     },
     {
@@ -1365,7 +1322,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:16.045Z",
+      "checkedAt": "2026-08-15T13:36:41.803Z",
       "hreflang": false
     },
     {
@@ -1379,7 +1336,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:16.028Z",
+      "checkedAt": "2026-08-15T13:36:41.083Z",
       "hreflang": false
     },
     {
@@ -1402,7 +1359,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:16.451Z",
+      "checkedAt": "2026-08-15T13:36:41.919Z",
       "hreflang": false
     },
     {
@@ -1416,7 +1373,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:16.559Z",
+      "checkedAt": "2026-08-15T13:36:41.701Z",
       "hreflang": false
     },
     {
@@ -1431,7 +1388,7 @@
       "reason": "HTTP 200",
       "code": 200,
       "redirectedTo": "https://github.com/oramasearch/orama/tree/main/packages/plugin-docusaurus-v3",
-      "checkedAt": "2026-08-15T12:55:16.738Z",
+      "checkedAt": "2026-08-15T13:36:41.637Z",
       "hreflang": false
     },
     {
@@ -1445,7 +1402,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:16.511Z",
+      "checkedAt": "2026-08-15T13:36:41.225Z",
       "hreflang": false
     },
     {
@@ -1459,7 +1416,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:16.629Z",
+      "checkedAt": "2026-08-15T13:36:41.360Z",
       "hreflang": false
     },
     {
@@ -1473,7 +1430,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:16.349Z",
+      "checkedAt": "2026-08-15T13:36:41.395Z",
       "hreflang": false
     },
     {
@@ -1487,8 +1444,64 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:16.920Z",
+      "checkedAt": "2026-08-15T13:36:41.446Z",
       "hreflang": false
+    },
+    {
+      "text": "biome-cli",
+      "url": "https://biomejs.dev/reference/cli/",
+      "type": "urls-json",
+      "source": "urls-json",
+      "urlKey": "biome-cli",
+      "lang": "en",
+      "filePath": "reuse/urls/index.json",
+      "line": null,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-15T13:36:41.882Z"
+    },
+    {
+      "text": "biome-cli",
+      "url": "https://biomejs.dev/es/reference/cli/",
+      "type": "urls-json",
+      "source": "urls-json",
+      "urlKey": "biome-cli",
+      "lang": "es",
+      "filePath": "reuse/urls/index.json",
+      "line": null,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-15T13:36:41.891Z"
+    },
+    {
+      "text": "biome-cli",
+      "url": "https://biomejs.dev/fr/reference/cli/",
+      "type": "urls-json",
+      "source": "urls-json",
+      "urlKey": "biome-cli",
+      "lang": "fr",
+      "filePath": "reuse/urls/index.json",
+      "line": null,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-15T13:36:41.568Z"
+    },
+    {
+      "text": "biome-cli",
+      "url": "https://biomejs.dev/ja/reference/cli/",
+      "type": "urls-json",
+      "source": "urls-json",
+      "urlKey": "biome-cli",
+      "lang": "ja",
+      "filePath": "reuse/urls/index.json",
+      "line": null,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-15T13:36:42.209Z"
     },
     {
       "text": "cals-table-model",
@@ -1502,7 +1515,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:16.751Z"
+      "checkedAt": "2026-08-15T13:36:41.970Z"
     },
     {
       "text": "docusaurus",
@@ -1516,7 +1529,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:16.453Z"
+      "checkedAt": "2026-08-15T13:36:41.757Z"
     },
     {
       "text": "docusaurus",
@@ -1530,7 +1543,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:16.800Z"
+      "checkedAt": "2026-08-15T13:36:41.816Z"
     },
     {
       "text": "docusaurus-advanced-guides",
@@ -1544,7 +1557,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:17.843Z"
+      "checkedAt": "2026-08-15T13:36:42.010Z"
     },
     {
       "text": "docusaurus-advanced-guides",
@@ -1558,7 +1571,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:17.838Z"
+      "checkedAt": "2026-08-15T13:36:42.019Z"
     },
     {
       "text": "docusaurus-autogenerated",
@@ -1573,7 +1586,7 @@
       "reason": "HTTP 200",
       "code": 200,
       "redirectedTo": "https://docusaurus.io/docs/sidebar/autogenerated",
-      "checkedAt": "2026-08-15T12:55:16.619Z"
+      "checkedAt": "2026-08-15T13:36:41.948Z"
     },
     {
       "text": "docusaurus-autogenerated",
@@ -1588,7 +1601,7 @@
       "reason": "HTTP 200",
       "code": 200,
       "redirectedTo": "https://docusaurus.io/fr/docs/sidebar/autogenerated",
-      "checkedAt": "2026-08-15T12:55:16.677Z"
+      "checkedAt": "2026-08-15T13:36:41.952Z"
     },
     {
       "text": "docusaurus-blog",
@@ -1602,7 +1615,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:16.681Z"
+      "checkedAt": "2026-08-15T13:36:41.980Z"
     },
     {
       "text": "docusaurus-blog",
@@ -1616,7 +1629,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:17.443Z"
+      "checkedAt": "2026-08-15T13:36:42.005Z"
     },
     {
       "text": "docusaurus-blog-plugin-api-reference",
@@ -1630,7 +1643,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:17.334Z"
+      "checkedAt": "2026-08-15T13:36:42.015Z"
     },
     {
       "text": "docusaurus-blog-plugin-api-reference",
@@ -1644,7 +1657,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:17.393Z"
+      "checkedAt": "2026-08-15T13:36:42.028Z"
     },
     {
       "text": "docusaurus-browser-support",
@@ -1658,7 +1671,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:17.441Z"
+      "checkedAt": "2026-08-15T13:36:42.195Z"
     },
     {
       "text": "docusaurus-browser-support",
@@ -1672,7 +1685,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:18.203Z"
+      "checkedAt": "2026-08-15T13:36:42.060Z"
     },
     {
       "text": "docusaurus-cli",
@@ -1686,7 +1699,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:16.981Z"
+      "checkedAt": "2026-08-15T13:36:42.847Z"
     },
     {
       "text": "docusaurus-cli",
@@ -1700,7 +1713,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:17.038Z"
+      "checkedAt": "2026-08-15T13:36:42.500Z"
     },
     {
       "text": "docusaurus-configuration",
@@ -1714,7 +1727,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:17.096Z"
+      "checkedAt": "2026-08-15T13:36:42.076Z"
     },
     {
       "text": "docusaurus-configuration",
@@ -1728,7 +1741,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:17.156Z"
+      "checkedAt": "2026-08-15T13:36:42.101Z"
     },
     {
       "text": "docusaurus-create-a-doc",
@@ -1742,7 +1755,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:17.849Z"
+      "checkedAt": "2026-08-15T13:36:42.125Z"
     },
     {
       "text": "docusaurus-create-a-doc",
@@ -1756,7 +1769,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:18.117Z"
+      "checkedAt": "2026-08-15T13:36:42.152Z"
     },
     {
       "text": "docusaurus-creating-pages",
@@ -1770,7 +1783,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:17.447Z"
+      "checkedAt": "2026-08-15T13:36:42.170Z"
     },
     {
       "text": "docusaurus-creating-pages",
@@ -1784,7 +1797,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:17.649Z"
+      "checkedAt": "2026-08-15T13:36:42.161Z"
     },
     {
       "text": "docusaurus-deployment",
@@ -1799,7 +1812,7 @@
       "reason": "HTTP 200",
       "code": 200,
       "redirectedTo": "https://docusaurus.io/docs/deployment",
-      "checkedAt": "2026-08-15T12:55:17.504Z"
+      "checkedAt": "2026-08-15T13:36:42.187Z"
     },
     {
       "text": "docusaurus-deployment",
@@ -1814,7 +1827,7 @@
       "reason": "HTTP 200",
       "code": 200,
       "redirectedTo": "https://docusaurus.io/fr/docs/deployment",
-      "checkedAt": "2026-08-15T12:55:17.655Z"
+      "checkedAt": "2026-08-15T13:36:42.365Z"
     },
     {
       "text": "docusaurus-diagrams",
@@ -1828,7 +1841,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:18.501Z"
+      "checkedAt": "2026-08-15T13:36:42.219Z"
     },
     {
       "text": "docusaurus-diagrams",
@@ -1842,7 +1855,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:17.928Z"
+      "checkedAt": "2026-08-15T13:36:42.233Z"
     },
     {
       "text": "docusaurus-docs-introduction",
@@ -1856,7 +1869,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:17.721Z"
+      "checkedAt": "2026-08-15T13:36:42.398Z"
     },
     {
       "text": "docusaurus-docs-introduction",
@@ -1870,7 +1883,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:17.794Z"
+      "checkedAt": "2026-08-15T13:36:42.260Z"
     },
     {
       "text": "docusaurus-docs-plugin-api-reference",
@@ -1884,7 +1897,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:18.201Z"
+      "checkedAt": "2026-08-15T13:36:42.266Z"
     },
     {
       "text": "docusaurus-docs-plugin-api-reference",
@@ -1898,7 +1911,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:18.578Z"
+      "checkedAt": "2026-08-15T13:36:43.081Z"
     },
     {
       "text": "docusaurus-guides",
@@ -1912,7 +1925,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:17.903Z"
+      "checkedAt": "2026-08-15T13:36:42.295Z"
     },
     {
       "text": "docusaurus-guides",
@@ -1926,7 +1939,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:17.906Z"
+      "checkedAt": "2026-08-15T13:36:42.318Z"
     },
     {
       "text": "docusaurus-head-metadata",
@@ -1940,7 +1953,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:18.192Z"
+      "checkedAt": "2026-08-15T13:36:42.463Z"
     },
     {
       "text": "docusaurus-head-metadata",
@@ -1954,7 +1967,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:17.965Z"
+      "checkedAt": "2026-08-15T13:36:42.614Z"
     },
     {
       "text": "docusaurus-headings-and-table-of-contents",
@@ -1968,7 +1981,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:17.988Z"
+      "checkedAt": "2026-08-15T13:36:43.106Z"
     },
     {
       "text": "docusaurus-headings-and-table-of-contents",
@@ -1982,7 +1995,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:18.268Z"
+      "checkedAt": "2026-08-15T13:36:42.428Z"
     },
     {
       "text": "docusaurus-i18n-introduction",
@@ -1996,7 +2009,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:18.198Z"
+      "checkedAt": "2026-08-15T13:36:42.458Z"
     },
     {
       "text": "docusaurus-i18n-introduction",
@@ -2010,7 +2023,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:18.180Z"
+      "checkedAt": "2026-08-15T13:36:42.496Z"
     },
     {
       "text": "docusaurus-markdown-features",
@@ -2024,7 +2037,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:18.240Z"
+      "checkedAt": "2026-08-15T13:36:42.663Z"
     },
     {
       "text": "docusaurus-markdown-features",
@@ -2038,7 +2051,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:18.245Z"
+      "checkedAt": "2026-08-15T13:36:42.775Z"
     },
     {
       "text": "docusaurus-markdown-links",
@@ -2052,7 +2065,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:18.251Z"
+      "checkedAt": "2026-08-15T13:36:42.701Z"
     },
     {
       "text": "docusaurus-markdown-links",
@@ -2066,7 +2079,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:18.270Z"
+      "checkedAt": "2026-08-15T13:36:43.566Z"
     },
     {
       "text": "docusaurus-mdx-and-react",
@@ -2080,7 +2093,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:18.998Z"
+      "checkedAt": "2026-08-15T13:36:42.668Z"
     },
     {
       "text": "docusaurus-mdx-and-react",
@@ -2094,7 +2107,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:18.293Z"
+      "checkedAt": "2026-08-15T13:36:42.737Z"
     },
     {
       "text": "docusaurus-mdx-plugins",
@@ -2108,7 +2121,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:18.581Z"
+      "checkedAt": "2026-08-15T13:36:42.869Z"
     },
     {
       "text": "docusaurus-mdx-plugins",
@@ -2122,7 +2135,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:18.461Z"
+      "checkedAt": "2026-08-15T13:36:42.959Z"
     },
     {
       "text": "docusaurus-monorepos",
@@ -2137,7 +2150,7 @@
       "reason": "HTTP 200",
       "code": 200,
       "redirectedTo": "https://docusaurus.io/docs/installation",
-      "checkedAt": "2026-08-15T12:55:18.340Z"
+      "checkedAt": "2026-08-15T13:36:42.799Z"
     },
     {
       "text": "docusaurus-monorepos",
@@ -2152,7 +2165,7 @@
       "reason": "HTTP 200",
       "code": 200,
       "redirectedTo": "https://docusaurus.io/fr/docs/installation",
-      "checkedAt": "2026-08-15T12:55:18.478Z"
+      "checkedAt": "2026-08-15T13:36:42.830Z"
     },
     {
       "text": "docusaurus-pages-plugin",
@@ -2166,7 +2179,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:18.360Z"
+      "checkedAt": "2026-08-15T13:36:42.863Z"
     },
     {
       "text": "docusaurus-pages-plugin",
@@ -2180,7 +2193,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:18.839Z"
+      "checkedAt": "2026-08-15T13:36:42.887Z"
     },
     {
       "text": "docusaurus-search",
@@ -2195,7 +2208,7 @@
       "reason": "HTTP 200",
       "code": 200,
       "redirectedTo": "https://docusaurus.io/docs/search",
-      "checkedAt": "2026-08-15T12:55:18.424Z"
+      "checkedAt": "2026-08-15T13:36:43.645Z"
     },
     {
       "text": "docusaurus-search",
@@ -2210,7 +2223,7 @@
       "reason": "HTTP 200",
       "code": 200,
       "redirectedTo": "https://docusaurus.io/fr/docs/search",
-      "checkedAt": "2026-08-15T12:55:18.833Z"
+      "checkedAt": "2026-08-15T13:36:42.931Z"
     },
     {
       "text": "docusaurus-static-assets",
@@ -2224,7 +2237,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:18.532Z"
+      "checkedAt": "2026-08-15T13:36:42.924Z"
     },
     {
       "text": "docusaurus-static-assets",
@@ -2238,7 +2251,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:18.542Z"
+      "checkedAt": "2026-08-15T13:36:42.937Z"
     },
     {
       "text": "docusaurus-tabs",
@@ -2252,7 +2265,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:18.701Z"
+      "checkedAt": "2026-08-15T13:36:43.206Z"
     },
     {
       "text": "docusaurus-tabs",
@@ -2266,7 +2279,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:18.592Z"
+      "checkedAt": "2026-08-15T13:36:43.126Z"
     },
     {
       "text": "docusaurus-using-plugins",
@@ -2280,7 +2293,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:18.736Z"
+      "checkedAt": "2026-08-15T13:36:43.002Z"
     },
     {
       "text": "docusaurus-using-plugins",
@@ -2294,7 +2307,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:19.747Z"
+      "checkedAt": "2026-08-15T13:36:43.017Z"
     },
     {
       "text": "github",
@@ -2308,7 +2321,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:18.605Z"
+      "checkedAt": "2026-08-15T13:36:43.026Z"
     },
     {
       "text": "github-actions",
@@ -2322,7 +2335,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:18.699Z"
+      "checkedAt": "2026-08-15T13:36:43.039Z"
     },
     {
       "text": "github-actions",
@@ -2336,7 +2349,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:18.627Z"
+      "checkedAt": "2026-08-15T13:36:43.049Z"
     },
     {
       "text": "github-actions",
@@ -2350,7 +2363,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:18.645Z"
+      "checkedAt": "2026-08-15T13:36:43.060Z"
     },
     {
       "text": "github-actions",
@@ -2364,7 +2377,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:18.663Z"
+      "checkedAt": "2026-08-15T13:36:43.070Z"
     },
     {
       "text": "github-actions",
@@ -2378,7 +2391,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:18.663Z"
+      "checkedAt": "2026-08-15T13:36:43.070Z"
     },
     {
       "text": "icloud-mailserver",
@@ -2392,7 +2405,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:18.700Z"
+      "checkedAt": "2026-08-15T13:36:43.094Z"
     },
     {
       "text": "icloud-mailserver",
@@ -2406,7 +2419,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:18.744Z"
+      "checkedAt": "2026-08-15T13:36:43.115Z"
     },
     {
       "text": "icloud-mailserver",
@@ -2420,7 +2433,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:18.730Z"
+      "checkedAt": "2026-08-15T13:36:43.118Z"
     },
     {
       "text": "icloud-mailserver",
@@ -2434,7 +2447,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:18.740Z"
+      "checkedAt": "2026-08-15T13:36:43.119Z"
     },
     {
       "text": "infima",
@@ -2448,7 +2461,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:19.528Z"
+      "checkedAt": "2026-08-15T13:36:43.926Z"
     },
     {
       "text": "katex",
@@ -2463,7 +2476,7 @@
       "reason": "HTTP 200",
       "code": 200,
       "redirectedTo": "https://katex.org/",
-      "checkedAt": "2026-08-15T12:55:18.885Z"
+      "checkedAt": "2026-08-15T13:36:43.350Z"
     },
     {
       "text": "languagetool",
@@ -2477,7 +2490,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:19.076Z"
+      "checkedAt": "2026-08-15T13:36:43.437Z"
     },
     {
       "text": "languagetool",
@@ -2491,7 +2504,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:19.113Z"
+      "checkedAt": "2026-08-15T13:36:43.384Z"
     },
     {
       "text": "languagetool",
@@ -2505,7 +2518,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:19.160Z"
+      "checkedAt": "2026-08-15T13:36:43.341Z"
     },
     {
       "text": "languagetool",
@@ -2519,7 +2532,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:19.157Z"
+      "checkedAt": "2026-08-15T13:36:43.485Z"
     },
     {
       "text": "languagetool-business",
@@ -2533,7 +2546,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:19.176Z"
+      "checkedAt": "2026-08-15T13:36:43.636Z"
     },
     {
       "text": "languagetool-business",
@@ -2547,7 +2560,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:19.324Z"
+      "checkedAt": "2026-08-15T13:36:43.649Z"
     },
     {
       "text": "languagetool-business",
@@ -2561,7 +2574,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:19.301Z"
+      "checkedAt": "2026-08-15T13:36:43.661Z"
     },
     {
       "text": "languagetool-business",
@@ -2575,7 +2588,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:19.339Z"
+      "checkedAt": "2026-08-15T13:36:43.623Z"
     },
     {
       "text": "langaugetool-premium",
@@ -2589,7 +2602,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:19.605Z"
+      "checkedAt": "2026-08-15T13:36:44.071Z"
     },
     {
       "text": "langaugetool-premium",
@@ -2603,7 +2616,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:19.457Z"
+      "checkedAt": "2026-08-15T13:36:43.848Z"
     },
     {
       "text": "langaugetool-premium",
@@ -2617,7 +2630,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:19.399Z"
+      "checkedAt": "2026-08-15T13:36:43.812Z"
     },
     {
       "text": "langaugetool-premium",
@@ -2631,7 +2644,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:19.533Z"
+      "checkedAt": "2026-08-15T13:36:43.818Z"
     },
     {
       "text": "langaugetool-register",
@@ -2645,7 +2658,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:19.534Z"
+      "checkedAt": "2026-08-15T13:36:43.819Z"
     },
     {
       "text": "langaugetool-register",
@@ -2659,7 +2672,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:19.658Z"
+      "checkedAt": "2026-08-15T13:36:43.923Z"
     },
     {
       "text": "langaugetool-register",
@@ -2673,7 +2686,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:19.609Z"
+      "checkedAt": "2026-08-15T13:36:43.837Z"
     },
     {
       "text": "langaugetool-register",
@@ -2687,7 +2700,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:19.669Z"
+      "checkedAt": "2026-08-15T13:36:43.990Z"
     },
     {
       "text": "langaugetool-development",
@@ -2701,7 +2714,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:19.795Z"
+      "checkedAt": "2026-08-15T13:36:44.022Z"
     },
     {
       "text": "langaugetool-development",
@@ -2715,7 +2728,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:19.749Z"
+      "checkedAt": "2026-08-15T13:36:44.097Z"
     },
     {
       "text": "langaugetool-development",
@@ -2729,7 +2742,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:19.743Z"
+      "checkedAt": "2026-08-15T13:36:44.139Z"
     },
     {
       "text": "langaugetool-development",
@@ -2743,7 +2756,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:19.808Z"
+      "checkedAt": "2026-08-15T13:36:44.047Z"
     },
     {
       "text": "lunr",
@@ -2757,7 +2770,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:19.667Z"
+      "checkedAt": "2026-08-15T13:36:43.972Z"
     },
     {
       "text": "markprompt",
@@ -2771,21 +2784,92 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:20.205Z"
+      "checkedAt": "2026-08-15T13:36:44.350Z"
     },
     {
       "text": "mermaid",
-      "url": "https://mermaid.ai/open-source/",
+      "url": "https://mermaid.js.org/",
       "type": "urls-json",
       "source": "urls-json",
       "urlKey": "mermaid",
       "lang": "en",
       "filePath": "reuse/urls/index.json",
       "line": null,
+      "status": "unverified",
+      "reason": "Domain did not resolve — check DNS, then the link",
+      "code": null,
+      "checkedAt": "2026-08-15T13:36:44.200Z"
+    },
+    {
+      "text": "node-js",
+      "url": "https://nodejs.org/en",
+      "type": "urls-json",
+      "source": "urls-json",
+      "urlKey": "node-js",
+      "lang": "en",
+      "filePath": "reuse/urls/index.json",
+      "line": null,
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:19.714Z"
+      "checkedAt": "2026-08-15T13:36:44.045Z"
+    },
+    {
+      "text": "node-js",
+      "url": "https://nodejs.org/de",
+      "type": "urls-json",
+      "source": "urls-json",
+      "urlKey": "node-js",
+      "lang": "de",
+      "filePath": "reuse/urls/index.json",
+      "line": null,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "redirectedTo": "https://nodejs.org/en/",
+      "checkedAt": "2026-08-15T13:36:44.114Z"
+    },
+    {
+      "text": "node-js",
+      "url": "https://nodejs.org/es",
+      "type": "urls-json",
+      "source": "urls-json",
+      "urlKey": "node-js",
+      "lang": "es",
+      "filePath": "reuse/urls/index.json",
+      "line": null,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-15T13:36:44.082Z"
+    },
+    {
+      "text": "node-js",
+      "url": "https://nodejs.org/fr",
+      "type": "urls-json",
+      "source": "urls-json",
+      "urlKey": "node-js",
+      "lang": "fr",
+      "filePath": "reuse/urls/index.json",
+      "line": null,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-15T13:36:44.235Z"
+    },
+    {
+      "text": "node-js",
+      "url": "https://nodejs.org/ja",
+      "type": "urls-json",
+      "source": "urls-json",
+      "urlKey": "node-js",
+      "lang": "ja",
+      "filePath": "reuse/urls/index.json",
+      "line": null,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-15T13:36:44.176Z"
     },
     {
       "text": "outlook",
@@ -2799,7 +2883,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:19.993Z"
+      "checkedAt": "2026-08-15T13:36:44.341Z"
     },
     {
       "text": "outlook",
@@ -2813,7 +2897,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:20.200Z"
+      "checkedAt": "2026-08-15T13:36:44.337Z"
     },
     {
       "text": "outlook",
@@ -2827,7 +2911,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:20.000Z"
+      "checkedAt": "2026-08-15T13:36:44.435Z"
     },
     {
       "text": "outlook",
@@ -2841,7 +2925,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:20.030Z"
+      "checkedAt": "2026-08-15T13:36:44.439Z"
     },
     {
       "text": "outlook",
@@ -2855,7 +2939,77 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:20.128Z"
+      "checkedAt": "2026-08-15T13:36:44.502Z"
+    },
+    {
+      "text": "react",
+      "url": "https://react.dev/",
+      "type": "urls-json",
+      "source": "urls-json",
+      "urlKey": "react",
+      "lang": "en",
+      "filePath": "reuse/urls/index.json",
+      "line": null,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-15T13:36:44.276Z"
+    },
+    {
+      "text": "react",
+      "url": "https://de.react.dev/",
+      "type": "urls-json",
+      "source": "urls-json",
+      "urlKey": "react",
+      "lang": "de",
+      "filePath": "reuse/urls/index.json",
+      "line": null,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-15T13:36:44.291Z"
+    },
+    {
+      "text": "react",
+      "url": "https://es.react.dev/",
+      "type": "urls-json",
+      "source": "urls-json",
+      "urlKey": "react",
+      "lang": "es",
+      "filePath": "reuse/urls/index.json",
+      "line": null,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-15T13:36:44.332Z"
+    },
+    {
+      "text": "react",
+      "url": "https://fr.react.dev/",
+      "type": "urls-json",
+      "source": "urls-json",
+      "urlKey": "react",
+      "lang": "fr",
+      "filePath": "reuse/urls/index.json",
+      "line": null,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-15T13:36:44.347Z"
+    },
+    {
+      "text": "react",
+      "url": "https://ja.react.dev/",
+      "type": "urls-json",
+      "source": "urls-json",
+      "urlKey": "react",
+      "lang": "ja",
+      "filePath": "reuse/urls/index.json",
+      "line": null,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-15T13:36:44.382Z"
     },
     {
       "text": "tinacms",
@@ -2869,7 +3023,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:19.923Z"
+      "checkedAt": "2026-08-15T13:36:44.482Z"
     },
     {
       "text": "vscodium",
@@ -2883,7 +3037,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:20.029Z"
+      "checkedAt": "2026-08-15T13:36:44.514Z"
     },
     {
       "text": "wikipedia-context-sensitive-help",
@@ -2897,7 +3051,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:20.116Z"
+      "checkedAt": "2026-08-15T13:36:44.418Z"
     },
     {
       "text": "wikipedia-context-sensitive-help",
@@ -2911,7 +3065,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:20.354Z"
+      "checkedAt": "2026-08-15T13:36:44.427Z"
     },
     {
       "text": "wikipedia-i18n",
@@ -2925,7 +3079,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:20.070Z"
+      "checkedAt": "2026-08-15T13:36:44.474Z"
     },
     {
       "text": "wikipedia-i18n",
@@ -2939,7 +3093,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:20.348Z"
+      "checkedAt": "2026-08-15T13:36:44.504Z"
     },
     {
       "text": "wikipedia-i18n",
@@ -2953,7 +3107,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:20.392Z"
+      "checkedAt": "2026-08-15T13:36:44.520Z"
     },
     {
       "text": "wikipedia-i18n",
@@ -2967,7 +3121,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:20.372Z"
+      "checkedAt": "2026-08-15T13:36:45.686Z"
     },
     {
       "text": "wikipedia-i18n",
@@ -2981,7 +3135,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:20.404Z"
+      "checkedAt": "2026-08-15T13:36:44.525Z"
     },
     {
       "text": "wikipedia-information-architecture",
@@ -2995,7 +3149,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:20.202Z"
+      "checkedAt": "2026-08-15T13:36:44.557Z"
     },
     {
       "text": "wikipedia-information-architecture",
@@ -3009,7 +3163,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:20.479Z"
+      "checkedAt": "2026-08-15T13:36:44.562Z"
     },
     {
       "text": "wikipedia-information-architecture",
@@ -3023,7 +3177,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:20.271Z"
+      "checkedAt": "2026-08-15T13:36:44.573Z"
     },
     {
       "text": "wikipedia-information-architecture",
@@ -3037,7 +3191,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:20.664Z"
+      "checkedAt": "2026-08-15T13:36:45.815Z"
     },
     {
       "text": "wikipedia-information-architecture",
@@ -3051,7 +3205,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:20.613Z"
+      "checkedAt": "2026-08-15T13:36:44.584Z"
     },
     {
       "text": "wikipedia-online-help",
@@ -3065,7 +3219,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:20.930Z"
+      "checkedAt": "2026-08-15T13:36:44.593Z"
     },
     {
       "text": "wikipedia-online-help",
@@ -3079,7 +3233,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:20.428Z"
+      "checkedAt": "2026-08-15T13:36:44.613Z"
     },
     {
       "text": "wikipedia-online-help",
@@ -3093,7 +3247,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:20.851Z"
+      "checkedAt": "2026-08-15T13:36:44.934Z"
     },
     {
       "text": "wikipedia-online-help",
@@ -3107,7 +3261,7 @@
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-15T12:55:20.798Z"
+      "checkedAt": "2026-08-15T13:36:44.641Z"
     }
   ]
 }
