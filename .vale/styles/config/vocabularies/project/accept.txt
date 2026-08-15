@@ -40,3 +40,6 @@ pgwide
 thead
 tbody
 tfoot
+[Hh]ardcoded?
+hostname
+hreflang

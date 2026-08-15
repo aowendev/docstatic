@@ -14,9 +14,12 @@ import {
   classifyUrl,
   collectUrlsJsonLinks,
   extractLinksFromRichText,
+  isWikipediaUrl,
   mapWithConcurrency,
   normalizeUrl,
+  probeHreflangInBrowser,
   probeUrlInBrowser,
+  replaceLinkNodeWithUrl,
 } from "../../utils/linkChecker";
 import { useTinaTask } from "./lib/useTinaTask";
 
@@ -28,21 +31,32 @@ const REFRESH_CONCURRENCY = 6;
 
 const DEFAULT_LOCALE = docusaurusData.languages?.default || "en";
 
-// Short, readable key from a candidate's link text (falling back to its
-// host), unique against whatever keys already exist in the urls[] list.
+const slugify = (s) =>
+  s
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+
+// Short, readable key from a candidate's link text, falling back to its URL
+// when there's no text — host plus the last path segment when the URL has
+// one, not host alone. Two different pages on the same site with no link
+// text (e.g. two Apple support articles) would otherwise both fall back to
+// the same host and only be told apart by an arbitrary "-2" suffix; the path
+// segment keeps the key meaningful instead. Made unique against whatever
+// keys already exist in the urls[] list.
 function suggestKey(candidate, existingKeys) {
-  const base =
-    (candidate.text || "")
-      .toLowerCase()
-      .replace(/[^a-z0-9]+/g, "-")
-      .replace(/^-+|-+$/g, "") ||
-    (() => {
-      try {
-        return new URL(candidate.url).hostname.replace(/^www\./, "");
-      } catch {
-        return "link";
-      }
-    })();
+  const fromText = slugify(candidate.text || "");
+  const fromUrl = (() => {
+    try {
+      const parsed = new URL(candidate.url);
+      const host = parsed.hostname.replace(/^www\./, "");
+      const lastSegment = parsed.pathname.split("/").filter(Boolean).pop();
+      return slugify(lastSegment ? `${host}-${lastSegment}` : host);
+    } catch {
+      return "link";
+    }
+  })();
+  const base = fromText || fromUrl || "link";
   let key = base;
   let n = 2;
   while (existingKeys.has(key)) {
@@ -87,26 +101,46 @@ const LinkHealthDashboard = ({ tinaForm }) => {
   const [justCentralized, setJustCentralized] = useState(null);
   const [report, setReport] = useState(initialLinkReport);
   const [refreshProgress, setRefreshProgress] = useState(null);
+  const [replacingUrl, setReplacingUrl] = useState(null);
   const rootRef = useRef(null);
   const { loading: refreshing, error: refreshError, run } = useTinaTask();
+  const {
+    loading: replacing,
+    error: replaceError,
+    run: runReplace,
+  } = useTinaTask();
 
   // Tina's admin layout scrolls an inner container, not the window, so
   // window.scrollTo alone is a no-op there. Walk up from this component's
   // own root to find whatever ancestor is actually scrollable.
-  const scrollToTop = () => {
-    let el = rootRef.current?.parentElement;
-    while (el) {
-      const style = getComputedStyle(el);
-      if (
-        (style.overflowY === "auto" || style.overflowY === "scroll") &&
-        el.scrollHeight > el.clientHeight
-      ) {
-        el.scrollTo({ top: 0, behavior: "smooth" });
-        break;
+  //
+  // Deferred a frame: the caller has generally just called tinaForm.change(),
+  // and that re-render — which is what actually grows the scrollable area to
+  // include the new entry — hasn't landed in the DOM yet on the same tick.
+  // Scrolling immediately measures the pre-update scrollHeight and lands
+  // short of the new content it's trying to reveal.
+  const scrollWithinAdminLayout = (edge) => {
+    requestAnimationFrame(() => {
+      let el = rootRef.current?.parentElement;
+      while (el) {
+        const style = getComputedStyle(el);
+        if (
+          (style.overflowY === "auto" || style.overflowY === "scroll") &&
+          el.scrollHeight > el.clientHeight
+        ) {
+          el.scrollTo({
+            top: edge === "bottom" ? el.scrollHeight : 0,
+            behavior: "smooth",
+          });
+          break;
+        }
+        el = el.parentElement;
       }
-      el = el.parentElement;
-    }
-    window.scrollTo({ top: 0, behavior: "smooth" });
+      window.scrollTo({
+        top: edge === "bottom" ? document.body.scrollHeight : 0,
+        behavior: "smooth",
+      });
+    });
   };
 
   // Rebuilds the report live from GraphQL instead of waiting for the next
@@ -221,6 +255,50 @@ const LinkHealthDashboard = ({ tinaForm }) => {
         if (result) Object.assign(link, result);
       }
 
+      // 4. hreflang: whether a single-use hardcoded link's target has
+      // language variants worth centralizing for — see the Migration
+      // Candidates filter below. Carry forward whatever's already known (a
+      // structural fact about the site, unlikely to change) and only probe
+      // new single-occurrence, non-Wikipedia candidates, the same
+      // restriction scripts/generate-link-report.js applies.
+      const candidateOccurrences = new Map();
+      for (const link of links) {
+        if (link.source === "doc" && link.inUrlsJson === false) {
+          candidateOccurrences.set(
+            link.url,
+            (candidateOccurrences.get(link.url) || 0) + 1
+          );
+        }
+      }
+      const knownHreflang = new Map();
+      for (const link of report.links || []) {
+        if (typeof link.hreflang === "boolean") {
+          knownHreflang.set(link.url, link.hreflang);
+        }
+      }
+      const hreflangTargets = [...candidateOccurrences.entries()]
+        .filter(
+          ([url, count]) =>
+            count === 1 && !isWikipediaUrl(url) && !knownHreflang.has(url)
+        )
+        .map(([url]) => url);
+
+      const hreflangOutcomes = await mapWithConcurrency(
+        hreflangTargets,
+        REFRESH_CONCURRENCY,
+        async (url) => [url, await probeHreflangInBrowser(url)]
+      );
+      for (const [url, value] of hreflangOutcomes) {
+        knownHreflang.set(url, value);
+      }
+
+      for (const link of links) {
+        if (link.source === "doc" && link.inUrlsJson === false) {
+          link.hreflang =
+            isWikipediaUrl(link.url) || knownHreflang.get(link.url) === true;
+        }
+      }
+
       const stats = links.reduce(
         (acc, link) => {
           acc.total += 1;
@@ -291,6 +369,9 @@ const LinkHealthDashboard = ({ tinaForm }) => {
     const centralizedLinks = allLinks.filter(
       (link) => link.source === "urls-json"
     );
+    const urlKeyByUrl = new Map(
+      centralizedLinks.map((link) => [link.url, link.urlKey])
+    );
 
     // Grouped by URL, not by file: the same hardcoded URL commonly repeats
     // across many docs, and the point of these lists is "go do something
@@ -309,16 +390,33 @@ const LinkHealthDashboard = ({ tinaForm }) => {
       for (const link of allLinks) {
         if (link.source !== "doc" || !predicate(link)) continue;
         if (!byUrl[link.url]) {
-          byUrl[link.url] = { url: link.url, text: link.text, occurrences: [] };
+          byUrl[link.url] = {
+            url: link.url,
+            text: link.text,
+            urlKey: urlKeyByUrl.get(link.url),
+            occurrences: [],
+            hreflang: false,
+          };
         }
         byUrl[link.url].occurrences.push({
           filePath: link.filePath,
           line: link.lineNumber,
         });
+        if (link.hreflang) byUrl[link.url].hreflang = true;
       }
       return Object.values(byUrl);
     };
-    const migrationCandidates = groupByUrl((link) => link.inUrlsJson === false);
+    // A single hardcoded use of a URL isn't worth the upkeep of a urls.json
+    // entry on its own — centralizing exists to avoid fixing the same link
+    // in five places, and to carry per-language variants. So a candidate
+    // only surfaces here when either is actually true: the URL repeats, or
+    // its target has a language variant to carry (Wikipedia is a known
+    // exception — see isWikipediaUrl() — and everything else is decided by
+    // `hreflang`, set in scripts/generate-link-report.js during
+    // `yarn check-links` and best-effort by handleRefresh below).
+    const migrationCandidates = groupByUrl(
+      (link) => link.inUrlsJson === false
+    ).filter((c) => c.occurrences.length >= 2 || c.hreflang === true);
     const centralizedButHardcoded = groupByUrl(
       (link) => link.inUrlsJson === true
     );
@@ -391,7 +489,64 @@ const LinkHealthDashboard = ({ tinaForm }) => {
       },
     ]);
     setJustCentralized(key);
-    scrollToTop();
+    // The new entry lands at the end of the urls[] list, which — now that
+    // the dashboard sits above it in the collection — is further down the
+    // page, not up where this component's own header is.
+    scrollWithinAdminLayout("bottom");
+  };
+
+  // Swaps every hardcoded use of `candidate.url` for a <Url> reference, in
+  // every file it appears in — not just navigating there like the file
+  // shortcuts below still do. Each occurrence keeps its own link text: the
+  // AST is fetched and edited per file, so "CALS table model" in one doc and
+  // "CALS table model reference" in another each get their own linkText
+  // rather than one borrowing the other's.
+  const handleReplace = (candidate) => {
+    if (!candidate.urlKey) return;
+    setReplacingUrl(candidate.url);
+    runReplace(async ({ client, isCurrent }) => {
+      const failures = [];
+      for (const occ of candidate.occurrences) {
+        const relativePath = occ.filePath.replace(/^\/docs\//, "");
+        try {
+          const res = await client.queries.doc({ relativePath });
+          const { body, replacedCount } = replaceLinkNodeWithUrl(
+            res.data.doc.body,
+            candidate.url,
+            { urlKey: candidate.urlKey, lang: DEFAULT_LOCALE }
+          );
+          if (replacedCount === 0) continue;
+          await client.request({
+            query: `
+              mutation ReplaceHardcodedLink($collection: String!, $relativePath: String!, $params: DocumentUpdateMutation!) {
+                updateDocument(collection: $collection, relativePath: $relativePath, params: $params) {
+                  ... on Doc { id }
+                }
+              }
+            `,
+            variables: {
+              collection: "doc",
+              relativePath,
+              params: { doc: { body } },
+            },
+          });
+        } catch (err) {
+          failures.push(`${relativePath}: ${err.message}`);
+        }
+      }
+      if (!isCurrent()) return;
+      setReplacingUrl(null);
+      // Re-derive the list from GraphQL rather than hand-patching local
+      // state — simpler, and it can't drift from what's actually on disk
+      // now, including for any file that failed above and is still
+      // hardcoded.
+      handleRefresh();
+      if (failures.length > 0) {
+        throw new Error(
+          `Replaced in some files, but failed in: ${failures.join("; ")}`
+        );
+      }
+    });
   };
 
   const {
@@ -507,6 +662,12 @@ const LinkHealthDashboard = ({ tinaForm }) => {
         </div>
       )}
 
+      {replaceError && (
+        <div className="rounded-lg border border-red-200 bg-red-50 px-4 py-3 mb-6 text-sm text-red-900 whitespace-normal">
+          Replace failed: {replaceError}
+        </div>
+      )}
+
       {checkedVia === "browser" && !refreshing && (
         <div className="rounded-lg border border-blue-200 bg-blue-50 px-4 py-3 mb-6 text-sm text-blue-900 whitespace-normal">
           This report was refreshed from this browser. New and previously
@@ -519,8 +680,16 @@ const LinkHealthDashboard = ({ tinaForm }) => {
       )}
 
       {justCentralized && (
-        <div className="rounded-lg border border-green-200 bg-green-50 px-4 py-3 mb-6 text-sm text-green-900 whitespace-normal">
-          Added <strong>{justCentralized}</strong> to the URLs list above.
+        // Sticky, not just present: handleCentralize scrolls down to reveal
+        // the new entry, which lives in the urls[] list below this
+        // component. A banner that scrolled away with the rest of this
+        // component would be exactly the message the user needed to see,
+        // gone the moment it mattered.
+        <div
+          className="rounded-lg border border-green-200 bg-green-50 px-4 py-3 mb-6 text-sm text-green-900 whitespace-normal"
+          style={{ position: "sticky", top: 0, zIndex: 1 }}
+        >
+          Added <strong>{justCentralized}</strong> to the URLs list below.
           Review it, add any other languages it needs, then click{" "}
           <strong>Save</strong>.
         </div>
@@ -1028,11 +1197,49 @@ const LinkHealthDashboard = ({ tinaForm }) => {
                           wordBreak: "break-all",
                         }}
                       >
-                        {candidate.url}
+                        {candidate.url.startsWith("http://") ||
+                        candidate.url.startsWith("https://") ? (
+                          <a
+                            href={candidate.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            style={{
+                              color: "#656d76",
+                              textDecoration: "underline",
+                              cursor: "pointer",
+                            }}
+                            onMouseOver={(e) =>
+                              (e.target.style.textDecoration = "none")
+                            }
+                            onFocus={(e) =>
+                              (e.target.style.textDecoration = "none")
+                            }
+                            onMouseOut={(e) =>
+                              (e.target.style.textDecoration = "underline")
+                            }
+                            onBlur={(e) =>
+                              (e.target.style.textDecoration = "underline")
+                            }
+                          >
+                            {candidate.url}
+                          </a>
+                        ) : (
+                          candidate.url
+                        )}
                       </div>
                       <div style={{ fontSize: "11px", color: "#656d76" }}>
                         Used in {candidate.occurrences.length} place
                         {candidate.occurrences.length !== 1 ? "s" : ""}
+                        {/* Only occurrence-count>=2 candidates need no
+                            explanation. A single-use candidate is only here
+                            because a language variant was found, so say so —
+                            otherwise it looks like the count filter isn't
+                            being applied. */}
+                        {candidate.occurrences.length === 1 && (
+                          <span style={{ color: "#0969da", marginLeft: "6px" }}>
+                            · has a language variant
+                          </span>
+                        )}
                       </div>
                     </div>
                     <button
@@ -1200,28 +1407,69 @@ const LinkHealthDashboard = ({ tinaForm }) => {
                           wordBreak: "break-all",
                         }}
                       >
-                        {candidate.url}
+                        {candidate.url.startsWith("http://") ||
+                        candidate.url.startsWith("https://") ? (
+                          <a
+                            href={candidate.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            style={{
+                              color: "#656d76",
+                              textDecoration: "underline",
+                              cursor: "pointer",
+                            }}
+                            onMouseOver={(e) =>
+                              (e.target.style.textDecoration = "none")
+                            }
+                            onFocus={(e) =>
+                              (e.target.style.textDecoration = "none")
+                            }
+                            onMouseOut={(e) =>
+                              (e.target.style.textDecoration = "underline")
+                            }
+                            onBlur={(e) =>
+                              (e.target.style.textDecoration = "underline")
+                            }
+                          >
+                            {candidate.url}
+                          </a>
+                        ) : (
+                          candidate.url
+                        )}
                       </div>
                       <div style={{ fontSize: "11px", color: "#656d76" }}>
                         Used in {candidate.occurrences.length} place
                         {candidate.occurrences.length !== 1 ? "s" : ""}
                       </div>
                     </div>
-                    <span
+                    <button
+                      type="button"
+                      onClick={() => handleReplace(candidate)}
+                      disabled={replacing && replacingUrl === candidate.url}
+                      title={`Replace every hardcoded use of this URL with <Url urlKey="${candidate.urlKey}" />, using each occurrence's own link text`}
                       style={{
-                        fontSize: "11px",
-                        fontWeight: "600",
-                        color: "#2da44e",
-                        border: "1px solid #2da44e",
-                        borderRadius: "12px",
-                        padding: "3px 10px",
+                        padding: "6px 12px",
+                        backgroundColor:
+                          replacing && replacingUrl === candidate.url
+                            ? "#94a3b8"
+                            : "#2da44e",
+                        color: "white",
+                        border: "none",
+                        borderRadius: "4px",
+                        cursor:
+                          replacing && replacingUrl === candidate.url
+                            ? "default"
+                            : "pointer",
+                        fontSize: "12px",
                         marginLeft: "12px",
                         flexShrink: 0,
                         whiteSpace: "nowrap",
                       }}
                     >
-                      ✓ Centralized
-                    </span>
+                      {replacing && replacingUrl === candidate.url
+                        ? "Replacing…"
+                        : "Replace"}
+                    </button>
                   </div>
                   <div
                     style={{

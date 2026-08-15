@@ -1,5 +1,5 @@
 ---
-lastmod: '2026-08-15T10:20:23.082Z'
+lastmod: '2026-08-15T11:05:35.926Z'
 title: Dashboards
 description: Viewing dashboards in TinaCMS
 tags:
@@ -112,14 +112,25 @@ The report counts:
 * OK: the server answered with a success or redirect status.
 * Broken: the server answered with an error status, such as 404 Not Found or 500 Internal Server Error. These are the links to fix.
 * Unverified: no answer came back, so the link could not be judged. Causes include a domain that did not resolve, a request that timed out, a site that refused the request with 403, and rate limiting with 429. Any of these can be a problem with the machine running the check rather than the link, so validate these manually by clicking the hyperlink.
-* Not checked: links that are not requested. This covers internal links, anchors, `mailto:` and `tel:` links, and localhost addresses.
+* Internal: links that are not requested. This covers internal links, anchors, `mailto:` and `tel:` links, and localhost addresses.
 * Files scanned.
 * Centralized: how many of the checked links come from the URLs collection rather than being hardcoded in a doc.
-* Migration candidates: distinct external URLs that are hardcoded in a doc but not yet present in the URLs collection.
+* Migration candidates: distinct external URLs that are hardcoded in a doc, not yet present in the URLs collection and worth centralizing—see below for what qualifies.
 
 Internal links are deliberately not requested here, because the site build already validates them against the real page list and reports any that are broken. Localhost addresses are also skipped, since they point at whatever happens to be running on the machine doing the check. You can document a localhost URL without it being reported.
 
-The dashboard lists files with problem links, tagging each one with whether it came from a doc or the URLs collection so you know which one to open. It also lists migration candidates — external URLs used in docs that aren't centralized yet, grouped so a URL repeated across several docs shows once, with a shortcut to add it to the URLs collection.
+The dashboard lists files with problem links, tagging each one with whether it came from a doc or the URLs collection so you know which one to open. It also lists migration candidates — external URLs used in docs that aren't centralized yet, grouped so a URL repeated across several docs shows once, with a **Centralize** button that adds it to the URLs collection.
+
+Centralizing a URL doesn't touch the docs that still hardcode it—that's a separate step, since adding the urls.json entry and swapping every doc reference for it are different edits. The dashboard tracks these separately, under **Centralized, Not Yet Updated in Docs**, with a **Replace** button that swaps every hardcoded use of that URL for a `<Url>` reference in one step, across however many docs it appears in. Each occurrence keeps its own link text—a URL linked with different wording in two different docs gets two different overrides, not one borrowing the other's.
+
+Not every hardcoded external URL is a migration candidate. Centralizing one only pays for itself when it repeats or carries a language variant, so a URL shows up here only if either is true:
+
+* It's hardcoded in two or more docs.
+* Its target has a language variant to carry: either the page itself declares one with `<link rel="alternate" hreflang>`, or it's a Wikipedia article, which is a known exception—Wikipedia has language variants but doesn't publish hreflang tags for them.
+
+A single-use link to a page with no detected variant just stays a plain hardcoded link; it's not worth a urls.json entry on its own. A candidate that qualifies only by language variant is labelled **has a language variant** so it doesn't look like the repeat-count rule was skipped.
+
+Detecting hreflang requires fetching the target page's HTML, which only `yarn check-links` can do reliably—it runs from Node, so it isn't subject to the browser's cross-origin restrictions. Clicking **Refresh** also attempts this from your browser, and it works for sites that send permissive CORS headers, but plenty don't; when a site blocks the read, Refresh has no way to tell whether a variant exists and leaves that candidate out until `yarn check-links` runs. Wikipedia's exception applies either way, since it's decided by hostname rather than a request.
 
 To fail a build when broken links are found, for example in a continuous integration job, run `yarn check-links --strict`. This exits with an error only for broken links, not unverified ones, so an intermittent network problem does not fail your build.
 

@@ -1261,6 +1261,39 @@
       "_template": "urlEntry"
     },
     {
+      "key": "icloud-mailserver",
+      "url": [
+        {
+          "lang": "en",
+          "url": "https://support.apple.com/en-us/102525",
+          "_template": "urlTranslation"
+        },
+        {
+          "lang": "fr",
+          "url": "https://support.apple.com/fr-fr/102525",
+          "_template": "urlTranslation"
+        },
+        {
+          "lang": "de",
+          "url": "https://support.apple.com/de-de/102525",
+          "_template": "urlTranslation"
+        },
+        {
+          "lang": "es",
+          "url": "https://support.apple.com/es-es/102525",
+          "_template": "urlTranslation"
+        }
+      ],
+      "defaultText": [
+        {
+          "lang": "en",
+          "text": "iCloud",
+          "_template": "textTranslation"
+        }
+      ],
+      "_template": "urlEntry"
+    },
+    {
       "key": "infima",
       "url": [
         {

@@ -36,6 +36,18 @@
  *    "reachable" or "request failed," never a real broken/OK verdict. Real
  *    4xx/5xx detection needs `yarn check-links`, which makes the same
  *    request from Node and can read the real status.
+ *
+ * The same cross-origin rule applies to `probeHreflangInBrowser()`, used to
+ * decide whether a single-use hardcoded link is worth centralizing because
+ * its target has language variants — but there it can matter which way a
+ * request fails: reading a cross-origin response body (not just its
+ * reachability) additionally needs the target to send permissive CORS
+ * headers, which plenty of sites do for public HTML and plenty don't. When
+ * one doesn't, the probe can't tell hreflang absent from hreflang unknown,
+ * so it reports neither — the candidate simply doesn't clear the bar from
+ * the browser alone. `yarn check-links` has no such gap, since Node was
+ * never subject to the browser's cross-origin restriction in the first
+ * place, so it remains the only source of a guaranteed answer.
  */
 
 const DEFAULT_TIMEOUT_MS = 8000;
@@ -174,6 +186,66 @@ export function extractLinksFromRichText(body, filePath) {
 }
 
 /**
+ * Replace every `a`/`link` node matching `targetUrl` in a rich-text body
+ * with a `<Url urlKey linkText={[{ lang, text }]} />` embed, returning a new
+ * body (the input is never mutated) and how many replacements were made.
+ *
+ * `text` always comes from the matched link node itself, per-occurrence —
+ * never a fallback to the key's preset default text. Two links to the same
+ * URL with different wording (a real case: "CALS table model" and "CALS
+ * table model reference" both point at the same OASIS page) get their own
+ * linkText each, rather than one borrowing the other's.
+ *
+ * The node shape (`mdxJsxTextElement` with a plain `props` object, no
+ * `_template` wrapper) was verified against the actual `@tinacms/mdx`
+ * parser/serializer, not assumed: parsing a real `<Url urlKey="..."
+ * linkText={[{ lang: "en", text: "..." }]} />` string and re-serializing it
+ * round-trips byte-for-byte, and splicing this exact node shape into a
+ * parsed link's position serializes to the same MDX a human typing it by
+ * hand would produce.
+ */
+export function replaceLinkNodeWithUrl(body, targetUrl, { urlKey, lang }) {
+  const target = normalizeUrl(targetUrl);
+  let replacedCount = 0;
+
+  function replaceChildren(children) {
+    return children.map((child) => {
+      if (!child || typeof child !== "object") return child;
+
+      let url;
+      if (child.type === "a" || child.type === "link") {
+        url = typeof child.url === "string" ? child.url : child.href;
+      }
+      if (typeof url === "string" && normalizeUrl(url) === target) {
+        replacedCount += 1;
+        return {
+          type: "mdxJsxTextElement",
+          name: "Url",
+          children: [{ type: "text", text: "" }],
+          props: {
+            urlKey,
+            linkText: [{ lang, text: plainText(child).trim() || target }],
+          },
+        };
+      }
+
+      if (Array.isArray(child.children)) {
+        return { ...child, children: replaceChildren(child.children) };
+      }
+      return child;
+    });
+  }
+
+  if (!body || !Array.isArray(body.children)) {
+    return { body, replacedCount: 0 };
+  }
+  return {
+    body: { ...body, children: replaceChildren(body.children) },
+    replacedCount,
+  };
+}
+
+/**
  * Turn every {lang, url} pair in a live `urls.json` query result into a link
  * record, mirroring `collectUrlsJsonLinks()` in scripts/generate-link-report.js.
  */
@@ -232,5 +304,66 @@ export async function probeUrlInBrowser(
       checkedVia: "browser",
       checkedAt,
     };
+  }
+}
+
+/**
+ * Wikipedia is a known edge case for language variants: every article has
+ * one, but Wikipedia doesn't advertise them via `<link rel="alternate"
+ * hreflang>` the way most other multilingual sites do. Mirrors
+ * `isWikipediaUrl()` in scripts/generate-link-report.js.
+ */
+export function isWikipediaUrl(url) {
+  try {
+    return /(^|\.)wikipedia\.org$/i.test(new URL(url).hostname);
+  } catch {
+    return false;
+  }
+}
+
+/**
+ * True if any `<link>` tag in the given HTML declares a language variant.
+ * Mirrors `hasHreflangTags()` in scripts/generate-link-report.js.
+ */
+export function hasHreflangTags(html) {
+  for (const [tag] of html.matchAll(/<link\b[^>]*>/gi)) {
+    if (
+      /\brel=["']alternate["']/i.test(tag) &&
+      /\bhreflang=["'][a-zA-Z-]+["']/i.test(tag)
+    ) {
+      return true;
+    }
+  }
+  return false;
+}
+
+/**
+ * Best-effort hreflang probe for one external URL, run directly from the
+ * browser. Unlike `probeUrlInBrowser()`, this needs to read the response
+ * body, so it can't use `mode: "no-cors"` — it uses the default `cors` mode,
+ * which only succeeds when the target sends permissive CORS headers. Many
+ * public sites do; plenty don't.
+ *
+ * Returns `true` only when a variant was actually found. Every failure —
+ * blocked by CORS, timed out, non-2xx, network error — returns `false`,
+ * indistinguishable here from "genuinely no variant." That's fine for this
+ * probe's one job (deciding whether to show a migration candidate; a false
+ * negative just leaves it hidden until `yarn check-links` runs), but it
+ * means this result is never strong enough to say a URL has *no* variant —
+ * only that this attempt didn't find one.
+ */
+export async function probeHreflangInBrowser(
+  url,
+  { timeout = DEFAULT_TIMEOUT_MS, fetchImpl = fetch } = {}
+) {
+  try {
+    const response = await fetchImpl(url, {
+      redirect: "follow",
+      signal: AbortSignal.timeout(timeout),
+    });
+    if (!response.ok) return false;
+    return hasHreflangTags(await response.text());
+  } catch {
+    return false;
   }
 }
