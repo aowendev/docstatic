@@ -34,6 +34,7 @@ const matter = require("gray-matter");
 const ROOT = path.join(__dirname, "..");
 const DOCS_DIR = path.join(ROOT, "docs");
 const OUTPUT_PATH = path.join(ROOT, "src", "data", "link-report.json");
+const URLS_DATA_PATH = path.join(ROOT, "reuse", "urls", "index.json");
 
 const DEFAULT_CONCURRENCY = 8;
 const DEFAULT_TIMEOUT_MS = 15000;
@@ -337,6 +338,41 @@ function collectDocs(dir, relativePath = "") {
   return docs;
 }
 
+/** Read `reuse/urls/index.json`, tolerating a missing/unreadable file. */
+function loadUrlsData() {
+  try {
+    return JSON.parse(fs.readFileSync(URLS_DATA_PATH, "utf-8"));
+  } catch {
+    return { urls: [] };
+  }
+}
+
+/**
+ * Turn every {lang, url} pair in urls.json into a link record, in the same
+ * shape `extractLinks()` produces, so they flow through the rest of the
+ * pipeline (classification, checking, previous-verdict carry-forward)
+ * unchanged. Tagged `source: "urls-json"` so the dashboard can tell them
+ * apart from links found by scanning docs.
+ */
+function collectUrlsJsonLinks(urlsData) {
+  const links = [];
+  for (const entry of urlsData.urls || []) {
+    for (const { lang, url } of entry.url || []) {
+      links.push({
+        text: entry.key,
+        url: normalizeUrl(url),
+        type: "urls-json",
+        source: "urls-json",
+        urlKey: entry.key,
+        lang,
+        filePath: "reuse/urls/index.json",
+        line: null,
+      });
+    }
+  }
+  return links.filter((link) => link.url.length > 0);
+}
+
 /**
  * Read the verdicts from the previous report, keyed by URL.
  *
@@ -380,6 +416,12 @@ async function generateLinkReport({
   const files = {};
   const links = [];
   const previousVerdicts = check ? new Map() : loadPreviousVerdicts();
+  const urlsData = loadUrlsData();
+  const urlsJsonUrlSet = new Set(
+    (urlsData.urls || []).flatMap((entry) =>
+      (entry.url || []).map((u) => normalizeUrl(u.url))
+    )
+  );
 
   for (const doc of collectDocs(DOCS_DIR)) {
     let parsed;
@@ -415,12 +457,26 @@ async function generateLinkReport({
         continue;
       }
       const previous = previousVerdicts.get(link.url);
+      const tagged = {
+        ...link,
+        source: "doc",
+        inUrlsJson: urlsJsonUrlSet.has(link.url),
+      };
       links.push(
         previous
-          ? { ...link, ...previous }
-          : { ...link, status: "unchecked", reason: "Not checked yet" }
+          ? { ...tagged, ...previous }
+          : { ...tagged, status: "unchecked", reason: "Not checked yet" }
       );
     }
+  }
+
+  for (const link of collectUrlsJsonLinks(urlsData)) {
+    const previous = previousVerdicts.get(link.url);
+    links.push(
+      previous
+        ? { ...link, ...previous }
+        : { ...link, status: "unchecked", reason: "Not checked yet" }
+    );
   }
 
   if (check) {
@@ -459,6 +515,10 @@ async function generateLinkReport({
     },
     { total: 0, ok: 0, broken: 0, unverified: 0, unchecked: 0, skipped: 0 }
   );
+  stats.centralized = links.filter((l) => l.source === "urls-json").length;
+  stats.migrationCandidates = links.filter(
+    (l) => l.source === "doc" && l.inUrlsJson === false
+  ).length;
 
   // When the inventory pass carries verdicts forward, the newest of them is
   // what the dashboard should report as the age of the results.
@@ -550,5 +610,8 @@ module.exports = {
   maskNonProse,
   normalizeUrl,
   mapWithConcurrency,
+  loadUrlsData,
+  collectUrlsJsonLinks,
   OUTPUT_PATH,
+  URLS_DATA_PATH,
 };

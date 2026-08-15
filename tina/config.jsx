@@ -24,6 +24,7 @@ import StatusField from "../src/components/StatusField";
 // tags UI component
 import TagsField from "../src/components/TagsField";
 import { ThemeCollection } from "../src/components/Theme/template";
+import { UrlCollection } from "../src/components/Url/template";
 import { YouTubeEmbedBlockTemplate } from "../src/components/YouTubeEmbed/template";
 import { MDXTemplates } from "../src/theme/template";
 import { getEditorIdentity } from "../src/utils/editorIdentity";
@@ -1551,6 +1552,7 @@ export default defineConfig({
       ThemeCollection,
       DocsCollection,
       TranslationCollection,
+      UrlCollection,
       VariableSetCollection,
       WikiCollection,
       APIsCollection,

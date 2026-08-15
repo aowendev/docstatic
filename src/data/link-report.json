@@ -1,14 +1,16 @@
 {
-  "generatedAt": "2026-08-13T15:27:50.744Z",
-  "lastCheckedAt": "2026-08-11T17:47:48.882Z",
-  "checked": false,
+  "generatedAt": "2026-08-14T19:11:00.817Z",
+  "lastCheckedAt": "2026-08-14T19:11:00.817Z",
+  "checked": true,
   "stats": {
-    "total": 154,
-    "ok": 115,
+    "total": 244,
+    "ok": 210,
     "broken": 0,
-    "unverified": 2,
-    "unchecked": 6,
-    "skipped": 31
+    "unverified": 0,
+    "unchecked": 0,
+    "skipped": 34,
+    "centralized": 106,
+    "migrationCandidates": 60
   },
   "files": {
     "/docs/advanced/adding-the-cms-to-an-ipad-home-screen.mdx": {
@@ -21,7 +23,7 @@
       "fileName": "front-matter-cms.mdx",
       "relativePath": "advanced/front-matter-cms.mdx",
       "title": "Front Matter CMS",
-      "totalLinks": 3
+      "totalLinks": 2
     },
     "/docs/advanced/hosted-cms.mdx": {
       "fileName": "hosted-cms.mdx",
@@ -33,7 +35,7 @@
       "fileName": "index.mdx",
       "relativePath": "advanced/index.mdx",
       "title": "Advanced guides",
-      "totalLinks": 2
+      "totalLinks": 0
     },
     "/docs/advanced/notifications.mdx": {
       "fileName": "notifications.mdx",
@@ -51,19 +53,19 @@
       "fileName": "style.mdx",
       "relativePath": "advanced/style.mdx",
       "title": "Style checking",
-      "totalLinks": 6
+      "totalLinks": 0
     },
     "/docs/blog.mdx": {
       "fileName": "blog.mdx",
       "relativePath": "blog.mdx",
       "title": "Blog",
-      "totalLinks": 2
+      "totalLinks": 1
     },
     "/docs/browser-support.mdx": {
       "fileName": "browser-support.mdx",
       "relativePath": "browser-support.mdx",
       "title": "Browser support",
-      "totalLinks": 2
+      "totalLinks": 1
     },
     "/docs/chatbot.mdx": {
       "fileName": "chatbot.mdx",
@@ -99,7 +101,7 @@
       "fileName": "dashboards.mdx",
       "relativePath": "guides/dashboards.mdx",
       "title": "Dashboards",
-      "totalLinks": 0
+      "totalLinks": 1
     },
     "/docs/guides/docs/create-doc.mdx": {
       "fileName": "create-doc.mdx",
@@ -165,7 +167,7 @@
       "fileName": "diagrams.mdx",
       "relativePath": "guides/markdown-features/diagrams.mdx",
       "title": "Diagrams",
-      "totalLinks": 3
+      "totalLinks": 2
     },
     "/docs/guides/markdown-features/figures.mdx": {
       "fileName": "figures.mdx",
@@ -257,6 +259,12 @@
       "title": "Headings and table of contents",
       "totalLinks": 2
     },
+    "/docs/guides/markdown-features/urls.mdx": {
+      "fileName": "urls.mdx",
+      "relativePath": "guides/markdown-features/urls.mdx",
+      "title": "URLs",
+      "totalLinks": 1
+    },
     "/docs/guides/markdown-features/variables.mdx": {
       "fileName": "variables.mdx",
       "relativePath": "guides/markdown-features/variables.mdx",
@@ -291,13 +299,13 @@
       "fileName": "installation.mdx",
       "relativePath": "installation.mdx",
       "title": "Installation",
-      "totalLinks": 14
+      "totalLinks": 10
     },
     "/docs/introduction.mdx": {
       "fileName": "introduction.mdx",
       "relativePath": "introduction.mdx",
       "title": "Introduction",
-      "totalLinks": 18
+      "totalLinks": 16
     },
     "/docs/mcp-server-details.mdx": {
       "fileName": "mcp-server-details.mdx",
@@ -356,26 +364,17 @@
   },
   "links": [
     {
-      "text": "VSCodium",
-      "url": "https://vscodium.com/",
-      "type": "markdown",
-      "filePath": "/docs/advanced/front-matter-cms.mdx",
-      "line": 2,
-      "status": "ok",
-      "reason": "HTTP 200",
-      "code": 200,
-      "checkedAt": "2026-08-11T17:47:46.785Z"
-    },
-    {
       "text": "Front Matter",
       "url": "https://frontmatter.codes/",
       "type": "markdown",
       "filePath": "/docs/advanced/front-matter-cms.mdx",
       "line": 2,
+      "source": "doc",
+      "inUrlsJson": false,
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:47:47.276Z"
+      "checkedAt": "2026-08-14T19:10:56.510Z"
     },
     {
       "text": "documentation",
@@ -383,10 +382,12 @@
       "type": "markdown",
       "filePath": "/docs/advanced/front-matter-cms.mdx",
       "line": 2,
+      "source": "doc",
+      "inUrlsJson": false,
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:47:46.864Z"
+      "checkedAt": "2026-08-14T19:10:56.374Z"
     },
     {
       "text": "TinaCloud",
@@ -394,10 +395,12 @@
       "type": "markdown",
       "filePath": "/docs/advanced/hosted-cms.mdx",
       "line": 7,
+      "source": "doc",
+      "inUrlsJson": false,
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:47:46.898Z"
+      "checkedAt": "2026-08-14T19:10:56.322Z"
     },
     {
       "text": "register",
@@ -405,10 +408,12 @@
       "type": "markdown",
       "filePath": "/docs/advanced/hosted-cms.mdx",
       "line": 7,
+      "source": "doc",
+      "inUrlsJson": false,
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:47:47.366Z"
+      "checkedAt": "2026-08-14T19:10:56.947Z"
     },
     {
       "text": "pricing plans",
@@ -416,10 +421,12 @@
       "type": "markdown",
       "filePath": "/docs/advanced/hosted-cms.mdx",
       "line": 7,
+      "source": "doc",
+      "inUrlsJson": false,
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:47:46.932Z"
+      "checkedAt": "2026-08-14T19:10:56.335Z"
     },
     {
       "text": "self-hosting",
@@ -427,32 +434,12 @@
       "type": "markdown",
       "filePath": "/docs/advanced/hosted-cms.mdx",
       "line": 11,
+      "source": "doc",
+      "inUrlsJson": false,
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:47:46.942Z"
-    },
-    {
-      "text": "Guides",
-      "url": "https://docusaurus.io/docs/category/guides",
-      "type": "markdown",
-      "filePath": "/docs/advanced/index.mdx",
-      "line": 5,
-      "status": "ok",
-      "reason": "HTTP 200",
-      "code": 200,
-      "checkedAt": "2026-08-11T17:47:47.135Z"
-    },
-    {
-      "text": "Advanced Guides",
-      "url": "https://docusaurus.io/docs/advanced",
-      "type": "markdown",
-      "filePath": "/docs/advanced/index.mdx",
-      "line": 5,
-      "status": "ok",
-      "reason": "HTTP 200",
-      "code": 200,
-      "checkedAt": "2026-08-11T17:47:47.149Z"
+      "checkedAt": "2026-08-14T19:10:56.647Z"
     },
     {
       "text": "GitHub Actions",
@@ -460,10 +447,12 @@
       "type": "markdown",
       "filePath": "/docs/advanced/notifications.mdx",
       "line": 3,
+      "source": "doc",
+      "inUrlsJson": false,
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:47:47.010Z"
+      "checkedAt": "2026-08-14T19:10:56.435Z"
     },
     {
       "text": "secrets",
@@ -471,10 +460,12 @@
       "type": "markdown",
       "filePath": "/docs/advanced/notifications.mdx",
       "line": 7,
+      "source": "doc",
+      "inUrlsJson": false,
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:47:47.117Z"
+      "checkedAt": "2026-08-14T19:10:56.315Z"
     },
     {
       "text": "iCloud",
@@ -482,10 +473,12 @@
       "type": "markdown",
       "filePath": "/docs/advanced/notifications.mdx",
       "line": 18,
+      "source": "doc",
+      "inUrlsJson": false,
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:47:47.166Z"
+      "checkedAt": "2026-08-14T19:10:56.376Z"
     },
     {
       "text": "app-specific-password)",
@@ -493,10 +486,12 @@
       "type": "markdown",
       "filePath": "/docs/advanced/notifications.mdx",
       "line": 18,
+      "source": "doc",
+      "inUrlsJson": false,
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:47:47.178Z"
+      "checkedAt": "2026-08-14T19:10:56.375Z"
     },
     {
       "text": "Outlook",
@@ -504,11 +499,13 @@
       "type": "markdown",
       "filePath": "/docs/advanced/notifications.mdx",
       "line": 19,
+      "source": "doc",
+      "inUrlsJson": false,
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
       "redirectedTo": "https://support.microsoft.com/en-US/Outlook/pop-imap-and-smtp-settings-for-outlook-com",
-      "checkedAt": "2026-08-11T17:47:47.456Z"
+      "checkedAt": "2026-08-14T19:10:56.638Z"
     },
     {
       "text": "Sending messages using incoming webhooks",
@@ -516,10 +513,12 @@
       "type": "markdown",
       "filePath": "/docs/advanced/notifications.mdx",
       "line": 23,
+      "source": "doc",
+      "inUrlsJson": false,
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:47:47.396Z"
+      "checkedAt": "2026-08-14T19:10:56.653Z"
     },
     {
       "text": "                                ",
@@ -527,77 +526,12 @@
       "type": "markdown",
       "filePath": "/docs/advanced/openapi.mdx",
       "line": 3,
+      "source": "doc",
+      "inUrlsJson": false,
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:47:47.216Z"
-    },
-    {
-      "text": "LanguageTool",
-      "url": "https://languagetool.org/",
-      "type": "markdown",
-      "filePath": "/docs/advanced/style.mdx",
-      "line": 7,
-      "status": "ok",
-      "reason": "HTTP 200",
-      "code": 200,
-      "checkedAt": "2026-08-11T17:47:46.974Z"
-    },
-    {
-      "text": "register",
-      "url": "https://languagetool.org/register",
-      "type": "markdown",
-      "filePath": "/docs/advanced/style.mdx",
-      "line": 7,
-      "status": "ok",
-      "reason": "HTTP 200",
-      "code": 200,
-      "checkedAt": "2026-08-11T17:47:47.459Z"
-    },
-    {
-      "text": "premium plan",
-      "url": "https://languagetool.org/premium",
-      "type": "markdown",
-      "filePath": "/docs/advanced/style.mdx",
-      "line": 7,
-      "status": "ok",
-      "reason": "HTTP 200",
-      "code": 200,
-      "checkedAt": "2026-08-11T17:47:47.873Z"
-    },
-    {
-      "text": "businesses",
-      "url": "https://languagetool.org/sales",
-      "type": "markdown",
-      "filePath": "/docs/advanced/style.mdx",
-      "line": 7,
-      "status": "ok",
-      "reason": "HTTP 200",
-      "code": 200,
-      "redirectedTo": "https://languagetool.org/premium",
-      "checkedAt": "2026-08-11T17:47:47.985Z"
-    },
-    {
-      "text": "discount",
-      "url": "https://languagetool.org/premium",
-      "type": "markdown",
-      "filePath": "/docs/advanced/style.mdx",
-      "line": 7,
-      "status": "ok",
-      "reason": "HTTP 200",
-      "code": 200,
-      "checkedAt": "2026-08-11T17:47:47.873Z"
-    },
-    {
-      "text": "self-hosting",
-      "url": "https://languagetool.org/dev",
-      "type": "markdown",
-      "filePath": "/docs/advanced/style.mdx",
-      "line": 11,
-      "status": "ok",
-      "reason": "HTTP 200",
-      "code": 200,
-      "checkedAt": "2026-08-11T17:47:47.601Z"
+      "checkedAt": "2026-08-14T19:10:56.976Z"
     },
     {
       "text": "Blog Plugin API Reference",
@@ -605,21 +539,12 @@
       "type": "markdown",
       "filePath": "/docs/blog.mdx",
       "line": 7,
+      "source": "doc",
+      "inUrlsJson": true,
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:47:47.442Z"
-    },
-    {
-      "text": "Blog",
-      "url": "https://docusaurus.io/docs/blog",
-      "type": "markdown",
-      "filePath": "/docs/blog.mdx",
-      "line": 22,
-      "status": "ok",
-      "reason": "HTTP 200",
-      "code": 200,
-      "checkedAt": "2026-08-11T17:47:47.452Z"
+      "checkedAt": "2026-08-14T19:10:56.500Z"
     },
     {
       "text": "browserslist configuration",
@@ -627,21 +552,12 @@
       "type": "markdown",
       "filePath": "/docs/browser-support.mdx",
       "line": 2,
+      "source": "doc",
+      "inUrlsJson": false,
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:47:47.462Z"
-    },
-    {
-      "text": "Browser support",
-      "url": "https://docusaurus.io/docs/browser-support",
-      "type": "markdown",
-      "filePath": "/docs/browser-support.mdx",
-      "line": 4,
-      "status": "ok",
-      "reason": "HTTP 200",
-      "code": 200,
-      "checkedAt": "2026-08-11T17:47:47.655Z"
+      "checkedAt": "2026-08-14T19:10:56.906Z"
     },
     {
       "text": "WebLLM",
@@ -649,8 +565,12 @@
       "type": "markdown",
       "filePath": "/docs/chatbot.mdx",
       "line": 1,
-      "status": "unchecked",
-      "reason": "Not checked yet"
+      "source": "doc",
+      "inUrlsJson": false,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-14T19:10:56.683Z"
     },
     {
       "text": "WebGPU",
@@ -658,8 +578,12 @@
       "type": "markdown",
       "filePath": "/docs/chatbot.mdx",
       "line": 9,
-      "status": "unchecked",
-      "reason": "Not checked yet"
+      "source": "doc",
+      "inUrlsJson": false,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-14T19:10:56.556Z"
     },
     {
       "text": "WebLLM prebuilt model ID",
@@ -667,8 +591,12 @@
       "type": "markdown",
       "filePath": "/docs/chatbot.mdx",
       "line": 25,
-      "status": "unchecked",
-      "reason": "Not checked yet"
+      "source": "doc",
+      "inUrlsJson": false,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-14T19:10:57.374Z"
     },
     {
       "text": "Dashboards",
@@ -694,10 +622,12 @@
       "type": "markdown",
       "filePath": "/docs/cli.mdx",
       "line": 31,
+      "source": "doc",
+      "inUrlsJson": true,
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:47:47.659Z"
+      "checkedAt": "2026-08-14T19:10:57.405Z"
     },
     {
       "text": "CLI Usage",
@@ -705,11 +635,13 @@
       "type": "markdown",
       "filePath": "/docs/cli.mdx",
       "line": 57,
+      "source": "doc",
+      "inUrlsJson": false,
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
       "redirectedTo": "https://github.com/PaloAltoNetworks/docusaurus-openapi-docs?tab=readme-ov-file",
-      "checkedAt": "2026-08-11T17:47:47.480Z"
+      "checkedAt": "2026-08-14T19:10:57.330Z"
     },
     {
       "text": "Usage",
@@ -717,11 +649,13 @@
       "type": "markdown",
       "filePath": "/docs/cli.mdx",
       "line": 59,
+      "source": "doc",
+      "inUrlsJson": false,
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
       "redirectedTo": "https://github.com/Zhouzi/docusaurus-graphql-plugin?tab=readme-ov-file",
-      "checkedAt": "2026-08-11T17:47:47.481Z"
+      "checkedAt": "2026-08-14T19:10:57.311Z"
     },
     {
       "text": "Installation",
@@ -738,10 +672,12 @@
       "type": "markdown",
       "filePath": "/docs/cli.mdx",
       "line": 94,
+      "source": "doc",
+      "inUrlsJson": false,
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:47:47.691Z"
+      "checkedAt": "2026-08-14T19:10:56.815Z"
     },
     {
       "text": "Configuration",
@@ -749,10 +685,12 @@
       "type": "markdown",
       "filePath": "/docs/configuration.mdx",
       "line": 4,
+      "source": "doc",
+      "inUrlsJson": true,
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:47:47.824Z"
+      "checkedAt": "2026-08-14T19:10:56.940Z"
     },
     {
       "text": "GitHub Pages",
@@ -760,10 +698,12 @@
       "type": "markdown",
       "filePath": "/docs/deployment.mdx",
       "line": 1,
+      "source": "doc",
+      "inUrlsJson": false,
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:47:47.622Z"
+      "checkedAt": "2026-08-14T19:10:56.933Z"
     },
     {
       "text": "Deployment",
@@ -771,11 +711,13 @@
       "type": "markdown",
       "filePath": "/docs/deployment.mdx",
       "line": 1,
+      "source": "doc",
+      "inUrlsJson": true,
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
       "redirectedTo": "https://docusaurus.io/docs/deployment",
-      "checkedAt": "2026-08-11T17:47:47.679Z"
+      "checkedAt": "2026-08-14T19:10:56.992Z"
     },
     {
       "text": "Pages Plugin API Reference",
@@ -801,21 +743,30 @@
       "type": "markdown",
       "filePath": "/docs/guides/creating-pages.mdx",
       "line": 31,
+      "source": "doc",
+      "inUrlsJson": true,
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:47:47.716Z"
+      "checkedAt": "2026-08-14T19:10:57.003Z"
+    },
+    {
+      "text": "centralized URLs",
+      "url": "/docs/guides/markdown-features/urls",
+      "type": "markdown",
+      "filePath": "/docs/guides/dashboards.mdx",
+      "line": 79,
+      "status": "skipped",
+      "reason": "Internal link — checked by the Docusaurus build"
     },
     {
       "text": "context-sensitive help",
-      "url": "https://docstatic.com/docs/context-help",
+      "url": "../../context-help",
       "type": "markdown",
       "filePath": "/docs/guides/docs/create-doc.mdx",
       "line": 14,
-      "status": "ok",
-      "reason": "HTTP 200",
-      "code": 200,
-      "checkedAt": "2026-08-11T17:47:47.686Z"
+      "status": "skipped",
+      "reason": "Internal link — checked by the Docusaurus build"
     },
     {
       "text": "taxonomy",
@@ -832,10 +783,12 @@
       "type": "markdown",
       "filePath": "/docs/guides/docs/create-doc.mdx",
       "line": 30,
+      "source": "doc",
+      "inUrlsJson": true,
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:47:47.756Z"
+      "checkedAt": "2026-08-14T19:10:57.429Z"
     },
     {
       "text": "Docs Plugin API Reference",
@@ -843,10 +796,12 @@
       "type": "markdown",
       "filePath": "/docs/guides/docs/introduction.mdx",
       "line": 6,
+      "source": "doc",
+      "inUrlsJson": true,
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:47:47.798Z"
+      "checkedAt": "2026-08-14T19:10:57.721Z"
     },
     {
       "text": "Docs introduction",
@@ -854,10 +809,12 @@
       "type": "markdown",
       "filePath": "/docs/guides/docs/introduction.mdx",
       "line": 9,
+      "source": "doc",
+      "inUrlsJson": true,
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:47:47.767Z"
+      "checkedAt": "2026-08-14T19:10:57.087Z"
     },
     {
       "text": "information architecture",
@@ -865,10 +822,12 @@
       "type": "markdown",
       "filePath": "/docs/guides/docs/taxonomies.mdx",
       "line": 4,
+      "source": "doc",
+      "inUrlsJson": true,
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:47:47.827Z"
+      "checkedAt": "2026-08-14T19:10:57.115Z"
     },
     {
       "text": "indexing",
@@ -894,10 +853,12 @@
       "type": "markdown",
       "filePath": "/docs/guides/markdown-features/assets.mdx",
       "line": 22,
+      "source": "doc",
+      "inUrlsJson": false,
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:47:47.904Z"
+      "checkedAt": "2026-08-14T19:10:57.197Z"
     },
     {
       "text": "Media Overview",
@@ -905,10 +866,12 @@
       "type": "markdown",
       "filePath": "/docs/guides/markdown-features/assets.mdx",
       "line": 39,
+      "source": "doc",
+      "inUrlsJson": false,
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:47:47.851Z"
+      "checkedAt": "2026-08-14T19:10:57.152Z"
     },
     {
       "text": "Static assets",
@@ -916,10 +879,12 @@
       "type": "markdown",
       "filePath": "/docs/guides/markdown-features/assets.mdx",
       "line": 49,
+      "source": "doc",
+      "inUrlsJson": true,
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:47:48.351Z"
+      "checkedAt": "2026-08-14T19:10:57.217Z"
     },
     {
       "text": "online help",
@@ -927,10 +892,12 @@
       "type": "markdown",
       "filePath": "/docs/guides/markdown-features/context-help.mdx",
       "line": 3,
+      "source": "doc",
+      "inUrlsJson": true,
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:47:47.885Z"
+      "checkedAt": "2026-08-14T19:10:57.270Z"
     },
     {
       "text": "Wikipedia",
@@ -938,10 +905,12 @@
       "type": "markdown",
       "filePath": "/docs/guides/markdown-features/context-help.mdx",
       "line": 3,
+      "source": "doc",
+      "inUrlsJson": true,
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:47:47.900Z"
+      "checkedAt": "2026-08-14T19:10:57.284Z"
     },
     {
       "text": "https://docstatic.com/docs/context-help#help-example",
@@ -954,36 +923,29 @@
     },
     {
       "text": "Mermaid",
-      "url": "https://mermaid.js.org/",
-      "type": "markdown",
-      "filePath": "/docs/guides/markdown-features/diagrams.mdx",
-      "line": 3,
-      "status": "unverified",
-      "reason": "Domain did not resolve — check DNS, then the link",
-      "code": null,
-      "checkedAt": "2026-08-11T17:47:47.831Z"
-    },
-    {
-      "text": "Mermaid",
       "url": "https://tina.io/docs/reference/rich-text-usage/mermaid",
       "type": "markdown",
       "filePath": "/docs/guides/markdown-features/diagrams.mdx",
-      "line": 28,
+      "line": 29,
+      "source": "doc",
+      "inUrlsJson": false,
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:47:47.862Z"
+      "checkedAt": "2026-08-14T19:10:57.311Z"
     },
     {
       "text": "Diagrams",
       "url": "https://docusaurus.io/docs/markdown-features/diagrams",
       "type": "markdown",
       "filePath": "/docs/guides/markdown-features/diagrams.mdx",
-      "line": 30,
+      "line": 31,
+      "source": "doc",
+      "inUrlsJson": true,
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:47:48.397Z"
+      "checkedAt": "2026-08-14T19:10:57.485Z"
     },
     {
       "text": "Markdown",
@@ -991,10 +953,12 @@
       "type": "markdown",
       "filePath": "/docs/guides/markdown-features/intro.mdx",
       "line": 4,
+      "source": "doc",
+      "inUrlsJson": false,
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:47:47.886Z"
+      "checkedAt": "2026-08-14T19:10:57.487Z"
     },
     {
       "text": "learn it in ten minutes",
@@ -1002,10 +966,12 @@
       "type": "markdown",
       "filePath": "/docs/guides/markdown-features/intro.mdx",
       "line": 4,
+      "source": "doc",
+      "inUrlsJson": false,
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:47:47.892Z"
+      "checkedAt": "2026-08-14T19:10:57.483Z"
     },
     {
       "text": "YAML",
@@ -1013,10 +979,12 @@
       "type": "markdown",
       "filePath": "/docs/guides/markdown-features/intro.mdx",
       "line": 10,
+      "source": "doc",
+      "inUrlsJson": false,
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:47:47.907Z"
+      "checkedAt": "2026-08-14T19:10:57.514Z"
     },
     {
       "text": "Admonitions",
@@ -1150,10 +1118,12 @@
       "type": "markdown",
       "filePath": "/docs/guides/markdown-features/intro.mdx",
       "line": 77,
+      "source": "doc",
+      "inUrlsJson": true,
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:47:47.953Z"
+      "checkedAt": "2026-08-14T19:10:57.439Z"
     },
     {
       "text": "Markdown Features",
@@ -1161,10 +1131,12 @@
       "type": "markdown",
       "filePath": "/docs/guides/markdown-features/intro.mdx",
       "line": 87,
+      "source": "doc",
+      "inUrlsJson": true,
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:47:48.882Z"
+      "checkedAt": "2026-08-14T19:10:57.593Z"
     },
     {
       "text": "Markdown links",
@@ -1172,10 +1144,12 @@
       "type": "markdown",
       "filePath": "/docs/guides/markdown-features/links.mdx",
       "line": 16,
+      "source": "doc",
+      "inUrlsJson": true,
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:47:47.954Z"
+      "checkedAt": "2026-08-14T19:10:57.640Z"
     },
     {
       "text": "KaTeX",
@@ -1183,11 +1157,13 @@
       "type": "markdown",
       "filePath": "/docs/guides/markdown-features/math-equations.mdx",
       "line": 3,
+      "source": "doc",
+      "inUrlsJson": true,
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
       "redirectedTo": "https://katex.org/",
-      "checkedAt": "2026-08-11T17:47:47.987Z"
+      "checkedAt": "2026-08-14T19:10:57.651Z"
     },
     {
       "text": "KaTeX",
@@ -1195,11 +1171,13 @@
       "type": "markdown",
       "filePath": "/docs/guides/markdown-features/math-equations.mdx",
       "line": 41,
+      "source": "doc",
+      "inUrlsJson": true,
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
       "redirectedTo": "https://katex.org/",
-      "checkedAt": "2026-08-11T17:47:47.987Z"
+      "checkedAt": "2026-08-14T19:10:57.651Z"
     },
     {
       "text": "Head metadata",
@@ -1207,10 +1185,12 @@
       "type": "markdown",
       "filePath": "/docs/guides/markdown-features/metadata.mdx",
       "line": 22,
+      "source": "doc",
+      "inUrlsJson": true,
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:47:48.103Z"
+      "checkedAt": "2026-08-14T19:10:57.540Z"
     },
     {
       "text": "plugin system",
@@ -1218,10 +1198,12 @@
       "type": "markdown",
       "filePath": "/docs/guides/markdown-features/plugins.mdx",
       "line": 3,
+      "source": "doc",
+      "inUrlsJson": false,
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:47:47.978Z"
+      "checkedAt": "2026-08-14T19:10:57.616Z"
     },
     {
       "text": "MDX Plugins",
@@ -1229,10 +1211,12 @@
       "type": "markdown",
       "filePath": "/docs/guides/markdown-features/plugins.mdx",
       "line": 9,
+      "source": "doc",
+      "inUrlsJson": true,
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:47:48.159Z"
+      "checkedAt": "2026-08-14T19:10:57.547Z"
     },
     {
       "text": "math plugins",
@@ -1249,10 +1233,12 @@
       "type": "markdown",
       "filePath": "/docs/guides/markdown-features/react.mdx",
       "line": 4,
+      "source": "doc",
+      "inUrlsJson": false,
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:47:47.997Z"
+      "checkedAt": "2026-08-14T19:10:57.673Z"
     },
     {
       "text": "MDX and React",
@@ -1260,10 +1246,12 @@
       "type": "markdown",
       "filePath": "/docs/guides/markdown-features/react.mdx",
       "line": 132,
+      "source": "doc",
+      "inUrlsJson": true,
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:47:48.041Z"
+      "checkedAt": "2026-08-14T19:10:57.611Z"
     },
     {
       "text": "example page",
@@ -1289,8 +1277,12 @@
       "type": "markdown",
       "filePath": "/docs/guides/markdown-features/tables.mdx",
       "line": 2,
-      "status": "unchecked",
-      "reason": "Not checked yet"
+      "source": "doc",
+      "inUrlsJson": true,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-14T19:10:57.890Z"
     },
     {
       "text": "CALS table model reference",
@@ -1298,8 +1290,12 @@
       "type": "markdown",
       "filePath": "/docs/guides/markdown-features/tables.mdx",
       "line": 63,
-      "status": "unchecked",
-      "reason": "Not checked yet"
+      "source": "doc",
+      "inUrlsJson": true,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-14T19:10:57.890Z"
     },
     {
       "text": "DocBook table documentation",
@@ -1307,8 +1303,12 @@
       "type": "markdown",
       "filePath": "/docs/guides/markdown-features/tables.mdx",
       "line": 63,
-      "status": "unchecked",
-      "reason": "Not checked yet"
+      "source": "doc",
+      "inUrlsJson": false,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-14T19:10:57.770Z"
     },
     {
       "text": "Tabs",
@@ -1316,10 +1316,12 @@
       "type": "markdown",
       "filePath": "/docs/guides/markdown-features/tabs.mdx",
       "line": 33,
+      "source": "doc",
+      "inUrlsJson": true,
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:47:48.429Z"
+      "checkedAt": "2026-08-14T19:10:57.672Z"
     },
     {
       "text": "information architecture",
@@ -1327,10 +1329,12 @@
       "type": "markdown",
       "filePath": "/docs/guides/markdown-features/taxonomies.mdx",
       "line": 4,
+      "source": "doc",
+      "inUrlsJson": true,
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:47:47.827Z"
+      "checkedAt": "2026-08-14T19:10:57.115Z"
     },
     {
       "text": "https://docstatic.com/docs/guides/markdown-features/toc#anchor-example",
@@ -1338,11 +1342,13 @@
       "type": "markdown",
       "filePath": "/docs/guides/markdown-features/toc.mdx",
       "line": 16,
+      "source": "doc",
+      "inUrlsJson": false,
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
       "redirectedTo": "https://docstatic.com/docs/guides/markdown-features/toc",
-      "checkedAt": "2026-08-11T17:47:48.021Z"
+      "checkedAt": "2026-08-14T19:10:57.773Z"
     },
     {
       "text": "Headings and Table of contents",
@@ -1350,10 +1356,21 @@
       "type": "markdown",
       "filePath": "/docs/guides/markdown-features/toc.mdx",
       "line": 22,
+      "source": "doc",
+      "inUrlsJson": true,
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:47:48.674Z"
+      "checkedAt": "2026-08-14T19:10:57.714Z"
+    },
+    {
+      "text": "Dashboards",
+      "url": "/docs/guides/dashboards",
+      "type": "markdown",
+      "filePath": "/docs/guides/markdown-features/urls.mdx",
+      "line": 32,
+      "status": "skipped",
+      "reason": "Internal link — checked by the Docusaurus build"
     },
     {
       "text": "Claude Code",
@@ -1361,10 +1378,12 @@
       "type": "markdown",
       "filePath": "/docs/guides/using-claude.mdx",
       "line": 2,
+      "source": "doc",
+      "inUrlsJson": false,
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:47:48.099Z"
+      "checkedAt": "2026-08-14T19:10:57.750Z"
     },
     {
       "text": "Vale",
@@ -1372,11 +1391,13 @@
       "type": "markdown",
       "filePath": "/docs/guides/vale.mdx",
       "line": 2,
+      "source": "doc",
+      "inUrlsJson": false,
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
       "redirectedTo": "https://vale.sh/",
-      "checkedAt": "2026-08-11T17:47:48.188Z"
+      "checkedAt": "2026-08-14T19:10:57.784Z"
     },
     {
       "text": "Vale installation guide",
@@ -1384,10 +1405,12 @@
       "type": "markdown",
       "filePath": "/docs/guides/vale.mdx",
       "line": 6,
+      "source": "doc",
+      "inUrlsJson": false,
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:47:48.391Z"
+      "checkedAt": "2026-08-14T19:10:57.805Z"
     },
     {
       "text": "Vale documentation",
@@ -1395,10 +1418,12 @@
       "type": "markdown",
       "filePath": "/docs/guides/vale.mdx",
       "line": 81,
+      "source": "doc",
+      "inUrlsJson": false,
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:47:48.275Z"
+      "checkedAt": "2026-08-14T19:10:57.824Z"
     },
     {
       "text": "Vale VSCode",
@@ -1406,10 +1431,12 @@
       "type": "markdown",
       "filePath": "/docs/guides/vale.mdx",
       "line": 86,
+      "source": "doc",
+      "inUrlsJson": false,
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:47:48.502Z"
+      "checkedAt": "2026-08-14T19:10:58.142Z"
     },
     {
       "text": "Autogenerated",
@@ -1417,11 +1444,13 @@
       "type": "markdown",
       "filePath": "/docs/guides/wikis.mdx",
       "line": 15,
+      "source": "doc",
+      "inUrlsJson": true,
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
       "redirectedTo": "https://docusaurus.io/docs/sidebar/autogenerated",
-      "checkedAt": "2026-08-11T17:47:48.332Z"
+      "checkedAt": "2026-08-14T19:10:57.967Z"
     },
     {
       "text": "i18n",
@@ -1429,10 +1458,12 @@
       "type": "markdown",
       "filePath": "/docs/i18n/introduction.mdx",
       "line": 3,
+      "source": "doc",
+      "inUrlsJson": true,
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:47:48.403Z"
+      "checkedAt": "2026-08-14T19:10:57.847Z"
     },
     {
       "text": "i18n - Introduction",
@@ -1440,108 +1471,74 @@
       "type": "markdown",
       "filePath": "/docs/i18n/introduction.mdx",
       "line": 3,
+      "source": "doc",
+      "inUrlsJson": true,
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:47:48.407Z"
-    },
-    {
-      "text": "GitHub",
-      "url": "https://github.com/",
-      "type": "markdown",
-      "filePath": "/docs/installation.mdx",
-      "line": 13,
-      "status": "ok",
-      "reason": "HTTP 200",
-      "code": 200,
-      "checkedAt": "2026-08-11T17:47:46.784Z"
-    },
-    {
-      "text": "TinaCMS",
-      "url": "https://tina.io/",
-      "type": "markdown",
-      "filePath": "/docs/installation.mdx",
-      "line": 14,
-      "status": "ok",
-      "reason": "HTTP 200",
-      "code": 200,
-      "checkedAt": "2026-08-11T17:47:46.813Z"
-    },
-    {
-      "text": "LanguageTool",
-      "url": "https://languagetool.org/",
-      "type": "markdown",
-      "filePath": "/docs/installation.mdx",
-      "line": 15,
-      "status": "ok",
-      "reason": "HTTP 200",
-      "code": 200,
-      "checkedAt": "2026-08-11T17:47:46.974Z"
+      "checkedAt": "2026-08-14T19:10:57.837Z"
     },
     {
       "text": "Eclipse",
       "url": "https://eclipseide.org",
       "type": "markdown",
       "filePath": "/docs/installation.mdx",
-      "line": 27,
+      "line": 28,
+      "source": "doc",
+      "inUrlsJson": false,
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
       "redirectedTo": "https://eclipseide.org/",
-      "checkedAt": "2026-08-11T17:47:47.180Z"
-    },
-    {
-      "text": "VSCodium",
-      "url": "https://vscodium.com/",
-      "type": "markdown",
-      "filePath": "/docs/installation.mdx",
-      "line": 28,
-      "status": "ok",
-      "reason": "HTTP 200",
-      "code": 200,
-      "checkedAt": "2026-08-11T17:47:46.785Z"
+      "checkedAt": "2026-08-14T19:10:58.218Z"
     },
     {
       "text": "Node.js",
       "url": "https://nodejs.org/",
       "type": "markdown",
       "filePath": "/docs/installation.mdx",
-      "line": 34,
+      "line": 35,
+      "source": "doc",
+      "inUrlsJson": false,
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
       "redirectedTo": "https://nodejs.org/en",
-      "checkedAt": "2026-08-11T17:47:46.883Z"
+      "checkedAt": "2026-08-14T19:10:57.916Z"
     },
     {
       "text": "official Node.js downloads",
       "url": "https://nodejs.org/en/download/prebuilt-installer",
       "type": "markdown",
       "filePath": "/docs/installation.mdx",
-      "line": 46,
+      "line": 47,
+      "source": "doc",
+      "inUrlsJson": false,
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
       "redirectedTo": "https://nodejs.org/en/download",
-      "checkedAt": "2026-08-11T17:47:46.884Z"
+      "checkedAt": "2026-08-14T19:10:57.910Z"
     },
     {
       "text": "Node Version Manager",
       "url": "https://github.com/nvm-sh/nvm",
       "type": "markdown",
       "filePath": "/docs/installation.mdx",
-      "line": 55,
+      "line": 56,
+      "source": "doc",
+      "inUrlsJson": false,
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:47:46.811Z"
+      "checkedAt": "2026-08-14T19:10:58.297Z"
     },
     {
       "text": "Project structure",
       "url": "#project-structure",
       "type": "markdown",
       "filePath": "/docs/installation.mdx",
-      "line": 139,
+      "line": 132,
       "status": "skipped",
       "reason": "Anchor link"
     },
@@ -1550,18 +1547,20 @@
       "url": "https://github.com/aowendev/docstatic",
       "type": "markdown",
       "filePath": "/docs/installation.mdx",
-      "line": 164,
+      "line": 155,
+      "source": "doc",
+      "inUrlsJson": false,
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:47:46.781Z"
+      "checkedAt": "2026-08-14T19:10:58.530Z"
     },
     {
       "text": "MCP server",
       "url": "mcp-server.mdx",
       "type": "markdown",
       "filePath": "/docs/installation.mdx",
-      "line": 272,
+      "line": 263,
       "status": "skipped",
       "reason": "Internal link — checked by the Docusaurus build"
     },
@@ -1570,19 +1569,21 @@
       "url": "https://docusaurus.io/docs/installation#monorepos",
       "type": "markdown",
       "filePath": "/docs/installation.mdx",
-      "line": 295,
+      "line": 286,
+      "source": "doc",
+      "inUrlsJson": true,
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
       "redirectedTo": "https://docusaurus.io/docs/installation",
-      "checkedAt": "2026-08-11T17:47:47.341Z"
+      "checkedAt": "2026-08-14T19:10:58.149Z"
     },
     {
       "text": "http://localhost:3000",
       "url": "http://localhost:3000",
       "type": "markdown",
       "filePath": "/docs/installation.mdx",
-      "line": 309,
+      "line": 300,
       "status": "skipped",
       "reason": "Local address — not checked"
     },
@@ -1591,11 +1592,13 @@
       "url": "https://docusaurus.io/docs/deployment",
       "type": "markdown",
       "filePath": "/docs/installation.mdx",
-      "line": 321,
+      "line": 312,
+      "source": "doc",
+      "inUrlsJson": false,
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:47:47.804Z"
+      "checkedAt": "2026-08-14T19:10:57.972Z"
     },
     {
       "text": "component content management systems",
@@ -1603,10 +1606,12 @@
       "type": "markdown",
       "filePath": "/docs/introduction.mdx",
       "line": 4,
+      "source": "doc",
+      "inUrlsJson": false,
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:47:48.465Z"
+      "checkedAt": "2026-08-14T19:10:57.987Z"
     },
     {
       "text": "docs-as-code",
@@ -1614,10 +1619,12 @@
       "type": "markdown",
       "filePath": "/docs/introduction.mdx",
       "line": 4,
+      "source": "doc",
+      "inUrlsJson": false,
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:47:48.435Z"
+      "checkedAt": "2026-08-14T19:10:58.209Z"
     },
     {
       "text": "Tinasaurus",
@@ -1625,10 +1632,12 @@
       "type": "markdown",
       "filePath": "/docs/introduction.mdx",
       "line": 8,
+      "source": "doc",
+      "inUrlsJson": false,
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:47:48.442Z"
+      "checkedAt": "2026-08-14T19:10:58.005Z"
     },
     {
       "text": "React",
@@ -1636,10 +1645,12 @@
       "type": "markdown",
       "filePath": "/docs/introduction.mdx",
       "line": 8,
+      "source": "doc",
+      "inUrlsJson": false,
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:47:48.444Z"
+      "checkedAt": "2026-08-14T19:10:58.039Z"
     },
     {
       "text": "static site generator",
@@ -1647,10 +1658,12 @@
       "type": "markdown",
       "filePath": "/docs/introduction.mdx",
       "line": 8,
+      "source": "doc",
+      "inUrlsJson": false,
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:47:48.499Z"
+      "checkedAt": "2026-08-14T19:10:58.084Z"
     },
     {
       "text": "Docusaurus",
@@ -1658,10 +1671,12 @@
       "type": "markdown",
       "filePath": "/docs/introduction.mdx",
       "line": 8,
+      "source": "doc",
+      "inUrlsJson": true,
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:47:47.953Z"
+      "checkedAt": "2026-08-14T19:10:57.439Z"
     },
     {
       "text": "headless content management system",
@@ -1669,10 +1684,12 @@
       "type": "markdown",
       "filePath": "/docs/introduction.mdx",
       "line": 8,
+      "source": "doc",
+      "inUrlsJson": false,
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:47:48.525Z"
+      "checkedAt": "2026-08-14T19:10:58.114Z"
     },
     {
       "text": "TinaCMS",
@@ -1680,10 +1697,12 @@
       "type": "markdown",
       "filePath": "/docs/introduction.mdx",
       "line": 8,
+      "source": "doc",
+      "inUrlsJson": true,
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:47:46.813Z"
+      "checkedAt": "2026-08-14T19:10:58.209Z"
     },
     {
       "text": "GraphQL",
@@ -1691,10 +1710,12 @@
       "type": "markdown",
       "filePath": "/docs/introduction.mdx",
       "line": 28,
+      "source": "doc",
+      "inUrlsJson": false,
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:47:48.511Z"
+      "checkedAt": "2026-08-14T19:10:58.208Z"
     },
     {
       "text": "GitHub",
@@ -1702,10 +1723,12 @@
       "type": "markdown",
       "filePath": "/docs/introduction.mdx",
       "line": 32,
+      "source": "doc",
+      "inUrlsJson": true,
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:47:46.784Z"
+      "checkedAt": "2026-08-14T19:10:58.165Z"
     },
     {
       "text": "KaTeX",
@@ -1713,10 +1736,12 @@
       "type": "markdown",
       "filePath": "/docs/introduction.mdx",
       "line": 38,
+      "source": "doc",
+      "inUrlsJson": false,
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:47:48.537Z"
+      "checkedAt": "2026-08-14T19:10:58.234Z"
     },
     {
       "text": "Lunr",
@@ -1724,21 +1749,12 @@
       "type": "markdown",
       "filePath": "/docs/introduction.mdx",
       "line": 38,
+      "source": "doc",
+      "inUrlsJson": true,
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:47:48.498Z"
-    },
-    {
-      "text": "Mermaid",
-      "url": "https://mermaid.js.org/",
-      "type": "markdown",
-      "filePath": "/docs/introduction.mdx",
-      "line": 38,
-      "status": "unverified",
-      "reason": "Domain did not resolve — check DNS, then the link",
-      "code": null,
-      "checkedAt": "2026-08-11T17:47:47.831Z"
+      "checkedAt": "2026-08-14T19:10:58.238Z"
     },
     {
       "text": "OpenAPI",
@@ -1746,21 +1762,12 @@
       "type": "markdown",
       "filePath": "/docs/introduction.mdx",
       "line": 38,
+      "source": "doc",
+      "inUrlsJson": false,
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:47:48.542Z"
-    },
-    {
-      "text": "LanguageTool",
-      "url": "https://languagetool.org/",
-      "type": "markdown",
-      "filePath": "/docs/introduction.mdx",
-      "line": 38,
-      "status": "ok",
-      "reason": "HTTP 200",
-      "code": 200,
-      "checkedAt": "2026-08-11T17:47:46.974Z"
+      "checkedAt": "2026-08-14T19:10:58.488Z"
     },
     {
       "text": "Model Context Protocol (MCP) server",
@@ -1777,10 +1784,12 @@
       "type": "markdown",
       "filePath": "/docs/introduction.mdx",
       "line": 50,
+      "source": "doc",
+      "inUrlsJson": false,
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:47:48.565Z"
+      "checkedAt": "2026-08-14T19:10:58.415Z"
     },
     {
       "text": "TinaCMS",
@@ -1788,10 +1797,12 @@
       "type": "markdown",
       "filePath": "/docs/introduction.mdx",
       "line": 50,
+      "source": "doc",
+      "inUrlsJson": false,
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:47:48.543Z"
+      "checkedAt": "2026-08-14T19:10:58.238Z"
     },
     {
       "text": "MCP Server Implementation Details",
@@ -1808,10 +1819,12 @@
       "type": "markdown",
       "filePath": "/docs/migration/index.mdx",
       "line": 3,
+      "source": "doc",
+      "inUrlsJson": false,
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:47:48.536Z"
+      "checkedAt": "2026-08-14T19:10:58.778Z"
     },
     {
       "text": "Lunr",
@@ -1819,10 +1832,12 @@
       "type": "markdown",
       "filePath": "/docs/search.mdx",
       "line": 1,
+      "source": "doc",
+      "inUrlsJson": true,
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:47:48.498Z"
+      "checkedAt": "2026-08-14T19:10:58.238Z"
     },
     {
       "text": "Markprompt",
@@ -1830,10 +1845,12 @@
       "type": "markdown",
       "filePath": "/docs/search.mdx",
       "line": 6,
+      "source": "doc",
+      "inUrlsJson": true,
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:47:48.550Z"
+      "checkedAt": "2026-08-14T19:10:58.701Z"
     },
     {
       "text": "Meilisearch",
@@ -1841,10 +1858,12 @@
       "type": "markdown",
       "filePath": "/docs/search.mdx",
       "line": 7,
+      "source": "doc",
+      "inUrlsJson": false,
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:47:48.573Z"
+      "checkedAt": "2026-08-14T19:10:58.952Z"
     },
     {
       "text": "Orama",
@@ -1852,11 +1871,13 @@
       "type": "markdown",
       "filePath": "/docs/search.mdx",
       "line": 8,
+      "source": "doc",
+      "inUrlsJson": false,
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
       "redirectedTo": "https://github.com/oramasearch/orama/tree/main/packages/plugin-docusaurus-v3",
-      "checkedAt": "2026-08-11T17:47:48.586Z"
+      "checkedAt": "2026-08-14T19:10:58.973Z"
     },
     {
       "text": "Typesense DocSearch",
@@ -1864,10 +1885,12 @@
       "type": "markdown",
       "filePath": "/docs/search.mdx",
       "line": 9,
+      "source": "doc",
+      "inUrlsJson": true,
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:47:48.550Z"
+      "checkedAt": "2026-08-14T19:10:58.701Z"
     },
     {
       "text": "Search",
@@ -1875,11 +1898,13 @@
       "type": "markdown",
       "filePath": "/docs/search.mdx",
       "line": 11,
+      "source": "doc",
+      "inUrlsJson": true,
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
       "redirectedTo": "https://docusaurus.io/docs/search",
-      "checkedAt": "2026-08-11T17:47:48.726Z"
+      "checkedAt": "2026-08-14T19:10:58.625Z"
     },
     {
       "text": "Search engine optimisation",
@@ -1887,10 +1912,12 @@
       "type": "markdown",
       "filePath": "/docs/seo.mdx",
       "line": 12,
+      "source": "doc",
+      "inUrlsJson": false,
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:47:48.597Z"
+      "checkedAt": "2026-08-14T19:10:58.474Z"
     },
     {
       "text": "Static Assets",
@@ -1898,10 +1925,12 @@
       "type": "markdown",
       "filePath": "/docs/static-assets.mdx",
       "line": 26,
+      "source": "doc",
+      "inUrlsJson": false,
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:47:48.848Z"
+      "checkedAt": "2026-08-14T19:10:58.676Z"
     },
     {
       "text": "Infima",
@@ -1909,10 +1938,12 @@
       "type": "markdown",
       "filePath": "/docs/styling-layout.mdx",
       "line": 10,
+      "source": "doc",
+      "inUrlsJson": true,
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:47:48.629Z"
+      "checkedAt": "2026-08-14T19:10:58.762Z"
     },
     {
       "text": "Infima website",
@@ -1920,10 +1951,12 @@
       "type": "markdown",
       "filePath": "/docs/styling-layout.mdx",
       "line": 10,
+      "source": "doc",
+      "inUrlsJson": true,
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:47:48.629Z"
+      "checkedAt": "2026-08-14T19:10:58.762Z"
     },
     {
       "text": "Example page",
@@ -1931,10 +1964,12 @@
       "type": "markdown",
       "filePath": "/docs/styling-layout.mdx",
       "line": 12,
+      "source": "doc",
+      "inUrlsJson": false,
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:47:48.592Z"
+      "checkedAt": "2026-08-14T19:10:58.814Z"
     },
     {
       "text": "Styling and Layout",
@@ -1942,10 +1977,12 @@
       "type": "markdown",
       "filePath": "/docs/styling-layout.mdx",
       "line": 45,
+      "source": "doc",
+      "inUrlsJson": false,
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:47:48.637Z"
+      "checkedAt": "2026-08-14T19:10:58.677Z"
     },
     {
       "text": "docs plugin",
@@ -1953,10 +1990,12 @@
       "type": "markdown",
       "filePath": "/docs/using-plugins.mdx",
       "line": 1,
+      "source": "doc",
+      "inUrlsJson": true,
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:47:47.798Z"
+      "checkedAt": "2026-08-14T19:10:57.721Z"
     },
     {
       "text": "blog plugin",
@@ -1964,10 +2003,12 @@
       "type": "markdown",
       "filePath": "/docs/using-plugins.mdx",
       "line": 1,
+      "source": "doc",
+      "inUrlsJson": true,
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:47:47.442Z"
+      "checkedAt": "2026-08-14T19:10:56.500Z"
     },
     {
       "text": "pages plugin",
@@ -1975,10 +2016,12 @@
       "type": "markdown",
       "filePath": "/docs/using-plugins.mdx",
       "line": 1,
+      "source": "doc",
+      "inUrlsJson": true,
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:47:48.640Z"
+      "checkedAt": "2026-08-14T19:10:58.740Z"
     },
     {
       "text": "Using Plugins",
@@ -1986,10 +2029,1505 @@
       "type": "markdown",
       "filePath": "/docs/using-plugins.mdx",
       "line": 11,
+      "source": "doc",
+      "inUrlsJson": true,
       "status": "ok",
       "reason": "HTTP 200",
       "code": 200,
-      "checkedAt": "2026-08-11T17:47:48.649Z"
+      "checkedAt": "2026-08-14T19:10:58.943Z"
+    },
+    {
+      "text": "cals-table-model",
+      "url": "https://www.oasis-open.org/specs/tm9901.html",
+      "type": "urls-json",
+      "source": "urls-json",
+      "urlKey": "cals-table-model",
+      "lang": "en",
+      "filePath": "reuse/urls/index.json",
+      "line": null,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-14T19:10:57.890Z"
+    },
+    {
+      "text": "docusaurus",
+      "url": "https://docusaurus.io/",
+      "type": "urls-json",
+      "source": "urls-json",
+      "urlKey": "docusaurus",
+      "lang": "en",
+      "filePath": "reuse/urls/index.json",
+      "line": null,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-14T19:10:57.439Z"
+    },
+    {
+      "text": "docusaurus",
+      "url": "https://docusaurus.io/fr/",
+      "type": "urls-json",
+      "source": "urls-json",
+      "urlKey": "docusaurus",
+      "lang": "fr",
+      "filePath": "reuse/urls/index.json",
+      "line": null,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-14T19:10:58.907Z"
+    },
+    {
+      "text": "docusaurus-advanced-guides",
+      "url": "https://docusaurus.io/docs/advanced",
+      "type": "urls-json",
+      "source": "urls-json",
+      "urlKey": "docusaurus-advanced-guides",
+      "lang": "en",
+      "filePath": "reuse/urls/index.json",
+      "line": null,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-14T19:10:58.793Z"
+    },
+    {
+      "text": "docusaurus-advanced-guides",
+      "url": "https://docusaurus.io/fr/docs/advanced",
+      "type": "urls-json",
+      "source": "urls-json",
+      "urlKey": "docusaurus-advanced-guides",
+      "lang": "fr",
+      "filePath": "reuse/urls/index.json",
+      "line": null,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-14T19:10:58.812Z"
+    },
+    {
+      "text": "docusaurus-autogenerated",
+      "url": "https://docusaurus.io/docs/sidebar/autogenerated#autogenerated-sidebar-metadata",
+      "type": "urls-json",
+      "source": "urls-json",
+      "urlKey": "docusaurus-autogenerated",
+      "lang": "en",
+      "filePath": "reuse/urls/index.json",
+      "line": null,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "redirectedTo": "https://docusaurus.io/docs/sidebar/autogenerated",
+      "checkedAt": "2026-08-14T19:10:57.967Z"
+    },
+    {
+      "text": "docusaurus-autogenerated",
+      "url": "https://docusaurus.io/fr/docs/sidebar/autogenerated#autogenerated-sidebar-metadata",
+      "type": "urls-json",
+      "source": "urls-json",
+      "urlKey": "docusaurus-autogenerated",
+      "lang": "fr",
+      "filePath": "reuse/urls/index.json",
+      "line": null,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "redirectedTo": "https://docusaurus.io/fr/docs/sidebar/autogenerated",
+      "checkedAt": "2026-08-14T19:10:58.829Z"
+    },
+    {
+      "text": "docusaurus-blog",
+      "url": "https://docusaurus.io/docs/blog",
+      "type": "urls-json",
+      "source": "urls-json",
+      "urlKey": "docusaurus-blog",
+      "lang": "en",
+      "filePath": "reuse/urls/index.json",
+      "line": null,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-14T19:10:58.845Z"
+    },
+    {
+      "text": "docusaurus-blog",
+      "url": "https://docusaurus.io/fr/docs/blog",
+      "type": "urls-json",
+      "source": "urls-json",
+      "urlKey": "docusaurus-blog",
+      "lang": "fr",
+      "filePath": "reuse/urls/index.json",
+      "line": null,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-14T19:10:58.874Z"
+    },
+    {
+      "text": "docusaurus-blog-plugin-api-reference",
+      "url": "https://docusaurus.io/docs/api/plugins/@docusaurus/plugin-content-blog",
+      "type": "urls-json",
+      "source": "urls-json",
+      "urlKey": "docusaurus-blog-plugin-api-reference",
+      "lang": "en",
+      "filePath": "reuse/urls/index.json",
+      "line": null,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-14T19:10:56.500Z"
+    },
+    {
+      "text": "docusaurus-blog-plugin-api-reference",
+      "url": "https://docusaurus.io/fr/docs/api/plugins/@docusaurus/plugin-content-blog",
+      "type": "urls-json",
+      "source": "urls-json",
+      "urlKey": "docusaurus-blog-plugin-api-reference",
+      "lang": "fr",
+      "filePath": "reuse/urls/index.json",
+      "line": null,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-14T19:10:58.872Z"
+    },
+    {
+      "text": "docusaurus-browser-support",
+      "url": "https://docusaurus.io/docs/browser-support",
+      "type": "urls-json",
+      "source": "urls-json",
+      "urlKey": "docusaurus-browser-support",
+      "lang": "en",
+      "filePath": "reuse/urls/index.json",
+      "line": null,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-14T19:10:58.880Z"
+    },
+    {
+      "text": "docusaurus-browser-support",
+      "url": "https://docusaurus.io/fr/docs/browser-support",
+      "type": "urls-json",
+      "source": "urls-json",
+      "urlKey": "docusaurus-browser-support",
+      "lang": "fr",
+      "filePath": "reuse/urls/index.json",
+      "line": null,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-14T19:10:59.054Z"
+    },
+    {
+      "text": "docusaurus-cli",
+      "url": "https://docusaurus.io/docs/cli",
+      "type": "urls-json",
+      "source": "urls-json",
+      "urlKey": "docusaurus-cli",
+      "lang": "en",
+      "filePath": "reuse/urls/index.json",
+      "line": null,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-14T19:10:57.405Z"
+    },
+    {
+      "text": "docusaurus-cli",
+      "url": "https://docusaurus.io/fr/docs/cli",
+      "type": "urls-json",
+      "source": "urls-json",
+      "urlKey": "docusaurus-cli",
+      "lang": "fr",
+      "filePath": "reuse/urls/index.json",
+      "line": null,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-14T19:10:59.360Z"
+    },
+    {
+      "text": "docusaurus-configuration",
+      "url": "https://docusaurus.io/docs/configuration",
+      "type": "urls-json",
+      "source": "urls-json",
+      "urlKey": "docusaurus-configuration",
+      "lang": "en",
+      "filePath": "reuse/urls/index.json",
+      "line": null,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-14T19:10:56.940Z"
+    },
+    {
+      "text": "docusaurus-configuration",
+      "url": "https://docusaurus.io/fr/docs/configuration",
+      "type": "urls-json",
+      "source": "urls-json",
+      "urlKey": "docusaurus-configuration",
+      "lang": "fr",
+      "filePath": "reuse/urls/index.json",
+      "line": null,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-14T19:10:59.599Z"
+    },
+    {
+      "text": "docusaurus-create-a-doc",
+      "url": "https://docusaurus.io/docs/create-doc",
+      "type": "urls-json",
+      "source": "urls-json",
+      "urlKey": "docusaurus-create-a-doc",
+      "lang": "en",
+      "filePath": "reuse/urls/index.json",
+      "line": null,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-14T19:10:57.429Z"
+    },
+    {
+      "text": "docusaurus-create-a-doc",
+      "url": "https://docusaurus.io/fr/docs/create-doc",
+      "type": "urls-json",
+      "source": "urls-json",
+      "urlKey": "docusaurus-create-a-doc",
+      "lang": "fr",
+      "filePath": "reuse/urls/index.json",
+      "line": null,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-14T19:10:59.078Z"
+    },
+    {
+      "text": "docusaurus-creating-pages",
+      "url": "https://docusaurus.io/docs/creating-pages",
+      "type": "urls-json",
+      "source": "urls-json",
+      "urlKey": "docusaurus-creating-pages",
+      "lang": "en",
+      "filePath": "reuse/urls/index.json",
+      "line": null,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-14T19:10:57.003Z"
+    },
+    {
+      "text": "docusaurus-creating-pages",
+      "url": "https://docusaurus.io/fr/docs/creating-pages",
+      "type": "urls-json",
+      "source": "urls-json",
+      "urlKey": "docusaurus-creating-pages",
+      "lang": "fr",
+      "filePath": "reuse/urls/index.json",
+      "line": null,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-14T19:10:58.963Z"
+    },
+    {
+      "text": "docusaurus-deployment",
+      "url": "https://docusaurus.io/docs/deployment#deploying-to-github-pages",
+      "type": "urls-json",
+      "source": "urls-json",
+      "urlKey": "docusaurus-deployment",
+      "lang": "en",
+      "filePath": "reuse/urls/index.json",
+      "line": null,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "redirectedTo": "https://docusaurus.io/docs/deployment",
+      "checkedAt": "2026-08-14T19:10:56.992Z"
+    },
+    {
+      "text": "docusaurus-deployment",
+      "url": "https://docusaurus.io/fr/docs/deployment#deploying-to-github-pages",
+      "type": "urls-json",
+      "source": "urls-json",
+      "urlKey": "docusaurus-deployment",
+      "lang": "fr",
+      "filePath": "reuse/urls/index.json",
+      "line": null,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "redirectedTo": "https://docusaurus.io/fr/docs/deployment",
+      "checkedAt": "2026-08-14T19:10:59.148Z"
+    },
+    {
+      "text": "docusaurus-diagrams",
+      "url": "https://docusaurus.io/docs/markdown-features/diagrams",
+      "type": "urls-json",
+      "source": "urls-json",
+      "urlKey": "docusaurus-diagrams",
+      "lang": "en",
+      "filePath": "reuse/urls/index.json",
+      "line": null,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-14T19:10:57.485Z"
+    },
+    {
+      "text": "docusaurus-diagrams",
+      "url": "https://docusaurus.io/fr/docs/markdown-features/diagrams",
+      "type": "urls-json",
+      "source": "urls-json",
+      "urlKey": "docusaurus-diagrams",
+      "lang": "fr",
+      "filePath": "reuse/urls/index.json",
+      "line": null,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-14T19:10:59.150Z"
+    },
+    {
+      "text": "docusaurus-docs-introduction",
+      "url": "https://docusaurus.io/docs/docs-introduction",
+      "type": "urls-json",
+      "source": "urls-json",
+      "urlKey": "docusaurus-docs-introduction",
+      "lang": "en",
+      "filePath": "reuse/urls/index.json",
+      "line": null,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-14T19:10:57.087Z"
+    },
+    {
+      "text": "docusaurus-docs-introduction",
+      "url": "https://docusaurus.io/fr/docs/docs-introduction",
+      "type": "urls-json",
+      "source": "urls-json",
+      "urlKey": "docusaurus-docs-introduction",
+      "lang": "fr",
+      "filePath": "reuse/urls/index.json",
+      "line": null,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-14T19:10:59.013Z"
+    },
+    {
+      "text": "docusaurus-docs-plugin-api-reference",
+      "url": "https://docusaurus.io/docs/api/plugins/@docusaurus/plugin-content-docs",
+      "type": "urls-json",
+      "source": "urls-json",
+      "urlKey": "docusaurus-docs-plugin-api-reference",
+      "lang": "en",
+      "filePath": "reuse/urls/index.json",
+      "line": null,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-14T19:10:57.721Z"
+    },
+    {
+      "text": "docusaurus-docs-plugin-api-reference",
+      "url": "https://docusaurus.io/fr/docs/api/plugins/@docusaurus/plugin-content-docs",
+      "type": "urls-json",
+      "source": "urls-json",
+      "urlKey": "docusaurus-docs-plugin-api-reference",
+      "lang": "fr",
+      "filePath": "reuse/urls/index.json",
+      "line": null,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-14T19:10:59.176Z"
+    },
+    {
+      "text": "docusaurus-guides",
+      "url": "https://docusaurus.io/docs/category/guides",
+      "type": "urls-json",
+      "source": "urls-json",
+      "urlKey": "docusaurus-guides",
+      "lang": "en",
+      "filePath": "reuse/urls/index.json",
+      "line": null,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-14T19:10:59.069Z"
+    },
+    {
+      "text": "docusaurus-guides",
+      "url": "https://docusaurus.io/fr/docs/category/guides",
+      "type": "urls-json",
+      "source": "urls-json",
+      "urlKey": "docusaurus-guides",
+      "lang": "fr",
+      "filePath": "reuse/urls/index.json",
+      "line": null,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-14T19:10:59.364Z"
+    },
+    {
+      "text": "docusaurus-head-metadata",
+      "url": "https://docusaurus.io/docs/markdown-features/head-metadata",
+      "type": "urls-json",
+      "source": "urls-json",
+      "urlKey": "docusaurus-head-metadata",
+      "lang": "en",
+      "filePath": "reuse/urls/index.json",
+      "line": null,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-14T19:10:57.540Z"
+    },
+    {
+      "text": "docusaurus-head-metadata",
+      "url": "https://docusaurus.io/fr/docs/markdown-features/head-metadata",
+      "type": "urls-json",
+      "source": "urls-json",
+      "urlKey": "docusaurus-head-metadata",
+      "lang": "fr",
+      "filePath": "reuse/urls/index.json",
+      "line": null,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-14T19:10:59.123Z"
+    },
+    {
+      "text": "docusaurus-headings-and-table-of-contents",
+      "url": "https://docusaurus.io/docs/markdown-features/toc",
+      "type": "urls-json",
+      "source": "urls-json",
+      "urlKey": "docusaurus-headings-and-table-of-contents",
+      "lang": "en",
+      "filePath": "reuse/urls/index.json",
+      "line": null,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-14T19:10:57.714Z"
+    },
+    {
+      "text": "docusaurus-headings-and-table-of-contents",
+      "url": "https://docusaurus.io/fr/docs/markdown-features/toc",
+      "type": "urls-json",
+      "source": "urls-json",
+      "urlKey": "docusaurus-headings-and-table-of-contents",
+      "lang": "fr",
+      "filePath": "reuse/urls/index.json",
+      "line": null,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-14T19:10:59.294Z"
+    },
+    {
+      "text": "docusaurus-i18n-introduction",
+      "url": "https://docusaurus.io/docs/i18n/introduction",
+      "type": "urls-json",
+      "source": "urls-json",
+      "urlKey": "docusaurus-i18n-introduction",
+      "lang": "en",
+      "filePath": "reuse/urls/index.json",
+      "line": null,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-14T19:10:57.837Z"
+    },
+    {
+      "text": "docusaurus-i18n-introduction",
+      "url": "https://docusaurus.io/fr/docs/i18n/introduction",
+      "type": "urls-json",
+      "source": "urls-json",
+      "urlKey": "docusaurus-i18n-introduction",
+      "lang": "fr",
+      "filePath": "reuse/urls/index.json",
+      "line": null,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-14T19:10:59.180Z"
+    },
+    {
+      "text": "docusaurus-markdown-features",
+      "url": "https://docusaurus.io/docs/markdown-features",
+      "type": "urls-json",
+      "source": "urls-json",
+      "urlKey": "docusaurus-markdown-features",
+      "lang": "en",
+      "filePath": "reuse/urls/index.json",
+      "line": null,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-14T19:10:57.593Z"
+    },
+    {
+      "text": "docusaurus-markdown-features",
+      "url": "https://docusaurus.io/fr/docs/markdown-features",
+      "type": "urls-json",
+      "source": "urls-json",
+      "urlKey": "docusaurus-markdown-features",
+      "lang": "fr",
+      "filePath": "reuse/urls/index.json",
+      "line": null,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-14T19:11:00.074Z"
+    },
+    {
+      "text": "docusaurus-markdown-links",
+      "url": "https://docusaurus.io/docs/markdown-features/links",
+      "type": "urls-json",
+      "source": "urls-json",
+      "urlKey": "docusaurus-markdown-links",
+      "lang": "en",
+      "filePath": "reuse/urls/index.json",
+      "line": null,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-14T19:10:57.640Z"
+    },
+    {
+      "text": "docusaurus-markdown-links",
+      "url": "https://docusaurus.io/fr/docs/markdown-features/links",
+      "type": "urls-json",
+      "source": "urls-json",
+      "urlKey": "docusaurus-markdown-links",
+      "lang": "fr",
+      "filePath": "reuse/urls/index.json",
+      "line": null,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-14T19:10:59.510Z"
+    },
+    {
+      "text": "docusaurus-mdx-and-react",
+      "url": "https://docusaurus.io/docs/markdown-features/react",
+      "type": "urls-json",
+      "source": "urls-json",
+      "urlKey": "docusaurus-mdx-and-react",
+      "lang": "en",
+      "filePath": "reuse/urls/index.json",
+      "line": null,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-14T19:10:57.611Z"
+    },
+    {
+      "text": "docusaurus-mdx-and-react",
+      "url": "https://docusaurus.io/fr/docs/markdown-features/react",
+      "type": "urls-json",
+      "source": "urls-json",
+      "urlKey": "docusaurus-mdx-and-react",
+      "lang": "fr",
+      "filePath": "reuse/urls/index.json",
+      "line": null,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-14T19:10:59.772Z"
+    },
+    {
+      "text": "docusaurus-mdx-plugins",
+      "url": "https://docusaurus.io/docs/markdown-features/plugins",
+      "type": "urls-json",
+      "source": "urls-json",
+      "urlKey": "docusaurus-mdx-plugins",
+      "lang": "en",
+      "filePath": "reuse/urls/index.json",
+      "line": null,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-14T19:10:57.547Z"
+    },
+    {
+      "text": "docusaurus-mdx-plugins",
+      "url": "https://docusaurus.io/fr/docs/markdown-features/plugins",
+      "type": "urls-json",
+      "source": "urls-json",
+      "urlKey": "docusaurus-mdx-plugins",
+      "lang": "fr",
+      "filePath": "reuse/urls/index.json",
+      "line": null,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-14T19:10:59.239Z"
+    },
+    {
+      "text": "docusaurus-monorepos",
+      "url": "https://docusaurus.io/docs/installation#monorepos",
+      "type": "urls-json",
+      "source": "urls-json",
+      "urlKey": "docusaurus-monorepos",
+      "lang": "en",
+      "filePath": "reuse/urls/index.json",
+      "line": null,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "redirectedTo": "https://docusaurus.io/docs/installation",
+      "checkedAt": "2026-08-14T19:10:58.149Z"
+    },
+    {
+      "text": "docusaurus-monorepos",
+      "url": "https://docusaurus.io/fr/docs/installation#monorepos",
+      "type": "urls-json",
+      "source": "urls-json",
+      "urlKey": "docusaurus-monorepos",
+      "lang": "fr",
+      "filePath": "reuse/urls/index.json",
+      "line": null,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "redirectedTo": "https://docusaurus.io/fr/docs/installation",
+      "checkedAt": "2026-08-14T19:10:59.303Z"
+    },
+    {
+      "text": "docusaurus-pages-plugin",
+      "url": "https://docusaurus.io/docs/api/plugins/@docusaurus/plugin-content-pages",
+      "type": "urls-json",
+      "source": "urls-json",
+      "urlKey": "docusaurus-pages-plugin",
+      "lang": "en",
+      "filePath": "reuse/urls/index.json",
+      "line": null,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-14T19:10:58.740Z"
+    },
+    {
+      "text": "docusaurus-pages-plugin",
+      "url": "https://docusaurus.io/fr/docs/api/plugins/@docusaurus/plugin-content-pages",
+      "type": "urls-json",
+      "source": "urls-json",
+      "urlKey": "docusaurus-pages-plugin",
+      "lang": "fr",
+      "filePath": "reuse/urls/index.json",
+      "line": null,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-14T19:10:59.367Z"
+    },
+    {
+      "text": "docusaurus-search",
+      "url": "https://docusaurus.io/docs/search#using-algolia-docsearch",
+      "type": "urls-json",
+      "source": "urls-json",
+      "urlKey": "docusaurus-search",
+      "lang": "en",
+      "filePath": "reuse/urls/index.json",
+      "line": null,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "redirectedTo": "https://docusaurus.io/docs/search",
+      "checkedAt": "2026-08-14T19:10:58.625Z"
+    },
+    {
+      "text": "docusaurus-search",
+      "url": "https://docusaurus.io/fr/docs/search#using-algolia-docsearch",
+      "type": "urls-json",
+      "source": "urls-json",
+      "urlKey": "docusaurus-search",
+      "lang": "fr",
+      "filePath": "reuse/urls/index.json",
+      "line": null,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "redirectedTo": "https://docusaurus.io/fr/docs/search",
+      "checkedAt": "2026-08-14T19:10:59.766Z"
+    },
+    {
+      "text": "docusaurus-static-assets",
+      "url": "https://docusaurus.io/docs/markdown-features/assets",
+      "type": "urls-json",
+      "source": "urls-json",
+      "urlKey": "docusaurus-static-assets",
+      "lang": "en",
+      "filePath": "reuse/urls/index.json",
+      "line": null,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-14T19:10:57.217Z"
+    },
+    {
+      "text": "docusaurus-static-assets",
+      "url": "https://docusaurus.io/fr/docs/markdown-features/assets",
+      "type": "urls-json",
+      "source": "urls-json",
+      "urlKey": "docusaurus-static-assets",
+      "lang": "fr",
+      "filePath": "reuse/urls/index.json",
+      "line": null,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-14T19:10:59.630Z"
+    },
+    {
+      "text": "docusaurus-tabs",
+      "url": "https://docusaurus.io/docs/markdown-features/tabs",
+      "type": "urls-json",
+      "source": "urls-json",
+      "urlKey": "docusaurus-tabs",
+      "lang": "en",
+      "filePath": "reuse/urls/index.json",
+      "line": null,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-14T19:10:57.672Z"
+    },
+    {
+      "text": "docusaurus-tabs",
+      "url": "https://docusaurus.io/fr/docs/markdown-features/tabs",
+      "type": "urls-json",
+      "source": "urls-json",
+      "urlKey": "docusaurus-tabs",
+      "lang": "fr",
+      "filePath": "reuse/urls/index.json",
+      "line": null,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-14T19:11:00.549Z"
+    },
+    {
+      "text": "docusaurus-using-plugins",
+      "url": "https://docusaurus.io/docs/using-plugins",
+      "type": "urls-json",
+      "source": "urls-json",
+      "urlKey": "docusaurus-using-plugins",
+      "lang": "en",
+      "filePath": "reuse/urls/index.json",
+      "line": null,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-14T19:10:58.943Z"
+    },
+    {
+      "text": "docusaurus-using-plugins",
+      "url": "https://docusaurus.io/fr/docs/using-plugins",
+      "type": "urls-json",
+      "source": "urls-json",
+      "urlKey": "docusaurus-using-plugins",
+      "lang": "fr",
+      "filePath": "reuse/urls/index.json",
+      "line": null,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-14T19:10:59.770Z"
+    },
+    {
+      "text": "github",
+      "url": "https://github.com/",
+      "type": "urls-json",
+      "source": "urls-json",
+      "urlKey": "github",
+      "lang": "en",
+      "filePath": "reuse/urls/index.json",
+      "line": null,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-14T19:10:58.165Z"
+    },
+    {
+      "text": "infima",
+      "url": "https://infima.dev/",
+      "type": "urls-json",
+      "source": "urls-json",
+      "urlKey": "infima",
+      "lang": "en",
+      "filePath": "reuse/urls/index.json",
+      "line": null,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-14T19:10:58.762Z"
+    },
+    {
+      "text": "katex",
+      "url": "https://katex.org",
+      "type": "urls-json",
+      "source": "urls-json",
+      "urlKey": "katex",
+      "lang": "en",
+      "filePath": "reuse/urls/index.json",
+      "line": null,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "redirectedTo": "https://katex.org/",
+      "checkedAt": "2026-08-14T19:10:57.651Z"
+    },
+    {
+      "text": "languagetool",
+      "url": "https://languagetool.org/",
+      "type": "urls-json",
+      "source": "urls-json",
+      "urlKey": "languagetool",
+      "lang": "en",
+      "filePath": "reuse/urls/index.json",
+      "line": null,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-14T19:10:59.777Z"
+    },
+    {
+      "text": "languagetool",
+      "url": "https://languagetool.org/de/",
+      "type": "urls-json",
+      "source": "urls-json",
+      "urlKey": "languagetool",
+      "lang": "de",
+      "filePath": "reuse/urls/index.json",
+      "line": null,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-14T19:10:59.875Z"
+    },
+    {
+      "text": "languagetool",
+      "url": "https://languagetool.org/es/",
+      "type": "urls-json",
+      "source": "urls-json",
+      "urlKey": "languagetool",
+      "lang": "es",
+      "filePath": "reuse/urls/index.json",
+      "line": null,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-14T19:10:59.908Z"
+    },
+    {
+      "text": "languagetool",
+      "url": "https://languagetool.org/fr/",
+      "type": "urls-json",
+      "source": "urls-json",
+      "urlKey": "languagetool",
+      "lang": "fr",
+      "filePath": "reuse/urls/index.json",
+      "line": null,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-14T19:11:00.052Z"
+    },
+    {
+      "text": "languagetool-business",
+      "url": "https://languagetool.org/business",
+      "type": "urls-json",
+      "source": "urls-json",
+      "urlKey": "languagetool-business",
+      "lang": "en",
+      "filePath": "reuse/urls/index.json",
+      "line": null,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-14T19:11:00.030Z"
+    },
+    {
+      "text": "languagetool-business",
+      "url": "https://languagetool.org/de/business",
+      "type": "urls-json",
+      "source": "urls-json",
+      "urlKey": "languagetool-business",
+      "lang": "de",
+      "filePath": "reuse/urls/index.json",
+      "line": null,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-14T19:10:59.958Z"
+    },
+    {
+      "text": "languagetool-business",
+      "url": "https://languagetool.org/es/business",
+      "type": "urls-json",
+      "source": "urls-json",
+      "urlKey": "languagetool-business",
+      "lang": "es",
+      "filePath": "reuse/urls/index.json",
+      "line": null,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-14T19:11:00.077Z"
+    },
+    {
+      "text": "languagetool-business",
+      "url": "https://languagetool.org/fr/business",
+      "type": "urls-json",
+      "source": "urls-json",
+      "urlKey": "languagetool-business",
+      "lang": "fr",
+      "filePath": "reuse/urls/index.json",
+      "line": null,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-14T19:11:00.059Z"
+    },
+    {
+      "text": "langaugetool-premium",
+      "url": "https://languagetool.org/premium",
+      "type": "urls-json",
+      "source": "urls-json",
+      "urlKey": "langaugetool-premium",
+      "lang": "en",
+      "filePath": "reuse/urls/index.json",
+      "line": null,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-14T19:11:00.389Z"
+    },
+    {
+      "text": "langaugetool-premium",
+      "url": "https://languagetool.org/de/premium",
+      "type": "urls-json",
+      "source": "urls-json",
+      "urlKey": "langaugetool-premium",
+      "lang": "de",
+      "filePath": "reuse/urls/index.json",
+      "line": null,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-14T19:11:00.260Z"
+    },
+    {
+      "text": "langaugetool-premium",
+      "url": "https://languagetool.org/es/premium",
+      "type": "urls-json",
+      "source": "urls-json",
+      "urlKey": "langaugetool-premium",
+      "lang": "es",
+      "filePath": "reuse/urls/index.json",
+      "line": null,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-14T19:11:00.230Z"
+    },
+    {
+      "text": "langaugetool-premium",
+      "url": "https://languagetool.org/fr/premium",
+      "type": "urls-json",
+      "source": "urls-json",
+      "urlKey": "langaugetool-premium",
+      "lang": "fr",
+      "filePath": "reuse/urls/index.json",
+      "line": null,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-14T19:11:00.243Z"
+    },
+    {
+      "text": "langaugetool-register",
+      "url": "https://languagetool.org/register",
+      "type": "urls-json",
+      "source": "urls-json",
+      "urlKey": "langaugetool-register",
+      "lang": "en",
+      "filePath": "reuse/urls/index.json",
+      "line": null,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-14T19:11:00.246Z"
+    },
+    {
+      "text": "langaugetool-register",
+      "url": "https://languagetool.org/de/register",
+      "type": "urls-json",
+      "source": "urls-json",
+      "urlKey": "langaugetool-register",
+      "lang": "de",
+      "filePath": "reuse/urls/index.json",
+      "line": null,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-14T19:11:00.346Z"
+    },
+    {
+      "text": "langaugetool-register",
+      "url": "https://languagetool.org/es/register",
+      "type": "urls-json",
+      "source": "urls-json",
+      "urlKey": "langaugetool-register",
+      "lang": "es",
+      "filePath": "reuse/urls/index.json",
+      "line": null,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-14T19:11:00.344Z"
+    },
+    {
+      "text": "langaugetool-register",
+      "url": "https://languagetool.org/fr/register",
+      "type": "urls-json",
+      "source": "urls-json",
+      "urlKey": "langaugetool-register",
+      "lang": "fr",
+      "filePath": "reuse/urls/index.json",
+      "line": null,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-14T19:11:00.455Z"
+    },
+    {
+      "text": "langaugetool-development",
+      "url": "https://languagetool.org/dev",
+      "type": "urls-json",
+      "source": "urls-json",
+      "urlKey": "langaugetool-development",
+      "lang": "en",
+      "filePath": "reuse/urls/index.json",
+      "line": null,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-14T19:11:00.429Z"
+    },
+    {
+      "text": "langaugetool-development",
+      "url": "https://languagetool.org/de/dev",
+      "type": "urls-json",
+      "source": "urls-json",
+      "urlKey": "langaugetool-development",
+      "lang": "de",
+      "filePath": "reuse/urls/index.json",
+      "line": null,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-14T19:11:00.449Z"
+    },
+    {
+      "text": "langaugetool-development",
+      "url": "https://languagetool.org/es/dev",
+      "type": "urls-json",
+      "source": "urls-json",
+      "urlKey": "langaugetool-development",
+      "lang": "es",
+      "filePath": "reuse/urls/index.json",
+      "line": null,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-14T19:11:00.451Z"
+    },
+    {
+      "text": "langaugetool-development",
+      "url": "https://languagetool.org/fr/dev",
+      "type": "urls-json",
+      "source": "urls-json",
+      "urlKey": "langaugetool-development",
+      "lang": "fr",
+      "filePath": "reuse/urls/index.json",
+      "line": null,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-14T19:11:00.523Z"
+    },
+    {
+      "text": "lunr",
+      "url": "https://lunrjs.com/",
+      "type": "urls-json",
+      "source": "urls-json",
+      "urlKey": "lunr",
+      "lang": "en",
+      "filePath": "reuse/urls/index.json",
+      "line": null,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-14T19:10:58.238Z"
+    },
+    {
+      "text": "markprompt",
+      "url": "https://github.com/typesense/docusaurus-theme-search-typesense",
+      "type": "urls-json",
+      "source": "urls-json",
+      "urlKey": "markprompt",
+      "lang": "en",
+      "filePath": "reuse/urls/index.json",
+      "line": null,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-14T19:10:58.701Z"
+    },
+    {
+      "text": "mermaid",
+      "url": "https://mermaid.ai/open-source/",
+      "type": "urls-json",
+      "source": "urls-json",
+      "urlKey": "mermaid",
+      "lang": "en",
+      "filePath": "reuse/urls/index.json",
+      "line": null,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-14T19:11:00.393Z"
+    },
+    {
+      "text": "outlook",
+      "url": "https://support.microsoft.com/en-us/outlook/pop-imap-and-smtp-settings-for-outlook-com",
+      "type": "urls-json",
+      "source": "urls-json",
+      "urlKey": "outlook",
+      "lang": "en",
+      "filePath": "reuse/urls/index.json",
+      "line": null,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-14T19:11:00.639Z"
+    },
+    {
+      "text": "outlook",
+      "url": "https://support.microsoft.com/de-de/outlook/pop-imap-and-smtp-settings-for-outlook-com",
+      "type": "urls-json",
+      "source": "urls-json",
+      "urlKey": "outlook",
+      "lang": "de",
+      "filePath": "reuse/urls/index.json",
+      "line": null,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-14T19:11:00.444Z"
+    },
+    {
+      "text": "outlook",
+      "url": "https://support.microsoft.com/es-es/outlook/pop-imap-and-smtp-settings-for-outlook-com",
+      "type": "urls-json",
+      "source": "urls-json",
+      "urlKey": "outlook",
+      "lang": "es",
+      "filePath": "reuse/urls/index.json",
+      "line": null,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-14T19:11:00.733Z"
+    },
+    {
+      "text": "outlook",
+      "url": "https://support.microsoft.com/fr-fr/outlook/pop-imap-and-smtp-settings-for-outlook-com",
+      "type": "urls-json",
+      "source": "urls-json",
+      "urlKey": "outlook",
+      "lang": "fr",
+      "filePath": "reuse/urls/index.json",
+      "line": null,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-14T19:11:00.817Z"
+    },
+    {
+      "text": "outlook",
+      "url": "https://support.microsoft.com/ja-jp/outlook/pop-imap-and-smtp-settings-for-outlook-com",
+      "type": "urls-json",
+      "source": "urls-json",
+      "urlKey": "outlook",
+      "lang": "ja",
+      "filePath": "reuse/urls/index.json",
+      "line": null,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-14T19:11:00.691Z"
+    },
+    {
+      "text": "tinacms",
+      "url": "https://tina.io/",
+      "type": "urls-json",
+      "source": "urls-json",
+      "urlKey": "tinacms",
+      "lang": "en",
+      "filePath": "reuse/urls/index.json",
+      "line": null,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-14T19:10:58.209Z"
+    },
+    {
+      "text": "vscodium",
+      "url": "https://vscodium.com/",
+      "type": "urls-json",
+      "source": "urls-json",
+      "urlKey": "vscodium",
+      "lang": "en",
+      "filePath": "reuse/urls/index.json",
+      "line": null,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-14T19:11:00.630Z"
+    },
+    {
+      "text": "wikipedia-context-sensitive-help",
+      "url": "https://en.wikipedia.org/wiki/Context-sensitive_help",
+      "type": "urls-json",
+      "source": "urls-json",
+      "urlKey": "wikipedia-context-sensitive-help",
+      "lang": "en",
+      "filePath": "reuse/urls/index.json",
+      "line": null,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-14T19:10:57.284Z"
+    },
+    {
+      "text": "wikipedia-context-sensitive-help",
+      "url": "https://de.wikipedia.org/wiki/Kontextsensitive_Hilfe",
+      "type": "urls-json",
+      "source": "urls-json",
+      "urlKey": "wikipedia-context-sensitive-help",
+      "lang": "de",
+      "filePath": "reuse/urls/index.json",
+      "line": null,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-14T19:11:00.536Z"
+    },
+    {
+      "text": "wikipedia-i18n",
+      "url": "https://en.wikipedia.org/wiki/Internationalization_and_localization",
+      "type": "urls-json",
+      "source": "urls-json",
+      "urlKey": "wikipedia-i18n",
+      "lang": "en",
+      "filePath": "reuse/urls/index.json",
+      "line": null,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-14T19:10:57.847Z"
+    },
+    {
+      "text": "wikipedia-i18n",
+      "url": "https://de.wikipedia.org/wiki/Lokalisierung_(Softwareentwicklung)",
+      "type": "urls-json",
+      "source": "urls-json",
+      "urlKey": "wikipedia-i18n",
+      "lang": "de",
+      "filePath": "reuse/urls/index.json",
+      "line": null,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-14T19:11:00.599Z"
+    },
+    {
+      "text": "wikipedia-i18n",
+      "url": "https://es.wikipedia.org/wiki/Internacionalizaci%C3%B3n_y_localizaci%C3%B3n",
+      "type": "urls-json",
+      "source": "urls-json",
+      "urlKey": "wikipedia-i18n",
+      "lang": "es",
+      "filePath": "reuse/urls/index.json",
+      "line": null,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-14T19:11:00.617Z"
+    },
+    {
+      "text": "wikipedia-i18n",
+      "url": "https://fr.wikipedia.org/wiki/Internationalisation_et_localisation",
+      "type": "urls-json",
+      "source": "urls-json",
+      "urlKey": "wikipedia-i18n",
+      "lang": "fr",
+      "filePath": "reuse/urls/index.json",
+      "line": null,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-14T19:11:00.619Z"
+    },
+    {
+      "text": "wikipedia-i18n",
+      "url": "https://ja.wikipedia.org/wiki/%E5%9B%BD%E9%9A%9B%E5%8C%96%E3%81%A8%E5%9C%B0%E5%9F%9F%E5%8C%96",
+      "type": "urls-json",
+      "source": "urls-json",
+      "urlKey": "wikipedia-i18n",
+      "lang": "ja",
+      "filePath": "reuse/urls/index.json",
+      "line": null,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-14T19:11:00.667Z"
+    },
+    {
+      "text": "wikipedia-information-architecture",
+      "url": "https://en.wikipedia.org/wiki/Information_architecture",
+      "type": "urls-json",
+      "source": "urls-json",
+      "urlKey": "wikipedia-information-architecture",
+      "lang": "en",
+      "filePath": "reuse/urls/index.json",
+      "line": null,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-14T19:10:57.115Z"
+    },
+    {
+      "text": "wikipedia-information-architecture",
+      "url": "https://de.wikipedia.org/wiki/Informationsarchitektur",
+      "type": "urls-json",
+      "source": "urls-json",
+      "urlKey": "wikipedia-information-architecture",
+      "lang": "de",
+      "filePath": "reuse/urls/index.json",
+      "line": null,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-14T19:11:00.689Z"
+    },
+    {
+      "text": "wikipedia-information-architecture",
+      "url": "https://es.wikipedia.org/wiki/Arquitectura_de_la_informaci%C3%B3n",
+      "type": "urls-json",
+      "source": "urls-json",
+      "urlKey": "wikipedia-information-architecture",
+      "lang": "es",
+      "filePath": "reuse/urls/index.json",
+      "line": null,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-14T19:11:00.691Z"
+    },
+    {
+      "text": "wikipedia-information-architecture",
+      "url": "https://fr.wikipedia.org/wiki/Architecture_de_l%27information",
+      "type": "urls-json",
+      "source": "urls-json",
+      "urlKey": "wikipedia-information-architecture",
+      "lang": "fr",
+      "filePath": "reuse/urls/index.json",
+      "line": null,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-14T19:11:00.693Z"
+    },
+    {
+      "text": "wikipedia-information-architecture",
+      "url": "https://ja.wikipedia.org/wiki/%E6%83%85%E5%A0%B1%E3%82%A2%E3%83%BC%E3%82%AD%E3%83%86%E3%82%AF%E3%83%81%E3%83%A3",
+      "type": "urls-json",
+      "source": "urls-json",
+      "urlKey": "wikipedia-information-architecture",
+      "lang": "ja",
+      "filePath": "reuse/urls/index.json",
+      "line": null,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-14T19:11:00.718Z"
+    },
+    {
+      "text": "wikipedia-online-help",
+      "url": "https://en.wikipedia.org/wiki/Online_help",
+      "type": "urls-json",
+      "source": "urls-json",
+      "urlKey": "wikipedia-online-help",
+      "lang": "en",
+      "filePath": "reuse/urls/index.json",
+      "line": null,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-14T19:10:57.270Z"
+    },
+    {
+      "text": "wikipedia-online-help",
+      "url": "https://es.wikipedia.org/wiki/Ayuda_en_L%C3%ADnea",
+      "type": "urls-json",
+      "source": "urls-json",
+      "urlKey": "wikipedia-online-help",
+      "lang": "es",
+      "filePath": "reuse/urls/index.json",
+      "line": null,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-14T19:11:00.742Z"
+    },
+    {
+      "text": "wikipedia-online-help",
+      "url": "https://fr.wikipedia.org/wiki/Aide_en_ligne",
+      "type": "urls-json",
+      "source": "urls-json",
+      "urlKey": "wikipedia-online-help",
+      "lang": "fr",
+      "filePath": "reuse/urls/index.json",
+      "line": null,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-14T19:11:00.766Z"
+    },
+    {
+      "text": "wikipedia-online-help",
+      "url": "https://ja.wikipedia.org/wiki/%E3%82%AA%E3%83%B3%E3%83%A9%E3%82%A4%E3%83%B3%E3%83%98%E3%83%AB%E3%83%97",
+      "type": "urls-json",
+      "source": "urls-json",
+      "urlKey": "wikipedia-online-help",
+      "lang": "ja",
+      "filePath": "reuse/urls/index.json",
+      "line": null,
+      "status": "ok",
+      "reason": "HTTP 200",
+      "code": 200,
+      "checkedAt": "2026-08-14T19:11:00.770Z"
     }
   ]
 }

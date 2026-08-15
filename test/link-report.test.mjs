@@ -25,6 +25,7 @@ const {
   maskNonProse,
   normalizeUrl,
   mapWithConcurrency,
+  collectUrlsJsonLinks,
 } = linkReport;
 
 const urls = (content) =>
@@ -269,4 +270,80 @@ test("the pool preserves order and respects its limit", async () => {
 
 test("an empty input does not hang", async () => {
   assert.deepEqual(await mapWithConcurrency([], 4, async (x) => x), []);
+});
+
+/* ---------------------------- urls.json links ---------------------------- */
+
+test("collectUrlsJsonLinks produces one link per language, tagged as urls-json", () => {
+  const urlsData = {
+    urls: [
+      {
+        key: "pricing",
+        url: [
+          { lang: "en", url: "https://example.com/en/pricing" },
+          { lang: "fr", url: "https://example.com/fr/pricing" },
+        ],
+      },
+    ],
+  };
+
+  const links = collectUrlsJsonLinks(urlsData);
+
+  assert.equal(links.length, 2);
+  for (const link of links) {
+    assert.equal(link.source, "urls-json");
+    assert.equal(link.urlKey, "pricing");
+    assert.equal(link.type, "urls-json");
+    assert.equal(link.text, "pricing");
+  }
+  assert.deepEqual(
+    links.map((l) => [l.lang, l.url]).sort(),
+    [
+      ["en", "https://example.com/en/pricing"],
+      ["fr", "https://example.com/fr/pricing"],
+    ]
+  );
+});
+
+test("collectUrlsJsonLinks normalizes URLs the same way doc-scanned links are", () => {
+  const urlsData = {
+    urls: [
+      {
+        key: "titled",
+        url: [{ lang: "en", url: '<https://example.com/x> "Title"' }],
+      },
+    ],
+  };
+
+  assert.equal(
+    collectUrlsJsonLinks(urlsData)[0].url,
+    "https://example.com/x"
+  );
+});
+
+test("collectUrlsJsonLinks tolerates missing/empty data", () => {
+  assert.deepEqual(collectUrlsJsonLinks({ urls: [] }), []);
+  assert.deepEqual(collectUrlsJsonLinks({}), []);
+  assert.deepEqual(
+    collectUrlsJsonLinks({ urls: [{ key: "no-urls" }] }),
+    []
+  );
+});
+
+test("a urls.json URL set catches the same string a doc-scanned link would produce", () => {
+  // This is the exact membership check generateLinkReport() uses to tag
+  // doc-scanned links `inUrlsJson: true/false` — verified here via the two
+  // already-tested normalizers agreeing on the same string, since
+  // generateLinkReport() itself reads from the real docs/ and urls/
+  // directories and isn't independently overridable for a unit test.
+  const urlsData = {
+    urls: [
+      { key: "a", url: [{ lang: "en", url: "https://example.com/a" }] },
+    ],
+  };
+  const set = new Set(collectUrlsJsonLinks(urlsData).map((l) => l.url));
+
+  const docLinkUrl = normalizeUrl('https://example.com/a "Title"');
+  assert.ok(set.has(docLinkUrl));
+  assert.ok(!set.has(normalizeUrl("https://example.com/b")));
 });

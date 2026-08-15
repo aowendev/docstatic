@@ -1,0 +1,14 @@
+{
+  "urls": [
+    {
+      "key": "example-key",
+      "url": [
+        { "lang": "en", "url": "https://example.com/", "_template": "urlTranslation" }
+      ],
+      "defaultText": [
+        { "lang": "en", "text": "Example", "_template": "textTranslation" }
+      ],
+      "_template": "urlEntry"
+    }
+  ]
+}

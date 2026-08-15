@@ -16,6 +16,7 @@ import { GlossaryTermBlockTemplate } from "../components/GlossaryTerm/template";
 import { PassthroughBlockTemplate } from "../components/Passthrough/template";
 import { RelatedTopicsBlockTemplate } from "../components/RelatedTopics/template";
 import { SnippetBlockTemplate } from "../components/Snippet/template";
+import { UrlLinkBlockTemplate } from "../components/Url/template";
 import { VariableSetBlockTemplate } from "../components/VariableSet/template";
 
 // Default Docusaurus components
@@ -241,5 +242,6 @@ export const MDXTemplates = [
   SnippetBlockTemplate,
   TabsTemplate,
   TruncateTemplate,
+  UrlLinkBlockTemplate,
   VariableSetBlockTemplate,
 ];

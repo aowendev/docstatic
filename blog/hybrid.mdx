@@ -1,6 +1,6 @@
 ---
 title: Hybrid document management systems revisited
-lastmod: "2026-04-14T07:14:34.255Z"
+lastmod: '2026-08-15T09:41:49.489Z'
 authors:
   - name: "Andrew Owen"
     title: "docStatic maintainer"
@@ -10,6 +10,7 @@ date: "2025-02-27"
 tags:
   - "content"
   - "content_blog-articles"
+modifiedBy: aowendev <aowen@translationcommons.org>
 ---
 
 In January last year, I was up for a documentation manager role and I needed to come up with a solution that would serve the needs of writers and developer-contributors.
@@ -36,7 +37,7 @@ I was the second choice, so fortunately for me I didn't have to deliver it. Inst
 
 But I'm still a fan of DocBook. Was there an off-the-shelf solution that looked more like my hybrid document management system (DMS) proposal? One possible solution would be [Magnolia CMS](https://www.magnolia-cms.com/), the [Antora](https://antora.org/) static site generator (SSG) and [AsciiDoc](https://asciidoc.org/). However, Magnolia doesn't disclose its pricing. And if you ever wanted to migrate to another system, you'd have to build it yourself because other headless CMS solutions don't support AsciiDoc.
 
-Which lead me back to Markdown. Was there an SSG primarily aimed at producing doc sites that would work with my favorite headless CMS ([TinaCMS](https://tina.io/))? That led me to [Docusaurus](https://docusaurus.io/). It's what Meta (Facebook) built to replace Jekyll as its in-house SSG and it uses [React](https://react.dev/). Its build times can feel like an age compared to Hugo. But the sites it builds are so much faster. But was there a better free REST API docs integration than hacking the output of Redocly CLI? The answer was yes, with a great Docusaurus plugin from Palo Alto Networks. All I should have had to do to set it up was to create a new site using the Tina Docusarus starter and then add the plugin. It wasn't that straightforward. Palo Alto Networks has drunk the TypeScript KoolAid. Because Docusaurus is React, the starter site created by Tina uses JSX. They did not want to play nicely. I ended up creating a site from the Palo Alto Networks template and then grafting Tina support onto it.
+Which lead me back to Markdown. Was there an SSG primarily aimed at producing doc sites that would work with my favorite headless CMS ([TinaCMS](https://tina.io/))? That led me to <Url urlKey="docusaurus" />. It's what Meta (Facebook) built to replace Jekyll as its in-house SSG and it uses [React](https://react.dev/). Its build times can feel like an age compared to Hugo. But the sites it builds are so much faster. But was there a better free REST API docs integration than hacking the output of Redocly CLI? The answer was yes, with a great Docusaurus plugin from Palo Alto Networks. All I should have had to do to set it up was to create a new site using the Tina Docusarus starter and then add the plugin. It wasn't that straightforward. Palo Alto Networks has drunk the TypeScript KoolAid. Because Docusaurus is React, the starter site created by Tina uses JSX. They did not want to play nicely. I ended up creating a site from the Palo Alto Networks template and then grafting Tina support onto it.
 
 I couldn't figure out a way to enable the versioning and localization widgets in the nav bar with the Tina solution, so I reverted to using a fixed definition for those. For most other settings, Tina uses JSON files that are referenced by the config. Adding [Mermaid](https://mermaid.js.org/) and [Lunr](https://lunrjs.com/) search support was trivial, although search only works in production. Rather than try to talk you through everything I had to do to get it working, this time I thought I'd simply share the [repo](https://github.com/aowendev/docstatic). The Palo Alto Networks component is made available under the MIT license, so I've used the same license. The only config you'll need to do is to add your Tina credentials to enable online web editing.
 

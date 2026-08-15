@@ -6,10 +6,11 @@ authors:
     image_url: "https://avatars.githubusercontent.com/u/84041006"
 date: "2025-02-27"
 title: Les systèmes hybrides de gestion des documents revisités
-lastmod: "2026-04-14T07:14:34.253Z"
+lastmod: '2026-08-15T09:41:50.918Z'
 tags:
   - "content"
   - "content_blog-articles"
+modifiedBy: aowendev <aowen@translationcommons.org>
 ---
 
 # Les systèmes hybrides de gestion des documents revisités
@@ -38,7 +39,7 @@ J'étais le seconde choix, donc heureusement pour moi, je n'ai pas eu à le livr
 
 Mais je reste un fan de DocBook. Existe-t-il une solution prête à l'emploi qui ressemblerait davantage à ma proposition de système de gestion documentaire (SGD) hybride ? Une solution possible serait [Magnolia CMS](https://www.magnolia-cms.com/), le générateur de site statique [Antora](https://antora.org/) et [AsciiDoc](https://asciidoc.org/). Cependant, Magnolia ne communique pas ses tarifs. Et si vous souhaitez migrer vers un autre système, vous devrez le construire vous-même, car les autres solutions CMS sans tête ne prennent pas en charge AsciiDoc.
 
-Ce qui me ramène à Markdown. Existait-il un SSG dont l'objectif principal était de produire des sites de documentation fonctionnant avec mon headless CMS préféré ([TinaCMS](https://tina.io/)) ? Cela m'a conduit à [Docusaurus](https://docusaurus.io/). C'est ce que Meta (Facebook) a construit pour remplacer Jekyll comme SSG interne et il utilise [React](https://react.dev/). Ses délais de construction peuvent sembler interminables comparés à ceux d'Hugo. Mais les sites qu'il construit sont tellement plus rapides. Mais existait-il une meilleure intégration des documents de l'API REST libre que de pirater la sortie du CLI de Redocly ? La réponse était oui, avec un excellent plugin Docusaurus de Palo Alto Networks. Tout ce que j'aurais dû faire pour le mettre en place était de créer un nouveau site en utilisant le starter Tina Docusarus, puis d'ajouter le plugin. Ce n'était pas si simple. Palo Alto Networks a bu le TypeScript KoolAid. Parce que Docusaurus est React, le site de démarrage créé par Tina utilise JSX. Ils n'ont pas voulu jouer franc jeu. J'ai fini par créer un site à partir du modèle de Palo Alto Networks, puis j'y ai greffé le support de Tina.
+Ce qui me ramène à Markdown. Existait-il un SSG dont l'objectif principal était de produire des sites de documentation fonctionnant avec mon headless CMS préféré ([TinaCMS](https://tina.io/)) ? Cela m'a conduit à <Url urlKey="docusaurus" />. C'est ce que Meta (Facebook) a construit pour remplacer Jekyll comme SSG interne et il utilise [React](https://react.dev/). Ses délais de construction peuvent sembler interminables comparés à ceux d'Hugo. Mais les sites qu'il construit sont tellement plus rapides. Mais existait-il une meilleure intégration des documents de l'API REST libre que de pirater la sortie du CLI de Redocly ? La réponse était oui, avec un excellent plugin Docusaurus de Palo Alto Networks. Tout ce que j'aurais dû faire pour le mettre en place était de créer un nouveau site en utilisant le starter Tina Docusarus, puis d'ajouter le plugin. Ce n'était pas si simple. Palo Alto Networks a bu le TypeScript KoolAid. Parce que Docusaurus est React, le site de démarrage créé par Tina utilise JSX. Ils n'ont pas voulu jouer franc jeu. J'ai fini par créer un site à partir du modèle de Palo Alto Networks, puis j'y ai greffé le support de Tina.
 
 Je n'ai pas réussi à trouver un moyen d'activer les widgets de version et de localisation dans la barre de navigation avec la solution Tina, j'ai donc décidé d'utiliser une définition fixe pour ces widgets. Pour la plupart des autres paramètres, Tina utilise des fichiers JSON qui sont référencés par la configuration. L'ajout du support de la recherche [Mermaid](https://mermaid.js.org/) et [Lunr](https://lunrjs.com/) était trivial, bien que la recherche ne fonctionne qu'en production. Plutôt que d'essayer de vous expliquer tout ce que j'ai dû faire pour que cela fonctionne, j'ai pensé cette fois-ci partager simplement le [repo](https://github.com/aowendev/docstatic). Le composant de Palo Alto Networks est disponible sous la licence MIT, j'ai donc utilisé la même licence. La seule configuration que vous aurez à faire est d'ajouter vos identifiants Tina pour permettre l'édition web en ligne.
 

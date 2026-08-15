@@ -103,7 +103,7 @@
     ],
     "path": "/chatbot",
     "filePath": "chatbot.mdx",
-    "lastmod": "2026-08-13T15:26:07.833Z"
+    "lastmod": "2026-08-13T15:29:06.737Z"
   },
   {
     "title": "CLI",
@@ -121,7 +121,7 @@
     ],
     "path": "/cli",
     "filePath": "cli.mdx",
-    "lastmod": "2026-08-11T18:15:07.446Z"
+    "lastmod": "2026-08-14T13:46:23.000Z"
   },
   {
     "title": "Code blocks and snippets",
@@ -201,7 +201,7 @@
     ],
     "path": "/guides/docs/create-doc",
     "filePath": "guides/docs/create-doc.mdx",
-    "lastmod": "2026-03-10T22:57:52.979Z"
+    "lastmod": "2026-08-14T17:50:05.053Z"
   },
   {
     "title": "Creating pages",
@@ -231,7 +231,7 @@
     ],
     "path": "/guides/dashboards",
     "filePath": "guides/dashboards.mdx",
-    "lastmod": "2026-08-11T17:45:19.489Z"
+    "lastmod": "2026-08-14T13:45:43.000Z"
   },
   {
     "title": "Deployment",
@@ -261,7 +261,7 @@
     ],
     "path": "/guides/markdown-features/diagrams",
     "filePath": "guides/markdown-features/diagrams.mdx",
-    "lastmod": "2026-03-04T22:51:34.727Z"
+    "lastmod": "2026-08-14T17:36:40.231Z"
   },
   {
     "title": "Docs introduction",
@@ -394,7 +394,7 @@
     ],
     "path": "/installation",
     "filePath": "installation.mdx",
-    "lastmod": "2026-08-11T18:15:07.647Z"
+    "lastmod": "2026-08-14T16:54:45.612Z"
   },
   {
     "title": "Internationalization",
@@ -430,7 +430,7 @@
     ],
     "path": "/introduction",
     "filePath": "introduction.mdx",
-    "lastmod": "2026-06-01T14:31:57.537Z"
+    "lastmod": "2026-08-14T17:36:36.194Z"
   },
   {
     "title": "Introduction",
@@ -750,6 +750,18 @@
     "path": "/migration",
     "filePath": "migration/index.mdx",
     "lastmod": "2026-03-10T22:59:35.900Z"
+  },
+  {
+    "title": "URLs",
+    "description": "Centrally managed, localizable external links.",
+    "tags": [
+      "reuse",
+      "internationalization",
+      "internationalization_localization"
+    ],
+    "path": "/guides/markdown-features/urls",
+    "filePath": "guides/markdown-features/urls.mdx",
+    "lastmod": "2026-08-14T13:44:54.000Z"
   },
   {
     "title": "Using Claude in this project",

@@ -17,7 +17,7 @@ translate: false
 approved: false
 published: true
 unlisted: false
-lastmod: '2026-08-11T18:15:07.446Z'
+lastmod: '2026-08-15T09:41:49.918Z'
 modifiedBy: aowendev <aowen@translationcommons.org>
 ---
 docStatic provides a set of scripts to help you generate, serve, and deploy your website. They are defined in the `scripts` section of your site's `package.json`, which is the authoritative list — run `npm run` with no arguments to print the scripts your site actually has.
@@ -33,7 +33,7 @@ To invoke the commands, use npm or yarn. For example, `npm run dev` or `yarn dev
 * **`dev`**: Start development server with TinaCMS integration
 * **`build`**: Build for production (runs TinaCMS build then Docusaurus build)
 * **`build-local`**: Build locally without cloud features
-* **`check-links`**: Request every external link in your topics and record the HTTP status each server returned, so the Broken Links dashboard can report real 404s and 500s. Add `--strict` to exit with an error when broken links are found, which is what you want in a continuous integration job. See [Dashboards](guides/dashboards.mdx).
+* **`check-links`**: Request every external link — both hardcoded in topics and stored in the URLs collection (`reuse/urls/index.json`) — and record the HTTP status each server returned, so the Link Health dashboard can report real 404s and 500s. Add `--strict` to exit with an error when broken links are found, which is what you want in a continuous integration job. See [Dashboards](guides/dashboards.mdx).
 * **`generate`**: Run every generator below in one go. `prebuild` and `predev` call this, so you rarely need it directly.
 * **`generate-media-index`**: Generate index of media files
 * **`generate-git-identity`**: Generate git identity information
@@ -67,7 +67,7 @@ These commands are built on top of standard Docusaurus commands described in [CL
 These run automatically, so you do not normally invoke them yourself:
 
 * `prebuild`, `predev` and `prebuild-local` each run `generate` before a build or the dev server starts, which refreshes the media index, file lists, docs metadata, link inventory, theme CSS and git identity.
-* `prestart` refreshes the link inventory before `start`, so the Broken Links dashboard has a report to display even if you have never run `check-links`.
+* `prestart` refreshes the link inventory before `start`, so the Link Health dashboard has a report to display even if you have never run `check-links`.
 * `postinstall` installs the MCP server's dependencies.
 
 ### API commands
