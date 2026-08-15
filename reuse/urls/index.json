@@ -1762,6 +1762,44 @@
       "_template": "urlEntry"
     },
     {
+      "key": "node-js",
+      "url": [
+        {
+          "lang": "en",
+          "url": "https://nodejs.org/en",
+          "_template": "urlTranslation"
+        },
+        {
+          "lang": "de",
+          "url": "https://nodejs.org/de",
+          "_template": "urlTranslation"
+        },
+        {
+          "lang": "es",
+          "url": "https://nodejs.org/es",
+          "_template": "urlTranslation"
+        },
+        {
+          "lang": "fr",
+          "url": "https://nodejs.org/fr",
+          "_template": "urlTranslation"
+        },
+        {
+          "lang": "ja",
+          "url": "https://nodejs.org/ja",
+          "_template": "urlTranslation"
+        }
+      ],
+      "defaultText": [
+        {
+          "lang": "en",
+          "text": "Node.js",
+          "_template": "textTranslation"
+        }
+      ],
+      "_template": "urlEntry"
+    },
+    {
       "key": "outlook",
       "url": [
         {
@@ -1794,26 +1832,6 @@
         {
           "lang": "en",
           "text": "Outlook",
-          "_template": "textTranslation"
-        },
-        {
-          "lang": "de",
-          "text": "",
-          "_template": "textTranslation"
-        },
-        {
-          "lang": "es",
-          "text": "",
-          "_template": "textTranslation"
-        },
-        {
-          "lang": "fr",
-          "text": "",
-          "_template": "textTranslation"
-        },
-        {
-          "lang": "ja",
-          "text": "",
           "_template": "textTranslation"
         }
       ],

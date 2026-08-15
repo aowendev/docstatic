@@ -1,18 +1,18 @@
 ---
-lastmod: '2026-08-15T12:45:28.357Z'
+lastmod: '2026-08-15T12:59:52.298Z'
+modifiedBy: aowendev <aowen@translationcommons.org>
 title: Dashboards
 description: Viewing dashboards in TinaCMS
 tags:
-  - "software_content-management-systems"
-  - "software_content-management-systems_tinacms"
-  - "software_content-management-systems_media-management"
+  - software_content-management-systems
+  - software_content-management-systems_tinacms
+  - software_content-management-systems_media-management
 draft: false
 review: false
 translate: false
 approved: false
 published: true
 unlisted: false
-modifiedBy: aowendev <aowen@translationcommons.org>
 ---
 
 docStatic adds dashboard functionality to TinaCMS. Tina generates a GraphQL API using the filesystem in the Git repository as the database. Dashboards query the API (locally or in the cloud) and present actionable reports directly in the CMS. Dashboard functionality is currently considered beta. The functionality is fully tested, but the user interface is provisional and requires refinement. Dashboards update when the page is updated. If another user has made changes since you viewed a dashboard, you can click **Refresh** to update the dashboard.
@@ -92,11 +92,9 @@ For used content, click Used in n docs to display the topics where the content i
 
 ## Checking link health
 
-Unlike the other dashboards on this page, the Link Health dashboard lives in the **URLs** collection rather than Dashboards — it's the same place you manage the [centralized URLs](/docs/guides/markdown-features/urls) used by the `<Url>` component, so link health and link management sit together.
+Unlike the other dashboards on this page, the Link Health dashboard lives in the **URLs** collection rather than Dashboards: it's the same place you manage the [centralized URLs](/docs/guides/markdown-features/urls) used by the `<Url>` component, so link health and link management sit together.
 
-The dashboard reports on the hyperlinks in your topics *and* the URLs stored in the URLs collection, including their HTTP status, so a page that returns 404 or 500 is identified as broken no matter which source it came from. For example, [this link](https://docusaurus.io/this-page-does-not-exist-demo-404) intentionally returns a 404, so `yarn check-links` reports it as broken.
-
-The dashboard displays the results of the last `yarn check-links` run, bundled into the site the last time it was built. To check your links with real HTTP statuses, run:
+The dashboard reports on the hyperlinks in your topics *and* the URLs stored in the URLs collection, including their HTTP status. So a page that returns 404 or 500 is identified as broken no matter which source it came from. The dashboard displays the results of the last `yarn check-links` run, bundled into the site the last time it was built. To check your links with real HTTP statuses, run:
 
 ```bash
 yarn check-links
