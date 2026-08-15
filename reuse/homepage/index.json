@@ -162,6 +162,7 @@
       "items": [
         {
           "image": "/img/writers.jpg",
+          "document": "docs/guides/docs/create-doc",
           "translations": [
             {
               "lang": "en",
@@ -192,6 +193,7 @@
         },
         {
           "image": "/img/developers.jpg",
+          "document": "docs/guides/markdown-features/react",
           "translations": [
             {
               "lang": "en",
@@ -222,6 +224,7 @@
         },
         {
           "image": "/img/users.jpg",
+          "document": "docs/search",
           "translations": [
             {
               "lang": "en",
