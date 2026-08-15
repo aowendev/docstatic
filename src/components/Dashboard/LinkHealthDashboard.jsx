@@ -1230,21 +1230,23 @@ const LinkHealthDashboard = ({ tinaForm }) => {
             >
               🧭 Migration Candidates ({migrationCandidates.length})
             </h3>
-            <button
-              type="button"
-              onClick={() => setShowMigrationDetails(!showMigrationDetails)}
-              style={{
-                padding: "4px 8px",
-                backgroundColor: "transparent",
-                color: "#0366d6",
-                border: "none",
-                borderRadius: "3px",
-                cursor: "pointer",
-                fontSize: "12px",
-              }}
-            >
-              {showMigrationDetails ? "Show fewer" : "Show more"}
-            </button>
+            {migrationCandidates.length > 5 && (
+              <button
+                type="button"
+                onClick={() => setShowMigrationDetails(!showMigrationDetails)}
+                style={{
+                  padding: "4px 8px",
+                  backgroundColor: "transparent",
+                  color: "#0366d6",
+                  border: "none",
+                  borderRadius: "3px",
+                  cursor: "pointer",
+                  fontSize: "12px",
+                }}
+              >
+                {showMigrationDetails ? "Show fewer" : "Show more"}
+              </button>
+            )}
           </div>
           <div
             style={{
@@ -1438,23 +1440,25 @@ const LinkHealthDashboard = ({ tinaForm }) => {
               🔗 Centralized, Not Yet Updated in Docs (
               {centralizedButHardcoded.length})
             </h3>
-            <button
-              type="button"
-              onClick={() =>
-                setShowCentralizedDocsDetails(!showCentralizedDocsDetails)
-              }
-              style={{
-                padding: "4px 8px",
-                backgroundColor: "transparent",
-                color: "#0366d6",
-                border: "none",
-                borderRadius: "3px",
-                cursor: "pointer",
-                fontSize: "12px",
-              }}
-            >
-              {showCentralizedDocsDetails ? "Show fewer" : "Show more"}
-            </button>
+            {centralizedButHardcoded.length > 5 && (
+              <button
+                type="button"
+                onClick={() =>
+                  setShowCentralizedDocsDetails(!showCentralizedDocsDetails)
+                }
+                style={{
+                  padding: "4px 8px",
+                  backgroundColor: "transparent",
+                  color: "#0366d6",
+                  border: "none",
+                  borderRadius: "3px",
+                  cursor: "pointer",
+                  fontSize: "12px",
+                }}
+              >
+                {showCentralizedDocsDetails ? "Show fewer" : "Show more"}
+              </button>
+            )}
           </div>
           <div
             style={{
@@ -1670,21 +1674,23 @@ const LinkHealthDashboard = ({ tinaForm }) => {
                 </svg>
                 Files with Problem Links ({filesWithProblemLinks.length})
               </h3>
-              <button
-                type="button"
-                onClick={() => setShowDetails(!showDetails)}
-                style={{
-                  padding: "4px 8px",
-                  backgroundColor: "transparent",
-                  color: "#0366d6",
-                  border: "none",
-                  borderRadius: "3px",
-                  cursor: "pointer",
-                  fontSize: "12px",
-                }}
-              >
-                {showDetails ? "Hide Details" : "Show Details"}
-              </button>
+              {filesWithProblemLinks.length > 5 && (
+                <button
+                  type="button"
+                  onClick={() => setShowDetails(!showDetails)}
+                  style={{
+                    padding: "4px 8px",
+                    backgroundColor: "transparent",
+                    color: "#0366d6",
+                    border: "none",
+                    borderRadius: "3px",
+                    cursor: "pointer",
+                    fontSize: "12px",
+                  }}
+                >
+                  {showDetails ? "Hide Details" : "Show Details"}
+                </button>
+              )}
             </div>
 
             <div

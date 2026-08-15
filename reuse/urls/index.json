@@ -1799,6 +1799,44 @@
       "_template": "urlEntry"
     },
     {
+      "key": "wikipedia-headless-content-management-system",
+      "url": [
+        {
+          "lang": "en",
+          "url": "https://en.wikipedia.org/wiki/Headless_content_management_system",
+          "_template": "urlTranslation"
+        },
+        {
+          "lang": "de",
+          "url": "https://de.wikipedia.org/wiki/Content-Management-System",
+          "_template": "urlTranslation"
+        },
+        {
+          "lang": "es",
+          "url": "https://es.wikipedia.org/wiki/Sistema_de_gesti%C3%B3n_de_contenidos",
+          "_template": "urlTranslation"
+        },
+        {
+          "lang": "fr",
+          "url": "https://fr.wikipedia.org/wiki/Syst%C3%A8me_de_gestion_de_contenu",
+          "_template": "urlTranslation"
+        },
+        {
+          "lang": "ja",
+          "url": "https://ja.wikipedia.org/wiki/%E3%82%B3%E3%83%B3%E3%83%86%E3%83%B3%E3%83%84%E7%AE%A1%E7%90%86%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0",
+          "_template": "urlTranslation"
+        }
+      ],
+      "defaultText": [
+        {
+          "lang": "en",
+          "text": "headless content management system",
+          "_template": "textTranslation"
+        }
+      ],
+      "_template": "urlEntry"
+    },
+    {
       "key": "wikipedia-i18n",
       "url": [
         {
@@ -1980,24 +2018,6 @@
         {
           "lang": "en",
           "text": "static site generator",
-          "_template": "textTranslation"
-        }
-      ],
-      "_template": "urlEntry"
-    },
-    {
-      "key": "wikipedia-headless-content-management-system",
-      "url": [
-        {
-          "lang": "en",
-          "url": "https://en.wikipedia.org/wiki/Headless_content_management_system",
-          "_template": "urlTranslation"
-        }
-      ],
-      "defaultText": [
-        {
-          "lang": "en",
-          "text": "headless content management system",
           "_template": "textTranslation"
         }
       ],
