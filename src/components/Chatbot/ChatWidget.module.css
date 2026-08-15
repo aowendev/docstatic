@@ -131,6 +131,15 @@
   margin: 0;
 }
 
+.messageAssistant .noContextBanner {
+  margin: 0 0 0.5rem;
+  padding: 0.3rem 0.5rem;
+  border-radius: var(--ifm-global-radius);
+  background: var(--ifm-color-warning-contrast-background, rgba(255, 186, 0, 0.15));
+  color: var(--ifm-color-warning-contrast-foreground, var(--ifm-color-emphasis-700));
+  font-size: 0.8rem;
+}
+
 .messageAssistant :global(p + p) {
   margin-top: 0.5rem;
 }

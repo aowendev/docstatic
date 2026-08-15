@@ -52,8 +52,11 @@ export function withContext(messages, context, systemPrompt) {
     systemParts.push(systemPrompt);
   }
   if (context) {
+    // The worked example matters more than the instruction above for small
+    // models: they're much more reliable at imitating a shown pattern than
+    // at reasoning about an abstract "say so if you don't know" rule.
     systemParts.push(
-      `Use the following documentation excerpts to answer the question. Cite the relevant page(s) by URL when helpful. If the excerpts don't contain the answer, say so rather than guessing.\n\n${context}`
+      `The following is retrieved documentation context for the question, if any matched closely enough. Cite the relevant page(s) by URL when helpful. Answer only from this context and your general system instructions — if it doesn't cover the question, say plainly that the docs don't address this rather than answering from prior/general knowledge.\n\nExample of the expected response when nothing relevant is found:\nQ: "Is this project affiliated with the Apache Software Foundation?"\nA: "I don't see anything about that in the documentation I have access to, so I can't confirm it one way or another."\n\n${context}`
     );
   }
   if (systemParts.length === 0) {

@@ -73,6 +73,11 @@ export function useChatEngine(chatbotConfig, copy) {
       try {
         const index = await fetchSearchIndex(siteConfig.baseUrl);
         const chunks = rankChunks(trimmed, index);
+        // Recorded on the message so the UI can show a "not grounded in the
+        // docs" banner independent of whether the model itself says so —
+        // small local models are unreliable at verbalizing uncertainty even
+        // when instructed to, so this signal comes from retrieval directly.
+        const hasContext = chunks.length > 0;
         const context = [
           buildContext(chunks),
           getLocaleInstruction(i18n.currentLocale),
@@ -92,6 +97,7 @@ export function useChatEngine(chatbotConfig, copy) {
               next[next.length - 1] = {
                 role: "assistant",
                 content: assistantText,
+                hasContext,
               };
               return next;
             });

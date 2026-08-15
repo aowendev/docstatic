@@ -14,7 +14,9 @@ const MAX_CONTEXT_CHARS = 2000;
  * @returns {string}
  */
 export function buildContext(chunks) {
-  if (!chunks || chunks.length === 0) return "";
+  if (!chunks || chunks.length === 0) {
+    return "No documentation excerpts matched this question closely enough to be useful.";
+  }
 
   let remaining = MAX_CONTEXT_CHARS;
   const parts = [];

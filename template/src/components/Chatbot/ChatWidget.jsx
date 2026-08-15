@@ -119,6 +119,14 @@ function MessageList({ messages }) {
           </div>
         ) : (
           <div key={index} className={styles.messageAssistant}>
+            {message.hasContext === false && (
+              <p className={styles.noContextBanner}>
+                <Translate id="chatbot.messages.noContext">
+                  No matching documentation was found for this question —
+                  this answer may not reflect the docs.
+                </Translate>
+              </p>
+            )}
             {/* rehypeRaw is intentionally omitted: message.content is
                 model output, not authored/trusted content, so raw HTML
                 in it must stay escaped rather than be rendered. */}
