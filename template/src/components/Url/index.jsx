@@ -34,7 +34,8 @@ const Url = ({ urlKey, linkText, lang }) => {
     return <span>URL NOT FOUND</span>;
   }
 
-  return <a href={href}>{text || href}</a>;
+  return <a href={href} target="_blank" rel="noopener noreferrer" class="">{text || href}</a>;
+
 };
 
 export default Url;
