@@ -67,11 +67,11 @@
       "heroCardFeatures": [
         {
           "translations": [
-            { "lang": "en", "feature": "Content Reuse & Single Sourcing" },
-            { "lang": "de", "feature": "Wiederverwendung von Inhalten & Single Sourcing" },
-            { "lang": "es", "feature": "Reutilización de contenido y fuente única" },
-            { "lang": "fr", "feature": "Réutilisation de contenu et source unique" },
-            { "lang": "ja", "feature": "コンテンツの再利用とシングルソーシング" }
+            { "lang": "en", "feature": "Content Reuse, Single Sourcing & Managed Links" },
+            { "lang": "de", "feature": "Wiederverwendung von Inhalten, Single Sourcing und verwaltete Links" },
+            { "lang": "es", "feature": "Reutilización de contenidos, fuente única y enlaces gestionados" },
+            { "lang": "fr", "feature": "Réutilisation de contenu, source unique et liens gérés" },
+            { "lang": "ja", "feature": "コンテンツの再利用、シングルソーシング、および管理されたリンク" }
           ]
         },
         {
@@ -85,11 +85,11 @@
         },
         {
           "translations": [
-            { "lang": "en", "feature": "Content Lifecycle & Workflow Management" },
-            { "lang": "de", "feature": "Content-Lifecycle- & Workflow-Management" },
-            { "lang": "es", "feature": "Gestión del ciclo de vida del contenido y flujos de trabajo" },
-            { "lang": "fr", "feature": "Gestion du cycle de vie du contenu et des flux de travail" },
-            { "lang": "ja", "feature": "コンテンツのライフサイクルとワークフロー管理" }
+            { "lang": "en", "feature": "Workflow Management & Content Dashboards" },
+            { "lang": "de", "feature": "Workflow-Management und Content-Dashboards" },
+            { "lang": "es", "feature": "Gestión de flujos de trabajo y paneles de control de contenidos" },
+            { "lang": "fr", "feature": "Gestion des flux de travail et tableaux de bord de contenu" },
+            { "lang": "ja", "feature": "ワークフロー管理とコンテンツダッシュボード" }
           ]
         },
         {
@@ -121,11 +121,11 @@
         },
         {
           "translations": [
-            { "lang": "en", "feature": "Local MCP server for AI integration." },
-            { "lang": "de", "feature": "Lokaler MCP-Server für KI-Integration" },
-            { "lang": "es", "feature": "Servidor MCP local para integración con IA" },
-            { "lang": "fr", "feature": "Serveur MCP local pour l'intégration IA" },
-            { "lang": "ja", "feature": "AI 統合のためのローカル MCP サーバー" }
+            { "lang": "en", "feature": "AI Chat Assistant & Local MCP Server" },
+            { "lang": "de", "feature": "KI-Chat-Assistent & lokaler MCP-Server" },
+            { "lang": "es", "feature": "Asistente de chat con IA y servidor MCP local" },
+            { "lang": "fr", "feature": "Assistant de chat IA et serveur MCP local" },
+            { "lang": "ja", "feature": "AIチャットアシスタントとローカルMCPサーバー" }
           ]
         }
       ],
@@ -252,37 +252,6 @@
         }
       ],
       "_template": "features"
-    },
-    {
-      "url": "https://www.youtube.com/watch?v=2bHBwM54UB8",
-      "translations": [
-        {
-          "lang": "en",
-          "title": "Watch the Demo",
-          "caption": "See how Docusaurus and TinaCMS work together."
-        },
-        {
-          "lang": "de",
-          "title": "Demo ansehen",
-          "caption": "Sehen Sie, wie Docusaurus und TinaCMS zusammenarbeiten."
-        },
-        {
-          "lang": "es",
-          "title": "Ver la demo",
-          "caption": "Vea cómo Docusaurus y TinaCMS trabajan juntos."
-        },
-        {
-          "lang": "fr",
-          "title": "Voir la démo",
-          "caption": "Découvrez comment Docusaurus et TinaCMS fonctionnent ensemble."
-        },
-        {
-          "lang": "ja",
-          "title": "デモを見る",
-          "caption": "Docusaurus と TinaCMS がどのように連携するかをご覧ください。"
-        }
-      ],
-      "_template": "youTubeEmbed"
     }
   ]
 }

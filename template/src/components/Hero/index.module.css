@@ -28,7 +28,7 @@
 
 .heroContent {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1.15fr;
   gap: 4rem;
   align-items: center;
   text-align: left;
@@ -117,7 +117,7 @@
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 12px;
   padding: 0;
-  max-width: 518px;
+  max-width: 580px;
   width: 100%;
   backdrop-filter: blur(20px);
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
@@ -164,7 +164,7 @@
 }
 
 .cardContent {
-  padding: 2rem;
+  padding: 2rem 1.5rem;
 }
 
 .codeBlock {
