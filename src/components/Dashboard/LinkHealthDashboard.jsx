@@ -10,6 +10,7 @@ import React, { useMemo, useRef, useState } from "react";
 // admin bundle, which esbuild builds without Docusaurus's path aliases.
 import docusaurusData from "../../../config/docusaurus/index.json";
 import initialLinkReport from "../../data/link-report.json";
+import { getEditorIdentity } from "../../utils/editorIdentity";
 import {
   classifyUrl,
   collectUrlsJsonLinks,
@@ -30,6 +31,62 @@ import { useTinaTask } from "./lib/useTinaTask";
 const REFRESH_CONCURRENCY = 6;
 
 const DEFAULT_LOCALE = docusaurusData.languages?.default || "en";
+
+const REPLACE_MUTATION = `
+  mutation ReplaceHardcodedLink($collection: String!, $relativePath: String!, $params: DocumentUpdateMutation!) {
+    updateDocument(collection: $collection, relativePath: $relativePath, params: $params) {
+      __typename
+    }
+  }
+`;
+
+/**
+ * DocMutation and I18nMutation (tina/__generated__/schema.gql) have the same
+ * fields, so one builder covers both the "doc" and "i18n" collections.
+ *
+ * Two things learned the hard way from a real save that mangled a real doc:
+ *
+ * 1. A field left out of `params` isn't necessarily left alone — the first
+ *    version of this sent only `body` and every other field came back
+ *    empty. So every other field the document actually has is included here
+ *    explicitly. But sending a field that's genuinely unset (`null`) writes
+ *    that field into the file's frontmatter as `null`, which wasn't there
+ *    before — "help: null" for a field the CMS itself never asked this
+ *    document to have an opinion on is not an improvement over losing
+ *    "title". So only fields the document already has a real value for are
+ *    included; anything already null stays left out, matching what leaving
+ *    a field out is supposed to mean in the first place.
+ *
+ * 2. `help` is dropped unconditionally, value or not — it only ever backs
+ *    the HelpButton shown in the Tina sidebar and is never real content, so
+ *    there's no version of this document that should have it written down.
+ *
+ * `lastmod`/`modifiedBy` are stamped fresh here rather than carried over
+ * from the query result, because on a normal save they come from this exact
+ * collection's own `ui.beforeSubmit` hook in tina/config.jsx — which only
+ * runs for saves made through Tina's own form. A raw mutation like this one
+ * bypasses that hook entirely, so without this, Replace-driven saves would
+ * silently stop updating either.
+ */
+async function buildDocUpdateParams(doc, body) {
+  const params = {
+    title: doc.title,
+    body,
+    lastmod: new Date().toISOString(),
+    modifiedBy: await getEditorIdentity(),
+    draft: doc.draft,
+    review: doc.review,
+    translate: doc.translate,
+    approved: doc.approved,
+    published: doc.published,
+    unlisted: doc.unlisted,
+  };
+  if (doc.description != null) params.description = doc.description;
+  if (doc.slug != null) params.slug = doc.slug;
+  if (doc.tags != null) params.tags = doc.tags;
+  if (doc.conditions != null) params.conditions = doc.conditions;
+  return params;
+}
 
 const slugify = (s) =>
   s
@@ -501,13 +558,26 @@ const LinkHealthDashboard = ({ tinaForm }) => {
   // AST is fetched and edited per file, so "CALS table model" in one doc and
   // "CALS table model reference" in another each get their own linkText
   // rather than one borrowing the other's.
+  //
+  // Every translation of each doc gets the same treatment, independently —
+  // a translated doc hardcodes the same link on its own, in its own words,
+  // and a localized <Url> only pays for itself once every language actually
+  // uses it. Each translation's replacement is tagged with its own locale,
+  // so if this key's linkText is ever consulted for that language, it's
+  // that language's own wording that comes back, not English's.
   const handleReplace = (candidate) => {
     if (!candidate.urlKey) return;
     setReplacingUrl(candidate.url);
+    const otherLocales = (docusaurusData.languages?.supported || []).filter(
+      (locale) => locale.code !== DEFAULT_LOCALE
+    );
+
     runReplace(async ({ client, isCurrent }) => {
       const failures = [];
+
       for (const occ of candidate.occurrences) {
         const relativePath = occ.filePath.replace(/^\/docs\//, "");
+
         try {
           const res = await client.queries.doc({ relativePath });
           const { body, replacedCount } = replaceLinkNodeWithUrl(
@@ -515,25 +585,53 @@ const LinkHealthDashboard = ({ tinaForm }) => {
             candidate.url,
             { urlKey: candidate.urlKey, lang: DEFAULT_LOCALE }
           );
-          if (replacedCount === 0) continue;
-          await client.request({
-            query: `
-              mutation ReplaceHardcodedLink($collection: String!, $relativePath: String!, $params: DocumentUpdateMutation!) {
-                updateDocument(collection: $collection, relativePath: $relativePath, params: $params) {
-                  ... on Doc { id }
-                }
-              }
-            `,
-            variables: {
-              collection: "doc",
-              relativePath,
-              params: { doc: { body } },
-            },
-          });
+          if (replacedCount > 0) {
+            const params = await buildDocUpdateParams(res.data.doc, body);
+            await client.request({
+              query: REPLACE_MUTATION,
+              variables: {
+                collection: "doc",
+                relativePath,
+                params: { doc: params },
+              },
+            });
+          }
         } catch (err) {
           failures.push(`${relativePath}: ${err.message}`);
         }
+
+        for (const locale of otherLocales) {
+          const i18nPath = `${locale.code}/docusaurus-plugin-content-docs/current/${relativePath}`;
+          let i18nRes;
+          try {
+            i18nRes = await client.queries.i18n({ relativePath: i18nPath });
+          } catch {
+            // No translation of this doc for this locale — nothing to do,
+            // and not a failure, since most docs don't have every locale.
+            continue;
+          }
+          try {
+            const { body, replacedCount } = replaceLinkNodeWithUrl(
+              i18nRes.data.i18n.body,
+              candidate.url,
+              { urlKey: candidate.urlKey, lang: locale.code }
+            );
+            if (replacedCount === 0) continue;
+            const params = await buildDocUpdateParams(i18nRes.data.i18n, body);
+            await client.request({
+              query: REPLACE_MUTATION,
+              variables: {
+                collection: "i18n",
+                relativePath: i18nPath,
+                params: { i18n: params },
+              },
+            });
+          } catch (err) {
+            failures.push(`${i18nPath}: ${err.message}`);
+          }
+        }
       }
+
       if (!isCurrent()) return;
       setReplacingUrl(null);
       // Re-derive the list from GraphQL rather than hand-patching local

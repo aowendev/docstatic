@@ -1,5 +1,5 @@
 ---
-lastmod: '2026-08-15T11:05:35.926Z'
+lastmod: '2026-08-15T12:45:28.357Z'
 title: Dashboards
 description: Viewing dashboards in TinaCMS
 tags:
@@ -122,6 +122,8 @@ Internal links are deliberately not requested here, because the site build alrea
 The dashboard lists files with problem links, tagging each one with whether it came from a doc or the URLs collection so you know which one to open. It also lists migration candidates — external URLs used in docs that aren't centralized yet, grouped so a URL repeated across several docs shows once, with a **Centralize** button that adds it to the URLs collection.
 
 Centralizing a URL doesn't touch the docs that still hardcode it—that's a separate step, since adding the urls.json entry and swapping every doc reference for it are different edits. The dashboard tracks these separately, under **Centralized, Not Yet Updated in Docs**, with a **Replace** button that swaps every hardcoded use of that URL for a `<Url>` reference in one step, across however many docs it appears in. Each occurrence keeps its own link text—a URL linked with different wording in two different docs gets two different overrides, not one borrowing the other's.
+
+Replace also checks every translation of each doc independently of the English source and updates any that still hardcode the same link—using that translation's own wording, not the source's. A localized `<Url>` only pays for itself once every language is actually using it, so leaving translations hardcoded would defeat the point of centralizing the link in the first place. A translation that doesn't exist, or doesn't happen to hardcode this particular link, is left untouched.
 
 Not every hardcoded external URL is a migration candidate. Centralizing one only pays for itself when it repeats or carries a language variant, so a URL shows up here only if either is true:
 
