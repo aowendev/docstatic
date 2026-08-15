@@ -141,19 +141,19 @@ export const UrlCollection = {
       },
     },
     {
-      type: "object",
-      name: "urls",
-      label: "URLs",
-      list: true,
-      templates: [UrlEntryTemplate],
-    },
-    {
       type: "boolean",
       name: "linkHealthDashboard",
       label: "Link Health",
       ui: {
         component: LinkHealthDashboardField,
       },
+    },
+    {
+      type: "object",
+      name: "urls",
+      label: "URLs",
+      list: true,
+      templates: [UrlEntryTemplate],
     },
   ],
   ui: {
