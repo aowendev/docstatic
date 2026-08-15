@@ -111,7 +111,6 @@
   padding: 0.55rem 0.8rem;
   border-radius: var(--ifm-global-radius);
   max-width: 90%;
-  white-space: pre-wrap;
   word-break: break-word;
 }
 
@@ -119,12 +118,50 @@
   align-self: flex-end;
   background: var(--ifm-color-primary);
   color: var(--ifm-button-color, #fff);
+  white-space: pre-wrap;
 }
 
 .messageAssistant {
   align-self: flex-start;
   background: var(--ifm-color-emphasis-100);
   color: var(--ifm-font-color-base);
+}
+
+.messageAssistant :global(p) {
+  margin: 0;
+}
+
+.messageAssistant :global(p + p) {
+  margin-top: 0.5rem;
+}
+
+.messageAssistant :global(ul),
+.messageAssistant :global(ol) {
+  margin: 0.5rem 0;
+  padding-left: 1.25rem;
+}
+
+.messageAssistant :global(pre) {
+  overflow-x: auto;
+  padding: 0.5rem;
+  border-radius: var(--ifm-global-radius);
+  background: var(--ifm-color-emphasis-200);
+}
+
+.messageAssistant :global(code) {
+  word-break: break-word;
+}
+
+.messageAssistant :global(pre) > :global(code) {
+  word-break: normal;
+}
+
+.messageAssistant :global(> *:first-child) {
+  margin-top: 0;
+}
+
+.messageAssistant :global(> *:last-child) {
+  margin-bottom: 0;
 }
 
 .inputRow {

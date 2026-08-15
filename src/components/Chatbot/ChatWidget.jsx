@@ -7,6 +7,8 @@
 
 import Translate, { translate } from "@docusaurus/Translate";
 import React, { useEffect, useState } from "react";
+import Markdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 import styles from "./ChatWidget.module.css";
 import { useChatEngine } from "./useChatEngine";
 import { useOptIn } from "./useOptIn";
@@ -110,18 +112,31 @@ function MessageList({ messages }) {
   }
   return (
     <div className={styles.messages}>
-      {messages.map((message, index) => (
-        <div
-          key={index}
-          className={
-            message.role === "user"
-              ? styles.messageUser
-              : styles.messageAssistant
-          }
-        >
-          {message.content || "…"}
-        </div>
-      ))}
+      {messages.map((message, index) =>
+        message.role === "user" ? (
+          <div key={index} className={styles.messageUser}>
+            {message.content || "…"}
+          </div>
+        ) : (
+          <div key={index} className={styles.messageAssistant}>
+            {/* rehypeRaw is intentionally omitted: message.content is
+                model output, not authored/trusted content, so raw HTML
+                in it must stay escaped rather than be rendered. */}
+            <Markdown
+              remarkPlugins={[remarkGfm]}
+              components={{
+                a: ({ children, ...props }) => (
+                  <a target="_blank" rel="noopener noreferrer" {...props}>
+                    {children}
+                  </a>
+                ),
+              }}
+            >
+              {message.content || "…"}
+            </Markdown>
+          </div>
+        ),
+      )}
     </div>
   );
 }
