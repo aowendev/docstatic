@@ -1,0 +1,116 @@
+---
+lastmod: '2026-08-15T16:12:41.173Z'
+title: Una evaluación técnica de la situación actual de docStatic
+authors:
+  - name: Andrew Owen
+    title: docStatic maintainer
+    url: 'https://github.com/aowendev'
+    image_url: 'https://avatars.githubusercontent.com/u/84041006'
+date: '2026-01-24'
+tags:
+  - content
+  - content_blog-articles
+modifiedBy: aowendev <aowen@translationcommons.org>
+---
+
+docStatic es mi segundo intento de crear una solución de documentación que satisfaga las necesidades tanto de los redactores como de los desarrolladores colaboradores. Puedes leer sobre mi primer intento en mi blog anterior. Aquello era una colección dispersa de componentes, mientras que docStatic está mucho más integrado, aunque, desde el punto de vista arquitectónico, no es un producto independiente en el sentido tradicional. En cambio, se trata de una integración cuidada y con una visión propia de Docusaurus (generador de sitios web estáticos) y TinaCMS (CMS «headless» basado en Git).
+
+<Truncate />
+
+## Funcionalidades principales
+
+* MDX (Markdown + React) como formato de contenido principal.
+* Edición mediante:
+  * Editores de texto locales (docs-as-code) con reconstrucciones instantáneas utilizando el servidor de desarrollo.
+  * El editor de texto enriquecido basado en navegador de TinaCMS para usuarios sin conocimientos técnicos.
+* Funcionalidades al estilo CCMS (fragmentos de código, texto condicional, conjuntos de variables, taxonomías, términos de glosario).
+
+### Flujo de trabajo de desarrollo
+
+* Git sigue siendo la única fuente de verdad.
+* TinaCMS realiza commits directamente en Git (o escribe archivos localmente).
+* Totalmente compatible con los flujos de trabajo de CI/CD.
+* La estructura del repositorio sigue de cerca los valores predeterminados de Docusaurus, lo que minimiza las sorpresas.
+
+### Integraciones preconfiguradas
+
+* Generación de documentación OpenAPI.
+* Diagramas Mermaid.
+* Representación matemática KaTeX.
+* Búsqueda basada en Lunr.
+* Internacionalización (i18n).
+
+Se admite la integración con LanguageTool para la revisión ortográfica y gramatical, pero depende de los complementos del navegador o del IDE.
+
+## Limitaciones
+
+Actualmente, adoptar docStatic implica implícitamente:
+
+* Ser propietario de la plataforma y ampliarla.
+* Aceptar un soporte técnico limitado, al estilo de los proveedores.
+
+DocStatic no es la opción más adecuada para equipos que necesitan producir documentación en formato impreso o PDF. No es un sustituto directo de las herramientas CCMS comerciales. Sin embargo, para una gran parte del mercado, ya es funcionalmente equivalente.
+
+## Arquitectura
+
+### Flujo de trabajo
+
+DocStatic ofrece un flujo de trabajo modulable. Los estados se implementan como metadatos MDX en la parte inicial del documento. TinaCMS lee el estado y lo muestra a través de una interfaz de usuario personalizada para el estado editorial. Las transiciones de estado son nativas del contenido y están versionadas. Este patrón lo utilizan varios proveedores comerciales de CCMS. Sin embargo, su aplicación es procedimental, no sistémica.
+
+### Contenido reutilizable
+
+El contenido reutilizable se almacena en una ubicación definida, se gestiona como contenido independiente y se hace referencia a él en los documentos. Los fragmentos son objetos de contenido. Esto se asemeja mucho a las referencias de contenido (conrefs) de DITA.
+
+### Traducción y localización
+
+* Los metadatos específicos de cada configuración regional realizan un seguimiento del estado de la traducción.
+* GitHub Actions:
+  * Detectan cambios de estado.
+  * Activan notificaciones en Slack o Teams.
+* Vistas previas locales por configuración regional.
+* El estado de la traducción es determinista y puede inspeccionarse y automatizarse.
+
+Las soluciones CCMS comerciales incluyen soporte integrado del proveedor. El enfoque de DocStatic es «operaciones de traducción como código». Esto puede suponer una ventaja a la hora de implementar la traducción automática, pero resulta menos «llave en mano» para los equipos de localización sin conocimientos técnicos.
+
+## Comparación de DocStatic con las herramientas CCMS
+
+DocStatic admite:
+
+* Contenido estructurado.
+* Objetos de contenido reutilizables.
+* Estados del flujo de trabajo.
+* Compatibilidad multilingüe.
+* Paneles de control (beta).
+
+DocStatic carece de:
+
+* Aplicación centralizada de políticas. Las reglas del flujo de trabajo residen en los metadatos, la lógica de la interfaz de usuario de Tina y el canal de CI/CD.
+* Control de acceso basado en roles. Aunque esto es posible con una suscripción de pago a TinaCloud.
+* Herramientas de migración.
+
+La diferencia fundamental entre docStatic y las herramientas CCMS radica en que los primeros son sistemas componibles e inspeccionables, frente a los segundos, que son sistemas integrados y opacos.
+
+docStatic:
+
+* Da prioridad a los metadatos explícitos.
+* Aprovecha la infraestructura existente (Git, CI, Slack, etc.).
+* Sacrifica una experiencia de usuario «llave en mano» a cambio de claridad arquitectónica.
+
+Herramientas CCMS:
+
+* Centralizan todo.
+* Ocultan el estado en la base de datos.
+* Están optimizadas para administradores sin conocimientos técnicos.
+
+## ¿Para quién es más adecuado docStatic?
+
+DocStatic puede considerarse un CCMS pensado ante todo para ingenieros. Ofrece funciones de creación de contenido, reutilización, flujos de trabajo y revisión en contexto —incluidos los comentarios de personas que no son desarrolladores directamente en TinaCMS mediante resaltados y comentarios— al tiempo que conserva una fuente de verdad transparente y nativa de Git. Si valoras las herramientas abiertas, los flujos de trabajo gestionados por repositorios y la extensibilidad de nivel de desarrollador, pero no quieres sacrificar la revisión por parte de personas que no son desarrolladores, docStatic podría ser lo que buscas.
+
+## Hoja de ruta
+
+DocStatic se centra exclusivamente en ofrecer la mejor experiencia posible de documentación en línea para los lectores. La impresión y el formato PDF no figuran en la hoja de ruta, y es poco probable que lleguen a hacerlo. Sin embargo, hay dos áreas en las que el uso de herramientas CCMS para la documentación en línea sigue teniendo ventaja sobre DocStatic:
+
+* Facilidad de implementación.
+* Paneles de control.
+
+Los paneles de control ya se encuentran en fase beta. En cuanto a la implementación, la intención es permitir la creación de un repositorio predeterminado mediante npm.

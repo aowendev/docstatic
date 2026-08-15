@@ -1,0 +1,73 @@
+---
+lastmod: '2026-08-15T16:12:41.348Z'
+title: Novedades de docStatic desde enero
+authors:
+  - name: Andrew Owen
+    title: docStatic maintainer
+    url: 'https://github.com/aowendev'
+    image_url: 'https://avatars.githubusercontent.com/u/84041006'
+date: '2026-08-12'
+tags:
+  - content
+  - content_blog-articles
+  - software
+  - software_static-site-generators_docusaurus
+  - software_content-management-systems_tinacms
+  - software_mcp
+  - software_ai-integration
+modifiedBy: aowendev <aowen@translationcommons.org>
+---
+
+En enero escribí una [evaluación técnica](/blog/a-technical-evaluation-of-where-docStatic-is-today) sobre el estado de desarrollo de docStatic: lo que hacía bien, en qué aspectos se quedaba corto respecto a un CCMS comercial y cuáles eran las dos carencias específicas que figuraban en la hoja de ruta. Seis meses y más de 200 commits después, es hora de una actualización.
+
+<Truncate />
+
+## Se han implementado ambos puntos de la hoja de ruta
+
+En enero, dos áreas en las que las herramientas CCMS seguían teniendo ventaja eran la facilidad de implementación y los paneles de control.
+
+Para la implementación, `npx create-docstatic@latest my-site` descarga la plantilla, establece el nombre del proyecto, ejecuta `git init` e instala las dependencias (el punto «crear un repositorio predeterminado con npm» de la hoja de ruta). Un script complementario mantiene la plantilla sincronizada con el código del sitio principal, lo cual se aplica en la integración continua (CI) y en el hook pre-commit, de modo que el esqueleto no quede desactualizado, como suele ocurrir con los plantillas generadas automáticamente.
+
+Los paneles de control ya no son una prueba de concepto. El conjunto completo incluye: **Resumen de contenido**, **Reutilización de contenido**, **Uso de medios**, **Estado de la traducción** y **Enlaces rotos**. A TinaCMS le gustó tanto el panel de control **Uso de archivos multimedia** que implementó su propia versión. Y eso proporcionó una plantilla de estilo, por lo que los paneles de control ahora se ajustan a la propia interfaz de usuario de TinaCMS. Pero el cambio más significativo es la unificación de los puntos de llamada ad hoc para la carga de datos en una única capa de datos compartida.
+
+## Lo que aún falta
+
+Persisten dos limitaciones de enero.
+
+El control de acceso basado en roles sigue siendo una función de pago de TinaCloud, no algo que docStatic ofrezca por sí mismo.
+
+Las herramientas de migración (importación de contenido desde un CCMS existente) aún no existen.
+
+## Funcionalidades no previstas
+
+Entre las funcionalidades implementadas que no figuraban en la hoja de ruta se incluyen:
+
+* Linting de prosa con Vale, con un estilo personalizado de docStatic (detecta palabras ambiguas, guiones largos y frases excesivamente largas).
+* Un servidor MCP, para que los asistentes de IA puedan consultar directamente el contenido y los metadatos de docStatic en lugar de tener que deducirlos a partir del Markdown sin procesar.
+* `llms.txt`, un manifiesto dirigido a los rastreadores de IA en lugar de a los motores de búsqueda.
+* Listas de tareas en Markdown al estilo de GitHub con casillas de selección funcionales.
+
+## Tablas estructuradas
+
+Ahora se admite el modelo de tablas CALS (utilizado por DocBook y DITA): celdas fusionadas, anchos por columna y control detallado de los bordes. Los redactores disponen de un editor gráfico al estilo de una hoja de cálculo en el CMS para fusionar y dividir celdas, en lugar de tener que editar manualmente el marcado de las tablas; además, el mismo motor de renderizado gestiona tanto la vista previa del CMS como la página publicada. Consulta la [guía de tablas de CALS](/docs/guides/markdown-features/tables) para obtener más detalles.
+
+## Traducción
+
+La novedad más importante se refiere a la traducción. La documentación ya está disponible en alemán, español y japonés, además de en inglés y francés. El panel de control de traducción permite exportar e importar archivos XLIFF. Se ha añadido un script de traducción basado en DeepL para exportar los segmentos desactualizados, traducir automáticamente el texto sin alterar las etiquetas de código ni el marcado de los componentes, y luego reimportarlo, cumpliendo así la promesa de «operaciones de traducción como código».
+
+## Fortalecimiento del código
+
+Ahora todo el código fuente se somete a linting con Biome y se ha añadido un conjunto de pruebas para proteger contra regresiones.
+
+## Próximos pasos
+
+Hay cuatro solicitudes de mejora pendientes:
+
+* Chatbot de IA. Se implementaría utilizando WebLLM como prueba de concepto. Debería ser lo suficientemente sencillo como para sustituir un servidor LLM comercial.
+* Componente de URL gestionadas: las URL no suelen traducirse. Este componente facilitaría el mantenimiento de enlaces externalizados localizados.
+* Análisis: una forma sencilla de configurar Matomo o Google Analytics en la interfaz de usuario de «Configuración».
+* Componente de comentarios: un componente de «me gusta/no me gusta» que activa las analíticas.
+
+## ¿Para quién es más adecuado docStatic en la actualidad?
+
+Sigue siendo la mejor opción para equipos formados por ingenieros que desean una plataforma de documentación nativa de Git con creación y revisión reales por parte de personas que no son desarrolladores. Ahora cuenta con un sólido proceso de traducción para equipos que publican en más de un idioma. Sigue sin ser la opción adecuada para equipos que necesiten control de acceso basado en roles o archivos PDF. Pero si la migración de documentos o el soporte de un proveedor son requisitos imprescindibles, nos encantaría que te pusieras en contacto con nosotros.

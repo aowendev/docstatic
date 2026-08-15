@@ -1,0 +1,44 @@
+---
+title: ハイブリッド型文書管理システムの再考
+lastmod: '2026-08-15T16:12:42.173Z'
+authors:
+  - name: Andrew Owen
+    title: docStatic maintainer
+    url: 'https://github.com/aowendev'
+    image_url: 'https://avatars.githubusercontent.com/u/84041006'
+date: '2025-02-27'
+tags:
+  - content
+  - content_blog-articles
+modifiedBy: aowendev <aowen@translationcommons.org>
+---
+
+昨年1月、私はドキュメントマネージャーの役職に就くことになり、ライターや開発者による寄稿者のニーズを満たすソリューションを考案する必要がありました。
+
+<Truncate />
+
+私の提案したソリューションは、おおむね次のようなものでした：
+
+* GitHub上の中央ドキュメントリポジトリ。Actionsを用いた自動デプロイ機能を備える。
+* 条件付きテキスト、翻訳、カスタムビルド、PDF出力にはDAPSを採用。
+* HTML5サイトにはHugoとAsciidoctorを採用。
+* スペル、文法、スタイルのチェックにはLanguageToolを採用。
+* 開発者向けには、AsciiDocおよびLanguageToolプラグインを搭載したVS Codeを採用。
+* 非開発者向けには、XML Mind XML Editor Web EditionとLanguageToolのブラウザプラグイン。
+* 図表作成にはMermaid。
+* DocBookからWordへの変換にはPandoc。
+* マーケティングコンテンツにはAffinity Suite（Wordからのインポート対応）。
+* 検索にはLucene派生ツール。
+* 分析にはMatomo。
+* 機械翻訳にはDeepL。
+* ウィキ（Confluenceなど）やナレッジベース（Zendeskなど）へ公開するためのAPIスクリプト。
+
+私は第二候補だったので、幸いにもそのプロジェクトを担当する必要はありませんでした。 その代わりに、RESTおよびGraphQL APIをある程度一貫性のある形で提示するドキュメントポータルソリューションを構築する仕事を受けることになりました。これは、[Magidoc](https://github.com/magidoc-org/magidoc "Magidoc static GraphQL docs.")を基盤とし、 無料の [Redocly CLI](https://redocly.com/docs/cli "Redocly CLI") ツール、そして大量のスクリプトを組み合わせて構築しました。その後、[Archbee](https://www.archbee.com/ "Archbee") を知りました。 これは、RESTやGraphQL APIを表示するための独自の拡張機能を備えたMarkdownベースのシステムです。当時このツールを知っていたとしても、報告されていた信頼性の問題を考慮すれば、おそらく選択しなかったでしょう。 しかし、最近別のクライアントのためにこれを使ってみたところ、ユーザードキュメントの本番環境でも十分使えるのではないかと考えています。使いやすいWebインターフェースを備えていますが、自身のGitHubリポジトリを「真実の源」として利用することも可能です。Webエディタで行った変更は、リポジトリにプルリクエストとして作成されます。検索機能もあり、サイトにはパスワード保護をかけることもできます。 Mermaid図やダークモードも標準でサポートされています。価格も手頃ですし、Markdown形式であるため、特定のプラットフォームに縛られることもありません。
+
+とはいえ、私は依然としてDocBookのファンです。私の提案したハイブリッド型ドキュメント管理システム（DMS）に近い、既製のソリューションはあったのでしょうか？ 考えられる解決策の一つとして、[Magnolia CMS](https://www.magnolia-cms.com/)、静的サイトジェネレータ（SSG）の[Antora](https://antora.org/)、そして[AsciiDoc](https://asciidoc.org/)です。しかし、Magnoliaは価格を公開していません。また、もし別のシステムへ移行したい場合、他のヘッドレスCMSソリューションはAsciiDocをサポートしていないため、自分で構築する必要があります。
+
+そこで、再びMarkdownに目を向けることになりました。私のお気に入りのヘッドレスCMS（<Url urlKey="tinacms" />）と連携し、主にドキュメントサイトの作成を目的としたSSGは存在するのでしょうか？ その探求の末、<Url urlKey="docusaurus" />にたどり着きました。 これはMeta（Facebook）が、社内用SSGとしてJekyllに代わるものとして開発したもので、[React](https://react.dev/)を採用しています。Hugoと比べるとビルド時間は非常に長く感じられますが、生成されるサイトの表示速度は格段に速いです。 しかし、Redocly CLIの出力をいじるよりも優れた、無料のREST APIドキュメント統合手段はあったのだろうか？答えは「はい」だった。Palo Alto Networksが提供する素晴らしいDocusaurusプラグインがあったのだ。セットアップするには、Tina Docusaurusスターターを使って新しいサイトを作成し、そのプラグインを追加するだけで済むはずだった。 しかし、そう単純な話ではありませんでした。Palo Alto NetworksはTypeScriptに完全に傾倒しています。DocusaurusはReactベースであるため、Tinaで作成されたスターターサイトはJSXを使用しています。両者はうまく連携しませんでした。結局、Palo Alto Networksのテンプレートからサイトを作成し、そこにTinaのサポートを組み込むことにしました。
+
+Tinaのソリューションでは、ナビゲーションバーのバージョン管理およびローカライズウィジェットを有効にする方法がわからなかったため、これらについては固定の定義を使用するように戻しました。 その他の設定のほとんどについては、Tinaはconfigから参照されるJSONファイルを使用しています。<Url urlKey="mermaid" />および<Url urlKey="lunr" />による検索機能の追加は簡単でしたが、検索は本番環境でのみ動作します。 動作させるために私が行ったすべての作業を詳しく説明するよりも、今回は単に [リポジトリ](https://github.com/aowendev/docstatic) を共有することにしました。 Palo Alto NetworksのコンポーネントはMITライセンスで提供されているため、私も同じライセンスを採用しました。設定で必要なのは、オンラインでのWeb編集を有効にするためにTinaの認証情報を追加することだけです。
+
+要件について振り返ると、Actions を含む GitHub リポジトリを用意しています。SSG としては Hugo の代わりに Docusaurus を採用しています。AsciiDoc の代わりに Markdown Extended (MDX) を使用しています。TinaCMS と VScode では、引き続き <Url urlKey="languagetool" /> を使用できます。 XML Mindエディタの代わりにTinaを使用しています。Mermaidダイアグラムも利用可能で、Tina内でプレビューできます。検索にはLunrを使用していますが、それだけでは不十分な場合は、組み込みの[Algolia](https://www.docusaurus.io/docs/search)サポートも利用可能です。 [Matomoアナリティクス](https://github.com/karser/docusaurus-plugin-matomo)用のプラグインがあります。 [GraphQLドキュメント](https://github.com/Zhouzi/docusaurus-graphql-plugin)用のプラグインもあります。Docusaurusにはバージョン管理とローカライゼーションのサポートが含まれています。 機械翻訳には引き続き [DeepL](https://www.deepl.com/) を使用できます。 PDFへの印刷出力や、[Affinity Publisher](https://affinity.serif.com/en-us/publisher/)へのエクスポート用のWordファイル作成には、引き続き[Pandoc](https://pandoc.org/)を使用できます。

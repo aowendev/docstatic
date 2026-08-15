@@ -1,33 +1,36 @@
 ---
+lastmod: '2026-08-15T16:12:41.953Z'
 title: Balises taxonomiques
-lastmod: "2026-03-10T23:01:19.552Z"
 description: Utilisation des étiquettes de taxonomie dans docStatic
 tags:
-  - "metadata"
-  - "metadata_taxonomies"
+  - metadata
+  - metadata_taxonomies
 draft: false
 review: false
 translate: false
 approved: false
 published: true
 unlisted: false
+modifiedBy: aowendev <aowen@translationcommons.org>
 ---
 
 # Balises de taxonomie
 
-Les balises de taxonomie vous permettent d'appliquer une [architecture de l'information](https://fr.wikipedia.org/wiki/Information_architecture) au contenu de votre site. Elles doivent être appliquées à toutes les plateformes de documentation que vous utilisez, telles que les systèmes de suivi des bogues et les wikis. Les exigences les plus restrictives en matière de balises que vous êtes susceptible de rencontrer sont les systèmes plats (non hiérarchiques) qui ne prennent en charge que les lettres minuscules et les traits de soulignement (`_`) sans espaces.
+Les balises de taxonomie vous permettent d'appliquer une structure <Url urlKey="wikipedia-information-architecture" /> au contenu de votre site. Elles doivent être appliquées à toutes les plateformes de documentation que vous utilisez, telles que les systèmes de suivi des bogues et les wikis. Les contraintes les plus strictes en matière de balises que vous êtes susceptible de rencontrer concernent les systèmes plats (non hiérarchiques) qui n’acceptent que les lettres minuscules et les traits de soulignement (`_`), sans espaces.
 
-DocStatic applique une hiérarchie à trois niveaux aux balises de taxonomie. Pour éviter que les balises ne deviennent trop longues, l'imbrication est limitée à une profondeur maximale de trois. Dans certains cas, vous devez aplatir la structure (par exemple, si `regions_europe_uk_scotland` est logique, il a quatre niveaux et doit alors être structuré comme `regions_uk_scotland`).
+docStatic applique une hiérarchie à trois niveaux aux balises de taxonomie. Pour éviter que les balises ne deviennent excessivement longues, l’imbrication est limitée à une profondeur maximale de trois niveaux. Dans certains cas, cela nécessite d’aplatir la structure (par exemple, bien que `regions_europe_uk_scotland` soit logique, cette balise comporte quatre niveaux et doit donc être structurée sous la forme `regions_uk_scotland`).
 
-Lors de la conception d'une architecture d'information à trois niveaux, il est recommandé d'avoir environ dix catégories de premier niveau, sept catégories de niveau intermédiaire et autant de catégories de niveau secondaire que nécessaire. Les acronymes et les abréviations doivent être explicités et la redondance doit être évitée.
+Lors de la conception d’une architecture d’information à trois niveaux, il est recommandé de viser environ dix catégories de premier niveau, sept catégories de niveau intermédiaire et autant de catégories de niveau feuille que nécessaire. Vous devez écrire en toutes lettres les acronymes et les abréviations, et veiller à éviter toute redondance.
 
-## Modifier les balises de la taxonomie
+## Modification des balises de taxonomie
 
-1. Dans la collection **Taxonomies**, **Add** une taxonomie.
-2. Donnez-lui un **Tag** avec uniquement des lettres minuscules.
-3. Ajoutez des **Children** et attribuez-leur une étiquette, en commençant par l'étiquette du parent suivie d'un trait de soulignement.
-4. Pour chaque enfant, ajoutez des **Children**.
+1. Dans la collection **Taxonomies**, **Ajoutez** une taxonomie.
+2. Attribuez-lui une **Balise** en utilisant uniquement des lettres minuscules.
+3. Ajoutez des **Enfants** et attribuez-leur une balise commençant par la balise parent suivie d’un trait de soulignement.
+4. Pour chaque enfant, ajoutez des enfants.
 
 <Admonition type="note" title="Note">
-  Vous pouvez saisir des balises sans le nom de la balise qui précède et sans trait de soulignement, mais si vous le faites lorsque vous les ajoutez à un thème, elles seront présentées sous la forme d'une liste plate.
+    You can enter tags without the preceding tag name and an underscore, but if you do when adding them to a topic, they will be presented as a flat list.
 </Admonition>
+
+<RelatedTopics maxResults={7} />

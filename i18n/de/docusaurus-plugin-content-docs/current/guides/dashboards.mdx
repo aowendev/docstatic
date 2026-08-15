@@ -1,5 +1,5 @@
 ---
-lastmod: '2026-08-11T23:19:39.350Z'
+lastmod: '2026-08-15T16:12:40.934Z'
 modifiedBy: aowendev <aowen@translationcommons.org>
 title: Dashboards
 tags:
@@ -14,10 +14,10 @@ published: true
 unlisted: false
 ---
 
-docStatic erweitert TinaCMS um Dashboard-Funktionen. Tina generiert eine GraphQL-API, wobei das Dateisystem im Git-Repository als Datenbank dient. Dashboards fragen die API ab (lokal oder in der Cloud) und stellen umsetzbare Berichte direkt im CMS dar. Die Dashboard-Funktionalität befindet sich derzeit im Beta-Stadium. Die Funktionalität ist vollständig getestet, die Benutzeroberfläche ist jedoch vorläufig und muss noch verfeinert werden. Die Dashboards werden aktualisiert, sobald die Seite aktualisiert wird. Falls ein anderer Benutzer seit dem letzten Aufruf des Dashboards Änderungen vorgenommen hat, können Sie auf **Aktualisieren** klicken, um das Dashboard zu aktualisieren.
+docStatic erweitert TinaCMS um Dashboard-Funktionen. Tina generiert eine GraphQL-API, wobei das Dateisystem im Git-Repository als Datenbank dient. Dashboards fragen die API ab (lokal oder in der Cloud) und stellen aussagekräftige Berichte direkt im CMS dar. Die Dashboard-Funktionalität befindet sich derzeit im Beta-Stadium. Die Funktionalität ist vollständig getestet, die Benutzeroberfläche ist jedoch vorläufig und muss noch verfeinert werden. Die Dashboards werden aktualisiert, wenn die Seite aktualisiert wird. Falls ein anderer Benutzer seit dem letzten Aufruf des Dashboards Änderungen vorgenommen hat, können Sie auf **Aktualisieren** klicken, um das Dashboard zu aktualisieren.
 
 <Admonition type="note" title="Note">
-  Depending on the amount of content in the system, some dashboards may take some time to load. These dashboards will typically update slightly faster when running locally.
+    Depending on the amount of content in the system, some dashboards may take some time to load. These dashboards will typically update slightly faster when running locally.
 </Admonition>
 
 ## Anzeigen der Dashboards
@@ -29,8 +29,8 @@ Navigieren Sie im CMS zur Sammlung „Dashboards“. Oben auf der Seite befindet
 Das Dashboard „Inhaltsübersicht“ zeigt die Gesamtzahl der Themen im Pfad /docs sowie die Themen in den einzelnen Workflow-Status an:
 
 * Entwurf
-* In Begutachtung
-* Übersetzen
+* Überprüfung
+* Übersetzung
 * Genehmigt
 * Veröffentlicht
 * Nicht gelistet
@@ -39,43 +39,43 @@ Klicken Sie auf den Status-Link, um alle Themen in diesem Status anzuzeigen.
 
 Klicken Sie auf „Bearbeiten“, um das Thema zur Bearbeitung zu öffnen.
 
-Klicken Sie auf das Schließen-Symbol, um die Themenliste zu schließen.
+Klicken Sie auf das Symbol „Schließen“, um die Themenliste zu schließen.
 
-### Aktuelle Aktivitäten anzeigen
+### Letzte Aktivitäten anzeigen
 
-Der Abschnitt „Aktuelle Aktivitäten“ zeigt kürzlich geänderte Themen an. Sie können den Zeitbereich filtern („Gesamter Zeitraum“, „Letzte Woche“ oder „Letzter Monat“) und die Anzahl der Ergebnisse auf 5 bis 50 festlegen.
+Der Abschnitt „Letzte Aktivitäten“ zeigt kürzlich geänderte Themen an. Sie können den Zeitbereich filtern („Gesamter Zeitraum“, „Letzte Woche“ oder „Letzter Monat“) und die Anzahl der Ergebnisse auf 5 bis 50 festlegen.
 
 ## Übersetzungsstatus anzeigen
 
 Das Übersetzungs-Dashboard zeigt den Status jedes Themas für die aus der Liste ausgewählte Sprache an:
 
-* Aktuell: Das Datum der letzten Änderung der Übersetzung liegt nach dem der Quelle.
+* Auf dem neuesten Stand: Das Datum der letzten Änderung der Übersetzung liegt nach dem der Quelle.
 * Veraltet: Das Datum der letzten Änderung der Quelle liegt nach dem der Übersetzung.
 * Fehlend: Es gibt eine Quelldatei, für die keine entsprechende Übersetzungsdatei vorhanden ist.
 
 ## Wiederverwendung von Inhalten anzeigen
 
-Das Dashboard „Wiederverwendung von Inhalten“ zeigt die im System wiederverwendbaren Inhalte an und wo sie verwendet werden. Es werden vier Kategorien angezeigt:
+Das Dashboard „Inhaltswiederverwendung“ zeigt die im System vorhandenen wiederverwendbaren Inhalte und deren Verwendungsorte an. Es umfasst vier Kategorien:
 
 * Code-Schnipsel: Code-Dateien, auf die von der CodeSnippet-Komponente verwiesen wird.
 * Glossarbegriffe: Begriffe, die in der Glossarbegriffssammlung definiert sind.
-* Schnipsel: MDX-Inhaltsdateien, auf die von der Snippet-Komponente verwiesen wird.
-* Variablensätze: Variablensätze, auf die von der VariableSet-Komponente verwiesen wird.
+* Snippets: MDX-Inhaltsdateien, auf die von der „Snippet“-Komponente verwiesen wird.
+* Variablensätze: Variablensätze, auf die von der „VariableSet“-Komponente verwiesen wird.
 
 Klicken Sie auf eine Kategoriekarte, um eine Liste der Elemente in dieser Kategorie mit den Themen anzuzeigen, in denen die einzelnen Elemente verwendet werden.
 
-### Wiederverwendungsvorschläge anzeigen
+### Vorschläge zur Wiederverwendung anzeigen
 
 Der Abschnitt „Vorschläge“ des Dashboards „Inhaltswiederverwendung“ identifiziert Inhalte, die in wiederverwendbare Komponenten umgewandelt werden könnten:
 
 * Mögliche Snippets (Code): Inline-Codeblöcke in Themen, die in Code-Snippet-Dateien extrahiert werden könnten.
-* Mögliche Begriffe: Glossarbegriffe, die als Klartext in Themen erscheinen und stattdessen mit der GlossaryTerm-Komponente verwendet werden könnten.
+* Mögliche Begriffe: Glossarbegriffe, die als Klartext in Themen erscheinen und stattdessen die „GlossaryTerm“-Komponente verwenden könnten.
 * Mögliche Snippets (Textduplikate): Textblöcke, die in zwei oder mehr Themen vorkommen und in Snippet-Dateien extrahiert werden könnten.
 * Mögliche Variablen: Variablenwerte, die als Klartext in Themen vorkommen und stattdessen die „VariableSet“-Komponente verwenden könnten.
 
 Klicken Sie auf eine Vorschlagskarte, um die gefundenen Elemente und die Themen anzuzeigen, in denen sie vorkommen.
 
-## Medienwiederverwendung anzeigen
+## Wiederverwendung von Medien anzeigen
 
 Das Dashboard „Medienbibliothek“ zeigt an, wo Inhalte im Pfad /static/img verwendet werden. Es zeigt die Gesamtzahl der Dateien und Bilder, die Dateigröße, die Bildpfade und die Bildgrößen an.
 
@@ -85,35 +85,54 @@ Sie können nach folgenden Kriterien filtern:
 * Nur Bilder.
 * Aktuell (7 Tage).
 * Verwendet.
-* Unverwendet.
+* Ungenutzte.
 
-Klicken Sie bei verwendeten Inhalten auf „In n Dokumenten verwendet“, um die Themen anzuzeigen, in denen der Inhalt verwendet wird. Anschließend können Sie auf „Bearbeiten“ klicken, um diese Themen zu bearbeiten.
+Klicken Sie bei genutzten Inhalten auf „In n Dokumenten verwendet“, um die Themen anzuzeigen, in denen der Inhalt verwendet wird. Anschließend können Sie auf „Bearbeiten“ klicken, um diese Themen zu bearbeiten.
 
-## Überprüfung auf defekte Links
+## Überprüfung des Linkzustands
 
-Das Dashboard „Defekte Links“ liefert einen Bericht über die Hyperlinks in Ihren Themen, einschließlich ihres HTTP-Status. Eine Seite, die einen 404- oder 500-Fehler zurückgibt, wird somit als defekt identifiziert.
+Im Gegensatz zu den anderen Dashboards auf dieser Seite befindet sich das Dashboard „Linkzustand“ in der Sammlung **URLs** und nicht unter „Dashboards“: Dort verwalten Sie auch die [zentralisierten URLs](/docs/guides/markdown-features/urls), die von der `<Url>`-Komponente verwendet werden, sodass Link-Zustand und Link-Verwaltung an einem Ort zusammengefasst sind.
 
-Das Dashboard zeigt die Ergebnisse der letzten Überprüfung an. Es führt die Überprüfung selbst nicht durch, da ein Browser den HTTP-Status eines Links zu einer anderen Website nicht auslesen kann. Um Ihre Links zu überprüfen, führen Sie Folgendes aus:
+Das Dashboard liefert Informationen zu den Hyperlinks in Ihren Themen *und* zu den in der Sammlung „URLs“ gespeicherten URLs, einschließlich ihres HTTP-Status. Eine Seite, die einen 404- oder 500-Fehler zurückgibt, wird also unabhängig von ihrer Quelle als defekt identifiziert. Das Dashboard zeigt die Ergebnisse des letzten `yarn check-links`-Laufs an, die beim letzten Erstellen der Website in diese eingebunden wurden. Um Ihre Links mit den tatsächlichen HTTP-Statussen zu überprüfen, führen Sie folgenden Befehl aus:
 
 ```bash
 yarn check-links
 ```
 
-Dadurch werden alle externen Links abgefragt, die Antworten der einzelnen Server protokolliert und der Bericht aktualisiert. Führen Sie den Befehl aus, wann immer Sie aktuelle Ergebnisse wünschen. Das Dashboard zeigt Datum und Uhrzeit der letzten Überprüfung an.
+Dadurch werden alle externen Links – sowohl die in den Dokumenten fest codierten als auch die in der URL-Sammlung gespeicherten – abgefragt, die Antworten der einzelnen Server protokolliert und der Bericht aktualisiert. Führen Sie diesen Befehl aus, wann immer Sie aktuelle Ergebnisse wünschen, und erstellen Sie anschließend die Website neu, damit das Dashboard den neuen Bericht übernimmt. Das Dashboard zeigt Datum und Uhrzeit der letzten Überprüfung an.
 
-Der Bericht zählt:
+Klicken Sie im Dashboard auf **Aktualisieren**, um es ohne Neugenerierung zu aktualisieren. Dabei werden die aktuellen Dokumente und die URL-Sammlung über GraphQL abgefragt, sodass Änderungen seit der letzten Generierung berücksichtigt werden – nützlich in TinaCloud, wo es keine Shell gibt, um `yarn check-links` auszuführen. Es überprüft externe Links auch direkt über Ihren Browser, doch ein Browser kann den HTTP-Status eines Links zu einer anderen Website nicht so auslesen wie `yarn check-links`. Daher wird alles, was „Aktualisieren“ selbst überprüft, als „Unverifiziert“ statt als „OK“ oder „Defekt“ gemeldet; Es überschreibt niemals ein bereits von `yarn check-links` aufgezeichnetes echtes Ergebnis für einen noch vorhandenen Link, sondern ergänzt lediglich, was neu ist oder noch nie überprüft wurde.
+
+Der Bericht enthält folgende Angaben:
 
 * Gesamtzahl der Links.
-* OK: Der Server hat mit einem Erfolg- oder Weiterleitungsstatus geantwortet.
-* Defekt: Der Server hat mit einem Fehlerstatus geantwortet, z. B. 404 Not Found oder 500 Internal Server Error. Dies sind die Links, die behoben werden müssen.
-* Nicht verifiziert: Es kam keine Antwort zurück, daher konnte der Link nicht bewertet werden. Mögliche Ursachen sind eine Domain, die nicht aufgelöst werden konnte, eine Anfrage, bei der die Zeitüberschreitung eintrat, eine Website, die die Anfrage mit 403 abgelehnt hat, sowie eine Ratenbegrenzung mit 429. Bei all diesen Fällen kann es sich um ein Problem mit dem Rechner handeln, auf dem die Überprüfung ausgeführt wird, und nicht um ein Problem mit dem Link selbst. Überprüfen Sie diese daher manuell, indem Sie auf den Hyperlink klicken.
-* Nicht geprüft: Links, die nicht aufgerufen wurden. Dazu gehören interne Links, Anker, `mailto:`- und `tel:`-Links sowie Localhost-Adressen.
+* „OK“: Der Server hat mit einem Erfolg- oder Weiterleitungsstatus geantwortet.
+* „Defekt“: Der Server hat mit einem Fehlerstatus geantwortet, z. B. 404 Not Found oder 500 Internal Server Error. Dies sind die Links, die behoben werden müssen.
+* „Unverifiziert“: Es kam keine Antwort zurück, daher konnte der Link nicht bewertet werden. Mögliche Ursachen sind eine Domain, die nicht aufgelöst werden konnte, eine Anfrage, bei der die Zeitüberschreitung eintrat, eine Website, die die Anfrage mit 403 abgelehnt hat, sowie eine Ratenbegrenzung mit 429. All dies kann ein Problem mit dem Rechner sein, auf dem die Überprüfung läuft, und nicht mit dem Link selbst. Überprüfen Sie diese daher manuell, indem Sie auf den Hyperlink klicken.
+* Intern: Links, die nicht angefordert werden. Dazu gehören interne Links, Anker, `mailto:`- und `tel:`-Links sowie Localhost-Adressen.
 * Gescannte Dateien.
+* Zentralisiert: Wie viele der überprüften Links stammen aus der URL-Sammlung und sind nicht fest in einem Dokument hinterlegt?
+* Migrationskandidaten: Eindeutige externe URLs, die in einem Dokument fest codiert sind, noch nicht in der URL-Sammlung vorhanden sind und eine Zentralisierung lohnen – siehe unten für die Kriterien.
 
-Interne Links werden hier bewusst nicht aufgerufen, da sie bereits beim Aufbau der Website anhand der tatsächlichen Seitenliste überprüft werden und defekte Links gemeldet werden. Localhost-Adressen werden ebenfalls übersprungen, da sie auf das verweisen, was gerade auf dem Rechner läuft, der die Überprüfung durchführt. Sie können eine Localhost-URL dokumentieren, ohne dass diese gemeldet wird.
+Interne Links werden hier bewusst nicht abgefragt, da der Site-Build diese bereits anhand der tatsächlichen Seitenliste überprüft und defekte Links meldet. Localhost-Adressen werden ebenfalls übersprungen, da sie auf das verweisen, was gerade auf dem Rechner läuft, der die Überprüfung durchführt. Sie können eine Localhost-URL dokumentieren, ohne dass diese gemeldet wird.
 
-Das Dashboard listet Dateien mit problematischen Links auf. Sie können diese öffnen, indem Sie in einer der beiden Listen auf „Bearbeiten“ klicken.
+Das Dashboard listet Dateien mit problematischen Links auf und kennzeichnet jede einzelne damit, ob sie aus einem Dokument oder aus der URL-Sammlung stammt, damit Sie wissen, welche Sie öffnen müssen. Außerdem werden Migrationskandidaten aufgelistet – externe URLs, die in Dokumenten verwendet werden, die noch nicht zentralisiert sind. Diese sind so gruppiert, dass eine URL, die in mehreren Dokumenten vorkommt, nur einmal angezeigt wird, und es gibt eine Schaltfläche **Zentralisieren**, mit der sie zur URL-Sammlung hinzugefügt wird.
 
-Um einen Build abzubrechen, wenn defekte Links gefunden werden – beispielsweise in einem Continuous-Integration-Job –, führen Sie `yarn check-links --strict` aus. Dies führt nur bei defekten Links zu einem Fehler und nicht bei nicht überprüften Links, sodass ein vorübergehendes Netzwerkproblem Ihren Build nicht zum Scheitern bringt.
+Ein Klick auf **Zentralisieren** fügt den Eintrag dem Formular der URL-Sammlung hinzu, jedoch nicht der Darstellung im Dashboard selbst. Speichern Sie den Eintrag – fügen Sie dabei gegebenenfalls weitere Sprach-URLs hinzu –, und klicken Sie dann auf **Aktualisieren**, bevor er in den Bereich **Zentralisiert, noch nicht in Dokumenten aktualisiert** mit einer Schaltfläche **Ersetzen** verschoben wird. Diese Lücke ist beabsichtigt und nicht als Umgehungslösung gedacht: Die Option **Ersetzen** sollte erst angeboten werden, wenn der Eintrag tatsächlich über die Daten verfügt, mit denen ein fest codierter Link ersetzt werden kann, und das Ausfüllen der für einen Eintrag erforderlichen Sprachvarianten lässt sich nicht automatisieren, da Websites bei deren Handhabung zu uneinheitlich sind – unterschiedliche Pfadpräfixe, unterschiedliche Domains, manche haben gar keine sprachspezifischen URLs – das kann nur von Hand nachgeschlagen und eingegeben werden.
+
+Die Zentralisierung einer URL hat keine Auswirkungen auf die Dokumente, in denen sie noch fest codiert ist – das ist ein separater Schritt, da das Hinzufügen des Eintrags in der Datei „urls.json“ und das Ersetzen aller Verweise in den Dokumenten durch diesen Eintrag unterschiedliche Bearbeitungsschritte sind. Das Dashboard erfasst diese separat unter **Zentralisiert, noch nicht in Dokumenten aktualisiert** mit einer **Ersetzen**-Schaltfläche, die jede fest codierte Verwendung dieser URL in einem Schritt durch eine `<Url>`-Referenz ersetzt, unabhängig davon, in wie vielen Dokumenten sie vorkommt. Jedes Vorkommen behält seinen eigenen Linktext bei – eine URL, die in zwei verschiedenen Dokumenten mit unterschiedlichem Wortlaut verlinkt ist, erhält zwei verschiedene Überschreibungen, nicht eine, die den Wortlaut der anderen übernimmt– es sei denn, dieser Wortlaut stimmt bereits mit dem Standardtext des Schlüssels für diese Sprache überein; in diesem Fall lässt „Ersetzen“ die Überschreibung weg und der bloße Schlüssel erfüllt dieselbe Aufgabe, ohne denselben String in jedes Dokument zu duplizieren, in dem er jemals geändert werden müsste.
+
+„Replace“ überprüft außerdem jede Übersetzung jedes Dokuments unabhängig von der englischen Quelle und aktualisiert alle, in denen derselbe Link noch fest codiert ist – wobei der Wortlaut der jeweiligen Übersetzung verwendet wird, nicht der der Quelle. Ein lokalisiertes `<Url>` macht sich erst dann bezahlt, wenn es tatsächlich in jeder Sprache verwendet wird; würden Übersetzungen also weiterhin fest codiert bleiben, würde dies den Sinn der Zentralisierung des Links von vornherein zunichte machen. Eine Übersetzung, die nicht existiert oder diesen bestimmten Link zufällig nicht fest codiert, bleibt unberührt.
+
+Nicht jede fest codierte externe URL kommt für eine Migration in Frage. Die Zentralisierung einer solchen URL macht sich nur dann bezahlt, wenn sie sich wiederholt oder eine Sprachvariante enthält; daher erscheint eine URL hier nur, wenn eine der beiden Bedingungen zutrifft:
+
+* Sie ist in zwei oder mehr Dokumenten fest codiert.
+* Ihr Ziel verfügt über eine Sprachvariante: Entweder gibt die Seite selbst eine mit `<link rel="alternate" hreflang>` an, oder es handelt sich um einen Wikipedia-Artikel, der eine bekannte Ausnahme darstellt – Wikipedia hat zwar Sprachvarianten, veröffentlicht dafür aber keine hreflang-Tags.
+
+Ein einmalig verwendeter Link zu einer Seite ohne erkannte Variante bleibt einfach ein normaler, fest codierter Link; er rechtfertigt für sich genommen keinen Eintrag in `urls.json`. Ein Kandidat, der sich nur durch eine Sprachvariante qualifiziert, wird mit **hat eine Sprachvariante** gekennzeichnet, damit es nicht so aussieht, als wäre die Regel zur Wiederholungsanzahl übersprungen worden.
+
+Um „hreflang“ zu erkennen, muss der HTML-Code der Zielseite abgerufen werden, was nur `yarn check-links` zuverlässig leisten kann – es läuft unter Node und unterliegt daher nicht den Cross-Origin-Einschränkungen des Browsers. Ein Klick auf **Aktualisieren** versucht dies ebenfalls über Ihren Browser, und es funktioniert bei Websites, die freizügige CORS-Header senden, was jedoch bei vielen nicht der Fall ist; wenn eine Website den Lesezugriff blockiert, kann „Aktualisieren“ nicht feststellen, ob eine Variante existiert, und lässt diesen Kandidaten außen vor, bis `yarn check-links` ausgeführt wird. Die Ausnahme bei Wikipedia gilt in jedem Fall, da sie vom Hostnamen und nicht von der Anfrage abhängt.
+
+Um einen Build abzubrechen, wenn defekte Links gefunden werden – beispielsweise in einem Continuous-Integration-Job –, führen Sie `yarn check-links --strict` aus. Dies führt nur bei defekten Links zu einem Fehler, nicht bei nicht verifizierten, sodass ein vorübergehendes Netzwerkproblem Ihren Build nicht zum Scheitern bringt.
 
 <RelatedTopics maxResults={7} />
