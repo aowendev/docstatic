@@ -9,7 +9,22 @@ import React, { useMemo, useRef, useState } from "react";
 // Relative, not the "@site" alias: this component is pulled into the Tina
 // admin bundle, which esbuild builds without Docusaurus's path aliases.
 import docusaurusData from "../../../config/docusaurus/index.json";
-import linkReport from "../../data/link-report.json";
+import initialLinkReport from "../../data/link-report.json";
+import {
+  classifyUrl,
+  collectUrlsJsonLinks,
+  extractLinksFromRichText,
+  mapWithConcurrency,
+  normalizeUrl,
+  probeUrlInBrowser,
+} from "../../utils/linkChecker";
+import { useTinaTask } from "./lib/useTinaTask";
+
+// Requests in flight during a browser Refresh. Lower than the Node script's
+// default (8): this runs in a live admin session someone is watching, on
+// whatever concurrent-connections-per-host limit the browser itself imposes,
+// not in a CI job.
+const REFRESH_CONCURRENCY = 6;
 
 const DEFAULT_LOCALE = docusaurusData.languages?.default || "en";
 
@@ -38,21 +53,31 @@ function suggestKey(candidate, existingKeys) {
 }
 
 /**
- * The results shown here are produced by `scripts/generate-link-report.js`, not
- * by this page.
+ * On first render this shows whatever `scripts/generate-link-report.js` last
+ * produced, bundled at build time as `src/data/link-report.json`. That's a
+ * real `yarn check-links` run with real HTTP statuses, but it's frozen at
+ * whenever the site was last built — and in TinaCloud there is no shell to
+ * run that script from, only this CMS UI, so an editor working purely there
+ * could never get a current report without asking someone else to run it
+ * locally and ship a new build.
  *
- * This dashboard used to check links itself, which it fundamentally could not
- * do: a browser fetching a third-party URL is making a cross-origin request, so
- * it is forced into `mode: "no-cors"` and gets back an opaque response whose
- * status is always 0. Every link that answered at all was reported "valid",
- * including 404s — the one thing a broken-link dashboard exists to catch.
+ * The Refresh button (see `handleRefresh` below) closes most of that gap: it
+ * queries the live Tina GraphQL API for the current docs and
+ * `reuse/urls/index.json`, rebuilds this same report shape in the browser,
+ * and probes external links directly from here. It carries forward any real
+ * "ok"/"broken" verdict `yarn check-links` already recorded for a URL that's
+ * still present, and only probes what's new or was never checked — a real
+ * HTTP status is worth more than a browser guess, so refreshing doesn't
+ * throw one away.
  *
- * Node has no such restriction, so the check moved to `yarn check-links` and
- * this page renders what that recorded. As of the URLs collection, the same
- * script also checks every locale's URL stored in `reuse/urls/index.json`
- * (tagged `source: "urls-json"` below) and cross-references doc-scanned
- * external links against it (`inUrlsJson`), so this page can also point out
- * links that haven't been centralized yet.
+ * The probe itself is the one thing that stays permanently weaker than the
+ * Node script: fetching a third-party URL from the browser is a cross-origin
+ * request, so it is forced into `mode: "no-cors"` and gets back an opaque
+ * response whose status is always 0 — a 404 is indistinguishable from a 200.
+ * `probeUrlInBrowser()` in `src/utils/linkChecker.js` therefore only ever
+ * reports "reachable" or "request failed," both surfaced as "unverified,"
+ * never a real broken/OK verdict. `yarn check-links` remains the only way to
+ * get one.
  */
 const LinkHealthDashboard = ({ tinaForm }) => {
   const [showDetails, setShowDetails] = useState(false);
@@ -60,7 +85,10 @@ const LinkHealthDashboard = ({ tinaForm }) => {
   const [showCentralizedDocsDetails, setShowCentralizedDocsDetails] =
     useState(false);
   const [justCentralized, setJustCentralized] = useState(null);
+  const [report, setReport] = useState(initialLinkReport);
+  const [refreshProgress, setRefreshProgress] = useState(null);
   const rootRef = useRef(null);
+  const { loading: refreshing, error: refreshError, run } = useTinaTask();
 
   // Tina's admin layout scrolls an inner container, not the window, so
   // window.scrollTo alone is a no-op there. Walk up from this component's
@@ -81,6 +109,148 @@ const LinkHealthDashboard = ({ tinaForm }) => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
+  // Rebuilds the report live from GraphQL instead of waiting for the next
+  // build — see the module doc comment above for what this can and can't do.
+  const handleRefresh = () => {
+    setRefreshProgress(null);
+    run(async ({ client, isCurrent }) => {
+      // 1. The live urls.json — the piece most likely to have just changed,
+      // since centralizing a link is a one-document CMS edit.
+      const urlsRes = await client.queries.urls({ relativePath: "index.json" });
+      const urlsData = urlsRes.data.urls || { urls: [] };
+      const urlsJsonUrlSet = new Set(
+        (urlsData.urls || []).flatMap((entry) =>
+          (entry.url || []).map((u) => normalizeUrl(u.url))
+        )
+      );
+
+      // 2. Every doc, paginated. `docs/api` is excluded for the same reason
+      // generate-link-report.js excludes it: it's regenerated from the
+      // OpenAPI spec, so its links are an artefact of the generator rather
+      // than anything an author can fix.
+      const files = {};
+      const links = [];
+      let after;
+      for (;;) {
+        const res = await client.queries.docConnection({ first: 200, after });
+        if (!isCurrent()) return;
+        for (const edge of res.data.docConnection.edges || []) {
+          const node = edge.node;
+          const relativePath = node._sys?.relativePath;
+          if (!relativePath || relativePath.startsWith("api/")) continue;
+
+          const filePath = `/docs/${relativePath}`;
+          const found = extractLinksFromRichText(node.body, filePath);
+
+          files[filePath] = {
+            fileName: relativePath.split("/").pop(),
+            relativePath,
+            title: node.title || relativePath.replace(/\.mdx?$/i, ""),
+            totalLinks: found.length,
+          };
+
+          for (const link of found) {
+            const classification = classifyUrl(link.url);
+            if (classification.kind !== "external") {
+              links.push({
+                ...link,
+                status: "skipped",
+                reason: classification.reason,
+              });
+              continue;
+            }
+            links.push({
+              ...link,
+              source: "doc",
+              inUrlsJson: urlsJsonUrlSet.has(link.url),
+              status: "unchecked",
+              reason: "Not checked yet",
+            });
+          }
+        }
+        const pageInfo = res.data.docConnection.pageInfo;
+        if (!pageInfo?.hasNextPage) break;
+        after = pageInfo.endCursor;
+      }
+
+      for (const link of collectUrlsJsonLinks(urlsData)) {
+        links.push({ ...link, status: "unchecked", reason: "Not checked yet" });
+      }
+
+      // 3. Carry forward any real verdict yarn check-links already recorded
+      // for a URL that's still here, so a browser guess never overwrites an
+      // actual HTTP status. Only what's new or was never checked gets probed.
+      const previousVerdicts = new Map();
+      for (const link of report.links || []) {
+        if (link.status === "ok" || link.status === "broken") {
+          previousVerdicts.set(link.url, {
+            status: link.status,
+            reason: link.reason,
+            code: link.code ?? null,
+            redirectedTo: link.redirectedTo,
+            checkedAt: link.checkedAt,
+          });
+        }
+      }
+      for (const link of links) {
+        const previous = previousVerdicts.get(link.url);
+        if (previous) Object.assign(link, previous);
+      }
+
+      const toProbe = [
+        ...new Set(
+          links.filter((l) => l.status === "unchecked").map((l) => l.url)
+        ),
+      ];
+
+      let done = 0;
+      setRefreshProgress({ done: 0, total: toProbe.length });
+      const outcomes = await mapWithConcurrency(
+        toProbe,
+        REFRESH_CONCURRENCY,
+        async (url) => {
+          const result = await probeUrlInBrowser(url);
+          done += 1;
+          if (isCurrent()) setRefreshProgress({ done, total: toProbe.length });
+          return [url, result];
+        }
+      );
+      const byUrl = new Map(outcomes);
+      for (const link of links) {
+        const result = byUrl.get(link.url);
+        if (result) Object.assign(link, result);
+      }
+
+      const stats = links.reduce(
+        (acc, link) => {
+          acc.total += 1;
+          acc[link.status] = (acc[link.status] || 0) + 1;
+          return acc;
+        },
+        { total: 0, ok: 0, broken: 0, unverified: 0, unchecked: 0, skipped: 0 }
+      );
+
+      const checkTimes = links
+        .map((l) => l.checkedAt)
+        .filter(Boolean)
+        .sort();
+
+      if (!isCurrent()) return;
+      setReport({
+        generatedAt: new Date().toISOString(),
+        lastCheckedAt: checkTimes.length
+          ? checkTimes[checkTimes.length - 1]
+          : null,
+        checked: true,
+        checkedVia: "browser",
+        stats,
+        files,
+        links,
+      });
+      setRefreshProgress(null);
+    });
+  };
+
   // The report maps onto the vocabulary this view already speaks: "valid" is a
   // real 2xx/3xx, "broken" is a server-attested 4xx/5xx, and "warning" covers
   // links no answer came back for, which are for a human to judge.
@@ -93,7 +263,7 @@ const LinkHealthDashboard = ({ tinaForm }) => {
       skipped: "skipped",
     };
 
-    const allLinks = (linkReport.links || []).map((link) => ({
+    const allLinks = (report.links || []).map((link) => ({
       ...link,
       status: statusMap[link.status] || "skipped",
       lineNumber: link.line,
@@ -155,7 +325,7 @@ const LinkHealthDashboard = ({ tinaForm }) => {
 
     return {
       stats,
-      fileStats: linkReport.files || {},
+      fileStats: report.files || {},
       linksByFile,
       allLinks,
       brokenLinks: allLinks.filter((link) => link.status === "broken"),
@@ -163,11 +333,12 @@ const LinkHealthDashboard = ({ tinaForm }) => {
       centralizedLinks,
       migrationCandidates,
       centralizedButHardcoded,
-      generatedAt: linkReport.generatedAt,
-      lastCheckedAt: linkReport.lastCheckedAt,
-      uncheckedCount: linkReport.stats?.unchecked || 0,
+      generatedAt: report.generatedAt,
+      lastCheckedAt: report.lastCheckedAt,
+      checkedVia: report.checkedVia,
+      uncheckedCount: report.stats?.unchecked || 0,
     };
-  }, []);
+  }, [report]);
 
   // Function to open file in CMS editor
   const openInCMS = (link) => {
@@ -233,6 +404,7 @@ const LinkHealthDashboard = ({ tinaForm }) => {
     migrationCandidates,
     centralizedButHardcoded,
     lastCheckedAt,
+    checkedVia,
     uncheckedCount,
   } = linkData;
   const problemLinks = [...(brokenLinks || []), ...(warningLinks || [])];
@@ -283,25 +455,68 @@ const LinkHealthDashboard = ({ tinaForm }) => {
             Link Health Dashboard
           </h2>
         </div>
-        {/* No refresh control: these results come from `yarn check-links`,
-            which this page cannot run. Showing the age of the data instead is
-            the honest equivalent. */}
-        <div className="text-right text-sm text-gray-500 whitespace-normal">
-          {lastCheckedAt ? (
-            <>
-              Links last checked{" "}
-              <strong className="text-gray-700">
-                {new Date(lastCheckedAt).toLocaleString()}
-              </strong>
-            </>
-          ) : (
-            <strong className="text-gray-700">Links not checked yet</strong>
-          )}
-          <div className="text-xs text-gray-400">
-            Run <code>yarn check-links</code> to update
+        <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
+          <div className="text-right text-sm text-gray-500 whitespace-normal">
+            {lastCheckedAt ? (
+              <>
+                Links last checked{" "}
+                <strong className="text-gray-700">
+                  {new Date(lastCheckedAt).toLocaleString()}
+                </strong>
+                {checkedVia === "browser" && (
+                  <span className="text-gray-400"> (from this browser)</span>
+                )}
+              </>
+            ) : (
+              <strong className="text-gray-700">Links not checked yet</strong>
+            )}
+            <div className="text-xs text-gray-400">
+              Run <code>yarn check-links</code> for a real HTTP-status check
+            </div>
           </div>
+          <button
+            type="button"
+            onClick={handleRefresh}
+            disabled={refreshing}
+            title="Query the current docs and urls.json over GraphQL and probe external links from this browser. Can't see real HTTP statuses cross-origin — see docs/guides/dashboards."
+            style={{
+              padding: "8px 14px",
+              backgroundColor: refreshing ? "#94a3b8" : "#0366d6",
+              color: "white",
+              border: "none",
+              borderRadius: "6px",
+              cursor: refreshing ? "default" : "pointer",
+              fontSize: "13px",
+              fontWeight: "600",
+              flexShrink: 0,
+              whiteSpace: "nowrap",
+            }}
+          >
+            {refreshing
+              ? refreshProgress
+                ? `Checking ${refreshProgress.done}/${refreshProgress.total}…`
+                : "Refreshing…"
+              : "Refresh"}
+          </button>
         </div>
       </div>
+
+      {refreshError && (
+        <div className="rounded-lg border border-red-200 bg-red-50 px-4 py-3 mb-6 text-sm text-red-900 whitespace-normal">
+          Refresh failed: {refreshError}
+        </div>
+      )}
+
+      {checkedVia === "browser" && !refreshing && (
+        <div className="rounded-lg border border-blue-200 bg-blue-50 px-4 py-3 mb-6 text-sm text-blue-900 whitespace-normal">
+          This report was refreshed from this browser. New and previously
+          unchecked links are marked <strong>Unverified</strong> rather than OK
+          or Broken — a browser can't see a third-party site's real HTTP status,
+          only whether the request went through. Run{" "}
+          <code>yarn check-links</code> for a verdict that can actually say
+          "broken."
+        </div>
+      )}
 
       {justCentralized && (
         <div className="rounded-lg border border-green-200 bg-green-50 px-4 py-3 mb-6 text-sm text-green-900 whitespace-normal">
@@ -447,7 +662,7 @@ const LinkHealthDashboard = ({ tinaForm }) => {
             </svg>
           </div>
           <div className="min-w-0">
-            <p className="text-sm text-gray-500 font-medium">Not checked</p>
+            <p className="text-sm text-gray-500 font-medium">Internal</p>
             <p className="text-3xl font-bold text-gray-800">
               {stats.skipped || 0}
             </p>
@@ -1042,18 +1257,19 @@ const LinkHealthDashboard = ({ tinaForm }) => {
                 </div>
               ))}
           </div>
-          {!showCentralizedDocsDetails && centralizedButHardcoded.length > 5 && (
-            <div
-              style={{
-                textAlign: "center",
-                marginTop: "10px",
-                fontSize: "12px",
-                color: "#656d76",
-              }}
-            >
-              And {centralizedButHardcoded.length - 5} more...
-            </div>
-          )}
+          {!showCentralizedDocsDetails &&
+            centralizedButHardcoded.length > 5 && (
+              <div
+                style={{
+                  textAlign: "center",
+                  marginTop: "10px",
+                  fontSize: "12px",
+                  color: "#656d76",
+                }}
+              >
+                And {centralizedButHardcoded.length - 5} more...
+              </div>
+            )}
         </div>
       )}
 
@@ -1203,9 +1419,7 @@ const LinkHealthDashboard = ({ tinaForm }) => {
                       </div>
                       <button
                         type="button"
-                        onClick={() =>
-                          openInCMS({ source: "doc", filePath })
-                        }
+                        onClick={() => openInCMS({ source: "doc", filePath })}
                         style={{
                           padding: "6px 12px",
                           backgroundColor: "#0366d6",

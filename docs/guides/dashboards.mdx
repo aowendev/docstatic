@@ -1,5 +1,5 @@
 ---
-lastmod: '2026-08-15T09:41:49.982Z'
+lastmod: '2026-08-15T10:20:23.082Z'
 title: Dashboards
 description: Viewing dashboards in TinaCMS
 tags:
@@ -94,15 +94,17 @@ For used content, click Used in n docs to display the topics where the content i
 
 Unlike the other dashboards on this page, the Link Health dashboard lives in the **URLs** collection rather than Dashboards — it's the same place you manage the [centralized URLs](/docs/guides/markdown-features/urls) used by the `<Url>` component, so link health and link management sit together.
 
-The dashboard reports on the hyperlinks in your topics *and* the URLs stored in the URLs collection, including their HTTP status, so a page that returns 404 or 500 is identified as broken no matter which source it came from.
+The dashboard reports on the hyperlinks in your topics *and* the URLs stored in the URLs collection, including their HTTP status, so a page that returns 404 or 500 is identified as broken no matter which source it came from. For example, [this link](https://docusaurus.io/this-page-does-not-exist-demo-404) intentionally returns a 404, so `yarn check-links` reports it as broken.
 
-The dashboard displays the results of the last check. It does not run the check itself, because a browser cannot read the HTTP status of a link to another site. To check your links, run:
+The dashboard displays the results of the last `yarn check-links` run, bundled into the site the last time it was built. To check your links with real HTTP statuses, run:
 
 ```bash
 yarn check-links
 ```
 
-This requests every external link — both hardcoded in docs and stored in the URLs collection — records what each server answered, and updates the report. Run it whenever you want fresh results. The dashboard shows the date and time of the last check.
+This requests every external link — both hardcoded in docs and stored in the URLs collection — records what each server answered, and updates the report. Run it whenever you want fresh results, then rebuild the site so the dashboard picks up the new report. The dashboard shows the date and time of the last check.
+
+Click **Refresh** on the dashboard to update it without a rebuild. This queries the current docs and URLs collection over GraphQL, so it reflects edits made since the last build—useful in TinaCloud, where there's no shell to run `yarn check-links` from. It also probes external links directly from your browser, but a browser cannot read the HTTP status of a link to another site the way `yarn check-links` can, so anything Refresh checks itself is reported as Unverified rather than OK or Broken; it never overwrites a real verdict `yarn check-links` already recorded for a link that's still present, only fills in what's new or was never checked.
 
 The report counts:
 
