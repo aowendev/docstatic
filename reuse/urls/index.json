@@ -1728,6 +1728,34 @@
       "_template": "urlEntry"
     },
     {
+      "key": "wikipedia-component-content-management-system",
+      "url": [
+        {
+          "lang": "en",
+          "url": "https://en.wikipedia.org/wiki/Component_content_management_system",
+          "_template": "urlTranslation"
+        },
+        {
+          "lang": "fr",
+          "url": "https://fr.wikipedia.org/wiki/Component_Content_Management_System",
+          "_template": "urlTranslation"
+        }
+      ],
+      "defaultText": [
+        {
+          "lang": "en",
+          "text": "component content management systems",
+          "_template": "textTranslation"
+        },
+        {
+          "lang": "fr",
+          "text": "systèmes de gestion de contenu par composants",
+          "_template": "textTranslation"
+        }
+      ],
+      "_template": "urlEntry"
+    },
+    {
       "key": "wikipedia-context-sensitive-help",
       "url": [
         {
@@ -1914,6 +1942,62 @@
         {
           "lang": "ja",
           "text": "オンラインヘルプ",
+          "_template": "textTranslation"
+        }
+      ],
+      "_template": "urlEntry"
+    },
+    {
+      "key": "wikipedia-static-site-generator",
+      "url": [
+        {
+          "lang": "en",
+          "url": "https://en.wikipedia.org/wiki/Static_site_generator",
+          "_template": "urlTranslation"
+        },
+        {
+          "lang": "de",
+          "url": "https://de.wikipedia.org/wiki/Statische_Webseite#Statische-Website-Generatoren",
+          "_template": "urlTranslation"
+        },
+        {
+          "lang": "es",
+          "url": "https://es.wikipedia.org/wiki/Generador_de_sitios_est%C3%A1ticos",
+          "_template": "urlTranslation"
+        },
+        {
+          "lang": "fr",
+          "url": "https://fr.wikipedia.org/wiki/G%C3%A9n%C3%A9rateur_de_site_statique",
+          "_template": "urlTranslation"
+        },
+        {
+          "lang": "ja",
+          "url": "https://ja.wikipedia.org/wiki/%E9%9D%99%E7%9A%84%E3%82%B5%E3%82%A4%E3%83%88%E3%82%B8%E3%82%A7%E3%83%8D%E3%83%AC%E3%83%BC%E3%82%BF",
+          "_template": "urlTranslation"
+        }
+      ],
+      "defaultText": [
+        {
+          "lang": "en",
+          "text": "static site generator",
+          "_template": "textTranslation"
+        }
+      ],
+      "_template": "urlEntry"
+    },
+    {
+      "key": "wikipedia-headless-content-management-system",
+      "url": [
+        {
+          "lang": "en",
+          "url": "https://en.wikipedia.org/wiki/Headless_content_management_system",
+          "_template": "urlTranslation"
+        }
+      ],
+      "defaultText": [
+        {
+          "lang": "en",
+          "text": "headless content management system",
           "_template": "textTranslation"
         }
       ],

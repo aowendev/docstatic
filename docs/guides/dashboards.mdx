@@ -1,5 +1,5 @@
 ---
-lastmod: '2026-08-15T13:18:17.803Z'
+lastmod: '2026-08-15T14:26:51.386Z'
 modifiedBy: aowendev <aowen@translationcommons.org>
 title: Dashboards
 description: Viewing dashboards in TinaCMS
@@ -118,6 +118,8 @@ The report counts:
 Internal links are deliberately not requested here, because the site build already validates them against the real page list and reports any that are broken. Localhost addresses are also skipped, since they point at whatever happens to be running on the machine doing the check. You can document a localhost URL without it being reported.
 
 The dashboard lists files with problem links, tagging each one with whether it came from a doc or the URLs collection so you know which one to open. It also lists migration candidates — external URLs used in docs that aren't centralized yet, grouped so a URL repeated across several docs shows once, with a **Centralize** button that adds it to the URLs collection.
+
+Clicking **Centralize** adds the entry to the URLs collection form, but not to the dashboard's own view of it. Save the entry—adding any other language URLs it needs—then click **Refresh** before it moves to **Centralized, Not Yet Updated in Docs** with a **Replace** button. That gap is deliberate, not something to work around: Replace shouldn't be offered before the entry actually has the data to replace a hardcoded link with, and filling in the language variants an entry needs can't be automated, since sites are too inconsistent in how they handle them—different path prefixes, different domains, some with no per-language URL at all—for anything but a person to look up and enter.
 
 Centralizing a URL doesn't touch the docs that still hardcode it—that's a separate step, since adding the urls.json entry and swapping every doc reference for it are different edits. The dashboard tracks these separately, under **Centralized, Not Yet Updated in Docs**, with a **Replace** button that swaps every hardcoded use of that URL for a `<Url>` reference in one step, across however many docs it appears in. Each occurrence keeps its own link text—a URL linked with different wording in two different docs gets two different overrides, not one borrowing the other's—unless that wording already matches the key's own default text for that language, in which case Replace leaves the override off and the bare key does the same job without duplicating the same string into every doc that would ever need to change it.
 
