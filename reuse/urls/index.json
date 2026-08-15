@@ -1177,6 +1177,44 @@
       "_template": "urlEntry"
     },
     {
+      "key": "github-pages",
+      "url": [
+        {
+          "lang": "en",
+          "url": "https://docs.github.com/en/pages",
+          "_template": "urlTranslation"
+        },
+        {
+          "lang": "de",
+          "url": "https://docs.github.com/de/pages",
+          "_template": "urlTranslation"
+        },
+        {
+          "lang": "es",
+          "url": "https://docs.github.com/es/pages",
+          "_template": "urlTranslation"
+        },
+        {
+          "lang": "fr",
+          "url": "https://docs.github.com/fr/pages",
+          "_template": "urlTranslation"
+        },
+        {
+          "lang": "ja",
+          "url": "https://docs.github.com/ja/pages",
+          "_template": "urlTranslation"
+        }
+      ],
+      "defaultText": [
+        {
+          "lang": "en",
+          "text": "GitHub Pages",
+          "_template": "textTranslation"
+        }
+      ],
+      "_template": "urlEntry"
+    },
+    {
       "key": "icloud-mailserver",
       "url": [
         {
