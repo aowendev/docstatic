@@ -1,14 +1,14 @@
 ---
-lastmod: '2026-08-15T09:53:46.791Z'
+lastmod: '2026-08-18T21:34:24.757Z'
 modifiedBy: aowendev <aowen@translationcommons.org>
 title: Diagrams
 description: Writing diagrams with Mermaid.
 tags:
-  - computer-languages
-  - computer-languages_javascript
-  - computer-languages_javascript_mermaid
-  - content
-  - content_diagrams
+  - "computer-languages"
+  - "computer-languages_javascript"
+  - "computer-languages_javascript_mermaid"
+  - "content"
+  - "content_diagrams"
 draft: false
 review: false
 translate: false
@@ -30,16 +30,6 @@ The CMS directly supports editing Mermaid diagrams.
 
 Click **Preview** to view your diagram.
 
-#### Example:
-
-```mermaid
-graph TD;
-    A-->B;
-    A-->C;
-    B-->D;
-    C-->D;
-```
-
 <Admonition type="note" title="Note">
   Currently, zenUML diagrams are not supported and mind map diagrams may produce unusual behaviour. Not all diagram types can be previewed in the CMS.
 </Admonition>
@@ -47,5 +37,272 @@ graph TD;
 For more information, refer to [Mermaid](https://tina.io/docs/reference/rich-text-usage/mermaid) in the TinaCMS documentation.
 
 For information on theming Mermaid, refer to <Url urlKey="docusaurus-diagrams" /> in the Docusaurus documentation.
+
+## Examples
+
+### Architecture diagram
+
+```mermaid
+architecture-beta
+    group site(cloud)[Site]
+    service cms(server)[CMS] in site
+    service store(database)[Content] in site
+    service pdf(server)[Exporter] in site
+    cms:R --> L:store
+    store:R --> L:pdf
+```
+
+### Block diagram
+
+```mermaid
+block-beta
+    columns 3
+    Parser["Parser"] Resolver["Resolver"] Composer["Composer"]
+    space:3
+    PDF["PDF"]:3
+```
+
+### C4 context diagram
+
+```mermaid
+C4Context
+    title Publishing system
+    Person(author, "Author", "Writes topics")
+    System(cms, "CMS", "Edits content")
+    System(exporter, "PDF exporter", "Produces books")
+    Rel(author, cms, "Edits")
+    Rel(cms, exporter, "Feeds")
+```
+
+### Class diagram
+
+```mermaid
+classDiagram
+    class Chapter {
+        +string Title
+        +int Depth
+        +VisibleBlocks()
+    }
+    class Book {
+        +Compose()
+    }
+    Book "1" *-- "many" Chapter : contains
+```
+
+### Entity relationship diagram
+
+```mermaid
+erDiagram
+    TOPIC ||--o{ TAG : carries
+    TOPIC ||--o{ SNIPPET : includes
+    TOPIC {
+        string title
+        bool published
+    }
+```
+
+### Flowchart
+
+```mermaid
+flowchart TD
+    Start([Start]) --> Input[/Read topic/]
+    Input --> Check{Valid?}
+    Check -->|Yes| Render[Render PDF]
+    Check -->|No| Warn[Warn and continue]
+    Render --> Done([Done])
+    Warn --> Done
+```
+
+### Gantt chart
+
+```mermaid
+gantt
+    title Release schedule
+    dateFormat YYYY-MM-DD
+    section Content
+    Draft topics      :a1, 2026-01-06, 10d
+    Review            :after a1, 5d
+    section Build
+    Export PDFs       :2026-01-26, 3d
+```
+
+### Git graph
+
+```mermaid
+gitGraph
+    commit id: "init"
+    branch feature
+    commit id: "diagrams"
+    checkout main
+    commit id: "docs"
+    merge feature
+```
+
+### Kanban board
+
+```mermaid
+kanban
+    Todo
+        [Mermaid gallery]
+    In progress
+        [Syntax highlighting]
+    Done
+        [Cross-references]
+```
+
+### Mindmap
+
+```mermaid
+mindmap
+  root((docStatic))
+    Content
+      Topics
+      Snippets
+    Output
+      Website
+      PDF
+```
+
+### Packet diagram
+
+```mermaid
+packet-beta
+    0-15: "Source port"
+    16-31: "Destination port"
+    32-63: "Sequence number"
+```
+
+### Pie chart
+
+```mermaid
+pie title Topics by status
+    "Published" : 52
+    "In review" : 12
+    "Draft" : 6
+```
+
+### Quadrant chart
+
+```mermaid
+quadrantChart
+    title Effort against value
+    x-axis Low effort --> High effort
+    y-axis Low value --> High value
+    quadrant-1 Do now
+    quadrant-2 Plan
+    quadrant-3 Drop
+    quadrant-4 Quick wins
+    Search: [0.4, 0.8]
+    Theming: [0.7, 0.3]
+    PDF export: [0.8, 0.9]
+```
+
+### Radar chart
+
+```mermaid
+radar-beta
+    title Output quality
+    axis fidelity["Fidelity"], speed["Speed"], size["Size"]
+    curve pdf["PDF"]{85, 70, 60}
+    max 100
+```
+
+### Requirement diagram
+
+```mermaid
+requirementDiagram
+    requirement print_fidelity {
+        id: 1
+        text: Diagrams must render as vectors.
+        risk: medium
+        verifymethod: test
+    }
+    element exporter {
+        type: application
+    }
+    exporter - satisfies -> print_fidelity
+```
+
+### Sankey diagram
+
+```mermaid
+sankey-beta
+Website,PDF,20
+Website,Help,15
+PDF,Print,10
+PDF,Screen,10
+```
+
+### Sequence diagram
+
+```mermaid
+sequenceDiagram
+    participant Author
+    participant CMS
+    participant Exporter
+    Author->>CMS: Save topic
+    CMS-->>Author: Confirm
+    Author->>Exporter: Export PDF
+    Exporter->>CMS: Read content
+    CMS-->>Exporter: MDX
+    Exporter-->>Author: docs-en.pdf
+```
+
+### State diagram
+
+```mermaid
+stateDiagram-v2
+    [*] --> Draft
+    Draft --> Review : submit
+    Review --> Draft : changes requested
+    Review --> Approved : approve
+    Approved --> [*]
+```
+
+### Timeline
+
+```mermaid
+timeline
+    title Project milestones
+    2026-01 : Parser
+    2026-02 : Layout
+    2026-03 : Diagrams
+```
+
+### Treemap
+
+```mermaid
+treemap-beta
+"Book"
+    "Chapters"
+        "Guides": 40
+        "Reference": 25
+    "Back matter"
+        "Index": 5
+```
+
+### User journey
+
+```mermaid
+journey
+    title Publishing a topic
+    section Write
+      Draft the topic: 4: Author
+      Add screenshots: 3: Author
+    section Publish
+      Review: 3: Editor
+      Export PDF: 5: Author
+```
+
+### XY chart
+
+```mermaid
+xychart-beta
+    title "Pages per release"
+    x-axis [v1, v2, v3, v4]
+    y-axis "Pages" 0 --> 120
+    bar [40, 65, 88, 101]
+    line [40, 65, 88, 101]
+```
 
 <RelatedTopics maxResults={7} />
