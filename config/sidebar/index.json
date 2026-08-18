@@ -46,6 +46,10 @@
           "_template": "category"
         },
         {
+          "document": "docs/guides/dashboards.mdx",
+          "_template": "doc"
+        },
+        {
           "document": "docs/blog.mdx",
           "_template": "doc"
         },
@@ -150,6 +154,10 @@
           "_template": "doc"
         },
         {
+          "document": "docs/guides/vale.mdx",
+          "_template": "doc"
+        },
+        {
           "document": "docs/static-assets.mdx",
           "_template": "doc"
         },
@@ -183,6 +191,10 @@
         },
         {
           "document": "docs/cli.mdx",
+          "_template": "doc"
+        },
+        {
+          "document": "docs/guides/using-claude.mdx",
           "_template": "doc"
         }
       ],
