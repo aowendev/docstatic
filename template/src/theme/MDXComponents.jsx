@@ -6,6 +6,7 @@
  */
 
 import CalsTable from "@site/src/components/CalsTable";
+import Cite from "@site/src/components/Cite";
 import CodeSnippet from "@site/src/components/CodeSnippet";
 import Comment from "@site/src/components/Comment";
 import ConditionalText from "@site/src/components/ConditionalText";
@@ -32,6 +33,7 @@ export default {
   ...MDXComponents,
   Admonition: MDXComponents.admonition,
   CalsTable: CalsTable,
+  Cite: Cite,
   CodeBlock: CodeBlock,
   CodeSnippet: CodeSnippet,
   Comment: Comment,

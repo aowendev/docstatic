@@ -141,6 +141,9 @@
           "tag": "elements_admonitions"
         },
         {
+          "tag": "elements_citations"
+        },
+        {
           "tag": "elements_code-blocks"
         },
         {
@@ -235,6 +238,9 @@
     {
       "tag": "reuse",
       "children": [
+        {
+          "tag": "reuse_bibliography"
+        },
         {
           "tag": "reuse_code-files"
         },

@@ -8,6 +8,7 @@ import conditionsData from "../reuse/conditions/index.json";
 import data from "../reuse/taxonomy/index.json";
 import { docusaurusDate, titleFromSlug } from "../scripts/util";
 import { ChatbotCollection } from "../src/components/Chatbot/template";
+import { BibliographyCollection } from "../src/components/Cite/template";
 // collapsible field component
 import CollapsibleField from "../src/components/CollapsibleField";
 // conditions tree UI component
@@ -1539,6 +1540,7 @@ export default defineConfig({
   schema: {
     collections: [
       PostCollection,
+      BibliographyCollection,
       ChatbotCollection,
       ConditionsCollection,
       DashboardsCollection,

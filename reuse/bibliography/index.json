@@ -1,0 +1,55 @@
+{
+  "bibliography": [
+    {
+      "key": "smith2020",
+      "type": "book",
+      "title": "The Art of Documentation",
+      "authors": [
+        {
+          "family": "Smith",
+          "given": "Jane",
+          "_template": "contributor"
+        }
+      ],
+      "issued": "2020-05-01",
+      "publisher": "Oxford University Press",
+      "publisherPlace": "Oxford",
+      "isbn": "978-0-19-000000-0",
+      "_template": "reference"
+    },
+    {
+      "key": "jones2019",
+      "type": "article-journal",
+      "title": "Single-sourcing in technical communication",
+      "authors": [
+        {
+          "family": "Jones",
+          "given": "Alex",
+          "_template": "contributor"
+        }
+      ],
+      "issued": "2019-11",
+      "containerTitle": "Journal of Documentation Practice",
+      "volume": "42",
+      "issue": "3",
+      "page": "112-134",
+      "doi": "10.0000/jdp.2019.42.3.112",
+      "_template": "reference"
+    },
+    {
+      "key": "csl-spec",
+      "type": "webpage",
+      "title": "Citation Style Language Specification",
+      "authors": [
+        {
+          "literal": "Citation Style Language Project",
+          "_template": "contributor"
+        }
+      ],
+      "issued": "2024",
+      "url": "https://docs.citationstyles.org/",
+      "accessed": "2026-08-18",
+      "_template": "reference"
+    }
+  ]
+}
