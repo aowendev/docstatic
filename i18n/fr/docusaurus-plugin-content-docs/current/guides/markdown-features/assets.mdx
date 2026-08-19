@@ -1,8 +1,8 @@
 ---
-lastmod: '2026-08-15T09:53:55.768Z'
+lastmod: '2026-08-19T14:50:04.206Z'
 modifiedBy: aowendev <aowen@translationcommons.org>
-title: Ressources
-description: Gestion des actifs dans docStatic.
+title: 'Actifs'
+description: 'Gestion des ressources dans docStatic.'
 tags:
   - "content"
   - "content_images"
@@ -14,45 +14,45 @@ published: true
 unlisted: false
 ---
 
-# Ressources
+# Actifs
 
-Parfois, vous souhaitiez créer des liens vers des ressources (par exemple, des fichiers docx, des images, etc.) directement à partir des rubriques. docStatic dirige cela à travers le dossier static/.
+Il arrive parfois que l’on souhaite créer des liens vers des ressources (par exemple, des fichiers docx, des images, etc.) directement depuis les rubriques. docStatic gère cela via le dossier « static/ ».
 
-Tout contenu placé dans ce dossier sera disponible à la racine du site publié. Par exemple, dans le cas de docStatic, il s'agit d'un dossier statique :
+Tout contenu placé dans ce dossier sera accessible depuis la racine du site publié. Par exemple :
 
 ```
-# Votre document
+# Your doc
 /website/docs/myFeature.mdx
 
-# Quelques actifs que vous voulez utiliser
+# Some assets you want to use
 /website/assets/docstatic-asset-example.docx
 /website/img/docstastic-asset-example-banner.png
 ```
 
 ## Images
 
-DocStatic propose deux façons d'ajouter des images aux rubriques. Pour les images en ligne, vous pouvez cliquer sur l'icône Image pour placer une image dans une rubrique. Cette méthode fonctionne mieux pour les icônes et les petites images. Pour les images plus grandes, il est préférable d'utiliser le composant Figure.
+docStatic propose deux façons d’ajouter des images aux rubriques. Pour les images intégrées, vous pouvez cliquer sur l’icône **Image** afin d’insérer une image dans une rubrique. Cette méthode est particulièrement adaptée aux icônes (![](/img/docs/example.svg)) et aux petites images. Les icônes doivent être enregistrées sous forme de fichiers SVG pré-redimensionnés. En mode sombre, celles-ci seront inversées et leur espace colorimétrique sera pivoté de 180°.
 
-1. Sélectionnez **Figure** dans la liste **Embed**.
-2. Modifiez le composant.
-3. Cliquez sur la zone **Image** pour ouvrir le **Media Manager**.
-4. Téléchargez ou sélectionnez une image.
-5. Donnez-lui une **Caption**.
+<Admonition type="tip" title="Conseil">
+  Vous pouvez utiliser [Librsvg](https://wiki.gnome.org/Projects/LibRsvg) pour redimensionner des fichiers SVG. Par exemple, la commande `rsvg-convert example.svg -h 12 -f svg -o example.svg` définit une hauteur de 12 points.
+</Admonition>
 
-#### Exemple :
+Pour les images plus grandes, utilisez plutôt le composant [Figure](figures.mdx). Il ajoute une légende — également utilisée comme texte alternatif pour les lecteurs d'écran —, redimensionne l'image pour l'adapter à la page et l'ouvre en taille réelle dans une fenêtre contextuelle lorsque l'on clique dessus.
 
-<Figure img="/img/docStaticDemo.jpg" caption="Exemple de figure" />
+#### Exemple
 
-La figure est redimensionnée en fonction de la fenêtre d'affichage. En cliquant dessus, vous l'ouvrirez à sa taille maximale dans une boîte lumineuse.
+<Figure img="/img/docStaticDemo.jpg" caption="Exemple d'illustration" size={66} align="left" />
 
-Pour plus d'informations sur le gestionnaire de médias, reportez-vous à [Media Overview](https://tina.io/docs/reference/media/overview) dans la documentation de TinaCMS.
+Pour plus d’informations sur le gestionnaire de médias, consultez la [Présentation des médias](https://tina.io/docs/reference/media/overview) dans la documentation de TinaCMS.
 
 ## Fichiers
 
-De la même manière, vous pouvez créer un lien vers des ressources existantes avec le chemin du dossier static/ dans l'URL. Par exemple, vous pouvez créer un lien vers un fichier existant avec le chemin du dossier `static/` dans l'URL :
+De la même manière, vous pouvez créer un lien vers des ressources existantes en utilisant le chemin d'accès au dossier static/ dans l'URL. Par exemple :
 
 ```
 ./assets/docstatic-asset-example.docx
 ```
 
-Pour plus d'informations, voir <Url urlKey="docusaurus-static-assets" /> dans la documentation de Docusaurus.
+Pour plus d'informations, consultez <Url urlKey="docusaurus-static-assets" linkText={[{ lang: "en", text: "Static assets" }]} /> dans la documentation de Docusaurus.
+
+<RelatedTopics maxResults={7} />

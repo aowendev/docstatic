@@ -1,5 +1,5 @@
 ---
-lastmod: '2026-08-15T15:19:40.523Z'
+lastmod: '2026-08-19T14:50:01.806Z'
 modifiedBy: aowendev <aowen@translationcommons.org>
 title: Installation
 tags:
@@ -99,8 +99,8 @@ npm install -g yarn
   ```
 </Admonition>
 
-<Admonition type="note" title="Note">
-  On Windows, you don’t use sudo. Just open your terminal as Administrator and run the command.
+<Admonition type="note" title="Nota">
+  En Windows no se utiliza «sudo». Solo tienes que abrir el terminal como administrador y ejecutar el comando.
 </Admonition>
 
 ***
@@ -143,8 +143,8 @@ cd my-docs
 yarn dev
 ```
 
-<Admonition type="tip" title="Tip">
-  Run `npx create-docstatic@latest --help` to see the available options, such as `--no-install` to skip dependency installation.
+<Admonition type="tip" title="Consejo">
+  Ejecuta `npx create-docstatic@latest --help` para ver las opciones disponibles, como `--no-install`, que permite omitir la instalación de dependencias.
 </Admonition>
 
 Si has creado tu sitio de esta forma, puedes pasar directamente a la sección [Estructura del proyecto](#project-structure).
@@ -161,8 +161,8 @@ El comando actualiza los archivos propios de docStatic (componentes de React, sc
 
 La actualización requiere un árbol de trabajo de Git limpio, así que primero confirma tu trabajo. A continuación, revisa el resultado con `git diff`, vuelve a aplicar cualquier personalización que hayas realizado en los archivos actualizados y confirma los cambios.
 
-<Admonition type="tip" title="Tip">
-  Add `--dry-run` to see what would change without writing anything.
+<Admonition type="tip" title="Consejo">
+  Añade `--dry-run` para ver qué cambios se producirían sin escribir nada.
 </Admonition>
 
 ### Hacer un fork del repositorio docStatic
@@ -219,16 +219,21 @@ Tras crear tu sitio web o clonar el repositorio, verás varios archivos en la ca
 docstatic
 ├── apis
 │   └── petstore.yaml
+├── bin
+│   └── docstatic.js
 ├── blog
 │   └── hybrid.mdx
 ├── config
+│   ├── chatbot
+│   │   └── index.json
 │   ├── docusaurus
 │   │   └── index.json
-│   ├── homepage
+│   ├── sidebar
 │   │   └── index.json
-│   └── sidebar
+│   └── theme
 │       └── index.json
-│
+├── create-docstatic
+│   └── index.js
 ├── docs
 │   └── introduction.mdx
 ├── i18n
@@ -243,9 +248,15 @@ docstatic
 │   │   └── index.json
 │   ├── glossaryTerms
 │   │   └── index.json
+│   ├── homepage
+│   │   └── index.json
+│   ├── media
+│   │   └── index.json
 │   ├── snippets
 │   │   └── example.mdx
 │   ├── taxonomy
+│   │   └── index.json
+│   ├── urls
 │   │   └── index.json
 │   ├── variableSets
 │   │   └── index.json
@@ -254,6 +265,8 @@ docstatic
 ├── scripts
 │   └── generate-media-index.js
 ├── src
+│   ├── components
+│   │   └── Dashboard
 │   ├── css
 │   │   └── custom.css
 │   └── pages
@@ -262,6 +275,10 @@ docstatic
 │       └── index.module.css
 ├── static
 │   └── img
+├── template
+│   └── docs
+├── test
+│   └── link-checker.test.mjs
 ├── tina
 │   └── config.jsx
 ├── docusaurus.config.ts
@@ -274,16 +291,21 @@ docstatic
 ### Resumen de la estructura del proyecto
 
 * `/apis/`: archivos YAML de OpenAPI.
+* `/bin/`: el punto de entrada de la CLI `docstatic` que ejecuta `create-docstatic` para crear un nuevo sitio. Solo está presente si has clonado el repositorio docStatic.
 * `/blog/`: archivos MDX del blog.
-* `/config/`: archivos JSON que utiliza TinaCMS para configurar docStatic.
+* `/config/`: archivos JSON que utiliza TinaCMS para configurar docStatic, incluidos los ajustes del chatbot y del tema.
+* `/create-docstatic/`: el paquete npm publicado como `create-docstatic`. Solo está presente si has clonado el repositorio docStatic.
 * `/docs/`: archivos MDX de la documentación.
 * `/i18n/`: archivos de traducción.
 * `/mcp-server/`: el [servidor MCP](mcp-server.mdx) que permite a los asistentes de IA acceder a tu documentación.
-* `/reuse/`: contenido reutilizable.
+* `/reuse/`: contenido reutilizable, incluidas las URL gestionadas y los ajustes de la página de inicio y de medios.
 * `/scripts/`: scripts de compilación que se ejecutan automáticamente mediante `prebuild` y `predev`.
 * `/src/`: archivos que no pertenecen a la documentación, como páginas o componentes React personalizados.
+  * `/src/components`: componentes React personalizados, como los paneles y el chatbot.
   * `/src/pages`: cualquier archivo JSX/TSX/MDX dentro de este directorio se convierte en una página web.
 * `/static/`: carpeta estática. Todo el contenido que se encuentre aquí se copia en la raíz de la carpeta de la compilación final.
+* `/template/`: la plantilla de scaffolding que se mantiene sincronizada con el sitio principal y que `create-docstatic` distribuye a los nuevos sitios. Solo está presente si has clonado el repositorio docStatic. Consulta [CLI](cli.mdx#template-sync-commands).
+* `/test/`: la batería de pruebas del proyecto. Solo está presente si has clonado el repositorio docStatic.
 * `/tina/`: configuración de TinaCMS y esquema GraphQL.
 * `/docusaurus.config.ts`: archivo de configuración que contiene la configuración del sitio.
 * `/package.json`: un sitio web de docStatic es una aplicación de React. Puedes instalar y utilizar cualquier paquete de npm que desees.

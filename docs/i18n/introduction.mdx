@@ -15,12 +15,16 @@ translate: false
 approved: false
 published: true
 unlisted: false
-lastmod: '2026-08-15T09:53:47.797Z'
+lastmod: '2026-08-19T14:49:54.009Z'
 modifiedBy: aowendev <aowen@translationcommons.org>
 ---
 # Internationalization
 
 Internationalization (<Url urlKey="wikipedia-i18n" />) support is provided by the static site generator. For detailed information, refer to <Url urlKey="docusaurus-i18n-introduction" /> in the Docusaurus documentation.
+
+<Admonition type="note" title="Heading 1 required for translated sidebar labels">
+  The sidebar's table of contents takes a translated topic's label from its rendered Heading 1 (`# Title`), not from the `title` field in the Frontmatter. On an English-only site the Heading 1 is optional—the Frontmatter title is enough—but once you translate a site, give every topic a Heading 1 that's an exact copy of its Frontmatter title. Otherwise that topic's sidebar entry stays in English even after the rest of the page is translated.
+</Admonition>
 
 ## Edit translated docs in the CMS
 

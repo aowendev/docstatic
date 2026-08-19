@@ -1,7 +1,7 @@
 ---
-lastmod: '2026-08-15T14:35:45.514Z'
+lastmod: '2026-08-19T14:49:57.657Z'
 modifiedBy: aowendev <aowen@translationcommons.org>
-title: Introduction
+title: Einführung
 tags:
   - software
   - software_source-control
@@ -20,20 +20,24 @@ published: true
 unlisted: false
 ---
 
+# Einführung
+
 docStatic ist eine moderne Dokumentationsplattform, die die Kluft zwischen Autoren und Entwicklern überbrückt und Ihnen dabei hilft, Online-Dokumentationen zu erstellen, die Ihre Nutzer begeistern werden.
 
 Sie vereint die besten Funktionen von <Url urlKey="wikipedia-component-content-management-system" linkText={[ { lang: "de", text: "Komponenten-Content-Management-Systemen" }]} /> und [Docs-as-Code](https://www.writethedocs.org/guide/docs-as-code/)-Lösungen für Online-Dokumentation. Mit docStatic kann jeder in Ihrem Team Ihre Dokumente erstellen und bearbeiten, ohne den Arbeitsablauf Ihrer Entwickler zu beeinträchtigen.
 
 ## Funktionen
 
-docStatic ist eine Weiterentwicklung von [Tinasaurus](https://tina.io/blog/tinasaurus-docusaurus-starter), einem Open-Source-Projekt auf Basis von <Url urlKey="react" />, das einen <Url urlKey="wikipedia-static-site-generator" linkText={[{ lang: "de", text: "Statik-Site-Generator" }]} /> (<Url urlKey="docusaurus" />) mit einem <Url urlKey="wikipedia-headless-content-management-system" linkText={[{ lang: "de", text: "Headless-Content-Management-System" }]} /> (<Url urlKey="tinacms" />). Es umfasst:
+docStatic begann als Weiterentwicklung von [Tinasaurus](https://tina.io/blog/tinasaurus-docusaurus-starter), einem Open-Source-Projekt auf Basis von <Url urlKey="react" />, das einen <Url urlKey="wikipedia-static-site-generator" linkText={[{ lang: "de", text: "Statik-Site-Generator" }]} /> (<Url urlKey="docusaurus" />) mit einem <Url urlKey="wikipedia-headless-content-management-system" linkText={[{ lang: "de", text: "Headless-Content-Management-System" }]} /> (<Url urlKey="tinacms" />). Es umfasst:
 
 * Eine benutzerfreundliche Bearbeitungsoberfläche für Markdown-, MDX-, JSON- und YAML-Inhalte.
 * Integration in bestehende Git- und CI/CD-Workflows.
 * Eingebettete MDX-Komponenten für die Erstellung reichhaltiger Inhalte.
 * Medienmanager mit Unterstützung für Medienanbieter von Drittanbietern.
 * Bearbeitung in der Cloud (keine lokale Einrichtung erforderlich).
+* Dashboards mit Berichten zum Inhaltsstatus und zur Linkintegrität.
 * Model Context Protocol (MCP)-Server für die Integration von KI-Assistenten.
+* Optionaler browserbasierter KI-Chatbot zur Beantwortung von Fragen zur Dokumentation.
 
 ## Einfache Inhaltsverwaltung
 
@@ -41,12 +45,16 @@ Die Standard-Sammlungen von docStatic umfassen einige der fortgeschritteneren Er
 
 Der Rich-Text-Editor erleichtert das Hinzufügen von:
 
-* Bedingtem Text, Snippets und Variablensätzen zur Wiederverwendung von Inhalten
-* Taxonomien
-* Glossarbegriffen
+* Bedingtem Text, Snippets, Variablensätzen und zentral verwalteten URLs zur Wiederverwendung von Inhalten.
+* Taxonomien.
+* Glossarbegriffen.
 * Code-Blöcken, Kommentaren, ausblendbaren Details, Abbildungen, Fußnoten und Registerkarten. Diese stehen als Vorlagen zur Verfügung, die Sie in eine Inhaltsdatei einfügen können.
 
 Das CMS verwendet ein [GraphQL](https://graphql.org/)-Schema, um die Struktur Ihrer Inhalte als eine Reihe von Sammlungen zu beschreiben.
+
+## Dashboards
+
+docStatic fügt TinaCMS Dashboard-Funktionen hinzu und fragt die GraphQL-API ab, um direkt im CMS über den Inhaltsstatus und die Linkintegrität zu berichten. Dazu gehört eine Inhaltsübersicht, die den Workflow-Status jedes Themas anzeigt, sowie ein Link-Integritäts-Dashboard, das externe Links prüft und defekte Links markiert.
 
 ## Git-gestützt
 
@@ -61,6 +69,8 @@ docStatic ist mit Plugins vorkonfiguriert, die Funktionen wie <Url urlKey="katex
 ## KI-Integration
 
 docStatic enthält einen integrierten [Model Context Protocol (MCP)-Server](mcp-server.mdx), der es KI-Assistenten ermöglicht, direkt auf Ihre Dokumentation zuzugreifen und diese zu verstehen. Dies bietet intelligente Unterstützung bei der Bearbeitung, Suche und Analyse von Inhalten auf der Grundlage Ihrer tatsächlichen Dokumentationsstruktur und -inhalte.
+
+docStatic kann Ihrer veröffentlichten Website außerdem einen optionalen KI-Chatbot hinzufügen, sodass Besucher Fragen stellen und Antworten erhalten können, die auf Ihrer Dokumentation basieren. Standardmäßig läuft er vollständig im Browser des Besuchers – kein externer Dienst, API-Schlüssel oder Server erforderlich – er kann aber auch auf einen kostenpflichtigen, selbst gehosteten Anbieter verweisen.
 
 ## React-basiert
 

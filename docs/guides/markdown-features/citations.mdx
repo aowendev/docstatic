@@ -1,0 +1,99 @@
+---
+title: Citations
+description: Cite sources from a central CSL bibliography.
+tags:
+  - "elements"
+  - "elements_citations"
+  - "reuse"
+  - "reuse_bibliography"
+  - "software"
+  - "software_content-management-systems"
+  - "software_content-management-systems_tinacms"
+draft: false
+review: false
+translate: false
+approved: false
+published: true
+unlisted: false
+lastmod: '2026-08-19T14:49:53.348Z'
+modifiedBy: aowendev <aowen@translationcommons.org>
+---
+
+# Citations
+
+<Admonition type="caution" title="In development">
+  This feature is incomplete. You can record bibliographic data and embed citations in your topics, and both are stored in a standards-compliant form that will not need re-entering. The render engine that formats them is not built yet, so citations currently produce no visible output on the published page.
+</Admonition>
+
+The **Citation** component cites sources held in a central **Bibliography** collection. Each source is recorded once, and every topic that cites it refers to it by a citation key. Correcting a publisher's name or a publication date updates every citation of that source across the doc set.
+
+Bibliographic data follows the Citation Style Language (CSL) standard, so it can be exported to and imported from reference managers such as Zotero and Mendeley.
+
+## Managing the bibliography
+
+Sources live in one collection, separate from the topics that cite them.
+
+1. Select **Bibliography** from the collection list.
+2. Add a reference to the list.
+3. Give it a **Citation key**. This is how topics refer to the source, so keep it short and stable—for example `smith2020`.
+4. Choose a **Type**. Only the fields relevant to that type are shown, so a journal article offers an ISSN while a book offers an ISBN.
+5. Fill in the remaining fields and save.
+
+<Admonition type="note" title="Note">
+  Changing a citation key breaks every citation that uses it. Treat keys as permanent once a topic cites them.
+</Admonition>
+
+### Fields the form does not show
+
+The form covers the fields documentation sources need, not every field the standard defines. Two categories are deliberately absent:
+
+* Values the formatter works out for itself, such as citation numbers and the letters that separate two works by one author in the same year.
+* Fields belonging to source types the **Type** list does not offer.
+
+For a source the form cannot express, use **Raw CSL-JSON override**. Anything valid entered there replaces the fields above it, with the citation key kept.
+
+## Citing a source
+
+1. Select **Citation** from the **Embed** list.
+2. Add a source to the citation.
+3. Choose a **Source** from the list of citation keys.
+4. Optionally, give a **Locator** and a **Locator type** to point at part of the source.
+
+Enter the locator as a bare value—`14`, or `14-16`. Do not type `p.`, because the citation style supplies that itself and styles disagree about what it should be.
+
+One citation can cite several sources. Add more than one item rather than placing two citations side by side, so that the citation style can combine them.
+
+#### Example
+
+The following citation refers to a single source:
+
+```jsx
+<Cite items={[{ key: "smith2020" }]} />
+```
+
+This one points at a specific page:
+
+```jsx
+<Cite items={[{ key: "smith2020", locator: "14", label: "page" }]} />
+```
+
+This one cites two sources together, each with its own page reference:
+
+```jsx
+<Cite items={[
+  { key: "smith2020", locator: "14", label: "page" },
+  { key: "jones2019", locator: "3-5", label: "page" }
+]} />
+```
+
+<Admonition type="note" title="Note">
+  Two citations with identical details share a number, in the same way footnotes with identical content do.
+</Admonition>
+
+## Choosing a style
+
+A citation style controls how citations and the reference list are formatted. Styles differ in substance rather than decoration: some put a superscript number in the text and the source in a note, others put the author and year in brackets in the running text.
+
+The style is set once for the whole site rather than per topic. Mixing styles within one doc set is a style error, because readers cannot tell what a given marker means.
+
+<RelatedTopics maxResults={7} />

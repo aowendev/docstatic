@@ -1,5 +1,5 @@
 ---
-lastmod: '2026-08-15T09:54:00.026Z'
+lastmod: '2026-08-19T14:50:08.442Z'
 modifiedBy: aowendev <aowen@translationcommons.org>
 title: CALS Tables
 description: Using CALS tables in docStatic, including merged cells, column widths and border control.
@@ -19,6 +19,8 @@ published: true
 unlisted: false
 ---
 
+# CALS Tables
+
 **CalsTable** コンポーネントは、DocBook や DITA で使用される <Url urlKey="cals-table-model" /> に対応しています。これには、セルの結合、列ごとの幅や配置の設定、およびきめ細かな枠線の制御が含まれます。 CMS内のグラフィカルなグリッドエディタが構造（セルの結合や分割、行や列の挿入・削除）を処理するため、基になるテーブルデータを手作業で編集する必要は一切ありません。
 
 1. **Embed**リストから**CALS Table**を選択します。
@@ -29,8 +31,8 @@ unlisted: false
 6. セルをダブルクリックして内容を編集します。セルの内容は Markdown 形式であるため、`**太字**`、`*斜体*`、リンク、インラインコードがすべて使用可能です。
 7. 変更内容を**保存**します。
 
-<Admonition type="note" title="Scope">
-  Each table supports one header, body and footer section with a single set of columns. DocBook's multiple-`tgroup`-per-table and nested-table (`entrytbl`) features aren't supported.
+<Admonition type="note" title="適用範囲">
+  各テーブルは、1つのヘッダー、ボディ、フッターセクションと、1組の列をサポートしています。DocBookの「1つのテーブルにつき複数の`tgroup`」や「ネストされたテーブル（`entrytbl`）」といった機能はサポートされていません。
 </Admonition>
 
 #### 例：

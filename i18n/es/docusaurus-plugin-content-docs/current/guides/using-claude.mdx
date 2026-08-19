@@ -1,7 +1,8 @@
 ---
-help: null
-lastmod: "2026-06-01T21:56:58.791Z"
-title: Using Claude in this project
+lastmod: '2026-08-19T14:50:01.605Z'
+modifiedBy: aowendev <aowen@translationcommons.org>
+title: 'Uso de Claude en este proyecto'
+description: 'Cómo se usa Claude Code en el proyecto docStatic: desarrollo de funciones, automatización, trabajo en componentes, herramientas de estilo, arquitectura de la información y revisión de contenido.'
 tags:
   - "software"
   - "software_artificial-intelligence"
@@ -15,21 +16,33 @@ published: true
 unlisted: false
 ---
 
-# Usar Claude en este proyecto
+# Uso de Claude en este proyecto
 
-[Claude Code](https://claude.ai/code) es la interfaz de línea de comandos con inteligencia artificial de Anthropic. Se usa en este proyecto como asistente de desarrollo para un conjunto específico de tareas. No se utilizó para diseñar ni desarrollar la arquitectura de docStatic.
+[Claude Code](https://claude.ai/code) es la CLI de Anthropic potenciada por IA. Se usa en este proyecto como asistente de desarrollo, para las tareas descritas a continuación.
+
+La división de responsabilidades importa más que la lista de tareas. Claude propone opciones, defiende una de ellas y escribe el código. Cada decisión que da forma al producto —qué construir, qué enfoque adoptar, qué lanzar— la toma el responsable del proyecto. Cuando una decisión de diseño tiene consecuencias que el responsable debe sopesar, se espera que Claude exponga la disyuntiva en lugar de elegir en silencio.
+
+## Diseño y desarrollo de funciones
+
+Claude trabaja en funciones completas, no solo en cambios aislados. La CLI de scaffolding y las herramientas de sincronización de plantillas, el chatbot con su compatibilidad con proveedores intercambiables, el sistema de reutilización de URL gestionadas y la capa de datos compartida de los paneles se desarrollaron todos así: Claude investiga el código existente, propone un diseño y lo implementa una vez acordado el enfoque.
+
+Esto incluye el trabajo de diseño. Las estructuras de datos, los límites entre la compilación y el tiempo de ejecución, y la estructura de los nuevos subsistemas los redacta Claude y se revisan antes de comenzar la implementación. Los diseños se devuelven con frecuencia, y algunos se rechazan por completo.
 
 ## Automatización de tareas manuales
 
-Claude se encarga del trabajo repetitivo o programado que de otro modo requeriría esfuerzo manual — por ejemplo, actualizar masivamente campos de metadatos en muchos archivos, reformatear contenido para adaptarlo a una nueva estructura o generar código repetitivo que sigue un patrón conocido. Son tareas donde la forma del trabajo es clara, pero la ejecución resulta tediosa.
+Claude se encarga del trabajo repetitivo o programado que de otro modo requeriría esfuerzo manual — por ejemplo, actualizar masivamente campos de frontmatter en muchos archivos, reformatear contenido para adaptarlo a una nueva estructura o generar código repetitivo que sigue un patrón conocido. Son tareas donde la forma del trabajo es clara, pero la ejecución resulta tediosa.
 
 ## Desarrollo de componentes React y paneles de datos
 
 Claude se usa para escribir e iterar sobre componentes React y paneles de datos. Esto incluye implementar nuevos componentes de interfaz de usuario, ajustar el diseño y el estilo, y conectar datos desde la API GraphQL de TinaCMS. Claude trabaja dentro de los patrones de componentes existentes del proyecto en lugar de introducir nuevas abstracciones.
 
-## Verificación de coherencia del contenido
+## Definición de esquemas del CMS
 
-Claude revisa la documentación para verificar la coherencia factual, las brechas estructurales y el flujo lógico. Es una verificación liviana — no reemplaza una revisión editorial formal, pero es útil para detectar problemas obvios antes de que el contenido llegue a los revisores.
+Claude redacta las definiciones de colecciones y plantillas de TinaCMS que rigen los formularios de edición, incluida la validación de campos y las reglas que muestran u ocultan campos en función de otros valores.
+
+## Redacción de pruebas
+
+Claude redacta y mantiene la batería de pruebas del proyecto. Se espera que las pruebas verifiquen el comportamiento frente a una fuente fiable —un estándar externo, una especificación o la salida real generada— en lugar de limitarse a repetir lo que el código ya indica.
 
 ## Rastreo de errores
 
@@ -41,14 +54,22 @@ Claude se usa para escribir reglas de Vale para el conjunto de estilos de docSta
 
 ## Mantenimiento de la arquitectura de la información
 
-Claude ayuda a mantener la arquitectura de la información del conjunto de documentos — revisando la taxonomía, las etiquetas y la estructura de las páginas para garantizar una categorización coherente y una navegación lógica. Es una tarea continua que generalmente se realiza junto con las revisiones de contenido.
+Claude ayuda a mantener la arquitectura de la información del conjunto de documentos—revisando la taxonomía, las etiquetas y la estructura de las páginas para garantizar una categorización coherente y una navegación lógica. Es una tarea continua que generalmente se realiza junto con las revisiones de contenido.
+
+## Verificación de coherencia del contenido
+
+Claude revisa la documentación para verificar la coherencia factual, las brechas estructurales y el flujo lógico. Es una verificación liviana—no reemplaza una revisión editorial formal, pero es útil para detectar problemas obvios antes de que el contenido llegue a los revisores.
 
 ## Redacción de documentación
 
 En ocasiones, Claude produce un primer borrador de una página de documentación, que luego es revisado y editado por un autor humano. Los borradores se tratan como puntos de partida, no como contenido terminado.
 
+<Admonition type="note" title="Validación de los cambios">
+  Antes de dar un trabajo por terminado, Claude ejecuta `yarn lint` (Biome) sobre los cambios de código y `vale` sobre los cambios de documentación, y corrige todo lo que señalen esas herramientas.
+</Admonition>
+
 <Admonition type="note" title="Alcance de la participación de la IA">
-  Claude no participó en el diseño ni la arquitectura de docStatic. Su uso se limita a las tareas de desarrollo y contenido descritas en esta página.
+  El concepto, la dirección del producto y las prioridades de docStatic son responsabilidad del responsable del proyecto. Claude contribuye al diseño y la implementación de funciones concretas dentro de esa dirección, y su trabajo se revisa antes de integrarse. En el momento de escribir esto, Claude es coautor de aproximadamente el seis por ciento de los commits.
 </Admonition>
 
 <RelatedTopics maxResults={5} />

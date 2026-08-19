@@ -43,3 +43,8 @@ tfoot
 [Hh]ardcoded?
 hostname
 hreflang
+Zotero
+Mendeley
+Anthropic('s)?
+pluggable
+maintainer('s)?

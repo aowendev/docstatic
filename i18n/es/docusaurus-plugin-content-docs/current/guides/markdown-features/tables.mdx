@@ -1,5 +1,5 @@
 ---
-lastmod: '2026-08-15T09:53:53.540Z'
+lastmod: '2026-08-19T14:50:01.054Z'
 modifiedBy: aowendev <aowen@translationcommons.org>
 title: CALS Tables
 description: Using CALS tables in docStatic, including merged cells, column widths and border control.
@@ -19,6 +19,8 @@ published: true
 unlisted: false
 ---
 
+# CALS Tables
+
 El componente **CalsTable** añade compatibilidad con el <Url urlKey="cals-table-model" /> utilizado por DocBook y DITA: celdas fusionadas, anchos y alineación por columna, y control detallado de los bordes. Un editor gráfico de cuadrículas integrado en el CMS se encarga de la estructura —fusionar y dividir celdas, insertar y eliminar filas y columnas— para que nunca tengas que editar manualmente los datos subyacentes de la tabla.
 
 1. Selecciona **Tabla CALS** en la lista **Incrustar**.
@@ -29,8 +31,8 @@ El componente **CalsTable** añade compatibilidad con el <Url urlKey="cals-table
 6. Haz doble clic en una celda para editar su contenido. El contenido de las celdas está en Markdown, por lo que funcionan `**negrita**`, `*cursiva*`, los enlaces y el código en línea.
 7. **Guarda** los cambios.
 
-<Admonition type="note" title="Scope">
-  Each table supports one header, body and footer section with a single set of columns. DocBook's multiple-`tgroup`-per-table and nested-table (`entrytbl`) features aren't supported.
+<Admonition type="note" title="Ámbito de aplicación">
+  Cada tabla admite una sección de encabezado, una de cuerpo y una de pie de página, con un único conjunto de columnas. No se admiten las características de DocBook que permiten varios `tgroup` por tabla ni las tablas anidadas (`entrytbl`).
 </Admonition>
 
 #### Ejemplo:

@@ -1,8 +1,8 @@
 ---
-lastmod: '2026-08-15T14:35:45.656Z'
+lastmod: '2026-08-19T14:50:06.171Z'
 modifiedBy: aowendev <aowen@translationcommons.org>
-title: Introduction
-description: docStatic a été conçu dès le départ pour être facilement installé et utilisé afin de rendre votre site Web rapidement opérationnel.
+title: 'Introduction'
+description: 'docStatic a été entièrement conçu pour être facile à installer et à utiliser, afin de vous permettre de mettre rapidement votre site web en ligne.'
 tags:
   - software
   - software_source-control
@@ -13,6 +13,8 @@ tags:
   - software_static-site-generators_docusaurus
   - software_content-management-systems
   - software_content-management-systems_tinacms
+  - development
+  - development_getting-started
 draft: false
 review: false
 translate: false
@@ -21,37 +23,45 @@ published: true
 unlisted: false
 ---
 
-docStatic est une plateforme de documentation moderne qui fait le lien entre les rédacteurs et les développeurs afin de vous aider à créer une documentation en ligne qui séduira vos utilisateurs.
+# Introduction
 
-Elle combine les meilleurs atouts des <Url urlKey="wikipedia-component-content-management-system" /> et des solutions [docs-as-code](https://www.writethedocs.org/guide/docs-as-code/) pour la documentation en ligne. Avec docStatic, n’importe quel membre de votre équipe peut créer et modifier vos documents sans perturber le flux de travail de vos développeurs.
+docStatic est une plateforme de documentation moderne qui fait le lien entre les rédacteurs et les développeurs pour vous aider à créer une documentation en ligne que vos utilisateurs adoreront.
+
+Elle combine les meilleurs atouts des solutions <Url urlKey="wikipedia-component-content-management-system" /> et [docs-as-code](https://www.writethedocs.org/guide/docs-as-code/) pour la documentation en ligne. Avec docStatic, n'importe quel membre de votre équipe peut créer et modifier vos documents sans perturber le flux de travail de vos développeurs.
 
 ## Fonctionnalités
 
-docStatic est une version améliorée de [Tinasaurus](https://tina.io/blog/tinasaurus-docusaurus-starter), un projet open source basé sur <Url urlKey="react" /> qui combine un <Url urlKey="wikipedia-static-site-generator" linkText={[{ lang: "fr", text: "générateur de site statique" }]} /> (<Url urlKey="docusaurus" />) et un <Url urlKey="wikipedia-headless-content-management-system" linkText={[ { lang: "fr", text: "système de gestion de contenu headless" }]} /> (<Url urlKey="tinacms" />). Il comprend :
+docStatic est né d’une amélioration de [Tinasaurus](https://tina.io/blog/tinasaurus-docusaurus-starter), un projet open source basé sur <Url urlKey="react" /> qui combine un <Url urlKey="wikipedia-static-site-generator" /> (<Url urlKey="docusaurus" />) et un <Url urlKey="wikipedia-headless-content-management-system" /> (<Url urlKey="tinacms" />). Il comprend :
 
 * Une interface d’édition conviviale pour les contenus Markdown, MDX, JSON et YAML.
-* Une intégration avec les workflows Git et CI/CD existants.
-* Des composants MDX intégrés pour la création de contenus enrichis.
+* L’intégration aux workflows Git et CI/CD existants.
+* Des composants MDX intégrés pour la création de contenu enrichi.
 * Un gestionnaire de médias prenant en charge les fournisseurs de médias tiers.
-* Édition dans le cloud (aucune installation locale requise).
-* Serveur Model Context Protocol (MCP) pour l’intégration d’un assistant IA.
+* L’édition dans le cloud (aucune installation locale requise).
+* Des tableaux de bord fournissant des rapports sur l’état du contenu et la validité des liens.
+* Un serveur MCP (Model Context Protocol) pour l’intégration d’un assistant IA.
+* Un chatbot IA intégrés au navigateur (en option) pour répondre aux questions relatives à la documentation.
 
 ## Gestion de contenu simplifiée
 
-Les collections par défaut de docStatic intègrent certaines des fonctionnalités de création les plus avancées que l’on peut attendre d’un CCMS.
+Les collections par défaut de docStatic intègrent certaines des fonctionnalités de rédaction les plus avancées que l’on peut attendre d’un CCMS.
 
 L’éditeur de texte enrichi facilite l’ajout :
 
-* De texte conditionnel, d’extraits de code et d’ensembles de variables pour la réutilisation du contenu
-* De taxonomies
-* De termes de glossaire
-* De blocs de code, de commentaires, de détails repliables, de figures, de notes de bas de page et d’onglets. Ceux-ci sont disponibles sous forme de modèles que vous pouvez insérer dans un fichier de contenu.
+* Du texte conditionnel, des extraits, des ensembles de variables et des URL gérées de manière centralisée pour la réutilisation du contenu.
+* Des taxonomies.
+* Des termes de glossaire.
+* Des blocs de code, des commentaires, des détails repliables, des figures, des notes de bas de page et des onglets. Ceux-ci sont disponibles sous forme de modèles que vous pouvez insérer dans un fichier de contenu.
 
 Le CMS utilise un schéma [GraphQL](https://graphql.org/) pour décrire la structure de votre contenu sous la forme d’un ensemble de collections.
 
-## Gestion par Git
+## Tableaux de bord
 
-Le contrôle de version, l’automatisation et, en option, la publication sont gérés via <Url urlKey="github" />. Lorsque vous modifiez des fichiers avec l’éditeur de texte enrichi, TinaCMS effectue un commit à l’enregistrement ou enregistre directement dans le fichier si vous travaillez en local. Git reste la source de référence pour toute l’équipe.
+docStatic ajoute des fonctionnalités de tableau de bord à TinaCMS, en interrogeant l’API GraphQL pour fournir des rapports sur l’état du contenu et la validité des liens directement dans le CMS. Cela inclut un aperçu du contenu affichant l’état du workflow de chaque rubrique, ainsi qu’un tableau de bord de santé des liens qui vérifie les liens externes et signale ceux qui sont rompus.
+
+## Prise en charge de Git
+
+Le contrôle de version, l’automatisation et, en option, la publication sont gérés via <Url urlKey="github" />. Lors de la modification de fichiers avec l’éditeur de texte enrichi, TinaCMS effectue un commit à l’enregistrement ou enregistre directement dans le fichier si le travail s’effectue en local. Git reste la source de référence pour toute l’équipe.
 
 La structure du dépôt est très similaire aux paramètres par défaut de Docusaurus, mais comporte quelques modifications nécessaires à l’intégration avec TinaCMS.
 
@@ -63,12 +73,14 @@ docStatic est préconfiguré avec des plugins prenant en charge des fonctionnali
 
 docStatic inclut un [serveur MCP (Model Context Protocol)](mcp-server.mdx) intégré qui permet aux assistants IA d’accéder directement à votre documentation et de la comprendre. Cela offre une assistance intelligente pour l’édition, la recherche et l’analyse de contenu en fonction de la structure et du contenu réels de votre documentation.
 
+docStatic peut également ajouter un chatbot IA optionnel à votre site publié, afin que les visiteurs puissent poser des questions et obtenir des réponses fondées sur votre documentation. Par défaut, il s’exécute entièrement dans le navigateur du visiteur — aucun service externe, aucune clé API ni aucun serveur n’est requis — bien qu’il puisse également être redirigé vers un fournisseur payant que vous hébergez vous-même.
+
 ## Basé sur React
 
 Le contenu est stocké au format MDX — une extension de Markdown qui prend en charge des composants React personnalisés pour des fonctionnalités telles que les avertissements. Ces composants sont disponibles de manière universelle et n’ont pas besoin d’être déclarés dans des fichiers individuels. Lorsque vous travaillez en local, le serveur de développement recompile instantanément les pages lorsque vous enregistrez vos modifications.
 
 ## Entièrement documenté
 
-Les développeurs trouveront toutes les informations nécessaires pour configurer et commencer à utiliser docStatic dans la documentation de [Docusaurus](https://docusaurus.io/docs) et de [TinaCMS](https://tina.io/docs). Ces informations ne sont pas reproduites ici, afin d’éviter qu’elles ne deviennent obsolètes. La documentation de docStatic se concentre plutôt sur l’utilisation du CMS.
+Les développeurs trouveront toutes les informations nécessaires pour configurer et commencer à utiliser docStatic dans la documentation de [Docusaurus](https://docusaurus.io/docs) et de [TinaCMS](https://tina.io/docs). Ces informations ne sont pas reprises ici, afin d’éviter qu’elles ne deviennent obsolètes. La documentation de docStatic se concentre plutôt sur l’utilisation du CMS.
 
 <RelatedTopics maxResults={7} />

@@ -44,7 +44,7 @@
     ],
     "path": "/guides/markdown-features/assets",
     "filePath": "guides/markdown-features/assets.mdx",
-    "lastmod": "2026-08-15T09:53:46.599Z"
+    "lastmod": "2026-08-19T07:36:00.490Z"
   },
   {
     "title": "Blog",
@@ -104,6 +104,22 @@
     "path": "/chatbot",
     "filePath": "chatbot.mdx",
     "lastmod": "2026-08-13T15:29:06.737Z"
+  },
+  {
+    "title": "Citations",
+    "description": "Cite sources from a central CSL bibliography.",
+    "tags": [
+      "elements",
+      "elements_citations",
+      "reuse",
+      "reuse_bibliography",
+      "software",
+      "software_content-management-systems",
+      "software_content-management-systems_tinacms"
+    ],
+    "path": "/guides/markdown-features/citations",
+    "filePath": "guides/markdown-features/citations.mdx",
+    "lastmod": "2026-08-19T07:52:34.336Z"
   },
   {
     "title": "CLI",
@@ -174,7 +190,7 @@
     ],
     "path": "/configuration",
     "filePath": "configuration.mdx",
-    "lastmod": "2026-08-15T09:53:46.052Z"
+    "lastmod": "2026-08-19T07:18:50.363Z"
   },
   {
     "title": "Context-sensitive help",
@@ -293,7 +309,7 @@
     ],
     "path": "/guides/markdown-features/figures",
     "filePath": "guides/markdown-features/figures.mdx",
-    "lastmod": "2026-03-04T22:51:34.363Z"
+    "lastmod": "2026-08-19T07:35:14.874Z"
   },
   {
     "title": "Footnotes",
@@ -394,7 +410,7 @@
     ],
     "path": "/installation",
     "filePath": "installation.mdx",
-    "lastmod": "2026-08-15T15:19:40.390Z"
+    "lastmod": "2026-08-19T13:00:00.000Z"
   },
   {
     "title": "Internationalization",
@@ -430,7 +446,7 @@
     ],
     "path": "/introduction",
     "filePath": "introduction.mdx",
-    "lastmod": "2026-08-15T14:35:45.443Z"
+    "lastmod": "2026-08-19T06:51:10.483Z"
   },
   {
     "title": "Introduction",
@@ -472,7 +488,7 @@
     ],
     "path": "/guides/markdown-features/intro",
     "filePath": "guides/markdown-features/intro.mdx",
-    "lastmod": "2026-08-15T09:53:46.899Z"
+    "lastmod": "2026-08-19T07:22:27.814Z"
   },
   {
     "title": "Markdown links",
@@ -616,7 +632,7 @@
     ],
     "path": "/guides/markdown-features/related-topics",
     "filePath": "guides/markdown-features/related-topics.mdx",
-    "lastmod": "2026-06-01T11:38:53.143Z"
+    "lastmod": "2026-08-19T07:09:49.059Z"
   },
   {
     "title": "Search",
@@ -641,7 +657,7 @@
     ],
     "path": "/seo",
     "filePath": "seo.mdx",
-    "lastmod": "2026-03-10T22:57:16.392Z"
+    "lastmod": "2026-08-19T07:57:28.504Z"
   },
   {
     "title": "Snippets",
@@ -737,7 +753,7 @@
   },
   {
     "title": "Upgrading",
-    "description": "Upgrading Node.js modules.",
+    "description": "Upgrade an existing docStatic site to the latest release using the update command.",
     "tags": [
       "software",
       "software_upgrading",
@@ -749,7 +765,7 @@
     ],
     "path": "/migration",
     "filePath": "migration/index.mdx",
-    "lastmod": "2026-03-10T22:59:35.900Z"
+    "lastmod": "2026-08-19T07:53:17.798Z"
   },
   {
     "title": "URLs",
@@ -764,8 +780,8 @@
     "lastmod": "2026-08-15T09:41:50.263Z"
   },
   {
-    "title": "Using Claude in this project",
-    "description": "How Claude Code is used in the docStatic project — automation, component development, style tooling, information architecture and content review.",
+    "title": "Use of Claude in this project",
+    "description": "How Claude Code is used in the docStatic project—feature development, automation, component work, style tooling, information architecture and content review.",
     "tags": [
       "software",
       "software_artificial-intelligence",
@@ -774,7 +790,7 @@
     ],
     "path": "/guides/using-claude",
     "filePath": "guides/using-claude.mdx",
-    "lastmod": "2026-06-01T00:00:00.000Z"
+    "lastmod": "2026-08-19T12:00:00.000Z"
   },
   {
     "title": "Using plugins",
@@ -809,6 +825,6 @@
     ],
     "path": "/guides/wikis",
     "filePath": "guides/wikis.mdx",
-    "lastmod": "2026-08-15T09:53:47.724Z"
+    "lastmod": "2026-08-19T06:55:37.713Z"
   }
 ]

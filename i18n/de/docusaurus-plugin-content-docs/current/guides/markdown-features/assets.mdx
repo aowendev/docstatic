@@ -1,5 +1,5 @@
 ---
-lastmod: '2026-08-15T09:53:49.262Z'
+lastmod: '2026-08-19T14:49:56.038Z'
 modifiedBy: aowendev <aowen@translationcommons.org>
 title: Assets
 tags:
@@ -36,19 +36,11 @@ DocStatic bietet zwei Möglichkeiten, Bilder zu Themen hinzuzufügen. Für Inlin
   Sie können [Librsvg](https://wiki.gnome.org/Projects/LibRsvg) verwenden, um SVGs zu skalieren. Beispielsweise legt `rsvg-convert example.svg -h 12 -f svg -o example.svg` eine Höhe von 12 Punkten fest.
 </Admonition>
 
-Für größere Bilder empfiehlt sich die Verwendung der Komponente „Abbildung“.
-
-1. Wählen Sie **Abbildung** aus der Liste **Einbetten**.
-2. Bearbeiten Sie die Komponente.
-3. Klicken Sie auf den Bereich **Bild**, um den **Medien-Manager** zu öffnen.
-4. Laden Sie ein Bild hoch oder wählen Sie eines aus.
-5. Geben Sie eine **Bildunterschrift** ein.
+Verwenden Sie für größere Bilder stattdessen die Komponente [Abbildung](figures.mdx). Sie fügt eine Bildunterschrift hinzu – die auch als Alt-Text für Bildschirmleser dient –, passt sich der Seite an und öffnet sich beim Anklicken in voller Größe in einem Leuchtkasten.
 
 #### Beispiel
 
-<Figure img="/img/docStaticDemo.jpg" caption="Beispielabbildung" />
-
-Die Abbildung passt sich der Größe des Anzeigefensters an. Durch Anklicken wird sie in maximaler Größe in einem Leuchtkasten geöffnet.
+<Figure img="/img/docStaticDemo.jpg" caption="Beispielabbildung" size={66} align="left" />
 
 Weitere Informationen zum Medienmanager finden Sie unter [Medienübersicht](https://tina.io/docs/reference/media/overview) in der TinaCMS-Dokumentation.
 
@@ -62,4 +54,4 @@ Auf die gleiche Weise können Sie auf vorhandene Assets verlinken, indem Sie den
 
 Weitere Informationen finden Sie unter <Url urlKey="docusaurus-static-assets" /> in der Docusaurus-Dokumentation.
 
-Übersetzt mit DeepL.com (kostenlose Version)
+<RelatedTopics maxResults={7} />

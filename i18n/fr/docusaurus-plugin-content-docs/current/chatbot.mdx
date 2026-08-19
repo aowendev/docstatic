@@ -1,5 +1,5 @@
 ---
-lastmod: '2026-08-13T15:29:07.019Z'
+lastmod: '2026-08-19T14:50:03.198Z'
 modifiedBy: aowendev <aowen@translationcommons.org>
 title: Chatbot
 tags:
@@ -13,6 +13,8 @@ approved: false
 published: true
 unlisted: false
 ---
+
+# Chatbot
 
 docStatic permet d'ajouter à votre site un chatbot basé sur l'IA qui répond aux questions concernant votre documentation. Par défaut, il fonctionne entièrement dans le navigateur du visiteur à l'aide de [WebLLM](https://webllm.mlc.ai/) (via WebGPU) ; aucun service externe, aucune clé API ni aucun serveur n'est donc nécessaire. Ce même widget peut également être redirigé vers un fournisseur payant que vous hébergez vous-même, sans modifier l’affichage pour les visiteurs.
 
@@ -43,8 +45,8 @@ Le modèle par défaut est `Qwen2.5-1.5B-Instruct-q4f16_1-MLC` (environ 1,6 Go, 
 * `SmolLM2-360M-Instruct-q4f16_1-MLC` — beaucoup plus petit et plus rapide, mais uniquement en anglais.
 * `Llama-3.2-1B-Instruct-q4f16_1-MLC` — plus petit que le modèle par défaut, il prend en charge l’anglais, l’allemand, le français, l’italien, le portugais, l’hindi, l’espagnol et le thaï, mais pas le japonais ni les autres langues utilisant un alphabet non latin.
 
-<Admonition type="note" title="Check language coverage before switching models">
-  If your site serves a language a smaller model doesn't officially support, answers in that language may be unreliable even with the "respond in this language" instruction the chatbot already sends automatically. Check a model's supported languages before making it the default.
+<Admonition type="note" title="Vérifiez les langues prises en charge avant de changer de modèle">
+  Si votre site propose une langue qui n'est pas officiellement prise en charge par un modèle plus petit, les réponses dans cette langue risquent de ne pas être fiables, même si le chatbot envoie déjà automatiquement l'instruction « Répondre dans cette langue ». Vérifiez les langues prises en charge par un modèle avant de le définir comme modèle par défaut.
 </Admonition>
 
 ## Plusieurs langues
@@ -125,8 +127,8 @@ export default async (request) => {
   \</TabItem>
 \</Tabs>
 
-<Admonition type="caution" title="Never embed a shared key client-side">
-  Do not put a real API key into the Chatbot settings' Endpoint URL field, or anywhere else that ships in the built site. The endpoint you configure should be a backend of your own, with the key held as a server-side secret.
+<Admonition type="caution" title="N'intégrez jamais une clé partagée côté client">
+  Ne saisissez pas de véritable clé API dans le champ « URL du point de terminaison » des paramètres du chatbot, ni à aucun autre endroit qui serait intégré au site final. Le point de terminaison que vous configurez doit correspondre à votre propre backend, la clé devant être conservée sous forme de secret côté serveur.
 </Admonition>
 
 <RelatedTopics maxResults={7} />

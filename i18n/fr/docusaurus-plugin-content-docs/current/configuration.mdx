@@ -1,22 +1,27 @@
 ---
-lastmod: '2026-08-15T09:53:55.263Z'
-title: Configuration
-description: Configurer le comportement de votre site grâce à docusaurus.config.ts et plus encore.
+lastmod: '2026-08-19T14:50:03.466Z'
+modifiedBy: aowendev <aowen@translationcommons.org>
+title: 'Configuration'
+description: 'Configurer le comportement de votre site via le fichier `docusaurus.config.ts` et bien plus encore.'
 tags:
   - configuration
   - configuration_docusaurus
+  - software
+  - software_static-site-generators
+  - software_static-site-generators_docusaurus
+  - software_content-management-systems
+  - software_content-management-systems_tinacms
 draft: false
 review: false
 translate: false
 approved: false
 published: true
 unlisted: false
-modifiedBy: aowendev <aowen@translationcommons.org>
 ---
 
 # Configuration
 
-La configuration du site statique doc est gérée via le fichier `docusaurus.config.ts`. Pour savoir comment modifier directement ce fichier, consultez la section <Url urlKey="docusaurus-configuration" /> de la documentation Docusaurus.
+La configuration du site statique docStatic est gérée via le fichier `docusaurus.config.ts`. Pour plus d'informations sur la modification directe de ce fichier, consultez la section <Url urlKey="docusaurus-configuration" /> de la documentation Docusaurus.
 
 Pour utiliser le CMS afin de modifier la configuration, accédez à la collection **Paramètres**. À partir de là, vous pouvez configurer les éléments suivants du site :
 
@@ -24,7 +29,7 @@ Pour utiliser le CMS afin de modifier la configuration, accédez à la collectio
 * **Slogan**.
 * **Favicon**.
 * **URL du schéma GraphQL**.
-* **Mode de couleur** par défaut (foncé ou clair).
+* **Mode de couleur** par défaut (sombre ou clair).
 * Éléments du **pied de page**.
 * **Langues**.
 * **Logo**.
@@ -37,12 +42,12 @@ Pour utiliser le CMS afin de modifier la configuration, accédez à la collectio
 
 Il existe une collection distincte intitulée **Thème** permettant de modifier la palette de couleurs et les paramètres typographiques.
 
-## Site vs. Collections
+## Sites et collections
 
 La barre latérale du CMS se divise en deux groupes :
 
-* **Collections** — contenu réutilisable à partir duquel vous créez de nombreux documents, tels que des articles de blog, des documents, des pages, des termes de glossaire et des pages wiki.
-* **Site** — configuration unique à l’échelle du site qui ne comporte qu’un seul document : **Paramètres**, **Thème**, **Page d’accueil**, **Chatbot**, **Tableaux de bord**, **Table des matières** et le **Gestionnaire de médias** intégré.
+* **Collections** : contenu réutilisable à partir duquel vous créez de nombreux documents, tels que des articles de blog, des documents, des pages, des termes de glossaire et des pages wiki.
+* **Site** : configuration unique à l’échelle du site qui ne contient qu’un seul document : **Paramètres**, **Thème**, **Page d’accueil**, **Chatbot**, **Tableaux de bord**, **Table des matières** et le **Gestionnaire de médias** intégré.
 
 Une collection apparaît sous **Site** plutôt que sous **Collections** lorsque son schéma définit `ui.global: true`. Cela modifie également la manière dont elle est modifiée : elle s’ouvre directement depuis la barre latérale plutôt que via une liste de documents.
 

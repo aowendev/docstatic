@@ -1,5 +1,5 @@
 ---
-lastmod: '2026-08-15T09:53:52.774Z'
+lastmod: '2026-08-19T14:50:00.397Z'
 modifiedBy: aowendev <aowen@translationcommons.org>
 title: Assets
 tags:
@@ -36,19 +36,11 @@ DocStatic ofrece dos formas de añadir imágenes a los temas. Para las imágenes
   Puede utilizar [Librsvg](https://wiki.gnome.org/Projects/LibRsvg) para escalar SVG. Por ejemplo, `rsvg-convert example.svg -h 12 -f svg -o example.svg` establece una altura de 12 puntos.
 </Admonition>
 
-Para imágenes más grandes, es mejor utilizar el componente Figura.
-
-1. Seleccione **Figura** en la lista **Incrustar**.
-2. Edite el componente.
-3. Haga clic en el área **Imagen** para abrir el **Administrador de medios**.
-4. Cargue o seleccione una imagen.
-5. Asígnele un **Título**.
+Para imágenes más grandes, utiliza en su lugar el componente [Figura](figures.mdx). Añade una leyenda —que también se usa como texto alternativo para lectores de pantalla—, se ajusta a la página y se abre a tamaño completo en un lightbox al hacer clic.
 
 #### Ejemplo
 
-<Figure img="/img/docStaticDemo.jpg" caption="Figura de ejemplo" />
-
-La figura cambia de tamaño en función de la ventana de visualización. Al hacer clic en ella, se abrirá en tamaño máximo en un cuadro de luz.
+<Figure img="/img/docStaticDemo.jpg" caption="Figura de ejemplo" size={66} align="left" />
 
 Para obtener más información sobre el Administrador de medios, consulte [Descripción general de los medios](https://tina.io/docs/reference/media/overview) en la documentación de TinaCMS.
 
@@ -61,3 +53,5 @@ Del mismo modo, puede enlazar a activos existentes utilizando la ruta de la carp
 ```
 
 Para obtener más información, consulte <Url urlKey="docusaurus-static-assets" /> en la documentación de Docusaurus.
+
+<RelatedTopics maxResults={7} />

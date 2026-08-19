@@ -1,7 +1,8 @@
 ---
-help: null
-lastmod: "2026-06-01T21:56:58.609Z"
-title: Using Claude in this project
+lastmod: '2026-08-19T14:49:57.133Z'
+modifiedBy: aowendev <aowen@translationcommons.org>
+title: 'Verwendung von Claude in diesem Projekt'
+description: 'Wie Claude Code im docStatic-Projekt eingesetzt wird – Feature-Entwicklung, Automatisierung, Arbeit an Komponenten, Stil-Tooling, Informationsarchitektur und Content-Review.'
 tags:
   - "software"
   - "software_artificial-intelligence"
@@ -15,9 +16,17 @@ published: true
 unlisted: false
 ---
 
-# Claude in diesem Projekt verwenden
+# Verwendung von Claude in diesem Projekt
 
-[Claude Code](https://claude.ai/code) ist die KI-gestützte CLI von Anthropic. In diesem Projekt wird es als Entwicklungsassistent für eine bestimmte Reihe von Aufgaben eingesetzt. Es wurde nicht verwendet, um die Architektur von docStatic zu entwerfen oder zu entwickeln.
+[Claude Code](https://claude.ai/code) ist Anthropics KI-gestützte CLI. Es wird in diesem Projekt als Entwicklungsassistent für die unten beschriebenen Aufgaben eingesetzt.
+
+Die Aufteilung der Verantwortlichkeiten ist wichtiger als die Liste der Aufgaben. Claude schlägt Optionen vor, vertritt eine davon und schreibt den Code. Jede Entscheidung, die das Produkt prägt – was gebaut wird, welcher Ansatz gewählt wird, was ausgeliefert wird – trifft der Projektverantwortliche. Wenn eine Designentscheidung Konsequenzen hat, die der Verantwortliche abwägen sollte, wird von Claude erwartet, den Kompromiss offenzulegen, anstatt ihn stillschweigend zu treffen.
+
+## Entwurf und Entwicklung von Funktionen
+
+Claude arbeitet an vollständigen Funktionen, nicht nur an isolierten Änderungen. Die Scaffolding-CLI und das Template-Sync-Tooling, der Chatbot mit seiner austauschbaren Provider-Unterstützung, das System zur Wiederverwendung verwalteter URLs und die gemeinsame Datenschicht der Dashboards wurden alle auf diese Weise entwickelt: Claude recherchiert den bestehenden Code, schlägt ein Design vor und setzt es um, sobald der Ansatz vereinbart ist.
+
+Das schließt die Konzeptionsarbeit ein. Datenstrukturen, Build- und Laufzeitgrenzen sowie die Struktur neuer Subsysteme werden von Claude entworfen und vor Beginn der Umsetzung überprüft. Entwürfe werden häufig zurückgewiesen, manche werden komplett verworfen.
 
 ## Automatisierung manueller Aufgaben
 
@@ -27,9 +36,13 @@ Claude übernimmt repetitive oder geskriptete Arbeiten, die sonst manuellen Aufw
 
 Claude wird verwendet, um React-Komponenten und Daten-Dashboards zu schreiben und zu iterieren. Dazu gehören die Implementierung neuer UI-Komponenten, die Anpassung von Layout und Styling sowie die Anbindung von Daten aus der TinaCMS GraphQL-API. Claude arbeitet innerhalb der bestehenden Komponentenmuster des Projekts, anstatt neue Abstraktionen einzuführen.
 
-## Inhaltliche Konsistenzprüfung
+## Definition von CMS-Schemas
 
-Claude überprüft die Dokumentation auf faktische Konsistenz, strukturelle Lücken und logischen Fluss. Dies ist eine leichtgewichtige Überprüfung – sie ersetzt keine formelle redaktionelle Überprüfung, ist aber nützlich, um offensichtliche Probleme zu erkennen, bevor der Inhalt die Überprüfer erreicht.
+Claude schreibt die TinaCMS-Collection- und Template-Definitionen, die die Bearbeitungsformulare steuern, einschließlich der Feldvalidierung und der Regeln, die Felder abhängig von anderen Werten ein- oder ausblenden.
+
+## Schreiben von Tests
+
+Claude schreibt und pflegt die Testsuite des Projekts. Tests sollen das Verhalten anhand einer maßgeblichen Quelle prüfen – eines externen Standards, einer Spezifikation oder der tatsächlich erzeugten Ausgabe – statt lediglich zu wiederholen, was der Code bereits aussagt.
 
 ## Fehlersuche
 
@@ -43,12 +56,20 @@ Claude wird verwendet, um Vale-Regeln für das docStatic-Stilset zu schreiben. D
 
 Claude hilft bei der Pflege der Informationsarchitektur des Dokumentensatzes – durch Überprüfung von Taxonomie, Tags und Seitenstruktur, um eine konsistente Kategorisierung und logische Navigation zu gewährleisten. Dies ist eine fortlaufende Aufgabe, die typischerweise parallel zu Inhaltsüberprüfungen durchgeführt wird.
 
+## Inhaltliche Konsistenzprüfung
+
+Claude überprüft die Dokumentation auf faktische Konsistenz, strukturelle Lücken und logischen Fluss. Dies ist eine leichtgewichtige Überprüfung – sie ersetzt keine formelle redaktionelle Überprüfung, ist aber nützlich, um offensichtliche Probleme zu erkennen, bevor der Inhalt die Überprüfer erreicht.
+
 ## Dokumentationsentwürfe
 
 Gelegentlich erstellt Claude einen ersten Entwurf einer Dokumentationsseite, der dann von einem menschlichen Autor überprüft und bearbeitet wird. Entwürfe werden als Ausgangspunkte behandelt, nicht als fertiger Inhalt.
 
+<Admonition type="note" title="Änderungen validieren">
+  Bevor eine Arbeit als abgeschlossen gilt, führt Claude `yarn lint` (Biome) für Codeänderungen und `vale` für Änderungen an der Dokumentation aus und behebt alles, was eines der beiden Tools meldet.
+</Admonition>
+
 <Admonition type="note" title="Umfang der KI-Beteiligung">
-  Claude war nicht an der Gestaltung oder Architektur von docStatic beteiligt. Sein Einsatz beschränkt sich auf die auf dieser Seite beschriebenen Entwicklungs- und Inhaltsaufgaben.
+  Konzept, Produktrichtung und Prioritäten von docStatic liegen in der Verantwortung des Projektverantwortlichen. Claude trägt zur Konzeption und Umsetzung einzelner Funktionen innerhalb dieser Richtung bei, und seine Arbeit wird vor der Integration überprüft. Zum Zeitpunkt der Erstellung ist Claude Mitautor von etwa sechs Prozent der Commits.
 </Admonition>
 
 <RelatedTopics maxResults={5} />

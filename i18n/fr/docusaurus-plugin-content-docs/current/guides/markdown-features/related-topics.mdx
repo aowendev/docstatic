@@ -1,17 +1,18 @@
 ---
-help: null
-lastmod: "2026-06-01T21:56:58.817Z"
-title: Related Topics
+lastmod: '2026-08-19T14:50:05.107Z'
+modifiedBy: aowendev <aowen@translationcommons.org>
+title: 'Sujets connexes'
+description: 'Générer automatiquement des liens vers du contenu connexe en fonction des balises taxonomiques communes.'
 tags:
-  - "elements"
-  - "elements_links"
-  - "computer-languages"
-  - "computer-languages_markdown"
-  - "software"
-  - "software_content-management-systems"
-  - "software_content-management-systems_tinacms"
-  - "metadata"
-  - "metadata_taxonomies"
+  - elements
+  - elements_links
+  - computer-languages
+  - computer-languages_markdown
+  - software
+  - software_content-management-systems
+  - software_content-management-systems_tinacms
+  - metadata
+  - metadata_taxonomies
 draft: false
 review: false
 translate: false
@@ -22,27 +23,27 @@ unlisted: false
 
 # Sujets connexes
 
-Le composant **Sujets connexes** suggère automatiquement du contenu connexe basé sur des balises de taxonomie partagées. Il analyse les balises de la page courante et trouve d'autres documents avec des balises similaires, puis les affiche sous forme de liste de recommandations organisée.
+Le composant **Sujets connexes** propose automatiquement du contenu connexe en fonction des balises taxonomiques communes. Il analyse les balises de la page actuelle, identifie d’autres documents comportant des balises similaires, puis les affiche sous la forme d’une liste de recommandations sélectionnées.
 
-## Ajout de sujets connexes
+## Ajouter des sujets connexes
 
 1. Sélectionnez **Sujets connexes** dans la liste **Intégrer**.
 2. Modifiez le composant.
-3. (Facultatif) Définissez le **Nombre de résultats maximum** pour contrôler le nombre de sujets connexes affichés (5 par défaut).
+3. (Facultatif) Définissez le **Nombre maximal de résultats** pour contrôler le nombre de sujets connexes affichés (valeur par défaut : 5).
 4. **Enregistrez** vos modifications.
 
 ## Options de configuration
 
-* **Nombre de résultats maximum** : Contrôle le nombre de sujets connexes affichés (1-20)
+**Nombre maximal de résultats** : permet de contrôler le nombre de sujets connexes affichés (1 à 20)
 
 ## Fonctionnement
 
-Le composant utilise l'algorithme de similarité de Jaccard pour comparer les balises de taxonomie entre la page courante et toutes les autres pages publiées. Les pages ayant plus de balises en commun apparaîtront plus haut dans la liste. Le composant n'apparaît que sur les pages qui ont des balises de taxonomie et lorsque du contenu connexe est trouvé.
+Le composant utilise l’algorithme de similarité de Jaccard pour comparer les balises de taxonomie entre la page actuelle et toutes les autres pages publiées. Les pages présentant le plus de balises communes apparaîtront en tête de liste. Le composant n’apparaît que sur les pages comportant des balises de taxonomie et uniquement lorsque du contenu associé est trouvé.
 
 ## Bonnes pratiques
 
-* **Utilisez un balisage cohérent** : Plus vous appliquez des balises de taxonomie de façon cohérente dans votre contenu, meilleures seront les suggestions de sujets connexes.
-* **Placement optimal** : Placez le composant Sujets connexes à la fin de votre contenu pour encourager une lecture approfondie.
-* **Limites raisonnables** : Utilisez 3 à 7 sujets connexes pour une meilleure expérience utilisateur. Trop de suggestions peuvent être écrasantes.
+* **Utilisez un balisage cohérent** : plus vous appliquez les balises de taxonomie de manière cohérente dans l’ensemble de votre contenu, plus les suggestions de sujets associés seront pertinentes.
+* **Emplacement optimal** : placez le composant « Sujets connexes » à la fin de votre contenu pour inciter à la lecture complémentaire.
+* **Limites raisonnables** : utilisez entre 3 et 7 sujets connexes pour une expérience utilisateur optimale. Un trop grand nombre de suggestions peut être déroutant.
 
 <RelatedTopics maxResults={7} />

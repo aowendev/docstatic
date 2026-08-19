@@ -1,5 +1,5 @@
 ---
-lastmod: '2026-08-13T15:29:07.124Z'
+lastmod: '2026-08-19T14:50:07.059Z'
 modifiedBy: aowendev <aowen@translationcommons.org>
 title: Chatbot
 tags:
@@ -13,6 +13,8 @@ approved: false
 published: true
 unlisted: false
 ---
+
+# Chatbot
 
 docStatic を使用すると、ドキュメントに関する質問に答える AI チャットボットをサイトに追加できます。デフォルトでは、[WebLLM](https://webllm.mlc.ai/)（WebGPU 経由）を使用して訪問者のブラウザ上で完全に実行されるため、外部サービス、API キー、サーバーは一切必要ありません。 また、このウィジェットは、訪問者に表示される内容を一切変更することなく、ご自身でホストしている有料プロバイダーを指定して利用することも可能です。
 
@@ -43,8 +45,8 @@ CMSでチャットボット設定を開き、**「チャットボットを有効
 * `SmolLM2-360M-Instruct-q4f16_1-MLC`—サイズがはるかに小さく高速ですが、英語のみに対応しています。
 * `Llama-3.2-1B-Instruct-q4f16_1-MLC`—デフォルトよりも軽量で、英語、ドイツ語、フランス語、イタリア語、ポルトガル語、ヒンディー語、スペイン語、タイ語に対応していますが、日本語やその他の非ラテン文字言語には対応していません。
 
-<Admonition type="note" title="Check language coverage before switching models">
-  If your site serves a language a smaller model doesn't officially support, answers in that language may be unreliable even with the "respond in this language" instruction the chatbot already sends automatically. Check a model's supported languages before making it the default.
+<Admonition type="note" title="モデルを切り替える前に、対応言語を確認してください">
+  サイトが、より小規模なモデルが公式にサポートしていない言語に対応している場合、チャットボットがすでに自動的に送信している「この言語で回答する」という指示があっても、その言語での回答は信頼できない可能性があります。モデルをデフォルトに設定する前に、そのモデルがサポートしている言語を確認してください。
 </Admonition>
 
 ## 多言語対応
@@ -125,8 +127,8 @@ export default async (request) => {
   \</TabItem>
 \</Tabs>
 
-<Admonition type="caution" title="Never embed a shared key client-side">
-  Do not put a real API key into the Chatbot settings' Endpoint URL field, or anywhere else that ships in the built site. The endpoint you configure should be a backend of your own, with the key held as a server-side secret.
+<Admonition type="caution" title="共有鍵をクライアント側に埋め込んではいけません">
+  チャットボットの設定にある「エンドポイントURL」フィールドや、構築されたサイト内で公開されるその他の場所には、実際のAPIキーを入力しないでください。設定するエンドポイントは、ご自身で用意したバックエンドとし、APIキーはサーバー側のシークレットとして管理してください。
 </Admonition>
 
 <RelatedTopics maxResults={7} />

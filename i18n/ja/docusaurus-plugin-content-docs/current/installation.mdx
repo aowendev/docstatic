@@ -1,5 +1,5 @@
 ---
-lastmod: '2026-08-15T15:19:40.672Z'
+lastmod: '2026-08-19T14:50:09.236Z'
 modifiedBy: aowendev <aowen@translationcommons.org>
 title: Installation
 tags:
@@ -104,8 +104,8 @@ npm install -g yarn
   ```
 </Admonition>
 
-<Admonition type="note" title="Note">
-  On Windows, you don’t use sudo. Just open your terminal as Administrator and run the command.
+<Admonition type="note" title="注意">
+  Windowsでは、sudoは使用しません。ターミナルを「管理者として実行」で開き、コマンドを実行してください。
 </Admonition>
 
 ***
@@ -148,8 +148,8 @@ cd my-docs
 yarn dev
 ```
 
-<Admonition type="tip" title="Tip">
-  Run `npx create-docstatic@latest --help` to see the available options, such as `--no-install` to skip dependency installation.
+<Admonition type="tip" title="ヒント">
+  `npx create-docstatic@latest --help` を実行すると、依存関係のインストールをスキップする `--no-install` など、利用可能なオプションを確認できます。
 </Admonition>
 
 この方法でサイトを作成した場合は、[プロジェクト構造](#project-structure)のセクションへ進んでください。
@@ -166,8 +166,8 @@ npx create-docstatic@latest --update
 
 更新にはクリーンな Git ワーキングツリーが必要ですので、まず作業内容をコミットしてください。その後、`git diff` で結果を確認し、更新されたファイルに対して行ったカスタマイズを再度適用してからコミットしてください。
 
-<Admonition type="tip" title="Tip">
-  Add `--dry-run` to see what would change without writing anything.
+<Admonition type="tip" title="ヒント">
+  `--dry-run` を追加すると、実際に書き込みを行わずに、どのような変更が行われるかを確認できます。
 </Admonition>
 
 ### docStatic リポジトリのフォーク
@@ -224,16 +224,21 @@ Yarn は package.json に記載されているすべてのものをダウンロ�
 docstatic
 ├── apis
 │   └── petstore.yaml
+├── bin
+│   └── docstatic.js
 ├── blog
 │   └── hybrid.mdx
 ├── config
+│   ├── chatbot
+│   │   └── index.json
 │   ├── docusaurus
 │   │   └── index.json
-│   ├── homepage
+│   ├── sidebar
 │   │   └── index.json
-│   └── sidebar
+│   └── theme
 │       └── index.json
-│
+├── create-docstatic
+│   └── index.js
 ├── docs
 │   └── introduction.mdx
 ├── i18n
@@ -248,9 +253,15 @@ docstatic
 │   │   └── index.json
 │   ├── glossaryTerms
 │   │   └── index.json
+│   ├── homepage
+│   │   └── index.json
+│   ├── media
+│   │   └── index.json
 │   ├── snippets
 │   │   └── example.mdx
 │   ├── taxonomy
+│   │   └── index.json
+│   ├── urls
 │   │   └── index.json
 │   ├── variableSets
 │   │   └── index.json
@@ -259,6 +270,8 @@ docstatic
 ├── scripts
 │   └── generate-media-index.js
 ├── src
+│   ├── components
+│   │   └── Dashboard
 │   ├── css
 │   │   └── custom.css
 │   └── pages
@@ -267,6 +280,10 @@ docstatic
 │       └── index.module.css
 ├── static
 │   └── img
+├── template
+│   └── docs
+├── test
+│   └── link-checker.test.mjs
 ├── tina
 │   └── config.jsx
 ├── docusaurus.config.ts
@@ -279,16 +296,21 @@ docstatic
 ### プロジェクト構造の概要
 
 * `/apis/` - OpenAPI YAML ファイル。
+* `/bin/` - `create-docstatic` が新しいサイトを作成する際に実行する `docstatic` CLI のエントリーポイント。docStatic リポジトリをクローンした場合にのみ存在します。
 * `/blog/` - ブログ用 MDX ファイル。
-* `/config/` - TinaCMS が docStatic を設定するために使用する JSON ファイル。
+* `/config/` - TinaCMS が docStatic を設定するために使用する JSON ファイル。チャットボットとテーマの設定を含みます。
+* `/create-docstatic/` - `create-docstatic` として公開されている npm パッケージ。docStatic リポジトリをクローンした場合にのみ存在します。
 * `/docs/` - ドキュメント用 MDX ファイル。
 * `/i18n/` - 翻訳ファイル。
 * `/mcp-server/` - AIアシスタントがドキュメントにアクセスできるようにする [MCPサーバー](mcp-server.mdx)。
-* `/reuse/` - 再利用可能なコンテンツ。
+* `/reuse/` - 再利用可能なコンテンツ。管理された URL やホームページ、メディアの設定を含みます。
 * `/scripts/` - `prebuild` および `predev` によって自動的に実行されるビルド時のスクリプト。
 * `/src/` - ページやカスタム React コンポーネントなど、ドキュメント以外のファイル。
+  * `/src/components` - ダッシュボードやチャットボットなど、カスタム React コンポーネント。
   * `/src/pages` - このディレクトリ内の JSX/TSX/MDX ファイルは、すべてウェブサイトのページに変換されます。
 * `/static/` - 静的フォルダ。ここにあるコンテンツはすべて、最終的なビルドフォルダのルートにコピーされます。
+* `/template/` - メインサイトと同期を保ち、`create-docstatic` によって新しいサイトに配布されるスキャフォールディングテンプレート。docStatic リポジトリをクローンした場合にのみ存在します。[CLI](cli.mdx#template-sync-commands) を参照してください。
+* `/test/` - プロジェクトのテストスイート。docStatic リポジトリをクローンした場合にのみ存在します。
 * `/tina/` - TinaCMS の設定および GraphQL スキーマ。
 * `/docusaurus.config.ts` - サイト設定を含む設定ファイル。
 * `/package.json` - docStatic ウェブサイトは React アプリです。必要な npm パッケージを自由にインストールして使用できます。

@@ -6,6 +6,10 @@
       "_template": "doc"
     },
     {
+      "document": "docs/guides/using-claude.mdx",
+      "_template": "doc"
+    },
+    {
       "title": "Getting started",
       "link": "generated",
       "items": [
@@ -63,27 +67,7 @@
           "docLink": "docs/guides/markdown-features/intro.mdx",
           "items": [
             {
-              "document": "docs/guides/markdown-features/react.mdx",
-              "_template": "doc"
-            },
-            {
-              "document": "docs/guides/markdown-features/tabs.mdx",
-              "_template": "doc"
-            },
-            {
-              "document": "docs/guides/markdown-features/tables.mdx",
-              "_template": "doc"
-            },
-            {
-              "document": "docs/guides/markdown-features/code-blocks.mdx",
-              "_template": "doc"
-            },
-            {
               "document": "docs/guides/markdown-features/admonitions.mdx",
-              "_template": "doc"
-            },
-            {
-              "document": "docs/guides/markdown-features/toc.mdx",
               "_template": "doc"
             },
             {
@@ -91,23 +75,15 @@
               "_template": "doc"
             },
             {
-              "document": "docs/guides/markdown-features/links.mdx",
+              "document": "docs/guides/markdown-features/tables.mdx",
               "_template": "doc"
             },
             {
-              "document": "docs/guides/markdown-features/plugins.mdx",
+              "document": "docs/guides/markdown-features/citations.mdx",
               "_template": "doc"
             },
             {
-              "document": "docs/guides/markdown-features/math-equations.mdx",
-              "_template": "doc"
-            },
-            {
-              "document": "docs/guides/markdown-features/diagrams.mdx",
-              "_template": "doc"
-            },
-            {
-              "document": "docs/guides/markdown-features/metadata.mdx",
+              "document": "docs/guides/markdown-features/code-blocks.mdx",
               "_template": "doc"
             },
             {
@@ -123,6 +99,10 @@
               "_template": "doc"
             },
             {
+              "document": "docs/guides/markdown-features/diagrams.mdx",
+              "_template": "doc"
+            },
+            {
               "document": "docs/guides/markdown-features/figures.mdx",
               "_template": "doc"
             },
@@ -135,11 +115,39 @@
               "_template": "doc"
             },
             {
+              "document": "docs/guides/markdown-features/metadata.mdx",
+              "_template": "doc"
+            },
+            {
+              "document": "docs/guides/markdown-features/toc.mdx",
+              "_template": "doc"
+            },
+            {
+              "document": "docs/guides/markdown-features/links.mdx",
+              "_template": "doc"
+            },
+            {
+              "document": "docs/guides/markdown-features/math-equations.mdx",
+              "_template": "doc"
+            },
+            {
+              "document": "docs/guides/markdown-features/react.mdx",
+              "_template": "doc"
+            },
+            {
+              "document": "docs/guides/markdown-features/plugins.mdx",
+              "_template": "doc"
+            },
+            {
               "document": "docs/guides/markdown-features/related-topics.mdx",
               "_template": "doc"
             },
             {
               "document": "docs/guides/markdown-features/snippets.mdx",
+              "_template": "doc"
+            },
+            {
+              "document": "docs/guides/markdown-features/tabs.mdx",
               "_template": "doc"
             },
             {
@@ -191,10 +199,6 @@
         },
         {
           "document": "docs/cli.mdx",
-          "_template": "doc"
-        },
-        {
-          "document": "docs/guides/using-claude.mdx",
           "_template": "doc"
         }
       ],

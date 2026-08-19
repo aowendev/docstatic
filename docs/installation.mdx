@@ -1,5 +1,5 @@
 ---
-lastmod: '2026-08-15T15:19:40.390Z'
+lastmod: '2026-08-19T14:49:54.079Z'
 modifiedBy: aowendev <aowen@translationcommons.org>
 title: Installation
 description: 'How to install docStatic locally, and start a docStatic site in no time.'
@@ -231,16 +231,21 @@ After creating your site or cloning the repository, you will see various files i
 docstatic
 ├── apis
 │   └── petstore.yaml
+├── bin
+│   └── docstatic.js
 ├── blog
 │   └── hybrid.mdx
 ├── config
+│   ├── chatbot
+│   │   └── index.json
 │   ├── docusaurus
 │   │   └── index.json
-│   ├── homepage
+│   ├── sidebar
 │   │   └── index.json
-│   └── sidebar
+│   └── theme
 │       └── index.json
-│   
+├── create-docstatic
+│   └── index.js
 ├── docs
 │   └── introduction.mdx
 ├── i18n
@@ -255,9 +260,15 @@ docstatic
 │   │   └── index.json
 │   ├── glossaryTerms
 │   │   └── index.json
+│   ├── homepage
+│   │   └── index.json
+│   ├── media
+│   │   └── index.json
 │   ├── snippets
 │   │   └── example.mdx
 │   ├── taxonomy
+│   │   └── index.json
+│   ├── urls
 │   │   └── index.json
 │   ├── variableSets
 │   │   └── index.json
@@ -266,6 +277,8 @@ docstatic
 ├── scripts
 │   └── generate-media-index.js
 ├── src
+│   ├── components
+│   │   └── Dashboard
 │   ├── css
 │   │   └── custom.css
 │   └── pages
@@ -274,6 +287,10 @@ docstatic
 │       └── index.module.css
 ├── static
 │   └── img
+├── template
+│   └── docs
+├── test
+│   └── link-checker.test.mjs
 ├── tina
 │   └── config.jsx
 ├── docusaurus.config.ts
@@ -286,16 +303,21 @@ docstatic
 ### Project structure rundown
 
 * `/apis/` - OpenAPI YAML files.
+* `/bin/` - The `docstatic` CLI entry point that `create-docstatic` runs to scaffold a new site. Only present if you cloned the docStatic repository.
 * `/blog/` - Blog MDX files.
-* `/config/` - JSON files used by TinaCMS to configure docStatic.
+* `/config/` - JSON files used by TinaCMS to configure docStatic, including the chatbot and theme settings.
+* `/create-docstatic/` - The npm package published as `create-docstatic`. Only present if you cloned the docStatic repository.
 * `/docs/` - Docs MDX files.
 * `/i18n/` - Translation files.
 * `/mcp-server/` - The [MCP server](mcp-server.mdx) that gives AI assistants access to your documentation.
-* `/reuse/` - Reusable content.
+* `/reuse/` - Reusable content, including managed URLs and homepage and media settings.
 * `/scripts/` - Build-time scripts run automatically by `prebuild` and `predev`.
 * `/src/` - Non-documentation files like pages or custom React components.
+  * `/src/components` - Custom React components, such as the dashboards and chatbot.
   * `/src/pages` - Any JSX/TSX/MDX file within this directory are converted into a website page.
 * `/static/` - Static folder. Any content inside here is copied into the root of the final build folder.
+* `/template/` - The scaffolding template kept in sync with the main site and shipped to new sites by `create-docstatic`. Only present if you cloned the docStatic repository. See [CLI](cli.mdx#template-sync-commands).
+* `/test/` - The project's test suite. Only present if you cloned the docStatic repository.
 * `/tina/` - TinaCMS configuration and GraphQL schema.
 * `/docusaurus.config.ts` - A config file containing the site configuration.
 * `/package.json` - A docStatic website is a React app. You can install and use any npm packages you want.

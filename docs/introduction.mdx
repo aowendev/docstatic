@@ -1,5 +1,5 @@
 ---
-lastmod: '2026-08-15T14:35:45.443Z'
+lastmod: '2026-08-19T14:49:54.144Z'
 modifiedBy: aowendev <aowen@translationcommons.org>
 title: Introduction
 description: docStatic was designed from the ground up to be easily installed and used to get your website up and running quickly.
@@ -23,20 +23,24 @@ published: true
 unlisted: false
 ---
 
+# Introduction
+
 docStatic is a modern documentation platform that bridges the gap between writers and developers to help you create online documentation your users will love.
 
 It simultaneously provides the best features of <Url urlKey="wikipedia-component-content-management-system" /> and [docs-as-code](https://www.writethedocs.org/guide/docs-as-code/) solutions for online documentation. With docStatic, anyone on your team can create and edit your documents without sacrificing your developer workflow.
 
 ## Features
 
-docStatic is a refinement of [Tinasaurus](https://tina.io/blog/tinasaurus-docusaurus-starter), an open-source <Url urlKey="react" />-based project that combines a <Url urlKey="wikipedia-static-site-generator" /> (<Url urlKey="docusaurus" />) with a <Url urlKey="wikipedia-headless-content-management-system" /> (<Url urlKey="tinacms" />). It includes:
+docStatic began as a refinement of [Tinasaurus](https://tina.io/blog/tinasaurus-docusaurus-starter), an open-source <Url urlKey="react" />-based project that combines a <Url urlKey="wikipedia-static-site-generator" /> (<Url urlKey="docusaurus" />) with a <Url urlKey="wikipedia-headless-content-management-system" /> (<Url urlKey="tinacms" />). It includes:
 
 * An easy-to-use editing interface for Markdown, MDX, JSON, and YAML content.
 * Integration with existing Git and CI/CD workflows.
 * Embedded MDX components for rich content authoring.
 * Media manager with support for third-party media providers.
 * Editing in the cloud (no local setup required).
+* Dashboards reporting on content status and link health.
 * Model Context Protocol (MCP) server for AI assistant integration.
+* Optional in-browser AI chatbot for answering documentation questions.
 
 ## Easy content management
 
@@ -44,12 +48,16 @@ docStatic's default collections include some of the more advanced authoring feat
 
 The rich text editor makes it easy to add:
 
-* Conditional text, snippets, and variable sets for content reuse
-* Taxonomies
-* Glossary terms
+* Conditional text, snippets, variable sets and centrally managed URLs for content reuse.
+* Taxonomies.
+* Glossary terms.
 * Code blocks, comments, collapsible details, figure, footnotes, and tabs. These are available as templates that you can insert into a content file.
 
 The CMS uses a [GraphQL](https://graphql.org/) schema to describe the shape of your content as a set of collections.
+
+## Dashboards
+
+docStatic adds dashboard functionality to TinaCMS, querying the GraphQL API to report on content status and link health directly in the CMS. This includes a content overview showing every topic's workflow status, and a link health dashboard that checks external links and flags broken ones.
 
 ## Git-backed
 
@@ -64,6 +72,8 @@ docStatic is preconfigured with plugins supporting features such as <Url urlKey=
 ## AI Integration
 
 docStatic includes an integrated [Model Context Protocol (MCP) server](mcp-server.mdx) that enables AI assistants to directly access and understand your documentation. This provides intelligent assistance for content editing, searching, and analysis based on your actual documentation structure and content.
+
+docStatic can also add an optional AI chatbot to your published site, so visitors can ask questions and get answers grounded in your documentation. By default it runs entirely in the visitor's browser—no external service, API key or server required—though it can also be pointed at a paid provider you host yourself.
 
 ## React-based
 

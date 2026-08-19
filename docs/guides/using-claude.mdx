@@ -1,7 +1,7 @@
 ---
-lastmod: "2026-06-01T00:00:00.000Z"
-title: Using Claude in this project
-description: How Claude Code is used in the docStatic project — automation, component development, style tooling, information architecture and content review.
+lastmod: '2026-08-19T14:49:53.838Z'
+title: Use of Claude in this project
+description: How Claude Code is used in the docStatic project—feature development, automation, component work, style tooling, information architecture and content review.
 tags:
   - "software"
   - "software_artificial-intelligence"
@@ -13,25 +13,40 @@ translate: false
 approved: false
 published: true
 unlisted: false
+modifiedBy: aowendev <aowen@translationcommons.org>
 ---
 
-[Claude Code](https://claude.ai/code) is Anthropic's AI-powered CLI. It is used in this project as a development assistant for a specific set of tasks. It was not used to design or develop the architecture of docStatic.
+# Use of Claude in this project
+
+[Claude Code](https://claude.ai/code) is Anthropic's AI-powered CLI. It is used in this project as a development assistant, on the tasks described below.
+
+The division of responsibility matters more than the list of tasks. Claude proposes options, argues for one and writes code. Every decision that shapes the product—what to build, which approach to take, what to ship—is made by the maintainer. Where a design choice has consequences the maintainer should weigh, Claude is expected to surface the trade-off rather than pick quietly.
+
+## Designing and building features
+
+Claude works on whole features, not only on isolated changes. The scaffolding CLI and template sync tooling, the chatbot with its pluggable provider support, the managed URL reuse system and the shared dashboard data layer were all developed this way: Claude researches the existing code, proposes a design and implements it once the approach is agreed.
+
+That includes design work. Data shapes, build-time and run-time boundaries, and the structure of new subsystems are drafted by Claude and reviewed before implementation begins. Designs are frequently sent back, and some are rejected outright.
 
 ## Automating manual tasks
 
-Claude handles repetitive or scripted work that would otherwise require manual effort—for example, bulk-updating frontmatter fields across many files, reformatting content to match a new structure, or generating boilerplate that follows a known pattern. These are tasks where the shape of the work is clear but execution is tedious.
+Claude handles repetitive or scripted work that would otherwise require manual effort—for example, bulk-updating Frontmatter fields across many files, reformatting content to match a new structure or generating boilerplate that follows a known pattern. These are tasks where the shape of the work is clear but execution is tedious.
 
 ## Developing React components and dashboards
 
-Claude is used to write and iterate on React components and data dashboards. This includes implementing new UI components, adjusting layout and styling, and wiring up data from the TinaCMS GraphQL API. Claude works within the existing component patterns in the project rather than introducing new abstractions.
+Claude is used to write and iterate on React components and data dashboards. This includes implementing new UI components, adjusting layout and styling and wiring up data from the TinaCMS GraphQL API. Claude works within the existing component patterns in the project rather than introducing new abstractions.
 
-## Sanity checking content
+## Defining CMS schemas
 
-Claude reviews documentation for factual consistency, structural gaps, and logical flow. This is a lightweight check—it does not replace a formal editorial review but is useful for catching obvious problems before content reaches reviewers.
+Claude writes the TinaCMS collection and template definitions that drive the editing forms, including field validation and the rules that show or hide fields based on other values.
+
+## Writing tests
+
+Claude writes and maintains the project's test suite. Tests are expected to check behaviour against an authoritative source—an external standard, a specification or the real generated output—rather than restating what the code already says.
 
 ## Tracking down bugs
 
-Claude helps narrow down the source of bugs by reading relevant code, checking recent changes, and reasoning about likely causes. It is particularly useful for bugs that span multiple files or require cross-referencing configuration with behaviour.
+Claude helps narrow down the source of bugs by reading relevant code, checking recent changes and reasoning about likely causes. It is particularly useful for bugs that span multiple files or require cross-referencing configuration with behaviour.
 
 ## Writing style rules
 
@@ -39,14 +54,22 @@ Claude is used to write Vale rules for the docStatic style set. This covers auth
 
 ## Maintaining information architecture
 
-Claude helps maintain the information architecture of the doc set — reviewing taxonomy, tags and page structure to ensure consistent categorisation and logical navigation. This is an ongoing task, typically run alongside content reviews.
+Claude helps maintain the information architecture of the doc set—reviewing taxonomy, tags and page structure to ensure consistent categorisation and logical navigation. This is an ongoing task, typically run alongside content reviews.
+
+## Sanity checking content
+
+Claude reviews documentation for factual consistency, structural gaps and logical flow. This is a lightweight check—it does not replace a formal editorial review but is useful for catching obvious problems before content reaches reviewers.
 
 ## Drafting documentation
 
 Occasionally Claude produces a first draft of a documentation page, which is then reviewed and edited by a human author. Drafts are treated as starting points, not finished content.
 
+<Admonition type="note" title="Validating changes">
+  Before work is considered done, Claude runs `yarn lint` (Biome) against code changes and `vale` against documentation changes, and fixes anything either tool flags.
+</Admonition>
+
 <Admonition type="note" title="Scope of AI involvement">
-Claude was not involved in the design or architecture of docStatic. Its use is limited to the development and content tasks described on this page.
+  docStatic's concept, product direction and priorities are the maintainer's. Claude contributes to the design and implementation of individual features within that direction, and its work is reviewed before it lands. At the time of writing, Claude is a co-author on roughly six per cent of commits.
 </Admonition>
 
 <RelatedTopics maxResults={5} />

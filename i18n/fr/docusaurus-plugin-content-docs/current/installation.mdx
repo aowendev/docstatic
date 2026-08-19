@@ -1,8 +1,8 @@
 ---
-lastmod: '2026-08-15T15:19:40.603Z'
+lastmod: '2026-08-19T14:50:06.020Z'
 modifiedBy: aowendev <aowen@translationcommons.org>
-title: Installation
-description: Comment installer docStatic localement et démarrer un site docStatic en un rien de temps.
+title: 'Installation'
+description: 'Comment installer docStatic en local et lancer un site docStatic en un clin d''œil.'
 tags:
   - software
   - software_integrated-development-environments
@@ -16,6 +16,11 @@ tags:
   - software_content-management-systems_tinacms
   - software_grammar-spelling-style
   - software_grammar-spelling-style_languagetool
+  - development
+  - development_installation
+  - development_getting-started
+  - computer-languages
+  - computer-languages_javascript
 draft: false
 review: false
 translate: false
@@ -28,25 +33,25 @@ unlisted: false
 
 Bienvenue ! Ce guide vous accompagne tout au long de la configuration initiale de docStatic.
 
-Si vous n’avez jamais utilisé GitHub ou le concept de « docs-as-code » auparavant, ne vous inquiétez pas : nous vous expliquerons ce dont vous avez besoin, pourquoi, et où trouver plus d’informations.
+Si vous n’avez jamais utilisé GitHub ou le concept de « docs-as-code » auparavant, ne vous inquiétez pas : nous vous expliquerons ce dont vous avez besoin, pourquoi et où trouver plus d’informations.
 
 ## Prérequis
 
 Vous pouvez exécuter docStatic en local (sur votre ordinateur) ou l’héberger dans le cloud.
 
-Pour une configuration dans le cloud des plus simples, créez des comptes gratuits auprès des services suivants :
+Pour une configuration cloud simplifiée, créez des comptes gratuits auprès de ces services :
 
-* <Url urlKey="github" /> — stocke votre contenu et suit les modifications
-* <Url urlKey="tinacms" /> — permet l’édition via un navigateur
-* <Url urlKey="languagetool" /> — propose une vérification facultative de la grammaire et du style
+* <Url urlKey="github" /> : stocke votre contenu et suit les modifications
+* <Url urlKey="tinacms" /> : permet l’édition depuis un navigateur
+* <Url urlKey="languagetool" /> : propose une vérification facultative de la grammaire et du style
 
-Si vous prévoyez plutôt d’exécuter docStatic localement (sur votre ordinateur), consultez la section « Configuration requise pour le développement local ».
+Si vous prévoyez plutôt d’exécuter docStatic en local (sur votre ordinateur), consultez la section « Configuration requise pour le développement local ».
 
 ***
 
 ## Configuration requise pour le développement local
 
-Cette section ne s’applique que si vous prévoyez de travailler localement.
+Cette section ne s’applique que si vous prévoyez de travailler en local.
 
 Vous aurez besoin d’un environnement de développement intégré (IDE) ou d’un éditeur de texte. Voici deux options open source :
 
@@ -57,7 +62,7 @@ Vous devrez également installer Node.js pour ses outils de compilation et Yarn 
 
 ### Installer Node.js
 
-Vous devez installer <Url urlKey="node-js" /> version 22.0 ou supérieure.
+Vous devez installer la version 22.0 ou supérieure de <Url urlKey="node-js" />.
 
 Vérifiez si Node.js est déjà installé. Ouvrez un terminal (Invite de commandes ou application Terminal) et exécutez :
 
@@ -65,14 +70,20 @@ Vérifiez si Node.js est déjà installé. Ouvrez un terminal (Invite de command
 node -v
 ```
 
-Si vous voyez un numéro de version commençant par v22 ou supérieur, tout est prêt.
+Si vous voyez un numéro de version commençant par v22 ou supérieur, vous êtes prêt.
 
 Si Node.js n’est pas installé ou si vous disposez d’une version plus ancienne :
 
-1. Rendez-vous sur la page <Url urlKey="nodejs-prebuilt-installer" linkText={[ { lang: "fr", text: "de téléchargement officielle de Node.js" }]} />.
-2. Choisissez la version LTS (support à long terme) adaptée à votre système d’exploitation. Le programme d’installation inclut npm, le gestionnaire de paquets Node, dont vous aurez besoin lors des étapes suivantes. Pendant l’installation :\* Conservez les options par défaut (celles-ci incluent les dépendances requises)
-   \* Une fois l’installation terminée, fermez puis rouvrez votre terminal.
-3. (Facultatif) Si vous travaillez sur différents projets nécessitant des versions différentes de Node, installez nvm ([Node Version Manager](https://github.com/nvm-sh/nvm)). Grâce à nvm, vous pouvez passer d’une version de Node à une autre sans perturber votre configuration.
+1. Rendez-vous sur la page <Url urlKey="nodejs-prebuilt-installer" />.
+2. Choisissez la version LTS (support à long terme) adaptée à votre système d’exploitation.
+
+   Le programme d'installation inclut npm, le gestionnaire de paquets Node, dont vous aurez besoin dans les étapes suivantes.
+
+   Pendant l’installation :
+
+   * Conservez les options par défaut (elles incluent les dépendances requises)
+   * Une fois l’installation terminée, fermez puis rouvrez votre terminal.
+3. (Facultatif) Si vous travaillez sur différents projets nécessitant des versions différentes de Node, installez nvm ([Node Version Manager](https://github.com/nvm-sh/nvm)). Grâce à nvm, vous pouvez passer d’une version de Node à l’autre sans perturber votre configuration.
 
 ### Installer Yarn
 
@@ -86,7 +97,7 @@ yarn -v
 
 Si un numéro de version s’affiche, Yarn est déjà installé.
 
-Si vous obtenez un message « commande introuvable » ou une erreur similaire, ouvrez un terminal (Invite de commandes ou application Terminal) et exécutez :
+Si vous obtenez un message « commande introuvable » ou une erreur similaire, ouvrez un terminal (Invite de commande ou application Terminal) et exécutez :
 
 ```
 npm install -g yarn
@@ -100,8 +111,8 @@ npm install -g yarn
   ```
 </Admonition>
 
-<Admonition type="note" title="Note">
-  On Windows, you don’t use sudo. Just open your terminal as Administrator and run the command.
+<Admonition type="note" title="Remarque">
+  Sous Windows, vous n'utilisez pas « sudo ». Il suffit d'ouvrir votre terminal en tant qu'administrateur et d'exécuter la commande.
 </Admonition>
 
 ***
@@ -110,7 +121,7 @@ npm install -g yarn
 
 Il existe deux façons d’obtenir votre propre copie de docStatic :
 
-1. **Créez un nouveau site avec \`create-docstatic\`** (recommandé). Une seule commande vous permet d’obtenir un site tout neuf et autonome, avec son propre nom et son historique Git.
+1. **Créer un nouveau site avec `create-docstatic`** (recommandé). Une seule commande vous permet d’obtenir un site tout neuf et autonome, avec son propre nom et son propre historique Git.
 2. **Forker et cloner le dépôt.** Optez pour cette solution si vous souhaitez contribuer au développement de docStatic lui-même, ou si vous préférez gérer les mises à jour via des fusions avec Git.
 
 ### Créer un nouveau site
@@ -137,15 +148,15 @@ Ouvrez un terminal (Invite de commandes ou application Terminal) et exécutez l�
   </TabItem>
 </Tabs>
 
-La commande télécharge le dernier modèle docStatic, crée le dossier `my-docs`, le transforme en dépôt Git et installe les dépendances du projet. Une fois l'opération terminée, démarrez le serveur de développement local :
+La commande télécharge le dernier modèle docStatic, crée le dossier `my-docs`, le transforme en dépôt Git et installe les dépendances du projet. Une fois l’opération terminée, démarrez le serveur de développement local :
 
 ```shell
 cd my-docs
 yarn dev
 ```
 
-<Admonition type="tip" title="Tip">
-  Run `npx create-docstatic@latest --help` to see the available options, such as `--no-install` to skip dependency installation.
+<Admonition type="tip" title="Conseil">
+  Exécutez la commande `npx create-docstatic@latest --help` pour afficher les options disponibles, telles que `--no-install` qui permet d'ignorer l'installation des dépendances.
 </Admonition>
 
 Si vous avez créé votre site de cette manière, vous pouvez passer directement à la section [Structure du projet](#project-structure).
@@ -158,17 +169,17 @@ Lorsqu’une nouvelle version de docStatic est publiée, exécutez cette command
 npx create-docstatic@latest --update
 ```
 
-Cette commande met à jour les fichiers appartenant à docStatic (composants React, scripts de compilation, configuration de Docusaurus et Tina, versions des dépendances) et laisse votre contenu — `docs/`, `blog/`, `config/`, `reuse/` et `static/` — inchangé. Le nom de votre site et les scripts `package.json` personnalisés que vous avez ajoutés sont conservés.
+Cette commande met à jour les fichiers appartenant à docStatic (composants React, scripts de compilation, configuration de Docusaurus et Tina, versions des dépendances) et laisse votre contenu — `docs/`, `blog/`, `config/`, `reuse/` et `static/` — inchangé. Le nom de votre site et tous les scripts `package.json` personnalisés que vous avez ajoutés sont conservés.
 
 La mise à jour nécessite une arborescence de travail Git propre ; veillez donc à valider votre travail au préalable. Ensuite, vérifiez le résultat avec `git diff`, réappliquez les personnalisations que vous aviez apportées aux fichiers mis à jour, puis validez.
 
-<Admonition type="tip" title="Tip">
-  Add `--dry-run` to see what would change without writing anything.
+<Admonition type="tip" title="Conseil">
+  Ajoutez `--dry-run` pour voir ce qui changerait sans rien écrire.
 </Admonition>
 
 ### Créer une fourche du dépôt docStatic
 
-Créer une fourche et cloner le dépôt est la bonne solution si vous prévoyez de contribuer à docStatic, ou si vous préférez fusionner les futures versions de docStatic dans votre site à l’aide de Git.
+La création d’une fourche et le clonage constituent la bonne solution si vous prévoyez de contribuer à docStatic, ou si vous préférez fusionner les futures versions de docStatic dans votre site à l’aide de Git.
 
 1. Connectez-vous à votre compte GitHub.
 2. Rendez-vous sur [https://github.com/aowendev/docstatic](https://github.com/aowendev/docstatic).
@@ -186,8 +197,8 @@ Pour créer un clone :
 
 1. Connectez-vous à votre compte GitHub.
 2. Accédez au dépôt correspondant au fork.
-3. Cliquez sur le dépôt pour l'ouvrir.
-4. Cliquez sur **\<> Code**, puis copiez l'URL.
+3. Cliquez sur le dépôt pour l’ouvrir.
+4. Cliquez sur **\<> Code**, puis copiez l’URL.
 5. Ouvrez votre terminal ou votre invite de commande et utilisez `cd` pour accéder à l’emplacement où vous souhaitez stocker le clone. Par exemple, `cd Documents/Projets/`.
 6. Saisissez `git clone` suivi de l’URL de votre clone.
 
@@ -199,37 +210,42 @@ git clone https://github.com/acme-projects/docstatic.git
 
 ## Installer les dépendances du projet
 
-Cette étape ne s’applique que si vous avez créé un fork et cloné le dépôt — `create-docstatic` installe les dépendances pour vous.
+Cette étape ne s’applique que si vous avez créé un fork et cloné le dépôt — `create-docstatic` installe les dépendances à votre place.
 
-Utilisez `cd` pour accéder au dossier racine de votre dépôt docStatic cloné et installez les paquets :
+Utilisez la commande `cd` pour accéder au dossier racine de votre dépôt docStatic cloné et installez les paquets :
 
 ```
 cd docstatic
 yarn install
 ```
 
-Yarn téléchargera tous les éléments répertoriés dans le fichier `package.json`. Cela peut prendre quelques minutes.
+Yarn téléchargera tous les éléments répertoriés dans le fichier package.json. Cela peut prendre quelques minutes.
 
 ***
 
 ## Structure du projet
 
-Après avoir créé votre site ou cloné le dépôt, vous verrez divers fichiers dans le dossier de votre projet. Ci-dessous, nous avons répertorié **certains** des fichiers et dossiers de la structure du projet que vous devez connaître. **Il ne s’agit pas d’une liste exhaustive de tout ce que contient le projet**.
+Après avoir créé votre site ou cloné le dépôt, vous verrez divers fichiers dans le dossier de votre projet. Ci-dessous, nous avons inclus **quelques-uns** des fichiers et dossiers de la structure du projet que vous devez connaître. **Il ne s’agit pas d’une liste exhaustive de tout ce que contient le projet**.
 
 ```
 docstatic
 ├── apis
 │   └── petstore.yaml
+├── bin
+│   └── docstatic.js
 ├── blog
 │   └── hybrid.mdx
 ├── config
+│   ├── chatbot
+│   │   └── index.json
 │   ├── docusaurus
 │   │   └── index.json
-│   ├── homepage
+│   ├── sidebar
 │   │   └── index.json
-│   └── sidebar
+│   └── theme
 │       └── index.json
-│
+├── create-docstatic
+│   └── index.js
 ├── docs
 │   └── introduction.mdx
 ├── i18n
@@ -244,9 +260,15 @@ docstatic
 │   │   └── index.json
 │   ├── glossaryTerms
 │   │   └── index.json
+│   ├── homepage
+│   │   └── index.json
+│   ├── media
+│   │   └── index.json
 │   ├── snippets
 │   │   └── example.mdx
 │   ├── taxonomy
+│   │   └── index.json
+│   ├── urls
 │   │   └── index.json
 │   ├── variableSets
 │   │   └── index.json
@@ -255,6 +277,8 @@ docstatic
 ├── scripts
 │   └── generate-media-index.js
 ├── src
+│   ├── components
+│   │   └── Dashboard
 │   ├── css
 │   │   └── custom.css
 │   └── pages
@@ -263,6 +287,10 @@ docstatic
 │       └── index.module.css
 ├── static
 │   └── img
+├── template
+│   └── docs
+├── test
+│   └── link-checker.test.mjs
 ├── tina
 │   └── config.jsx
 ├── docusaurus.config.ts
@@ -275,34 +303,39 @@ docstatic
 ### Aperçu de la structure du projet
 
 * `/apis/` - Fichiers YAML OpenAPI.
+* `/bin/` - Le point d’entrée de la CLI `docstatic` que `create-docstatic` exécute pour générer la structure d’un nouveau site. Ce dossier n’est présent que si vous avez cloné le dépôt docStatic.
 * `/blog/` - Fichiers MDX du blog.
-* `/config/` - Fichiers JSON utilisés par TinaCMS pour configurer docStatic.
+* `/config/` - Fichiers JSON utilisés par TinaCMS pour configurer docStatic, y compris les paramètres du chatbot et du thème.
+* `/create-docstatic/` - Le paquet npm publié sous le nom `create-docstatic`. Présent uniquement si vous avez cloné le dépôt docStatic.
 * `/docs/` - Fichiers MDX de la documentation.
 * `/i18n/` - Fichiers de traduction.
-* `/mcp-server/` - Le [serveur MCP](mcp-server.mdx) qui permet aux assistants IA d’accéder à votre documentation.
-* `/reuse/` - Contenu réutilisable.
-* `/scripts/` - Scripts d'exécution de la compilation lancés automatiquement par `prebuild` et `predev`.
+* `/mcp-server/` - Le [serveur MCP](mcp-server.mdx) qui permet aux assistants IA d'accéder à votre documentation.
+* `/reuse/` - Contenu réutilisable, y compris les URL gérées et les paramètres de la page d'accueil et des médias.
+* `/scripts/` - Scripts d’exécution de la compilation lancés automatiquement par `prebuild` et `predev`.
 * `/src/` - Fichiers non liés à la documentation, tels que des pages ou des composants React personnalisés.
+  * `/src/components` - Composants React personnalisés, tels que les tableaux de bord et le chatbot.
   * `/src/pages` - Tout fichier JSX/TSX/MDX présent dans ce répertoire est converti en une page web.
-* `/static/` - Dossier statique. Tout contenu présent ici est copié à la racine du dossier de build final.
+* `/static/` - Dossier statique. Tout contenu qui s’y trouve est copié à la racine du dossier de build final.
+* `/template/` - Le modèle de structure maintenu synchronisé avec le site principal et déployé vers les nouveaux sites par `create-docstatic`. Présent uniquement si vous avez cloné le dépôt docStatic. Voir [CLI](cli.mdx#template-sync-commands).
+* `/test/` - La suite de tests du projet. N'est présente que si vous avez cloné le dépôt docStatic.
 * `/tina/` - Configuration de TinaCMS et schéma GraphQL.
 * `/docusaurus.config.ts` - Fichier de configuration contenant les paramètres du site.
 * `/package.json` - Un site web docStatic est une application React. Vous pouvez installer et utiliser tous les paquets npm de votre choix.
-* `/sidebars.ts` - Spécifie l’ordre des documents dans la barre latérale. Utilisez ce fichier pour définir la structure de votre « table des matières ».
+* `/sidebars.ts` - Spécifie l’ordre des documents dans la barre latérale. Utilisez-le pour structurer votre « table des matières ».
 
 ***
 
 ### Effacer le dossier Docs
 
-Le dossier `docs/` contient une copie de la documentation de docStatic — les pages que vous êtes en train de lire. Il s’agit d’un exemple pratique, et non du contenu de votre site ; supprimez-le donc avant de publier et enregistrez vos propres rubriques à la place dans `docs/`. Si vous le laissez, votre site publiera le manuel de docStatic sous votre nom.
+Le dossier `docs/` contient une copie de la documentation de docStatic — les pages que vous êtes en train de lire. Il s'agit d'un exemple pratique, et non du contenu de votre site ; supprimez-le donc avant de publier et enregistrez vos propres rubriques à la place dans `docs/`. Si vous le conservez, votre site publiera le manuel de docStatic sous votre nom.
 
 ***
 
 ### Monorepos
 
-docStatic permet d’utiliser un seul dépôt contenant à la fois le code du projet et la documentation du projet. Dans la terminologie de Docusaurus, ce concept est appelé « monorepo ».
+docStatic permet d’utiliser un dépôt unique contenant à la fois le code du projet et la documentation du projet. Dans la terminologie de Docusaurus, ce concept est appelé « monorepo ».
 
-Pour plus d’informations, consultez la section <Url urlKey="docusaurus-monorepos" /> dans la documentation de Docusaurus.
+Pour plus d’informations, consultez <Url urlKey="docusaurus-monorepos" /> dans la documentation de Docusaurus.
 
 ***
 
@@ -328,6 +361,6 @@ docStatic utilise un générateur de site statique pour générer le site web da
 yarn build-local
 ```
 
-Le contenu est généré dans le dossier `/build`, que vous pouvez copier vers n'importe quel service d'hébergement de fichiers statiques tel que GitHub Pages, Netlify ou Vercel. Pour plus d'informations, consultez la section [Déploiement](https://docusaurus.io/docs/deployment) de la documentation Docusaurus.
+Le contenu est généré dans le dossier `/build`, que vous pouvez copier vers n'importe quel service d'hébergement de fichiers statiques tel que GitHub Pages, Netlify ou Vercel. Pour plus d'informations, consultez la section [Déploiement](https://docusaurus.io/docs/deployment) dans la documentation de Docusaurus.
 
 <RelatedTopics maxResults={7} />

@@ -1,5 +1,5 @@
 ---
-lastmod: '2026-08-15T14:35:45.781Z'
+lastmod: '2026-08-19T14:50:09.378Z'
 modifiedBy: aowendev <aowen@translationcommons.org>
 title: Introduction
 tags:
@@ -30,14 +30,16 @@ docStaticは、ライターと開発者の間の溝を埋め、ユーザーが�
 
 ## 機能
 
-docStaticは[Tinasaurus](https://tina.io/blog/tinasaurus-docusaurus-starter)を改良したものです。Tinasaurusは、<Url urlKey="wikipedia-static-site-generator" linkText={[{ lang: "ja", text: "静的サイトジェネレーター" }]} />（<Url urlKey="docusaurus" />）と<Url urlKey="wikipedia-headless-content-management-system" linkText={[{ lang: "ja", text: "ヘッドレスコンテンツ管理システム" }]} />（<Url urlKey="tinacms" />）を組み合わせたオープンソースの<Url urlKey="react" />ベースのプロジェクトです。以下が含まれます。
+docStaticは[Tinasaurus](https://tina.io/blog/tinasaurus-docusaurus-starter)を改良したものとして始まりました。Tinasaurusは、<Url urlKey="wikipedia-static-site-generator" linkText={[{ lang: "ja", text: "静的サイトジェネレーター" }]} />（<Url urlKey="docusaurus" />）と<Url urlKey="wikipedia-headless-content-management-system" linkText={[{ lang: "ja", text: "ヘッドレスコンテンツ管理システム" }]} />（<Url urlKey="tinacms" />）を組み合わせたオープンソースの<Url urlKey="react" />ベースのプロジェクトです。以下が含まれます。
 
 * Markdown、MDX、JSON、YAMLコンテンツの使いやすい編集インターフェース
 * 既存のGitおよびCI/CDワークフローとの統合
 * リッチなコンテンツオーサリングのための埋め込みMDXコンポーネント
 * サードパーティメディアプロバイダーをサポートするメディアマネージャー
 * クラウドでの編集（ローカルセットアップ不要）
+* コンテンツの状態とリンクの健全性を報告するダッシュボード
 * AIアシスタント統合のためのModel Context Protocol（MCP）サーバー
+* ドキュメントに関する質問に答えるオプションのブラウザ内AIチャットボット
 
 ## 簡単なコンテンツ管理
 
@@ -45,12 +47,16 @@ docStaticのデフォルトコレクションには、CCMSに期待されるよ�
 
 リッチテキストエディターを使用すると、以下を簡単に追加できます。
 
-* コンテンツ再利用のための条件付きテキスト、スニペット、変数セット
-* タクソノミー
-* 用語集の用語
-* コードブロック、コメント、折りたたみ可能な詳細、図、脚注、タブ。これらはコンテンツファイルに挿入できるテンプレートとして利用可能です
+* コンテンツ再利用のための条件付きテキスト、スニペット、変数セット、一元管理されたURL。
+* タクソノミー。
+* 用語集の用語。
+* コードブロック、コメント、折りたたみ可能な詳細、図、脚注、タブ。これらはコンテンツファイルに挿入できるテンプレートとして利用可能です。
 
 CMSは[GraphQL](https://graphql.org/)スキーマを使用して、コンテンツの構造をコレクションのセットとして記述します。
+
+## ダッシュボード
+
+docStaticはTinaCMSにダッシュボード機能を追加し、GraphQL APIに問い合わせてコンテンツの状態とリンクの健全性をCMS内で直接報告します。これには、各トピックのワークフローステータスを示すコンテンツ概要と、外部リンクをチェックして無効なリンクを検出するリンク健全性ダッシュボードが含まれます。
 
 ## Gitバックエンド
 
@@ -65,6 +71,8 @@ docStaticは、<Url urlKey="katex" />数式、<Url urlKey="lunr" />検索、<Url
 ## AI統合
 
 docStaticには統合された[Model Context Protocol（MCP）サーバー](mcp-server.mdx)が含まれており、AIアシスタントがドキュメントに直接アクセスして理解できるようにします。これにより、実際のドキュメント構造とコンテンツに基づいたコンテンツ編集、検索、分析のためのインテリジェントなサポートが提供されます。
+
+docStaticは、公開サイトにオプションのAIチャットボットを追加することもできます。これにより、訪問者は質問をして、ドキュメントに基づいた回答を得ることができます。デフォルトでは訪問者のブラウザ内で完全に動作するため、外部サービス、APIキー、サーバーは不要ですが、自分でホストする有料プロバイダーを指定することもできます。
 
 ## Reactベース
 

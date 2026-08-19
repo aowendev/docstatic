@@ -1,10 +1,12 @@
 ---
-lastmod: '2026-08-15T09:53:56.009Z'
-title: Fonctionnalités de Markdown
-description: docStatic utilise MDX. En savoir plus sur les fonctionnalités spécifiques à docStatic lors de l'écriture de Markdown.
+lastmod: '2026-08-19T14:50:04.713Z'
+modifiedBy: aowendev <aowen@translationcommons.org>
+title: 'Fonctionnalités de Markdown'
+description: 'docStatic utilise le langage MDX. Découvrez les fonctionnalités spécifiques à docStatic lors de la rédaction de contenu au format Markdown.'
 tags:
   - computer-languages
   - computer-languages_markdown
+  - computer-languages_markdown_mdx
   - elements
   - elements_tabs
   - elements_footnotes
@@ -17,22 +19,24 @@ tags:
   - elements_links
   - elements_tables
   - elements_quotes
+  - software
+  - software_content-management-systems
+  - software_content-management-systems_tinacms
 draft: false
 review: false
 translate: false
 approved: false
 published: true
 unlisted: false
-modifiedBy: aowendev <aowen@translationcommons.org>
 ---
 
-# Fonctionnalités Markdown
+# Fonctionnalités de Markdown
 
 docStatic utilise [Markdown](https://commonmark.org/) comme format principal de rédaction de contenu. Vous pouvez [l'apprendre en dix minutes](https://commonmark.org/help/). Mais ce n'est pas obligatoire, car le CMS fournit un environnement d'édition de texte enrichi complet pour les métadonnées, le Markdown et les composants React.
 
 ## Rédaction structurée simple
 
-Dans docStatic, les rubriques comportent trois parties :
+Les rubriques dans docStatic comportent trois parties :
 
 * Les métadonnées (au format [YAML](https://yaml.org/spec/1.2.2/))
 * Le contenu (en Markdown)
@@ -50,11 +54,11 @@ Les fonctionnalités Markdown comprennent :
 * Les niveaux de titre (1 à 6).
 * Les lignes horizontales.
 * Les images.
-* Les liens.
-* Les citations.
-* Des tableaux simples.
+* Liens.
+* Citations.
+* Tableaux simples.
 
-Toutes ces fonctionnalités peuvent être sélectionnées directement depuis la barre d’outils de texte enrichi du CMS.
+Toutes ces options peuvent être sélectionnées directement depuis la barre d’outils de texte enrichi du CMS.
 
 À cela, Docusaurus ajoute :
 
@@ -63,28 +67,28 @@ Toutes ces fonctionnalités peuvent être sélectionnées directement depuis la 
 * Listes de fiches de documentation
 * [Onglets](tabs)
 
-docStatic étend encore ces possibilités avec :
+docStatic étend encore ces fonctionnalités avec :
 
 * [Extraits de code](code-blocks) (à partir de fichiers)
 * [Commentaires](comments)
 * [Texte conditionnel](conditional-text)
-* [Liens d'aide contextuelle](../../context-help)
+* [Liens d’aide contextuelle](../../context-help)
 * [Diagrammes](diagrams)
 * [Figures](figures)
 * [Notes de bas de page](footnotes)
-* [Termes du glossaire](glossary)
+* [Termes de glossaire](glossary)
 * [Équations mathématiques](math-equations)
-* [Sujets connexes](sujets-connexes) (générés automatiquement)
-* [Extraits](extraits)
+* [Sujets connexes](related-topics) (générés automatiquement)
+* [Extraits de code](snippets)
 * [Variables](variables)
 
 ## Front matter
 
-Les métadonnées de tête permettent d’ajouter des métadonnées à votre fichier Markdown. Elles sont placées tout en haut du fichier, encadrées par trois tirets ---. Les plugins de contenu peuvent avoir leur propre schéma de métadonnées de tête. docStatic utilise les métadonnées de tête pour :
+Le front matter sert à ajouter des métadonnées à votre fichier Markdown. Il est placé tout en haut du fichier, encadré par trois tirets ---. Les plugins de contenu peuvent avoir leur propre schéma de front matter. docStatic utilise le front matter pour :
 
 * Les conditions (pour le texte conditionnel)
-* Les descriptions
-* Les slugs (chemins fixes)
+* Descriptions
+* Slugs (chemins fixes)
 * Balises de taxonomie
 * Titres
 * Statut du workflow
@@ -98,21 +102,21 @@ Les métadonnées de tête permettent d’ajouter des métadonnées à votre fic
 
 #### Exemple :
 
-<Details summary="Toggle me.">
+<Details summary="Afficher/masquer.">
   This is the detailed content.
 
-  You can use Markdown here including **bold** and *italic* text, and inline [links](https://docusaurus.io/).
+  You can use Markdown here including **bold** and *italic* text, and inline [links](https://docstatic.com/).
 </Details>
 
 ## Listes de fiches de documentation
 
 Les listes de fiches de documentation sont générées automatiquement pour les catégories de la table des matières. Cependant, vous pouvez également les ajouter manuellement à une rubrique.
 
-1. Sélectionnez **Liste de fiches de documentation** dans la liste **Intégrer**.
+1. Sélectionnez **Liste de fiches document** dans la liste **Intégrer**.
 2. Donnez-lui un **Titre**.
 
-Pour plus d’informations, consultez la section <Url urlKey="docusaurus-markdown-features" /> dans la documentation de Docusaurus.
+Pour plus d’informations, consultez <Url urlKey="docusaurus-markdown-features" /> dans la documentation de Docusaurus.
 
 #### Exemple :
 
-<DocCardList title="Markdown Features" />
+<DocCardList title="Fonctionnalités de Markdown" />

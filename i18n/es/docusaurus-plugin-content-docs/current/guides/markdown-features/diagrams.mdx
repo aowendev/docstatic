@@ -1,7 +1,11 @@
 ---
-lastmod: '2026-08-15T13:37:31.280Z'
-title: Diagrams
+lastmod: '2026-08-19T14:50:00.507Z'
+title: 'Diagramas'
+description: 'Crear diagramas con Mermaid.'
 tags:
+  - computer-languages
+  - computer-languages_javascript
+  - computer-languages_javascript_mermaid
   - content
   - content_diagrams
 draft: false
@@ -36,12 +40,279 @@ graph TD;
     C-->D;
 ```
 
-<Admonition type="note" title="Note">
-  Currently, zenUML diagrams are not supported and mind map diagrams may produce unusual behaviour. Not all diagram types can be previewed in the CMS.
+<Admonition type="note" title="Nota">
+  Actualmente, los diagramas zenUML no son compatibles y los diagramas de mapas mentales pueden presentar un comportamiento anómalo. No todos los tipos de diagramas se pueden previsualizar en el CMS.
 </Admonition>
 
 Para obtener más información, consulta [Mermaid](https://tina.io/docs/reference/rich-text-usage/mermaid) en la documentación de TinaCMS.
 
 Para obtener información sobre cómo personalizar el aspecto de Mermaid, consulta <Url urlKey="docusaurus-diagrams" /> en la documentación de Docusaurus.
+
+## Ejemplos
+
+### Diagrama de arquitectura
+
+```mermaid
+architecture-beta
+    group site(cloud)[Site]
+    service cms(server)[CMS] in site
+    service store(database)[Content] in site
+    service pdf(server)[Exporter] in site
+    cms:R --> L:store
+    store:R --> L:pdf
+```
+
+### Diagrama de bloques
+
+```mermaid
+block-beta
+    columns 3
+    Parser["Parser"] Resolver["Resolver"] Composer["Composer"]
+    space:3
+    PDF["PDF"]:3
+```
+
+### Diagrama de contexto C4
+
+```mermaid
+C4Context
+    title Publishing system
+    Person(author, "Author", "Writes topics")
+    System(cms, "CMS", "Edits content")
+    System(exporter, "PDF exporter", "Produces books")
+    Rel(author, cms, "Edits")
+    Rel(cms, exporter, "Feeds")
+```
+
+### Diagrama de clases
+
+```mermaid
+classDiagram
+    class Chapter {
+        +string Title
+        +int Depth
+        +VisibleBlocks()
+    }
+    class Book {
+        +Compose()
+    }
+    Book "1" *-- "many" Chapter : contains
+```
+
+### Diagrama entidad-relación
+
+```mermaid
+erDiagram
+    TOPIC ||--o{ TAG : carries
+    TOPIC ||--o{ SNIPPET : includes
+    TOPIC {
+        string title
+        bool published
+    }
+```
+
+### Diagrama de flujo
+
+```mermaid
+flowchart TD
+    Start([Start]) --> Input[/Read topic/]
+    Input --> Check{Valid?}
+    Check -->|Yes| Render[Render PDF]
+    Check -->|No| Warn[Warn and continue]
+    Render --> Done([Done])
+    Warn --> Done
+```
+
+### Diagrama de Gantt
+
+```mermaid
+gantt
+    title Release schedule
+    dateFormat YYYY-MM-DD
+    section Content
+    Draft topics      :a1, 2026-01-06, 10d
+    Review            :after a1, 5d
+    section Build
+    Export PDFs       :2026-01-26, 3d
+```
+
+### Gráfico de Git
+
+```mermaid
+gitGraph
+    commit id: "init"
+    branch feature
+    commit id: "diagrams"
+    checkout main
+    commit id: "docs"
+    merge feature
+```
+
+### Tablero Kanban
+
+```mermaid
+kanban
+    Todo
+        [Mermaid gallery]
+    In progress
+        [Syntax highlighting]
+    Done
+        [Cross-references]
+```
+
+### Mapa mental
+
+```mermaid
+mindmap
+  root((docStatic))
+    Content
+      Topics
+      Snippets
+    Output
+      Website
+      PDF
+```
+
+### Diagrama de paquetes
+
+```mermaid
+packet-beta
+    0-15: "Source port"
+    16-31: "Destination port"
+    32-63: "Sequence number"
+```
+
+### Gráfico circular
+
+```mermaid
+pie title Topics by status
+    "Published" : 52
+    "In review" : 12
+    "Draft" : 6
+```
+
+### Diagrama de cuadrantes
+
+```mermaid
+quadrantChart
+    title Effort against value
+    x-axis Low effort --> High effort
+    y-axis Low value --> High value
+    quadrant-1 Do now
+    quadrant-2 Plan
+    quadrant-3 Drop
+    quadrant-4 Quick wins
+    Search: [0.4, 0.8]
+    Theming: [0.7, 0.3]
+    PDF export: [0.8, 0.9]
+```
+
+### Gráfico de radar
+
+```mermaid
+radar-beta
+    title Output quality
+    axis fidelity["Fidelity"], speed["Speed"], size["Size"]
+    curve pdf["PDF"]{85, 70, 60}
+    max 100
+```
+
+### Diagrama de requisitos
+
+```mermaid
+requirementDiagram
+    requirement print_fidelity {
+        id: 1
+        text: Diagrams must render as vectors.
+        risk: medium
+        verifymethod: test
+    }
+    element exporter {
+        type: application
+    }
+    exporter - satisfies -> print_fidelity
+```
+
+### Diagrama de Sankey
+
+```mermaid
+sankey-beta
+Website,PDF,20
+Website,Help,15
+PDF,Print,10
+PDF,Screen,10
+```
+
+### Diagrama de secuencia
+
+```mermaid
+sequenceDiagram
+    participant Author
+    participant CMS
+    participant Exporter
+    Author->>CMS: Save topic
+    CMS-->>Author: Confirm
+    Author->>Exporter: Export PDF
+    Exporter->>CMS: Read content
+    CMS-->>Exporter: MDX
+    Exporter-->>Author: docs-en.pdf
+```
+
+### Diagrama de estados
+
+```mermaid
+stateDiagram-v2
+    [*] --> Draft
+    Draft --> Review : submit
+    Review --> Draft : changes requested
+    Review --> Approved : approve
+    Approved --> [*]
+```
+
+### Cronología
+
+```mermaid
+timeline
+    title Project milestones
+    2026-01 : Parser
+    2026-02 : Layout
+    2026-03 : Diagrams
+```
+
+### Mapa arbóreo
+
+```mermaid
+treemap-beta
+"Book"
+    "Chapters"
+        "Guides": 40
+        "Reference": 25
+    "Back matter"
+        "Index": 5
+```
+
+### Recorrido del usuario
+
+```mermaid
+journey
+    title Publishing a topic
+    section Write
+      Draft the topic: 4: Author
+      Add screenshots: 3: Author
+    section Publish
+      Review: 3: Editor
+      Export PDF: 5: Author
+```
+
+### Gráfico XY
+
+```mermaid
+xychart-beta
+    title "Pages per release"
+    x-axis [v1, v2, v3, v4]
+    y-axis "Pages" 0 --> 120
+    bar [40, 65, 88, 101]
+    line [40, 65, 88, 101]
+```
 
 <RelatedTopics maxResults={7} />

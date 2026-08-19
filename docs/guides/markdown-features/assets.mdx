@@ -1,5 +1,5 @@
 ---
-lastmod: '2026-08-15T09:53:46.599Z'
+lastmod: '2026-08-19T14:49:53.247Z'
 modifiedBy: aowendev <aowen@translationcommons.org>
 title: Assets
 description: Handling assets in docStatic.
@@ -37,19 +37,11 @@ docStatic provides two ways to add images to topics. For inline images you can c
   You can use [Librsvg](https://wiki.gnome.org/Projects/LibRsvg) to scale SVGs. For example, `rsvg-convert example.svg -h 12 -f svg -o example.svg` sets a height of 12 points.
 </Admonition>
 
-For larger images, it's better to use the Figure component.
-
-1. Select **Figure** from the **Embed** list.
-2. Edit the component.
-3. Click the **Image** area to open the **Media Manager**.
-4. Upload or select an image.
-5. Give it a **Caption**.
+For larger images, use the [Figure](figures.mdx) component instead. It adds a caption—also used as alt text for screen readers—resizes to fit the page, and opens at full size in a light box when clicked.
 
 #### Example
 
-<Figure img="/img/docStaticDemo.jpg" caption="Example Figure" />
-
-The figure resizes based on the view window. Clicking it will open it at maximum size in a light box.
+<Figure img="/img/docStaticDemo.jpg" caption="Figure Example" size={66} align="left" />
 
 For more information about the Media Manager, refer to [Media Overview](https://tina.io/docs/reference/media/overview) in the TinaCMS documentation.
 

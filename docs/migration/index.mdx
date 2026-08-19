@@ -1,6 +1,6 @@
 ---
 title: Upgrading
-description: Upgrading Node.js modules.
+description: Upgrade an existing docStatic site to the latest release using the update command.
 tags:
   - "software"
   - "software_upgrading"
@@ -9,14 +9,31 @@ tags:
   - "development"
   - "computer-languages"
   - "computer-languages_javascript"
-lastmod: "2026-03-10T22:59:35.900Z"
+lastmod: '2026-08-19T14:49:54.255Z'
+modifiedBy: aowendev <aowen@translationcommons.org>
 ---
+
 # Upgrading
 
-While docStatic is still in early development, changes must be merged individually from the main repository. However, the Node.js components can safely be updated by replacing the [package.json](https://github.com/aowendev/docstatic/blob/main/package.json) file with the latest version from the main repository. After updating, run:
+Sites created with `create-docstatic` are updated with the same package, run from the root folder of the site:
 
 ```shell
-yarn install
+npx create-docstatic@latest --update
 ```
+
+This command updates the docStatic-owned files and dependency versions, and leaves your content untouched. It works out which files belong to docStatic itself by reading `update-manifest.json`, a manifest generated from the project's template and shipped with every release.
+
+Before writing anything, the command checks that your git working tree is clean, so you can review the update with `git diff` afterward. If you have uncommitted changes, commit or stash them first or pass `--force` to proceed anyway.
+
+The update command accepts these options:
+
+* **`--dry-run`**: Report what would change without writing anything.
+* **`--force`**: Proceed even if the git working tree isn't clean.
+* **`--tag <dist-tag>`**: Update to a specific `docstatic` package version or dist-tag instead of `latest`.
+* **`--no-install`**: Skip installing dependencies after the update.
+
+<Admonition type="tip" title="Preview an update first">
+  Run with `--dry-run` before updating a site with local customisations, so you can see which files would change before committing to the update.
+</Admonition>
 
 <RelatedTopics maxResults={7} />
