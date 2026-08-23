@@ -7,8 +7,64 @@
 
 import React from "react";
 import { ImageField, ReferenceField, TextField } from "tinacms";
+import docusaurusData from "../../../config/docusaurus/index.json";
 import CollapsibleField from "../CollapsibleField";
 import HelpButton from "../HelpButton";
+
+/**
+ * Citation styles vendored under csl/styles. Each value must match a .csl
+ * filename there, because scripts/generate-bibliography.mjs resolves the style
+ * by name and fails the build on a value it cannot find.
+ *
+ * The two "notes" styles put the citation in a footnote rather than in the
+ * running text; the rest put it inline. All five produce a reference list.
+ */
+const CITATION_STYLES = [
+  { value: "chicago-author-date", label: "Chicago (author-date)" },
+  {
+    value: "chicago-notes-bibliography",
+    label: "Chicago (notes and bibliography)",
+  },
+  { value: "harvard-cite-them-right", label: "Harvard (Cite Them Right)" },
+  { value: "ieee", label: "IEEE" },
+  {
+    value: "oxford-guide-to-style-notes",
+    label: "Oxford (Guide to Style, notes)",
+  },
+];
+
+/**
+ * Which English the CSL locale supplies for English pages.
+ *
+ * Blank leaves the choice to the style. Only Oxford declares a default-locale
+ * of its own (en-GB); the rest declare none, so citeproc falls back to en-US
+ * and renders "August 18, 2026" even under a style that expects "18 August
+ * 2026". Setting this forces the locale instead.
+ *
+ * The values are CSL locale identifiers and cannot change; only the labels are
+ * ours. "Global English" rather than "British English" for en-GB, since the
+ * distinction being drawn is a spelling and date convention, not a nationality.
+ */
+const ENGLISH_LOCALES = [
+  { value: "", label: "Let the style decide" },
+  { value: "en-GB", label: "Global English" },
+  { value: "en-US", label: "American English" },
+];
+
+/**
+ * The site's configured languages, so the per-language title list offers
+ * exactly the languages that exist. Read the same way Url/template.jsx reads
+ * its reuse data - a static import, because Tina templates are bundled for the
+ * browser and cannot reach the filesystem.
+ */
+const LANGUAGE_OPTIONS = (
+  Array.isArray(docusaurusData?.languages?.supported)
+    ? docusaurusData.languages.supported
+    : []
+).map((language) => ({
+  value: language.code,
+  label: `${language.label} (${language.code})`,
+}));
 
 const WarningIcon = (props) => {
   return (
@@ -863,6 +919,65 @@ export const SettingsCollection = {
       type: "boolean",
       label: "Show blog reading time",
       name: "showReadingTime",
+    },
+    {
+      type: "object",
+      label: "Citations",
+      name: "citations",
+      fields: [
+        {
+          type: "boolean",
+          label: "Generate a references page",
+          name: "bibliographyPage",
+          description:
+            "Build a References page at /docs/references listing every source in the Bibliography collection. Add it to the Table of Contents to link it from the sidebar. Regenerated on every build; do not edit the page by hand.",
+        },
+        {
+          type: "string",
+          label: "Citation style",
+          name: "style",
+          options: CITATION_STYLES,
+          description:
+            "How references are formatted. Applies to the whole site: mixing styles within one doc set is a style error.",
+        },
+        {
+          type: "string",
+          label: "English variant",
+          name: "englishLocale",
+          options: ENGLISH_LOCALES,
+          description:
+            "Spelling and date order for English pages. Most styles do not declare a locale, so a style that expects day-first dates renders US ones unless this is set to Global English.",
+        },
+        {
+          type: "object",
+          label: "References page title",
+          name: "pageTitles",
+          list: true,
+          description:
+            "Heading and table-of-contents label for the references page, per language. Leave a language out to use the built-in title for it.",
+          ui: {
+            itemProps: (item) => ({
+              label: [item?.language, item?.title].filter(Boolean).join(" - "),
+            }),
+          },
+          fields: [
+            {
+              type: "string",
+              label: "Language",
+              name: "language",
+              isTitle: true,
+              required: true,
+              options: LANGUAGE_OPTIONS,
+            },
+            {
+              type: "string",
+              label: "Title",
+              name: "title",
+              required: true,
+            },
+          ],
+        },
+      ],
     },
   ],
 };

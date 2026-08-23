@@ -32,6 +32,10 @@ const MIRROR_SRC_DIRS = [
   "src/plugins",
   "src/theme",
   "src/utils",
+  // Vendored CSL schemas, styles and locales. generate-bibliography.mjs reads
+  // these by name, so a scaffolded site without them cannot build a references
+  // page. Upstream files, not user content - see csl/README.md.
+  "csl",
 ];
 
 // Individual files copied verbatim
@@ -255,6 +259,12 @@ seedFile(
   "reuse/media/index.json",
   `${JSON.stringify({ media: [] }, null, 2)}\n`
 );
+// Cite/template.jsx imports this at Tina schema-build time to populate the
+// citation-key dropdown, so a scaffolded site without it cannot build at all.
+seedFile(
+  "reuse/bibliography/index.json",
+  `${JSON.stringify({ bibliography: [] }, null, 2)}\n`
+);
 // The Snippet component's dynamic import needs @site/i18n to resolve
 seedFile("i18n/.gitkeep", "");
 seedFile(
@@ -296,6 +306,7 @@ This is your first blog post. Edit it in the CMS at
       "src/pages/example-page.mdx",
       "i18n/.gitkeep",
       "reuse/media/index.json",
+      "reuse/bibliography/index.json",
       "blog/welcome.mdx",
     ],
     // package.json sections replaced from the template's package.json

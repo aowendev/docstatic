@@ -1,0 +1,68 @@
+/**
+ * Copyright (c) Source Solutions, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ * Notes at the foot of a page. Until these reached server-rendered HTML there
+ * was nothing to style - the classNames existed but no rule ever matched them.
+ */
+
+.ref {
+  line-height: 0;
+}
+
+.ref a {
+  color: var(--ifm-link-color);
+  font-size: 0.8em;
+  text-decoration: none;
+  padding: 0 0.1em;
+}
+
+.ref a:hover {
+  text-decoration: underline;
+}
+
+.list {
+  margin-top: 3rem;
+  font-size: 0.9rem;
+}
+
+.title {
+  font-size: 1.1rem;
+  margin-bottom: 0.75rem;
+}
+
+.ol {
+  padding-left: 1.25rem;
+}
+
+.item {
+  margin-bottom: 0.5rem;
+}
+
+/* A note is the target of an in-page jump, so give it somewhere to land clear
+   of the sticky navbar and flag it briefly when it is the one being visited. */
+.item:target {
+  scroll-margin-top: calc(var(--ifm-navbar-height) + 1rem);
+  background-color: var(--ifm-color-emphasis-200);
+  border-radius: var(--ifm-global-radius);
+}
+
+.content > :last-child {
+  display: inline;
+}
+
+.content p {
+  display: inline;
+  margin: 0;
+}
+
+.backlink {
+  text-decoration: none;
+  margin-left: 0.25rem;
+}
+
+.backlink:hover {
+  text-decoration: underline;
+}

@@ -15,15 +15,11 @@ translate: false
 approved: false
 published: true
 unlisted: false
-lastmod: '2026-08-19T14:49:53.348Z'
+lastmod: '2026-08-23T23:00:50.022Z'
 modifiedBy: aowendev <aowen@translationcommons.org>
 ---
 
 # Citations
-
-<Admonition type="caution" title="In development">
-  This feature is incomplete. You can record bibliographic data and embed citations in your topics, and both are stored in a standards-compliant form that will not need re-entering. The render engine that formats them is not built yet, so citations currently produce no visible output on the published page.
-</Admonition>
 
 The **Citation** component cites sources held in a central **Bibliography** collection. Each source is recorded once, and every topic that cites it refers to it by a citation key. Correcting a publisher's name or a publication date updates every citation of that source across the doc set.
 
@@ -87,7 +83,7 @@ This one cites two sources together, each with its own page reference:
 ```
 
 <Admonition type="note" title="Note">
-  Two citations with identical details share a number, in the same way footnotes with identical content do.
+  Citing the same source twice does not reuse the first citation. Each gets its own place, and the style decides how to shorten the later ones.
 </Admonition>
 
 ## Choosing a style
@@ -95,5 +91,91 @@ This one cites two sources together, each with its own page reference:
 A citation style controls how citations and the reference list are formatted. Styles differ in substance rather than decoration: some put a superscript number in the text and the source in a note, others put the author and year in brackets in the running text.
 
 The style is set once for the whole site rather than per topic. Mixing styles within one doc set is a style error, because readers cannot tell what a given marker means.
+
+Select **Settings** from the collection list, open **Citations**, and choose a **Citation style**:
+
+| Style | Where the citation goes | Example reference |
+|---|---|---|
+| Chicago (author-date) | In the text | Smith, Jane. 2020. *The Art of Documentation*. Oxford University Press. |
+| Chicago (notes and bibliography) | In a footnote | Smith, Jane. *The Art of Documentation*. Oxford University Press, 2020. |
+| Harvard (Cite Them Right) | In the text | Smith, J. (2020) *The Art of Documentation*. Oxford: Oxford University Press. |
+| IEEE | In the text, numbered | [1] J. Smith, *The Art of Documentation*. Oxford: Oxford University Press, 2020. |
+| Oxford (Guide to Style, notes) | In a footnote | Smith, J., *The Art of Documentation* (Oxford, 2020). |
+
+### English variant
+
+Only the Oxford style states which English it is written for. The others leave it to the site and fall back to American English, so a style that expects day-first dates—Cite Them Right, for one—dates a source `August 18, 2026` unless told otherwise.
+
+Set **English variant** to **Global English** to correct this. It affects date order, quotation marks and spelling on English pages only; the other languages take their conventions from their own locale.
+
+## Citations in a note style
+
+Under **Chicago (notes and bibliography)** or **Oxford**, a citation is a footnote. The same `<Cite>` you already authored becomes a numbered note; nothing in the topic changes.
+
+Citations and your own footnotes share **one numbered sequence**, in the order they appear on the page. Both Oxford and Chicago number notes consecutively throughout, and a reader cannot tell two sequences apart.
+
+Because the numbering is worked out when the site is built, the style can shorten a repeat citation correctly rather than repeating it in full.
+
+### A note holding both comment and a citation
+
+Chicago allows one note to carry a source and your own remark together. Put the citation inside a footnote and it renders within that note instead of creating a second one:
+
+```jsx
+<Footnote summary="1"><Cite items={[{ key: "jones2019" }]} /> This argues the opposite.</Footnote>
+```
+
+Put the citation first and your remark after it. A note style ends a citation with a full stop, so a remark written around the citation rather than after it reads oddly.
+
+For a remark of only a few words, use the citation's **Suffix** field instead—it stays with the citation under every style, including the in-text ones.
+
+## A worked example
+
+The paragraph below is live. Its citations are rendered in whichever style this site is currently set to, from the sources in the **Bibliography** collection.
+
+<Admonition type="info" title="Example">
+  Documentation is best written once and reused<Cite items={[{ key: "smith2020", locator: "14", label: "page" }]} />. The idea predates the tooling<Footnote summary="Single-sourcing predates the tooling">Technical writers were reusing content through conditional text long before single-sourcing had a name.</Footnote>, and the same source returns to it later<Cite items={[{ key: "smith2020", locator: "22", label: "page" }]} />. Not everyone agrees<Footnote summary="A dissenting view"><Cite items={[{ key: "jones2019" }]} /> This argues that reuse costs more than it saves.</Footnote>. Two sources can be cited together in one citation<Cite items={[{ key: "smith2020" }, { key: "csl-spec" }]} />.
+</Admonition>
+
+What to look at depends on the style in **Settings**:
+
+* Under a **note** style—Oxford, or Chicago (notes and bibliography)—the markers above are footnotes, and the notes themselves are at the foot of this page. The author's own notes and the citations run in **one sequence**. The second citation of *The Art of Documentation* is shortened, because another note came between it and the first.
+* Under an **in-text** style—Harvard, IEEE, or Chicago (author-date)—the citations appear in the sentence itself, and only the two author footnotes are numbered.
+
+The source of that paragraph is unchanged either way:
+
+```jsx
+Documentation is best written once and reused<Cite items={[{ key: "smith2020", locator: "14", label: "page" }]} />.
+The idea predates the tooling<Footnote summary="...">Technical writers were reusing content...</Footnote>,
+and the same source returns to it later<Cite items={[{ key: "smith2020", locator: "22", label: "page" }]} />.
+Not everyone agrees<Footnote summary="...">Compare <Cite items={[{ key: "jones2019" }]} />, which argues...</Footnote>.
+Two sources can be cited together in one citation<Cite items={[{ key: "smith2020" }, { key: "csl-spec" }]} />.
+```
+
+## The references page
+
+A **references page** lists every source in the bibliography, formatted in the chosen style. It is separate from the citations in your topics: the note or in-text form of a source and its reference-list form deliberately differ.
+
+To publish it, select **Settings** from the collection list, open **Citations**, and turn on **Generate a references page**.
+
+### Naming the page
+
+**References page title** sets the heading and the table-of-contents label, one entry per language. Add a language and give it a title; leave a language out and it keeps its built-in title—*References* in English, *Références* in French, and so on.
+
+### Placing the page
+
+The page is published at `/docs/references`, but it is not added to the table of contents for you—only you know where it belongs in your reading order.
+
+1. Select **Table of Contents** from the collection list.
+2. Add a document entry pointing at `docs/references.mdx`, wherever you want it.
+
+Leave the entry in place even if you later switch the page off: an entry whose page does not exist is ignored rather than breaking the build.
+
+<Admonition type="note" title="Note">
+  The page is rebuilt from the bibliography on every build, in each of your site languages, so it is never out of date. Do not edit it by hand—your changes are overwritten. Correct the source in the **Bibliography** collection instead.
+</Admonition>
+
+<Admonition type="note" title="Note">
+  The page lists the whole bibliography, not only the sources your topics cite.
+</Admonition>
 
 <RelatedTopics maxResults={7} />

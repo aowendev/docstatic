@@ -1,14 +1,14 @@
 {
-  "generatedAt": "2026-08-19T15:35:56.924Z",
+  "generatedAt": "2026-08-23T22:58:46.853Z",
   "lastCheckedAt": "2026-08-17T17:48:33.969Z",
   "checked": false,
   "stats": {
-    "total": 244,
+    "total": 245,
     "ok": 208,
     "broken": 0,
     "unverified": 0,
     "unchecked": 0,
-    "skipped": 36,
+    "skipped": 37,
     "centralized": 161,
     "migrationCandidates": 47
   },
@@ -185,7 +185,7 @@
       "fileName": "footnotes.mdx",
       "relativePath": "guides/markdown-features/footnotes.mdx",
       "title": "Footnotes",
-      "totalLinks": 0
+      "totalLinks": 1
     },
     "/docs/guides/markdown-features/glossary.mdx": {
       "fileName": "glossary.mdx",
@@ -329,6 +329,12 @@
       "fileName": "index.mdx",
       "relativePath": "migration/index.mdx",
       "title": "Upgrading",
+      "totalLinks": 0
+    },
+    "/docs/references.mdx": {
+      "fileName": "references.mdx",
+      "relativePath": "references.mdx",
+      "title": "References",
       "totalLinks": 0
     },
     "/docs/search.mdx": {
@@ -731,6 +737,15 @@
       "code": 200,
       "checkedAt": "2026-08-17T17:48:28.137Z",
       "hreflang": false
+    },
+    {
+      "text": "Citations",
+      "url": "./citations.mdx",
+      "type": "markdown",
+      "filePath": "/docs/guides/markdown-features/footnotes.mdx",
+      "line": 56,
+      "status": "skipped",
+      "reason": "Internal link — checked by the Docusaurus build"
     },
     {
       "text": "Markdown",

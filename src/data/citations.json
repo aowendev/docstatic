@@ -1,0 +1,190 @@
+{
+  "style": "oxford-guide-to-style-notes",
+  "bibliography": {
+    "items": {
+      "smith2020": {
+        "id": "smith2020",
+        "type": "book",
+        "title": "The Art of Documentation",
+        "author": [
+          {
+            "family": "Smith",
+            "given": "Jane"
+          }
+        ],
+        "issued": {
+          "date-parts": [
+            [
+              2020,
+              5,
+              1
+            ]
+          ]
+        },
+        "publisher": "Oxford University Press",
+        "publisher-place": "Oxford",
+        "ISBN": "978-0-19-000000-0"
+      },
+      "jones2019": {
+        "id": "jones2019",
+        "type": "article-journal",
+        "title": "Single-sourcing in technical communication",
+        "author": [
+          {
+            "family": "Jones",
+            "given": "Alex"
+          }
+        ],
+        "issued": {
+          "date-parts": [
+            [
+              2019,
+              11
+            ]
+          ]
+        },
+        "container-title": "Journal of Documentation Practice",
+        "volume": "42",
+        "issue": "3",
+        "page": "112-134",
+        "DOI": "10.0000/jdp.2019.42.3.112"
+      },
+      "csl-spec": {
+        "id": "csl-spec",
+        "type": "webpage",
+        "title": "Citation Style Language Specification",
+        "author": [
+          {
+            "literal": "Citation Style Language Project"
+          }
+        ],
+        "issued": {
+          "date-parts": [
+            [
+              2024
+            ]
+          ]
+        },
+        "URL": "https://docs.citationstyles.org/",
+        "accessed": {
+          "date-parts": [
+            [
+              2026,
+              8,
+              18
+            ]
+          ]
+        }
+      }
+    },
+    "rendered": {
+      "de": [
+        "Citation Style Language Project, „Citation Style Language Specification“ (2024), https://docs.citationstyles.org/, zugegriffen 18. August 2026.",
+        "Jones, A., „Single-sourcing in technical communication“, *Journal of Documentation Practice*, 42/3 (2019), 112–34, https://doi.org/10.0000/jdp.2019.42.3.112.",
+        "Smith, J., *The Art of Documentation* (Oxford, 2020)."
+      ],
+      "en": [
+        "Citation Style Language Project, ‘Citation Style Language Specification’ (2024), https://docs.citationstyles.org/, accessed 18 Aug. 2026.",
+        "Jones, A., ‘Single-Sourcing in Technical Communication’, *Journal of Documentation Practice*, 42/3 (2019), 112–34, https://doi.org/10.0000/jdp.2019.42.3.112.",
+        "Smith, J., *The Art of Documentation* (Oxford, 2020)."
+      ],
+      "es": [
+        "Citation Style Language Project, «Citation Style Language Specification» (2024), https://docs.citationstyles.org/, accedido 18 de agosto de 2026.",
+        "Jones, A., «Single-sourcing in technical communication», *Journal of Documentation Practice*, 42/3 (2019), 112-34, https://doi.org/10.0000/jdp.2019.42.3.112.",
+        "Smith, J., *The Art of Documentation* (Oxford, 2020)."
+      ],
+      "fr": [
+        "Citation Style Language Project, « Citation Style Language Specification » (2024), https://docs.citationstyles.org/, consulté le 18 août 2026.",
+        "Jones, A., « Single-sourcing in technical communication », *Journal of Documentation Practice*, 42/3 (2019), 112‑34, https://doi.org/10.0000/jdp.2019.42.3.112.",
+        "Smith, J., *The Art of Documentation* (Oxford, 2020)."
+      ],
+      "ja": [
+        "Citation Style Language Project, 「Citation Style Language Specification」 (2024年), https://docs.citationstyles.org/, 参照 2026年8月18日.",
+        "Jones, A., 「Single-sourcing in technical communication」, *Journal of Documentation Practice*, 42/3 (2019年), 112–34, https://doi.org/10.0000/jdp.2019.42.3.112.",
+        "Smith, J., *The Art of Documentation* (Oxford, 2020年)."
+      ]
+    }
+  },
+  "styleClass": "note",
+  "clusters": {
+    "docs/guides/markdown-features/citations.mdx": {
+      "noteCount": 5,
+      "clusters": [
+        {
+          "noteIndex": 1,
+          "nested": false,
+          "items": [
+            {
+              "key": "smith2020",
+              "locator": "14",
+              "label": "page"
+            }
+          ],
+          "rendered": "Jane Smith, *The Art of Documentation* (Oxford, 2020), 14."
+        },
+        {
+          "noteIndex": 3,
+          "nested": false,
+          "items": [
+            {
+              "key": "smith2020",
+              "locator": "22",
+              "label": "page"
+            }
+          ],
+          "rendered": "Smith, *The Art of Documentation*, 22."
+        },
+        {
+          "noteIndex": 4,
+          "nested": true,
+          "items": [
+            {
+              "key": "jones2019"
+            }
+          ],
+          "rendered": "Alex Jones, ‘Single-Sourcing in Technical Communication’, *Journal of Documentation Practice*, 42/3 (2019), 112–34, https://doi.org/10.0000/jdp.2019.42.3.112."
+        },
+        {
+          "noteIndex": 5,
+          "nested": false,
+          "items": [
+            {
+              "key": "smith2020"
+            },
+            {
+              "key": "csl-spec"
+            }
+          ],
+          "rendered": "Smith, *The Art of Documentation*; Citation Style Language Project, ‘Citation Style Language Specification’ (2024), https://docs.citationstyles.org/, accessed 18 Aug. 2026."
+        }
+      ]
+    },
+    "docs/guides/markdown-features/footnotes.mdx": {
+      "noteCount": 6,
+      "clusters": [
+        {
+          "noteIndex": 5,
+          "nested": true,
+          "items": [
+            {
+              "key": "jones2019"
+            }
+          ],
+          "rendered": "Alex Jones, ‘Single-Sourcing in Technical Communication’, *Journal of Documentation Practice*, 42/3 (2019), 112–34, https://doi.org/10.0000/jdp.2019.42.3.112."
+        },
+        {
+          "noteIndex": 6,
+          "nested": false,
+          "items": [
+            {
+              "key": "smith2020",
+              "locator": "14",
+              "label": "page"
+            }
+          ],
+          "rendered": "Jane Smith, *The Art of Documentation* (Oxford, 2020), 14."
+        }
+      ]
+    }
+  }
+}

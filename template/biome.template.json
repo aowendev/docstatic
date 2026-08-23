@@ -18,6 +18,8 @@
       "!**/reuse/media/index.json",
       "!**/src/data/docs-metadata.json",
       "!**/src/data/link-report.json",
+      "!**/src/data/citations.json",
+      "!**/csl/**",
       "!**/docs/api",
       "!**/config/**/*.json",
       "!**/static/admin",

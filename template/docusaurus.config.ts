@@ -1,6 +1,9 @@
 import { themes } from "prism-react-renderer";
 import rehypeKatex from "rehype-katex";
 import remarkMath from "remark-math";
+import remarkCitations, {
+  citationsFingerprint,
+} from "./src/plugins/remark-citations.mjs";
 import PrismDark from "./src/utils/prismDark";
 import PrismLight from "./src/utils/prismLight";
 
@@ -219,7 +222,12 @@ const config = {
       {
         docs: {
           sidebarPath: require.resolve("./sidebars.ts"),
-          remarkPlugins: [remarkMath],
+          remarkPlugins: [
+            remarkMath,
+            // The fingerprint makes regenerated citations invalidate the
+            // bundler cache; without it a style change never reaches the page.
+            [remarkCitations, { fingerprint: citationsFingerprint() }],
+          ],
           rehypePlugins: [rehypeKatex],
           // Remove this to remove the "edit this page" links.
           editUrl: ({
@@ -250,6 +258,11 @@ const config = {
             return getFutureDatedBlogFiles(blogDir);
           })(),
           showReadingTime: docusaurusData.showReadingTime,
+          // Footnotes are numbered at build time here too, so a blog post does
+          // not fall back to the client-side path the docs no longer use.
+          remarkPlugins: [
+            [remarkCitations, { fingerprint: citationsFingerprint() }],
+          ],
           // Truncate blog previews with manual markers or excerpt
           truncateMarker: /<Truncate\s*\/?>/,
           // Edit URL configuration for blog posts

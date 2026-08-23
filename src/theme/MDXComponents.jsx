@@ -12,6 +12,9 @@ import Comment from "@site/src/components/Comment";
 import ConditionalText from "@site/src/components/ConditionalText";
 import Figure from "@site/src/components/Figure";
 import Footnote from "@site/src/components/Footnote";
+import FootnoteItem from "@site/src/components/Footnote/FootnoteItem";
+import FootnoteRef from "@site/src/components/Footnote/FootnoteRef";
+import FootnotesList from "@site/src/components/Footnote/FootnotesList";
 import GlossaryTerm from "@site/src/components/GlossaryTerm";
 import Passthrough from "@site/src/components/Passthrough";
 import RelatedTopics from "@site/src/components/RelatedTopics";
@@ -42,6 +45,10 @@ export default {
   DocCardList: DocCardList,
   Figure: Figure,
   Footnote: Footnote,
+  // Emitted by src/plugins/remark-citations.mjs, not authored directly.
+  FootnoteRef: FootnoteRef,
+  FootnoteItem: FootnoteItem,
+  FootnotesList: FootnotesList,
   GlossaryTerm: GlossaryTerm,
   Passthrough: Passthrough,
   RelatedTopics: RelatedTopics,
