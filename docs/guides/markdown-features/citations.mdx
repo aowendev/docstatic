@@ -15,7 +15,7 @@ translate: false
 approved: false
 published: true
 unlisted: false
-lastmod: '2026-08-24T08:56:25.948Z'
+lastmod: '2026-08-24T09:02:40.010Z'
 modifiedBy: aowendev <aowen@translationcommons.org>
 ---
 
@@ -37,6 +37,13 @@ Sources live in one collection, separate from the topics that cite them.
 
 <Admonition type="note" title="Note">
   Changing a citation key breaks every citation that uses it. Treat keys as permanent once a topic cites them.
+
+  A citation pointing at a key that no longer exists stops the build rather than publishing a gap, and the message names the topic and the key:
+
+  ```
+  docs/guides/example.mdx: citation 2 refers to "typo-here",
+  which is not in reuse/bibliography/index.json
+  ```
 </Admonition>
 
 ### Fields the form does not show
@@ -127,6 +134,21 @@ Select **Settings** from the collection list, open **Citations**, and choose a *
 Only the Oxford style states which English it is written for. The others leave it to the site and fall back to American English, so a style that expects day-first dates—Cite Them Right, for one—dates a source `August 18, 2026` unless told otherwise.
 
 Set **English variant** to **Global English** to correct this. It affects date order, quotation marks and spelling on English pages only; the other languages take their conventions from their own locale.
+
+### Adding a language
+
+The five languages docStatic ships with are ready to use. Adding another needs one file: the CSL locale that supplies its quotation marks, date order and terms like *accessed*.
+
+Without it a page in the new language still builds, but its citations come out in English. The build says so and names the file to add:
+
+```
+! No CSL locale for "it": its citations will use the style's default (English).
+  Add csl/locales/locales-it-IT.xml to fix.
+```
+
+Take that file from the [CSL locales project](https://github.com/citation-style-language/locales) and put it in `csl/locales/`. Nothing else is needed—the language is matched to its locale by name.
+
+Set a title for the new language under **References page title** as well, or the sources page keeps its English heading.
 
 ## Citations in a note style
 
