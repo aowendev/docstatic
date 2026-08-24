@@ -192,7 +192,7 @@ export default function remarkCitations(options = {}) {
     // Last on the page, below everything the author wrote - including a
     // trailing <RelatedTopics />. That is where footnotes have always been
     // here: the previous client-side version rendered the list from the
-    // DocItem/Content swizzle, after the page content. Moving them up would
+    // theme swizzle, after the page content. Moving them up would
     // also override where the author chose to put their trailing components.
     if (notes.size > 0) tree.children.push(notesListNode(notes));
   };

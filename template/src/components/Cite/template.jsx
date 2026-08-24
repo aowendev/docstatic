@@ -15,7 +15,7 @@ import {
   LOCATOR_LABELS,
   REFERENCE_TYPES,
   referenceTypeAt,
-} from "./cslTerms";
+} from "./cslTerms.mjs";
 
 const HELP_URL =
   "https://docstatic.com/docs/guides/markdown-features/citations";

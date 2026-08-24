@@ -55,7 +55,9 @@ module.exports = function citationsPlugin() {
       const { generateCitations } = await import(
         "../../scripts/generate-citations.mjs"
       );
-      generateCitations();
+      // Skipped when nothing has changed since the last run - otherwise every
+      // dev start regenerates what `predev` has just generated.
+      generateCitations({ skipIfFresh: true });
     },
   };
 };

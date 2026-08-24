@@ -15,7 +15,7 @@ translate: false
 approved: false
 published: true
 unlisted: false
-lastmod: '2026-08-24T08:25:58.523Z'
+lastmod: '2026-08-24T08:41:55.973Z'
 modifiedBy: aowendev <aowen@translationcommons.org>
 ---
 
@@ -84,6 +84,26 @@ This one cites two sources together, each with its own page reference:
 
 <Admonition type="note" title="Note">
   Citing the same source twice does not reuse the first citation. Each gets its own place, and the style decides how to shorten the later ones.
+</Admonition>
+
+## When changes appear
+
+Editing a **source** in the Bibliography collection updates every citation of it straight away—correct a publisher's name and the change reaches the page while you watch, with no restart.
+
+Three things behave differently, and it is worth knowing which is which:
+
+| Change | When it appears |
+|---|---|
+| Editing a source | Immediately |
+| Adding a citation to a topic | Next build |
+| Changing the citation style | After restarting the CMS |
+
+A new citation shows nothing at all until the next build—not a placeholder, not an error. It has no formatted text yet, and showing a half-formatted citation would be worse than showing none.
+
+The citation style is the one setting that needs a restart, because it decides whether citations sit in the running text or in footnotes. That reshapes the page rather than just its wording, so the pages have to be rebuilt.
+
+<Admonition type="note" title="Note">
+  Citations work in topics, not blog posts. Footnotes work in both. A citation placed in a blog post produces no output.
 </Admonition>
 
 ## Choosing a style

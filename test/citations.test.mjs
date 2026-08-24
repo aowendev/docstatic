@@ -30,7 +30,7 @@ import {
   REFERENCE_FIELD_MAP,
   REFERENCE_TYPES,
   referenceTypeAt,
-} from "../src/components/Cite/cslTerms.js";
+} from "../src/components/Cite/cslTerms.mjs";
 
 const citationSchema = JSON.parse(
   readFileSync(new URL("../csl/csl-citation.json", import.meta.url), "utf8")

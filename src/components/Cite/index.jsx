@@ -26,7 +26,7 @@
 
 import citations from "@site/src/data/citations-rendered.json";
 import React from "react";
-import { lookupCitation } from "./lookup";
+import { lookupCitation } from "./lookup.mjs";
 
 /**
  * Tokens -> elements. Recursive, and deliberately dependency-free: rendering

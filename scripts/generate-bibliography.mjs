@@ -28,7 +28,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { pathToFileURL } from "node:url";
-import { mapLibraryToCslJson } from "../src/components/Cite/mapToCslJson.js";
+import { mapLibraryToCslJson } from "../src/components/Cite/mapToCslJson.mjs";
 import {
   cslHtmlToMarkdown,
   DATA_FILE,

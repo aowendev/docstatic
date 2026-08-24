@@ -28,7 +28,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { pathToFileURL } from "node:url";
-import { mapLibraryToCslJson } from "../src/components/Cite/mapToCslJson.js";
+import { mapLibraryToCslJson } from "../src/components/Cite/mapToCslJson.mjs";
 import {
   cslHtmlToMarkdown,
   cslHtmlToTokens,
@@ -43,6 +43,8 @@ import {
   readCitationSettings,
   readJson,
   readStyle,
+  SETTINGS_FILE,
+  STYLES_DIR,
   styleClass,
   writeIfChanged,
 } from "./lib/csl.mjs";
@@ -278,8 +280,52 @@ function main() {
  * Run a full generation. The Docusaurus plugin calls this in-process so a
  * bibliography edit can be picked up without spawning a Node process.
  */
-export function generateCitations() {
+/**
+ * Whether the generated files already reflect every input.
+ *
+ * `yarn generate` runs from prebuild and predev, and the Docusaurus plugin runs
+ * generation again as it loads - so without this, every dev start pays for the
+ * same work twice and prints the same line twice, which reads like a bug.
+ *
+ * Compared by modification time rather than a stored hash: the generator writes
+ * its output after reading everything, so an output older than any input means
+ * something changed since. Only pages that contain a citation are considered,
+ * matching what the generator actually reads.
+ */
+function outputsAreCurrent(settings) {
+  const outputs = [DATA_FILE, RUNTIME_DATA_FILE];
+  if (!outputs.every((file) => fs.existsSync(file))) return false;
+  const generatedAt = Math.min(
+    ...outputs.map((file) => fs.statSync(file).mtimeMs)
+  );
+
+  const inputs = [LIBRARY_FILE, SETTINGS_FILE];
+  if (settings.style) {
+    const style = path.join(STYLES_DIR, `${settings.style}.csl`);
+    if (fs.existsSync(style)) inputs.push(style);
+  }
+  for (const { dir } of docRoots(settings.languages)) {
+    for (const file of findPages(dir)) {
+      if (fs.readFileSync(file, "utf8").includes("<Cite")) inputs.push(file);
+    }
+  }
+
+  return inputs.every(
+    (file) => !fs.existsSync(file) || fs.statSync(file).mtimeMs <= generatedAt
+  );
+}
+
+/**
+ * Run a generation. The Docusaurus plugin calls this in-process so a
+ * bibliography edit can be picked up without spawning a Node process.
+ *
+ * `skipIfFresh` is for that caller only: running from the CLI always
+ * regenerates, so `yarn generate` stays a reliable way to force the issue.
+ */
+export function generateCitations({ skipIfFresh = false } = {}) {
+  if (skipIfFresh && outputsAreCurrent(readCitationSettings())) return false;
   main();
+  return true;
 }
 
 // Only generate when run as a script; the tests import the helpers above.

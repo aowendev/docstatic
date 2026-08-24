@@ -1,6 +1,6 @@
 ---
 modifiedBy: aowendev <aowen@translationcommons.org>
-lastmod: '2026-08-23T23:00:49.951Z'
+lastmod: '2026-08-24T08:41:55.902Z'
 ---
 
 # CSL schemas and styles
@@ -15,7 +15,7 @@ provenance of anything added.
 | `csl-data.json` | [citation-style-language/schema](https://github.com/citation-style-language/schema) | JSON Schema for item data. The authority for the reference `type` dropdown and for every property name `mapToCslJson()` may emit. |
 
 `test/citations.test.mjs` checks the dropdowns and the field maps in
-`src/components/Cite/cslTerms.js` against both files, so replacing them with a
+`src/components/Cite/cslTerms.mjs` against both files, so replacing them with a
 newer upstream version will fail the tests rather than silently drift.
 
 Both schemas set `additionalProperties: false`. Anything the generator emits

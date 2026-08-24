@@ -31,7 +31,7 @@ import {
   parseMdx,
   readCiteItems,
 } from "../scripts/lib/notes.mjs";
-import { lookupCitation } from "../src/components/Cite/lookup.js";
+import { lookupCitation } from "../src/components/Cite/lookup.mjs";
 import remarkCitations, {
   citationStyleClass,
 } from "../src/plugins/remark-citations.mjs";

@@ -21,7 +21,7 @@ import {
   CONTRIBUTOR_FIELD_MAP,
   NON_CSL_FIELDS,
   REFERENCE_FIELD_MAP,
-} from "./cslTerms.js";
+} from "./cslTerms.mjs";
 
 /**
  * Fields holding a list of contributors. Each becomes a CSL name variable, an

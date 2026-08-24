@@ -28,13 +28,13 @@ import { cslHtmlToMarkdown, cslHtmlToTokens } from "../scripts/lib/csl.mjs";
 import {
   NON_CSL_FIELDS,
   REFERENCE_TYPES,
-} from "../src/components/Cite/cslTerms.js";
+} from "../src/components/Cite/cslTerms.mjs";
 import {
   mapLibraryToCslJson,
   mapToCslJson,
   toCslDate,
   toCslName,
-} from "../src/components/Cite/mapToCslJson.js";
+} from "../src/components/Cite/mapToCslJson.mjs";
 
 const dataSchema = JSON.parse(
   readFileSync(new URL("../csl/csl-data.json", import.meta.url), "utf8")
