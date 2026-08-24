@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-24T09:01:47.794Z",
+  "generatedAt": "2026-08-24T09:09:24.971Z",
   "lastCheckedAt": "2026-08-17T17:48:33.969Z",
   "checked": false,
   "stats": {
@@ -720,7 +720,7 @@
       "url": "https://github.com/citation-style-language/locales",
       "type": "markdown",
       "filePath": "/docs/guides/markdown-features/citations.mdx",
-      "line": 129,
+      "line": 130,
       "source": "doc",
       "inUrlsJson": false,
       "status": "unchecked",

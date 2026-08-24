@@ -25,6 +25,10 @@
  */
 export function lookupCitation(data, id) {
   if (!id || !data) return null;
-  const tokens = data[id];
-  return Array.isArray(tokens) ? tokens : null;
+  const entry = data[id];
+  if (Array.isArray(entry)) return { tokens: entry };
+  if (entry && typeof entry.problem === "string") {
+    return { problem: entry.problem };
+  }
+  return null;
 }

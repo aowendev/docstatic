@@ -57,15 +57,22 @@ function renderTokens(tokens) {
 }
 
 const Cite = ({ id }) => {
-  const tokens = lookupCitation(citations, id);
+  const entry = lookupCitation(citations, id);
 
   // No entry yet: the citation was added to the page since the last
   // generation. Render nothing rather than something wrong - `yarn generate`
   // fills it in. Cannot happen in a production build, where generation runs
   // first via prebuild.
-  if (!tokens) return null;
+  if (!entry) return null;
 
-  return <span className="citation">{renderTokens(tokens)}</span>;
+  // A citation naming a source that is not in the bibliography says so where it
+  // stands, the way a glossary term or a variable does. It used to fail the
+  // build, which stopped anyone previewing the site over one mistyped key.
+  if (entry.problem) {
+    return <span className="citation citation--error">{entry.problem}</span>;
+  }
+
+  return <span className="citation">{renderTokens(entry.tokens)}</span>;
 };
 
 export default Cite;

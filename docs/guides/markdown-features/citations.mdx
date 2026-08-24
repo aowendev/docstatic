@@ -15,7 +15,7 @@ translate: false
 approved: false
 published: true
 unlisted: false
-lastmod: '2026-08-24T09:02:40.010Z'
+lastmod: '2026-08-24T09:12:55.237Z'
 modifiedBy: aowendev <aowen@translationcommons.org>
 ---
 
@@ -38,12 +38,13 @@ Sources live in one collection, separate from the topics that cite them.
 <Admonition type="note" title="Note">
   Changing a citation key breaks every citation that uses it. Treat keys as permanent once a topic cites them.
 
-  A citation pointing at a key that no longer exists stops the build rather than publishing a gap, and the message names the topic and the key:
+  A citation pointing at a key that no longer exists says so in place, the way a glossary term or a variable does:
 
   ```
-  docs/guides/example.mdx: citation 2 refers to "typo-here",
-  which is not in reuse/bibliography/index.json
+  SOURCE NOT FOUND: typo-here
   ```
+
+  The build still succeeds and every other citation on the page is unaffected, so one mistyped key does not stop you previewing the site. The build also lists them, in case the page is one you were not looking at.
 </Admonition>
 
 ### Fields the form does not show

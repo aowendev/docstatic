@@ -131,30 +131,58 @@ function structuredItem(item) {
  * a page is a standalone document. The PDF tool renumbers across the flattened
  * doc set from the structured half of the output.
  */
-function renderPage({ source, items, styleXml, locale, noteStyle, key }) {
+/**
+ * What is wrong with a citation, or null if nothing is.
+ *
+ * Returned rather than thrown. A mistyped source key is an authoring mistake in
+ * one sentence of one topic, and taking the whole build down for it means
+ * nobody can preview anything until it is found. Glossary terms and variables
+ * both render an inline marker instead, and citations now match them.
+ */
+function citationProblem(entry, items) {
+  if (!entry.items) return "UNREADABLE CITATION";
+
+  const missing = entry.items
+    .map((item) => item.key)
+    .filter((key) => !key || !items[key]);
+
+  return missing.length > 0 ? `SOURCE NOT FOUND: ${missing.join(", ")}` : null;
+}
+
+/**
+ * Render one page's citations.
+ *
+ * A fresh engine per page, because note numbering restarts per page: on the web
+ * a page is a standalone document. The PDF tool renumbers across the flattened
+ * doc set from the structured half of the output.
+ */
+export function renderPage({
+  source,
+  items,
+  styleXml,
+  locale,
+  noteStyle,
+  key,
+}) {
   const tree = parseMdx(source);
   const { entries, noteCount } = collectNotes(tree, { noteStyle });
   const cites = citeEntries(entries);
   if (cites.length === 0) return null;
 
+  const problems = cites.map((entry) => citationProblem(entry, items));
+
   const engine = makeEngine(items, styleXml, locale);
   const rendered = [];
+  const renderedIndex = new Map();
 
+  // Only sound citations reach citeproc: handing it an id it cannot retrieve
+  // makes it emit its own placeholder, or throw. Their positions among each
+  // other still decide short forms, so the note indices go through unchanged
+  // and a broken citation simply takes no part in the sequence.
   cites.forEach((entry, index) => {
-    if (!entry.items) {
-      throw new Error(
-        `${key}: citation ${index + 1} has an unreadable items prop. ` +
-          'It must be a literal array, e.g. items={[{ key: "smith2020" }]}'
-      );
-    }
-    for (const item of entry.items) {
-      if (!item.key || !items[item.key]) {
-        throw new Error(
-          `${key}: citation ${index + 1} refers to "${item.key}", ` +
-            "which is not in reuse/bibliography/index.json"
-        );
-      }
-    }
+    if (problems[index]) return;
+
+    renderedIndex.set(index, renderedIndex.size);
 
     // appendCitationCluster returns [clusterIndex, html] pairs, and may revise
     // clusters already emitted - a later citation of the same source can turn an
@@ -170,19 +198,25 @@ function renderPage({ source, items, styleXml, locale, noteStyle, key }) {
 
   return {
     noteCount,
-    clusters: cites.map((entry, index) => ({
-      // The id the compiled page will carry in place of this citation's text.
-      // A content signature, not a position - see citationId in lib/notes.mjs.
-      id: citationId(key, entry),
-      noteIndex: entry.noteIndex,
-      nested: entry.nested,
-      items: entry.items.map(structuredItem),
-      // Markdown for the reference page and the PDF tool; tokens for the
-      // browser. Both come from the same citeproc HTML rather than one being
-      // derived from the other, so neither is a lossy round trip.
-      rendered: cslHtmlToMarkdown(rendered[index] ?? ""),
-      tokens: cslHtmlToTokens(rendered[index] ?? ""),
-    })),
+    clusters: cites.map((entry, index) => {
+      const problem = problems[index];
+      const html = problem ? "" : (rendered[renderedIndex.get(index)] ?? "");
+
+      return {
+        // The id the compiled page will carry in place of this citation's text.
+        // A content signature, not a position - see citationId in lib/notes.mjs.
+        id: citationId(key, entry),
+        noteIndex: entry.noteIndex,
+        nested: entry.nested,
+        items: (entry.items ?? []).map(structuredItem),
+        // Markdown for the reference page and the PDF tool; tokens for the
+        // browser. Both come from the same citeproc HTML rather than one being
+        // derived from the other, so neither is a lossy round trip.
+        rendered: cslHtmlToMarkdown(html),
+        tokens: cslHtmlToTokens(html),
+        ...(problem ? { problem } : {}),
+      };
+    }),
   };
 }
 
@@ -209,7 +243,13 @@ function updateData(patch) {
 function writeRuntimeData(clusters) {
   const rendered = {};
   for (const page of Object.values(clusters)) {
-    for (const cluster of page.clusters) rendered[cluster.id] = cluster.tokens;
+    for (const cluster of page.clusters) {
+      // A broken citation carries its message instead of tokens, so the page
+      // can show it where the citation should have been.
+      rendered[cluster.id] = cluster.problem
+        ? { problem: cluster.problem }
+        : cluster.tokens;
+    }
   }
   return writeIfChanged(
     RUNTIME_DATA_FILE,
@@ -280,9 +320,15 @@ function main() {
   });
   writeRuntimeData(clusters);
 
+  const broken = Object.entries(clusters).flatMap(([page, data]) =>
+    data.clusters.filter((c) => c.problem).map((c) => `${page}: ${c.problem}`)
+  );
+  for (const line of broken) console.warn(`  ! ${line}`);
+
   console.log(
     `Citations (${settings.style}, ${styleClass(styleXml)}): ` +
-      `${citationCount} citation(s) across ${pageCount} page(s)`
+      `${citationCount} citation(s) across ${pageCount} page(s)` +
+      (broken.length > 0 ? `, ${broken.length} broken` : "")
   );
 }
 

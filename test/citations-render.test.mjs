@@ -411,7 +411,7 @@ test("an unknown id renders nothing rather than throwing", () => {
   assert.equal(lookupCitation({}, "docs/x.mdx#abc#0"), null);
   assert.equal(lookupCitation(null, "docs/x.mdx#abc#0"), null);
   assert.equal(lookupCitation({ a: ["x"] }, undefined), null);
-  assert.deepEqual(lookupCitation({ a: ["x"] }, "a"), ["x"]);
+  assert.deepEqual(lookupCitation({ a: ["x"] }, "a"), { tokens: ["x"] });
 });
 
 /**
@@ -478,5 +478,77 @@ test("the plugin behaves the same through Docusaurus's own MDX pipeline", async 
     order,
     ["RelatedTopics", "FootnotesList"],
     "notes go last, below the author's trailing components"
+  );
+});
+
+test("a citation naming a missing source reports itself instead of failing", async () => {
+  // A mistyped key is one word in one topic. Taking the build down for it stops
+  // anyone previewing anything, so it renders in place like a glossary term or
+  // a variable does. lookupCitation distinguishes the two shapes it can hold.
+  const problem = lookupCitation(
+    { "docs/x.mdx#abc#0": { problem: "SOURCE NOT FOUND: typo-here" } },
+    "docs/x.mdx#abc#0"
+  );
+  assert.deepEqual(problem, { problem: "SOURCE NOT FOUND: typo-here" });
+
+  const ok = lookupCitation(
+    { "docs/x.mdx#abc#0": ["Smith, J."] },
+    "docs/x.mdx#abc#0"
+  );
+  assert.deepEqual(ok, { tokens: ["Smith, J."] });
+
+  // Still nothing for an id the generator has not seen.
+  assert.equal(lookupCitation({}, "docs/x.mdx#abc#0"), null);
+  // And a malformed entry is treated as absent rather than rendered.
+  assert.equal(lookupCitation({ a: { problem: 7 } }, "a"), null);
+});
+
+test("a broken citation does not disturb the ones around it", async () => {
+  const { renderPage } = await import("../scripts/generate-citations.mjs");
+  const { readStyle, makeEngine } = await import("../scripts/lib/csl.mjs");
+  const { mapLibraryToCslJson } = await import(
+    "../src/components/Cite/mapToCslJson.mjs"
+  );
+  const { default: library } = await import(
+    "../reuse/bibliography/index.json",
+    { with: { type: "json" } }
+  );
+
+  const items = mapLibraryToCslJson(library.bibliography);
+  const styleXml = readStyle("chicago-notes-bibliography");
+
+  // Good, broken, good - citing the same source either side of the break.
+  const source = [
+    '<Cite items={[{ key: "smith2020", locator: "14", label: "page" }]} />',
+    '<Cite items={[{ key: "no-such-key" }]} />',
+    '<Cite items={[{ key: "smith2020", locator: "22", label: "page" }]} />',
+  ].join(" and ");
+
+  const page = renderPage({
+    source,
+    items,
+    styleXml,
+    locale: null,
+    noteStyle: true,
+    key: "docs/x.mdx",
+  });
+
+  const [first, broken, third] = page.clusters;
+
+  assert.equal(broken.problem, "SOURCE NOT FOUND: no-such-key");
+  assert.ok(!first.problem && !third.problem);
+
+  // Note numbering runs straight through the break.
+  assert.deepEqual(
+    page.clusters.map((c) => c.noteIndex),
+    [1, 2, 3]
+  );
+
+  // And the surviving pair still shortens: skipping the broken one must not
+  // make citeproc forget it had already seen this source.
+  assert.match(first.rendered, /Jane Smith/, "the first is the full form");
+  assert.ok(
+    !/Jane Smith/.test(third.rendered) && /Smith/.test(third.rendered),
+    `the third should be a short form, got: ${third.rendered}`
   );
 });
