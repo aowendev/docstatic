@@ -15,7 +15,7 @@ translate: false
 approved: false
 published: true
 unlisted: false
-lastmod: '2026-08-24T09:28:23.591Z'
+lastmod: '2026-08-24T09:38:11.002Z'
 modifiedBy: aowendev <aowen@translationcommons.org>
 ---
 
@@ -23,7 +23,7 @@ modifiedBy: aowendev <aowen@translationcommons.org>
 
 The **Citation** component cites sources held in a central **Bibliography** collection. Each source is recorded once, and every topic that cites it refers to it by a citation key. Correcting a publisher's name or a publication date updates every citation of that source across the doc set.
 
-Bibliographic data follows the Citation Style Language (CSL) standard, so it can be exported to and imported from reference managers such as Zotero and Mendeley.
+Bibliographic data follows the Citation Style Language (CSL) standard, the same format reference managers such as Zotero and Mendeley export. There is no importer yet, so a source from one of those is moved across by pasting its CSL-JSON into **Raw CSL-JSON override**.
 
 ## Managing the bibliography
 
@@ -188,7 +188,7 @@ The paragraph below is live. Its citations are rendered in whichever style this 
 What to look at depends on the style in **Settings**:
 
 * Under a **note** style—Oxford, or Chicago (notes and bibliography)—the markers above are footnotes, and the notes themselves are at the foot of this page. The author's own notes and the citations run in **one sequence**. The second citation of *The Art of Documentation* is shortened, because another note came between it and the first.
-* Under an **in-text** style—Harvard, IEEE, or Chicago (author-date)—the citations appear in the sentence itself, and only the two author footnotes are numbered.
+* Under an **in-text** style—Harvard, IEEE, or Chicago (author-date)—the citations appear in the sentence itself, and only this paragraph's two author footnotes are numbered.
 
 The source of that paragraph is unchanged either way:
 
@@ -196,7 +196,7 @@ The source of that paragraph is unchanged either way:
 Documentation is best written once and reused<Cite items={[{ key: "smith2020", locator: "14", label: "page" }]} />.
 The idea predates the tooling<Footnote summary="...">Technical writers were reusing content...</Footnote>,
 and the same source returns to it later<Cite items={[{ key: "smith2020", locator: "22", label: "page" }]} />.
-Not everyone agrees<Footnote summary="...">Compare <Cite items={[{ key: "jones2019" }]} />, which argues...</Footnote>.
+Not everyone agrees<Footnote summary="..."><Cite items={[{ key: "jones2019" }]} /> This argues that reuse...</Footnote>.
 Two sources can be cited together in one citation<Cite items={[{ key: "smith2020" }, { key: "csl-spec" }]} />.
 ```
 
