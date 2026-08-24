@@ -32,6 +32,10 @@ const MIRROR_SRC_DIRS = [
   "src/plugins",
   "src/theme",
   "src/utils",
+  // Vendored CSL schemas, styles and locales. generate-bibliography.mjs reads
+  // these by name, so a scaffolded site without them cannot build a references
+  // page. Upstream files, not user content - see csl/README.md.
+  "csl",
 ];
 
 // Individual files copied verbatim
@@ -60,6 +64,15 @@ const SCRIPTS_ALLOWLIST = [
   "generate-link-report.js",
   "update-theme-css.js",
   "util.js",
+  // The citation generators and the library they share. These are not optional:
+  // syncPackageJson copies the root "generate" script verbatim, so a scaffolded
+  // site runs them on every build, and src/plugins/remark-citations.mjs imports
+  // scripts/lib/notes.mjs - which docusaurus.config.ts loads, so a site missing
+  // them fails at config load, before anything else can report a better error.
+  "generate-bibliography.mjs",
+  "generate-citations.mjs",
+  "lib/csl.mjs",
+  "lib/notes.mjs",
 ];
 
 // Biome only auto-discovers "biome.json"/"biome.jsonc", so the template ships
@@ -154,7 +167,10 @@ function mirrorScripts() {
   const dest = path.join(TEMPLATE, "scripts");
   if (fs.existsSync(dest)) {
     for (const f of listFiles(dest)) {
-      if (!SCRIPTS_ALLOWLIST.includes(f)) {
+      // listFiles returns nested entries with the platform separator; the
+      // allowlist is written POSIX, so normalise or "lib/csl.mjs" would be
+      // deleted again on every sync under Windows.
+      if (!SCRIPTS_ALLOWLIST.includes(f.split(path.sep).join("/"))) {
         log("remove", path.join("scripts", f));
         if (!CHECK) fs.rmSync(path.join(dest, f));
       }
@@ -255,6 +271,12 @@ seedFile(
   "reuse/media/index.json",
   `${JSON.stringify({ media: [] }, null, 2)}\n`
 );
+// Cite/template.jsx imports this at Tina schema-build time to populate the
+// citation-key dropdown, so a scaffolded site without it cannot build at all.
+seedFile(
+  "reuse/bibliography/index.json",
+  `${JSON.stringify({ bibliography: [] }, null, 2)}\n`
+);
 // The Snippet component's dynamic import needs @site/i18n to resolve
 seedFile("i18n/.gitkeep", "");
 seedFile(
@@ -296,6 +318,7 @@ This is your first blog post. Edit it in the CMS at
       "src/pages/example-page.mdx",
       "i18n/.gitkeep",
       "reuse/media/index.json",
+      "reuse/bibliography/index.json",
       "blog/welcome.mdx",
     ],
     // package.json sections replaced from the template's package.json

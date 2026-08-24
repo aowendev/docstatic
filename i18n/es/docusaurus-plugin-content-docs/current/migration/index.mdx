@@ -1,0 +1,45 @@
+---
+title: Upgrading
+description: Actualice un sitio docStatic existente a la última versión con el comando de actualización.
+tags:
+  - "software"
+  - "software_upgrading"
+  - "software_package-managers"
+  - "software_package-managers_yarn"
+  - "development"
+  - "computer-languages"
+  - "computer-languages_javascript"
+lastmod: '2026-08-24T21:26:06.431Z'
+modifiedBy: aowendev <aowen@translationcommons.org>
+draft: false
+review: false
+translate: false
+approved: false
+published: true
+unlisted: false
+---
+
+# Upgrading
+
+Los sitios creados con `create-docstatic` se actualizan con el mismo paquete, ejecutado desde la carpeta raíz del sitio:
+
+```shell
+npx create-docstatic@latest --update
+```
+
+Este comando actualiza los archivos propios de docStatic y las versiones de las dependencias, y deja su contenido intacto. Determina qué archivos pertenecen a docStatic leyendo `update-manifest.json`, un manifiesto generado a partir de la plantilla del proyecto y distribuido con cada versión.
+
+Antes de escribir nada, el comando comprueba que su árbol de trabajo de git esté limpio, de modo que pueda revisar la actualización con `git diff` después. Si tiene cambios sin confirmar, confírmelos o guárdelos primero, o pase `--force` para continuar de todos modos.
+
+El comando de actualización acepta estas opciones:
+
+* **`--dry-run`**: Informa de lo que cambiaría sin escribir nada.
+* **`--force`**: Continúa aunque el árbol de trabajo de git no esté limpio.
+* **`--tag <dist-tag>`**: Actualiza a una versión o etiqueta de distribución concreta del paquete `docstatic` en lugar de `latest`.
+* **`--no-install`**: Omite la instalación de dependencias después de la actualización.
+
+<Admonition type="tip" title="Previsualice una actualización primero">
+  Ejecute con `--dry-run` antes de actualizar un sitio con personalizaciones locales, para poder ver qué archivos cambiarían antes de confirmar la actualización.
+</Admonition>
+
+<RelatedTopics maxResults={7} />

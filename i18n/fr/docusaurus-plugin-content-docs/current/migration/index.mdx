@@ -1,0 +1,45 @@
+---
+title: Upgrading
+description: Mettez à niveau un site docStatic existant vers la dernière version à l'aide de la commande de mise à jour.
+tags:
+  - "software"
+  - "software_upgrading"
+  - "software_package-managers"
+  - "software_package-managers_yarn"
+  - "development"
+  - "computer-languages"
+  - "computer-languages_javascript"
+lastmod: '2026-08-24T21:26:06.980Z'
+modifiedBy: aowendev <aowen@translationcommons.org>
+draft: false
+review: false
+translate: false
+approved: false
+published: true
+unlisted: false
+---
+
+# Upgrading
+
+Les sites créés avec `create-docstatic` sont mis à jour avec le même paquet, exécuté depuis le dossier racine du site :
+
+```shell
+npx create-docstatic@latest --update
+```
+
+Cette commande met à jour les fichiers propres à docStatic ainsi que les versions des dépendances, et laisse votre contenu intact. Elle détermine quels fichiers appartiennent à docStatic lui-même en lisant `update-manifest.json`, un manifeste généré à partir du modèle du projet et livré avec chaque version.
+
+Avant d'écrire quoi que ce soit, la commande vérifie que votre arbre de travail git est propre, afin que vous puissiez examiner la mise à jour avec `git diff` par la suite. Si vous avez des modifications non validées, validez-les ou mettez-les de côté d'abord, ou passez `--force` pour continuer malgré tout.
+
+La commande de mise à jour accepte les options suivantes :
+
+* **`--dry-run`** : Signale ce qui changerait sans rien écrire.
+* **`--force`** : Continue même si l'arbre de travail git n'est pas propre.
+* **`--tag <dist-tag>`** : Met à jour vers une version ou une balise de distribution spécifique du paquet `docstatic` plutôt que `latest`.
+* **`--no-install`** : Ignore l'installation des dépendances après la mise à jour.
+
+<Admonition type="tip" title="Prévisualiser une mise à jour d'abord">
+  Exécutez avec `--dry-run` avant de mettre à jour un site comportant des personnalisations locales, afin de voir quels fichiers changeraient avant de vous engager dans la mise à jour.
+</Admonition>
+
+<RelatedTopics maxResults={7} />

@@ -1,7 +1,7 @@
 ---
-help: null
-lastmod: "2026-06-01T21:56:58.742Z"
-title: Footnotes
+lastmod: '2026-08-24T20:47:14.399Z'
+title: 脚注
+description: 自動的に番号が振られ、本文へ戻れる脚注。
 tags:
   - "elements"
   - "elements_footnotes"
@@ -16,41 +16,54 @@ translate: false
 approved: false
 published: true
 unlisted: false
+modifiedBy: aowendev <aowen@translationcommons.org>
 ---
 
 # 脚注
 
-Markdown には脚注を提供する拡張機能がありますが、その実装は一貫性がなく、コンテンツと番号が分離されてしまいます。たとえば：
+Markdownには脚注を提供する拡張構文がありますが、その実装は統一されておらず、内容が番号から切り離されてしまいます。例えば：
 
 ```markdown
-Markdown is a lightweight markup language[^1] created by John Gruber[^2], now widely used in writing[^3].
+Markdownは軽量なマークアップ言語であり[^1]、John Gruberによって作成され[^2]、現在では執筆に広く使われています[^3]。
 
-[^1]: Markdown uses simple syntax to achieve text formatting.
-[^2]: John Gruber created Markdown in 2004.
-[^3]: Many platforms such as GitHub, Stack Overflow, and blog platforms support Markdown.
+[^1]: Markdownはシンプルな構文でテキストの書式を実現します。
+[^2]: John Gruberは2004年にMarkdownを作成しました。
+[^3]: GitHub、Stack Overflow、ブログプラットフォームなど、多くのプラットフォームがMarkdownをサポートしています。
 ```
 
-docStatic では、これは次のように表現されます：
+docStaticでは、これは次のように表現されます。
 
 ```markdown
-Markdown is a lightweight markup language<Footnote summary="1"> Markdown uses simple syntax to achieve text formatting.</Footnote>
-created by John Gruber<Footnote summary="2">John Gruber created Markdown in 2004.</Footnote>,
-now widely used in writing<Footnote summary="3">Many platforms such as GitHub, Stack Overflow, and blog platforms support Markdown.</Footnote>.
+Markdownは軽量なマークアップ言語であり<Footnote summary="1"> Markdownはシンプルな構文でテキストの書式を実現します。</Footnote>
+John Gruberによって作成され<Footnote summary="2">John Gruberは2004年にMarkdownを作成しました。</Footnote>、
+現在では執筆に広く使われています<Footnote summary="3">GitHub、Stack Overflow、ブログプラットフォームなど、多くのプラットフォームがMarkdownをサポートしています。</Footnote>。
 ```
 
-**Footnotes** コンポーネントを使用すると、テキストにインライン脚注を追加できます。
+**Footnote**（脚注）コンポーネントを使うと、本文にインラインの脚注を追加できます。
 
-1. **Embed** リストから **Footnotes** を選択します。
+1. **Embed**（埋め込み）リストから **Footnote**（脚注）を選択します。
 2. コンポーネントを編集します。
 3. **Summary**（要約）を入力します。
-4. **Footnote**（脚注）を入力します。
+4. **Footnote**（脚注本文）を入力します。
 
 #### 例
 
-Markdown is a lightweight markup language<Footnote summary="1"> Markdown uses simple syntax to achieve text formatting.</Footnote> created by John Gruber<Footnote summary="2">John Gruber created Markdown in 2004.</Footnote>, now widely used in writing<Footnote summary="3">Many platforms such as GitHub, Stack Overflow, and blog platforms support Markdown.</Footnote>.
+Markdownは軽量なマークアップ言語であり<Footnote summary="1"> Markdownはシンプルな構文でテキストの書式を実現します。</Footnote>、John Gruberによって作成され<Footnote summary="2">John Gruberは2004年にMarkdownを作成しました。</Footnote>、現在では執筆に広く使われています<Footnote summary="3">GitHub、Stack Overflow、ブログプラットフォームなど、多くのプラットフォームがMarkdownをサポートしています。</Footnote>。
 
-<Admonition type="note" title="注意">
-  2つの脚注のコンテンツが同じ場合、フッターには1回のみ表示され、番号を共有します。
+脚注は登場する順に番号が振られ、注釈自体はページの末尾にまとめられます。番号付けはサイトのビルド時に決まるため、番号と注釈はブラウザ側で組み立てられるのではなく、配信されるページにすでに含まれています。
+
+## 脚注を繰り返す
+
+内容が同じ2つの脚注は、同一の注釈として扱われます。番号を共有し、ページ末尾には一度だけ表示されるので、二度述べたい内容があってもリストが煩雑になりません。
+
+<Admonition type="info" title="例">
+  Markdownは幅広いプラットフォームでサポートされています<Footnote summary="プラットフォームサポート">GitHubやStack Overflowをはじめ、多くのプラットフォームがMarkdownをサポートしています。</Footnote>。表の構文も同様です<Footnote summary="プラットフォームサポート">GitHubやStack Overflowをはじめ、多くのプラットフォームがMarkdownをサポートしています。</Footnote>。
 </Admonition>
+
+上記の2つのマーカーは、テキストが同一であるため同じ注釈を指しています。どちらか一方を変更すると、それぞれ独立した注釈になります。
+
+## 脚注と引用
+
+**注釈形式**の引用スタイルでは、引用も脚注として扱われ、引用は同じ番号付けの並びを共有します。この仕組みと見た目については、[引用](./citations.mdx)を参照してください。
 
 <RelatedTopics maxResults={7} />

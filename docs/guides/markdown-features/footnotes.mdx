@@ -15,7 +15,8 @@ translate: false
 approved: false
 published: true
 unlisted: false
-lastmod: "2026-03-10T22:58:39.157Z"
+lastmod: '2026-08-24T08:56:26.010Z'
+modifiedBy: aowendev <aowen@translationcommons.org>
 ---
 # Footnotes
 
@@ -48,8 +49,20 @@ The **Footnotes** component enables you add inline footnotes to your text.
 
 Markdown is a lightweight markup language<Footnote summary="1"> Markdown uses simple syntax to achieve text formatting.</Footnote> created by John Gruber<Footnote summary="2">John Gruber created Markdown in 2004.</Footnote>, now widely used in writing<Footnote summary="3">Many platforms such as GitHub, Stack Overflow, and blog platforms support Markdown.</Footnote>.
 
-<Admonition type="note" title="Note">
-  If two footnotes have the same content, they will only appear once in the footer and will share a number.
+Footnotes are numbered in the order they appear, and the notes themselves are collected at the foot of the page. The numbering is worked out when the site is built, so the numbers and the notes are in the page as served rather than being assembled by the browser.
+
+## Repeating a footnote
+
+Two footnotes with the same content are the same note. They share a number and appear once at the foot of the page, so a point you need to make twice does not clutter the list.
+
+<Admonition type="info" title="Example">
+  Markdown is widely supported<Footnote summary="Platform support">Many platforms, including GitHub and Stack Overflow, support Markdown.</Footnote>, and so is its table syntax<Footnote summary="Platform support">Many platforms, including GitHub and Stack Overflow, support Markdown.</Footnote>.
 </Admonition>
+
+Both markers above point at the same note, because the text inside them is identical. Change one of them and it becomes a note of its own.
+
+## Footnotes and citations
+
+Under a **note** citation style, a citation is also a footnote, and citations share this same numbered sequence. See [Citations](./citations.mdx) for how that works and what it looks like.
 
 <RelatedTopics maxResults={7} />

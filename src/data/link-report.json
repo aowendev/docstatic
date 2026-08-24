@@ -1,16 +1,16 @@
 {
-  "generatedAt": "2026-08-19T15:35:56.924Z",
+  "generatedAt": "2026-08-24T21:39:26.812Z",
   "lastCheckedAt": "2026-08-17T17:48:33.969Z",
   "checked": false,
   "stats": {
-    "total": 244,
+    "total": 246,
     "ok": 208,
     "broken": 0,
     "unverified": 0,
-    "unchecked": 0,
-    "skipped": 36,
+    "unchecked": 1,
+    "skipped": 37,
     "centralized": 161,
-    "migrationCandidates": 47
+    "migrationCandidates": 48
   },
   "files": {
     "/docs/advanced/adding-the-cms-to-an-ipad-home-screen.mdx": {
@@ -143,7 +143,7 @@
       "fileName": "citations.mdx",
       "relativePath": "guides/markdown-features/citations.mdx",
       "title": "Citations",
-      "totalLinks": 0
+      "totalLinks": 1
     },
     "/docs/guides/markdown-features/code-blocks.mdx": {
       "fileName": "code-blocks.mdx",
@@ -185,7 +185,7 @@
       "fileName": "footnotes.mdx",
       "relativePath": "guides/markdown-features/footnotes.mdx",
       "title": "Footnotes",
-      "totalLinks": 0
+      "totalLinks": 1
     },
     "/docs/guides/markdown-features/glossary.mdx": {
       "fileName": "glossary.mdx",
@@ -329,6 +329,12 @@
       "fileName": "index.mdx",
       "relativePath": "migration/index.mdx",
       "title": "Upgrading",
+      "totalLinks": 0
+    },
+    "/docs/references.mdx": {
+      "fileName": "references.mdx",
+      "relativePath": "references.mdx",
+      "title": "References",
       "totalLinks": 0
     },
     "/docs/search.mdx": {
@@ -710,6 +716,18 @@
       "hreflang": false
     },
     {
+      "text": "CSL locales project",
+      "url": "https://github.com/citation-style-language/locales",
+      "type": "markdown",
+      "filePath": "/docs/guides/markdown-features/citations.mdx",
+      "line": 130,
+      "source": "doc",
+      "inUrlsJson": false,
+      "status": "unchecked",
+      "reason": "Not checked yet",
+      "hreflang": false
+    },
+    {
       "text": "https://docstatic.com/docs/context-help#help-example",
       "url": "/docs/context-help#help-example",
       "type": "markdown",
@@ -731,6 +749,15 @@
       "code": 200,
       "checkedAt": "2026-08-17T17:48:28.137Z",
       "hreflang": false
+    },
+    {
+      "text": "Citations",
+      "url": "./citations.mdx",
+      "type": "markdown",
+      "filePath": "/docs/guides/markdown-features/footnotes.mdx",
+      "line": 46,
+      "status": "skipped",
+      "reason": "Internal link — checked by the Docusaurus build"
     },
     {
       "text": "Markdown",

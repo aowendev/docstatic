@@ -1,20 +1,27 @@
 ---
-lastmod: "2026-03-10T23:00:29.102Z"
-title: Footnotes
+lastmod: '2026-08-24T20:47:13.738Z'
+title: Fußnoten
+description: Automatisch nummerierte Fußnoten mit Rücksprung.
 tags:
   - "elements"
   - "elements_footnotes"
+  - "computer-languages"
+  - "computer-languages_markdown"
+  - "software"
+  - "software_content-management-systems"
+  - "software_content-management-systems_tinacms"
 draft: false
 review: false
 translate: false
 approved: false
 published: true
 unlisted: false
+modifiedBy: aowendev <aowen@translationcommons.org>
 ---
 
 # Fußnoten
 
-Es gibt eine Erweiterung zu Markdown, die Fußnoten bereitstellt, aber ihre Implementierung ist nicht konsistent und trennt den Inhalt von der Nummer. Zum Beispiel:
+Es gibt eine Markdown-Erweiterung, die Fußnoten bereitstellt, deren Umsetzung jedoch uneinheitlich ist und die den Inhalt von der Nummer trennt. Zum Beispiel:
 
 ```markdown
 Markdown ist eine leichtgewichtige Auszeichnungssprache[^1], die von John Gruber[^2] entwickelt wurde und heute beim Schreiben weit verbreitet ist[^3].
@@ -24,12 +31,12 @@ Markdown ist eine leichtgewichtige Auszeichnungssprache[^1], die von John Gruber
 [^3]: Viele Plattformen wie GitHub, Stack Overflow und Blog-Plattformen unterstützen Markdown.
 ```
 
-In docStatic würde dies wie folgt dargestellt werden:
+In docStatic würde dies so dargestellt:
 
 ```markdown
-Markdown ist eine leichtgewichtige Auszeichnungssprache<Fußnote summary="1"> Markdown verwendet eine einfache Syntax, um Textformatierungen zu erzielen.</Fußnote>
-Erstellt von John Gruber<Fußnote summary="2">John Gruber hat Markdown im Jahr 2004 entwickelt.</Fußnote>,
-heute weit verbreitet beim Schreiben<Fußnote summary="3">Viele Plattformen wie GitHub, Stack Overflow und Blog-Plattformen unterstützen Markdown.</Fußnote>.
+Markdown ist eine leichtgewichtige Auszeichnungssprache<Footnote summary="1"> Markdown verwendet eine einfache Syntax, um Textformatierungen zu erzielen.</Footnote>
+entwickelt von John Gruber<Footnote summary="2">John Gruber hat Markdown 2004 entwickelt.</Footnote>,
+heute beim Schreiben weit verbreitet<Footnote summary="3">Viele Plattformen wie GitHub, Stack Overflow und Blog-Plattformen unterstützen Markdown.</Footnote>.
 ```
 
 Mit der Komponente **Fußnoten** können Sie Ihrem Text Inline-Fußnoten hinzufügen.
@@ -41,8 +48,22 @@ Mit der Komponente **Fußnoten** können Sie Ihrem Text Inline-Fußnoten hinzuf�
 
 #### Beispiel
 
-Markdown ist eine leichtgewichtige Auszeichnungssprache(jsx\:Fußnote Zusammenfassung="1") Markdown verwendet eine einfache Syntax, um Textformatierungen vorzunehmen.(/jsx\:Footnote) erstellt von John Gruber<Footnote summary="2">John Gruber hat Markdown im Jahr 2004 entwickelt.</Footnote>, heute weit verbreitet beim Schreiben<Footnote summary="3">Viele Plattformen wie GitHub, Stack Overflow und Blog-Plattformen unterstützen Markdown.</Footnote>.
+Markdown ist eine leichtgewichtige Auszeichnungssprache<Footnote summary="1"> Markdown verwendet eine einfache Syntax, um Textformatierungen zu erzielen.</Footnote> entwickelt von John Gruber<Footnote summary="2">John Gruber hat Markdown 2004 entwickelt.</Footnote>, heute beim Schreiben weit verbreitet<Footnote summary="3">Viele Plattformen wie GitHub, Stack Overflow und Blog-Plattformen unterstützen Markdown.</Footnote>.
 
-<Admonition type="note" title="Hinweis">
-  Wenn zwei Fußnoten denselben Inhalt haben, werden sie nur einmal in der Fußzeile angezeigt und teilen sich eine Nummer.
+Fußnoten werden in der Reihenfolge nummeriert, in der sie erscheinen, und die Notizen selbst werden am Seitenende gesammelt. Die Nummerierung wird beim Erstellen der Website berechnet, sodass die Nummern und die Notizen bereits in der ausgelieferten Seite enthalten sind, statt erst vom Browser zusammengesetzt zu werden.
+
+## Eine Fußnote wiederholen
+
+Zwei Fußnoten mit demselben Inhalt sind dieselbe Notiz. Sie teilen sich eine Nummer und erscheinen nur einmal am Seitenende, sodass ein Punkt, den Sie zweimal machen möchten, die Liste nicht unnötig füllt.
+
+<Admonition type="info" title="Beispiel">
+  Markdown wird von vielen Plattformen unterstützt<Footnote summary="Plattformunterstützung">Viele Plattformen, darunter GitHub und Stack Overflow, unterstützen Markdown.</Footnote>, ebenso seine Tabellensyntax<Footnote summary="Plattformunterstützung">Viele Plattformen, darunter GitHub und Stack Overflow, unterstützen Markdown.</Footnote>.
 </Admonition>
+
+Beide Markierungen oben verweisen auf dieselbe Notiz, weil ihr Text identisch ist. Ändern Sie eine davon, und sie wird zu einer eigenen Notiz.
+
+## Fußnoten und Zitate
+
+Bei einem **Notiz**-Zitierstil ist ein Zitat ebenfalls eine Fußnote, und Zitate teilen sich dieselbe Nummerierungsfolge. Unter [Zitate](./citations.mdx) erfahren Sie, wie das funktioniert und wie es aussieht.
+
+<RelatedTopics maxResults={7} />

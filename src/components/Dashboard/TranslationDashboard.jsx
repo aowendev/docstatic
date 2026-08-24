@@ -7,6 +7,7 @@
 
 import React, { useState } from "react";
 import docusaurusData from "../../../config/docusaurus/index.json";
+import * as tbxUtils from "../../utils/tbx";
 import * as xliffUtils from "../../utils/xliff";
 import { getTinaClient } from "./lib/tinaClient";
 import { useTinaTask } from "./lib/useTinaTask";
@@ -1166,6 +1167,42 @@ const TranslationDashboard = () => {
             disabled={loading}
           >
             Export XLIFF
+          </button>
+          <button
+            type="button"
+            onClick={async () => {
+              setStatus("Exporting variables as TBX...");
+              try {
+                const { client } = await import(
+                  "../../../tina/__generated__/client"
+                );
+                const text = await tbxUtils.exportVariablesAsTbx(client);
+                const blob = new Blob([text], { type: "application/xml" });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement("a");
+                a.href = url;
+                a.download = "variables.tbx";
+                document.body.appendChild(a);
+                a.click();
+                a.remove();
+                URL.revokeObjectURL(url);
+                setStatus("TBX export complete");
+              } catch (err) {
+                setStatus(`TBX export error: ${err.message}`);
+              }
+            }}
+            style={{
+              padding: "5px 10px",
+              backgroundColor: "#0d9488",
+              color: "white",
+              border: "none",
+              borderRadius: "4px",
+              cursor: "pointer",
+              fontSize: "12px",
+            }}
+            disabled={loading}
+          >
+            Export TBX
           </button>
           <input
             type="file"

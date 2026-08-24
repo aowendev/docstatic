@@ -5,53 +5,27 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useContext, useEffect, useState } from "react";
-import { FootnotesContext } from "./FootnotesProvider";
+/**
+ * A footnote, before the build gets to it.
+ *
+ * src/plugins/remark-citations.mjs replaces every <Footnote> with a numbered
+ * <FootnoteRef> and moves its body into the notes list at the foot of the page,
+ * so on a docs page or a blog post this component is never rendered.
+ *
+ * It stays registered in MDXComponents because MDX throws on an unregistered
+ * capitalised component, and the plugin only runs where it is configured. In
+ * any such context this renders the note's text inline rather than dropping it:
+ * an unnumbered aside still reads, whereas a blank does not.
+ *
+ * This used to hold the whole footnote mechanism - a React context that
+ * collected notes and numbered them after hydration. That left server-rendered
+ * HTML with "[...]" placeholders and no notes at all, invisible to search
+ * engines and to readers without JavaScript. Numbering now happens at build
+ * time, and FootnotesProvider and its content-hashing helper went with it.
+ */
 
-const Footnote = ({ children }) => {
-  const context = useContext(FootnotesContext);
-  const [footnoteNumber, setFootnoteNumber] = useState(null);
+import React from "react";
 
-  // FootnotesContext is created with a default value that already provides
-  // addFootnote, so this is always defined — the previous window.globalFootnotes
-  // fallback below it was unreachable and has been removed.
-  useEffect(() => {
-    setFootnoteNumber(context.addFootnote(children));
-  }, [children, context.addFootnote]);
-
-  const handleClick = (e) => {
-    e.preventDefault();
-    const footnoteElement = document.getElementById(
-      `footnote-${footnoteNumber}`
-    );
-    if (footnoteElement) {
-      footnoteElement.scrollIntoView({ behavior: "smooth" });
-    }
-  };
-
-  if (footnoteNumber === null) {
-    return (
-      <sup>
-        <span style={{ color: "#1976d2", fontSize: "0.8em" }}>[...]</span>
-      </sup>
-    );
-  }
-  return (
-    <sup>
-      <a
-        href={`#footnote-${footnoteNumber}`}
-        id={`footnote-ref-${footnoteNumber}`}
-        onClick={handleClick}
-        style={{
-          color: "#1976d2",
-          textDecoration: "none",
-          fontSize: "0.8em",
-        }}
-      >
-        [{footnoteNumber}]
-      </a>
-    </sup>
-  );
-};
+const Footnote = ({ children }) => <span>{children}</span>;
 
 export default Footnote;

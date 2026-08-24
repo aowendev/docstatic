@@ -243,5 +243,12 @@
     }
   ],
   "sidebarHideable": true,
-  "showReadingTime": true
+  "showReadingTime": true,
+  "citations": {
+    "bibliographyPage": true,
+    "style": "oxford-guide-to-style-notes",
+    "englishLocale": "",
+    "pageTitles": [],
+    "includeUncited": false
+  }
 }

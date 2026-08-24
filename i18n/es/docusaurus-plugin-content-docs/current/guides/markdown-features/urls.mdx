@@ -1,6 +1,6 @@
 ---
 help: null
-lastmod: '2026-08-19T14:50:01.468Z'
+lastmod: '2026-08-24T21:53:37.647Z'
 modifiedBy: aowendev <aowen@translationcommons.org>
 title: URLs
 tags:
@@ -9,29 +9,29 @@ tags:
   - internationalization_localization
 draft: false
 review: false
-translate: true
+translate: false
 approved: false
-published: false
-unlisted: true
+published: true
+unlisted: false
 ---
 
 # URLs
 
-The **URL** component lets you reference an external link by key instead of hardcoding it. Each key maps to a URL per language, so a visitor always lands on the language-appropriate version of the destination, and a link that moves or breaks only needs fixing in one place, no matter how many docs reference it.
+El componente **URL** te permite hacer referencia a un enlace externo mediante una clave en lugar de codificarlo directamente. Cada clave se asocia a una URL por idioma, de modo que un visitante siempre llega a la versión del destino adecuada para su idioma, y un enlace que cambia o deja de funcionar solo necesita corregirse en un lugar, sin importar cuántos documentos lo referencien.
 
-## Managing URLs
+## Gestión de URL
 
-You can edit the URLs collection in the CMS.
+Puedes editar la colección «URL» en el CMS.
 
-1. Click the **Add** icon ( **+** ) to add a new **Key**.
-2. Under **URL (per language)**, click the **Add** icon to add a **Translation** for each language the link should support. Give it a **Language Code** and the destination **URL**.
-3. Under **Default Link Text (per language)**, add a **Translation** for each language, giving the text a `<Url>` usage should show when it doesn't supply its own.
+1. Haz clic en el icono **Añadir** ( **+** ) para añadir una nueva **Clave**.
+2. En **URL (por idioma)**, haz clic en el icono **Añadir** para añadir una **Traducción** para cada idioma que el enlace deba admitir. Asigna un **código de idioma** y la **URL** de destino.
+3. En **Texto de enlace predeterminado (por idioma)**, añade una **Traducción** para cada idioma, indicando el texto que debe mostrar un uso de `<Url>` cuando no proporciona uno propio.
 
-## Using URLs
+## Uso de URL
 
-1. Select **URL Link** from the **Embed** list.
-2. Enter the **URL Key** matching an entry in the URLs collection.
-3. Optionally, add **Link Text** translations to override the key's default text for this specific usage — the same key can be used in different places with different wording.
+1. Selecciona **URL Link** en la lista **Incrustar**.
+2. Introduce la **clave de URL** que coincida con una entrada de la colección URL.
+3. Opcionalmente, añade traducciones de **texto de enlace** para anular el texto predeterminado de la clave en este uso específico: la misma clave se puede utilizar en distintos lugares con una redacción diferente.
 
 <Admonition type="caution" title="El texto del enlace no ha sido traducido automáticamente">
   A diferencia de la prosa habitual, el texto del enlace de un elemento `<Url>` nunca se somete a traducción automática: el componente completo se conserva exactamente tal y como está escrito cuando se traduce un documento, en todos los idiomas. Si añades texto de enlace, rellena todos los idiomas admitidos al mismo tiempo, en el documento en el que añadas el enlace por primera vez. Cualquier idioma que se omita en ese momento seguirá sin aparecer hasta que alguien edite el texto original y lo añada manualmente.
@@ -39,12 +39,12 @@ You can edit the URLs collection in the CMS.
   Si no necesitas una redacción personalizada para un uso concreto, deja el «Texto del enlace» en blanco y, en su lugar, se utilizará el «Texto del enlace predeterminado» de la clave; ese texto se traduce de la forma habitual, una sola vez, en la colección de URL.
 </Admonition>
 
-#### Example
+#### Ejemplo
 
 <Url urlKey="docusaurus-website" />
 
-## Checking link health
+## Comprobación del estado de los enlaces
 
-The URLs collection also hosts the **Link Health** dashboard, which reports on both the URLs stored here and any external links still hardcoded directly in your docs — including which of those aren't in the URLs collection yet, so you can find and centralize them. See [Dashboards](/docs/guides/dashboards) for details.
+La colección URL también alberga el panel **Estado de los enlaces**, que informa tanto sobre las URL almacenadas aquí como sobre cualquier enlace externo que aún esté codificado directamente en tus documentos, incluidos los que todavía no están en la colección URL, para que puedas encontrarlos y centralizarlos. Consulta [Dashboards](/docs/guides/dashboards) para más información.
 
 <RelatedTopics maxResults={7} />

@@ -13,9 +13,11 @@
     "generate-files": "node scripts/generate-file-list.js",
     "generate-docs-metadata": "node scripts/generate-docs-metadata.js",
     "generate-link-report": "node scripts/generate-link-report.js",
+    "generate-bibliography": "node scripts/generate-bibliography.mjs",
+    "generate-citations": "node scripts/generate-citations.mjs",
     "check-links": "node scripts/generate-link-report.js --check",
     "update-theme-css": "node scripts/update-theme-css.js",
-    "generate": "node scripts/generate-media-index.js && node scripts/generate-file-list.js && node scripts/generate-docs-metadata.js && node scripts/generate-link-report.js && node scripts/update-theme-css.js && node scripts/generate-git-identity.js",
+    "generate": "node scripts/generate-media-index.js && node scripts/generate-file-list.js && node scripts/generate-citations.mjs && node scripts/generate-bibliography.mjs && node scripts/generate-docs-metadata.js && node scripts/generate-link-report.js && node scripts/update-theme-css.js && node scripts/generate-git-identity.js",
     "prebuild": "yarn generate",
     "predev": "yarn generate",
     "prebuild-local": "yarn generate",
@@ -103,8 +105,13 @@
   "devDependencies": {
     "@biomejs/biome": "^2.5.7",
     "@tinacms/cli": "^2.5.6",
+    "citeproc": "^2.4.63",
     "deepl-node": "^1.27.0",
-    "gray-matter": "^4.0.3"
+    "gray-matter": "^4.0.3",
+    "remark-mdx": "^3",
+    "remark-parse": "^11",
+    "unified": "^11",
+    "unist-util-visit": "^5"
   },
   "engines": {
     "node": ">=22.0.0"

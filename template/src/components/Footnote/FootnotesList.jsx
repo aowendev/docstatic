@@ -5,94 +5,36 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useContext, useEffect, useState } from "react";
-import { FootnotesContext } from "./FootnotesProvider";
+/**
+ * The notes at the foot of the page.
+ *
+ * Built by src/plugins/remark-citations.mjs, which appends it to the page and
+ * fills it with one FootnoteItem per note, already in order. Under a note style
+ * that list holds author footnotes and citations together in one sequence -
+ * which is what Oxford and Chicago both require, and what lets citeproc pick a
+ * short form over a full one.
+ *
+ * This replaced a client-only version that rendered nothing at all into the
+ * static HTML.
+ */
 
-const FootnotesList = () => {
-  const context = useContext(FootnotesContext);
-  const [footnotes, setFootnotes] = useState([]);
+import Translate from "@docusaurus/Translate";
+import React from "react";
+import styles from "./Footnote.module.css";
 
-  // As in Footnote/index.jsx, the context default always supplies these, so the
-  // former window.globalFootnotes fallbacks were unreachable.
-  useEffect(() => {
-    setFootnotes(context.footnotes);
-  }, [context.footnotes]);
-
-  // Clear footnotes when component unmounts (page navigation)
-  useEffect(() => {
-    return () => {
-      context.clearFootnotes();
-    };
-  }, [context.clearFootnotes]);
-
-  if (!footnotes || footnotes.length === 0) {
-    return null;
-  }
-
-  const handleBackClick = (footnoteNumber) => (e) => {
-    e.preventDefault();
-    const refElement = document.getElementById(
-      `footnote-ref-${footnoteNumber}`
-    );
-    if (refElement) {
-      refElement.scrollIntoView({ behavior: "smooth" });
-    }
-  };
-
-  // Function to safely render footnote content
-  const renderFootnoteContent = (content) => {
-    if (typeof content === "string") {
-      return <span>{content}</span>;
-    }
-    if (React.isValidElement(content)) {
-      return content;
-    }
-    if (Array.isArray(content)) {
-      // Handle array of mixed content (strings and elements)
-      return content.map((item, index) => {
-        if (typeof item === "string") {
-          return <span key={index}>{item}</span>;
-        }
-        if (React.isValidElement(item)) {
-          return React.cloneElement(item, { key: index });
-        }
-        return <span key={index}>{String(item)}</span>;
-      });
-    }
-    if (typeof content === "object" && content !== null) {
-      // Try to extract text content from object
-      if (content.props?.children) {
-        return renderFootnoteContent(content.props.children);
-      }
-      return <span>{String(content)}</span>;
-    }
-    return <span>{String(content)}</span>;
-  };
-
-  return (
-    <div className="footnotes-list">
-      <hr />
-      <h3 className="footnotes-title">Footnotes</h3>
-      <ol className="footnotes-ol">
-        {footnotes.map((footnote) => (
-          <li key={footnote.number} className="footnotes-item">
-            <span id={`footnote-${footnote.number}`} />
-            <span className="footnotes-content">
-              {renderFootnoteContent(footnote.content)}
-              <a
-                href={`#footnote-ref-${footnote.number}`}
-                onClick={handleBackClick(footnote.number)}
-                className="footnotes-backlink"
-                title="Back to reference"
-              >
-                ↩
-              </a>
-            </span>
-          </li>
-        ))}
-      </ol>
-    </div>
-  );
-};
+const FootnotesList = ({ children }) => (
+  <div className={styles.list}>
+    <hr />
+    <h2 className={styles.title}>
+      <Translate
+        id="theme.footnotes.title"
+        description="Heading above the notes at the foot of a page"
+      >
+        Footnotes
+      </Translate>
+    </h2>
+    <ol className={styles.ol}>{children}</ol>
+  </div>
+);
 
 export default FootnotesList;

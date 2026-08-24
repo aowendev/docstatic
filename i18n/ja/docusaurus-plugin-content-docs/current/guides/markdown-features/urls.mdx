@@ -1,6 +1,6 @@
 ---
 help: null
-lastmod: '2026-08-19T14:50:08.607Z'
+lastmod: '2026-08-24T21:53:37.768Z'
 modifiedBy: aowendev <aowen@translationcommons.org>
 title: URLs
 tags:
@@ -9,29 +9,29 @@ tags:
   - internationalization_localization
 draft: false
 review: false
-translate: true
+translate: false
 approved: false
-published: false
-unlisted: true
+published: true
+unlisted: false
 ---
 
 # URLs
 
-The **URL** component lets you reference an external link by key instead of hardcoding it. Each key maps to a URL per language, so a visitor always lands on the language-appropriate version of the destination, and a link that moves or breaks only needs fixing in one place, no matter how many docs reference it.
+**URL** コンポーネントを使用すると、外部リンクをハードコーディングする代わりに、キーで参照できます。各キーは言語ごとにURLに対応しているため、訪問者は常にその言語に適したバージョンの遷移先にたどり着きます。また、移動または切れたリンクは、どれだけ多くのドキュメントで参照されていても、1か所を修正するだけで済みます。
 
-## Managing URLs
+## URLの管理
 
-You can edit the URLs collection in the CMS.
+URLコレクションはCMSで編集できます。
 
-1. Click the **Add** icon ( **+** ) to add a new **Key**.
-2. Under **URL (per language)**, click the **Add** icon to add a **Translation** for each language the link should support. Give it a **Language Code** and the destination **URL**.
-3. Under **Default Link Text (per language)**, add a **Translation** for each language, giving the text a `<Url>` usage should show when it doesn't supply its own.
+1. **追加** アイコン（ **+** ）をクリックして新しい **キー** を追加します。
+2. **URL（言語別）** で **追加** アイコンをクリックし、リンクがサポートする各言語の **翻訳** を追加します。**言語コード** と遷移先の **URL** を入力します。
+3. **デフォルトのリンクテキスト（言語別）** で、各言語の **翻訳** を追加し、`<Url>` の使用箇所が独自のテキストを指定しない場合に表示するテキストを入力します。
 
-## Using URLs
+## URLの使用
 
-1. Select **URL Link** from the **Embed** list.
-2. Enter the **URL Key** matching an entry in the URLs collection.
-3. Optionally, add **Link Text** translations to override the key's default text for this specific usage — the same key can be used in different places with different wording.
+1. **埋め込み** リストから **URL Link** を選択します。
+2. URLコレクション内のエントリに対応する **URLキー** を入力します。
+3. 必要に応じて、この特定の使用箇所についてキーのデフォルトテキストを上書きする **リンクテキスト** の翻訳を追加します。同じキーは、異なる文言で複数の場所に使用できます。
 
 <Admonition type="caution" title="リンクテキストは機械翻訳されていません">
   通常の文章とは異なり、`<Url>` の「リンクテキスト」は自動翻訳の対象にはなりません。ドキュメントが翻訳される際、このコンポーネント全体は、どの言語においても記述されたままの状態で完全に保持されます。リンクテキストを追加する場合は、そのリンクを最初に追加したドキュメント内で、サポートされているすべての言語について同時に記入してください。 その時点で省略された言語は、誰かがソースを編集して手動で追加するまで、欠落したままとなります。
@@ -39,12 +39,12 @@ You can edit the URLs collection in the CMS.
   特定の使用例で独自の文言が必要ない場合は、リンクテキストを空欄のままにしておくと、代わりにキーの「デフォルトのリンクテキスト」が使用されます。このテキストは、URLコレクション内で通常の方法で一度だけ翻訳されます。
 </Admonition>
 
-#### Example
+#### 例
 
 <Url urlKey="docusaurus-website" />
 
-## Checking link health
+## リンクの状態の確認
 
-The URLs collection also hosts the **Link Health** dashboard, which reports on both the URLs stored here and any external links still hardcoded directly in your docs — including which of those aren't in the URLs collection yet, so you can find and centralize them. See [Dashboards](/docs/guides/dashboards) for details.
+URLコレクションには、ここに保存されているURLと、ドキュメント内にまだハードコーディングされている外部リンク（URLコレクションにまだ登録されていないものを含む）の両方を報告する **リンクの状態** ダッシュボードも含まれています。これにより、それらを見つけて一元化できます。詳細については、[Dashboards](/docs/guides/dashboards) を参照してください。
 
 <RelatedTopics maxResults={7} />

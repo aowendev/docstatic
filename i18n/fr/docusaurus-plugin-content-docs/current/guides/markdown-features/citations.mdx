@@ -1,0 +1,243 @@
+---
+lastmod: '2026-08-24T20:47:14.121Z'
+title: Citations
+description: Citez des sources depuis une bibliographie CSL centrale.
+tags:
+  - "elements"
+  - "elements_citations"
+  - "reuse"
+  - "reuse_bibliography"
+  - "software"
+  - "software_content-management-systems"
+  - "software_content-management-systems_tinacms"
+draft: false
+review: false
+translate: false
+approved: false
+published: true
+unlisted: false
+modifiedBy: aowendev <aowen@translationcommons.org>
+---
+
+# Citations
+
+Le composant **Citation** cite des sources conservées dans une collection **Bibliography** centrale. Chaque source est enregistrée une seule fois, et chaque sujet qui la cite y renvoie par une clé de citation. Corriger le nom d'un éditeur ou une date de publication met à jour chaque citation de cette source dans tout l'ensemble documentaire.
+
+Les données bibliographiques suivent la norme Citation Style Language (CSL), le même format qu'exportent les gestionnaires de références comme Zotero et Mendeley. Il n'existe pas encore d'importateur : une source provenant de l'un d'eux se transfère en collant son CSL-JSON dans **Raw CSL-JSON override**.
+
+## Gérer la bibliographie
+
+Les sources vivent dans une collection unique, distincte des sujets qui les citent.
+
+1. Sélectionnez **Bibliography** dans la liste des collections.
+2. Ajoutez une référence à la liste.
+3. Donnez-lui une **Citation key**. C'est ainsi que les sujets font référence à la source, alors gardez-la courte et stable — par exemple `smith2020`.
+4. Choisissez un **Type**. Seuls les champs pertinents pour ce type sont affichés, de sorte qu'un article de revue propose un ISSN tandis qu'un livre propose un ISBN.
+5. Renseignez les champs restants et enregistrez.
+
+<Admonition type="note" title="Remarque">
+  Modifier une clé de citation casse toutes les citations qui l'utilisent. Traitez les clés comme permanentes dès qu'un sujet les cite.
+
+  Une citation pointant vers une clé qui n'existe plus l'indique à sa place, de la même façon qu'un terme de glossaire ou une variable :
+
+  ```
+  typo-here NOT FOUND
+  ```
+
+  La compilation continue de réussir et chaque autre citation de la page reste intacte, si bien qu'une clé mal orthographiée ne vous empêche pas de prévisualiser le site. La compilation les répertorie également, au cas où il s'agirait d'une page que vous ne regardiez pas.
+</Admonition>
+
+### Champs que le formulaire ne montre pas
+
+Le formulaire couvre les champs dont les sources documentaires ont besoin, pas tous ceux que définit la norme. Deux catégories sont délibérément absentes :
+
+* Les valeurs que le formateur calcule lui-même, comme les numéros de citation et les lettres qui distinguent deux œuvres d'un même auteur la même année.
+* Les champs propres à des types de source que la liste **Type** ne propose pas.
+
+Pour une source que le formulaire ne peut pas exprimer, utilisez **Raw CSL-JSON override**. Tout contenu valide saisi là remplace les champs ci-dessus, en conservant la clé de citation.
+
+## Citer une source
+
+1. Sélectionnez **Citation** dans la liste **Embed**.
+2. Ajoutez une source à la citation.
+3. Choisissez une **Source** dans la liste des clés de citation.
+4. Indiquez éventuellement un **Locator** et un **Locator type** pour désigner une partie précise de la source.
+
+Saisissez le repère comme une valeur brute — `14`, ou `14-16`. N'écrivez pas « p. » : le style de citation le fournit lui-même, et les styles ne s'accordent pas sur sa forme.
+
+Une citation peut citer plusieurs sources. Ajoutez plusieurs éléments plutôt que de placer deux citations côte à côte, afin que le style de citation puisse les combiner.
+
+#### Exemple
+
+La citation suivante renvoie à une seule source :
+
+```jsx
+<Cite items={[{ key: "smith2020" }]} />
+```
+
+Celle-ci pointe vers une page précise :
+
+```jsx
+<Cite items={[{ key: "smith2020", locator: "14", label: "page" }]} />
+```
+
+Celle-ci cite deux sources ensemble, chacune avec sa propre référence de page :
+
+```jsx
+<Cite items={[
+  { key: "smith2020", locator: "14", label: "page" },
+  { key: "jones2019", locator: "3-5", label: "page" }
+]} />
+```
+
+<Admonition type="note" title="Remarque">
+  Citer deux fois la même source ne réutilise pas la première citation. Chacune obtient sa propre place, et le style décide comment abréger les suivantes.
+</Admonition>
+
+## Quand les changements apparaissent
+
+Modifier une **source** dans la collection Bibliography met à jour immédiatement chaque citation de cette source — corrigez le nom d'un éditeur, et le changement atteint la page sous vos yeux, sans redémarrage.
+
+Trois choses se comportent différemment, et il est utile de savoir laquelle est laquelle :
+
+| Changement | Quand il apparaît |
+|---|---|
+| Modifier une source | Immédiatement |
+| Ajouter une citation à un sujet | À la prochaine compilation |
+| Changer le style de citation | Après un redémarrage du CMS |
+
+Une nouvelle citation n'affiche rien du tout jusqu'à la prochaine compilation — ni espace réservé, ni erreur. Elle n'a pas encore de texte formaté, et afficher une citation à moitié formatée serait pire que de ne rien afficher.
+
+Le style de citation est le seul réglage qui exige un redémarrage, car il détermine si les citations se placent dans le texte courant ou dans des notes de bas de page. Cela restructure la page plutôt que son seul libellé, d'où la nécessité de reconstruire les pages.
+
+<Admonition type="note" title="Remarque">
+  Les citations fonctionnent dans les sujets, pas dans les articles de blog. Les notes de bas de page fonctionnent dans les deux. Une citation placée dans un article de blog ne produit aucune sortie.
+</Admonition>
+
+## Choisir un style
+
+Un style de citation détermine la mise en forme des citations et de la liste de références. Les styles diffèrent sur le fond, pas seulement la forme : certains placent un numéro en exposant dans le texte et la source dans une note, d'autres placent l'auteur et l'année entre parenthèses directement dans le texte courant.
+
+Le style se définit une fois pour tout le site, pas par sujet. Mélanger les styles au sein d'un même ensemble documentaire est une erreur de style, car les lecteurs ne peuvent pas savoir ce que signifie une marque donnée.
+
+Sélectionnez **Settings** dans la liste des collections, ouvrez **Citations** et choisissez un **Citation style** :
+
+| Style | Où va la citation | Exemple de référence |
+|---|---|---|
+| Chicago (author-date) | Dans le texte | Smith, Jane. 2020. *The Art of Documentation*. Oxford University Press. |
+| Chicago (notes and bibliography) | Dans une note de bas de page | Smith, Jane. *The Art of Documentation*. Oxford University Press, 2020. |
+| Harvard (Cite Them Right) | Dans le texte | Smith, J. (2020) *The Art of Documentation*. Oxford: Oxford University Press. |
+| IEEE | Dans le texte, numéroté | [1] J. Smith, *The Art of Documentation*. Oxford: Oxford University Press, 2020. |
+| Oxford (Guide to Style, notes) | Dans une note de bas de page | Smith, J., *The Art of Documentation* (Oxford, 2020). |
+
+### Variante d'anglais
+
+Seul le style Oxford précise pour quel anglais il est écrit. Les autres laissent le site en décider et retombent sur l'anglais américain, si bien qu'un style attendant des dates jour-mois — Cite Them Right, par exemple — date une source `August 18, 2026` sauf indication contraire.
+
+Réglez **English variant** sur **Global English** pour corriger cela. Cela affecte l'ordre des dates, les guillemets et l'orthographe uniquement sur les pages en anglais ; les autres langues suivent leurs propres conventions locales.
+
+### Ajouter une langue
+
+Les cinq langues fournies avec docStatic sont prêtes à l'emploi. En ajouter une autre ne nécessite qu'un fichier : la locale CSL qui fournit ses guillemets, l'ordre des dates et des termes comme *consulté le*.
+
+Sans elle, une page dans la nouvelle langue se compile quand même, mais ses citations apparaissent en anglais. La compilation le signale et nomme le fichier à ajouter :
+
+```
+! No CSL locale for "it": its citations will use the style's default (English).
+  Add csl/locales/locales-it-IT.xml to fix.
+```
+
+Prenez ce fichier dans le [projet de locales CSL](https://github.com/citation-style-language/locales) et placez-le dans `csl/locales/`. Rien d'autre n'est nécessaire : la langue est associée à sa locale par son nom.
+
+Définissez également un titre pour la nouvelle langue sous **References page title**, sinon la page des sources conserve son intitulé anglais.
+
+## Citations dans un style à notes
+
+Avec **Chicago (notes and bibliography)** ou **Oxford**, une citation est aussi une note de bas de page. Le même `<Cite>` déjà rédigé devient une note numérotée ; rien ne change dans le sujet lui-même.
+
+Les citations et vos propres notes de bas de page partagent **une séquence numérotée unique**, dans l'ordre où elles apparaissent sur la page. Oxford comme Chicago numérotent les notes de façon continue sur l'ensemble du texte, et un lecteur ne peut pas distinguer deux séquences.
+
+Comme la numérotation est calculée à la génération du site, le style peut abréger correctement une citation répétée plutôt que de la répéter intégralement.
+
+### Une note portant à la fois un commentaire et une citation
+
+Chicago permet à une note de porter ensemble une source et une remarque personnelle. Placez la citation à l'intérieur d'une note de bas de page, et elle apparaîtra dans cette note plutôt que d'en créer une seconde :
+
+```jsx
+<Footnote summary="1"><Cite items={[{ key: "jones2019" }]} /> Ceci défend l'avis contraire.</Footnote>
+```
+
+Placez la citation d'abord, votre remarque ensuite. Un style à notes termine une citation par un point, donc une remarque rédigée autour de la citation plutôt qu'après elle paraît étrange.
+
+Pour une remarque de quelques mots seulement, utilisez plutôt le champ **Suffix** de la citation — il reste attaché à la citation quel que soit le style, y compris les styles dans le texte.
+
+<Admonition type="info" title="Exemple">
+  Réutiliser n'est pas gratuit<Footnote summary="Sur le coût de la réutilisation"><Cite items={[{ key: "jones2019" }]} /> Ceci défend l'idée que les coûts dépassent les économies réalisées.</Footnote>, quoi que promettent les outils<Cite items={[{ key: "csl-spec" }]} />.
+</Admonition>
+
+Avec un style à notes, les deux marques ci-dessus sont des notes, numérotées dans la même séquence que toute autre note de cette page — la première portant une source et une remarque ensemble, la seconde portant une citation seule. Avec un style dans le texte, la seconde apparaît directement dans la phrase, et seule la note de bas de page est numérotée.
+
+## Un exemple complet
+
+Le paragraphe ci-dessous est actif. Ses citations sont rendues dans le style actuellement configuré pour ce site, à partir des sources de la collection **Bibliography**.
+
+<Admonition type="info" title="Exemple">
+  La documentation se rédige mieux une seule fois et se réutilise<Cite items={[{ key: "smith2020", locator: "14", label: "page" }]} />. L'idée est antérieure à l'outillage<Footnote summary="Le single-sourcing est antérieur à l'outillage">Les rédacteurs techniques réutilisaient déjà du contenu via du texte conditionnel bien avant que le single-sourcing n'ait un nom.</Footnote>, et la même source y revient plus tard<Cite items={[{ key: "smith2020", locator: "22", label: "page" }]} />. Tout le monde n'est pas d'accord<Footnote summary="Un avis divergent"><Cite items={[{ key: "jones2019" }]} /> Ceci défend l'idée que la réutilisation coûte plus qu'elle ne fait économiser.</Footnote>. Deux sources peuvent être citées ensemble dans une seule citation<Cite items={[{ key: "smith2020" }, { key: "csl-spec" }]} />.
+</Admonition>
+
+Ce qu'il faut observer dépend du style choisi dans **Settings** :
+
+* Avec un **style à notes** — Oxford, ou Chicago (notes and bibliography) — les marques ci-dessus sont des notes de bas de page, et les notes elles-mêmes se trouvent au bas de cette page. Les notes propres à l'auteur et les citations se déroulent en **une seule séquence**. La deuxième citation de *The Art of Documentation* est abrégée, car une autre note s'est intercalée entre elle et la première.
+* Avec un **style dans le texte** — Harvard, IEEE ou Chicago (author-date) — les citations apparaissent directement dans la phrase, et seules les deux notes de bas de page de ce paragraphe sont numérotées.
+
+Le code source de ce paragraphe reste inchangé dans les deux cas :
+
+```jsx
+Documentation is best written once and reused<Cite items={[{ key: "smith2020", locator: "14", label: "page" }]} />.
+The idea predates the tooling<Footnote summary="...">Technical writers were reusing content...</Footnote>,
+and the same source returns to it later<Cite items={[{ key: "smith2020", locator: "22", label: "page" }]} />.
+Not everyone agrees<Footnote summary="..."><Cite items={[{ key: "jones2019" }]} /> This argues that reuse...</Footnote>.
+Two sources can be cited together in one citation<Cite items={[{ key: "smith2020" }, { key: "csl-spec" }]} />.
+```
+
+## La page des sources
+
+Une page générée liste vos sources, mises en forme dans le style choisi. Elle est distincte des citations de vos sujets : la forme en note ou dans le texte d'une source et sa forme dans la liste de références diffèrent délibérément.
+
+Pour la publier, sélectionnez **Settings** dans la liste des collections, ouvrez **Citations** et activez **Generate a sources page**.
+
+### Bibliographie ou références
+
+**List every source, including uncited ones** détermine ce que contient la page, et son nom :
+
+| Réglage | Contient | Titre par défaut |
+|---|---|---|
+| Activé | Toutes les sources de la collection **Bibliography** | Bibliographie |
+| Désactivé | Seulement les sources que citent vos sujets | Références |
+
+Les noms ne sont pas interchangeables. Une *bibliographie* peut inclure des ouvrages que vous n'avez pas cités — lectures complémentaires, sources additionnelles. Une *liste de références*, par convention, ne recense que ce que le texte cite réellement, de sorte qu'un lecteur qui y trouve une entrée peut s'attendre à la rencontrer quelque part dans la documentation.
+
+Cité signifie cité n'importe où dans l'ensemble documentaire, dans n'importe quelle langue. Une source citée seulement sur une page qui n'est pas encore traduite continue d'apparaître dans la liste de chaque langue, de sorte que les listes ne se réduisent pas quand une traduction prend du retard.
+
+### Nommer la page
+
+**References page title** définit le titre et l'étiquette dans la table des matières, une entrée par langue, et remplace le titre par défaut ci-dessus. Ajoutez une langue avec un titre ; omettez une langue et elle conserve son titre intégré.
+
+### Placer la page
+
+La page est publiée à `/docs/references`, mais elle n'est pas ajoutée à la table des matières pour vous — vous seul savez où elle a sa place dans votre ordre de lecture.
+
+1. Sélectionnez **Table of Contents** dans la liste des collections.
+2. Ajoutez une entrée de document pointant vers `docs/references.mdx`, où vous le souhaitez.
+
+Laissez l'entrée en place même si vous désactivez la page plus tard : une entrée dont la page n'existe pas est ignorée plutôt que de faire échouer la compilation.
+
+<Admonition type="note" title="Remarque">
+  La page est reconstruite à partir de la bibliographie à chaque compilation, dans chacune des langues de votre site, si bien qu'elle n'est jamais obsolète. Ne la modifiez pas à la main — vos changements seraient écrasés. Corrigez plutôt la source dans la collection **Bibliography**.
+</Admonition>
+
+<Admonition type="note" title="Remarque">
+  Modifier ce réglage renomme la page, ce qui change son étiquette dans la barre latérale mais pas son adresse : elle reste à `/docs/references`.
+</Admonition>
+
+<RelatedTopics maxResults={7} />
