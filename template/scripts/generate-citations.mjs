@@ -140,13 +140,15 @@ function structuredItem(item) {
  * both render an inline marker instead, and citations now match them.
  */
 function citationProblem(entry, items) {
-  if (!entry.items) return "UNREADABLE CITATION";
+  if (!entry.items) return "citation";
 
   const missing = entry.items
     .map((item) => item.key)
     .filter((key) => !key || !items[key]);
 
-  return missing.length > 0 ? `SOURCE NOT FOUND: ${missing.join(", ")}` : null;
+  // The name of what could not be found. src/components/NotFound turns it into
+  // "<name> NOT FOUND", the same marker a glossary term or a variable renders.
+  return missing.length > 0 ? missing.join(", ") : null;
 }
 
 /**
@@ -214,7 +216,7 @@ export function renderPage({
         // derived from the other, so neither is a lossy round trip.
         rendered: cslHtmlToMarkdown(html),
         tokens: cslHtmlToTokens(html),
-        ...(problem ? { problem } : {}),
+        ...(problem ? { missing: problem } : {}),
       };
     }),
   };
@@ -246,8 +248,8 @@ function writeRuntimeData(clusters) {
     for (const cluster of page.clusters) {
       // A broken citation carries its message instead of tokens, so the page
       // can show it where the citation should have been.
-      rendered[cluster.id] = cluster.problem
-        ? { problem: cluster.problem }
+      rendered[cluster.id] = cluster.missing
+        ? { missing: cluster.missing }
         : cluster.tokens;
     }
   }
@@ -321,7 +323,9 @@ function main() {
   writeRuntimeData(clusters);
 
   const broken = Object.entries(clusters).flatMap(([page, data]) =>
-    data.clusters.filter((c) => c.problem).map((c) => `${page}: ${c.problem}`)
+    data.clusters
+      .filter((c) => c.missing)
+      .map((c) => `${page}: ${c.missing} NOT FOUND`)
   );
   for (const line of broken) console.warn(`  ! ${line}`);
 

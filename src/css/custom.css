@@ -829,3 +829,24 @@ ul + :empty + ul,
 ol + :empty + ol {
   margin-top: -1em;
 }
+
+/**
+ * Unresolved references - a glossary term, variable or citation naming
+ * something that is not there. Rendered by src/components/NotFound.
+ *
+ * Plain text on a pink ground: it has to read as prose, because it sits inside
+ * a sentence, while still being findable when you scan the page for what needs
+ * fixing. Both colours are set in each theme rather than only the background,
+ * or the inherited text colour goes unreadable on the other one.
+ */
+.key--error {
+  background-color: #ffd9e2;
+  color: #6b1230;
+  padding: 0 0.25em;
+  border-radius: var(--ifm-global-radius);
+}
+
+[data-theme="dark"] .key--error {
+  background-color: #6b1230;
+  color: #ffd9e2;
+}

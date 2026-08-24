@@ -11,6 +11,7 @@ import React from "react";
 
 // Import the JSON data directly at build time
 import variableSetsData from "/reuse/variableSets/index.json";
+import NotFound from "../NotFound";
 
 const VariableSet = ({ variableSelection, lang, initcap, bold }) => {
   const location = useLocation();
@@ -70,22 +71,28 @@ const VariableSet = ({ variableSelection, lang, initcap, bold }) => {
         const translationObj =
           variable.translations.find((t) => t.lang === currentLang) ||
           variable.translations.find((t) => t.lang === "en");
-        return translationObj ? translationObj.value : "NOT FOUND";
+        return translationObj ? translationObj.value : null;
       }
 
-      return "NOT FOUND";
+      return null;
     } catch {
-      return "NOT FOUND";
+      return null;
     }
   };
 
   const translation = getTranslation();
 
+  // null means the set, the variable or its translation could not be resolved.
+  // Say which selection failed rather than a bare "NOT FOUND": the author needs
+  // to know whether the set or the variable is the part that is wrong.
+  if (translation === null) {
+    return <NotFound name={variableSelection} />;
+  }
+
   // Apply initcap transformation if requested
-  const displayValue =
-    initcap && translation !== "NOT FOUND"
-      ? translation.charAt(0).toUpperCase() + translation.slice(1)
-      : translation;
+  const displayValue = initcap
+    ? translation.charAt(0).toUpperCase() + translation.slice(1)
+    : translation;
 
   return (
     <span style={bold ? { fontWeight: "bold" } : undefined}>

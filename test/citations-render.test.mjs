@@ -486,10 +486,10 @@ test("a citation naming a missing source reports itself instead of failing", asy
   // anyone previewing anything, so it renders in place like a glossary term or
   // a variable does. lookupCitation distinguishes the two shapes it can hold.
   const problem = lookupCitation(
-    { "docs/x.mdx#abc#0": { problem: "SOURCE NOT FOUND: typo-here" } },
+    { "docs/x.mdx#abc#0": { missing: "typo-here" } },
     "docs/x.mdx#abc#0"
   );
-  assert.deepEqual(problem, { problem: "SOURCE NOT FOUND: typo-here" });
+  assert.deepEqual(problem, { missing: "typo-here" });
 
   const ok = lookupCitation(
     { "docs/x.mdx#abc#0": ["Smith, J."] },
@@ -500,7 +500,7 @@ test("a citation naming a missing source reports itself instead of failing", asy
   // Still nothing for an id the generator has not seen.
   assert.equal(lookupCitation({}, "docs/x.mdx#abc#0"), null);
   // And a malformed entry is treated as absent rather than rendered.
-  assert.equal(lookupCitation({ a: { problem: 7 } }, "a"), null);
+  assert.equal(lookupCitation({ a: { missing: 7 } }, "a"), null);
 });
 
 test("a broken citation does not disturb the ones around it", async () => {
@@ -535,8 +535,8 @@ test("a broken citation does not disturb the ones around it", async () => {
 
   const [first, broken, third] = page.clusters;
 
-  assert.equal(broken.problem, "SOURCE NOT FOUND: no-such-key");
-  assert.ok(!first.problem && !third.problem);
+  assert.equal(broken.missing, "no-such-key");
+  assert.ok(!first.missing && !third.missing);
 
   // Note numbering runs straight through the break.
   assert.deepEqual(

@@ -26,6 +26,7 @@
 
 import citations from "@site/src/data/citations-rendered.json";
 import React from "react";
+import NotFound from "../NotFound";
 import { lookupCitation } from "./lookup.mjs";
 
 /**
@@ -68,8 +69,8 @@ const Cite = ({ id }) => {
   // A citation naming a source that is not in the bibliography says so where it
   // stands, the way a glossary term or a variable does. It used to fail the
   // build, which stopped anyone previewing the site over one mistyped key.
-  if (entry.problem) {
-    return <span className="citation citation--error">{entry.problem}</span>;
+  if (entry.missing) {
+    return <NotFound name={entry.missing} />;
   }
 
   return <span className="citation">{renderTokens(entry.tokens)}</span>;

@@ -11,6 +11,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 // Import the JSON data directly at build time
 import glossaryData from "/reuse/glossaryTerms/index.json";
+import NotFound from "../NotFound";
 
 const GlossaryTerm = ({ termKey, lang, initcap, bold }) => {
   const location = useLocation();
@@ -137,10 +138,7 @@ const GlossaryTerm = ({ termKey, lang, initcap, bold }) => {
         : null;
 
       if (!entry || !Array.isArray(entry.translations)) {
-        return {
-          term: "TERM NOT FOUND",
-          definition: "NOT FOUND",
-        };
+        return null;
       }
 
       // Find the translation by current language, fallback to 'en'
@@ -150,22 +148,27 @@ const GlossaryTerm = ({ termKey, lang, initcap, bold }) => {
         entry.translations[0]; // Fallback to first available translation
 
       return {
-        term: translation?.term || "TERM NOT FOUND",
-        definition: translation?.definition || "NOT FOUND",
+        term: translation?.term || null,
+        definition: translation?.definition || "",
       };
     } catch {
-      return {
-        term: "TERM NOT FOUND",
-        definition: "NOT FOUND",
-      };
+      return null;
     }
   };
 
-  const { term, definition } = getTermData();
-  const displayTerm =
-    initcap && term !== "TERM NOT FOUND"
-      ? term.charAt(0).toUpperCase() + term.slice(1)
-      : term;
+  const termData = getTermData();
+
+  // The whole component depends on a resolved term - the popup, the hover
+  // handlers, the portal - so an unresolved key returns the marker instead of
+  // rendering an interactive element with nothing behind it.
+  if (!termData?.term) {
+    return <NotFound name={termKey} />;
+  }
+
+  const { term, definition } = termData;
+  const displayTerm = initcap
+    ? term.charAt(0).toUpperCase() + term.slice(1)
+    : term;
 
   // Rendered inline rather than declared as a component: a component defined
   // in the render body gets a new identity every render, which made React
