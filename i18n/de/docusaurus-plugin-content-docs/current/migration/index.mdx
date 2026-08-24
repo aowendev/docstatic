@@ -1,0 +1,45 @@
+---
+title: Upgrading
+description: Aktualisieren Sie eine bestehende docStatic-Website mit dem Update-Befehl auf die neueste Version.
+tags:
+  - "software"
+  - "software_upgrading"
+  - "software_package-managers"
+  - "software_package-managers_yarn"
+  - "development"
+  - "computer-languages"
+  - "computer-languages_javascript"
+lastmod: '2026-08-24T21:26:06.008Z'
+modifiedBy: aowendev <aowen@translationcommons.org>
+draft: false
+review: false
+translate: false
+approved: false
+published: true
+unlisted: false
+---
+
+# Upgrading
+
+Mit `create-docstatic` erstellte Websites werden mit demselben Paket aktualisiert, ausgeführt im Stammordner der Website:
+
+```shell
+npx create-docstatic@latest --update
+```
+
+Dieser Befehl aktualisiert die docStatic-eigenen Dateien und Abhängigkeitsversionen und lässt Ihre Inhalte unangetastet. Er ermittelt, welche Dateien zu docStatic selbst gehören, indem er `update-manifest.json` liest – ein Manifest, das aus der Projektvorlage generiert und mit jeder Version ausgeliefert wird.
+
+Bevor irgendetwas geschrieben wird, prüft der Befehl, ob Ihr Git-Arbeitsverzeichnis sauber ist, damit Sie das Update anschließend mit `git diff` überprüfen können. Haben Sie nicht committete Änderungen, committen oder stashen Sie diese zuerst, oder übergeben Sie `--force`, um trotzdem fortzufahren.
+
+Der Update-Befehl akzeptiert folgende Optionen:
+
+* **`--dry-run`**: Meldet, was sich ändern würde, ohne etwas zu schreiben.
+* **`--force`**: Fährt fort, auch wenn das Git-Arbeitsverzeichnis nicht sauber ist.
+* **`--tag <dist-tag>`**: Aktualisiert auf eine bestimmte `docstatic`-Paketversion oder einen Dist-Tag statt auf `latest`.
+* **`--no-install`**: Überspringt die Installation der Abhängigkeiten nach dem Update.
+
+<Admonition type="tip" title="Ein Update zuerst in der Vorschau ansehen">
+  Führen Sie den Befehl vor dem Aktualisieren einer Website mit lokalen Anpassungen mit `--dry-run` aus, damit Sie sehen können, welche Dateien sich ändern würden, bevor Sie sich auf das Update festlegen.
+</Admonition>
+
+<RelatedTopics maxResults={7} />

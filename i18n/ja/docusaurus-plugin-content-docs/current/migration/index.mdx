@@ -1,0 +1,45 @@
+---
+title: Upgrading
+description: アップデートコマンドを使って、既存のdocStaticサイトを最新リリースにアップグレードします。
+tags:
+  - "software"
+  - "software_upgrading"
+  - "software_package-managers"
+  - "software_package-managers_yarn"
+  - "development"
+  - "computer-languages"
+  - "computer-languages_javascript"
+lastmod: '2026-08-24T21:26:07.584Z'
+modifiedBy: aowendev <aowen@translationcommons.org>
+draft: false
+review: false
+translate: false
+approved: false
+published: true
+unlisted: false
+---
+
+# Upgrading
+
+`create-docstatic` で作成したサイトは、サイトのルートフォルダーで同じパッケージを実行することで更新できます。
+
+```shell
+npx create-docstatic@latest --update
+```
+
+このコマンドは、docStatic自身が所有するファイルと依存関係のバージョンを更新し、コンテンツには手を加えません。どのファイルがdocStatic自身に属するかは、プロジェクトのテンプレートから生成され、各リリースに同梱されるマニフェストファイル `update-manifest.json` を読み取って判断します。
+
+何かを書き込む前に、このコマンドはgitの作業ツリーがクリーンであることを確認します。これにより、更新後に `git diff` で内容を確認できます。コミットしていない変更がある場合は、先にコミットまたはスタッシュするか、`--force` を指定してそのまま続行してください。
+
+updateコマンドは次のオプションを受け付けます。
+
+* **`--dry-run`**: 何も書き込まずに、変更内容のみを報告します。
+* **`--force`**: gitの作業ツリーがクリーンでなくても続行します。
+* **`--tag <dist-tag>`**: `latest` の代わりに、特定の `docstatic` パッケージのバージョンまたはdistタグに更新します。
+* **`--no-install`**: 更新後の依存関係のインストールをスキップします。
+
+<Admonition type="tip" title="まずは更新内容をプレビューする">
+  ローカルでカスタマイズしたサイトを更新する前に `--dry-run` を実行すると、実際に更新を確定する前にどのファイルが変更されるかを確認できます。
+</Admonition>
+
+<RelatedTopics maxResults={7} />
