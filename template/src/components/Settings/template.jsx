@@ -927,10 +927,17 @@ export const SettingsCollection = {
       fields: [
         {
           type: "boolean",
-          label: "Generate a references page",
+          label: "Generate a sources page",
           name: "bibliographyPage",
           description:
-            "Build a References page at /docs/references listing every source in the Bibliography collection. Add it to the Table of Contents to link it from the sidebar. Regenerated on every build; do not edit the page by hand.",
+            "Build a page at /docs/references listing your sources. Add it to the Table of Contents to link it from the sidebar. Regenerated on every build; do not edit the page by hand.",
+        },
+        {
+          type: "boolean",
+          label: "List every source, including uncited ones",
+          name: "includeUncited",
+          description:
+            "On: lists the whole Bibliography collection, titled Bibliography. Off: lists only sources your topics actually cite, titled References. A bibliography may hold works you have not cited; a reference list, by convention, may not.",
         },
         {
           type: "string",

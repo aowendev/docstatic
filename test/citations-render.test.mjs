@@ -24,15 +24,27 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
 import {
+  citationId,
   citeEntries,
   collectNotes,
   literalFromEstree,
   parseMdx,
   readCiteItems,
 } from "../scripts/lib/notes.mjs";
+import { lookupCitation } from "../src/components/Cite/lookup.js";
 import remarkCitations, {
-  citationsFingerprint,
+  citationStyleClass,
 } from "../src/plugins/remark-citations.mjs";
+
+/** The plugin now takes styleClass directly instead of a data blob. */
+const run = (tree, styleClass, path = "docs/x.mdx") =>
+  remarkCitations({ styleClass })(tree, { path });
+
+/** Every citation id a page produces, in document order. */
+const idsOf = (source, noteStyle, page = "docs/x.mdx") =>
+  citeEntries(collectNotes(parseMdx(source), { noteStyle }).entries).map((e) =>
+    citationId(page, e)
+  );
 
 /** An author footnote, a citation, a footnote holding a citation, a citation. */
 const MIXED_PAGE = [
@@ -111,25 +123,13 @@ test("a citation inside a footnote still shares the note under an in-text style"
   assert.equal(nested.noteIndex, 2, "the second footnote is note 2");
 });
 
-test("the citation data has a fingerprint the bundler can key a cache on", () => {
-  // Citations come from a file the bundler has never heard of, so it caches a
-  // compiled page against that page's own source and nothing else. Regenerating
-  // then leaves every already-compiled page stale, across restarts - a style
-  // change renders correctly on disk and not at all in the browser.
-  // docusaurus.config.ts passes this in as a plugin option so new citation data
-  // invalidates the cache the way an edit to the page would.
-  const fingerprint = citationsFingerprint();
-
-  assert.equal(typeof fingerprint, "string");
-  assert.notEqual(
-    fingerprint,
-    "",
-    "an empty fingerprint would never invalidate"
-  );
-  assert.equal(
-    fingerprint,
-    citationsFingerprint(),
-    "it must be stable while the data is unchanged, or every build recompiles"
+test("the style class is readable without loading the CSL machinery", () => {
+  // docusaurus.config.ts calls this while the config loads, so it must not pull
+  // in citeproc - a devDependency a production install may not have.
+  const styleClass = citationStyleClass();
+  assert.ok(
+    styleClass === "note" || styleClass === "in-text",
+    `expected a CSL style class, got ${styleClass}`
   );
 });
 
@@ -151,9 +151,7 @@ test("two footnotes with the same content share a number", () => {
 
   // And the notes list holds one entry per distinct note, not per reference.
   const tree = parseMdx(source);
-  remarkCitations({ data: { styleClass: "in-text", clusters: {} } })(tree, {
-    path: "docs/x.mdx",
-  });
+  run(tree, "in-text");
   assert.equal(tree.children.at(-1).children.length, 2);
 });
 
@@ -165,9 +163,7 @@ test("the notes list goes last, below trailing components the author placed", ()
   const source =
     'Text<Footnote summary="a">a note</Footnote>.\n\n<RelatedTopics maxResults={7} />\n';
   const tree = parseMdx(source);
-  remarkCitations({ data: { styleClass: "in-text", clusters: {} } })(tree, {
-    path: "docs/x.mdx",
-  });
+  run(tree, "in-text");
 
   assert.equal(tree.children.at(-1).name, "FootnotesList");
 });
@@ -180,99 +176,85 @@ test("the walk is deterministic across repeated parses", () => {
   assert.deepEqual(shape(a), shape(b));
 });
 
-test("the plugin numbers notes exactly as the generator did", () => {
-  // The invariant the whole design rests on: the generator wrote clusters in
-  // the order its walk produced, and the plugin consumes them positionally.
-  const generatorOrder = citeEntries(notesOf(MIXED_PAGE, true).entries).map(
-    (e) => e.noteIndex
-  );
+test("the plugin gives every citation the id the generator wrote", () => {
+  // The invariant the whole design rests on. The generator keys its output by
+  // id; the plugin stamps ids into the page. If the two ever derive them
+  // differently, every citation silently renders nothing.
+  const expected = idsOf(MIXED_PAGE, true);
 
   const tree = parseMdx(MIXED_PAGE);
-  const data = {
-    styleClass: "note",
-    clusters: {
-      "docs/x.mdx": {
-        noteCount: 4,
-        clusters: generatorOrder.map((noteIndex, i) => ({
-          noteIndex,
-          rendered: `CITATION-${i}`,
-        })),
-      },
-    },
-  };
+  run(tree, "note");
 
-  remarkCitations({ data })(tree, { path: "docs/x.mdx" });
-
-  const list = tree.children.at(-1);
-  assert.equal(list.name, "FootnotesList");
-
-  const numbers = list.children.map((item) =>
-    Number(item.attributes.find((a) => a.name === "n").value)
-  );
-  assert.deepEqual(
-    numbers,
-    [1, 2, 3, 4],
-    "notes come out ordered and complete"
-  );
-
-  const rendered = JSON.stringify(list);
-  for (let i = 0; i < generatorOrder.length; i += 1) {
-    assert.ok(
-      rendered.includes(`CITATION-${i}`),
-      `cluster ${i} should reach the note it was numbered for`
-    );
-  }
-});
-
-test("the plugin leaves no Cite or Footnote behind in the tree", () => {
-  const tree = parseMdx(MIXED_PAGE);
-  const data = {
-    styleClass: "note",
-    clusters: {
-      "docs/x.mdx": {
-        noteCount: 4,
-        clusters: [1, 2, 3, 4].map(() => ({ rendered: "x" })),
-      },
-    },
-  };
-  remarkCitations({ data })(tree, { path: "docs/x.mdx" });
-
-  const names = [];
+  const ids = [];
   const walk = (n) => {
-    if (n.name) names.push(n.name);
+    if (n.name === "Cite") {
+      ids.push(n.attributes.find((a) => a.name === "id").value);
+    }
     for (const c of n.children ?? []) walk(c);
   };
   walk(tree);
 
-  assert.ok(!names.includes("Cite"), "every citation should be resolved");
+  assert.deepEqual(ids, expected);
+});
+
+test("notes still come out ordered and complete", () => {
+  const tree = parseMdx(MIXED_PAGE);
+  run(tree, "note");
+
+  const list = tree.children.at(-1);
+  assert.equal(list.name, "FootnotesList");
+  assert.deepEqual(
+    list.children.map((item) =>
+      Number(item.attributes.find((a) => a.name === "n").value)
+    ),
+    [1, 2, 3, 4]
+  );
+});
+
+test("the plugin resolves every Footnote and strips citation props", () => {
+  const tree = parseMdx(MIXED_PAGE);
+  run(tree, "note");
+
+  const names = [];
+  const cites = [];
+  const walk = (n) => {
+    if (n.name) names.push(n.name);
+    if (n.name === "Cite") cites.push(n);
+    for (const c of n.children ?? []) walk(c);
+  };
+  walk(tree);
+
   assert.ok(
     !names.includes("Footnote"),
     "every footnote should become a reference"
   );
   assert.ok(names.includes("FootnoteRef"), "markers replace them");
+
+  // Citations survive by design now, but carrying only an id. Keeping `items`
+  // would compile the authored props back into the page as a JS literal,
+  // undoing the payload saving that moving the text out achieved.
+  for (const cite of cites) {
+    assert.deepEqual(
+      cite.attributes.map((a) => a.name),
+      ["id"],
+      "a citation should carry its id and nothing else"
+    );
+  }
 });
 
-test("an in-text citation is spliced into the text, not turned into a note", () => {
+test("an in-text citation becomes a marker carrying its id, not a note", () => {
   const source = 'Some text <Cite items={[{ key: "smith2020" }]} />.';
   const tree = parseMdx(source);
-  remarkCitations({
-    data: {
-      styleClass: "in-text",
-      clusters: {
-        "docs/x.mdx": {
-          noteCount: 0,
-          clusters: [{ rendered: "(Smith 2020)" }],
-        },
-      },
-    },
-  })(tree, { path: "docs/x.mdx" });
+  run(tree, "in-text");
 
   assert.equal(
     tree.children.at(-1).name,
     undefined,
     "no notes list is appended when there are no notes"
   );
-  assert.ok(JSON.stringify(tree).includes("(Smith 2020)"));
+
+  const [expected] = idsOf(source, false);
+  assert.ok(JSON.stringify(tree).includes(expected));
 });
 
 test("citation items are read from the authored literal", () => {
@@ -315,9 +297,7 @@ test("a Cite with no items prop is caught, not silently empty", () => {
 test("a page with neither citations nor footnotes is left alone", () => {
   const tree = parseMdx("Just ordinary prose.");
   const before = JSON.stringify(tree);
-  remarkCitations({ data: { styleClass: "note", clusters: {} } })(tree, {
-    path: "docs/x.mdx",
-  });
+  run(tree, "note");
   assert.equal(JSON.stringify(tree), before);
 });
 
@@ -332,4 +312,171 @@ test("footnotes still resolve on a page the generator never saw", () => {
   const list = tree.children.at(-1);
   assert.equal(list.name, "FootnotesList");
   assert.equal(list.children.length, 1);
+});
+
+test("ids survive a citation being inserted earlier on the page", () => {
+  // The property positional ids lack, and the reason for the whole scheme.
+  // With "page#3" style ids, inserting a citation shifts every later one, so a
+  // citations file generated before the edit would render the WRONG SOURCE
+  // under each marker. A content signature only ever fails to resolve.
+  const before = idsOf(MIXED_PAGE, true);
+  const after = idsOf(
+    `Opening<Cite items={[{ key: "csl-spec" }]} /> ${MIXED_PAGE}`,
+    true
+  );
+
+  assert.deepEqual(
+    after.slice(1),
+    before,
+    "existing citations must keep their ids"
+  );
+});
+
+test("ids survive a citation being deleted earlier on the page", () => {
+  const source = [
+    '<Cite items={[{ key: "csl-spec" }]} /> then',
+    '<Cite items={[{ key: "smith2020", locator: "14", label: "page" }]} /> and',
+    '<Cite items={[{ key: "jones2019" }]} />.',
+  ].join(" ");
+  const full = idsOf(source, false);
+  const trimmed = idsOf(
+    source.replace('<Cite items={[{ key: "csl-spec" }]} /> then ', ""),
+    false
+  );
+
+  assert.deepEqual(trimmed, full.slice(1));
+});
+
+test("identical citations on one page are told apart by occurrence", () => {
+  const source =
+    'A<Cite items={[{ key: "smith2020" }]} /> B<Cite items={[{ key: "smith2020" }]} />';
+  const [first, second] = idsOf(source, true);
+
+  assert.notEqual(first, second, "the second is the one a note style shortens");
+  assert.equal(first.replace(/#0$/, ""), second.replace(/#1$/, ""));
+});
+
+test("an id ignores prop order and Tina bookkeeping", () => {
+  // Tina rewrites embed props on save; a re-save that reorders them, or adds
+  // its own _template, must not change what a citation *is*.
+  const a = idsOf(
+    '<Cite items={[{ key: "smith2020", locator: "14" }]} />',
+    false
+  );
+  const b = idsOf(
+    '<Cite items={[{ locator: "14", key: "smith2020", _template: "citeItem" }]} />',
+    false
+  );
+  assert.deepEqual(a, b);
+});
+
+test("a different page gives a different id for the same citation", () => {
+  const source = '<Cite items={[{ key: "smith2020" }]} />';
+  assert.notDeepEqual(
+    idsOf(source, false, "docs/a.mdx"),
+    idsOf(source, false, "docs/b.mdx")
+  );
+});
+
+test("a repeated footnote yields exactly one backlink target", () => {
+  // Two markers sharing a note must not both claim id="footnote-ref-N": that is
+  // invalid HTML, and the note's backlink can only return to one of them.
+  const source =
+    'A<Footnote summary="x">same</Footnote> B<Footnote summary="x">same</Footnote>.';
+  const tree = parseMdx(source);
+  run(tree, "in-text");
+
+  const refs = [];
+  const walk = (n) => {
+    if (n.name === "FootnoteRef") refs.push(n);
+    for (const c of n.children ?? []) walk(c);
+  };
+  walk(tree);
+
+  assert.equal(refs.length, 2, "both markers still render");
+  const repeats = refs.map((r) =>
+    r.attributes.some((a) => a.name === "repeat")
+  );
+  assert.deepEqual(
+    repeats,
+    [false, true],
+    "the first owns the target, the second is marked a repeat"
+  );
+  assert.equal(tree.children.at(-1).children.length, 1, "one note, not two");
+});
+
+test("an unknown id renders nothing rather than throwing", () => {
+  // The stale window: a citation added since the last generation. Rendering
+  // nothing is recoverable; throwing would take the page down.
+  assert.equal(lookupCitation({}, "docs/x.mdx#abc#0"), null);
+  assert.equal(lookupCitation(null, "docs/x.mdx#abc#0"), null);
+  assert.equal(lookupCitation({ a: ["x"] }, undefined), null);
+  assert.deepEqual(lookupCitation({ a: ["x"] }, "a"), ["x"]);
+});
+
+/**
+ * Everything above parses with this repo's own parseMdx. That is a blind spot:
+ * Docusaurus builds its tree with a longer plugin chain and appends an mdxjsEsm
+ * `export const toc` node ours does not have. A note-ordering bug once passed
+ * every test here while the built site was wrong, for exactly that reason.
+ *
+ * This runs the plugin through Docusaurus's own processor instead.
+ * createProcessorUncached is exported for this purpose - its own source calls it
+ * "useful for tests" - and DEFAULT_MARKDOWN_CONFIG supplies the config fields it
+ * requires. Note the call signature is {content, filePath}, not a VFile's
+ * {value, path}: passing the latter silently compiles an empty document.
+ */
+test("the plugin behaves the same through Docusaurus's own MDX pipeline", async () => {
+  const { DEFAULT_MARKDOWN_CONFIG } = await import(
+    "@docusaurus/core/lib/server/configValidation.js"
+  );
+  const { createProcessorUncached } = await import(
+    "@docusaurus/mdx-loader/lib/processor.js"
+  );
+
+  const processor = await createProcessorUncached({
+    options: {
+      admonitions: true,
+      markdownConfig: DEFAULT_MARKDOWN_CONFIG,
+      remarkPlugins: [[remarkCitations, { styleClass: "note" }]],
+      rehypePlugins: [],
+      recmaPlugins: [],
+    },
+    format: "mdx",
+  });
+
+  const filePath = new URL("../docs/x.mdx", import.meta.url).pathname;
+  const source =
+    'Text<Footnote summary="a">note</Footnote> and ' +
+    '<Cite items={[{ key: "smith2020" }]} />.\n\n<RelatedTopics maxResults={7} />\n';
+
+  const { content } = await processor.process({
+    content: source,
+    filePath,
+    frontMatter: {},
+    compilerName: "server",
+  });
+
+  assert.match(
+    content,
+    /docs\/x\.mdx#[a-f0-9]+#0/,
+    "the citation should carry its id"
+  );
+  assert.ok(
+    !/items:/.test(content),
+    "the authored props must not be compiled into the page"
+  );
+
+  // Order is read from the render calls, not the whole file: the component
+  // destructuring near the top lists names alphabetically and would otherwise
+  // report the opposite.
+  const body = content.slice(content.indexOf("_createMdxContent"));
+  const order = [
+    ...body.matchAll(/_jsx\w*\((FootnotesList|RelatedTopics)/g),
+  ].map((match) => match[1]);
+  assert.deepEqual(
+    order,
+    ["RelatedTopics", "FootnotesList"],
+    "notes go last, below the author's trailing components"
+  );
 });

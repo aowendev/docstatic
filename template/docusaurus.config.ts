@@ -2,7 +2,7 @@ import { themes } from "prism-react-renderer";
 import rehypeKatex from "rehype-katex";
 import remarkMath from "remark-math";
 import remarkCitations, {
-  citationsFingerprint,
+  citationStyleClass,
 } from "./src/plugins/remark-citations.mjs";
 import PrismDark from "./src/utils/prismDark";
 import PrismLight from "./src/utils/prismLight";
@@ -224,9 +224,10 @@ const config = {
           sidebarPath: require.resolve("./sidebars.ts"),
           remarkPlugins: [
             remarkMath,
-            // The fingerprint makes regenerated citations invalidate the
-            // bundler cache; without it a style change never reaches the page.
-            [remarkCitations, { fingerprint: citationsFingerprint() }],
+            // styleClass decides page structure (inline vs note), so it is part
+            // of the loader cache key. Citation *text* is not: it is looked up
+            // at render time, which is what lets a CMS edit go live.
+            [remarkCitations, { styleClass: citationStyleClass() }],
           ],
           rehypePlugins: [rehypeKatex],
           // Remove this to remove the "edit this page" links.
@@ -261,7 +262,7 @@ const config = {
           // Footnotes are numbered at build time here too, so a blog post does
           // not fall back to the client-side path the docs no longer use.
           remarkPlugins: [
-            [remarkCitations, { fingerprint: citationsFingerprint() }],
+            [remarkCitations, { styleClass: citationStyleClass() }],
           ],
           // Truncate blog previews with manual markers or excerpt
           truncateMarker: /<Truncate\s*\/?>/,
@@ -442,6 +443,9 @@ const config = {
     })(),
   },
   plugins: [
+    // Re-runs citeproc when the CMS writes the bibliography, so citation edits
+    // reach the page without a restart. See src/plugins/docusaurus-plugin-citations.js
+    require.resolve("./src/plugins/docusaurus-plugin-citations.js"),
     [
       "docusaurus-lunr-search",
       {

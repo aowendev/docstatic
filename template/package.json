@@ -17,7 +17,7 @@
     "generate-citations": "node scripts/generate-citations.mjs",
     "check-links": "node scripts/generate-link-report.js --check",
     "update-theme-css": "node scripts/update-theme-css.js",
-    "generate": "node scripts/generate-media-index.js && node scripts/generate-file-list.js && node scripts/generate-bibliography.mjs && node scripts/generate-citations.mjs && node scripts/generate-docs-metadata.js && node scripts/generate-link-report.js && node scripts/update-theme-css.js && node scripts/generate-git-identity.js",
+    "generate": "node scripts/generate-media-index.js && node scripts/generate-file-list.js && node scripts/generate-citations.mjs && node scripts/generate-bibliography.mjs && node scripts/generate-docs-metadata.js && node scripts/generate-link-report.js && node scripts/update-theme-css.js && node scripts/generate-git-identity.js",
     "prebuild": "yarn generate",
     "predev": "yarn generate",
     "prebuild-local": "yarn generate",

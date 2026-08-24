@@ -1,6 +1,6 @@
 ---
 modifiedBy: aowendev <aowen@translationcommons.org>
-lastmod: '2026-08-23T23:00:50.599Z'
+lastmod: '2026-08-24T08:25:58.979Z'
 ---
 
 # CSL schemas and styles

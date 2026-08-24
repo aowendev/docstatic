@@ -248,6 +248,7 @@
     "bibliographyPage": true,
     "style": "oxford-guide-to-style-notes",
     "englishLocale": "",
-    "pageTitles": []
+    "pageTitles": [],
+    "includeUncited": false
   }
 }

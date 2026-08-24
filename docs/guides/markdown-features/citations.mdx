@@ -15,7 +15,7 @@ translate: false
 approved: false
 published: true
 unlisted: false
-lastmod: '2026-08-23T23:00:50.022Z'
+lastmod: '2026-08-24T08:25:58.523Z'
 modifiedBy: aowendev <aowen@translationcommons.org>
 ---
 
@@ -151,15 +151,28 @@ Not everyone agrees<Footnote summary="...">Compare <Cite items={[{ key: "jones20
 Two sources can be cited together in one citation<Cite items={[{ key: "smith2020" }, { key: "csl-spec" }]} />.
 ```
 
-## The references page
+## The sources page
 
-A **references page** lists every source in the bibliography, formatted in the chosen style. It is separate from the citations in your topics: the note or in-text form of a source and its reference-list form deliberately differ.
+A generated page lists your sources, formatted in the chosen style. It is separate from the citations in your topics: the note or in-text form of a source and its reference-list form deliberately differ.
 
-To publish it, select **Settings** from the collection list, open **Citations**, and turn on **Generate a references page**.
+To publish it, select **Settings** from the collection list, open **Citations**, and turn on **Generate a sources page**.
+
+### Bibliography or references
+
+**List every source, including uncited ones** decides what the page contains, and what it is called:
+
+| Setting | Contains | Default title |
+|---|---|---|
+| On | Every source in the **Bibliography** collection | Bibliography |
+| Off | Only sources your topics cite | References |
+
+The names are not interchangeable. A *bibliography* may include works you have not cited—background reading, further sources. A *reference list*, by convention, lists only what the text actually cites, so a reader who finds an entry there can expect to meet it somewhere in the documentation.
+
+Cited means cited anywhere in the doc set, in any language. A source cited only on a page that has not been translated yet still appears in every language's list, so the lists do not shrink when a translation lags behind.
 
 ### Naming the page
 
-**References page title** sets the heading and the table-of-contents label, one entry per language. Add a language and give it a title; leave a language out and it keeps its built-in title—*References* in English, *Références* in French, and so on.
+**References page title** sets the heading and the table-of-contents label, one entry per language, and overrides the default title above. Add a language and give it a title; leave a language out and it keeps its built-in title.
 
 ### Placing the page
 
@@ -175,7 +188,7 @@ Leave the entry in place even if you later switch the page off: an entry whose p
 </Admonition>
 
 <Admonition type="note" title="Note">
-  The page lists the whole bibliography, not only the sources your topics cite.
+  Changing this setting renames the page, which changes its URL label in the sidebar but not its address: it stays at `/docs/references`.
 </Admonition>
 
 <RelatedTopics maxResults={7} />

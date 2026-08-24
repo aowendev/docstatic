@@ -64,6 +64,15 @@ const SCRIPTS_ALLOWLIST = [
   "generate-link-report.js",
   "update-theme-css.js",
   "util.js",
+  // The citation generators and the library they share. These are not optional:
+  // syncPackageJson copies the root "generate" script verbatim, so a scaffolded
+  // site runs them on every build, and src/plugins/remark-citations.mjs imports
+  // scripts/lib/notes.mjs - which docusaurus.config.ts loads, so a site missing
+  // them fails at config load, before anything else can report a better error.
+  "generate-bibliography.mjs",
+  "generate-citations.mjs",
+  "lib/csl.mjs",
+  "lib/notes.mjs",
 ];
 
 // Biome only auto-discovers "biome.json"/"biome.jsonc", so the template ships
@@ -158,7 +167,10 @@ function mirrorScripts() {
   const dest = path.join(TEMPLATE, "scripts");
   if (fs.existsSync(dest)) {
     for (const f of listFiles(dest)) {
-      if (!SCRIPTS_ALLOWLIST.includes(f)) {
+      // listFiles returns nested entries with the platform separator; the
+      // allowlist is written POSIX, so normalise or "lib/csl.mjs" would be
+      // deleted again on every sync under Windows.
+      if (!SCRIPTS_ALLOWLIST.includes(f.split(path.sep).join("/"))) {
         log("remove", path.join("scripts", f));
         if (!CHECK) fs.rmSync(path.join(dest, f));
       }

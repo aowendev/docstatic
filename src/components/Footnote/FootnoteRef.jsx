@@ -17,9 +17,16 @@
 import React from "react";
 import styles from "./Footnote.module.css";
 
-const FootnoteRef = ({ n }) => (
+/**
+ * `repeat` marks the second and later markers of a footnote whose content is
+ * identical to an earlier one. They share a note, so only the first carries the
+ * `footnote-ref-N` id: two elements with the same id is invalid HTML, and the
+ * note's backlink can only return to one place anyway. Standard markdown sends
+ * a repeat back to its first instance, which is what this produces.
+ */
+const FootnoteRef = ({ n, repeat }) => (
   <sup className={styles.ref}>
-    <a href={`#footnote-${n}`} id={`footnote-ref-${n}`}>
+    <a href={`#footnote-${n}`} id={repeat ? undefined : `footnote-ref-${n}`}>
       [{n}]
     </a>
   </sup>

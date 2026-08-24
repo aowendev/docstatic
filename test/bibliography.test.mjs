@@ -24,7 +24,7 @@ import { test } from "node:test";
 import bibliography from "../reuse/bibliography/index.json" with {
   type: "json",
 };
-import { cslHtmlToMarkdown } from "../scripts/lib/csl.mjs";
+import { cslHtmlToMarkdown, cslHtmlToTokens } from "../scripts/lib/csl.mjs";
 import {
   NON_CSL_FIELDS,
   REFERENCE_TYPES,
@@ -263,4 +263,93 @@ test("MDX-hostile characters are escaped, not emitted raw", () => {
 test("entities are decoded so readers do not see &amp;", () => {
   assert.equal(cslHtmlToMarkdown("Smith &amp; Jones"), "Smith & Jones");
   assert.equal(cslHtmlToMarkdown("&#8220;Quoted&#8221;"), "“Quoted”");
+});
+
+test("citeproc markup becomes tokens the browser can render without a parser", () => {
+  assert.deepEqual(cslHtmlToTokens("Smith, <i>Title</i>."), [
+    "Smith, ",
+    { i: ["Title"] },
+    ".",
+  ]);
+  assert.deepEqual(cslHtmlToTokens("<b>Bold</b>"), [{ b: ["Bold"] }]);
+  assert.deepEqual(cslHtmlToTokens('<a href="https://x.test/">x</a>'), [
+    { a: "https://x.test/", c: ["x"] },
+  ]);
+});
+
+test("numeric styles keep their bracketed number in tokens too", () => {
+  const html =
+    '<div class="csl-entry"><div class="csl-left-margin">[1]</div>' +
+    '<div class="csl-right-inline">J. Smith, <i>Title</i>.</div></div>';
+  assert.deepEqual(cslHtmlToTokens(html), [
+    "[1] J. Smith, ",
+    { i: ["Title"] },
+    ".",
+  ]);
+});
+
+test("tokens decode entities but do not escape for MDX", () => {
+  // The markdown converter has to escape braces and angle brackets so the
+  // string survives an MDX parse. Tokens are never parsed, so escaping them
+  // would put backslashes on the page.
+  assert.deepEqual(cslHtmlToTokens("Smith &amp; Jones"), ["Smith & Jones"]);
+  assert.deepEqual(cslHtmlToTokens("Set {a} and 3 &lt; 4"), [
+    "Set {a} and 3 < 4",
+  ]);
+});
+
+test("tokens keep the text of markup they cannot represent", () => {
+  assert.deepEqual(
+    cslHtmlToTokens('<span style="font-variant:small-caps;">caps</span> after'),
+    ["caps", " after"]
+  );
+});
+
+test("nested emphasis nests in the tokens", () => {
+  assert.deepEqual(cslHtmlToTokens("<i><b>both</b></i>"), [
+    { i: [{ b: ["both"] }] },
+  ]);
+});
+
+test("the sources page is named for what it actually contains", async () => {
+  // A bibliography may list works the author has not cited; a reference list,
+  // by convention, may not. So the two modes get different default titles, and
+  // switching the setting renames the page.
+  const { stringsFor } = await import("../scripts/generate-bibliography.mjs");
+
+  assert.equal(stringsFor("en", true).title, "Bibliography");
+  assert.equal(stringsFor("en", false).title, "References");
+
+  // Every site language has both, so a translated page is never left with an
+  // English heading.
+  for (const lang of ["en", "de", "es", "fr", "ja"]) {
+    for (const includeUncited of [true, false]) {
+      const strings = stringsFor(lang, includeUncited);
+      assert.ok(strings.title, `${lang} needs a title for both modes`);
+      assert.ok(strings.description, `${lang} needs a description`);
+    }
+  }
+
+  // Spanish and French carry the distinction natively; the two modes must not
+  // collapse to the same word there.
+  for (const lang of ["en", "es", "fr"]) {
+    assert.notEqual(
+      stringsFor(lang, true).title,
+      stringsFor(lang, false).title,
+      `${lang} distinguishes a bibliography from a reference list`
+    );
+  }
+});
+
+test("cited-only mode keeps just the sources the doc set cites", async () => {
+  const { citedOnly } = await import("../scripts/generate-bibliography.mjs");
+  const items = { a: { id: "a" }, b: { id: "b" }, c: { id: "c" } };
+
+  assert.deepEqual(Object.keys(citedOnly(items, new Set(["a", "c"]))), [
+    "a",
+    "c",
+  ]);
+  assert.deepEqual(Object.keys(citedOnly(items, new Set())), []);
+  // A key cited but missing from the library cannot conjure an entry.
+  assert.deepEqual(Object.keys(citedOnly(items, new Set(["a", "zz"]))), ["a"]);
 });

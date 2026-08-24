@@ -6,40 +6,66 @@
  */
 
 /**
- * Citation marker.
+ * A citation, rendered from build-time output.
  *
- * Citations are resolved at build time, not here.
- * scripts/generate-citations.mjs renders each one through citeproc, and
- * src/plugins/remark-citations.mjs replaces the <Cite> in the page's mdast with
- * the result - inline under an in-text style, or as a numbered note under a
- * note style. So on a docs page this component is never actually rendered.
+ * src/plugins/remark-citations.mjs has already replaced the authored
+ * `<Cite items={[...]} />` with `<Cite id="…" />`; this looks that id up in the
+ * data citeproc produced. The engine itself never reaches the browser - it is
+ * CPAL-1.0 OR AGPL-1.0, and only its output ships.
  *
- * It still has to exist and stay registered in MDXComponents: MDX throws on an
- * unregistered capitalised component, and the remark plugin runs only where it
- * is configured (the docs plugin). Anywhere else - a blog post, a standalone
- * page - a <Cite> reaches this component unresolved.
+ * The static import is the point of the whole design. It makes
+ * citations-rendered.json a module the dev server watches, so editing a source
+ * in the CMS updates every citation of it without a rebuild or a restart -
+ * exactly how GlossaryTerm and VariableSet have always worked.
  *
- * There it renders nothing, as it did before the pipeline existed. If a citation
- * is missing from a page, that is the reason: check that the page is under the
- * docs plugin and that `yarn generate` has run.
- *
- * Props (the shape the CMS writes):
- *
- *   items  - array of citation items, at least one. Each item is:
- *              key            - key of an entry in reuse/bibliography/index.json
- *              locator        - bare value only: "14", "14-16", "vii".
- *                               Never "p. 14" - the CSL locale supplies "p."/"pp."
- *              label          - what the locator counts: page, chapter, section...
- *              prefix         - text before the citation, e.g. "see also"
- *              suffix         - text after it; the place for a short remark
- *              suppressAuthor - omit the author, for "Smith (2020) argued..."
- *
- * One <Cite> is one citeproc cluster, which is what lets a style collapse
- * several sources into "[1-3]" or "(Smith 2020a, 2020b)". For a remark longer
- * than `suffix` suits, put the citation inside a <Footnote> instead: it renders
- * within that note rather than making a new one.
+ * The lookup happens during render, never in an effect. Docusaurus
+ * server-renders every page, so computing here puts the citation in the static
+ * HTML; computing in a useEffect would leave the served page empty until
+ * hydration, which is the defect the footnote rewrite existed to fix.
  */
 
-const Cite = () => null;
+import citations from "@site/src/data/citations-rendered.json";
+import React from "react";
+import { lookupCitation } from "./lookup";
+
+/**
+ * Tokens -> elements. Recursive, and deliberately dependency-free: rendering
+ * "Smith, J., <i>The Art of Documentation</i>" does not justify a markdown
+ * parser in the page bundle.
+ */
+function renderTokens(tokens) {
+  return tokens.map((token, index) => {
+    if (typeof token === "string") return token;
+    if (token.a !== undefined) {
+      return (
+        // biome-ignore lint/suspicious/noArrayIndexKey: tokens are positional
+        <a key={index} href={token.a}>
+          {renderTokens(token.c)}
+        </a>
+      );
+    }
+    if (token.i !== undefined) {
+      // biome-ignore lint/suspicious/noArrayIndexKey: tokens are positional
+      return <em key={index}>{renderTokens(token.i)}</em>;
+    }
+    if (token.b !== undefined) {
+      // biome-ignore lint/suspicious/noArrayIndexKey: tokens are positional
+      return <strong key={index}>{renderTokens(token.b)}</strong>;
+    }
+    return null;
+  });
+}
+
+const Cite = ({ id }) => {
+  const tokens = lookupCitation(citations, id);
+
+  // No entry yet: the citation was added to the page since the last
+  // generation. Render nothing rather than something wrong - `yarn generate`
+  // fills it in. Cannot happen in a production build, where generation runs
+  // first via prebuild.
+  if (!tokens) return null;
+
+  return <span className="citation">{renderTokens(tokens)}</span>;
+};
 
 export default Cite;
