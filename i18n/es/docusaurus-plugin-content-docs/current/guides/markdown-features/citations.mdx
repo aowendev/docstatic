@@ -1,0 +1,243 @@
+---
+lastmod: '2026-08-24T20:47:13.868Z'
+title: Citas
+description: Cite fuentes desde una bibliografía CSL central.
+tags:
+  - "elements"
+  - "elements_citations"
+  - "reuse"
+  - "reuse_bibliography"
+  - "software"
+  - "software_content-management-systems"
+  - "software_content-management-systems_tinacms"
+draft: false
+review: false
+translate: false
+approved: false
+published: true
+unlisted: false
+modifiedBy: aowendev <aowen@translationcommons.org>
+---
+
+# Citas
+
+El componente **Citation** cita fuentes que residen en una colección **Bibliography** central. Cada fuente se registra una sola vez, y cada tema que la cita hace referencia a ella mediante una clave de cita. Corregir el nombre de una editorial o una fecha de publicación actualiza cada cita de esa fuente en todo el conjunto de documentación.
+
+Los datos bibliográficos siguen el estándar Citation Style Language (CSL), el mismo formato que exportan gestores de referencias como Zotero y Mendeley. Todavía no existe un importador, así que una fuente procedente de uno de ellos se traslada pegando su CSL-JSON en **Raw CSL-JSON override**.
+
+## Gestionar la bibliografía
+
+Las fuentes residen en una única colección, separada de los temas que las citan.
+
+1. Seleccione **Bibliography** en la lista de colecciones.
+2. Añada una referencia a la lista.
+3. Asígnele una **Citation key**. Así es como los temas hacen referencia a la fuente, así que manténgala corta y estable; por ejemplo, `smith2020`.
+4. Elija un **Type**. Solo se muestran los campos pertinentes para ese tipo, de modo que un artículo de revista ofrece un ISSN mientras que un libro ofrece un ISBN.
+5. Rellene el resto de campos y guarde.
+
+<Admonition type="note" title="Nota">
+  Cambiar una clave de cita rompe todas las citas que la usan. Trate las claves como permanentes en cuanto un tema las cite.
+
+  Una cita que apunta a una clave que ya no existe lo indica en el propio lugar, del mismo modo que lo haría un término del glosario o una variable:
+
+  ```
+  typo-here NOT FOUND
+  ```
+
+  La compilación sigue teniendo éxito y ninguna otra cita de la página se ve afectada, de modo que una clave mal escrita no le impide previsualizar el sitio. La compilación también las enumera, por si se trata de una página que no estaba mirando.
+</Admonition>
+
+### Campos que el formulario no muestra
+
+El formulario cubre los campos que necesitan las fuentes de documentación, no todos los que define el estándar. Faltan deliberadamente dos categorías:
+
+* Valores que el formateador calcula por sí mismo, como los números de cita y las letras que distinguen dos obras de un mismo autor en el mismo año.
+* Campos propios de tipos de fuente que la lista **Type** no ofrece.
+
+Para una fuente que el formulario no puede expresar, use **Raw CSL-JSON override**. Cualquier contenido válido introducido ahí sustituye a los campos anteriores, conservando la clave de cita.
+
+## Citar una fuente
+
+1. Seleccione **Citation** en la lista **Embed**.
+2. Añada una fuente a la cita.
+3. Elija una **Source** de la lista de claves de cita.
+4. Opcionalmente, indique un **Locator** y un **Locator type** para señalar una parte concreta de la fuente.
+
+Introduzca el localizador como un valor sin adornos: `14`, o `14-16`. No escriba «p.», porque el propio estilo de cita lo añade, y los estilos no coinciden en qué debería ser.
+
+Una cita puede citar varias fuentes. Añada más de un elemento en lugar de colocar dos citas una junto a otra, para que el estilo de cita pueda combinarlas.
+
+#### Ejemplo
+
+La siguiente cita hace referencia a una única fuente:
+
+```jsx
+<Cite items={[{ key: "smith2020" }]} />
+```
+
+Esta apunta a una página concreta:
+
+```jsx
+<Cite items={[{ key: "smith2020", locator: "14", label: "page" }]} />
+```
+
+Esta cita dos fuentes juntas, cada una con su propia referencia de página:
+
+```jsx
+<Cite items={[
+  { key: "smith2020", locator: "14", label: "page" },
+  { key: "jones2019", locator: "3-5", label: "page" }
+]} />
+```
+
+<Admonition type="note" title="Nota">
+  Citar la misma fuente dos veces no reutiliza la primera cita. Cada una obtiene su propio lugar, y el estilo decide cómo abreviar las posteriores.
+</Admonition>
+
+## Cuándo aparecen los cambios
+
+Editar una **fuente** en la colección Bibliography actualiza al instante cada cita de esa fuente: corrija el nombre de una editorial y el cambio llega a la página mientras lo observa, sin necesidad de reiniciar.
+
+Tres cosas se comportan de forma distinta, y conviene saber cuál es cuál:
+
+| Cambio | Cuándo aparece |
+|---|---|
+| Editar una fuente | De inmediato |
+| Añadir una cita a un tema | En la siguiente compilación |
+| Cambiar el estilo de cita | Tras reiniciar el CMS |
+
+Una cita nueva no muestra absolutamente nada hasta la siguiente compilación: ni marcador de posición ni error. Todavía no tiene texto formateado, y mostrar una cita a medio formatear sería peor que no mostrar nada.
+
+El estilo de cita es el único ajuste que requiere reinicio, porque determina si las citas van en el texto corrido o en notas al pie. Eso reestructura la página, no solo su redacción, así que las páginas deben reconstruirse.
+
+<Admonition type="note" title="Nota">
+  Las citas funcionan en los temas, no en las entradas de blog. Las notas al pie funcionan en ambos. Una cita colocada en una entrada de blog no produce salida alguna.
+</Admonition>
+
+## Elegir un estilo
+
+Un estilo de cita controla cómo se formatean las citas y la lista de referencias. Los estilos difieren en el fondo, no solo en la forma: algunos colocan un número en superíndice en el texto y la fuente en una nota, otros colocan el autor y el año entre paréntesis en el propio texto.
+
+El estilo se establece una vez para todo el sitio, no por tema. Mezclar estilos dentro de un mismo conjunto de documentación es un error de estilo, porque los lectores no pueden saber qué significa una marca dada.
+
+Seleccione **Settings** en la lista de colecciones, abra **Citations** y elija un **Citation style**:
+
+| Estilo | Dónde va la cita | Referencia de ejemplo |
+|---|---|---|
+| Chicago (author-date) | En el texto | Smith, Jane. 2020. *The Art of Documentation*. Oxford University Press. |
+| Chicago (notes and bibliography) | En una nota al pie | Smith, Jane. *The Art of Documentation*. Oxford University Press, 2020. |
+| Harvard (Cite Them Right) | En el texto | Smith, J. (2020) *The Art of Documentation*. Oxford: Oxford University Press. |
+| IEEE | En el texto, numerado | [1] J. Smith, *The Art of Documentation*. Oxford: Oxford University Press, 2020. |
+| Oxford (Guide to Style, notes) | En una nota al pie | Smith, J., *The Art of Documentation* (Oxford, 2020). |
+
+### Variante de inglés
+
+Solo el estilo Oxford indica para qué variante de inglés está escrito. Los demás lo dejan en manos del sitio y recurren por defecto al inglés americano, de modo que un estilo que espera fechas con el día por delante —Cite Them Right, por ejemplo— data una fuente como `August 18, 2026` a menos que se indique lo contrario.
+
+Establezca **English variant** en **Global English** para corregirlo. Esto afecta al orden de la fecha, las comillas y la ortografía solo en las páginas en inglés; el resto de idiomas siguen sus propias convenciones locales.
+
+### Añadir un idioma
+
+Los cinco idiomas con los que se distribuye docStatic están listos para usarse. Añadir otro requiere un único archivo: la locale CSL que aporta sus comillas, el orden de fecha y términos como *consultado el*.
+
+Sin ella, una página en el nuevo idioma se sigue compilando, pero sus citas aparecen en inglés. La compilación lo indica y nombra el archivo que hay que añadir:
+
+```
+! No CSL locale for "it": its citations will use the style's default (English).
+  Add csl/locales/locales-it-IT.xml to fix.
+```
+
+Tome ese archivo del [proyecto de locales CSL](https://github.com/citation-style-language/locales) y colóquelo en `csl/locales/`. No hace falta nada más: el idioma se empareja con su locale por el nombre.
+
+Establezca también un título para el nuevo idioma en **References page title**, o la página de fuentes conservará su encabezado en inglés.
+
+## Citas en un estilo de notas
+
+Con **Chicago (notes and bibliography)** u **Oxford**, una cita es también una nota al pie. El mismo `<Cite>` ya redactado se convierte en una nota numerada; en el tema no cambia nada.
+
+Las citas y sus propias notas al pie comparten **una única secuencia numerada**, en el orden en que aparecen en la página. Tanto Oxford como Chicago numeran las notas de forma correlativa a lo largo de todo el texto, y un lector no puede distinguir dos secuencias distintas.
+
+Como la numeración se calcula al compilar el sitio, el estilo puede abreviar correctamente una cita repetida en lugar de repetirla por completo.
+
+### Una nota que contiene comentario y cita a la vez
+
+Chicago permite que una nota lleve juntos una fuente y un comentario propio. Coloque la cita dentro de una nota al pie y aparecerá dentro de esa nota en lugar de crear una segunda:
+
+```jsx
+<Footnote summary="1"><Cite items={[{ key: "jones2019" }]} /> Esto defiende lo contrario.</Footnote>
+```
+
+Coloque la cita primero y su comentario después. Un estilo de notas cierra una cita con un punto, así que un comentario redactado alrededor de la cita, en lugar de después, resulta extraño.
+
+Para un comentario de solo unas pocas palabras, use en su lugar el campo **Suffix** de la cita: permanece junto a la cita en todos los estilos, incluidos los de texto corrido.
+
+<Admonition type="info" title="Ejemplo">
+  Reutilizar no sale gratis<Footnote summary="Sobre el coste de la reutilización"><Cite items={[{ key: "jones2019" }]} /> Esto defiende que los costes superan al ahorro.</Footnote>, prometa lo que prometa la herramienta<Cite items={[{ key: "csl-spec" }]} />.
+</Admonition>
+
+Con un estilo de notas, ambas marcas anteriores son notas, numeradas en la misma secuencia que cualquier otra nota de esta página: la primera lleva una fuente y un comentario juntos, la segunda lleva solo una cita. Con un estilo de texto corrido, la segunda aparece dentro de la propia frase, y solo se numera la nota al pie.
+
+## Un ejemplo completo
+
+El siguiente párrafo está activo. Sus citas se representan en el estilo con el que este sitio esté configurado en cada momento, a partir de las fuentes de la colección **Bibliography**.
+
+<Admonition type="info" title="Ejemplo">
+  La documentación se escribe mejor una sola vez y se reutiliza<Cite items={[{ key: "smith2020", locator: "14", label: "page" }]} />. La idea es anterior a las herramientas<Footnote summary="El single-sourcing es anterior a las herramientas">Los redactores técnicos ya reutilizaban contenido mediante texto condicional mucho antes de que el single-sourcing tuviera nombre.</Footnote>, y la misma fuente vuelve sobre ello más tarde<Cite items={[{ key: "smith2020", locator: "22", label: "page" }]} />. No todo el mundo está de acuerdo<Footnote summary="Una opinión discrepante"><Cite items={[{ key: "jones2019" }]} /> Esto defiende que la reutilización cuesta más de lo que ahorra.</Footnote>. Dos fuentes pueden citarse juntas en una sola cita<Cite items={[{ key: "smith2020" }, { key: "csl-spec" }]} />.
+</Admonition>
+
+Qué observar depende del estilo en **Settings**:
+
+* Con un **estilo de notas** —Oxford, o Chicago (notes and bibliography)— las marcas anteriores son notas al pie, y las notas propiamente dichas están al final de esta página. Las notas propias del autor y las citas transcurren en **una sola secuencia**. La segunda cita de *The Art of Documentation* aparece abreviada, porque entre ella y la primera se interpuso otra nota.
+* Con un **estilo de texto corrido** —Harvard, IEEE o Chicago (author-date)— las citas aparecen dentro de la propia frase, y solo se numeran las dos notas al pie de este párrafo.
+
+El origen de ese párrafo no cambia en ninguno de los dos casos:
+
+```jsx
+Documentation is best written once and reused<Cite items={[{ key: "smith2020", locator: "14", label: "page" }]} />.
+The idea predates the tooling<Footnote summary="...">Technical writers were reusing content...</Footnote>,
+and the same source returns to it later<Cite items={[{ key: "smith2020", locator: "22", label: "page" }]} />.
+Not everyone agrees<Footnote summary="..."><Cite items={[{ key: "jones2019" }]} /> This argues that reuse...</Footnote>.
+Two sources can be cited together in one citation<Cite items={[{ key: "smith2020" }, { key: "csl-spec" }]} />.
+```
+
+## La página de fuentes
+
+Una página generada enumera sus fuentes, formateadas en el estilo elegido. Es independiente de las citas de sus temas: la forma en nota o en texto corrido de una fuente y su forma en la lista de referencias difieren deliberadamente.
+
+Para publicarla, seleccione **Settings** en la lista de colecciones, abra **Citations** y active **Generate a sources page**.
+
+### Bibliografía o referencias
+
+**List every source, including uncited ones** decide qué contiene la página, y cómo se llama:
+
+| Ajuste | Contiene | Título por defecto |
+|---|---|---|
+| Activado | Todas las fuentes de la colección **Bibliography** | Bibliografía |
+| Desactivado | Solo las fuentes que citan sus temas | Referencias |
+
+Los nombres no son intercambiables. Una *bibliografía* puede incluir obras que no ha citado: lecturas complementarias, fuentes adicionales. Una *lista de referencias*, por convención, recoge solo lo que el texto cita realmente, de modo que un lector que encuentre allí una entrada puede esperar encontrarla también en algún lugar de la documentación.
+
+Citado significa citado en cualquier parte del conjunto de documentación, en cualquier idioma. Una fuente citada solo en una página que aún no se ha traducido sigue apareciendo en la lista de todos los idiomas, de modo que las listas no se reducen cuando una traducción va con retraso.
+
+### Nombrar la página
+
+**References page title** establece el encabezado y la etiqueta en el índice de contenidos, un valor por idioma, y sustituye al título por defecto anterior. Añada un idioma y asígnele un título; deje un idioma sin él y conservará su título integrado.
+
+### Colocar la página
+
+La página se publica en `/docs/references`, pero no se añade al índice de contenidos automáticamente: solo usted sabe dónde encaja en su orden de lectura.
+
+1. Seleccione **Table of Contents** en la lista de colecciones.
+2. Añada una entrada de documento que apunte a `docs/references.mdx`, donde quiera colocarla.
+
+Deje la entrada en su sitio aunque más adelante desactive la página: una entrada cuya página no existe se ignora en lugar de romper la compilación.
+
+<Admonition type="note" title="Nota">
+  La página se reconstruye a partir de la bibliografía en cada compilación, en cada uno de los idiomas de su sitio, así que nunca queda desactualizada. No la edite a mano: sus cambios se sobrescribirán. Corrija la fuente en la colección **Bibliography**.
+</Admonition>
+
+<Admonition type="note" title="Nota">
+  Cambiar este ajuste renombra la página, lo que cambia su etiqueta en la barra lateral, pero no su dirección: permanece en `/docs/references`.
+</Admonition>
+
+<RelatedTopics maxResults={7} />

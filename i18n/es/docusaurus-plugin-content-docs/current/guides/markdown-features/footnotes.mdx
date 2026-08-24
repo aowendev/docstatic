@@ -1,38 +1,45 @@
 ---
-lastmod: "2026-03-10T23:00:51.141Z"
-title: Footnotes
+lastmod: '2026-08-24T20:47:13.932Z'
+title: Notas al pie
+description: Notas al pie numeradas automáticamente y con enlace de retorno.
 tags:
   - "elements"
   - "elements_footnotes"
+  - "computer-languages"
+  - "computer-languages_markdown"
+  - "software"
+  - "software_content-management-systems"
+  - "software_content-management-systems_tinacms"
 draft: false
 review: false
 translate: false
 approved: false
 published: true
 unlisted: false
+modifiedBy: aowendev <aowen@translationcommons.org>
 ---
 
 # Notas al pie
 
-Existe una extensión de Markdown que proporciona notas al pie, pero su implementación no es consistente y separa el contenido del número. Por ejemplo:
+Existe una extensión de Markdown que ofrece notas al pie, pero su implementación no es uniforme y separa el contenido del número. Por ejemplo:
 
 ```markdown
-Markdown es un lenguaje de marcado ligero[^1] creado por John Gruber[^2], ahora ampliamente utilizado en la escritura[^3].
+Markdown es un lenguaje de marcado ligero[^1] creado por John Gruber[^2], hoy ampliamente utilizado en la escritura[^3].
 
-[^1]: Markdown utiliza una sintaxis sencilla para lograr el formato del texto.
+[^1]: Markdown usa una sintaxis sencilla para dar formato al texto.
 [^2]: John Gruber creó Markdown en 2004.
-[^3]: Muchas plataformas, como GitHub, Stack Overflow y plataformas de blogs, son compatibles con Markdown.
+[^3]: Muchas plataformas, como GitHub, Stack Overflow y los blogs, admiten Markdown.
 ```
 
 En docStatic, esto se representaría así:
 
 ```markdown
-Markdown es un lenguaje de marcado ligero<Footnote summary="1"> Markdown utiliza una sintaxis sencilla para dar formato al texto.</Footnote>
+Markdown es un lenguaje de marcado ligero<Footnote summary="1"> Markdown usa una sintaxis sencilla para dar formato al texto.</Footnote>
 creado por John Gruber<Footnote summary="2">John Gruber creó Markdown en 2004.</Footnote>,
-ahora ampliamente utilizado en la escritura<Footnote summary="3">Muchas plataformas, como GitHub, Stack Overflow y plataformas de blogs, son compatibles con Markdown.</Footnote>.
+hoy ampliamente utilizado en la escritura<Footnote summary="3">Muchas plataformas, como GitHub, Stack Overflow y los blogs, admiten Markdown.</Footnote>.
 ```
 
-El componente **Notas al pie** te permite añadir notas al pie en línea a tu texto.
+El componente **Notas al pie** le permite añadir notas al pie en línea a su texto.
 
 1. Seleccione **Notas al pie** en la lista **Incrustar**.
 2. Edite el componente.
@@ -41,8 +48,22 @@ El componente **Notas al pie** te permite añadir notas al pie en línea a tu te
 
 #### Ejemplo
 
-Markdown es un lenguaje de marcado ligero <Footnote summary="1"> Markdown utiliza una sintaxis sencilla para dar formato al texto.</Footnote> creado por John Gruber<Footnote summary="2">John Gruber creó Markdown en 2004.</Footnote>, ahora ampliamente utilizado en la escritura<Footnote summary="3">Muchas plataformas, como GitHub, Stack Overflow y plataformas de blogs, son compatibles con Markdown.</Footnote>.
+Markdown es un lenguaje de marcado ligero<Footnote summary="1"> Markdown usa una sintaxis sencilla para dar formato al texto.</Footnote> creado por John Gruber<Footnote summary="2">John Gruber creó Markdown en 2004.</Footnote>, hoy ampliamente utilizado en la escritura<Footnote summary="3">Muchas plataformas, como GitHub, Stack Overflow y los blogs, admiten Markdown.</Footnote>.
 
-<Admonition type="note" title="Nota">
-  Si dos notas al pie tienen el mismo contenido, solo aparecerán una vez en el pie de página y compartirán un número.
+Las notas al pie se numeran en el orden en que aparecen, y las notas propiamente dichas se recopilan al final de la página. La numeración se calcula al compilar el sitio, de modo que los números y las notas ya están en la página tal como se sirve, en lugar de ser ensamblados por el navegador.
+
+## Repetir una nota al pie
+
+Dos notas al pie con el mismo contenido son la misma nota. Comparten un número y aparecen una sola vez al final de la página, de modo que un punto que necesite repetir no satura la lista.
+
+<Admonition type="info" title="Ejemplo">
+  Markdown cuenta con amplio soporte<Footnote summary="Soporte de plataformas">Muchas plataformas, entre ellas GitHub y Stack Overflow, admiten Markdown.</Footnote>, al igual que su sintaxis de tablas<Footnote summary="Soporte de plataformas">Muchas plataformas, entre ellas GitHub y Stack Overflow, admiten Markdown.</Footnote>.
 </Admonition>
+
+Ambas marcas anteriores apuntan a la misma nota, porque su texto es idéntico. Cambie una de ellas y pasará a ser una nota propia.
+
+## Notas al pie y citas
+
+Con un estilo de cita de **nota**, una cita es también una nota al pie, y las citas comparten esta misma secuencia numerada. Consulte [Citas](./citations.mdx) para saber cómo funciona y qué aspecto tiene.
+
+<RelatedTopics maxResults={7} />

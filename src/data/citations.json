@@ -107,6 +107,126 @@
   },
   "styleClass": "note",
   "clusters": {
+    "i18n/de/docusaurus-plugin-content-docs/current/guides/markdown-features/citations.mdx": {
+      "noteCount": 7,
+      "clusters": [
+        {
+          "id": "i18n/de/docusaurus-plugin-content-docs/current/guides/markdown-features/citations.mdx#ded6be9a21e3#0",
+          "noteIndex": 1,
+          "nested": true,
+          "items": [
+            {
+              "key": "jones2019"
+            }
+          ],
+          "rendered": "Alex Jones, „Single-sourcing in technical communication“, *Journal of Documentation Practice*, 42/3 (2019), 112–34, https://doi.org/10.0000/jdp.2019.42.3.112.",
+          "tokens": [
+            "Alex Jones, „Single-sourcing in technical communication“, ",
+            {
+              "i": [
+                "Journal of Documentation Practice"
+              ]
+            },
+            ", 42/3 (2019), 112–34, https://doi.org/10.0000/jdp.2019.42.3.112."
+          ]
+        },
+        {
+          "id": "i18n/de/docusaurus-plugin-content-docs/current/guides/markdown-features/citations.mdx#49d7ab4900ba#0",
+          "noteIndex": 2,
+          "nested": false,
+          "items": [
+            {
+              "key": "csl-spec"
+            }
+          ],
+          "rendered": "Citation Style Language Project, „Citation Style Language Specification“ (2024), https://docs.citationstyles.org/, zugegriffen 18. August 2026.",
+          "tokens": [
+            "Citation Style Language Project, „Citation Style Language Specification“ (2024), https://docs.citationstyles.org/, zugegriffen 18. August 2026."
+          ]
+        },
+        {
+          "id": "i18n/de/docusaurus-plugin-content-docs/current/guides/markdown-features/citations.mdx#39bee593065a#0",
+          "noteIndex": 3,
+          "nested": false,
+          "items": [
+            {
+              "key": "smith2020",
+              "locator": "14",
+              "label": "page"
+            }
+          ],
+          "rendered": "Jane Smith, *The Art of Documentation* (Oxford, 2020), 14.",
+          "tokens": [
+            "Jane Smith, ",
+            {
+              "i": [
+                "The Art of Documentation"
+              ]
+            },
+            " (Oxford, 2020), 14."
+          ]
+        },
+        {
+          "id": "i18n/de/docusaurus-plugin-content-docs/current/guides/markdown-features/citations.mdx#fcea1b0167de#0",
+          "noteIndex": 5,
+          "nested": false,
+          "items": [
+            {
+              "key": "smith2020",
+              "locator": "22",
+              "label": "page"
+            }
+          ],
+          "rendered": "Smith, *The Art of Documentation*, 22.",
+          "tokens": [
+            "Smith, ",
+            {
+              "i": [
+                "The Art of Documentation"
+              ]
+            },
+            ", 22."
+          ]
+        },
+        {
+          "id": "i18n/de/docusaurus-plugin-content-docs/current/guides/markdown-features/citations.mdx#ded6be9a21e3#1",
+          "noteIndex": 6,
+          "nested": true,
+          "items": [
+            {
+              "key": "jones2019"
+            }
+          ],
+          "rendered": "Jones, „Single-sourcing in technical communication“.",
+          "tokens": [
+            "Jones, „Single-sourcing in technical communication“."
+          ]
+        },
+        {
+          "id": "i18n/de/docusaurus-plugin-content-docs/current/guides/markdown-features/citations.mdx#1b145342e120#0",
+          "noteIndex": 7,
+          "nested": false,
+          "items": [
+            {
+              "key": "smith2020"
+            },
+            {
+              "key": "csl-spec"
+            }
+          ],
+          "rendered": "Smith, *The Art of Documentation*; Citation Style Language Project, „Citation Style Language Specification“.",
+          "tokens": [
+            "Smith, ",
+            {
+              "i": [
+                "The Art of Documentation"
+              ]
+            },
+            "; Citation Style Language Project, „Citation Style Language Specification“."
+          ]
+        }
+      ]
+    },
     "docs/guides/markdown-features/citations.mdx": {
       "noteCount": 7,
       "clusters": [
@@ -223,6 +343,366 @@
               ]
             },
             "; Citation Style Language Project, ‘Citation Style Language Specification’."
+          ]
+        }
+      ]
+    },
+    "i18n/es/docusaurus-plugin-content-docs/current/guides/markdown-features/citations.mdx": {
+      "noteCount": 7,
+      "clusters": [
+        {
+          "id": "i18n/es/docusaurus-plugin-content-docs/current/guides/markdown-features/citations.mdx#ded6be9a21e3#0",
+          "noteIndex": 1,
+          "nested": true,
+          "items": [
+            {
+              "key": "jones2019"
+            }
+          ],
+          "rendered": "Alex Jones, «Single-sourcing in technical communication», *Journal of Documentation Practice*, 42/3 (2019), 112-34, https://doi.org/10.0000/jdp.2019.42.3.112.",
+          "tokens": [
+            "Alex Jones, «Single-sourcing in technical communication», ",
+            {
+              "i": [
+                "Journal of Documentation Practice"
+              ]
+            },
+            ", 42/3 (2019), 112-34, https://doi.org/10.0000/jdp.2019.42.3.112."
+          ]
+        },
+        {
+          "id": "i18n/es/docusaurus-plugin-content-docs/current/guides/markdown-features/citations.mdx#49d7ab4900ba#0",
+          "noteIndex": 2,
+          "nested": false,
+          "items": [
+            {
+              "key": "csl-spec"
+            }
+          ],
+          "rendered": "Citation Style Language Project, «Citation Style Language Specification» (2024), https://docs.citationstyles.org/, accedido 18 de agosto de 2026.",
+          "tokens": [
+            "Citation Style Language Project, «Citation Style Language Specification» (2024), https://docs.citationstyles.org/, accedido 18 de agosto de 2026."
+          ]
+        },
+        {
+          "id": "i18n/es/docusaurus-plugin-content-docs/current/guides/markdown-features/citations.mdx#39bee593065a#0",
+          "noteIndex": 3,
+          "nested": false,
+          "items": [
+            {
+              "key": "smith2020",
+              "locator": "14",
+              "label": "page"
+            }
+          ],
+          "rendered": "Jane Smith, *The Art of Documentation* (Oxford, 2020), 14.",
+          "tokens": [
+            "Jane Smith, ",
+            {
+              "i": [
+                "The Art of Documentation"
+              ]
+            },
+            " (Oxford, 2020), 14."
+          ]
+        },
+        {
+          "id": "i18n/es/docusaurus-plugin-content-docs/current/guides/markdown-features/citations.mdx#fcea1b0167de#0",
+          "noteIndex": 5,
+          "nested": false,
+          "items": [
+            {
+              "key": "smith2020",
+              "locator": "22",
+              "label": "page"
+            }
+          ],
+          "rendered": "Smith, *The Art of Documentation*, 22.",
+          "tokens": [
+            "Smith, ",
+            {
+              "i": [
+                "The Art of Documentation"
+              ]
+            },
+            ", 22."
+          ]
+        },
+        {
+          "id": "i18n/es/docusaurus-plugin-content-docs/current/guides/markdown-features/citations.mdx#ded6be9a21e3#1",
+          "noteIndex": 6,
+          "nested": true,
+          "items": [
+            {
+              "key": "jones2019"
+            }
+          ],
+          "rendered": "Jones, «Single-sourcing in technical communication».",
+          "tokens": [
+            "Jones, «Single-sourcing in technical communication»."
+          ]
+        },
+        {
+          "id": "i18n/es/docusaurus-plugin-content-docs/current/guides/markdown-features/citations.mdx#1b145342e120#0",
+          "noteIndex": 7,
+          "nested": false,
+          "items": [
+            {
+              "key": "smith2020"
+            },
+            {
+              "key": "csl-spec"
+            }
+          ],
+          "rendered": "Smith, *The Art of Documentation*; Citation Style Language Project, «Citation Style Language Specification».",
+          "tokens": [
+            "Smith, ",
+            {
+              "i": [
+                "The Art of Documentation"
+              ]
+            },
+            "; Citation Style Language Project, «Citation Style Language Specification»."
+          ]
+        }
+      ]
+    },
+    "i18n/fr/docusaurus-plugin-content-docs/current/guides/markdown-features/citations.mdx": {
+      "noteCount": 7,
+      "clusters": [
+        {
+          "id": "i18n/fr/docusaurus-plugin-content-docs/current/guides/markdown-features/citations.mdx#ded6be9a21e3#0",
+          "noteIndex": 1,
+          "nested": true,
+          "items": [
+            {
+              "key": "jones2019"
+            }
+          ],
+          "rendered": "Alex Jones, « Single-sourcing in technical communication », *Journal of Documentation Practice*, 42/3 (2019), 112‑34, https://doi.org/10.0000/jdp.2019.42.3.112.",
+          "tokens": [
+            "Alex Jones, « Single-sourcing in technical communication », ",
+            {
+              "i": [
+                "Journal of Documentation Practice"
+              ]
+            },
+            ", 42/3 (2019), 112‑34, https://doi.org/10.0000/jdp.2019.42.3.112."
+          ]
+        },
+        {
+          "id": "i18n/fr/docusaurus-plugin-content-docs/current/guides/markdown-features/citations.mdx#49d7ab4900ba#0",
+          "noteIndex": 2,
+          "nested": false,
+          "items": [
+            {
+              "key": "csl-spec"
+            }
+          ],
+          "rendered": "Citation Style Language Project, « Citation Style Language Specification » (2024), https://docs.citationstyles.org/, consulté le 18 août 2026.",
+          "tokens": [
+            "Citation Style Language Project, « Citation Style Language Specification » (2024), https://docs.citationstyles.org/, consulté le 18 août 2026."
+          ]
+        },
+        {
+          "id": "i18n/fr/docusaurus-plugin-content-docs/current/guides/markdown-features/citations.mdx#39bee593065a#0",
+          "noteIndex": 3,
+          "nested": false,
+          "items": [
+            {
+              "key": "smith2020",
+              "locator": "14",
+              "label": "page"
+            }
+          ],
+          "rendered": "Jane Smith, *The Art of Documentation* (Oxford, 2020), 14.",
+          "tokens": [
+            "Jane Smith, ",
+            {
+              "i": [
+                "The Art of Documentation"
+              ]
+            },
+            " (Oxford, 2020), 14."
+          ]
+        },
+        {
+          "id": "i18n/fr/docusaurus-plugin-content-docs/current/guides/markdown-features/citations.mdx#fcea1b0167de#0",
+          "noteIndex": 5,
+          "nested": false,
+          "items": [
+            {
+              "key": "smith2020",
+              "locator": "22",
+              "label": "page"
+            }
+          ],
+          "rendered": "Smith, *The Art of Documentation*, 22.",
+          "tokens": [
+            "Smith, ",
+            {
+              "i": [
+                "The Art of Documentation"
+              ]
+            },
+            ", 22."
+          ]
+        },
+        {
+          "id": "i18n/fr/docusaurus-plugin-content-docs/current/guides/markdown-features/citations.mdx#ded6be9a21e3#1",
+          "noteIndex": 6,
+          "nested": true,
+          "items": [
+            {
+              "key": "jones2019"
+            }
+          ],
+          "rendered": "Jones, « Single-sourcing in technical communication ».",
+          "tokens": [
+            "Jones, « Single-sourcing in technical communication »."
+          ]
+        },
+        {
+          "id": "i18n/fr/docusaurus-plugin-content-docs/current/guides/markdown-features/citations.mdx#1b145342e120#0",
+          "noteIndex": 7,
+          "nested": false,
+          "items": [
+            {
+              "key": "smith2020"
+            },
+            {
+              "key": "csl-spec"
+            }
+          ],
+          "rendered": "Smith, *The Art of Documentation*; Citation Style Language Project, « Citation Style Language Specification ».",
+          "tokens": [
+            "Smith, ",
+            {
+              "i": [
+                "The Art of Documentation"
+              ]
+            },
+            "; Citation Style Language Project, « Citation Style Language Specification »."
+          ]
+        }
+      ]
+    },
+    "i18n/ja/docusaurus-plugin-content-docs/current/guides/markdown-features/citations.mdx": {
+      "noteCount": 7,
+      "clusters": [
+        {
+          "id": "i18n/ja/docusaurus-plugin-content-docs/current/guides/markdown-features/citations.mdx#ded6be9a21e3#0",
+          "noteIndex": 1,
+          "nested": true,
+          "items": [
+            {
+              "key": "jones2019"
+            }
+          ],
+          "rendered": "Alex Jones, 「Single-sourcing in technical communication」, *Journal of Documentation Practice*, 42/3 (2019年), 112–34, https://doi.org/10.0000/jdp.2019.42.3.112.",
+          "tokens": [
+            "Alex Jones, 「Single-sourcing in technical communication」, ",
+            {
+              "i": [
+                "Journal of Documentation Practice"
+              ]
+            },
+            ", 42/3 (2019年), 112–34, https://doi.org/10.0000/jdp.2019.42.3.112."
+          ]
+        },
+        {
+          "id": "i18n/ja/docusaurus-plugin-content-docs/current/guides/markdown-features/citations.mdx#49d7ab4900ba#0",
+          "noteIndex": 2,
+          "nested": false,
+          "items": [
+            {
+              "key": "csl-spec"
+            }
+          ],
+          "rendered": "Citation Style Language Project, 「Citation Style Language Specification」 (2024年), https://docs.citationstyles.org/, 参照 2026年8月18日.",
+          "tokens": [
+            "Citation Style Language Project, 「Citation Style Language Specification」 (2024年), https://docs.citationstyles.org/, 参照 2026年8月18日."
+          ]
+        },
+        {
+          "id": "i18n/ja/docusaurus-plugin-content-docs/current/guides/markdown-features/citations.mdx#39bee593065a#0",
+          "noteIndex": 3,
+          "nested": false,
+          "items": [
+            {
+              "key": "smith2020",
+              "locator": "14",
+              "label": "page"
+            }
+          ],
+          "rendered": "Jane Smith, *The Art of Documentation* (Oxford, 2020年), 14.",
+          "tokens": [
+            "Jane Smith, ",
+            {
+              "i": [
+                "The Art of Documentation"
+              ]
+            },
+            " (Oxford, 2020年), 14."
+          ]
+        },
+        {
+          "id": "i18n/ja/docusaurus-plugin-content-docs/current/guides/markdown-features/citations.mdx#fcea1b0167de#0",
+          "noteIndex": 5,
+          "nested": false,
+          "items": [
+            {
+              "key": "smith2020",
+              "locator": "22",
+              "label": "page"
+            }
+          ],
+          "rendered": "Smith, *The Art of Documentation*, 22.",
+          "tokens": [
+            "Smith, ",
+            {
+              "i": [
+                "The Art of Documentation"
+              ]
+            },
+            ", 22."
+          ]
+        },
+        {
+          "id": "i18n/ja/docusaurus-plugin-content-docs/current/guides/markdown-features/citations.mdx#ded6be9a21e3#1",
+          "noteIndex": 6,
+          "nested": true,
+          "items": [
+            {
+              "key": "jones2019"
+            }
+          ],
+          "rendered": "Jones, 「Single-sourcing in technical communication」.",
+          "tokens": [
+            "Jones, 「Single-sourcing in technical communication」."
+          ]
+        },
+        {
+          "id": "i18n/ja/docusaurus-plugin-content-docs/current/guides/markdown-features/citations.mdx#1b145342e120#0",
+          "noteIndex": 7,
+          "nested": false,
+          "items": [
+            {
+              "key": "smith2020"
+            },
+            {
+              "key": "csl-spec"
+            }
+          ],
+          "rendered": "Smith, *The Art of Documentation*; Citation Style Language Project, 「Citation Style Language Specification」.",
+          "tokens": [
+            "Smith, ",
+            {
+              "i": [
+                "The Art of Documentation"
+              ]
+            },
+            "; Citation Style Language Project, 「Citation Style Language Specification」."
           ]
         }
       ]

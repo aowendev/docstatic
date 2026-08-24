@@ -1,0 +1,243 @@
+---
+lastmod: '2026-08-24T20:47:13.676Z'
+title: Zitate
+description: Zitieren Sie Quellen aus einer zentralen CSL-Bibliografie.
+tags:
+  - "elements"
+  - "elements_citations"
+  - "reuse"
+  - "reuse_bibliography"
+  - "software"
+  - "software_content-management-systems"
+  - "software_content-management-systems_tinacms"
+draft: false
+review: false
+translate: false
+approved: false
+published: true
+unlisted: false
+modifiedBy: aowendev <aowen@translationcommons.org>
+---
+
+# Zitate
+
+Die Komponente **Citation** zitiert Quellen aus einer zentralen **Bibliografie**-Sammlung. Jede Quelle wird nur einmal erfasst, und jedes Thema, das sie zitiert, verweist über einen Zitierschlüssel darauf. Wird der Name eines Verlags oder ein Erscheinungsdatum korrigiert, aktualisiert sich jedes Zitat dieser Quelle im gesamten Themenbestand.
+
+Bibliografische Daten folgen dem Standard Citation Style Language (CSL) – demselben Format, das Literaturverwaltungsprogramme wie Zotero und Mendeley exportieren. Ein Importer fehlt bislang, daher wird eine Quelle aus einem solchen Programm übertragen, indem ihr CSL-JSON in **Raw CSL-JSON override** eingefügt wird.
+
+## Die Bibliografie verwalten
+
+Quellen befinden sich in einer eigenen Sammlung, getrennt von den Themen, die sie zitieren.
+
+1. Wählen Sie **Bibliografie** aus der Sammlungsliste.
+2. Fügen Sie der Liste eine Referenz hinzu.
+3. Geben Sie ihr einen **Zitierschlüssel**. So verweisen Themen auf die Quelle – halten Sie ihn daher kurz und dauerhaft, zum Beispiel `smith2020`.
+4. Wählen Sie einen **Typ**. Es werden nur die für diesen Typ relevanten Felder angezeigt, sodass ein Zeitschriftenartikel eine ISSN anbietet, ein Buch dagegen eine ISBN.
+5. Füllen Sie die übrigen Felder aus und speichern Sie.
+
+<Admonition type="note" title="Hinweis">
+  Das Ändern eines Zitierschlüssels macht jedes Zitat unbrauchbar, das ihn verwendet. Behandeln Sie Schlüssel als dauerhaft, sobald ein Thema sie zitiert.
+
+  Verweist ein Zitat auf einen Schlüssel, den es nicht mehr gibt, wird dies an Ort und Stelle angezeigt, so wie es ein Glossarbegriff oder eine Variable auch tun würde:
+
+  ```
+  typo-here NOT FOUND
+  ```
+
+  Der Build ist weiterhin erfolgreich, und jedes andere Zitat auf der Seite bleibt unberührt – ein vertippter Schlüssel hindert Sie also nicht daran, die Website in der Vorschau zu betrachten. Der Build listet solche Fälle außerdem auf, falls es sich um eine Seite handelt, die Sie gerade nicht im Blick hatten.
+</Admonition>
+
+### Felder, die das Formular nicht zeigt
+
+Das Formular deckt die Felder ab, die dokumentarische Quellen benötigen, nicht jedes vom Standard definierte Feld. Zwei Kategorien fehlen bewusst:
+
+* Werte, die der Formatierer selbst ermittelt, etwa Zitationsnummern und die Buchstaben, die zwei Werke eines Autors im selben Jahr unterscheiden.
+* Felder, die zu Quellentypen gehören, die die Liste **Typ** nicht anbietet.
+
+Für eine Quelle, die das Formular nicht abbilden kann, verwenden Sie **Raw CSL-JSON override**. Alles gültig Eingegebene ersetzt die Felder darüber, wobei der Zitierschlüssel erhalten bleibt.
+
+## Eine Quelle zitieren
+
+1. Wählen Sie **Citation** aus der Liste **Einbetten**.
+2. Fügen Sie dem Zitat eine Quelle hinzu.
+3. Wählen Sie eine **Source** aus der Liste der Zitierschlüssel.
+4. Geben Sie optional einen **Locator** und einen **Locator type** an, um auf einen Teil der Quelle zu verweisen.
+
+Geben Sie den Locator als reinen Wert ein – `14` oder `14-16`. Schreiben Sie kein „S.“ davor, denn das liefert der Zitierstil selbst, und die Stile sind sich uneinig, wie es aussehen soll.
+
+Ein Zitat kann mehrere Quellen zitieren. Fügen Sie mehrere Einträge hinzu, statt zwei Zitate nebeneinanderzusetzen, damit der Zitierstil sie zusammenfassen kann.
+
+#### Beispiel
+
+Das folgende Zitat verweist auf eine einzelne Quelle:
+
+```jsx
+<Cite items={[{ key: "smith2020" }]} />
+```
+
+Dieses verweist auf eine bestimmte Seite:
+
+```jsx
+<Cite items={[{ key: "smith2020", locator: "14", label: "page" }]} />
+```
+
+Dieses zitiert zwei Quellen zusammen, jede mit eigenem Seitenverweis:
+
+```jsx
+<Cite items={[
+  { key: "smith2020", locator: "14", label: "page" },
+  { key: "jones2019", locator: "3-5", label: "page" }
+]} />
+```
+
+<Admonition type="note" title="Hinweis">
+  Wird dieselbe Quelle zweimal zitiert, wird nicht das erste Zitat wiederverwendet. Jedes bekommt seine eigene Stelle, und der Stil entscheidet, wie die späteren verkürzt werden.
+</Admonition>
+
+## Wann Änderungen erscheinen
+
+Das Bearbeiten einer **Quelle** in der Bibliografie-Sammlung aktualisiert sofort jedes Zitat dieser Quelle – korrigieren Sie den Namen eines Verlags, und die Änderung erreicht die Seite, während Sie zusehen, ganz ohne Neustart.
+
+Drei Dinge verhalten sich unterschiedlich, und es lohnt sich zu wissen, welches welches ist:
+
+| Änderung | Wann sie erscheint |
+|---|---|
+| Eine Quelle bearbeiten | Sofort |
+| Ein Zitat zu einem Thema hinzufügen | Beim nächsten Build |
+| Den Zitierstil ändern | Nach einem Neustart des CMS |
+
+Ein neues Zitat zeigt zunächst gar nichts an – keinen Platzhalter, keinen Fehler. Es hat noch keinen formatierten Text, und ein halb formatiertes Zitat anzuzeigen wäre schlimmer, als nichts anzuzeigen.
+
+Der Zitierstil ist die einzige Einstellung, die einen Neustart erfordert, weil er bestimmt, ob Zitate im Fließtext oder in Fußnoten stehen. Das verändert die Struktur der Seite und nicht nur ihren Wortlaut, weshalb die Seiten neu gebaut werden müssen.
+
+<Admonition type="note" title="Hinweis">
+  Zitate funktionieren in Themen, nicht in Blogbeiträgen. Fußnoten funktionieren in beiden. Ein Zitat in einem Blogbeitrag erzeugt keine Ausgabe.
+</Admonition>
+
+## Einen Stil wählen
+
+Ein Zitierstil bestimmt, wie Zitate und das Literaturverzeichnis formatiert werden. Die Stile unterscheiden sich inhaltlich, nicht nur optisch: Manche setzen eine hochgestellte Nummer in den Text und die Quelle in eine Fußnote, andere setzen Autor und Jahr in Klammern direkt in den Fließtext.
+
+Der Stil wird einmal für die gesamte Website festgelegt, nicht pro Thema. Unterschiedliche Stile innerhalb eines Themenbestands zu mischen ist ein Stilfehler, weil Lesende dann nicht erkennen können, was eine Markierung bedeutet.
+
+Wählen Sie **Settings** aus der Sammlungsliste, öffnen Sie **Citations** und wählen Sie einen **Citation style**:
+
+| Stil | Wo das Zitat steht | Beispielreferenz |
+|---|---|---|
+| Chicago (author-date) | Im Fließtext | Smith, Jane. 2020. *The Art of Documentation*. Oxford University Press. |
+| Chicago (notes and bibliography) | In einer Fußnote | Smith, Jane. *The Art of Documentation*. Oxford University Press, 2020. |
+| Harvard (Cite Them Right) | Im Fließtext | Smith, J. (2020) *The Art of Documentation*. Oxford: Oxford University Press. |
+| IEEE | Im Fließtext, nummeriert | [1] J. Smith, *The Art of Documentation*. Oxford: Oxford University Press, 2020. |
+| Oxford (Guide to Style, notes) | In einer Fußnote | Smith, J., *The Art of Documentation* (Oxford, 2020). |
+
+### Sprachvariante
+
+Nur der Oxford-Stil legt fest, für welches Englisch er geschrieben ist. Die anderen überlassen das der Website und weichen auf amerikanisches Englisch aus, sodass ein Stil, der ein tagvorangestelltes Datum erwartet – etwa Cite Them Right –, eine Quelle mit `August 18, 2026` datiert, sofern nichts anderes eingestellt ist.
+
+Stellen Sie **English variant** auf **Global English**, um das zu korrigieren. Das betrifft Datumsreihenfolge, Anführungszeichen und Rechtschreibung nur auf englischsprachigen Seiten; die übrigen Sprachen richten sich nach ihrer eigenen Locale.
+
+### Eine Sprache hinzufügen
+
+Die fünf Sprachen, mit denen docStatic ausgeliefert wird, sind einsatzbereit. Für eine weitere Sprache wird eine einzige Datei benötigt: die CSL-Locale, die Anführungszeichen, Datumsreihenfolge und Begriffe wie *abgerufen am* liefert.
+
+Ohne sie baut eine Seite in der neuen Sprache trotzdem, aber ihre Zitate erscheinen auf Englisch. Der Build meldet das und nennt die hinzuzufügende Datei:
+
+```
+! No CSL locale for "it": its citations will use the style's default (English).
+  Add csl/locales/locales-it-IT.xml to fix.
+```
+
+Nehmen Sie diese Datei aus dem [CSL-Locales-Projekt](https://github.com/citation-style-language/locales) und legen Sie sie in `csl/locales/` ab. Mehr ist nicht nötig – die Sprache wird ihrer Locale anhand des Namens zugeordnet.
+
+Legen Sie außerdem unter **References page title** einen Titel für die neue Sprache fest, sonst behält die Quellenseite ihre englische Überschrift.
+
+## Zitate in einem Fußnotenstil
+
+Bei **Chicago (notes and bibliography)** oder **Oxford** ist ein Zitat eine Fußnote. Dasselbe bereits verfasste `<Cite>` wird zu einer nummerierten Fußnote; am Thema selbst ändert sich nichts.
+
+Zitate und Ihre eigenen Fußnoten teilen sich **eine gemeinsame Nummerierung**, in der Reihenfolge, in der sie auf der Seite erscheinen. Sowohl Oxford als auch Chicago nummerieren Fußnoten „fortlaufend durch den gesamten Text“, und Lesende können die beiden Arten nicht auseinanderhalten.
+
+Weil die Nummerierung beim Bauen der Website berechnet wird, kann der Stil ein wiederholtes Zitat korrekt verkürzen, statt es vollständig zu wiederholen.
+
+### Eine Fußnote mit Kommentar und Zitat zugleich
+
+Chicago erlaubt es, dass eine Fußnote eine Quelle und eine eigene Anmerkung zusammen trägt. Setzen Sie das Zitat innerhalb einer Fußnote, dann erscheint es in dieser Fußnote, statt eine zweite zu erzeugen:
+
+```jsx
+<Footnote summary="1"><Cite items={[{ key: "jones2019" }]} /> Dies vertritt die gegenteilige Ansicht.</Footnote>
+```
+
+Setzen Sie das Zitat zuerst und Ihre Anmerkung danach. Ein Fußnotenstil schließt ein Zitat mit einem Punkt ab, sodass eine Anmerkung, die um das Zitat herum statt danach formuliert ist, seltsam wirkt.
+
+Für eine nur wenige Worte umfassende Anmerkung verwenden Sie stattdessen das Feld **Suffix** des Zitats – es bleibt bei jedem Stil beim Zitat, auch bei den Fließtext-Stilen.
+
+<Admonition type="info" title="Beispiel">
+  Wiederverwendung ist nicht kostenlos<Footnote summary="Zu den Kosten der Wiederverwendung"><Cite items={[{ key: "jones2019" }]} /> Dies vertritt die Ansicht, dass die Kosten den Nutzen übersteigen.</Footnote>, was auch immer die Werkzeuge versprechen<Cite items={[{ key: "csl-spec" }]} />.
+</Admonition>
+
+Bei einem Fußnotenstil sind beide obigen Markierungen Fußnoten, fortlaufend nummeriert mit jeder anderen Fußnote dieser Seite – die erste trägt Quelle und Anmerkung zusammen, die zweite allein ein Zitat. Bei einem Fließtext-Stil erscheint das zweite Zitat direkt im Satz, und nur die Fußnote wird nummeriert.
+
+## Ein durchgängiges Beispiel
+
+Der folgende Absatz ist live. Seine Zitate werden in dem Stil dargestellt, auf den diese Website derzeit eingestellt ist, aus den Quellen der **Bibliografie**-Sammlung.
+
+<Admonition type="info" title="Beispiel">
+  Dokumentation wird am besten einmal geschrieben und wiederverwendet<Cite items={[{ key: "smith2020", locator: "14", label: "page" }]} />. Die Idee ist älter als das Werkzeug<Footnote summary="Single-Sourcing ist älter als das Werkzeug">Technische Redakteure haben Inhalte schon über bedingten Text wiederverwendet, lange bevor Single-Sourcing einen Namen hatte.</Footnote>, und dieselbe Quelle greift das später wieder auf<Cite items={[{ key: "smith2020", locator: "22", label: "page" }]} />. Nicht alle stimmen zu<Footnote summary="Eine abweichende Meinung"><Cite items={[{ key: "jones2019" }]} /> Dies vertritt die Ansicht, dass Wiederverwendung mehr kostet, als sie einspart.</Footnote>. Zwei Quellen lassen sich in einem einzigen Zitat zusammenfassen<Cite items={[{ key: "smith2020" }, { key: "csl-spec" }]} />.
+</Admonition>
+
+Worauf zu achten ist, hängt vom in **Settings** eingestellten Stil ab:
+
+* Bei einem **Fußnotenstil** – Oxford oder Chicago (notes and bibliography) – sind die obigen Markierungen Fußnoten, und die Notizen selbst stehen am Fuß dieser Seite. Die eigenen Notizen des Autors und die Zitate laufen in **einer** gemeinsamen Folge. Das zweite Zitat von *The Art of Documentation* wird verkürzt, weil zwischen ihm und dem ersten eine weitere Notiz liegt.
+* Bei einem **Fließtext-Stil** – Harvard, IEEE oder Chicago (author-date) – erscheinen die Zitate direkt im Satz, und nur die beiden Fußnoten dieses Absatzes werden nummeriert.
+
+Der Quelltext dieses Absatzes bleibt in beiden Fällen unverändert:
+
+```jsx
+Documentation is best written once and reused<Cite items={[{ key: "smith2020", locator: "14", label: "page" }]} />.
+The idea predates the tooling<Footnote summary="...">Technical writers were reusing content...</Footnote>,
+and the same source returns to it later<Cite items={[{ key: "smith2020", locator: "22", label: "page" }]} />.
+Not everyone agrees<Footnote summary="..."><Cite items={[{ key: "jones2019" }]} /> This argues that reuse...</Footnote>.
+Two sources can be cited together in one citation<Cite items={[{ key: "smith2020" }, { key: "csl-spec" }]} />.
+```
+
+## Die Quellenseite
+
+Eine generierte Seite listet Ihre Quellen im gewählten Stil auf. Sie ist von den Zitaten in Ihren Themen getrennt: Die Notiz- oder Fließtextform einer Quelle und ihre Form im Literaturverzeichnis unterscheiden sich bewusst.
+
+Um sie zu veröffentlichen, wählen Sie **Settings** aus der Sammlungsliste, öffnen **Citations** und aktivieren **Generate a sources page**.
+
+### Literaturverzeichnis oder Quellenverzeichnis
+
+**List every source, including uncited ones** legt fest, was die Seite enthält – und wie sie heißt:
+
+| Einstellung | Enthält | Standardtitel |
+|---|---|---|
+| Ein | Jede Quelle der **Bibliografie**-Sammlung | Literaturverzeichnis |
+| Aus | Nur Quellen, die Ihre Themen zitieren | Quellenverzeichnis |
+
+Die Bezeichnungen sind nicht austauschbar. Ein *Literaturverzeichnis* darf Werke enthalten, die Sie nicht zitiert haben – weiterführende Lektüre, zusätzliche Quellen. Ein *Quellenverzeichnis* führt üblicherweise nur auf, was der Text tatsächlich zitiert, sodass eine Leserin, die dort einen Eintrag findet, ihm auch irgendwo in der Dokumentation begegnen kann.
+
+„Zitiert“ bedeutet: irgendwo im gesamten Themenbestand zitiert, in beliebiger Sprache. Eine Quelle, die nur auf einer noch nicht übersetzten Seite zitiert wird, erscheint dennoch in der Liste jeder Sprache, sodass die Listen nicht schrumpfen, wenn eine Übersetzung hinterherhinkt.
+
+### Die Seite benennen
+
+**References page title** legt die Überschrift und die Bezeichnung im Inhaltsverzeichnis fest, jeweils ein Eintrag pro Sprache, und überschreibt den oben genannten Standardtitel. Fügen Sie eine Sprache mit einem Titel hinzu; lassen Sie eine Sprache weg, behält sie ihren eingebauten Titel.
+
+### Die Seite platzieren
+
+Die Seite wird unter `/docs/references` veröffentlicht, aber nicht automatisch ins Inhaltsverzeichnis aufgenommen – nur Sie wissen, wo sie in Ihrer Leseordnung hingehört.
+
+1. Wählen Sie **Table of Contents** aus der Sammlungsliste.
+2. Fügen Sie einen Dokumenteintrag hinzu, der auf `docs/references.mdx` verweist, an der gewünschten Stelle.
+
+Lassen Sie den Eintrag auch dann stehen, wenn Sie die Seite später abschalten: Ein Eintrag, dessen Seite nicht existiert, wird ignoriert, statt den Build scheitern zu lassen.
+
+<Admonition type="note" title="Hinweis">
+  Die Seite wird bei jedem Build aus der Bibliografie neu erstellt, in jeder Ihrer Websitesprachen, sodass sie nie veraltet. Bearbeiten Sie sie nicht von Hand – Ihre Änderungen werden überschrieben. Korrigieren Sie stattdessen die Quelle in der **Bibliografie**-Sammlung.
+</Admonition>
+
+<Admonition type="note" title="Hinweis">
+  Das Ändern dieser Einstellung benennt die Seite um, was ihre Bezeichnung in der Seitenleiste ändert, nicht aber ihre Adresse: Sie bleibt unter `/docs/references`.
+</Admonition>
+
+<RelatedTopics maxResults={7} />
