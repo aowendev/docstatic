@@ -1,6 +1,6 @@
 ---
 modifiedBy: aowendev <aowen@translationcommons.org>
-lastmod: '2026-08-24T08:41:56.366Z'
+lastmod: '2026-08-24T08:56:26.402Z'
 ---
 
 # CSL schemas and styles
@@ -57,6 +57,23 @@ citeproc requires a locale even for English, and the locale is what supplies
 quotation marks, date order and terms like "accessed" - which is how the
 generated page comes out right in all five site languages without any of it
 going through translation.
+
+## Adding a site language
+
+A language the site supports needs its CSL locale vendored here, or its
+citations render with English terms, English date order and English quotation
+marks. `scripts/generate-citations.mjs` warns when one is missing and names the
+file to add.
+
+1. Take `locales-<xx-XX>.xml` from the pinned locales commit above.
+2. Drop it in `csl/locales/`. No code change: `localeFor` derives the
+   conventional name from the language code, so `it` finds `locales-it-IT.xml`.
+   A language whose CSL locale does not follow that pattern needs an entry in
+   `CSL_LOCALES` in `scripts/lib/csl.mjs`.
+3. Optionally set the references page title for that language in
+   `Settings -> Citations -> References page title`. Without one it falls back
+   to the English title, since the built-in titles cover only the five languages
+   this site ships with.
 
 Both English locales are vendored because only `oxford-guide-to-style-notes`
 declares a `default-locale`; the rest declare none, so citeproc falls back to

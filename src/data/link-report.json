@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-24T08:37:54.407Z",
+  "generatedAt": "2026-08-24T08:52:18.477Z",
   "lastCheckedAt": "2026-08-17T17:48:33.969Z",
   "checked": false,
   "stats": {
@@ -743,7 +743,7 @@
       "url": "./citations.mdx",
       "type": "markdown",
       "filePath": "/docs/guides/markdown-features/footnotes.mdx",
-      "line": 56,
+      "line": 46,
       "status": "skipped",
       "reason": "Internal link — checked by the Docusaurus build"
     },

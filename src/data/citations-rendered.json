@@ -1,4 +1,16 @@
 {
+  "docs/guides/markdown-features/citations.mdx#ded6be9a21e3#0": [
+    "Alex Jones, ‘Single-Sourcing in Technical Communication’, ",
+    {
+      "i": [
+        "Journal of Documentation Practice"
+      ]
+    },
+    ", 42/3 (2019), 112–34, https://doi.org/10.0000/jdp.2019.42.3.112."
+  ],
+  "docs/guides/markdown-features/citations.mdx#49d7ab4900ba#0": [
+    "Citation Style Language Project, ‘Citation Style Language Specification’ (2024), https://docs.citationstyles.org/, accessed 18 Aug. 2026."
+  ],
   "docs/guides/markdown-features/citations.mdx#39bee593065a#0": [
     "Jane Smith, ",
     {
@@ -17,14 +29,8 @@
     },
     ", 22."
   ],
-  "docs/guides/markdown-features/citations.mdx#ded6be9a21e3#0": [
-    "Alex Jones, ‘Single-Sourcing in Technical Communication’, ",
-    {
-      "i": [
-        "Journal of Documentation Practice"
-      ]
-    },
-    ", 42/3 (2019), 112–34, https://doi.org/10.0000/jdp.2019.42.3.112."
+  "docs/guides/markdown-features/citations.mdx#ded6be9a21e3#1": [
+    "Jones, ‘Single-Sourcing in Technical Communication’."
   ],
   "docs/guides/markdown-features/citations.mdx#1b145342e120#0": [
     "Smith, ",
@@ -33,24 +39,6 @@
         "The Art of Documentation"
       ]
     },
-    "; Citation Style Language Project, ‘Citation Style Language Specification’ (2024), https://docs.citationstyles.org/, accessed 18 Aug. 2026."
-  ],
-  "docs/guides/markdown-features/footnotes.mdx#ded6be9a21e3#0": [
-    "Alex Jones, ‘Single-Sourcing in Technical Communication’, ",
-    {
-      "i": [
-        "Journal of Documentation Practice"
-      ]
-    },
-    ", 42/3 (2019), 112–34, https://doi.org/10.0000/jdp.2019.42.3.112."
-  ],
-  "docs/guides/markdown-features/footnotes.mdx#39bee593065a#0": [
-    "Jane Smith, ",
-    {
-      "i": [
-        "The Art of Documentation"
-      ]
-    },
-    " (Oxford, 2020), 14."
+    "; Citation Style Language Project, ‘Citation Style Language Specification’."
   ]
 }

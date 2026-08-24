@@ -38,6 +38,7 @@ import {
   LIBRARY_FILE,
   localeFor,
   makeEngine,
+  missingLocales,
   ROOT,
   RUNTIME_DATA_FILE,
   readCitationSettings,
@@ -231,6 +232,15 @@ function main() {
 
   const styleXml = readStyle(settings.style);
   const noteStyle = isNoteStyle(styleXml);
+
+  // A language with no CSL locale still gets pages, but its citations come out
+  // with English terms and date order. Silent would be worse than noisy.
+  for (const { lang, expected } of missingLocales(settings.languages)) {
+    console.warn(
+      `  ! No CSL locale for "${lang}": its citations will use the style's ` +
+        `default (English). Add csl/locales/locales-${expected}.xml to fix.`
+    );
+  }
 
   const library = readJson(LIBRARY_FILE).bibliography ?? [];
   const items = mapLibraryToCslJson(library);

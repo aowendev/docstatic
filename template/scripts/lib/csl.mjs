@@ -173,9 +173,49 @@ export function makeEngine(items, styleXml, lang) {
     : new CSL.Engine(sys, styleXml);
 }
 
-/** The CSL locale for a site language, honouring the English setting. */
+/** Whether a CSL locale file is vendored under csl/locales. */
+export function hasLocale(name) {
+  return fs.existsSync(path.join(LOCALES_DIR, `locales-${name}.xml`));
+}
+
+/**
+ * The CSL locale for a site language, honouring the English setting.
+ *
+ * CSL_LOCALES above covers the languages this site ships with, but a site can
+ * add any language. Rather than leave those silently English, an unlisted
+ * language derives the conventional CSL name - "it" becomes "it-IT" - and uses
+ * it if that locale is vendored. Adding a language then needs only its locale
+ * file, not a code change.
+ *
+ * Returns null when nothing matches, which tells citeproc to use the style's
+ * own default locale. That is a real limitation, not a fix, so the generators
+ * report it: see missingLocales.
+ */
 export function localeFor(lang, englishLocale) {
-  return lang === "en" ? englishLocale : (CSL_LOCALES[lang] ?? null);
+  if (lang === "en") return englishLocale;
+
+  const explicit = CSL_LOCALES[lang];
+  if (explicit) return hasLocale(explicit) ? explicit : null;
+
+  const derived = `${lang}-${lang.toUpperCase()}`;
+  return hasLocale(derived) ? derived : null;
+}
+
+/**
+ * Site languages that will fall back to the style's default locale, with the
+ * locale file that would fix each one.
+ *
+ * Worth reporting rather than swallowing: a language with no CSL locale still
+ * produces a page, but its citations come out with English terms, English date
+ * order and English quotation marks, which is easy to miss.
+ */
+export function missingLocales(languages) {
+  return languages
+    .filter((lang) => lang !== "en" && localeFor(lang, null) === null)
+    .map((lang) => ({
+      lang,
+      expected: CSL_LOCALES[lang] ?? `${lang}-${lang.toUpperCase()}`,
+    }));
 }
 
 /** Only touch the file when the content actually changed, to keep diffs quiet. */

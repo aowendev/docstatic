@@ -353,3 +353,44 @@ test("cited-only mode keeps just the sources the doc set cites", async () => {
   // A key cited but missing from the library cannot conjure an entry.
   assert.deepEqual(Object.keys(citedOnly(items, new Set(["a", "zz"]))), ["a"]);
 });
+
+test("a site language finds its CSL locale without a code change", async () => {
+  const { localeFor, hasLocale, missingLocales } = await import(
+    "../scripts/lib/csl.mjs"
+  );
+
+  // The five this site ships with resolve to vendored files.
+  for (const [lang, expected] of [
+    ["de", "de-DE"],
+    ["es", "es-ES"],
+    ["fr", "fr-FR"],
+    ["ja", "ja-JP"],
+  ]) {
+    assert.equal(localeFor(lang, null), expected);
+    assert.ok(
+      hasLocale(expected),
+      `locales-${expected}.xml should be vendored`
+    );
+  }
+
+  // English is the one language with no forced locale: only Oxford declares a
+  // default, so the setting decides and blank leaves it to the style.
+  assert.equal(localeFor("en", null), null);
+  assert.equal(localeFor("en", "en-GB"), "en-GB");
+});
+
+test("an unvendored language degrades to English and says so", async () => {
+  const { localeFor, missingLocales } = await import("../scripts/lib/csl.mjs");
+
+  // Italian is not vendored here. It must not silently claim a locale: null
+  // tells citeproc to use the style's default rather than hand it a locale file
+  // that does not exist.
+  assert.equal(localeFor("it", null), null);
+
+  // ...and it must be reported, naming the file that would fix it.
+  const missing = missingLocales(["en", "de", "it"]);
+  assert.deepEqual(missing, [{ lang: "it", expected: "it-IT" }]);
+
+  // A language that is vendored is never reported.
+  assert.deepEqual(missingLocales(["en", "de", "fr"]), []);
+});

@@ -108,11 +108,45 @@
   "styleClass": "note",
   "clusters": {
     "docs/guides/markdown-features/citations.mdx": {
-      "noteCount": 5,
+      "noteCount": 7,
       "clusters": [
         {
-          "id": "docs/guides/markdown-features/citations.mdx#39bee593065a#0",
+          "id": "docs/guides/markdown-features/citations.mdx#ded6be9a21e3#0",
           "noteIndex": 1,
+          "nested": true,
+          "items": [
+            {
+              "key": "jones2019"
+            }
+          ],
+          "rendered": "Alex Jones, ‘Single-Sourcing in Technical Communication’, *Journal of Documentation Practice*, 42/3 (2019), 112–34, https://doi.org/10.0000/jdp.2019.42.3.112.",
+          "tokens": [
+            "Alex Jones, ‘Single-Sourcing in Technical Communication’, ",
+            {
+              "i": [
+                "Journal of Documentation Practice"
+              ]
+            },
+            ", 42/3 (2019), 112–34, https://doi.org/10.0000/jdp.2019.42.3.112."
+          ]
+        },
+        {
+          "id": "docs/guides/markdown-features/citations.mdx#49d7ab4900ba#0",
+          "noteIndex": 2,
+          "nested": false,
+          "items": [
+            {
+              "key": "csl-spec"
+            }
+          ],
+          "rendered": "Citation Style Language Project, ‘Citation Style Language Specification’ (2024), https://docs.citationstyles.org/, accessed 18 Aug. 2026.",
+          "tokens": [
+            "Citation Style Language Project, ‘Citation Style Language Specification’ (2024), https://docs.citationstyles.org/, accessed 18 Aug. 2026."
+          ]
+        },
+        {
+          "id": "docs/guides/markdown-features/citations.mdx#39bee593065a#0",
+          "noteIndex": 3,
           "nested": false,
           "items": [
             {
@@ -134,7 +168,7 @@
         },
         {
           "id": "docs/guides/markdown-features/citations.mdx#fcea1b0167de#0",
-          "noteIndex": 3,
+          "noteIndex": 5,
           "nested": false,
           "items": [
             {
@@ -155,28 +189,22 @@
           ]
         },
         {
-          "id": "docs/guides/markdown-features/citations.mdx#ded6be9a21e3#0",
-          "noteIndex": 4,
+          "id": "docs/guides/markdown-features/citations.mdx#ded6be9a21e3#1",
+          "noteIndex": 6,
           "nested": true,
           "items": [
             {
               "key": "jones2019"
             }
           ],
-          "rendered": "Alex Jones, ‘Single-Sourcing in Technical Communication’, *Journal of Documentation Practice*, 42/3 (2019), 112–34, https://doi.org/10.0000/jdp.2019.42.3.112.",
+          "rendered": "Jones, ‘Single-Sourcing in Technical Communication’.",
           "tokens": [
-            "Alex Jones, ‘Single-Sourcing in Technical Communication’, ",
-            {
-              "i": [
-                "Journal of Documentation Practice"
-              ]
-            },
-            ", 42/3 (2019), 112–34, https://doi.org/10.0000/jdp.2019.42.3.112."
+            "Jones, ‘Single-Sourcing in Technical Communication’."
           ]
         },
         {
           "id": "docs/guides/markdown-features/citations.mdx#1b145342e120#0",
-          "noteIndex": 5,
+          "noteIndex": 7,
           "nested": false,
           "items": [
             {
@@ -186,7 +214,7 @@
               "key": "csl-spec"
             }
           ],
-          "rendered": "Smith, *The Art of Documentation*; Citation Style Language Project, ‘Citation Style Language Specification’ (2024), https://docs.citationstyles.org/, accessed 18 Aug. 2026.",
+          "rendered": "Smith, *The Art of Documentation*; Citation Style Language Project, ‘Citation Style Language Specification’.",
           "tokens": [
             "Smith, ",
             {
@@ -194,54 +222,7 @@
                 "The Art of Documentation"
               ]
             },
-            "; Citation Style Language Project, ‘Citation Style Language Specification’ (2024), https://docs.citationstyles.org/, accessed 18 Aug. 2026."
-          ]
-        }
-      ]
-    },
-    "docs/guides/markdown-features/footnotes.mdx": {
-      "noteCount": 6,
-      "clusters": [
-        {
-          "id": "docs/guides/markdown-features/footnotes.mdx#ded6be9a21e3#0",
-          "noteIndex": 5,
-          "nested": true,
-          "items": [
-            {
-              "key": "jones2019"
-            }
-          ],
-          "rendered": "Alex Jones, ‘Single-Sourcing in Technical Communication’, *Journal of Documentation Practice*, 42/3 (2019), 112–34, https://doi.org/10.0000/jdp.2019.42.3.112.",
-          "tokens": [
-            "Alex Jones, ‘Single-Sourcing in Technical Communication’, ",
-            {
-              "i": [
-                "Journal of Documentation Practice"
-              ]
-            },
-            ", 42/3 (2019), 112–34, https://doi.org/10.0000/jdp.2019.42.3.112."
-          ]
-        },
-        {
-          "id": "docs/guides/markdown-features/footnotes.mdx#39bee593065a#0",
-          "noteIndex": 6,
-          "nested": false,
-          "items": [
-            {
-              "key": "smith2020",
-              "locator": "14",
-              "label": "page"
-            }
-          ],
-          "rendered": "Jane Smith, *The Art of Documentation* (Oxford, 2020), 14.",
-          "tokens": [
-            "Jane Smith, ",
-            {
-              "i": [
-                "The Art of Documentation"
-              ]
-            },
-            " (Oxford, 2020), 14."
+            "; Citation Style Language Project, ‘Citation Style Language Specification’."
           ]
         }
       ]
