@@ -1,6 +1,6 @@
 ---
 help: null
-lastmod: '2026-08-19T14:49:57.038Z'
+lastmod: '2026-08-24T21:53:37.588Z'
 modifiedBy: aowendev <aowen@translationcommons.org>
 title: URLs
 tags:
@@ -9,29 +9,29 @@ tags:
   - internationalization_localization
 draft: false
 review: false
-translate: true
+translate: false
 approved: false
-published: false
-unlisted: true
+published: true
+unlisted: false
 ---
 
 # URLs
 
-The **URL** component lets you reference an external link by key instead of hardcoding it. Each key maps to a URL per language, so a visitor always lands on the language-appropriate version of the destination, and a link that moves or breaks only needs fixing in one place, no matter how many docs reference it.
+Die Komponente **URL** ermöglicht es Ihnen, auf einen externen Link über einen Schlüssel zu verweisen, statt ihn fest zu codieren. Jeder Schlüssel ordnet einer Sprache eine URL zu, sodass ein Besucher immer auf der sprachlich passenden Version des Ziels landet, und ein Link, der sich ändert oder nicht mehr funktioniert, muss nur an einer Stelle korrigiert werden, unabhängig davon, wie viele Dokumente ihn referenzieren.
 
-## Managing URLs
+## Verwalten von URLs
 
-You can edit the URLs collection in the CMS.
+Sie können die Sammlung „URLs" im CMS bearbeiten.
 
-1. Click the **Add** icon ( **+** ) to add a new **Key**.
-2. Under **URL (per language)**, click the **Add** icon to add a **Translation** for each language the link should support. Give it a **Language Code** and the destination **URL**.
-3. Under **Default Link Text (per language)**, add a **Translation** for each language, giving the text a `<Url>` usage should show when it doesn't supply its own.
+1. Klicken Sie auf das Symbol **Hinzufügen** ( **+** ), um einen neuen **Schlüssel** hinzuzufügen.
+2. Klicken Sie unter **URL (pro Sprache)** auf das Symbol **Hinzufügen**, um für jede Sprache, die der Link unterstützen soll, eine **Übersetzung** hinzuzufügen. Geben Sie einen **Sprachcode** und die Ziel-**URL** an.
+3. Fügen Sie unter **Standard-Linktext (pro Sprache)** für jede Sprache eine **Übersetzung** hinzu und legen Sie den Text fest, den eine `<Url>`-Verwendung anzeigen soll, wenn sie keinen eigenen angibt.
 
-## Using URLs
+## Verwendung von URLs
 
-1. Select **URL Link** from the **Embed** list.
-2. Enter the **URL Key** matching an entry in the URLs collection.
-3. Optionally, add **Link Text** translations to override the key's default text for this specific usage — the same key can be used in different places with different wording.
+1. Wählen Sie **URL Link** aus der Liste **Einbetten** aus.
+2. Geben Sie den **URL-Schlüssel** ein, der einem Eintrag in der URLs-Sammlung entspricht.
+3. Fügen Sie optional Übersetzungen für den **Linktext** hinzu, um den Standardtext des Schlüssels für diese bestimmte Verwendung zu überschreiben – derselbe Schlüssel kann an verschiedenen Stellen mit unterschiedlichem Wortlaut verwendet werden.
 
 <Admonition type="caution" title="Der Linktext wurde nicht maschinell übersetzt">
   Im Gegensatz zu gewöhnlicher Prosa wird der Linktext einer `<Url>`-Verwendung niemals einer automatischen Übersetzung unterzogen – die gesamte Komponente bleibt bei der Übersetzung eines Dokuments in jeder Sprache genau so erhalten, wie sie geschrieben wurde. Wenn Sie Linktext hinzufügen, geben Sie diesen gleichzeitig in allen unterstützten Sprachen in dem Dokument ein, in dem Sie den Link zum ersten Mal einfügen. Eine Sprache, die an dieser Stelle ausgelassen wird, bleibt so lange unberücksichtigt, bis jemand die Quelle bearbeitet und sie manuell hinzufügt.
@@ -39,12 +39,12 @@ You can edit the URLs collection in the CMS.
   Wenn Sie für eine bestimmte Verwendung keinen benutzerdefinierten Wortlaut benötigen, lassen Sie den Linktext leer; stattdessen wird der Standard-Linktext des Schlüssels verwendet – dieser Text wird auf die übliche Weise einmalig in der URLs-Sammlung übersetzt.
 </Admonition>
 
-#### Example
+#### Beispiel
 
 <Url urlKey="docusaurus-website" />
 
-## Checking link health
+## Überprüfung des Linkzustands
 
-The URLs collection also hosts the **Link Health** dashboard, which reports on both the URLs stored here and any external links still hardcoded directly in your docs — including which of those aren't in the URLs collection yet, so you can find and centralize them. See [Dashboards](/docs/guides/dashboards) for details.
+Die URLs-Sammlung beherbergt außerdem das Dashboard **Linkzustand**, das sowohl über die hier gespeicherten URLs als auch über alle externen Links berichtet, die noch direkt in Ihren Dokumenten fest codiert sind – einschließlich derer, die noch nicht in der URLs-Sammlung enthalten sind, damit Sie sie finden und zentralisieren können. Einzelheiten finden Sie unter [Dashboards](/docs/guides/dashboards).
 
 <RelatedTopics maxResults={7} />
