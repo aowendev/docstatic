@@ -1,14 +1,14 @@
 {
-  "generatedAt": "2026-09-01T17:17:34.495Z",
+  "generatedAt": "2026-09-01T17:33:11.967Z",
   "lastCheckedAt": "2026-08-17T17:48:33.969Z",
   "checked": false,
   "stats": {
-    "total": 246,
+    "total": 248,
     "ok": 208,
     "broken": 0,
     "unverified": 0,
     "unchecked": 1,
-    "skipped": 37,
+    "skipped": 39,
     "centralized": 161,
     "migrationCandidates": 48
   },
@@ -245,7 +245,7 @@
       "fileName": "tables.mdx",
       "relativePath": "guides/markdown-features/tables.mdx",
       "title": "CALS Tables",
-      "totalLinks": 1
+      "totalLinks": 3
     },
     "/docs/guides/markdown-features/tabs.mdx": {
       "fileName": "tabs.mdx",
@@ -638,7 +638,7 @@
       "url": "/docs/guides/markdown-features/urls",
       "type": "markdown",
       "filePath": "/docs/guides/dashboards.mdx",
-      "line": 81,
+      "line": 88,
       "status": "skipped",
       "reason": "Internal link — checked by the Docusaurus build"
     },
@@ -997,11 +997,29 @@
       "reason": "Internal link — checked by the Docusaurus build"
     },
     {
+      "text": "Aligning cells",
+      "url": "#aligning-cells",
+      "type": "markdown",
+      "filePath": "/docs/guides/markdown-features/tables.mdx",
+      "line": 11,
+      "status": "skipped",
+      "reason": "Anchor link"
+    },
+    {
+      "text": "variables",
+      "url": "variables",
+      "type": "markdown",
+      "filePath": "/docs/guides/markdown-features/tables.mdx",
+      "line": 33,
+      "status": "skipped",
+      "reason": "Internal link — checked by the Docusaurus build"
+    },
+    {
       "text": "DocBook table documentation",
       "url": "https://tdg.docbook.org/tdg/5.2/cals.table.html",
       "type": "markdown",
       "filePath": "/docs/guides/markdown-features/tables.mdx",
-      "line": 65,
+      "line": 97,
       "source": "doc",
       "inUrlsJson": false,
       "status": "ok",
