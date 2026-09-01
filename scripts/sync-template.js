@@ -53,7 +53,16 @@ const COPY_FILES = [
   "src/pages/index.jsx",
   "src/pages/index.module.css",
   "src/pages/example-page.mdx",
+  // The document the Dashboards collection points at. tina/config.jsx registers
+  // that collection with create: false, so Tina cannot make this file — without
+  // it a scaffolded site has the dashboard code and no way to open it.
+  "static/dashboards/index.json",
 ];
+
+// Shipped in the template, but only ever *created* in an existing site, never
+// overwritten: each of these is a document whose contents are the user's, so
+// an update that rewrote them would discard their state.
+const CREATE_ONLY = ["src/pages/example-page.mdx", "static/dashboards/index.json"];
 
 // scripts/ is mirrored to exactly this allowlist (dev-only tooling stays out)
 const SCRIPTS_ALLOWLIST = [
@@ -306,7 +315,7 @@ This is your first blog post. Edit it in the CMS at
     mirrorDirs: [...MIRROR_SRC_DIRS, "scripts"],
     // Individual files overwritten
     files: [
-      ...COPY_FILES.filter((f) => f !== "src/pages/example-page.mdx"),
+      ...COPY_FILES.filter((f) => !CREATE_ONLY.includes(f)),
       BIOME_TEMPLATE_NAME,
     ],
     // Template path -> path written into the site
@@ -315,7 +324,7 @@ This is your first blog post. Edit it in the CMS at
     removeFiles: REMOVE_FILES,
     // Created only if missing (content-ish or required-to-exist files)
     ensureFiles: [
-      "src/pages/example-page.mdx",
+      ...CREATE_ONLY,
       "i18n/.gitkeep",
       "reuse/media/index.json",
       "reuse/bibliography/index.json",

@@ -6,6 +6,8 @@
  */
 
 import React from "react";
+import docusaurusData from "../../../config/docusaurus/index.json";
+import { cellAlign } from "./cellAlign.js";
 
 const SECTION_TAGS = { thead: "thead", tbody: "tbody", tfoot: "tfoot" };
 const BORDER_COLOR = "var(--ifm-table-border-color, #dadde1)";
@@ -69,12 +71,28 @@ const captionStyle = {
   paddingBottom: "0.5rem",
 };
 
+/**
+ * The site-wide cell alignment from Settings, used only where CALS itself
+ * resolved nothing.
+ *
+ * It belongs here rather than in calsLayout.js because it is not part of the
+ * table model: CALS decides alignment from the entry, then its spanspec, then
+ * its colspec, and an undefined result means "no instruction" - which is the
+ * seam this fills. Threading a site setting through the resolver would put a
+ * preference inside the thing that answers what the markup says.
+ *
+ * Blank means what it always meant: leave it to the browser, which centres a
+ * header cell and left-aligns a body cell. That keeps a site that never opens
+ * the setting rendering exactly as it did before it existed.
+ */
+const SITE_DEFAULT_ALIGN = docusaurusData?.calsTables?.align || undefined;
+
 // CALS colsep/rowsep are a single shared rule between two adjacent cells, so
 // this only ever draws the right/bottom edge of a cell - never left/top -
 // which keeps two cells from disagreeing about their shared border.
-function cellStyle(cell) {
+function cellStyle(cell, defaultAlign) {
   return {
-    textAlign: cell.align === "char" ? "right" : cell.align,
+    textAlign: cellAlign(cell, defaultAlign),
     verticalAlign: cell.valign,
     borderRight: cell.colsep ? `1px solid ${BORDER_COLOR}` : "none",
     borderBottom: cell.rowsep ? `1px solid ${BORDER_COLOR}` : "none",
@@ -89,13 +107,25 @@ function cellStyle(cell) {
  * editor's preview and the published output run through the exact same
  * markup and styling.
  *
- * `cellRenderer(cell, sectionName)` renders a cell's content.
+ * `defaultAlign` overrides the site-wide alignment setting for one table;
+ * it is the fallback used only where CALS resolved no alignment of its own.
+ * `cellRenderer(cell, sectionName)` renders a cell's content, and
+ * `titleRenderer(title)` the caption - both optional for the title, which
+ * falls back to plain text so the component still renders something sensible
+ * without one.
  * `getCellProps(cell, sectionName)` optionally returns extra props (a
  * `style` object merged on top of the cell's base style, plus onClick,
  * onDoubleClick, ...) - used by the editor for selection and click-to-edit;
  * the live site doesn't need it.
  */
-const CalsTableView = ({ layout, cellRenderer, getCellProps, style }) => {
+const CalsTableView = ({
+  layout,
+  cellRenderer,
+  titleRenderer,
+  getCellProps,
+  style,
+  defaultAlign = SITE_DEFAULT_ALIGN,
+}) => {
   return (
     <div
       style={wrapperStyle(layout.pgwide)}
@@ -109,7 +139,11 @@ const CalsTableView = ({ layout, cellRenderer, getCellProps, style }) => {
         }}
         data-frame={layout.frame}
       >
-        {layout.title && <caption style={captionStyle}>{layout.title}</caption>}
+        {layout.title && (
+          <caption style={captionStyle}>
+            {titleRenderer ? titleRenderer(layout.title) : layout.title}
+          </caption>
+        )}
         <colgroup>
           {layout.columns.map((col, index) => (
             <col
@@ -134,7 +168,10 @@ const CalsTableView = ({ layout, cellRenderer, getCellProps, style }) => {
                         key={`${cell.rowIndex}-${cell.colStart}`}
                         colSpan={cell.colSpan > 1 ? cell.colSpan : undefined}
                         rowSpan={cell.rowSpan > 1 ? cell.rowSpan : undefined}
-                        style={{ ...cellStyle(cell), ...extraStyle }}
+                        style={{
+                          ...cellStyle(cell, defaultAlign),
+                          ...extraStyle,
+                        }}
                         {...extraProps}
                       >
                         {cellRenderer(cell, section.name)}

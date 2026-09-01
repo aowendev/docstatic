@@ -24,6 +24,7 @@ import { test } from "node:test";
 import bibliography from "../reuse/bibliography/index.json" with {
   type: "json",
 };
+import { foreignFrontmatterLines } from "../scripts/generate-bibliography.mjs";
 import { cslHtmlToMarkdown, cslHtmlToTokens } from "../scripts/lib/csl.mjs";
 import {
   NON_CSL_FIELDS,
@@ -355,9 +356,7 @@ test("cited-only mode keeps just the sources the doc set cites", async () => {
 });
 
 test("a site language finds its CSL locale without a code change", async () => {
-  const { localeFor, hasLocale, missingLocales } = await import(
-    "../scripts/lib/csl.mjs"
-  );
+  const { localeFor, hasLocale } = await import("../scripts/lib/csl.mjs");
 
   // The five this site ships with resolve to vendored files.
   for (const [lang, expected] of [
@@ -393,4 +392,104 @@ test("an unvendored language degrades to English and says so", async () => {
 
   // A language that is vendored is never reported.
   assert.deepEqual(missingLocales(["en", "de", "fr"]), []);
+});
+
+/**
+ * The references page is generated, but it lives in the docs collection, so
+ * the CMS stamps lastmod/modifiedBy onto it. The generator used to rebuild the
+ * frontmatter from a fixed list and throw those away on every run, which put
+ * the page back in `git status` after every build. What it owns it may
+ * rewrite; what it does not own it has to carry.
+ */
+
+const GENERATED_PAGE = [
+  "---",
+  'title: "References"',
+  'description: "Works cited."',
+  "draft: false",
+  "review: false",
+  "translate: false",
+  "approved: true",
+  "published: true",
+  "unlisted: false",
+  "sidebar_position: 999",
+  "---",
+  "",
+  "# References",
+].join("\n");
+
+function withFrontmatter(extraLines) {
+  const lines = GENERATED_PAGE.split("\n");
+  const close = lines.indexOf("---", 1);
+  return [...lines.slice(0, close), ...extraLines, ...lines.slice(close)].join(
+    "\n"
+  );
+}
+
+test("frontmatter the generator does not own is carried forward", () => {
+  const source = withFrontmatter([
+    "modifiedBy: aowendev <someone@example.com>",
+    "lastmod: '2026-08-24T21:41:47.779Z'",
+  ]);
+
+  assert.deepEqual(foreignFrontmatterLines(source), [
+    "modifiedBy: aowendev <someone@example.com>",
+    "lastmod: '2026-08-24T21:41:47.779Z'",
+  ]);
+});
+
+test("frontmatter the generator owns is not carried, so it stays authoritative", () => {
+  assert.deepEqual(foreignFrontmatterLines(GENERATED_PAGE), []);
+});
+
+test("a carried value keeps its own formatting rather than being re-serialised", () => {
+  const line = "modifiedBy: aowendev <someone@example.com>";
+  assert.deepEqual(foreignFrontmatterLines(withFrontmatter([line])), [line]);
+});
+
+test("a multi-line value is carried with the lines that belong to it", () => {
+  const source = withFrontmatter([
+    "tags:",
+    "  - reference",
+    "  - generated",
+    "lastmod: '2026-08-24T21:41:47.779Z'",
+  ]);
+
+  assert.deepEqual(foreignFrontmatterLines(source), [
+    "tags:",
+    "  - reference",
+    "  - generated",
+    "lastmod: '2026-08-24T21:41:47.779Z'",
+  ]);
+});
+
+test("the continuation lines of an owned key are dropped with it", () => {
+  const source = withFrontmatter(["keep: yes"]).replace(
+    "sidebar_position: 999",
+    ["sidebar_position: 999", "description:", "  - not really a list"].join(
+      "\n"
+    )
+  );
+
+  assert.deepEqual(foreignFrontmatterLines(source), ["keep: yes"]);
+});
+
+test("carrying is idempotent, so a second run reproduces the same page", () => {
+  const carried = ["lastmod: '2026-08-24T21:41:47.779Z'"];
+  const once = withFrontmatter(carried);
+  assert.deepEqual(foreignFrontmatterLines(once), carried);
+  assert.deepEqual(
+    foreignFrontmatterLines(withFrontmatter(foreignFrontmatterLines(once))),
+    carried
+  );
+});
+
+test("a page with no usable frontmatter carries nothing", () => {
+  assert.deepEqual(foreignFrontmatterLines("# Just a heading"), []);
+  assert.deepEqual(
+    foreignFrontmatterLines("---\nlastmod: x\n# never closed"),
+    []
+  );
+  assert.deepEqual(foreignFrontmatterLines(undefined), []);
+  assert.deepEqual(foreignFrontmatterLines(""), []);
 });

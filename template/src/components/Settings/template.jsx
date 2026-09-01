@@ -45,6 +45,30 @@ const CITATION_STYLES = [
  * ours. "Global English" rather than "British English" for en-GB, since the
  * distinction being drawn is a spelling and date convention, not a nationality.
  */
+/**
+ * Site-wide alignment for CALS table cells.
+ *
+ * The values are CALS `align` values, so a table that sets alignment on a
+ * cell or a colspec is speaking the same vocabulary and simply wins - this is
+ * only the fallback for cells that say nothing, and the table editor writes
+ * both of the levels that outrank it. "" keeps the browser's own behaviour,
+ * which is the pre-setting rendering: headings centred, body cells
+ * left-aligned. CALS also defines "char" (align on a decimal point), which is
+ * left out deliberately: it is meaningful per column, not as a site default.
+ *
+ * A plain select rather than a button-toggle: five labels, one of them
+ * "Browser default", collapse to unreadable truncated stubs in the width Tina
+ * gives a sidebar field, and the neighbouring citation settings are selects
+ * for the same reason.
+ */
+const CALS_ALIGNMENTS = [
+  { value: "", label: "Browser default" },
+  { value: "left", label: "Left" },
+  { value: "center", label: "Center" },
+  { value: "right", label: "Right" },
+  { value: "justify", label: "Justify" },
+];
+
 const ENGLISH_LOCALES = [
   { value: "", label: "Let the style decide" },
   { value: "en-GB", label: "Global English" },
@@ -919,6 +943,21 @@ export const SettingsCollection = {
       type: "boolean",
       label: "Show blog reading time",
       name: "showReadingTime",
+    },
+    {
+      type: "object",
+      label: "CALS tables",
+      name: "calsTables",
+      fields: [
+        {
+          type: "string",
+          label: "Cell alignment",
+          name: "align",
+          options: CALS_ALIGNMENTS,
+          description:
+            "How text sits in a CALS table cell, headings included, when the table itself says nothing. Alignment set on a cell or a column in the table editor always wins over this. Browser default keeps headings centred and body cells left-aligned.",
+        },
+      ],
     },
     {
       type: "object",

@@ -250,5 +250,8 @@
     "englishLocale": "",
     "pageTitles": [],
     "includeUncited": false
+  },
+  "calsTables": {
+    "align": ""
   }
 }

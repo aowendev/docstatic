@@ -12,7 +12,6 @@ import Dashboard1 from "./Dashboard1";
 import MediaDashboard from "./MediaDashboard";
 import StatusBar from "./StatusBar";
 import TranslationDashboard from "./TranslationDashboard";
-//. import DocumentMutationDashboard from './DocumentMutationDashboard';
 
 export const DashboardsCollection = {
   name: "dashboards",
@@ -115,17 +114,6 @@ export const DashboardsCollection = {
         ),
       },
     },
-    // {
-    // 	type: "boolean",
-    // 	name: "documentMutationDashboard",
-    // 	label: "Document Mutations",
-    // 	required: false,
-    // 	ui: {
-    // 		component: (props) => (
-    // 			<DocumentMutationDashboard />
-    // 		),
-    // 	},
-    // },
   ],
 };
 

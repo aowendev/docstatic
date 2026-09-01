@@ -6,13 +6,13 @@
  */
 
 import React from "react";
+import docusaurusData from "../../../config/docusaurus/index.json";
+import { useCurrentLocale } from "../../utils/useCurrentLocale";
 import CalsTableView from "./CalsTableView";
 import { resolveLayout } from "./calsLayout.js";
 import { renderMarkdownCell } from "./markdownCell";
 
-function renderCellContent(cell) {
-  return renderMarkdownCell(cell.content);
-}
+const DEFAULT_LOCALE = docusaurusData.languages?.default;
 
 /**
  * Renders a CALS table (see calsLayout.js for the full data model and the
@@ -20,10 +20,39 @@ function renderCellContent(cell) {
  * CALS structure as authored in Tina; this component only resolves it and
  * hands the result to CalsTableView, the same renderer the Tina grid editor
  * uses for its live preview.
+ *
+ * The locale is read here rather than inside the cell renderer because the
+ * renderer is shared with Tina's admin, which has no Docusaurus context to
+ * ask. A variable in a cell resolves to the language of the page it is on,
+ * exactly as one in a paragraph does.
  */
 const CalsTable = ({ table }) => {
+  const locale = useCurrentLocale();
   const layout = resolveLayout(table);
-  return <CalsTableView layout={layout} cellRenderer={renderCellContent} />;
+
+  const renderCellContent = (cell) =>
+    renderMarkdownCell(cell.content, {
+      locale,
+      fallbackLocale: DEFAULT_LOCALE,
+    });
+
+  // The caption goes through the same renderer as a cell, so a variable
+  // resolves the same way wherever it is written in the table. `inline` drops
+  // the paragraph wrapper a caption has no use for.
+  const renderTitle = (title) =>
+    renderMarkdownCell(title, {
+      locale,
+      fallbackLocale: DEFAULT_LOCALE,
+      inline: true,
+    });
+
+  return (
+    <CalsTableView
+      layout={layout}
+      cellRenderer={renderCellContent}
+      titleRenderer={renderTitle}
+    />
+  );
 };
 
 export default CalsTable;

@@ -188,8 +188,11 @@ export function hasLocale(name) {
  * file, not a code change.
  *
  * Returns null when nothing matches, which tells citeproc to use the style's
- * own default locale. That is a real limitation, not a fix, so the generators
- * report it: see missingLocales.
+ * own default locale. That is a real limitation, not a fix, so it is reported
+ * rather than swallowed - once, by generate-citations.mjs, which runs first in
+ * `yarn generate` and reads the same language list. generate-bibliography.mjs
+ * deliberately does not repeat the check: the two would print the same warning
+ * twice on every build.
  */
 export function localeFor(lang, englishLocale) {
   if (lang === "en") return englishLocale;

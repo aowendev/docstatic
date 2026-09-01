@@ -7,6 +7,7 @@
 
 import React, { useEffect, useState } from "react";
 import { wrapFieldsWithMeta } from "tinacms";
+import variableSetsData from "../../../reuse/variableSets/index.json";
 import CalsTableView from "./CalsTableView";
 import { resolveLayout } from "./calsLayout.js";
 import {
@@ -16,11 +17,103 @@ import {
   insertColumn,
   insertRow,
   mergeCells,
+  setColumnAttributes,
+  setEntryAttributes,
   splitCell,
 } from "./calsOperations.js";
 import { renderMarkdownCell } from "./markdownCell";
 
 const FRAME_OPTIONS = ["all", "sides", "top", "bottom", "topbot", "none"];
+
+/**
+ * CALS carries alignment at three levels - the entry, its spanspec and its
+ * colspec - and the grid has to be able to write the two an author picks cells
+ * and columns for. Without them the only alignment control in the CMS would be
+ * the site-wide default in Settings, which would flatten a per-cell model into
+ * one switch and leave the rest reachable only by hand-editing MDX.
+ *
+ * "Inherit" writes nothing, which is what lets a cell fall through to its
+ * column, and a column to the site setting. `char` - CALS decimal alignment -
+ * is deliberately absent: it is meaningless without the `char`/`charoff`
+ * attributes that say what to align on, and remains settable in MDX.
+ */
+const ALIGN_OPTIONS = [
+  { value: "", label: "Inherit" },
+  { value: "left", label: "Left" },
+  { value: "center", label: "Center" },
+  { value: "right", label: "Right" },
+  { value: "justify", label: "Justify" },
+];
+
+const VALIGN_OPTIONS = [
+  { value: "", label: "Inherit" },
+  { value: "top", label: "Top" },
+  { value: "middle", label: "Middle" },
+  { value: "bottom", label: "Bottom" },
+];
+
+/**
+ * Every variable an author can drop into a cell, read the same way
+ * VariableSet's own template reads it - a static import, because a Tina
+ * template is bundled for the browser and cannot reach the filesystem. The
+ * "Excluded" set is the one VariableSet's picker hides too.
+ */
+const VARIABLE_OPTIONS = (
+  Array.isArray(variableSetsData?.variableSets)
+    ? variableSetsData.variableSets
+    : []
+)
+  .filter((set) => set.name !== "Excluded")
+  .flatMap((set) =>
+    (set.variables ?? []).map((variable) => ({
+      value: `${set.name}_${variable.key}`,
+      label: `${variable.key} (${set.name})`,
+    }))
+  );
+
+/**
+ * A cell holds Markdown, so a variable goes in as the same element the CMS
+ * writes into a paragraph - see remarkVariables.js for why the syntax is
+ * shared rather than shortened for tables.
+ */
+function variableElement(variableSelection) {
+  return `<VariableSet variableSelection="${variableSelection}" />`;
+}
+
+/**
+ * Appends a variable to text that may already have some, keeping one space
+ * between them so two variables in a row do not run together as one word.
+ */
+function appendVariable(existing, variableSelection) {
+  const text = existing ?? "";
+  const separator = text && !text.endsWith(" ") ? " " : "";
+  return `${text}${separator}${variableElement(variableSelection)}`;
+}
+
+/**
+ * The picker itself, used once for the title and once for the selected cells.
+ *
+ * Controlled at "" so it returns to its prompt after each choice: it performs
+ * an action rather than holding a value, and a select left showing the last
+ * variable would suggest the field now *is* that variable.
+ */
+function VariablePicker({ onPick, disabled, label }) {
+  return (
+    <select
+      aria-label={label}
+      value=""
+      disabled={disabled}
+      onChange={(event) => onPick(event.target.value)}
+    >
+      <option value="">Insert…</option>
+      {VARIABLE_OPTIONS.map((option) => (
+        <option key={option.value} value={option.value}>
+          {option.label}
+        </option>
+      ))}
+    </select>
+  );
+}
 
 // Deliberately inline styles, not CSS Modules: Tina's admin runs as a
 // separate Vite-bundled app that doesn't process this project's CSS Modules,
@@ -199,25 +292,60 @@ const CalsTableEditor = wrapFieldsWithMeta(({ input }) => {
     }
   }
 
+  /**
+   * Writes one cell's content back. A resolved cell knows which entry in the
+   * raw row it came from (`entryIndex`), which is the only reliable way back:
+   * a row's entries do not line up with columns once anything spans, and a
+   * gap-filling placeholder cell has no entry at all.
+   */
+  function writeCellContent(section, rowIndex, entryIndex, content) {
+    if (entryIndex === null || entryIndex === undefined) return;
+    if (!table.tgroup[section]?.rows[rowIndex]) return;
+    const nextTable = JSON.parse(JSON.stringify(table));
+    nextTable.tgroup[section].rows[rowIndex].entries[entryIndex].content =
+      content;
+    input.onChange(nextTable);
+  }
+
   function commitEdit() {
     if (!editingCell) return;
     const { section, rowIndex, colStart, draft } = editingCell;
-    const raw = table.tgroup[section]?.rows[rowIndex];
-    if (raw) {
-      const resolved = resolveLayout(table);
-      const resolvedRow = resolved.sections
-        .find((s) => s.name === section)
-        ?.rows.find((r) => r.rowIndex === rowIndex);
-      const cell = resolvedRow?.cells.find((c) => c.colStart === colStart);
-      if (cell && cell.entryIndex !== null) {
-        const nextTable = JSON.parse(JSON.stringify(table));
-        nextTable.tgroup[section].rows[rowIndex].entries[
-          cell.entryIndex
-        ].content = draft;
-        input.onChange(nextTable);
-      }
+    const cell = resolveLayout(table)
+      .sections.find((s) => s.name === section)
+      ?.rows.find((r) => r.rowIndex === rowIndex)
+      ?.cells.find((c) => c.colStart === colStart);
+    if (cell) {
+      writeCellContent(section, rowIndex, cell.entryIndex, draft);
     }
     setEditingCell(null);
+  }
+
+  /**
+   * Appends a variable to the selected cell rather than inserting at a caret:
+   * the picker lives in the toolbar, and clicking it would take focus out of
+   * the cell editor and commit the edit before the choice was made. Every
+   * other toolbar control acts on the selection too, so this is the behaviour
+   * the rest of the editor has already taught.
+   */
+  function insertVariable(variableSelection) {
+    if (!variableSelection || !selectedSingleCell) return;
+    writeCellContent(
+      activeSection,
+      selectedSingleCell.rowIndex,
+      selectedSingleCell.entryIndex,
+      appendVariable(selectedSingleCell.content, variableSelection)
+    );
+  }
+
+  /**
+   * The title's picker appends rather than inserting at the caret, for the
+   * same reason the cell one does: choosing from a select takes focus out of
+   * the text field, so there is no caret left to insert at by the time the
+   * choice arrives.
+   */
+  function insertTitleVariable(variableSelection) {
+    if (!variableSelection) return;
+    updateTable({ title: appendVariable(table.title, variableSelection) });
   }
 
   function getCellProps(cell, section) {
@@ -270,7 +398,30 @@ const CalsTableEditor = wrapFieldsWithMeta(({ input }) => {
     return renderMarkdownCell(cell.content);
   }
 
+  // The caption resolves variables the same way a cell does, so the preview
+  // shows what the page will. `inline` drops the paragraph a caption has no
+  // use for; the locale is the site default, which is all Tina's admin can
+  // honestly claim to be showing.
+  function renderTitle(title) {
+    return renderMarkdownCell(title, { inline: true });
+  }
+
   const activeSection = selection?.section;
+
+  // Read off the resolved columns rather than the raw colspecs: a column the
+  // author never declared has no colspec to read, and resolveLayout has
+  // already invented one for it.
+  const columnAlignValue = (() => {
+    if (!selection) return "";
+    const covered = layout.columns.slice(
+      selection.colStart,
+      selection.colEnd + 1
+    );
+    const first = covered[0]?.align ?? "";
+    return covered.every((column) => (column.align ?? "") === first)
+      ? first
+      : "";
+  })();
 
   // A merged cell's own rect already spans multiple rows/cols, so "is the
   // selection exactly one existing cell" can't be tested with
@@ -334,6 +485,46 @@ const CalsTableEditor = wrapFieldsWithMeta(({ input }) => {
     setSelection({ ...sel });
   }
 
+  /**
+   * The value to show in a selection-wide picker: what every covered cell
+   * agrees on, or blank when they differ. Blank therefore reads as "no single
+   * answer" as well as "inherit" - picking a value still applies it to all of
+   * them, which is the behaviour a multi-cell selection needs either way.
+   */
+  function sharedCellValue(attribute) {
+    if (!selection) return "";
+    const section = layout.sections.find((s) => s.name === activeSection);
+    const covered = (section?.rows ?? [])
+      .flatMap((row) => row.cells)
+      .filter((cell) => isWithin(selection, cell.rowIndex, cell.colStart));
+    if (covered.length === 0) return "";
+    const first = covered[0][attribute] ?? "";
+    return covered.every((cell) => (cell[attribute] ?? "") === first)
+      ? first
+      : "";
+  }
+
+  function setCellAttribute(attribute, value) {
+    if (!selection) return;
+    const result = setEntryAttributes(input.value, activeSection, selection, {
+      [attribute]: value,
+    });
+    if (result.ok === false) return;
+    input.onChange(result.table);
+  }
+
+  function setColumnAlign(value) {
+    if (!selection) return;
+    const result = setColumnAttributes(
+      input.value,
+      selection.colStart,
+      selection.colEnd,
+      { align: value }
+    );
+    if (result.ok === false) return;
+    input.onChange(result.table);
+  }
+
   function handleMerge() {
     if (!selection) return;
     const dryRun = mergeCells(table, activeSection, selection);
@@ -386,6 +577,10 @@ const CalsTableEditor = wrapFieldsWithMeta(({ input }) => {
             value={table.title || ""}
             onChange={(e) => updateTable({ title: e.target.value })}
           />
+          <VariablePicker
+            label="Insert a variable into the title"
+            onPick={insertTitleVariable}
+          />
         </label>
         <label style={settingLabelStyle}>
           <input
@@ -394,6 +589,56 @@ const CalsTableEditor = wrapFieldsWithMeta(({ input }) => {
             onChange={(e) => updateTable({ pgwide: e.target.checked })}
           />
           Page-wide
+        </label>
+        <label style={settingLabelStyle}>
+          Cell align
+          <select
+            value={sharedCellValue("align")}
+            disabled={!selection}
+            onChange={(e) => setCellAttribute("align", e.target.value)}
+          >
+            {ALIGN_OPTIONS.map((option) => (
+              <option key={option.value} value={option.value}>
+                {option.label}
+              </option>
+            ))}
+          </select>
+        </label>
+        <label style={settingLabelStyle}>
+          Cell vertical
+          <select
+            value={sharedCellValue("valign")}
+            disabled={!selection}
+            onChange={(e) => setCellAttribute("valign", e.target.value)}
+          >
+            {VALIGN_OPTIONS.map((option) => (
+              <option key={option.value} value={option.value}>
+                {option.label}
+              </option>
+            ))}
+          </select>
+        </label>
+        <label style={settingLabelStyle}>
+          Column align
+          <select
+            value={columnAlignValue}
+            disabled={!selection}
+            onChange={(e) => setColumnAlign(e.target.value)}
+          >
+            {ALIGN_OPTIONS.map((option) => (
+              <option key={option.value} value={option.value}>
+                {option.label}
+              </option>
+            ))}
+          </select>
+        </label>
+        <label style={settingLabelStyle}>
+          Cell variable
+          <VariablePicker
+            label="Insert a variable into the selected cell"
+            disabled={!selectedSingleCell}
+            onPick={insertVariable}
+          />
         </label>
         <div style={buttonRowStyle}>
           <ToolbarButton disabled={!canMerge} onClick={handleMerge}>
@@ -479,6 +724,7 @@ const CalsTableEditor = wrapFieldsWithMeta(({ input }) => {
       <CalsTableView
         layout={layout}
         cellRenderer={renderCell}
+        titleRenderer={renderTitle}
         getCellProps={getCellProps}
       />
 

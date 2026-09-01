@@ -1,1 +1,8 @@
-{"template":{},"static":{"img":{"docs":{}}}}
+{
+  "static": {
+    "img": {
+      "docs": {}
+    }
+  },
+  "template": {}
+}

@@ -6,6 +6,8 @@
  */
 
 import React, { useCallback, useEffect, useState } from "react";
+import { describeDataSource } from "./lib/dataSource.js";
+import { escapeHtml, firstLine } from "./lib/statusText.js";
 import { getTinaClient } from "./lib/tinaClient";
 
 const getStatusColor = (type) => {
@@ -56,10 +58,33 @@ const getStatusIcon = (type) => {
   }
 };
 
+/**
+ * One row of the bar. Built as an HTML string because the bar is injected into
+ * an element Tina owns, not rendered by React - see the effect below.
+ */
+function statusRow(label, entry) {
+  return `
+          <div style="display: flex; align-items: center; gap: 0.5rem;">
+            <span style="color: ${getStatusColor(entry.type)}">${getStatusIcon(entry.type)}</span>
+            <span style="font-weight: 500; color: #374151">${label}:</span>
+            <span style="color: ${getStatusColor(entry.type)}">${escapeHtml(entry.message)}</span>
+          </div>`;
+}
+
+function statusHtml(status) {
+  return [
+    statusRow("GraphQL", status.connection),
+    statusRow("Environment", status.environment),
+    statusRow("Data source", status.dataSource),
+    statusRow("Settings", status.settings),
+  ].join("");
+}
+
 const StatusBar = () => {
   const [status, setStatus] = useState({
     connection: { type: "loading", message: "Checking connection..." },
     environment: { type: "unknown", message: "Detecting environment..." },
+    dataSource: { type: "loading", message: "Locating content..." },
     settings: { type: "loading", message: "Validating settings..." },
   });
 
@@ -134,9 +159,29 @@ const StatusBar = () => {
       missingSettings.push("Docusaurus config");
     }
 
-    // Check if TinaCMS client is properly generated
+    // One client load answers three questions: is the client generated at all,
+    // where will it send queries, and - the one that matters - does a query
+    // actually come back.
+    let dataSourceStatus = { type: "error", message: "No client" };
     try {
-      await getTinaClient();
+      const client = await getTinaClient();
+      dataSourceStatus = describeDataSource(client?.apiUrl);
+
+      // The authoritative connection test, and it deliberately overrides the
+      // ping above. The ping proves some endpoint on localhost answers; it
+      // does not prove the client can use it, and the two come apart in the
+      // cases worth catching - a client built for production queries TinaCloud
+      // while a local server answers the ping, and a schema that has drifted
+      // from TinaCloud's index still loads a client whose every query fails.
+      try {
+        await client.queries.docConnection({ first: 1 });
+        connectionStatus = { type: "success", message: "Query returned" };
+      } catch (queryErr) {
+        connectionStatus = {
+          type: "error",
+          message: `Query failed - ${firstLine(queryErr?.message ?? queryErr)}`,
+        };
+      }
     } catch (_err) {
       missingSettings.push("TinaCMS client (run: yarn tina-build)");
     }
@@ -151,6 +196,7 @@ const StatusBar = () => {
     setStatus({
       connection: connectionStatus,
       environment: environmentStatus,
+      dataSource: dataSourceStatus,
       settings: settingsStatus,
     });
   }, []);
@@ -187,43 +233,11 @@ const StatusBar = () => {
         statusDiv.className =
           "status-bar-injected flex items-center gap-4 mr-auto";
         statusDiv.style.fontSize = "0.75rem";
-        statusDiv.innerHTML = `
-          <div style="display: flex; align-items: center; gap: 0.5rem;">
-            <span style="color: ${getStatusColor(status.connection.type)}">${getStatusIcon(status.connection.type)}</span>
-            <span style="font-weight: 500; color: #374151">GraphQL:</span>
-            <span style="color: ${getStatusColor(status.connection.type)}">${status.connection.message}</span>
-          </div>
-          <div style="display: flex; align-items: center; gap: 0.5rem;">
-            <span style="color: ${getStatusColor(status.environment.type)}">${getStatusIcon(status.environment.type)}</span>
-            <span style="font-weight: 500; color: #374151">Environment:</span>
-            <span style="color: ${getStatusColor(status.environment.type)}">${status.environment.message}</span>
-          </div>
-          <div style="display: flex; align-items: center; gap: 0.5rem;">
-            <span style="color: ${getStatusColor(status.settings.type)}">${getStatusIcon(status.settings.type)}</span>
-            <span style="font-weight: 500; color: #374151">Settings:</span>
-            <span style="color: ${getStatusColor(status.settings.type)}">${status.settings.message}</span>
-          </div>
-        `;
+        statusDiv.innerHTML = statusHtml(status);
         targetElement.insertBefore(statusDiv, targetElement.firstChild);
       } else {
         // Update existing status
-        statusContainer.innerHTML = `
-          <div style="display: flex; align-items: center; gap: 0.5rem;">
-            <span style="color: ${getStatusColor(status.connection.type)}">${getStatusIcon(status.connection.type)}</span>
-            <span style="font-weight: 500; color: #374151">GraphQL:</span>
-            <span style="color: ${getStatusColor(status.connection.type)}">${status.connection.message}</span>
-          </div>
-          <div style="display: flex; align-items: center; gap: 0.5rem;">
-            <span style="color: ${getStatusColor(status.environment.type)}">${getStatusIcon(status.environment.type)}</span>
-            <span style="font-weight: 500; color: #374151">Environment:</span>
-            <span style="color: ${getStatusColor(status.environment.type)}">${status.environment.message}</span>
-          </div>
-          <div style="display: flex; align-items: center; gap: 0.5rem;">
-            <span style="color: ${getStatusColor(status.settings.type)}">${getStatusIcon(status.settings.type)}</span>
-            <span style="font-weight: 500; color: #374151">Settings:</span>
-            <span style="color: ${getStatusColor(status.settings.type)}">${status.settings.message}</span>
-          </div>
-        `;
+        statusContainer.innerHTML = statusHtml(status);
       }
     }
 

@@ -5,55 +5,26 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useEffect, useState } from "react";
+/**
+ * What is left of a <Snippet> that could not be inlined.
+ *
+ * src/plugins/remark-snippets.mjs replaces every snippet it can resolve with
+ * the snippet's own content, at build time, so a working snippet never reaches
+ * this component at all. What arrives here is a filepath that named no file,
+ * or a snippet that includes itself - and it renders the same marker a missing
+ * glossary term, variable or citation renders, naming the key so the author
+ * knows what to fix.
+ *
+ * The component used to load the file itself, in a useEffect. That left
+ * "Loading snippet..." in the static HTML of every page that reused anything:
+ * absent from the served page, absent from the search index, and present only
+ * after hydration. Resolving it at build time is what fixed that; this file is
+ * the leftover error path.
+ */
 
-const Snippet = ({ filepath }) => {
-  const [SnippetMDX, setSnippetMDX] = useState(null);
-  const [error, setError] = useState(null);
+import React from "react";
+import NotFound from "../NotFound";
 
-  useEffect(() => {
-    let isMounted = true;
-    const loadSnippet = async () => {
-      const lang = document.documentElement.lang || "en";
-
-      try {
-        let mod;
-        if (lang !== "en") {
-          // Try to load translated snippet first
-          mod = await import(
-            /* webpackInclude: /\.mdx$/ */
-            `@site/i18n/${lang}/snippets/${filepath}`
-          );
-        } else {
-          // Fallback to English
-          mod = await import(
-            /* webpackInclude: /\.mdx$/ */
-            `@site/reuse/snippets/${filepath}`
-          );
-        }
-        if (isMounted) setSnippetMDX(() => mod.default);
-      } catch (_e) {
-        try {
-          const mod = await import(
-            /* webpackInclude: /\.mdx$/ */
-            `@site/reuse/snippets/${filepath}`
-          );
-          if (isMounted) setSnippetMDX(() => mod.default);
-        } catch (_e2) {
-          if (isMounted) setError("Error: Snippet not found.");
-        }
-      }
-    };
-
-    loadSnippet();
-    return () => {
-      isMounted = false;
-    };
-  }, [filepath]);
-
-  if (error) return <div>{error}</div>;
-  if (!SnippetMDX) return <div>Loading snippet...</div>;
-  return <SnippetMDX />;
-};
+const Snippet = ({ filepath }) => <NotFound name={filepath || "Snippet"} />;
 
 export default Snippet;

@@ -575,3 +575,105 @@ export function deleteColumn(table, colIndex) {
 
   return { table: newTable, warnings };
 }
+
+/**
+ * Applies `patch` to every entry the selection covers.
+ *
+ * A key whose value is "" or undefined is deleted rather than stored, which is
+ * how a cell goes back to inheriting: CALS resolution reads "absent" as "ask
+ * the spanspec, then the colspec, then whatever the site says", and storing an
+ * empty string instead would pin the cell to a value that means nothing.
+ *
+ * Unlike the structural operations, this one does not pin positional entries.
+ * It changes no entry's position, no row's length and no column count, so
+ * "whatever column is next" still resolves to exactly the column it did
+ * before - and pinning would write a colname onto entries the author never
+ * touched.
+ */
+export function setEntryAttributes(table, section, selection, patch) {
+  if (!SECTION_NAMES.includes(section))
+    return { ok: false, error: `Unknown section "${section}"` };
+
+  const layout = resolveLayout(table);
+  const resolvedSection = layout.sections.find((s) => s.name === section);
+  if (!resolvedSection)
+    return { ok: false, error: `Section "${section}" has no rows` };
+
+  const newTable = deepClone(table);
+  const warnings = [];
+  let changed = 0;
+
+  for (const row of resolvedSection.rows) {
+    for (const cell of row.cells) {
+      // A gap-filling placeholder stands for no entry, so there is nothing to
+      // write to; it disappears the moment the row gains a real entry.
+      if (cell.entryIndex === null || cell.entryIndex === undefined) continue;
+
+      // A cell counts as selected when its *origin* is inside the rect, not
+      // when any part of it overlaps. That is the same test the editor uses to
+      // decide which cells to highlight, so what this writes is exactly what
+      // the author saw selected. The two only ever differ for a merged cell
+      // reaching into the rect from outside it - and a selection is always
+      // built from whole cell rects, so that cell's origin is in the rect
+      // anyway.
+      const selected =
+        cell.rowIndex >= selection.rowStart &&
+        cell.rowIndex <= selection.rowEnd &&
+        cell.colStart >= selection.colStart &&
+        cell.colStart <= selection.colEnd;
+      if (!selected) continue;
+
+      const entry =
+        newTable.tgroup[section]?.rows[cell.rowIndex]?.entries[cell.entryIndex];
+      if (!entry) continue;
+
+      applyAttributePatch(entry, patch);
+      changed += 1;
+    }
+  }
+
+  if (changed === 0)
+    warnings.push({
+      code: "no-entries",
+      message: "The selection covered no editable cells",
+      section,
+    });
+
+  return { table: newTable, warnings };
+}
+
+/**
+ * Applies `patch` to the colspecs of columns colStart..colEnd.
+ *
+ * A colspec is where CALS puts "this whole column is aligned like so", which
+ * an individual entry can still override - the resolution order is entry,
+ * spanspec, colspec, so writing here is deliberately the weaker statement.
+ */
+export function setColumnAttributes(table, colStart, colEnd, patch) {
+  const columns = resolveLayout(table).columns;
+  if (colStart < 0 || colEnd >= columns.length || colStart > colEnd)
+    return { ok: false, error: "Column range out of range" };
+
+  const newTable = deepClone(table);
+  const colspecs = newTable.tgroup.colspecs;
+
+  for (let index = colStart; index <= colEnd; index += 1) {
+    // resolveLayout invents a colspec for a column the author never declared,
+    // so the raw array can be shorter than the resolved column list.
+    if (!colspecs[index]) colspecs[index] = { colname: columns[index].colname };
+    applyAttributePatch(colspecs[index], patch);
+  }
+
+  return { table: newTable, warnings: [] };
+}
+
+/** Shared by both setters; see setEntryAttributes for why "" deletes. */
+function applyAttributePatch(target, patch) {
+  for (const [key, value] of Object.entries(patch)) {
+    if (value === "" || value === undefined || value === null) {
+      delete target[key];
+    } else {
+      target[key] = value;
+    }
+  }
+}

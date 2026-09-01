@@ -4,6 +4,7 @@ import remarkMath from "remark-math";
 import remarkCitations, {
   citationStyleClass,
 } from "./src/plugins/remark-citations.mjs";
+import remarkSnippets from "./src/plugins/remark-snippets.mjs";
 import PrismDark from "./src/utils/prismDark";
 import PrismLight from "./src/utils/prismLight";
 
@@ -222,6 +223,11 @@ const config = {
       {
         docs: {
           sidebarPath: require.resolve("./sidebars.ts"),
+          // Snippets are inlined before Docusaurus's own remark plugins run,
+          // so a snippet's headings reach the table of contents and its
+          // admonitions, links and images are transformed as page content.
+          // Registered under remarkPlugins it would arrive after all of them.
+          beforeDefaultRemarkPlugins: [remarkSnippets],
           remarkPlugins: [
             remarkMath,
             // styleClass decides page structure (inline vs note), so it is part
@@ -261,6 +267,7 @@ const config = {
           showReadingTime: docusaurusData.showReadingTime,
           // Footnotes are numbered at build time here too, so a blog post does
           // not fall back to the client-side path the docs no longer use.
+          beforeDefaultRemarkPlugins: [remarkSnippets],
           remarkPlugins: [
             [remarkCitations, { styleClass: citationStyleClass() }],
           ],
@@ -290,6 +297,10 @@ const config = {
           },
           onInlineAuthors: "ignore",
           onUntruncatedBlogPosts: "ignore",
+        },
+        // A custom MDX page reuses snippets like any doc or post does.
+        pages: {
+          beforeDefaultRemarkPlugins: [remarkSnippets],
         },
         theme: {
           customCss: require.resolve("./src/css/custom.css"),
@@ -446,6 +457,12 @@ const config = {
     // Re-runs citeproc when the CMS writes the bibliography, so citation edits
     // reach the page without a restart. See src/plugins/docusaurus-plugin-citations.js
     require.resolve("./src/plugins/docusaurus-plugin-citations.js"),
+    // Lets a reused code file be a .json without failing the build. See the
+    // file for why the extension and raw-loader disagree.
+    require.resolve("./src/plugins/reuse-code-loader.js"),
+    // Rebuilds a page when a snippet inlined into it changes, so CMS edits to
+    // reused content stay live. See src/plugins/remark-snippets.mjs.
+    require.resolve("./src/plugins/docusaurus-plugin-snippets.js"),
     [
       "docusaurus-lunr-search",
       {

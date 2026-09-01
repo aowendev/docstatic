@@ -89,6 +89,12 @@
       "link": "doc",
       "docId": "introduction",
       "position": "left"
+    },
+    {
+      "label": "Dashboard",
+      "link": "manualPath",
+      "manualPath": "/admin#/collections/edit/dashboards/index",
+      "position": "right"
     }
   ],
   "sidebarHideable": true,

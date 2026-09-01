@@ -5,94 +5,30 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { useLocation } from "@docusaurus/router";
-import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import React from "react";
-
-// Import the JSON data directly at build time
-import variableSetsData from "/reuse/variableSets/index.json";
+import variableSetsData from "../../../reuse/variableSets/index.json";
+import { useCurrentLocale } from "../../utils/useCurrentLocale";
+import { initcapValue, resolveVariable } from "../../utils/variables";
 import NotFound from "../NotFound";
 
 const VariableSet = ({ variableSelection, lang, initcap, bold }) => {
-  const location = useLocation();
-  const { i18n } = useDocusaurusContext();
-
-  // Parse composite value
-  const [finalSetKey, finalVariableKey] = variableSelection?.split("_") || [];
-
-  // Determine the current language
-  const getCurrentLanguage = () => {
-    // 1. Use explicit lang prop if provided
-    if (lang) return lang;
-
-    // 2. Try to get from current locale
-    if (i18n?.currentLocale) return i18n.currentLocale;
-
-    // 3. Try to extract from URL path (e.g., /es/docs/... -> 'es')
-    const pathParts = location.pathname.split("/").filter(Boolean);
-    const possibleLang = pathParts[0];
-
-    // Check if first path segment is a valid language code
-    const supportedLocales = i18n?.locales || ["en"];
-    if (supportedLocales.includes(possibleLang)) {
-      return possibleLang;
-    }
-
-    // 4. Try to get from browser language
-    if (typeof navigator !== "undefined" && navigator.language) {
-      const browserLang = navigator.language.split("-")[0]; // 'en-US' -> 'en'
-      if (supportedLocales.includes(browserLang)) {
-        return browserLang;
-      }
-    }
-
-    // 5. Fallback to default
-    return i18n?.defaultLocale || "en";
-  };
-
-  const currentLang = getCurrentLanguage();
-
-  // All logic now runs at build time
-  const getTranslation = () => {
-    try {
-      // Find the set by finalSetKey
-      const set = Array.isArray(variableSetsData.variableSets)
-        ? variableSetsData.variableSets.find((s) => s.name === finalSetKey)
-        : null;
-
-      // Find the variable by finalVariableKey
-      const variable =
-        set && Array.isArray(set.variables)
-          ? set.variables.find((v) => v.key === finalVariableKey)
-          : null;
-
-      // Find the translation by current language, fallback to 'en'
-      if (variable && Array.isArray(variable.translations)) {
-        const translationObj =
-          variable.translations.find((t) => t.lang === currentLang) ||
-          variable.translations.find((t) => t.lang === "en");
-        return translationObj ? translationObj.value : null;
-      }
-
-      return null;
-    } catch {
-      return null;
-    }
-  };
-
-  const translation = getTranslation();
+  // The same locale chain every other reuse component uses, and the same
+  // resolution rule a CALS table cell uses - see src/utils/variables.js.
+  const locale = useCurrentLocale(lang);
+  const value = resolveVariable(
+    variableSetsData.variableSets,
+    variableSelection,
+    locale
+  );
 
   // null means the set, the variable or its translation could not be resolved.
   // Say which selection failed rather than a bare "NOT FOUND": the author needs
   // to know whether the set or the variable is the part that is wrong.
-  if (translation === null) {
+  if (value === null) {
     return <NotFound name={variableSelection} />;
   }
 
-  // Apply initcap transformation if requested
-  const displayValue = initcap
-    ? translation.charAt(0).toUpperCase() + translation.slice(1)
-    : translation;
+  const displayValue = initcap ? initcapValue(value) : value;
 
   return (
     <span style={bold ? { fontWeight: "bold" } : undefined}>

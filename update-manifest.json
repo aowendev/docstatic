@@ -31,6 +31,7 @@
   ],
   "ensureFiles": [
     "src/pages/example-page.mdx",
+    "static/dashboards/index.json",
     "i18n/.gitkeep",
     "reuse/media/index.json",
     "reuse/bibliography/index.json",
