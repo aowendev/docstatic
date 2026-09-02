@@ -1,5 +1,5 @@
 ---
-lastmod: '2026-08-11T23:23:43.687Z'
+lastmod: '2026-09-02T06:55:36.961Z'
 title: Snippets
 tags:
   - reuse
@@ -20,6 +20,22 @@ El componente **Fragmento** te permite reutilizar contenido en toda tu documenta
 1. Selecciona el componente **Fragmento** en la lista **Incrustar**.
 2. Edita el componente.
 3. Elige un archivo de la lista. La lista se rellena con todos los archivos de la carpeta `/reuse/snippets/` cada vez que ejecutas el servidor de desarrollo o realizas una compilación.
+
+Un fragmento pasa a formar parte del tema cuando se genera el sitio web, en lugar de recuperarse al cargarse la página. De ello se desprenden tres cosas:
+
+* La búsqueda en la web encuentra el texto de un fragmento en cada tema en el que aparece.
+* Los títulos que aparecen dentro de un fragmento se incluyen en el índice del tema.
+* Un fragmento puede contener otro fragmento.
+
+<Admonition type="note" title="Nota">
+  Un fragmento de código que apunta a un archivo que ya no existe lo indica en el mismo lugar, del mismo modo que lo haría un término del glosario o una variable:
+
+  ```
+  missing-file.mdx NOT FOUND
+  ```
+
+  La compilación sigue realizándose con éxito, por lo que un nombre de archivo incorrecto no impide que puedas previsualizar la página web. Además, la compilación los muestra en la lista, por si acaso se trata de un tema que no estabas revisando.
+</Admonition>
 
 #### Ejemplo
 

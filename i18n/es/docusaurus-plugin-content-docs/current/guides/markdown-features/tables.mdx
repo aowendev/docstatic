@@ -1,5 +1,5 @@
 ---
-lastmod: '2026-08-19T14:50:01.054Z'
+lastmod: '2026-09-02T06:55:37.033Z'
 modifiedBy: aowendev <aowen@translationcommons.org>
 title: CALS Tables
 description: Using CALS tables in docStatic, including merged cells, column widths and border control.
@@ -21,18 +21,50 @@ unlisted: false
 
 # CALS Tables
 
-El componente **CalsTable** añade compatibilidad con el <Url urlKey="cals-table-model" /> utilizado por DocBook y DITA: celdas fusionadas, anchos y alineación por columna, y control detallado de los bordes. Un editor gráfico de cuadrículas integrado en el CMS se encarga de la estructura —fusionar y dividir celdas, insertar y eliminar filas y columnas— para que nunca tengas que editar manualmente los datos subyacentes de la tabla.
+El componente **CalsTable** incorpora compatibilidad con la etiqueta <Url urlKey="cals-table-model" /> utilizada por DocBook y DITA: celdas fusionadas, anchos y alineación por columna, y control preciso de los bordes. Un editor gráfico de cuadrículas integrado en el CMS se encarga de gestionar la estructura —fusionar y dividir celdas, insertar y eliminar filas y columnas, alinear celdas y columnas— para que nunca tengas que editar manualmente los datos de la tabla subyacente.
 
 1. Selecciona **Tabla CALS** en la lista **Incrustar**.
 2. Utiliza los controles **Marco**, **Título** y **A lo ancho de la página** situados en la parte superior para configurar el borde exterior, el título y el ancho de la tabla.
 3. Haz clic en una celda para seleccionarla. Mantén pulsada la tecla Mayús y haz clic, o arrastra el cursor, para seleccionar un rango rectangular de celdas.
 4. Haz clic en **Combinar** para unir las celdas seleccionadas, o en **Dividir** para deshacer una combinación. La opción **Combinar** solo está habilitada cuando la selección es un rectángulo limpio que no atraviesa una celda combinada existente.
 5. Utiliza **Insertar fila arriba/abajo**, **Eliminar fila**, **Insertar columna a la izquierda/derecha** y **Eliminar columna** para cambiar la forma de la cuadrícula.
-6. Haz doble clic en una celda para editar su contenido. El contenido de las celdas está en Markdown, por lo que funcionan `**negrita**`, `*cursiva*`, los enlaces y el código en línea.
-7. **Guarda** los cambios.
+6. Utiliza **Alineación de celdas**, **Alineación vertical de las celdas** y **Alineación de columnas** para establecer cómo se alinean las celdas seleccionadas y sus columnas.
+7. Haz doble clic en una celda para editar su contenido. El contenido de las celdas está en Markdown, por lo que funcionan `**negrita**`, `*cursiva*`, los enlaces y el código en línea. Pulsa Intro para empezar una nueva línea dentro de una celda.
+8. **Guarda** los cambios.
 
 <Admonition type="note" title="Ámbito de aplicación">
   Cada tabla admite una sección de encabezado, una de cuerpo y una de pie de página, con un único conjunto de columnas. No se admiten las características de DocBook que permiten varios `tgroup` por tabla ni las tablas anidadas (`entrytbl`).
+</Admonition>
+
+## Alineación de celdas
+
+CALS toma la alineación de una celda del primero de los tres lugares que la establecen: la celda, a continuación cualquier span al que pertenezca y, por último, su columna. El editor escribe dos de esos tres: la celda y la columna:
+
+* **Alineación de celdas** establece la alineación horizontal de las celdas seleccionadas.
+* **Alineación vertical de las celdas** establece la alineación vertical de las celdas seleccionadas.
+* **Alineación de columnas** establece la alineación horizontal de todas las celdas de las columnas seleccionadas.
+
+Al seleccionar **Heredar**, se borra un ajuste en lugar de guardarlo, por lo que una celda adopta la configuración de su columna, y una columna, la configuración predeterminada del sitio.
+
+Para establecer ese valor por defecto, selecciona **Configuración** en la lista de opciones, abre **Tablas CALS** y elige una **Alineación de celdas**. Se aplica a todas las tablas CALS del sitio, incluidos los encabezados, y solo a las celdas que no tengan una alineación propia; la alineación establecida en una celda o en una columna siempre tiene prioridad sobre esta. La opción **Predeterminado del navegador** deja los encabezados centrados y las celdas del cuerpo alineadas a la izquierda.
+
+## Uso de variables en una tabla
+
+Las celdas, los encabezados y el título de la tabla pueden contener [variables](variables), que se sustituyen por el idioma de la página en la que aparecen.
+
+1. Selecciona una celda y, a continuación, elige una opción de la lista **Variable de celda** para añadirle una variable.
+2. Para incluir una variable en el pie de imagen, selecciona una opción de la lista que aparece junto al campo **Título**.
+
+Ambas listas añaden la variable al final del texto, así que edita la celda o el título después si la necesitas en otro sitio. El título también admite Markdown, por lo que `**negrita**` y los enlaces también funcionan ahí.
+
+<Admonition type="note" title="Nota">
+  Una variable cuya clave ya no existe lo indica en el mismo lugar, tal y como ocurre en un párrafo:
+
+  ```
+  set_key NOT FOUND
+  ```
+
+  La compilación sigue completándose con éxito, por lo que un error al escribir una tecla no te impide previsualizar la página web.
 </Admonition>
 
 #### Ejemplo:

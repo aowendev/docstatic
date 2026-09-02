@@ -1,5 +1,5 @@
 ---
-lastmod: '2026-08-19T14:49:56.718Z'
+lastmod: '2026-09-02T06:55:36.730Z'
 modifiedBy: aowendev <aowen@translationcommons.org>
 title: CALS Tables
 description: Using CALS tables in docStatic, including merged cells, column widths and border control.
@@ -21,18 +21,50 @@ unlisted: false
 
 # CALS Tables
 
-Die Komponente **CalsTable** bietet Unterstützung für das von DocBook und DITA verwendete <Url urlKey="cals-table-model" />: zusammengeführte Zellen, spaltenbezogene Breiten und Ausrichtung sowie eine detaillierte Steuerung der Rahmen. Ein grafischer Rastereditor im CMS übernimmt die Strukturierung – das Zusammenführen und Teilen von Zellen sowie das Einfügen und Löschen von Zeilen und Spalten –, sodass Sie die zugrunde liegenden Tabellendaten niemals manuell bearbeiten müssen.
+Die Komponente **CalsTable** bietet Unterstützung für das von DocBook und DITA verwendete <Url urlKey="cals-table-model" />: zusammengeführte Zellen, spaltenweise Breiten und Ausrichtung sowie eine detaillierte Steuerung der Rahmen. Ein grafischer Rastereditor im CMS übernimmt die Strukturierung – das Zusammenführen und Aufteilen von Zellen, das Einfügen und Löschen von Zeilen und Spalten sowie das Ausrichten von Zellen und Spalten –, sodass Sie die zugrunde liegenden Tabellendaten niemals manuell bearbeiten müssen.
 
 1. Wählen Sie **CALS-Tabelle** aus der Liste **Einbetten** aus.
 2. Verwenden Sie die Steuerelemente **Rahmen**, **Titel** und **Seitenweit** oben, um den äußeren Rahmen, die Beschriftung und die Breite der Tabelle festzulegen.
 3. Klicken Sie auf eine Zelle, um sie auszuwählen. Klicken Sie bei gedrückter Umschalttaste oder ziehen Sie, um einen rechteckigen Zellbereich auszuwählen.
 4. Klicken Sie auf **Zusammenführen**, um die ausgewählten Zellen zusammenzuführen, oder auf **Teilen**, um eine Zusammenführung rückgängig zu machen. Die Option **Zusammenführen** ist nur aktiviert, wenn die Auswahl ein sauberes Rechteck ist, das keine bereits zusammengeführte Zelle durchschneidet.
 5. Verwenden Sie **„Zeile oben/unten einfügen“**, **„Zeile löschen“**, **„Spalte links/rechts einfügen“** und **„Spalte löschen“**, um die Form des Rasters zu ändern.
-6. Doppelklicken Sie auf eine Zelle, um deren Inhalt zu bearbeiten. Der Zellinhalt ist Markdown, daher funktionieren `**Fett**`, `*Kursiv*`, Links und Inline-Code.
-7. **Speichern** Sie Ihre Änderungen.
+6. Verwenden Sie **Zellenausrichtung**, **Vertikale Ausrichtung** und **Spaltenausrichtung**, um festzulegen, wie die ausgewählten Zellen und ihre Spalten ausgerichtet werden sollen.
+7. Doppelklicken Sie auf eine Zelle, um deren Inhalt zu bearbeiten. Der Zellinhalt ist Markdown, daher funktionieren `**Fett**`, `*Kursiv*`, Links und Inline-Code. Drücken Sie die Eingabetaste, um innerhalb einer Zelle eine neue Zeile zu beginnen.
+8. **Speichern** Sie Ihre Änderungen.
 
 <Admonition type="note" title="Geltungsbereich">
   Jede Tabelle unterstützt einen Kopf-, Mittel- und Fußbereich mit jeweils einem Spaltensatz. Die DocBook-Funktionen für mehrere `tgroup`-Elemente pro Tabelle und verschachtelte Tabellen (`entrytbl`) werden nicht unterstützt.
+</Admonition>
+
+## Zellen ausrichten
+
+CALS übernimmt die Ausrichtung einer Zelle von der ersten der drei Stellen, an denen eine solche festgelegt ist: der Zelle selbst, dann einem eventuellen Span, zu dem sie gehört, und schließlich ihrer Spalte. Der Editor schreibt zwei dieser drei Werte, nämlich die Zelle und die Spalte:
+
+* **Zellenausrichtung** legt die horizontale Ausrichtung der ausgewählten Zellen fest.
+* **Vertikale Ausrichtung** legt die vertikale Ausrichtung der ausgewählten Zellen fest.
+* **Spaltenausrichtung** legt die horizontale Ausrichtung aller Zellen in den ausgewählten Spalten fest.
+
+Wenn Sie **Vererben** wählen, wird eine Einstellung gelöscht, anstatt sie zu speichern, sodass eine Zelle die Einstellung ihrer Spalte übernimmt und eine Spalte die Website-Standardeinstellung.
+
+Um diese Standardeinstellung festzulegen, wählen Sie **Einstellungen** aus der Auswahlliste, öffnen Sie **CALS-Tabellen** und wählen Sie eine **Zellenausrichtung** aus. Dies gilt für jede CALS-Tabelle auf der Website, einschließlich der Überschriften, und nur für Zellen, die keine eigene Ausrichtung festlegen – die für eine Zelle oder Spalte festgelegte Ausrichtung hat immer Vorrang. Bei der **Browser-Standardeinstellung** werden Überschriften zentriert und Textzellen linksbündig ausgerichtet.
+
+## Verwendung von Variablen in einer Tabelle
+
+Zellen, Überschriften und der Tabellentitel können alle [Variablen](variables) enthalten, die in die Sprache der Seite aufgelöst werden, auf der sie erscheinen.
+
+1. Markieren Sie eine Zelle und wählen Sie dann aus der Liste **Zellvariable** eine Variable aus, um sie der Zelle hinzuzufügen.
+2. Um eine Variable in die Bildunterschrift einzufügen, wählen Sie aus der Liste neben dem Feld **Titel** aus.
+
+Bei beiden Listen wird die Variable am Ende des Textes angehängt. Bearbeiten Sie daher die Zelle oder den Titel anschließend, falls Sie sie an einer anderen Stelle benötigen. Der Titel unterstützt ebenfalls Markdown, sodass dort auch `**fett**` und Links funktionieren.
+
+<Admonition type="note" title="Hinweis">
+  Eine Variable, deren Schlüssel nicht mehr existiert, gibt dies direkt an, so wie es auch in einem Absatz der Fall ist:
+
+  ```
+  set_key NOT FOUND
+  ```
+
+  Der Build läuft weiterhin erfolgreich ab, sodass ein einziger Tippfehler Sie nicht daran hindert, eine Vorschau der Website anzuzeigen.
 </Admonition>
 
 #### Beispiel:

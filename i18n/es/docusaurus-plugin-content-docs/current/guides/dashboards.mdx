@@ -1,5 +1,5 @@
 ---
-lastmod: '2026-08-19T14:49:59.936Z'
+lastmod: '2026-09-02T06:55:36.796Z'
 modifiedBy: aowendev <aowen@translationcommons.org>
 title: Dashboards
 tags:
@@ -24,7 +24,14 @@ docStatic añade la funcionalidad de paneles de control a TinaCMS. Tina genera u
 
 ## Visualización de los paneles de control
 
-Desde el CMS, accede a la colección «Paneles de control». En la parte superior de la página hay una barra de estado que muestra la conexión GraphQL. Indica si estás conectado a la nube o al localhost. Si el localhost está disponible, siempre se conectará al localhost. Para utilizar la nube, asegúrate de que el servidor de desarrollo local esté detenido. La barra de estado también muestra el entorno y comprueba que todos los ajustes sean válidos.
+Desde el CMS, accede a la colección «Dashboards». En la parte superior de la página hay una barra de estado con cuatro indicaciones:
+
+* **GraphQL**: indica si una consulta a la API devuelve realmente un resultado. Si no es así, aquí se muestra el motivo.
+* **Entorno**: qué API ha respondido a una comprobación, si la nube o el localhost.
+* **Fuente de datos**: de dónde obtienen su contenido los paneles de control: de tus archivos locales o de TinaCloud.
+* **Configuración**: si la configuración que necesita el CMS está presente y es válida.
+
+**Entorno** y **Fuente de datos** responden a preguntas diferentes y pueden presentar discrepancias. El primero indica qué API ha respondido a una comprobación; el segundo indica dónde se ha configurado el CMS para enviar sus consultas. Cuando difieren, **Fuente de datos** es la que te indica qué contenido estás viendo. Al ejecutar el servidor de desarrollo local, el CMS se configura con tus archivos locales, así que deténlo para trabajar con contenido en la nube.
 
 ## Visualización del estado del flujo de trabajo
 

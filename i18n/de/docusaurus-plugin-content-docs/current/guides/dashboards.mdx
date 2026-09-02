@@ -1,5 +1,5 @@
 ---
-lastmod: '2026-08-19T14:49:55.748Z'
+lastmod: '2026-09-02T06:55:36.521Z'
 modifiedBy: aowendev <aowen@translationcommons.org>
 title: Dashboards
 tags:
@@ -24,7 +24,14 @@ docStatic erweitert TinaCMS um Dashboard-Funktionen. Tina generiert eine GraphQL
 
 ## Anzeigen der Dashboards
 
-Navigieren Sie im CMS zur Sammlung „Dashboards“. Oben auf der Seite befindet sich eine Statusleiste, die die GraphQL-Verbindung anzeigt. Sie gibt an, ob Sie mit der Cloud oder dem Localhost verbunden sind. Wenn der Localhost verfügbar ist, wird immer eine Verbindung zum Localhost hergestellt. Um die Cloud zu nutzen, stellen Sie sicher, dass der lokale Entwicklungsserver gestoppt ist. Die Statusleiste zeigt außerdem die Umgebung an und überprüft, ob alle Einstellungen gültig sind.
+Navigieren Sie im CMS zur Sammlung „Dashboards“. Oben auf der Seite befindet sich eine Statusleiste mit vier Anzeigen:
+
+* **GraphQL**: Gibt an, ob eine Abfrage an die API tatsächlich eine Antwort liefert. Ist dies nicht der Fall, wird hier der Grund dafür angezeigt.
+* **Umgebung**: Welche API hat eine Überprüfung beantwortet – die Cloud oder der Localhost?
+* **Datenquelle**: Woher beziehen die Dashboards ihre Inhalte – aus Ihren lokalen Dateien oder aus TinaCloud?
+* **Einstellungen**: Gibt an, ob die vom CMS benötigte Konfiguration vorhanden und gültig ist.
+
+**Umgebung** und **Datenquelle** beantworten unterschiedliche Fragen und können voneinander abweichen. Ersteres gibt an, welche API auf eine Abfrage reagiert hat; letzteres gibt an, wohin das CMS seine Abfragen sendet. Wenn sie voneinander abweichen, gibt **Datenquelle** an, welche Inhalte Sie gerade betrachten. Beim Ausführen des lokalen Entwicklungsservers wird das CMS anhand Ihrer lokalen Dateien erstellt. Beenden Sie den Server daher, um mit Cloud-Inhalten zu arbeiten.
 
 ## Workflow-Status anzeigen
 

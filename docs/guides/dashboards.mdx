@@ -1,12 +1,12 @@
 ---
-lastmod: '2026-08-19T14:49:53.074Z'
+lastmod: '2026-09-02T06:55:36.266Z'
 modifiedBy: aowendev <aowen@translationcommons.org>
 title: Dashboards
 description: Viewing dashboards in TinaCMS
 tags:
-  - software_content-management-systems
-  - software_content-management-systems_tinacms
-  - software_content-management-systems_media-management
+  - "software_content-management-systems"
+  - "software_content-management-systems_tinacms"
+  - "software_content-management-systems_media-management"
 draft: false
 review: false
 translate: false
@@ -25,7 +25,14 @@ docStatic adds dashboard functionality to TinaCMS. Tina generates a GraphQL API 
 
 ## Viewing the dashboards
 
-From the CMS, navigate to the Dashboards collection. At the top of the page is a status bar that shows the GraphQL connection. It indicates if you are connected to the cloud or localhost. If the localhost is available, it will always connect to the localhost. To use the cloud, ensure the local dev server is stopped. The status bar also displays the environment and checks all settings are valid.
+From the CMS, navigate to the Dashboards collection. At the bottom of the page is a status bar with four readings:
+
+* **GraphQL**: whether a query to the API actually returns. If it does not, the reason is shown here.
+* **Environment**: which API answered a check, the cloud or localhost.
+* **Data source**: where the dashboards read their content from, your local files or TinaCloud.
+* **Settings**: whether the configuration the CMS needs is present and valid.
+
+**Environment** and **Data source** answer different questions and can disagree. The first reports which API responded to a check; the second reports where the CMS was built to send its queries. When they differ, **Data source** is the one that tells you which content you are looking at. Running the local dev server builds the CMS against your local files, so stop it to work with cloud content.
 
 ## Viewing workflow status
 

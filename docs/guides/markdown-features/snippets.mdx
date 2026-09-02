@@ -10,7 +10,8 @@ translate: false
 approved: false
 published: true
 unlisted: false
-lastmod: "2026-03-04T22:51:30.877Z"
+lastmod: '2026-09-02T06:55:36.341Z'
+modifiedBy: aowendev <aowen@translationcommons.org>
 ---
 # Snippets
 
@@ -19,6 +20,22 @@ The **Snippet** component enables you to reuse content across your documentation
 1. Select the **Snippet** component from the **Embed** list.
 2. Edit the component.
 3. Choose a file from the list. The list is populated with all the files in the `/reuse/snippets/` folder) every time you run the dev server or do a build.
+
+A snippet becomes part of the topic when the site is built, rather than being fetched as the page loads. Three things follow from that:
+
+* Site search finds the text of a snippet, under every topic that uses it.
+* Headings inside a snippet appear in the topic's table of contents.
+* A snippet can contain another snippet.
+
+<Admonition type="note" title="Note">
+  A snippet pointing at a file that no longer exists says so in place, the way a glossary term or a variable does:
+
+  ```
+  missing-file.mdx NOT FOUND
+  ```
+
+  The build still succeeds, so one wrong file name does not stop you previewing the site. The build also lists them, in case the topic is one you were not looking at.
+</Admonition>
 
 #### Example
 

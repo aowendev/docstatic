@@ -1,5 +1,5 @@
 ---
-lastmod: '2026-08-19T14:50:03.762Z'
+lastmod: '2026-09-02T06:55:37.120Z'
 modifiedBy: aowendev <aowen@translationcommons.org>
 title: Dashboards
 tags:
@@ -24,7 +24,14 @@ docStatic ajoute une fonctionnalité de tableaux de bord à TinaCMS. Tina génè
 
 ## Affichage des tableaux de bord
 
-Dans le CMS, accédez à la collection Tableaux de bord. En haut de la page se trouve une barre d’état qui affiche la connexion GraphQL. Elle indique si vous êtes connecté au cloud ou à localhost. Si localhost est disponible, la connexion s’effectuera toujours vers localhost. Pour utiliser le cloud, assurez-vous que le serveur de développement local est arrêté. La barre d’état affiche également l’environnement et vérifie que tous les paramètres sont valides.
+Dans le CMS, accédez à la collection « Tableaux de bord ». En haut de la page se trouve une barre d'état comportant quatre indicateurs :
+
+* **GraphQL** : indique si une requête adressée à l'API renvoie effectivement un résultat. Si ce n'est pas le cas, la raison est indiquée ici.
+* **Environnement** : quelle API a répondu à une requête, le cloud ou localhost.
+* **Source de données** : d'où les tableaux de bord tirent leur contenu : vos fichiers locaux ou TinaCloud.
+* **Paramètres** : vérifie si la configuration requise par le CMS est présente et valide.
+
+**Environnement** et **Source de données** répondent à des questions différentes et peuvent présenter des divergences. Le premier indique quelle API a répondu à une requête ; le second indique où le CMS a été configuré pour envoyer ses requêtes. En cas de divergence, c’est **Source de données** qui vous indique quel contenu vous consultez. L’exécution du serveur de développement local configure le CMS en fonction de vos fichiers locaux ; arrêtez-le donc pour travailler avec du contenu dans le cloud.
 
 ## Affichage de l’état des workflows
 

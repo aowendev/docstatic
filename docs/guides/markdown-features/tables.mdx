@@ -1,5 +1,5 @@
 ---
-lastmod: '2026-08-19T14:49:53.689Z'
+lastmod: '2026-09-02T06:55:36.418Z'
 modifiedBy: aowendev <aowen@translationcommons.org>
 title: CALS Tables
 description: Using CALS tables in docStatic, including merged cells, column widths and border control.
@@ -21,18 +21,50 @@ unlisted: false
 
 # CALS Tables
 
-The **CalsTable** component adds support for the <Url urlKey="cals-table-model" /> used by DocBook and DITA: merged cells, per-column widths and alignment, and fine-grained border control. A graphical grid editor in the CMS handles the structure—merging and splitting cells, inserting and deleting rows and columns—so you never need to hand-edit the underlying table data.
+The **CalsTable** component adds support for the <Url urlKey="cals-table-model" /> used by DocBook and DITA: merged cells, per-column widths and alignment, and fine-grained border control. A graphical grid editor in the CMS handles the structure—merging and splitting cells, inserting and deleting rows and columns, aligning cells and columns—so you never need to hand-edit the underlying table data.
 
 1. Select **CALS Table** from the **Embed** list.
 2. Use the **Frame**, **Title** and **Page-wide** controls at the top to set the table's outer border, caption and width.
 3. Click a cell to select it. Shift-click or drag to select a rectangular range of cells.
 4. Click **Merge** to combine the selected cells, or **Split** to undo a merge. **Merge** is only enabled when the selection is a clean rectangle that doesn't cut through an existing merged cell.
 5. Use **Insert Row Above/Below**, **Delete Row**, **Insert Column Left/Right** and **Delete Column** to change the grid's shape.
-6. Double-click a cell to edit its content. Cell content is Markdown, so `**bold**`, `*italic*`, links and inline code all work.
-7. **Save** your changes.
+6. Use **Cell align**, **Cell vertical** and **Column align** to set how the selected cells and their columns are aligned.
+7. Double-click a cell to edit its content. Cell content is Markdown, so `**bold**`, `*italic*`, links and inline code all work. Press Enter to start a new line inside a cell.
+8. **Save** your changes.
 
 <Admonition type="note" title="Scope">
   Each table supports one header, body and footer section with a single set of columns. DocBook's multiple-`tgroup`-per-table and nested-table (`entrytbl`) features aren't supported.
+</Admonition>
+
+## Aligning cells
+
+CALS takes a cell's alignment from the first of three places that sets one: the cell, then any span it belongs to, then its column. The editor writes two of those three, the cell and the column:
+
+* **Cell align** sets the horizontal alignment of the selected cells.
+* **Cell vertical** sets the vertical alignment of the selected cells.
+* **Column align** sets the horizontal alignment of every cell in the selected columns.
+
+Choosing **Inherit** clears a setting rather than storing one, so a cell falls through to its column, and a column to the site default.
+
+To set that default, select **Settings** from the collection list, open **CALS tables**, and choose a **Cell alignment**. It applies to every CALS table on the site, headings included, and only to cells that set no alignment of their own—alignment set on a cell or a column always wins over it. **Browser default** leaves headings centred and body cells left-aligned.
+
+## Using variables in a table
+
+Cells, headings and the table title can all contain [variables](variables), which resolve to the language of the page they appear on.
+
+1. Select a cell, then choose from the **Cell variable** list to add a variable to it.
+2. To put a variable in the caption, choose from the list beside the **Title** field.
+
+Both lists add the variable to the end of the text, so edit the cell or the title afterwards if you need it somewhere else. The title accepts Markdown as well, so `**bold**` and links work there too.
+
+<Admonition type="note" title="Note">
+  A variable whose key no longer exists says so in place, the way it does in a paragraph:
+
+  ```
+  set_key NOT FOUND
+  ```
+
+  The build still succeeds, so one mistyped key does not stop you previewing the site.
 </Admonition>
 
 #### Example:

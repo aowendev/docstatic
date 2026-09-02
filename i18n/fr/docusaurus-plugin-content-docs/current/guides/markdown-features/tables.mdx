@@ -1,5 +1,5 @@
 ---
-lastmod: '2026-08-19T14:50:05.366Z'
+lastmod: '2026-09-02T06:55:37.348Z'
 modifiedBy: aowendev <aowen@translationcommons.org>
 title: CALS Tables
 description: Using CALS tables in docStatic, including merged cells, column widths and border control.
@@ -21,18 +21,50 @@ unlisted: false
 
 # CALS Tables
 
-Le composant **CalsTable** prend en charge le <Url urlKey="cals-table-model" /> utilisé par DocBook et DITA : cellules fusionnées, largeurs et alignement par colonne, ainsi qu’un contrôle précis des bordures. Un éditeur graphique de grille intégré au CMS gère la structure (fusion et division de cellules, insertion et suppression de lignes et de colonnes) ; vous n'avez donc jamais besoin de modifier manuellement les données sous-jacentes du tableau.
+Le composant **CalsTable** prend en charge la balise <Url urlKey="cals-table-model" /> utilisée par DocBook et DITA : cellules fusionnées, largeurs et alignement par colonne, ainsi qu’un contrôle précis des bordures. Un éditeur graphique de grille intégré au CMS gère la structure (fusion et division de cellules, insertion et suppression de lignes et de colonnes, alignement des cellules et des colonnes) ; vous n’avez donc jamais besoin de modifier manuellement les données du tableau sous-jacent.
 
 1. Sélectionnez **CALS Table** dans la liste **Embed**.
 2. Utilisez les commandes **Cadre**, **Titre** et **Sur toute la page** situées en haut pour définir la bordure extérieure, la légende et la largeur du tableau.
 3. Cliquez sur une cellule pour la sélectionner. Cliquez tout en maintenant la touche Maj enfoncée ou faites glisser pour sélectionner une plage rectangulaire de cellules.
 4. Cliquez sur **Fusionner** pour fusionner les cellules sélectionnées, ou sur **Diviser** pour annuler une fusion. L’option **Fusionner** n’est disponible que lorsque la sélection forme un rectangle net qui ne traverse pas une cellule déjà fusionnée.
 5. Utilisez **Insérer une ligne au-dessus/en dessous**, **Supprimer une ligne**, **Insérer une colonne à gauche/à droite** et **Supprimer une colonne** pour modifier la forme de la grille.
-6. Double-cliquez sur une cellule pour modifier son contenu. Le contenu des cellules est au format Markdown ; les balises `**gras**`, `*italique*`, les liens et le code en ligne fonctionnent donc tous.
-7. **Enregistrez** vos modifications.
+6. Utilisez **Alignement des cellules**, **Alignement vertical des cellules** et **Alignement des colonnes** pour définir l'alignement des cellules sélectionnées et de leurs colonnes.
+7. Double-cliquez sur une cellule pour modifier son contenu. Le contenu des cellules est au format Markdown ; les balises `**gras**`, `*italique*`, les liens et le code en ligne fonctionnent donc tous. Appuyez sur Entrée pour commencer une nouvelle ligne dans une cellule.
+8. **Enregistrez** vos modifications.
 
 <Admonition type="note" title="Champ d'application">
   Chaque tableau comporte une section d'en-tête, une section de corps et une section de pied de page, avec un seul ensemble de colonnes. Les fonctionnalités DocBook permettant d'utiliser plusieurs `tgroup` par tableau et les tableaux imbriqués (`entrytbl`) ne sont pas prises en charge.
+</Admonition>
+
+## Alignement des cellules
+
+CALS récupère l'alignement d'une cellule à partir du premier des trois emplacements qui en définissent un : la cellule, puis tout span auquel elle appartient, puis sa colonne. L'éditeur enregistre deux de ces trois éléments, à savoir la cellule et la colonne :
+
+* **Alignement des cellules** définit l'alignement horizontal des cellules sélectionnées.
+* **Alignement vertical des cellules** définit l’alignement vertical des cellules sélectionnées.
+* **Alignement des colonnes** définit l’alignement horizontal de toutes les cellules des colonnes sélectionnées.
+
+Sélectionner **Hériter** efface un paramètre au lieu de l'enregistrer ; ainsi, une cellule reprend les paramètres de sa colonne, et une colonne ceux de la valeur par défaut du site.
+
+Pour définir cette valeur par défaut, sélectionnez **Paramètres** dans la liste des collections, ouvrez **Tableaux CALS**, puis choisissez un **Alignement des cellules**. Ce paramètre s'applique à tous les tableaux CALS du site, en-têtes compris, et uniquement aux cellules qui ne définissent pas leur propre alignement — l'alignement défini au niveau d'une cellule ou d'une colonne prévaut toujours sur celui-ci. L'option **Par défaut du navigateur** centre les en-têtes et aligne les cellules du corps à gauche.
+
+## Utilisation des variables dans un tableau
+
+Les cellules, les en-têtes et le titre du tableau peuvent tous contenir des [variables](variables), qui sont remplacées par la langue de la page sur laquelle elles apparaissent.
+
+1. Sélectionnez une cellule, puis choisissez une option dans la liste **Variable de cellule** pour y ajouter une variable.
+2. Pour insérer une variable dans la légende, sélectionnez-la dans la liste située à côté du champ **Titre**.
+
+Ces deux listes ajoutent la variable à la fin du texte ; vous pouvez donc modifier la cellule ou le titre par la suite si vous en avez besoin ailleurs. Le titre prend également en charge le Markdown : les balises `**gras**` et les liens y fonctionnent donc aussi.
+
+<Admonition type="note" title="Remarque">
+  Une variable dont la clé n'existe plus l'indique clairement, tout comme on le ferait dans un paragraphe :
+
+  ```
+  set_key NOT FOUND
+  ```
+
+  La compilation aboutit quand même ; une seule touche mal tapée ne vous empêche donc pas de prévisualiser le site.
 </Admonition>
 
 #### Exemple :

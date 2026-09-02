@@ -1,5 +1,5 @@
 ---
-lastmod: '2026-08-11T23:12:25.147Z'
+lastmod: '2026-09-02T06:55:37.218Z'
 title: Snippets
 description: Thèmes réutilisables.
 tags:
@@ -21,6 +21,22 @@ Le composant **Extrait** vous permet de réutiliser du contenu dans l'ensemble d
 1. Sélectionnez le composant **Extrait** dans la liste **Intégrer**.
 2. Modifiez le composant.
 3. Choisissez un fichier dans la liste. Cette liste est renseignée avec tous les fichiers du dossier `/reuse/snippets/` chaque fois que vous lancez le serveur de développement ou que vous effectuez une compilation.
+
+Un extrait est intégré au sujet lors de la génération du site, et non pas récupéré au moment du chargement de la page. Il en découle trois conséquences :
+
+* La recherche sur le site permet de trouver le texte d'un extrait sous chaque rubrique qui l'utilise.
+* Les titres figurant dans un extrait apparaissent dans la table des matières de la rubrique.
+* Un extrait peut contenir un autre extrait.
+
+<Admonition type="note" title="Remarque">
+  Un extrait de code faisant référence à un fichier qui n'existe plus l'indique directement, tout comme le ferait un terme de glossaire ou une variable :
+
+  ```
+  missing-file.mdx NOT FOUND
+  ```
+
+  La compilation aboutit tout de même ; ainsi, un seul nom de fichier erroné ne vous empêche pas de prévisualiser le site. La compilation les répertorie également, au cas où il s'agirait d'un sujet que vous n'aviez pas consulté.
+</Admonition>
 
 #### Exemple
 
