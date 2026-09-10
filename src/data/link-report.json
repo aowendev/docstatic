@@ -1,14 +1,14 @@
 {
-  "generatedAt": "2026-09-01T17:33:11.967Z",
+  "generatedAt": "2026-09-10T07:48:08.148Z",
   "lastCheckedAt": "2026-08-17T17:48:33.969Z",
   "checked": false,
   "stats": {
-    "total": 248,
+    "total": 247,
     "ok": 208,
     "broken": 0,
     "unverified": 0,
     "unchecked": 1,
-    "skipped": 39,
+    "skipped": 38,
     "centralized": 161,
     "migrationCandidates": 48
   },
@@ -245,7 +245,7 @@
       "fileName": "tables.mdx",
       "relativePath": "guides/markdown-features/tables.mdx",
       "title": "CALS Tables",
-      "totalLinks": 3
+      "totalLinks": 2
     },
     "/docs/guides/markdown-features/tabs.mdx": {
       "fileName": "tabs.mdx",
@@ -995,15 +995,6 @@
       "line": 145,
       "status": "skipped",
       "reason": "Internal link — checked by the Docusaurus build"
-    },
-    {
-      "text": "Aligning cells",
-      "url": "#aligning-cells",
-      "type": "markdown",
-      "filePath": "/docs/guides/markdown-features/tables.mdx",
-      "line": 11,
-      "status": "skipped",
-      "reason": "Anchor link"
     },
     {
       "text": "variables",
